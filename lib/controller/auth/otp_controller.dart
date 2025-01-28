@@ -1,0 +1,56 @@
+import 'package:b2b_partenership/core/utils/app_snackbars.dart';
+import 'package:get/get.dart';
+
+class OTPController extends GetxController {
+  String otp = "";
+  String email = "";
+
+  @override
+  void onInit() {
+    email = Get.arguments['email'] ?? "";
+    super.onInit();
+  }
+
+  void onCodeChange(String code) {
+    otp = code;
+    update();
+  }
+
+  void onCodeSubmit(String verificationCode) {
+    otp = verificationCode;
+    update();
+    if (otp == "") {
+      AppSnackBars.warning(message: "OTP must not be empty".tr);
+      return;
+    } else if (otp.length != 6) {
+      AppSnackBars.warning(message: "OTP must be 6 digits".tr);
+      return;
+    } else {
+      //verifyOTP();
+    }
+  }
+
+  // Future<void> verifyOTP() async {
+  //   final result = await _repo.verifyOTP(email: email, otp: otp);
+  //   result.fold(
+  //     (error) {
+  //       errorLogger(error.errMsg);
+  //       AppSnackBars.error(message: error.errMsg);
+  //     },
+  //     (data) {
+  //       AppSnackBars.success(
+  //         message: "OTP Verified Successfully".tr,
+  //       );
+  //       Get.offNamed(
+  //         AppRoutes.forgetPasswordReset,
+  //         arguments: {
+  //           "email": email,
+  //         },
+  //       );
+  //     },
+  //   );
+  // }
+
+
+
+}
