@@ -17,20 +17,21 @@ class CustomRequest<T> {
 * It has a queryParameters which is the query parameters of the request
 * It has a data which is the request data
 * It has a fromJson function which is used to convert the response to the required type
+* It has a files which is the files to upload with the request, Key is the key of the file in the request, Value is the path of the file
 */
 
   final String path;
   final Map<String, dynamic> queryParameters;
   final Map<String, dynamic> data;
   final T Function(Map<String, dynamic>) fromJson;
-  final Map<String, dynamic> files;
+  final Map<String, String> files;
 
   CustomRequest({
     required this.path,
     required this.fromJson,
     this.queryParameters = const {},
     this.data = const {},
-    this.files= const {}
+    this.files = const {},
   });
 
 /*
@@ -61,6 +62,22 @@ class CustomRequest<T> {
 
   Future<Either<Failure, T>> sendPostRequest() async {
     try {
+      Map<String, dio.MultipartFile> files = {};
+
+      if (this.files.isNotEmpty) {
+        for (var file in this.files.entries) {
+          files[file.key] = await dio.MultipartFile.fromFile(
+            file.value,
+            filename: file.value.split('/').last,
+          );
+        }
+      }
+
+      final data = dio.FormData.fromMap({
+        if (files.isNotEmpty) ...files,
+        ...this.data,
+      });
+
       final response = await Get.find<DioLogger>().getDio().post(
             path,
             data: data,
