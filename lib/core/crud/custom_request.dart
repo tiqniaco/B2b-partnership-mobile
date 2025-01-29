@@ -1,5 +1,5 @@
-import 'package:b2b_partenership/core/errors/failure.dart';
-import 'package:b2b_partenership/core/network/dio_logger.dart';
+import '/core/errors/failure.dart';
+import '/core/network/dio_logger.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/dio.dart' as dio;
