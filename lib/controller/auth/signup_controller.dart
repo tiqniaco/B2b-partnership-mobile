@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
+import 'package:b2b_partenership/core/utils/app_snackbars.dart';
 import 'package:b2b_partenership/models/city_model.dart';
 import 'package:b2b_partenership/models/country_model.dart';
 import 'package:b2b_partenership/models/provider_type_model.dart';
@@ -12,6 +13,7 @@ import 'package:b2b_partenership/models/sub_spacialize_model.dart';
 import 'package:b2b_partenership/widgets/auth/provider_signup1.dart';
 import 'package:b2b_partenership/widgets/auth/provider_signup2.dart';
 import 'package:b2b_partenership/widgets/auth/provider_signup3.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -24,6 +26,9 @@ class SignupController extends GetxController {
   late TextEditingController usernameController;
   late TextEditingController passwordController;
   late TextEditingController emailController;
+  late TextEditingController bioController;
+  late TextEditingController commercialController;
+  late TextEditingController taxCartController;
   late CountryModel selectedCountry;
   late CityModel selectedCity;
   late ProviderTypeModel selectedType;
@@ -59,6 +64,8 @@ class SignupController extends GetxController {
   StatusRequest statusRequestSupSpacialization = StatusRequest.loading;
   GlobalKey<FormState> formKeyCustomer = GlobalKey<FormState>();
   File? imageFile;
+  File? commercPdfFile; // ;
+  File? taxPdfFile;
   bool isLoading = false;
   late String id;
 
@@ -68,12 +75,56 @@ class SignupController extends GetxController {
     usernameController = TextEditingController();
     passwordController = TextEditingController();
     emailController = TextEditingController();
+    bioController = TextEditingController();
+    commercialController = TextEditingController();
+    taxCartController = TextEditingController();
     await getCountries();
     getCities();
     getProviderTyps();
     await getSpacialization();
     getSupSpacialization();
     super.onInit();
+  }
+
+  removeFile(String file) {
+    if (file == "c") {
+      commercPdfFile = null;
+      commercialController.clear();
+    } else {
+      taxPdfFile = null;
+      taxCartController.clear();
+    }
+    update();
+  }
+
+  Future<void> pickPDF(String fileName) async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf'],
+    );
+
+    if (result != null && result.files.single.path != null) {
+      if (fileName == "c") {
+        commercPdfFile = File(result.files.single.path!);
+        commercialController.text = result.files.single.name;
+        print("File selected: ${commercPdfFile!.path}");
+      } else {
+        taxPdfFile = File(result.files.single.path!);
+        taxCartController.text = result.files.single.name;
+        print("File selected: ${taxPdfFile!.path}");
+      }
+    } else {
+      print("No file selected");
+    }
+    printFiles();
+    update();
+  }
+
+  printFiles() {
+    print("=============================");
+    print(commercPdfFile);
+    print(taxPdfFile);
+    print("=============================");
   }
 
   void nextStep() {
@@ -187,30 +238,41 @@ class SignupController extends GetxController {
     update();
   }
 
-  cameraImage() async {
-    XFile? xfile = await ImagePicker().pickImage(source: ImageSource.camera);
-    imageFile = File(xfile!.path);
-    Get.back();
-    Get.defaultDialog(
-        title: "New Image".tr,
-        content: SizedBox(
-          width: 300,
-          height: 300,
-          child: Image.file(
-            imageFile!,
-            fit: BoxFit.cover,
-          ),
-        ),
-        onCancel: () {
-          imageFile = null;
-          update();
+  Future<void> signup() async {
+    statusRequest = StatusRequest.loading;
+    final result = await CustomRequest<Map<String, dynamic>>(
+        path: ApiConstance.register,
+        fromJson: (json) {
+          return json['message'];
         },
-        onConfirm: () {
-          //add();
-          Get.back();
-          //Get.back();
-        });
-    update();
+        files: {
+          "image":imageFile!.path,
+          "commercial_register":commercPdfFile!.path,
+          "tax_card":taxPdfFile!.path,
+        },
+        data: {
+          "name": usernameController.text,
+          "email": emailController.text,
+          "password": passwordController.text,
+          "country_code": selectedCountry.code,
+          "phone": phoneController.text,
+          "role": "provider",
+          "government_id": selectedCity.id,
+          "sub_specialization_id": selectedSubSpacialization.id,
+          "provider_types_id": selectedType.id,
+          "bio": bioController.text,
+        }).sendPostRequest();
+
+    result.fold((l) {
+      statusRequest = StatusRequest.error;
+      Logger().e(l.errMsg);
+      update();
+    }, (r) {
+      AppSnackBars.success(message: r['message']);
+      statusRequest = StatusRequest.success;
+
+      update();
+    });
   }
 
   Future<void> getCountries() async {
@@ -354,6 +416,9 @@ class SignupController extends GetxController {
     usernameController.dispose();
     passwordController.dispose();
     emailController.dispose();
+    bioController.dispose();
+    commercialController.dispose();
+    taxCartController.dispose();
     super.dispose();
   }
 }

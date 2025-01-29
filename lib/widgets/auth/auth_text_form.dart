@@ -1,25 +1,28 @@
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class AuthTextForm extends StatelessWidget {
-  const AuthTextForm({
-    super.key,
-    required this.hintText,
-    this.suficon,
-    this.textFormController,
-    this.validator,
-    this.keyboardType,
-    this.obscureText,
-    this.preicon,
-    this.onTapIconsuf,
-    this.sufcolor,
-    required this.lable,
-    this.formBorderColor = pageColor,
-    // this.autofocus,
-  });
+  const AuthTextForm(
+      {super.key,
+      required this.hintText,
+      this.suficon,
+      this.textFormController,
+      this.validator,
+      this.keyboardType,
+      this.obscureText,
+      this.preicon,
+      this.onTapIconsuf,
+      this.sufcolor,
+      required this.lable,
+      this.formBorderColor = pageColor,
+      this.minLines,
+      this.maxLines,
+      this.sufix,
+      this.enabled});
   final Color? sufcolor;
   final String hintText;
   final IconData? suficon;
@@ -31,29 +34,32 @@ class AuthTextForm extends StatelessWidget {
   final String? lable;
   final void Function()? onTapIconsuf;
   final Color? formBorderColor;
+  final int? minLines;
+  final int? maxLines;
+  final Widget? sufix;
+  final bool? enabled;
 
-  //final bool? autofocus;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       obscureText: obscureText ?? false,
       validator: validator,
-      //keyboardAppearance: Brightness.dark,
       keyboardType: keyboardType,
-      //autofocus: autofocus!,
-
       maxLength: null,
+      minLines: minLines ?? 1,
+      maxLines: maxLines ?? 1,
       controller: textFormController,
       onChanged: (val) {},
-      //style: TextStyle(fontSize: 10.sp), // getRegularStyle,
+      inputFormatters: [
+        if (enabled != null && !enabled!) FilteringTextInputFormatter.allow(""),
+      ],
       decoration: InputDecoration(
+        // enabled: enabled ?? true,
         floatingLabelBehavior: FloatingLabelBehavior.always,
         contentPadding: EdgeInsets.symmetric(
           horizontal: context.isTablet ? 10.w : 12.w,
           vertical: context.isTablet ? 15.h : 12.h,
         ),
-        //label: Text("phone"),
-        //labelText: lable,
         label: Text(
           lable!,
           style: TextStyle(
@@ -67,24 +73,19 @@ class AuthTextForm extends StatelessWidget {
           borderRadius: BorderRadius.circular(7.r),
           borderSide: const BorderSide(color: blackColor, width: 1),
         ),
-        // prefixIcon: Padding(
-        //   padding: const EdgeInsets.all(10.0),
-        //   child: Icon(
-        //     preicon,
-        //     color: Colors.black,
-        //     size: context.isTablet ? 11.sp : 18.sp,
-        //   ),
-        // ),
         filled: true,
         fillColor: Colors.white,
-        suffixIcon: InkWell(
-          onTap: onTapIconsuf,
-          child: Icon(
-            suficon,
-            color: sufcolor,
-            size: context.isTablet ? 11.sp : 18.sp,
-          ),
-        ),
+        suffixIcon: sufix ??
+            (suficon != null
+                ? InkWell(
+                    onTap: onTapIconsuf,
+                    child: Icon(
+                      suficon,
+                      color: sufcolor,
+                      size: context.isTablet ? 11.sp : 18.sp,
+                    ),
+                  )
+                : null),
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: formBorderColor!, width: 1.5),
           borderRadius: BorderRadius.circular(7.0),

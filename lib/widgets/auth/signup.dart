@@ -10,8 +10,8 @@ import '../../core/theme/app_color.dart';
 import '../../app_routes.dart';
 import 'auth_text_form.dart';
 
-class LaundrySignup extends StatelessWidget {
-  const LaundrySignup({super.key});
+class Signup extends StatelessWidget {
+  const Signup({super.key});
 
   @override
   Widget build(BuildContext context) {

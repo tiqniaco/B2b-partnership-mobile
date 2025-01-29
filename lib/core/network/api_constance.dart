@@ -11,12 +11,11 @@ class ApiConstance {
   static String getProviderTyps = 'provider-types';
   static String getSpacialization = 'specializations';
   static String getSupSpacialization = 'sub-specializations';
-  
 
   /// Auth
   static const String login = 'auth/login';
   static const String logout = 'patient/auth/logout';
-  static const String register = 'patient/auth/register';
+  static const String register = 'auth/register';
   static const String checkEmail = 'patient/auth/check-email';
   static const String checkPhone = 'patient/auth/check-phone';
   static const String registerWithGoogle = 'patient/auth/register-with-google';

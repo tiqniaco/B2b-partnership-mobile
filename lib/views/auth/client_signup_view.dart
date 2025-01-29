@@ -54,8 +54,6 @@ class ClientSignupView extends StatelessWidget {
       ),
     );
   }
-
-
 }
 
 // class StepOne extends StatelessWidget {

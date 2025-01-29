@@ -14,6 +14,7 @@ class CustomePhoneWidget extends StatelessWidget {
     return GetBuilder<SignupController>(builder: (controller) {
       return TextFormField(
         keyboardType: TextInputType.phone,
+        controller: controller.phoneController,
         maxLength: int.parse(controller.selectedCountry.phoneLength!),
         decoration: InputDecoration(
           floatingLabelBehavior: FloatingLabelBehavior.always,

@@ -106,10 +106,7 @@ class ProviderSignup1 extends StatelessWidget {
               return controller.validUserData(val);
             },
           ),
-          // Gap(20.h),
-          // SelectCountryWidget(
-          //   enabled: true,
-          // ),
+         
           Gap(20.h),
           AuthTextForm(
             lable: "Password".tr,

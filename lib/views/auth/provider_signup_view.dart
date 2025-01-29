@@ -169,12 +169,12 @@ class ProviderSignupView extends StatelessWidget {
                     "Create a New Account",
                     style: TextStyle(
                       fontSize: 20.sp,
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.bold,
                       color: blackColor,
                       shadows: [
                         Shadow(
-                          offset: Offset(2.0, 2.0), // X and Y offset
-                          blurRadius: 4.0, // How blurry the shadow is
+                          offset: Offset(1.0, 1.0), // X and Y offset
+                          blurRadius: 5.0, // How blurry the shadow is
                           color: Colors.grey, // Shadow color
                         ),
                       ],
@@ -204,7 +204,11 @@ class ProviderSignupView extends StatelessWidget {
                   ),
                   CustomLoadingButton(
                       onPressed: () {
-                        return controller.nextStep;
+                        if (controller.currentStep == 2) {
+                          return controller.signup();
+                        } else {
+                          return controller.nextStep;
+                        }
                       },
                       text: controller.currentStep ==
                               controller.providerSteps.length - 1
