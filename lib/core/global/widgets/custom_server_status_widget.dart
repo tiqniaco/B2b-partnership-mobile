@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 import '/core/enums/status_request.dart';
 import '/core/global/widgets/custom_empty_widget.dart';
 import '/core/global/widgets/custom_error_widget.dart';
-
-import 'custom_loading_widget.dart';
 
 class CustomServerStatusWidget extends StatelessWidget {
   const CustomServerStatusWidget({
@@ -21,11 +20,15 @@ class CustomServerStatusWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return switch (statusRequest) {
-      StatusRequest.loading => Container(
-          height: height,
-          alignment: Alignment.center,
-          child: const CustomLoadingWidget(),
+      StatusRequest.loading => Skeletonizer(
+          enabled: true,
+          child: child,
         ),
+      // Container(
+      //     height: height,
+      //     alignment: Alignment.center,
+      //     child: const CustomLoadingWidget(),
+      //   ),
       StatusRequest.success => child,
       StatusRequest.error => Container(
           height: height,
