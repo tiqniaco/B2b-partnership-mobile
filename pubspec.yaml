@@ -52,6 +52,7 @@ dependencies:
   easy_loading_button: ^0.3.2
   timezone: ^0.10.0
   logger: ^2.5.0
+  skeletonizer: ^1.4.3
 
 dev_dependencies:
   flutter_test:
