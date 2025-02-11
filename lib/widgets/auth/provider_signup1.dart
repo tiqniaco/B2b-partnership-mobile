@@ -48,7 +48,7 @@ class ProviderSignup1 extends StatelessWidget {
                 bottom: 10,
                 child: InkWell(
                   onTap: () {
-                    controller.gallaryImage();
+                    controller.galleryImage();
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -106,7 +106,7 @@ class ProviderSignup1 extends StatelessWidget {
               return controller.validUserData(val);
             },
           ),
-         
+
           Gap(20.h),
           AuthTextForm(
             lable: "Password".tr,

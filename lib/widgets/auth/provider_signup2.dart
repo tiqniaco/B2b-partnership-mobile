@@ -18,35 +18,34 @@ class ProviderSignup2 extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(SignupController());
     return GetBuilder<SignupController>(
-      builder: (controller) => Form(
-        key: controller.formKeyCustomer,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            //Gap(20.h),
-            Row(
-              children: [
-                Expanded(
-                  child: SelectCountryWidget(
-                    enabled: false,
-                  ),
+      builder: (controller) => Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          //Gap(20.h),
+          Row(
+            children: [
+              Expanded(
+                child: SelectCountryWidget(
+                  enabled: false,
                 ),
-                Gap(10),
-                Expanded(child: SelectCityWidget()),
-              ],
-            ),
-            //Gap(20.h),
-            Gap(20.h),
-            CustomePhoneWidget(),
+              ),
+              Gap(10),
+              Expanded(child: SelectCityWidget()),
+            ],
+          ),
+          //Gap(20.h),
+          Gap(20.h),
+          CustomPhoneWidget(),
+          if (controller.role == "provider") ...[
             Gap(10.h),
             SelectProviderWidget(),
             Gap(20.h),
-            SelectSpacializationWidget(),
+            SelectSpecializationWidget(),
             Gap(20.h),
-            SelectSupSpacializationWidget(),
-            Gap(20.h),
+            SelectSupSpacializationWidget()
           ],
-        ),
+          Gap(20.h),
+        ],
       ),
     );
   }

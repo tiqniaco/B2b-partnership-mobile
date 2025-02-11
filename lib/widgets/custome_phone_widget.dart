@@ -5,8 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class CustomePhoneWidget extends StatelessWidget {
-  const CustomePhoneWidget({super.key});
+class CustomPhoneWidget extends StatelessWidget {
+  const CustomPhoneWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

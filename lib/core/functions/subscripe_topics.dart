@@ -8,16 +8,16 @@ import 'package:get/get.dart';
 Future<void> subscribeTopics(int id, String role) async {
   kUserId = id.toString();
   Get.find<AppPreferences>().setUserId(id.toString());
-  if (role == "patient") {
+  if (role == "provider") {
     await FirebaseMessaging.instance.subscribeToTopic('all');
-    await FirebaseMessaging.instance.subscribeToTopic('patients');
-    await FirebaseMessaging.instance.subscribeToTopic('patient$id');
-    log('patient$id', name: 'subscribeTopics');
-  } else if (role == "doctor") {
+    await FirebaseMessaging.instance.subscribeToTopic('providers');
+    await FirebaseMessaging.instance.subscribeToTopic('provider$id');
+    log('provider$id', name: 'subscribeTopics');
+  } else if (role == "client") {
     await FirebaseMessaging.instance.subscribeToTopic('all');
-    await FirebaseMessaging.instance.subscribeToTopic('doctors');
-    await FirebaseMessaging.instance.subscribeToTopic('doctor$id');
-    log('doctor$id', name: 'subscribeTopics');
+    await FirebaseMessaging.instance.subscribeToTopic('clients');
+    await FirebaseMessaging.instance.subscribeToTopic('client$id');
+    log('client$id', name: 'subscribeTopics');
   } else if (role == "admin") {
     await FirebaseMessaging.instance.subscribeToTopic('all');
     await FirebaseMessaging.instance.subscribeToTopic('admins');

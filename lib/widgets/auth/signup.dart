@@ -18,7 +18,7 @@ class Signup extends StatelessWidget {
     return GetBuilder<SignupController>(
       init: SignupController(),
       builder: (SignupController controller) => Form(
-        key: controller.formKeyCustomer,
+        //: controller.formKeyCustomer,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           //mainAxisAlignment: MainAxisAlignment.//,

@@ -1,7 +1,7 @@
 import 'package:b2b_partenership/controller/auth/signup_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
-import 'package:b2b_partenership/models/sub_spacialize_model.dart';
+import 'package:b2b_partenership/models/sub_specialize_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -14,8 +14,8 @@ class SelectSupSpacializationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SignupController>(
-      builder: (controller) => DropdownButtonFormField<SubSpacializModel>(
-        value: controller.selectedSubSpacialization, //CountryModel
+      builder: (controller) => DropdownButtonFormField<SubSpecializeModel>(
+        value: controller.selectedSubSpecialization, //CountryModel
         decoration: InputDecoration(
           contentPadding:
               EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
@@ -40,8 +40,8 @@ class SelectSupSpacializationWidget extends StatelessWidget {
           size: 23.sp,
           color: greyColor,
         ),
-        items: controller.subSpacializations.map((item) {
-          return DropdownMenuItem<SubSpacializModel>(
+        items: controller.subSpecializations.map((item) {
+          return DropdownMenuItem<SubSpecializeModel>(
             value: item,
             child: Row(
               children: [
@@ -58,7 +58,7 @@ class SelectSupSpacializationWidget extends StatelessWidget {
           );
         }).toList(),
         onChanged: (value) {
-          controller.onSubSpacializChanged(value);
+          controller.onSubSpecializeChanged(value);
         },
       ),
     );

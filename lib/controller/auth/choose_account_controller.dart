@@ -26,7 +26,7 @@ class ChooseAccountController extends GetxController {
 
   goOnTap() {
     if (isClient) {
-      Get.toNamed(AppRoutes.clientSignup, arguments: {"role": "client"});
+      Get.toNamed(AppRoutes.providerSignup, arguments: {"role": "client"});
     } else {
       Get.toNamed(AppRoutes.providerSignup, arguments: {"role": "provider"});
     }

@@ -5,7 +5,7 @@ class AssetsData {
   static const String loading1Animation = "${_baseLottiePath}loading1.json";
   static const String loading2Animation = "${_baseLottiePath}loading2.json";
   static const String loading3Animation = "${_baseLottiePath}loading3.json";
-  static const String noDataAnimation = "${_baseLottiePath}noData.json";
+  static const String noDataAnimation = "${_baseLottiePath}nodata.json";
   static const String offlineAnimation = "${_baseLottiePath}offline.json";
   static const String noConnectionAnimation =
       "${_baseLottiePath}noConnectionAnimation.json";

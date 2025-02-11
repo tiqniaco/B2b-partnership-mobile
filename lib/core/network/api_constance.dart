@@ -8,9 +8,9 @@ class ApiConstance {
   // global
   static String countries = 'countries';
   static String cities = 'governments';
-  static String getProviderTyps = 'provider-types';
-  static String getSpacialization = 'specializations';
-  static String getSupSpacialization = 'sub-specializations';
+  static String getProviderTypes = 'provider-types';
+  static String getSpecialization = 'specializations';
+  static String getSupSpecialization = 'sub-specializations';
 
   /// Auth
   static const String login = 'auth/login';
@@ -24,4 +24,28 @@ class ApiConstance {
   static final String updateProfile = 'patient/$kUserId';
   static final String deleteAccount = 'patient/$kUserId';
   static const String resetPassword = 'reset-password';
+
+  // home
+  static const String getBanners = 'banners';
+  static const String getTopServices = 'home/top-services';
+  static const String getTopProviders = 'home/top-providers';
+  static const String getNewServices = 'home/new-services';
+  static const String getJobs = 'home/new-jobs';
+
+  //service details
+  static String getServiceDetails(String id) => 'provider-service/$id';
+  static const String getReviewServices = 'provider-service-reviews';
+  static const String getFeatureServices = 'provider-service-features';
+
+  //provider Details
+
+  static String getProviderProfileDetails(String id) => 'providers/$id';
+  static String getProviderServices(String id) => 'providers/$id/services';
+  static String getServicesInCategory(String id) =>
+      'specializations/$id/services';
+  static String getProvidersInCategory = 'specializations/providers';
+  static String getTopCountriesProv(String id) =>
+      'home/country/$id/top-providers';
+  static String getUserFavorite = 'favorite-providers';
+  static String toggleFavorite = 'toggle-favorite';
 }

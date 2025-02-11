@@ -2,7 +2,15 @@ import 'package:b2b_partenership/views/auth/choose_account.dart';
 import 'package:b2b_partenership/views/auth/login_view.dart';
 import 'package:b2b_partenership/views/auth/provider_signup_view.dart';
 import 'package:b2b_partenership/views/auth/client_signup_view.dart';
-import 'package:b2b_partenership/views/home/clint_home_view.dart';
+import 'package:b2b_partenership/views/home/client_home_layout.dart';
+import 'package:b2b_partenership/views/home/client_home_view.dart';
+import 'package:b2b_partenership/views/home/provider_home_view.dart';
+import 'package:b2b_partenership/views/provider_profile_view.dart';
+import 'package:b2b_partenership/views/see_all/see_all_categories.dart';
+import 'package:b2b_partenership/views/see_all/see_all_providers.dart';
+import 'package:b2b_partenership/views/service_details_view.dart';
+import 'package:b2b_partenership/views/in_category/providers_in_categories.dart';
+import 'package:b2b_partenership/views/service_request/service_request.dart';
 import 'package:b2b_partenership/views/splash/views/splash_view.dart';
 import 'package:get/get.dart';
 
@@ -24,6 +32,18 @@ class AppRoutes {
 
   // home
   static const String clintHome = '/clintHome';
+  static const String providerHome = '/providerHome';
+  static const String clientHomeLayout = '/clientHomeLayout';
+  static const String seeAll = '/seeAll';
+  static const String seeAllCategories = '/seeAllCategories';
+  static const String requestServices = '/requestServices';
+
+  // service details
+  static const String serviceDetails = '/serviceDetails';
+  static const String providersInCategory = '/providersInCategory';
+
+  // provider
+  static const String providerProfile = '/providerProfile';
 
   static final List<GetPage<dynamic>> pages = [
     // base
@@ -53,7 +73,43 @@ class AppRoutes {
 
     GetPage(
       name: clintHome,
-      page: () => const ClintHomeView(),
+      page: () => ClientHomeView(),
+    ),
+    GetPage(
+      name: providerHome,
+      page: () => const ProviderHomeView(),
+    ),
+    GetPage(
+      name: clientHomeLayout,
+      page: () => const ClientHomeLayout(),
+    ),
+    GetPage(
+      name: seeAll,
+      page: () => const SeeAll(),
+    ),
+    GetPage(
+      name: seeAllCategories,
+      page: () => const SeeAllCategories(),
+    ),
+    GetPage(
+      name: requestServices,
+      page: () => ServiceRequest(),
+    ),
+
+    // service details
+    GetPage(
+      name: serviceDetails,
+      page: () => ServiceDetailsView(),
+    ),
+    GetPage(
+      name: providersInCategory,
+      page: () => ProvidersInCategories(),
+    ),
+
+    // provider
+    GetPage(
+      name: providerProfile,
+      page: () => const ProviderProfileView(),
     ),
   ];
 }

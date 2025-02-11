@@ -2,7 +2,6 @@ import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 
 import '/core/constants/app_constants.dart';
-import '/core/services/database/database_service.dart';
 import '/core/services/notifications_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -28,7 +27,6 @@ class _SplashViewBodyState extends State<SplashViewBody>
     _navigateToNext();
 
     Get.find<NotificationsService>().initialize();
-    Get.find<DatabaseService>().init();
     Get.find<AppPreferences>().init();
   }
 

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import '/core/theme/app_color.dart';
 import '/core/theme/text_style.dart';
-import '/core/utils/assets_data.dart';
 
 class CustomEmptyWidget extends StatelessWidget {
   const CustomEmptyWidget({
@@ -23,7 +22,7 @@ class CustomEmptyWidget extends StatelessWidget {
           alignment: Alignment.center,
           height: height ?? 0.25.sh,
           child: Lottie.asset(
-            AssetsData.noDataAnimation,
+            "assets/lottie/nodata.json",
             repeat: false,
           ),
         ),

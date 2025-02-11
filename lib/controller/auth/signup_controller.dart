@@ -2,14 +2,15 @@
 
 import 'dart:io';
 
+import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
-import 'package:b2b_partenership/core/utils/app_snackbars.dart';
+import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:b2b_partenership/models/city_model.dart';
 import 'package:b2b_partenership/models/country_model.dart';
 import 'package:b2b_partenership/models/provider_type_model.dart';
-import 'package:b2b_partenership/models/spacialize_model.dart';
-import 'package:b2b_partenership/models/sub_spacialize_model.dart';
+import 'package:b2b_partenership/models/specialize_model.dart';
+import 'package:b2b_partenership/models/sub_specialize_model.dart';
 import 'package:b2b_partenership/widgets/auth/provider_signup1.dart';
 import 'package:b2b_partenership/widgets/auth/provider_signup2.dart';
 import 'package:b2b_partenership/widgets/auth/provider_signup3.dart';
@@ -32,45 +33,44 @@ class SignupController extends GetxController {
   late CountryModel selectedCountry;
   late CityModel selectedCity;
   late ProviderTypeModel selectedType;
-  late SpacializModel selectedSpacialization;
-  late SubSpacializModel selectedSubSpacialization;
+  late SpecializeModel selectedSpecialization;
+  late SubSpecializeModel selectedSubSpecialization;
   String phoneNumber = "";
   String countryCode = "+20";
-
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   List<CountryModel> countries = [];
   List<CityModel> cities = [];
   List<ProviderTypeModel> providerTypes = [];
-  List<SpacializModel> spacializations = [];
-  List<SubSpacializModel> subSpacializations = [];
-
+  List<SpecializeModel> specializations = [];
+  List<SubSpecializeModel> subSpecializations = [];
+  late String role;
   int currentStep = 0;
 
-  final List<Widget> providerSteps = [
-    const ProviderSignup1(),
-    const ProviderSignup2(),
-    const ProviderSignup3(),
-  ];
+  List<Widget> get providerSteps => [
+        const ProviderSignup1(),
+        const ProviderSignup2(),
+        if (role == 'provider') const ProviderSignup3(),
+      ];
 
   String userType = "customer";
-  bool isCustomer = true;
-  bool isLaundry = false;
+
   bool obscureText = true;
   bool customerObscureText = true;
   bool laundryObscureText = true;
   StatusRequest statusRequest = StatusRequest.loading;
   StatusRequest statusRequestCity = StatusRequest.loading;
   StatusRequest statusRequestProviderType = StatusRequest.loading;
-  StatusRequest statusRequestSpacialization = StatusRequest.loading;
-  StatusRequest statusRequestSupSpacialization = StatusRequest.loading;
-  GlobalKey<FormState> formKeyCustomer = GlobalKey<FormState>();
+  StatusRequest statusRequestSpecialization = StatusRequest.loading;
+  StatusRequest statusRequestSupSpecialization = StatusRequest.loading;
   File? imageFile;
-  File? commercPdfFile; // ;
+  File? commercePdfFile;
   File? taxPdfFile;
   bool isLoading = false;
   late String id;
 
   @override
   Future<void> onInit() async {
+    role = Get.arguments['role'];
     phoneController = TextEditingController();
     usernameController = TextEditingController();
     passwordController = TextEditingController();
@@ -80,15 +80,15 @@ class SignupController extends GetxController {
     taxCartController = TextEditingController();
     await getCountries();
     getCities();
-    getProviderTyps();
-    await getSpacialization();
-    getSupSpacialization();
+    getProviderTypes();
+    await getSpecialization();
+    getSupSpecialization();
     super.onInit();
   }
 
   removeFile(String file) {
     if (file == "c") {
-      commercPdfFile = null;
+      commercePdfFile = null;
       commercialController.clear();
     } else {
       taxPdfFile = null;
@@ -105,9 +105,9 @@ class SignupController extends GetxController {
 
     if (result != null && result.files.single.path != null) {
       if (fileName == "c") {
-        commercPdfFile = File(result.files.single.path!);
+        commercePdfFile = File(result.files.single.path!);
         commercialController.text = result.files.single.name;
-        print("File selected: ${commercPdfFile!.path}");
+        print("File selected: ${commercePdfFile!.path}");
       } else {
         taxPdfFile = File(result.files.single.path!);
         taxCartController.text = result.files.single.name;
@@ -122,7 +122,7 @@ class SignupController extends GetxController {
 
   printFiles() {
     print("=============================");
-    print(commercPdfFile);
+    print(commercePdfFile);
     print(taxPdfFile);
     print("=============================");
   }
@@ -160,16 +160,16 @@ class SignupController extends GetxController {
     update();
   }
 
-  onSpacializChanged(value) {
-    selectedSpacialization = value;
-    debugPrint('Selected spacializ: $value');
-    getSupSpacialization();
+  onSpecializeChanged(value) {
+    selectedSpecialization = value;
+    debugPrint('Selected specialize: $value');
+    getSupSpecialization();
     update();
   }
 
-  onSubSpacializChanged(value) {
-    selectedSubSpacialization = value;
-    debugPrint('Selected sub spacializ: $value');
+  onSubSpecializeChanged(value) {
+    selectedSubSpecialization = value;
+    debugPrint('Selected sub specialize: $value');
     update();
   }
 
@@ -193,21 +193,21 @@ class SignupController extends GetxController {
     update();
   }
 
-  onCustomer() {
-    isCustomer = true;
-    isLaundry = false;
-    userType = "customer";
-    debugPrint(userType);
-    update();
-  }
+  // onCustomer() {
+  //   isCustomer = true;
+  //   isLaundry = false;
+  //   userType = "customer";
+  //   debugPrint(userType);
+  //   update();
+  // }
 
-  onLaundry() {
-    isCustomer = false;
-    isLaundry = true;
-    userType = "laundry";
-    debugPrint(userType);
-    update();
-  }
+  // onLaundry() {
+  //   isCustomer = false;
+  //   isLaundry = true;
+  //   userType = "laundry";
+  //   debugPrint(userType);
+  //   update();
+  // }
 
   validUserData(val) {
     if (val.isEmpty) {
@@ -215,7 +215,7 @@ class SignupController extends GetxController {
     }
   }
 
-  gallaryImage() async {
+  galleryImage() async {
     XFile? xfile = await ImagePicker().pickImage(source: ImageSource.gallery);
     imageFile = File(xfile!.path);
     Get.defaultDialog(
@@ -238,41 +238,91 @@ class SignupController extends GetxController {
     update();
   }
 
-  Future<void> signup() async {
-    statusRequest = StatusRequest.loading;
-    final result = await CustomRequest<Map<String, dynamic>>(
-        path: ApiConstance.register,
-        fromJson: (json) {
-          return json['message'];
-        },
-        files: {
-          "image":imageFile!.path,
-          "commercial_register":commercPdfFile!.path,
-          "tax_card":taxPdfFile!.path,
-        },
-        data: {
-          "name": usernameController.text,
-          "email": emailController.text,
-          "password": passwordController.text,
-          "country_code": selectedCountry.code,
-          "phone": phoneController.text,
-          "role": "provider",
-          "government_id": selectedCity.id,
-          "sub_specialization_id": selectedSubSpacialization.id,
-          "provider_types_id": selectedType.id,
-          "bio": bioController.text,
-        }).sendPostRequest();
+  Future<void> signupProvider() async {
+    if (formKey.currentState!.validate()) {
+      statusRequest = StatusRequest.loading;
+      if (imageFile == null) {
+        AppSnackBars.warning(message: "upload profile image");
+      } else if (commercePdfFile == null) {
+        AppSnackBars.warning(message: "upload commercial register pdf file");
+      } else if (taxPdfFile == null) {
+        AppSnackBars.warning(message: "upload tax card pdf file");
+      } else {
+        final result = await CustomRequest<Map<String, dynamic>>(
+            path: ApiConstance.register,
+            fromJson: (json) {
+              return json;
+            },
+            files: {
+              "image": imageFile!.path,
+              "commercial_register": commercePdfFile!.path,
+              "tax_card": taxPdfFile!.path,
+            },
+            data: {
+              "name": usernameController.text,
+              "email": emailController.text,
+              "password": passwordController.text,
+              "country_code": selectedCountry.code,
+              "phone": phoneController.text,
+              "role": "provider",
+              "government_id": selectedCity.id,
+              "sub_specialization_id": selectedSubSpecialization.id,
+              "provider_types_id": selectedType.id,
+              "bio": bioController.text,
+            }).sendPostRequest();
 
-    result.fold((l) {
-      statusRequest = StatusRequest.error;
-      Logger().e(l.errMsg);
-      update();
-    }, (r) {
-      AppSnackBars.success(message: r['message']);
-      statusRequest = StatusRequest.success;
+        result.fold((l) {
+          statusRequest = StatusRequest.error;
+          Logger().e(l.errMsg);
+          AppSnackBars.error(message: l.errMsg);
+          update();
+        }, (r) {
+          AppSnackBars.success(message: r['message']);
+          statusRequest = StatusRequest.success;
+          Get.offAllNamed(AppRoutes.login);
+          update();
+        });
+      }
+    }
+  }
 
-      update();
-    });
+  Future<void> signupClient() async {
+    if (formKey.currentState!.validate()) {
+      statusRequest = StatusRequest.loading;
+      if (imageFile == null) {
+        AppSnackBars.warning(message: "upload profile image");
+      } else {
+        final result = await CustomRequest<Map<String, dynamic>>(
+            path: ApiConstance.register,
+            fromJson: (json) {
+              return json;
+            },
+            files: {
+              "image": imageFile!.path,
+            },
+            data: {
+              "name": usernameController.text,
+              "email": emailController.text,
+              "password": passwordController.text,
+              "country_code": selectedCountry.code,
+              "phone": phoneController.text,
+              "role": "client",
+              "government_id": selectedCity.id,
+            }).sendPostRequest();
+
+        result.fold((l) {
+          statusRequest = StatusRequest.error;
+          Logger().e(l.errMsg);
+          AppSnackBars.error(message: l.errMsg);
+          update();
+        }, (r) {
+          AppSnackBars.success(message: r['message']);
+          statusRequest = StatusRequest.success;
+          Get.offAllNamed(AppRoutes.login);
+          update();
+        });
+      }
+    }
   }
 
   Future<void> getCountries() async {
@@ -329,10 +379,10 @@ class SignupController extends GetxController {
     update();
   }
 
-  Future<void> getProviderTyps() async {
+  Future<void> getProviderTypes() async {
     statusRequestProviderType = StatusRequest.loading;
     final response = await CustomRequest(
-        path: ApiConstance.getProviderTyps,
+        path: ApiConstance.getProviderTypes,
         fromJson: (json) {
           return json['data']
               .map<ProviderTypeModel>(
@@ -356,55 +406,55 @@ class SignupController extends GetxController {
     update();
   }
 
-  Future<void> getSpacialization() async {
+  Future<void> getSpecialization() async {
     statusRequestProviderType = StatusRequest.loading;
     final response = await CustomRequest(
-        path: ApiConstance.getSpacialization,
+        path: ApiConstance.getSpecialization,
         fromJson: (json) {
           return json['data']
-              .map<SpacializModel>((e) => SpacializModel.fromJson(e))
+              .map<SpecializeModel>((e) => SpecializeModel.fromJson(e))
               .toList();
         }).sendGetRequest();
     response.fold((l) {
-      statusRequestSpacialization = StatusRequest.error;
+      statusRequestSpecialization = StatusRequest.error;
       Logger().e(l.errMsg);
     }, (r) {
-      spacializations.clear();
-      statusRequestSpacialization = StatusRequest.success;
-      spacializations = r;
+      specializations.clear();
+      statusRequestSpecialization = StatusRequest.success;
+      specializations = r;
       if (r.isEmpty) {
-        statusRequestSpacialization = StatusRequest.noData;
+        statusRequestSpecialization = StatusRequest.noData;
       } else {
-        selectedSpacialization = r[0];
-        statusRequestSpacialization = StatusRequest.success;
+        selectedSpecialization = r[0];
+        statusRequestSpecialization = StatusRequest.success;
       }
     });
     update();
   }
 
-  Future<void> getSupSpacialization() async {
-    statusRequestSupSpacialization = StatusRequest.loading;
+  Future<void> getSupSpecialization() async {
+    statusRequestSupSpecialization = StatusRequest.loading;
     final response = await CustomRequest(
-        path: ApiConstance.getSupSpacialization,
-        data: {"specialization_id": selectedSpacialization.id},
+        path: ApiConstance.getSupSpecialization,
+        data: {"specialization_id": selectedSpecialization.id},
         fromJson: (json) {
           return json['data']
-              .map<SubSpacializModel>(
-                  (type) => SubSpacializModel.fromJson(type))
+              .map<SubSpecializeModel>(
+                  (type) => SubSpecializeModel.fromJson(type))
               .toList();
         }).sendGetRequest();
     response.fold((l) {
-      statusRequestSupSpacialization = StatusRequest.error;
+      statusRequestSupSpecialization = StatusRequest.error;
       Logger().e(l.errMsg);
     }, (r) {
-      subSpacializations.clear();
-      statusRequestSupSpacialization = StatusRequest.success;
-      subSpacializations = r;
+      subSpecializations.clear();
+      statusRequestSupSpecialization = StatusRequest.success;
+      subSpecializations = r;
       if (r.isEmpty) {
-        statusRequestSupSpacialization = StatusRequest.noData;
+        statusRequestSupSpecialization = StatusRequest.noData;
       } else {
-        selectedSubSpacialization = r[0];
-        statusRequestSupSpacialization = StatusRequest.success;
+        selectedSubSpecialization = r[0];
+        statusRequestSupSpecialization = StatusRequest.success;
       }
     });
     update();

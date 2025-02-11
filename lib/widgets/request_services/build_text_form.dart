@@ -1,0 +1,52 @@
+import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
+
+Widget buildTextField(
+    TextEditingController controller, String label, IconData icon,
+    {int maxLines = 1}) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 8.0),
+    child: TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        floatingLabelBehavior: FloatingLabelBehavior.always,
+        contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+        hintText: label,
+        hintStyle: TextStyle(fontSize: 13.sp),
+        label: Column(
+          children: [
+            Container(
+              width: 210,
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+              decoration: BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: BorderRadius.circular(8)),
+              child: Text(
+                label,
+                style:
+                    TextStyle(color: whiteColor, fontWeight: FontWeight.w500),
+              ),
+            ),
+            Gap(35)
+          ],
+        ),
+        filled: true,
+        fillColor: whiteColor,
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: greyColor, width: 0.5),
+          borderRadius: BorderRadius.circular(10),
+        ), 
+       
+      ),
+      maxLines: maxLines,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter $label';
+        }
+        return null;
+      },
+    ),
+  );
+}

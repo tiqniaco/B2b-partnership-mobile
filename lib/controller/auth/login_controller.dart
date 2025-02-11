@@ -1,27 +1,36 @@
 // ignore_for_file: avoid_print
 
+import 'package:b2b_partenership/app_routes.dart';
+import 'package:b2b_partenership/core/crud/custom_request.dart';
+import 'package:b2b_partenership/core/enums/status_request.dart';
+import 'package:b2b_partenership/core/functions/subscripe_topics.dart';
+import 'package:b2b_partenership/core/network/api_constance.dart';
+import 'package:b2b_partenership/core/services/app_prefs.dart';
+import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:logger/logger.dart';
 
 class LoginController extends GetxController {
-  late TextEditingController phoneController;
+  late TextEditingController emailController;
   late TextEditingController passwordController;
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  StatusRequest statusRequest = StatusRequest.loading;
+
   bool obscureText = true;
-  //final _authRepo = Get.find<AuthRepo>();
   bool obscurePassword = true;
   bool isLoading = false;
 
   @override
   void onInit() {
-    phoneController = TextEditingController();
+    emailController = TextEditingController();
     passwordController = TextEditingController();
     super.onInit();
   }
 
   @override
   void dispose() {
-    phoneController.dispose();
+    emailController.dispose();
     passwordController.dispose();
     super.dispose();
   }
@@ -37,59 +46,44 @@ class LoginController extends GetxController {
     }
   }
 
-  // Future<void> login() async {
-  //   if (passwordController.text.isNotEmpty) {
-  //     if (passwordController.text.length < 6) {
-  //       AppSnackBars.warning(
-  //         message: "Password must be at least 6 characters".tr,
-  //       );
-  //     } else {
-  //       isLoading = true;
-  //       update();
-  //       final result = await _authRepo.login(
-  //           phoneController.text, passwordController.text);
-  //       result.fold(
-  //         (error) {
-  //           Get.defaultDialog(
-  //             title: "note",
-  //             content: Text(
-  //               "Because you create B2B account, please wait admin approval to login the application "
-  //                   .tr,
-  //               textAlign: TextAlign.center,
-  //             ),
-  //           );
-  //           isLoading = false;
-  //           update();
-  //         },
-  //         (data) {
-  //           isLoading = false;
-  //           update();
-  //           log(data.toString(), name: "login response");
-  //           Get.find<AppPreferences>().setToken(data.token);
-  //           Get.find<AppPreferences>().setUserId(data.user.id.toString());
-  //           Get.find<AppPreferences>().setUserRole(data.user.role.toString());
-  //           kUserId = data.user.id.toString();
-  //           ApiConstance.token = data.token;
-  //           subscribeTopics(int.parse(kUserId));
-  //           if (data.hasLocation ?? true) {
-  //             if (data.user.role == "super_admin") {
-  //               Get.offAllNamed(AppRoutes.mainAdmin);
-  //             } else if (data.user.role == "operation") {
-  //               Get.offAllNamed(AppRoutes.mainOperation);
-  //             } else if (Get.find<AppPreferences>().getUserRole() == "admin") {
-  //               Get.offAllNamed(AppRoutes.mainDelivery);
-  //             } else {
-  //               Get.offAllNamed(AppRoutes.main);
-  //             }
-  //           } else {
-  //             Get.offAllNamed(AppRoutes.addlocations, arguments: {
-  //               "fromPage": "signup",
-  //               "token": data.token,
-  //             });
-  //           }
-  //         },
-  //       );
-  //     }
-  //   }
-  // }
+  Future<void> login() async {
+    if (loginFormKey.currentState!.validate()) {
+      statusRequest = StatusRequest.loading;
+
+      final result = await CustomRequest<Map<String, dynamic>>(
+          path: ApiConstance.login,
+          fromJson: (json) {
+            return json;
+          },
+          data: {
+            "email": emailController.text,
+            "password": passwordController.text,
+          }).sendPostRequest();
+      result.fold((l) {
+        statusRequest = StatusRequest.error;
+        Logger().e(l.errMsg);
+        AppSnackBars.error(message: l.errMsg);
+        update();
+      }, (r) {
+        AppSnackBars.success(message: r['message']);
+        statusRequest = StatusRequest.success;
+        subscribeTopics(
+          r['user_id'],
+          r['role'],
+        );
+        Get.find<AppPreferences>().setToken(r['token']);
+        Get.find<AppPreferences>().setUserId(r['user_id'].toString());
+         Get.find<AppPreferences>().setUserRoleId(r['role_id'].toString());
+        Get.find<AppPreferences>().setUserRole(r['role']);
+        ApiConstance.token = r['token'];
+        if (r['role'] == 'provider') {
+          Get.offAllNamed(AppRoutes.providerHome);
+        } else {
+          Get.offAllNamed(AppRoutes.clientHomeLayout);
+        }
+
+        update();
+      });
+    }
+  }
 }

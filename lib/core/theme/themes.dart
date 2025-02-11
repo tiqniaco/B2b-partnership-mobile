@@ -69,7 +69,7 @@ class AppThemes {
             borderRadius: BorderRadius.circular(8.w),
           ),
           enabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
+            borderSide: BorderSide(
               color: borderColor,
               width: 1.0,
             ),
@@ -90,7 +90,7 @@ class AppThemes {
             borderRadius: BorderRadius.circular(8.w),
           ),
           disabledBorder: OutlineInputBorder(
-            borderSide: const BorderSide(
+            borderSide: BorderSide(
               color: borderColor,
               width: 1.0,
             ),

@@ -1,4 +1,4 @@
-import 'package:b2b_partenership/core/utils/app_snackbars.dart';
+import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:get/get.dart';
 
 class OTPController extends GetxController {

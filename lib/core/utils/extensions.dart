@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'dart:ui';
 
 extension StringExtension on String {
@@ -8,6 +10,6 @@ extension StringExtension on String {
 
 extension ToHex on Color {
   String toHex({bool leadingHashSign = true}) {
-    return '#${this.value.toRadixString(16).padLeft(8, '0').toUpperCase()}';
+    return '#${value.toRadixString(16).padLeft(8, '0').toUpperCase()}';
   }
 }

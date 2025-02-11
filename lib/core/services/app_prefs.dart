@@ -12,6 +12,7 @@ enum SharedKey {
   language,
   isDarkMode,
   userId,
+  userRoleId,
   userEmail,
   phone,
   userRole,
@@ -109,9 +110,21 @@ class AppPreferences {
     );
   }
 
+  /// Save the userId to the shared preferences
+  Future<void> setUserRoleId(String userId) async {
+    await _sharedPreferences.setString(
+      SharedKey.userRoleId.toString(),
+      userId,
+    );
+  }
+
   /// Get the userId from the shared preferences
   String getUserId() {
     return _sharedPreferences.getString(SharedKey.userId.toString()) ?? '';
+  }
+
+  String getUserRoleId() {
+    return _sharedPreferences.getString(SharedKey.userRoleId.toString()) ?? '';
   }
 
   /// Remove the userId from the shared preferences

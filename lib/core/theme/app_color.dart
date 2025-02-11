@@ -1,5 +1,7 @@
 // This file contains all the colors used in the app
 
+// ignore_for_file: deprecated_member_use
+
 // Primary color
 import '/core/functions/build_material_color.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ import 'package:flutter/material.dart';
 const primaryColor = Color(0xffbe0000); // 821115
 const secondaryColor = Color(0xffA9181D);
 const thirdColor = Color.fromARGB(255, 223, 66, 71);
+Color borderColor = Colors.grey.withAlpha(50);
 
 const redColor = Color(0xffF43F5F);
 
@@ -14,12 +17,7 @@ const orangColor = Color.fromARGB(255, 250, 153, 6);
 // const primaryColor = Color(0xff00ce7c);
 
 //------------------
-//const primaryColor = babyBlueColor;
-//const secondaryColor = orangeColor;
-//const lightPrimaryColor = Color(0xffc9f7e3);
-//const darkPrimaryColor = Color(0xff05414b);
-//const selectedBNavBackgroundColor = Color.fromRGBO(255, 255, 255, 0.16);
-//const unSelectedBNavColor = Color(0xff5b6c62);
+
 const orangeColor = Color(0xffda911e);
 const lightBabyBlueColor = Color(0xffb2d1ed);
 const babyBlueColor = Color(0xff8eabd3);
@@ -65,7 +63,7 @@ const whiteColor = Color(0xFFFFFFFF);
 const greyColor = Color(0xFF9A9A9D);
 const textFormFieldFilledColor = whiteColor; // Color(0xFFededed);
 const lightGreyColor = Color(0xFFf7f7f7);
-const borderColor = Color(0xFFdbdbdb);
+// const borderColor = Color(0xFFdbdbdb);
 const dividerColor = Color(0xFFe7e7e7);
 const starColor = Color(0xFFffcc00);
 
