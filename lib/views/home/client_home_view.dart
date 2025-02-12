@@ -116,7 +116,7 @@ class ClientHomeView extends StatelessWidget {
             ),
             Gap(10),
             SizedBox(
-                height: 311,
+                height: 235.h,
                 child: CustomServerStatusWidget(
                     statusRequest: controller.statusRequestProviders,
                     child: ListView.separated(
@@ -159,7 +159,7 @@ class ClientHomeView extends StatelessWidget {
             ),
             Gap(15),
             SizedBox(
-                height: 311,
+                height: 235.h,
                 child: CustomServerStatusWidget(
                     statusRequest: controller.statusRequestProviders,
                     child: ListView.separated(
@@ -197,7 +197,7 @@ class ClientHomeView extends StatelessWidget {
             ),
             Gap(20),
             SizedBox(
-                height: 311,
+                height: 235.h,
                 child: CustomServerStatusWidget(
                     statusRequest: controller.statusRequestProviders,
                     child: ListView.separated(
@@ -235,7 +235,7 @@ class ClientHomeView extends StatelessWidget {
             ),
             Gap(20),
             SizedBox(
-                height: 311,
+                height: 235.h,
                 child: CustomServerStatusWidget(
                     statusRequest: controller.statusRequestProviders,
                     child: ListView.separated(

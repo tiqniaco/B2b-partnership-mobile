@@ -12,7 +12,7 @@ class ShopBannerWidget extends StatelessWidget {
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: primaryColor, width: 0)),
-      height: 180,
+      height: 133.h,
       width: double.infinity,
       child: Stack(
         children: [
