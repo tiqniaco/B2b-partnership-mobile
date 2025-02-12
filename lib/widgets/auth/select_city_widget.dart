@@ -45,13 +45,6 @@ class SelectCityWidget extends StatelessWidget {
             value: item,
             child: Row(
               children: [
-                // Image.network(
-                //   item.flag!,
-                //   width: 26.h,
-                //   height: 26.h,
-                //   fit: BoxFit.cover,
-                // ),
-                // const SizedBox(width: 10),
                 Text(
                   translateDatabase(
                       arabic: item.nameAr!, english: item.nameEn!),
@@ -65,7 +58,7 @@ class SelectCityWidget extends StatelessWidget {
           );
         }).toList(),
         onChanged: (value) {
-          controller.onCountryChanged(value);
+          controller.onCityChanged(value);
         },
       ),
     );

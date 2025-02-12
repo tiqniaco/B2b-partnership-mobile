@@ -4,8 +4,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 Widget buildTextField(
-    TextEditingController controller, String label, IconData icon,
-    {int maxLines = 1}) {
+  TextEditingController controller,
+  String label,
+  IconData icon,
+  String hintText
+) {
   return Padding(
     padding: const EdgeInsets.symmetric(vertical: 8.0),
     child: TextFormField(
@@ -13,7 +16,7 @@ Widget buildTextField(
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.always,
         contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 15),
-        hintText: label,
+        hintText: hintText,
         hintStyle: TextStyle(fontSize: 13.sp),
         label: Column(
           children: [
@@ -21,8 +24,7 @@ Widget buildTextField(
               width: 210,
               padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
               decoration: BoxDecoration(
-                  color: primaryColor,
-                  borderRadius: BorderRadius.circular(8)),
+                  color: primaryColor, borderRadius: BorderRadius.circular(8)),
               child: Text(
                 label,
                 style:
@@ -37,10 +39,9 @@ Widget buildTextField(
         enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: greyColor, width: 0.5),
           borderRadius: BorderRadius.circular(10),
-        ), 
-       
+        ),
       ),
-      maxLines: maxLines,
+      maxLines: null,
       validator: (value) {
         if (value == null || value.isEmpty) {
           return 'Please enter $label';

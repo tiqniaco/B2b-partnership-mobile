@@ -73,7 +73,7 @@ class LoginController extends GetxController {
         );
         Get.find<AppPreferences>().setToken(r['token']);
         Get.find<AppPreferences>().setUserId(r['user_id'].toString());
-         Get.find<AppPreferences>().setUserRoleId(r['role_id'].toString());
+        Get.find<AppPreferences>().setUserRoleId(r['role_id'].toString());
         Get.find<AppPreferences>().setUserRole(r['role']);
         ApiConstance.token = r['token'];
         if (r['role'] == 'provider') {

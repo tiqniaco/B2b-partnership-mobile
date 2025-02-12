@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
+import 'package:b2b_partenership/core/services/app_prefs.dart';
+import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:b2b_partenership/models/city_model.dart';
 import 'package:b2b_partenership/models/country_model.dart';
 import 'package:b2b_partenership/models/specialize_model.dart';
@@ -34,7 +36,6 @@ class RequestServiceController extends GetxController {
   List<CityModel> cities = [];
   List<SpecializeModel> specializations = [];
   List<SubSpecializeModel> subSpecializations = [];
-  late String role;
   int currentStep = 0;
 
   List<Widget> get steps => [
@@ -42,22 +43,19 @@ class RequestServiceController extends GetxController {
         const RequestService2(),
       ];
 
-  String userType = "customer";
-
-  bool obscureText = true;
   StatusRequest statusRequest = StatusRequest.loading;
   StatusRequest statusRequestCity = StatusRequest.loading;
+  StatusRequest statusRequestCountry = StatusRequest.loading;
   StatusRequest statusRequestSpecialization = StatusRequest.loading;
   StatusRequest statusRequestSupSpecialization = StatusRequest.loading;
   File? imageFile;
-  bool isLoading = false;
 
   @override
   Future<void> onInit() async {
-    //await getCountries();
-    //getCities();
-    // await getSpecialization();
-    //getSupSpecialization();
+    await getCountries();
+    getCities();
+    await getSpecialization();
+    getSupSpecialization();
     super.onInit();
   }
 
@@ -130,93 +128,44 @@ class RequestServiceController extends GetxController {
     update();
   }
 
-  // Future<void> signupProvider() async {
-  //   if (formKey.currentState!.validate()) {
-  //     statusRequest = StatusRequest.loading;
-  //     if (imageFile == null) {
-  //       AppSnackBars.warning(message: "upload profile image");
-  //     } else if (commercePdfFile == null) {
-  //       AppSnackBars.warning(message: "upload commercial register pdf file");
-  //     } else if (taxPdfFile == null) {
-  //       AppSnackBars.warning(message: "upload tax card pdf file");
-  //     } else {
-  //       final result = await CustomRequest<Map<String, dynamic>>(
-  //           path: ApiConstance.register,
-  //           fromJson: (json) {
-  //             return json;
-  //           },
-  //           files: {
-  //             "image": imageFile!.path,
-  //             "commercial_register": commercePdfFile!.path,
-  //             "tax_card": taxPdfFile!.path,
-  //           },
-  //           data: {
-  //             "name": usernameController.text,
-  //             "email": emailController.text,
-  //             "password": passwordController.text,
-  //             "country_code": selectedCountry.code,
-  //             "phone": phoneController.text,
-  //             "role": "provider",
-  //             "government_id": selectedCity.id,
-  //             "sub_specialization_id": selectedSubSpecialization.id,
-  //             "provider_types_id": selectedType.id,
-  //             "bio": bioController.text,
-  //           }).sendPostRequest();
-  //       result.fold((l) {
-  //         statusRequest = StatusRequest.error;
-  //         Logger().e(l.errMsg);
-  //         AppSnackBars.error(message: l.errMsg);
-  //         update();
-  //       }, (r) {
-  //         AppSnackBars.success(message: r['message']);
-  //         statusRequest = StatusRequest.success;
-  //         Get.offAllNamed(AppRoutes.login);
-  //         update();
-  //       });
-  //     }
-  //   }
-  // }
+  Future<void> addServices() async {
+    if (formKey.currentState!.validate()) {
+      statusRequest = StatusRequest.loading;
 
-  // Future<void> signupClient() async {
-  //   if (formKey.currentState!.validate()) {
-  //     statusRequest = StatusRequest.loading;
-  //     if (imageFile == null) {
-  //       AppSnackBars.warning(message: "upload profile image");
-  //     } else {
-  //       final result = await CustomRequest<Map<String, dynamic>>(
-  //           path: ApiConstance.register,
-  //           fromJson: (json) {
-  //             return json;
-  //           },
-  //           files: {
-  //             "image": imageFile!.path,
-  //           },
-  //           data: {
-  //             "name": usernameController.text,
-  //             "email": emailController.text,
-  //             "password": passwordController.text,
-  //             "country_code": selectedCountry.code,
-  //             "phone": phoneController.text,
-  //             "role": "client",
-  //             "government_id": selectedCity.id,
-  //           }).sendPostRequest();
-  //       result.fold((l) {
-  //         statusRequest = StatusRequest.error;
-  //         Logger().e(l.errMsg);
-  //         AppSnackBars.error(message: l.errMsg);
-  //         update();
-  //       }, (r) {
-  //         AppSnackBars.success(message: r['message']);
-  //         statusRequest = StatusRequest.success;
-  //         Get.offAllNamed(AppRoutes.login);
-  //         update();
-  //       });
-  //     }
-  //   }
-  // }
+      final result = await CustomRequest<Map<String, dynamic>>(
+          path: ApiConstance.addServiceRequest,
+          fromJson: (json) {
+            return json;
+          },
+          files: {
+            if (imageFile != null) "image": imageFile!.path,
+          },
+          data: {
+            "client_id": Get.find<AppPreferences>().getUserRoleId(),
+            "governments_id": selectedCity.id,
+            "sub_specialization_id": selectedSubSpecialization.id,
+            "title_ar": titleArController.text,
+            "title_en": titleEnController.text,
+            "address": addressController.text,
+            "description": descriptionController.text,
+          }).sendPostRequest();
+      result.fold((l) {
+        statusRequest = StatusRequest.error;
+        Logger().e(l.errMsg);
+        AppSnackBars.error(message: l.errMsg);
+        update();
+      }, (r) {
+        Get.back();
+        AppSnackBars.success(message: r['message']);
+        statusRequest = StatusRequest.success;
+
+        update();
+      });
+    }
+  }
 
   Future<void> getCountries() async {
-    statusRequest = StatusRequest.loading;
+    statusRequestCountry = StatusRequest.loading;
     final result = await CustomRequest<List<CountryModel>>(
       path: ApiConstance.countries,
       fromJson: (json) {
@@ -227,24 +176,22 @@ class RequestServiceController extends GetxController {
     ).sendGetRequest();
 
     result.fold((l) {
-      statusRequest = StatusRequest.error;
+      statusRequestCountry = StatusRequest.error;
       Logger().e(l.errMsg);
       update();
     }, (r) {
-      print(r);
       countries = r;
       selectedCountry = r[0];
       if (r.isEmpty) {
-        statusRequest = StatusRequest.noData;
+        statusRequestCountry = StatusRequest.noData;
       } else {
-        statusRequest = StatusRequest.success;
+        statusRequestCountry = StatusRequest.success;
       }
       update();
     });
   }
 
   Future<void> getCities() async {
-    print(selectedCountry.id);
     statusRequestCity = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.cities,

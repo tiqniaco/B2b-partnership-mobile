@@ -6,15 +6,15 @@ import '/core/global/widgets/custom_loading_widget.dart';
 import '/core/theme/app_color.dart';
 
 class CustomLoadingButton extends StatelessWidget {
-  const CustomLoadingButton({
-    super.key,
-    required this.onPressed,
-    required this.text,
-    this.backgroundColor,
-    this.height,
-    this.width,
-    this.alignment,
-  });
+  const CustomLoadingButton(
+      {super.key,
+      required this.onPressed,
+      required this.text,
+      this.backgroundColor,
+      this.height,
+      this.width,
+      this.alignment,
+      this.borderRadius = 30});
 
   final Function onPressed;
   final String text;
@@ -22,6 +22,7 @@ class CustomLoadingButton extends StatelessWidget {
   final double? height;
   final double? width;
   final Alignment? alignment;
+  final double borderRadius;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class CustomLoadingButton extends StatelessWidget {
           return onPressed();
         },
         type: EasyButtonType.elevated,
-        borderRadius: 30.w,
+        borderRadius: borderRadius,
         buttonColor: backgroundColor ?? primaryColor,
         height: height ?? 0.055.sh,
         width: width ?? 100.sw,
@@ -50,7 +51,7 @@ class CustomLoadingButton extends StatelessWidget {
           ],
         ),
         loadingStateWidget: const CustomLoadingWidget(
-            // backgroundColor: whiteColor,
+            
             ),
       ),
     );

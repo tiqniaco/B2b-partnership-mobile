@@ -193,22 +193,6 @@ class SignupController extends GetxController {
     update();
   }
 
-  // onCustomer() {
-  //   isCustomer = true;
-  //   isLaundry = false;
-  //   userType = "customer";
-  //   debugPrint(userType);
-  //   update();
-  // }
-
-  // onLaundry() {
-  //   isCustomer = false;
-  //   isLaundry = true;
-  //   userType = "laundry";
-  //   debugPrint(userType);
-  //   update();
-  // }
-
   validUserData(val) {
     if (val.isEmpty) {
       return "can't be empty".tr;
@@ -407,7 +391,7 @@ class SignupController extends GetxController {
   }
 
   Future<void> getSpecialization() async {
-    statusRequestProviderType = StatusRequest.loading;
+    statusRequestSpecialization = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getSpecialization,
         fromJson: (json) {

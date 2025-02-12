@@ -1,21 +1,21 @@
 import 'package:b2b_partenership/controller/auth/signup_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
-import 'package:b2b_partenership/models/sub_specialize_model.dart';
+import 'package:b2b_partenership/models/specialize_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class SelectSupSpacializationWidget extends StatelessWidget {
-  const SelectSupSpacializationWidget({
+class SelectSpecializationWidget extends StatelessWidget {
+  const SelectSpecializationWidget({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return GetBuilder<SignupController>(
-      builder: (controller) => DropdownButtonFormField<SubSpecializeModel>(
-        value: controller.selectedSubSpecialization, //CountryModel
+      builder: (controller) => DropdownButtonFormField<SpecializeModel>(
+        value: controller.selectedSpecialization,
         decoration: InputDecoration(
           contentPadding:
               EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
@@ -28,7 +28,7 @@ class SelectSupSpacializationWidget extends StatelessWidget {
             borderSide: const BorderSide(color: pageColor, width: 1.5),
           ),
           label: Text(
-            'Select Sub Spacialization',
+            'Select Specialization',
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 17.sp,
@@ -40,8 +40,8 @@ class SelectSupSpacializationWidget extends StatelessWidget {
           size: 23.sp,
           color: greyColor,
         ),
-        items: controller.subSpecializations.map((item) {
-          return DropdownMenuItem<SubSpecializeModel>(
+        items: controller.specializations.map((item) {
+          return DropdownMenuItem<SpecializeModel>(
             value: item,
             child: Row(
               children: [
@@ -58,7 +58,7 @@ class SelectSupSpacializationWidget extends StatelessWidget {
           );
         }).toList(),
         onChanged: (value) {
-          controller.onSubSpecializeChanged(value);
+          controller.onSpecializeChanged(value);
         },
       ),
     );

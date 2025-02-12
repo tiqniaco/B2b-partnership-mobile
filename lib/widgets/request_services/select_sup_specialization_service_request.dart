@@ -1,21 +1,22 @@
-import 'package:b2b_partenership/controller/auth/signup_controller.dart';
+import 'package:b2b_partenership/controller/request_services/request_service_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
-import 'package:b2b_partenership/models/provider_type_model.dart';
+import 'package:b2b_partenership/models/sub_specialize_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class SelectProviderWidget extends StatelessWidget {
-  const SelectProviderWidget({
+class SelectSupSpecializationServiceRequest extends StatelessWidget {
+  const SelectSupSpecializationServiceRequest({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SignupController>(
-      builder: (controller) => DropdownButtonFormField<ProviderTypeModel>(
-        value: controller.selectedType, //CountryModel
+    return GetBuilder<RequestServiceController>(
+      builder: (controller) => DropdownButtonFormField<SubSpecializeModel>(
+        value: controller.selectedSubSpecialization,
         decoration: InputDecoration(
           contentPadding:
               EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
@@ -27,12 +28,22 @@ class SelectProviderWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(7),
             borderSide: const BorderSide(color: pageColor, width: 1.5),
           ),
-          label: Text(
-            'Provider Type',
-            style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 17.sp,
-                color: Colors.black87),
+          label: Column(
+            children: [
+              Container(
+                width: 210,
+                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+                decoration: BoxDecoration(
+                    color: primaryColor,
+                    borderRadius: BorderRadius.circular(8)),
+                child: Text(
+                  "Select Sub Category",
+                  style:
+                      TextStyle(color: whiteColor, fontWeight: FontWeight.w500),
+                ),
+              ),
+              Gap(35)
+            ],
           ),
         ),
         icon: Icon(
@@ -40,8 +51,8 @@ class SelectProviderWidget extends StatelessWidget {
           size: 23.sp,
           color: greyColor,
         ),
-        items: controller.providerTypes.map((item) {
-          return DropdownMenuItem<ProviderTypeModel>(
+        items: controller.subSpecializations.map((item) {
+          return DropdownMenuItem<SubSpecializeModel>(
             value: item,
             child: Row(
               children: [
@@ -58,7 +69,7 @@ class SelectProviderWidget extends StatelessWidget {
           );
         }).toList(),
         onChanged: (value) {
-          controller.onProviderTypeChanged(value);
+          controller.onSubSpecializeChanged(value);
         },
       ),
     );

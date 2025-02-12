@@ -1,10 +1,10 @@
 import 'package:b2b_partenership/controller/auth/signup_controller.dart';
 import 'package:b2b_partenership/widgets/custome_phone_widget.dart';
-import 'package:b2b_partenership/widgets/select_city_widget.dart';
-import 'package:b2b_partenership/widgets/select_country_widget.dart';
-import 'package:b2b_partenership/widgets/select_provider_widget.dart';
-import 'package:b2b_partenership/widgets/select_spacialization_widget.dart';
-import 'package:b2b_partenership/widgets/select_sup_spacialization_widget.dart';
+import 'package:b2b_partenership/widgets/auth/select_city_widget.dart';
+import 'package:b2b_partenership/widgets/auth/select_country_widget.dart';
+import 'package:b2b_partenership/widgets/auth/select_provider_widget.dart';
+import 'package:b2b_partenership/widgets/auth/select_spacialization_widget.dart';
+import 'package:b2b_partenership/widgets/auth/select_sup_spacialization_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -42,7 +42,7 @@ class ProviderSignup2 extends StatelessWidget {
             Gap(20.h),
             SelectSpecializationWidget(),
             Gap(20.h),
-            SelectSupSpacializationWidget()
+            SelectSupSpecializationWidget()
           ],
           Gap(20.h),
         ],
