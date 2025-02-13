@@ -1,7 +1,9 @@
+import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class ShopBannerWidget extends StatelessWidget {
   const ShopBannerWidget({super.key});
@@ -59,7 +61,9 @@ class ShopBannerWidget extends StatelessWidget {
                 ElevatedButton(
                     style: ButtonStyle(
                         backgroundColor: WidgetStatePropertyAll(whiteColor)),
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.toNamed(AppRoutes.shop);
+                    },
                     child: Text(
                       "View Now",
                       style: TextStyle(
