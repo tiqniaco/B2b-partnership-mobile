@@ -62,7 +62,7 @@ class ServiceBannerWidget extends StatelessWidget {
                     style: ButtonStyle(
                         backgroundColor: WidgetStatePropertyAll(whiteColor)),
                     onPressed: () {
-                      Get.toNamed(AppRoutes.requestServices);
+                      Get.toNamed(AppRoutes.getRequestServices);
                     },
                     child: Text(
                       "Post Now",

@@ -1,22 +1,20 @@
-import 'package:b2b_partenership/controller/request_services/request_service_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
-import 'package:b2b_partenership/models/sub_specialize_model.dart';
+import 'package:b2b_partenership/models/city_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
-import 'package:get/get.dart';
 
-class SelectSupSpecializationServiceRequest extends StatelessWidget {
-  const SelectSupSpecializationServiceRequest({
-    super.key,
+class SelectCityWidget extends StatelessWidget {
+  const SelectCityWidget({
+    super.key, required this.value, required this.models, required this.onChanged,
   });
-
+  final CityModel value;
+  final List<CityModel> models;
+  final void Function(CityModel?) onChanged;
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<RequestServiceController>(
-      builder: (controller) => DropdownButtonFormField<SubSpecializeModel>(
-        value: controller.selectedSubSpecialization,
+    return DropdownButtonFormField<CityModel>(
+        value: value, //CountryModel
         decoration: InputDecoration(
           contentPadding:
               EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
@@ -28,22 +26,12 @@ class SelectSupSpecializationServiceRequest extends StatelessWidget {
             borderRadius: BorderRadius.circular(7),
             borderSide: const BorderSide(color: pageColor, width: 1.5),
           ),
-          label: Column(
-            children: [
-              Container(
-                width: 210,
-                padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-                decoration: BoxDecoration(
-                    color: primaryColor,
-                    borderRadius: BorderRadius.circular(8)),
-                child: Text(
-                  "Select Sub Category",
-                  style:
-                      TextStyle(color: whiteColor, fontWeight: FontWeight.w500),
-                ),
-              ),
-              Gap(35)
-            ],
+          label: Text(
+            'Select City',
+            style: TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 17.sp,
+                color: Colors.black87),
           ),
         ),
         icon: Icon(
@@ -51,8 +39,8 @@ class SelectSupSpecializationServiceRequest extends StatelessWidget {
           size: 23.sp,
           color: greyColor,
         ),
-        items: controller.subSpecializations.map((item) {
-          return DropdownMenuItem<SubSpecializeModel>(
+        items: models.map((item) {
+          return DropdownMenuItem<CityModel>(
             value: item,
             child: Row(
               children: [
@@ -68,10 +56,11 @@ class SelectSupSpecializationServiceRequest extends StatelessWidget {
             ),
           );
         }).toList(),
-        onChanged: (value) {
-          controller.onSubSpecializeChanged(value);
-        },
-      ),
+        onChanged: onChanged
+        //  (value) {
+        //   controller.onCityChanged(value);
+        // },
+      
     );
   }
 }

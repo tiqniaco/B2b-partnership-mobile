@@ -1,21 +1,23 @@
-import 'package:b2b_partenership/controller/auth/signup_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
-import 'package:b2b_partenership/models/city_model.dart';
+import 'package:b2b_partenership/models/specialize_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
-class SelectCityWidget extends StatelessWidget {
-  const SelectCityWidget({
+class SelectSpecializationWidget extends StatelessWidget {
+  const SelectSpecializationWidget({
     super.key,
+    required this.value,
+    required this.models,
+    required this.onChanged,
   });
-
+  final SpecializeModel value;
+  final List<SpecializeModel> models;
+  final void Function(SpecializeModel?) onChanged;
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SignupController>(
-      builder: (controller) => DropdownButtonFormField<CityModel>(
-        value: controller.selectedCity, //CountryModel
+    return DropdownButtonFormField<SpecializeModel>(
+        value: value, //controller.selectedSpecialization,
         decoration: InputDecoration(
           contentPadding:
               EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
@@ -28,7 +30,7 @@ class SelectCityWidget extends StatelessWidget {
             borderSide: const BorderSide(color: pageColor, width: 1.5),
           ),
           label: Text(
-            'Select City',
+            'Select Category',
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 17.sp,
@@ -40,8 +42,8 @@ class SelectCityWidget extends StatelessWidget {
           size: 23.sp,
           color: greyColor,
         ),
-        items: controller.cities.map((item) {
-          return DropdownMenuItem<CityModel>(
+        items: models.map((item) {
+          return DropdownMenuItem<SpecializeModel>(
             value: item,
             child: Row(
               children: [
@@ -57,10 +59,11 @@ class SelectCityWidget extends StatelessWidget {
             ),
           );
         }).toList(),
-        onChanged: (value) {
-          controller.onCityChanged(value);
-        },
-      ),
-    );
+        onChanged: onChanged
+        // (value) {
+        //   controller.onSpecializeChanged(value);
+        // },
+
+        );
   }
 }

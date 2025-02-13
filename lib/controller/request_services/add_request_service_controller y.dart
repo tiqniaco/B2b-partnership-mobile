@@ -16,7 +16,7 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 
-class RequestServiceController extends GetxController {
+class AddRequestServiceController extends GetxController {
   final TextEditingController clientIdController = TextEditingController();
   final TextEditingController governmentIdController = TextEditingController();
   final TextEditingController subSpecializationIdController =
@@ -129,7 +129,8 @@ class RequestServiceController extends GetxController {
   }
 
   Future<void> addServices() async {
-    if (formKey.currentState!.validate()) {
+    if (formKey.currentState?.validate() ?? false) {
+      formKey.currentState!.save();
       statusRequest = StatusRequest.loading;
 
       final result = await CustomRequest<Map<String, dynamic>>(
@@ -144,7 +145,7 @@ class RequestServiceController extends GetxController {
             "client_id": Get.find<AppPreferences>().getUserRoleId(),
             "governments_id": selectedCity.id,
             "sub_specialization_id": selectedSubSpecialization.id,
-            "title_ar": titleArController.text,
+            "title_ar": titleEnController.text,
             "title_en": titleEnController.text,
             "address": addressController.text,
             "description": descriptionController.text,
@@ -161,6 +162,9 @@ class RequestServiceController extends GetxController {
 
         update();
       });
+    } else {
+      print("not valid");
+      AppSnackBars.warning(message: "please fill all fields");
     }
   }
 
