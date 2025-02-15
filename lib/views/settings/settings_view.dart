@@ -56,16 +56,20 @@ class SettingsView extends StatelessWidget {
                   children: [
                     boxWidget(Icons.work_outline, Colors.amber, "25", "Jobs",
                         () {
-                      Get.toNamed(AppRoutes.requestServices);
+                      Get.toNamed(AppRoutes.getRequestServices);
                     }),
                     boxWidget(Icons.shopping_cart_outlined, Colors.blue, "123",
-                        "Shopping", () {}),
+                        "Shopping", () {
+                      Get.toNamed(AppRoutes.getRequestServices);
+                    }),
                     boxWidget(CupertinoIcons.news, Colors.green, "34",
                         "Post Services", () {
-                      Get.toNamed(AppRoutes.requestServices);
+                      Get.toNamed(AppRoutes.getRequestServices);
                     }),
                     boxWidget(Icons.headset_mic_outlined, Colors.red, "23",
-                        "Complaints", () {})
+                        "Complaints", () {
+                      Get.toNamed(AppRoutes.getRequestServices);
+                    })
                   ],
                 ),
                 Gap(20.h),

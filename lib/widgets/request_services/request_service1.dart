@@ -1,4 +1,4 @@
-import 'package:b2b_partenership/controller/request_services/request_service_controller.dart';
+import 'package:b2b_partenership/controller/request_services/add_request_service_controller.dart';
 import 'package:b2b_partenership/widgets/request_services/build_text_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,7 +10,7 @@ class RequestService1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<RequestServiceController>(builder: (controller) {
+    return GetBuilder<AddRequestServiceController>(builder: (controller) {
       return Column(
         children: [
           Center(
@@ -37,17 +37,26 @@ class RequestService1 extends StatelessWidget {
           Gap(10),
           Text("upload service image (optional)"),
           Gap(40),
-          buildTextField(controller.titleArController, 'Title (Arabic)',
-              Icons.title, "enter title in arabic"),
+          // buildTextField(controller.titleArController, 'Title (Arabic)',
+          //     Icons.title, "enter title in arabic"),
+          // Gap(30),
+          buildTextField(
+              controller.titleEnController, 'Title', Icons.title, "enter title",
+              (val) {
+            return controller.validUserData(val);
+          }),
           Gap(30),
-          buildTextField(controller.titleEnController, 'Title (English)',
-              Icons.title, "enter title in english"),
+
+          buildTextField(controller.descriptionController, 'Description',
+              Icons.description, "enter service description", (val) {
+            return controller.validUserData(val);
+          }),
           Gap(30),
           buildTextField(controller.addressController, 'Address',
-              Icons.location_on, "enter your address"),
-          Gap(30),
-          buildTextField(controller.descriptionController, 'Description',
-              Icons.description, "enter service description"),
+              Icons.location_on, "enter your address", (val) {
+            return controller.validUserData(val);
+          }),
+
           Gap(20),
         ],
       );

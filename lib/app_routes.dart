@@ -10,7 +10,8 @@ import 'package:b2b_partenership/views/see_all/see_all_categories.dart';
 import 'package:b2b_partenership/views/see_all/see_all_providers.dart';
 import 'package:b2b_partenership/views/service_details_view.dart';
 import 'package:b2b_partenership/views/in_category/providers_in_categories.dart';
-import 'package:b2b_partenership/views/service_request/service_request.dart';
+import 'package:b2b_partenership/views/service_request/add_service_request.dart';
+import 'package:b2b_partenership/views/service_request/get_user_service_request.dart';
 import 'package:b2b_partenership/views/shop/shop_product_details_view.dart';
 import 'package:b2b_partenership/views/shop/shop_view.dart';
 import 'package:b2b_partenership/views/splash/views/splash_view.dart';
@@ -38,7 +39,10 @@ class AppRoutes {
   static const String clientHomeLayout = '/clientHomeLayout';
   static const String seeAll = '/seeAll';
   static const String seeAllCategories = '/seeAllCategories';
-  static const String requestServices = '/requestServices';
+  static const String addServicesRequest = '/addServicesRequest';
+  static const String getRequestServices = '/requestServices';
+
+
 
   // service details
   static const String serviceDetails = '/serviceDetails';
@@ -98,8 +102,12 @@ class AppRoutes {
       page: () => const SeeAllCategories(),
     ),
     GetPage(
-      name: requestServices,
-      page: () => ServiceRequest(),
+      name: addServicesRequest,
+      page: () => AddServiceRequest(),
+    ),
+    GetPage(
+      name: getRequestServices,
+      page: () => GetUserServiceRequest(),
     ),
 
     // service details

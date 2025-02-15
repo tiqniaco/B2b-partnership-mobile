@@ -1,8 +1,8 @@
-import 'package:b2b_partenership/controller/request_services/request_service_controller.dart';
-import 'package:b2b_partenership/widgets/request_services/select_city_service_request.dart';
-import 'package:b2b_partenership/widgets/request_services/select_country_service_request.dart';
-import 'package:b2b_partenership/widgets/request_services/select_specialization_service_request.dart';
-import 'package:b2b_partenership/widgets/request_services/select_sup_specialization_service_request.dart';
+import 'package:b2b_partenership/controller/request_services/add_request_service_controller.dart';
+import 'package:b2b_partenership/widgets/select_city_widget.dart';
+import 'package:b2b_partenership/widgets/select_country_widget.dart';
+import 'package:b2b_partenership/widgets/select_specialization_widget.dart';
+import 'package:b2b_partenership/widgets/select_sup_specialization_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -12,19 +12,42 @@ class RequestService2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<RequestServiceController>(builder: (controller) {
+    return GetBuilder<AddRequestServiceController>(builder: (controller) {
       return Column(
         children: [
-          Gap(50),
-          SelectCountryServiceRequest(
+          Gap(20),
+          SelectCountryWidget(
             enabled: false,
+            value: controller.selectedCountry,
+            models: controller.countries,
+            onChanged: (val) {
+              controller.onCountryChanged(val);
+            },
           ),
           Gap(40),
-          SelectCityServiceRequest(),
+          SelectCityWidget(
+            value: controller.selectedCity,
+            models: controller.cities,
+            onChanged: (val) {
+              controller.onCityChanged(val);
+            },
+          ),
           Gap(40),
-          SelectSpecializationServiceRequest(),
+          SelectSpecializationWidget(
+            value: controller.selectedSpecialization,
+            models: controller.specializations,
+            onChanged: (val) {
+              controller.onSpecializeChanged(val);
+            },
+          ),
           Gap(40),
-          SelectSupSpecializationServiceRequest(),
+          SelectSupSpecializationWidget(
+            value: controller.selectedSubSpecialization,
+            models: controller.subSpecializations,
+            onChanged: (val) {
+              controller.onSubSpecializeChanged(val);
+            },
+          ),
           Gap(30),
         ],
       );

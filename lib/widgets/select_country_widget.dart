@@ -1,22 +1,26 @@
-import 'package:b2b_partenership/controller/auth/signup_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
-import 'package:b2b_partenership/models/specialize_model.dart';
+import 'package:b2b_partenership/models/country_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
-class SelectSpecializationWidget extends StatelessWidget {
-  const SelectSpecializationWidget({
+class SelectCountryWidget extends StatelessWidget {
+  const SelectCountryWidget({
     super.key,
+    required this.enabled, required this.value, required this.models, required this.onChanged,
   });
+
+  final bool enabled;
+   final CountryModel value;
+  final List<CountryModel> models;
+  final void Function(CountryModel?) onChanged;
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SignupController>(
-      builder: (controller) => DropdownButtonFormField<SpecializeModel>(
-        value: controller.selectedSpecialization,
+    return  DropdownButtonFormField<CountryModel>(
+        value: value,
         decoration: InputDecoration(
+          enabled: enabled,
           contentPadding:
               EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
           focusedBorder: OutlineInputBorder(
@@ -28,7 +32,7 @@ class SelectSpecializationWidget extends StatelessWidget {
             borderSide: const BorderSide(color: pageColor, width: 1.5),
           ),
           label: Text(
-            'Select Specialization',
+            'Select Country',
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 17.sp,
@@ -40,11 +44,18 @@ class SelectSpecializationWidget extends StatelessWidget {
           size: 23.sp,
           color: greyColor,
         ),
-        items: controller.specializations.map((item) {
-          return DropdownMenuItem<SpecializeModel>(
+        items: models.map((item) {
+          return DropdownMenuItem<CountryModel>(
             value: item,
             child: Row(
               children: [
+                Image.network(
+                  item.flag!,
+                  width: 23.h,
+                  height: 23.h,
+                  fit: BoxFit.cover,
+                ),
+                const SizedBox(width: 10),
                 Text(
                   translateDatabase(
                       arabic: item.nameAr!, english: item.nameEn!),
@@ -57,10 +68,8 @@ class SelectSpecializationWidget extends StatelessWidget {
             ),
           );
         }).toList(),
-        onChanged: (value) {
-          controller.onSpecializeChanged(value);
-        },
-      ),
+        onChanged:onChanged
+    
     );
   }
 }
