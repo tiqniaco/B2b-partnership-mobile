@@ -163,7 +163,7 @@ class AddRequestServiceController extends GetxController {
         update();
       });
     } else {
-      print("not valid");
+     
       AppSnackBars.warning(message: "please fill all fields");
     }
   }

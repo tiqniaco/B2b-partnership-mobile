@@ -28,7 +28,6 @@ class ServiceWidgetVertical extends StatelessWidget {
                     arguments: {"id": services[index].id});
               },
               child: Container(
-                //width: 250.h,
                 height: 116.h,
                 padding: EdgeInsets.all(18),
                 decoration: BoxDecoration(
@@ -100,6 +99,7 @@ class ServiceWidgetVertical extends StatelessWidget {
                                           style: TextStyle(fontSize: 11.sp),
                                         )),
                                   )
+                               
                                 ],
                               )
                             ],
