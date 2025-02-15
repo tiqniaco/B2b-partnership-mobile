@@ -49,4 +49,7 @@ class ApiConstance {
       'home/country/$id/top-providers';
   static String getUserFavorite = 'favorite-providers';
   static String toggleFavorite = 'toggle-favorite';
+
+  static String shopCategories = 'store/categories';
+  static String shopProducts = 'store/products';
 }
