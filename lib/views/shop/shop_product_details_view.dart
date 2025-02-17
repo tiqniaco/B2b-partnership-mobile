@@ -106,7 +106,7 @@ class ShopProductDetailsView extends StatelessWidget {
                             english: controller.product.titleEn,
                           ),
                           style: TextStyle(
-                            fontSize: 20.sp,
+                            fontSize: 18.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -150,11 +150,12 @@ class ShopProductDetailsView extends StatelessWidget {
                   Gap(4.h),
                   ReadMoreText(
                     translateDatabase(
-                      arabic: controller.product.descriptionAr,
-                      english: controller.product.descriptionEn,
-                    ),
+                          arabic: controller.product.descriptionAr,
+                          english: controller.product.descriptionEn,
+                        ) +
+                        " ",
                     style: TextStyle(
-                      fontSize: 16.sp,
+                      fontSize: 15.sp,
                       fontWeight: FontWeight.normal,
                     ),
                   ),
