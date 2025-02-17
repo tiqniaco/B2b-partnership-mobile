@@ -102,20 +102,27 @@ import 'package:b2b_partenership/controller/home/home_client_layout_controller.d
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ClientHomeLayout extends StatelessWidget {
+class ClientHomeLayout extends StatefulWidget {
   const ClientHomeLayout({super.key});
 
   @override
+  State<ClientHomeLayout> createState() => _ClientHomeLayoutState();
+}
+
+class _ClientHomeLayoutState extends State<ClientHomeLayout>
+    with TickerProviderStateMixin {
+  @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeClintLayoutController>(
-      init: HomeClintLayoutController(),
+      init: HomeClintLayoutController(this),
       builder: (controller) => Scaffold(
         backgroundColor: backgroundColor,
         body: controller.screens[controller.currentIndex],
         bottomNavigationBar: ConvexAppBar(
+          controller: controller.convexController,
           top: -30,
           height: 60.h,
-          style: TabStyle.fixedCircle, 
+          style: TabStyle.fixedCircle,
           backgroundColor: whiteColor,
           color: unSelectedBNavColor,
           activeColor: primaryColor,

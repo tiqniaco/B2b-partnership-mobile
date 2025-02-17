@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/home/home_client_controller.dart';
+import 'package:b2b_partenership/controller/home/home_client_layout_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/widgets/home/category_widget.dart';
@@ -15,8 +16,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class ClientHomeView extends StatelessWidget {
+class ClientHomeView extends StatefulWidget {
   const ClientHomeView({super.key});
+
+  @override
+  State<ClientHomeView> createState() => _ClientHomeViewState();
+}
+
+class _ClientHomeViewState extends State<ClientHomeView>
+    with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     Get.put(HomeClientController());
@@ -64,7 +72,7 @@ class ClientHomeView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: SearchWidget(
                 onTap: () {
-                  // clintLayoutController.onBNavPressed(2);
+                  Get.put(HomeClintLayoutController(this)).onBNavPressed(2);
                 },
               ),
             ),
