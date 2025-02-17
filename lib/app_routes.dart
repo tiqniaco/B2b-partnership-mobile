@@ -18,6 +18,7 @@ import 'package:b2b_partenership/views/splash/views/splash_view.dart';
 import 'package:get/get.dart';
 
 import 'views/service_request/service_request_details.dart';
+import 'views/shop/shop_product_details_view.dart';
 
 class AppRoutes {
   /// Base routes
