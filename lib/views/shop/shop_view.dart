@@ -1,3 +1,4 @@
+import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/shop/shop_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
@@ -68,7 +69,9 @@ class ShopView extends StatelessWidget {
               Container(
                 margin: EdgeInsetsDirectional.only(end: 8.w),
                 child: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(AppRoutes.shopCart);
+                  },
                   icon: Icon(
                     CupertinoIcons.shopping_cart,
                     color: blackColor,
@@ -195,7 +198,14 @@ class ShopView extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final product = controller.shopProducts[index];
                       return GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          Get.toNamed(
+                            AppRoutes.shopProductDetails,
+                            arguments: {
+                              "product": product,
+                            },
+                          );
+                        },
                         child: Container(
                           decoration: BoxDecoration(
                             border: Border.all(

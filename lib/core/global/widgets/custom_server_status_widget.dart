@@ -10,12 +10,14 @@ class CustomServerStatusWidget extends StatelessWidget {
     required this.child,
     this.errorMessage,
     this.height,
+    this.emptyMessage,
   });
 
   final StatusRequest statusRequest;
   final Widget child;
   final String? errorMessage;
   final double? height;
+  final String? emptyMessage;
   @override
   Widget build(BuildContext context) {
     return switch (statusRequest) {
@@ -47,7 +49,9 @@ class CustomServerStatusWidget extends StatelessWidget {
       StatusRequest.noData => Container(
           height: height,
           alignment: Alignment.center,
-          child: const CustomEmptyWidget(),
+          child: CustomEmptyWidget(
+            text: emptyMessage,
+          ),
         ),
       StatusRequest.initial => child,
     };

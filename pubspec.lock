@@ -960,6 +960,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.0.1"
+  readmore:
+    dependency: "direct main"
+    description:
+      name: readmore
+      sha256: e8fca2bd397b86342483b409e2ec26f06560a5963aceaa39b27f30722b506187
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   rename:
     dependency: "direct main"
     description:
@@ -1309,6 +1317,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  widget_zoom:
+    dependency: "direct main"
+    description:
+      name: widget_zoom
+      sha256: f74cb1b9969a74668db0048d3db9ddc7ec5b334d32a1f54475db56f873114550
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.4"
   win32:
     dependency: transitive
     description:

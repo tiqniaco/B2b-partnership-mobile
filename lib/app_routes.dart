@@ -12,6 +12,7 @@ import 'package:b2b_partenership/views/service_details_view.dart';
 import 'package:b2b_partenership/views/in_category/providers_in_categories.dart';
 import 'package:b2b_partenership/views/service_request/add_service_request.dart';
 import 'package:b2b_partenership/views/service_request/get_user_service_request.dart';
+import 'package:b2b_partenership/views/shop/shop_cart_view.dart';
 import 'package:b2b_partenership/views/shop/shop_product_details_view.dart';
 import 'package:b2b_partenership/views/shop/shop_view.dart';
 import 'package:b2b_partenership/views/splash/views/splash_view.dart';
@@ -42,8 +43,6 @@ class AppRoutes {
   static const String addServicesRequest = '/addServicesRequest';
   static const String getRequestServices = '/requestServices';
 
-
-
   // service details
   static const String serviceDetails = '/serviceDetails';
   static const String providersInCategory = '/providersInCategory';
@@ -54,6 +53,7 @@ class AppRoutes {
   // Shop
   static const String shop = '/shop';
   static const String shopProductDetails = '/shopProductDetails';
+  static const String shopCart = '/shopCart';
 
   static final List<GetPage<dynamic>> pages = [
     // base
@@ -134,6 +134,10 @@ class AppRoutes {
     GetPage(
       name: shopProductDetails,
       page: () => const ShopProductDetailsView(),
+    ),
+    GetPage(
+      name: shopCart,
+      page: () => const ShopCartView(),
     ),
   ];
 }
