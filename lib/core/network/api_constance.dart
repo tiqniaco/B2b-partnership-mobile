@@ -31,7 +31,11 @@ class ApiConstance {
   static const String getTopProviders = 'home/top-providers';
   static const String getNewServices = 'home/new-services';
   static const String getJobs = 'home/new-jobs';
+
+  // service request
   static const String addServiceRequest = 'request-services';
+  static String getClientServiceRequest(String id) => 'clients/$id/services';
+  static const String getServicePriceOffer = 'request-offers';
 
   //service details
   static String getServiceDetails(String id) => 'provider-service/$id';
@@ -39,7 +43,6 @@ class ApiConstance {
   static const String getFeatureServices = 'provider-service-features';
 
   //provider Details
-
   static String getProviderProfileDetails(String id) => 'providers/$id';
   static String getProviderServices(String id) => 'providers/$id/services';
   static String getServicesInCategory(String id) =>
