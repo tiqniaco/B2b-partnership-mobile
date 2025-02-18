@@ -4,12 +4,23 @@ import 'package:b2b_partenership/views/save/save_view.dart';
 import 'package:b2b_partenership/views/search/search_view.dart';
 import 'package:b2b_partenership/views/settings/settings_view.dart';
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 
 import '/core/localization/app_strings.dart';
 import 'package:get/get.dart';
 
 class HomeClintLayoutController extends GetxController {
-  int currentIndex = 0;
+  late TabController convexController;
+
+  HomeClintLayoutController(
+    TickerProvider vsync,
+  ) : convexController = TabController(
+          length: 5,
+          vsync: vsync,
+        );
+
+  int get currentIndex => convexController.index;
+
   final bottomNavItems = [
     HomeBottomNavModel(
       icon: "assets/svgs/home.svg",
@@ -47,13 +58,16 @@ class HomeClintLayoutController extends GetxController {
   ];
 
   onBNavPressed(int index) {
-    currentIndex = index;
+    convexController.animateTo(index);
     update();
   }
 
   @override
   void onInit() {
-    currentIndex = 0;
+    // currentIndex = 0;
+    convexController.addListener(() {
+      onBNavPressed(convexController.index);
+    });
     update();
     super.onInit();
   }

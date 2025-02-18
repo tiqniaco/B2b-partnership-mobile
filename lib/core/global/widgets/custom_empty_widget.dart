@@ -9,8 +9,10 @@ class CustomEmptyWidget extends StatelessWidget {
   const CustomEmptyWidget({
     super.key,
     this.height,
+    this.text,
   });
   final double? height;
+  final String? text;
 
   @override
   Widget build(BuildContext context) {
@@ -20,18 +22,23 @@ class CustomEmptyWidget extends StatelessWidget {
       children: [
         Container(
           alignment: Alignment.center,
-          height: height ?? 0.25.sh,
+          height: height ?? 0.22.sh,
           child: Lottie.asset(
             "assets/lottie/nodata.json",
             repeat: false,
           ),
         ),
         Text(
-          Get.locale?.languageCode == 'ar' ? 'لا يوجد بيانات' : 'No Data',
+          text != null
+              ? text!
+              : Get.locale?.languageCode == 'ar'
+                  ? 'لا يوجد بيانات'
+                  : 'No Data',
           style: getMediumStyle.copyWith(
             color: blackWithOpacityColor,
-            fontSize: 16.sp,
+            fontSize: 14.sp,
           ),
+          textAlign: TextAlign.center,
         ),
       ],
     );
