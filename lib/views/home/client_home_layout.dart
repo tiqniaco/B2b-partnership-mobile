@@ -117,7 +117,12 @@ class _ClientHomeLayoutState extends State<ClientHomeLayout>
       init: HomeClintLayoutController(this),
       builder: (controller) => Scaffold(
         backgroundColor: backgroundColor,
-        body: controller.screens[controller.currentIndex],
+        body: TabBarView(
+          controller: controller.convexController,
+          children: [
+            ...controller.screens,
+          ],
+        ),
         bottomNavigationBar: ConvexAppBar(
           controller: controller.convexController,
           top: -30,

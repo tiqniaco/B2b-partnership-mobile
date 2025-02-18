@@ -19,7 +19,8 @@ class HomeClintLayoutController extends GetxController {
           vsync: vsync,
         );
 
-  int currentIndex = 0;
+  int get currentIndex => convexController.index;
+
   final bottomNavItems = [
     HomeBottomNavModel(
       icon: "assets/svgs/home.svg",
@@ -57,14 +58,17 @@ class HomeClintLayoutController extends GetxController {
   ];
 
   onBNavPressed(int index) {
-    currentIndex = index;
+    // currentIndex = index;
     convexController.animateTo(index);
     update();
   }
 
   @override
   void onInit() {
-    currentIndex = 0;
+    // currentIndex = 0;
+    convexController.addListener(() {
+      onBNavPressed(convexController.index);
+    });
     update();
     super.onInit();
   }
