@@ -1,6 +1,7 @@
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
+import 'package:b2b_partenership/models/pervious_work_model.dart';
 import 'package:b2b_partenership/models/provider_model.dart';
 import 'package:b2b_partenership/models/services_model.dart';
 import 'package:get/get.dart';
@@ -15,14 +16,17 @@ class ProviderProfileController extends GetxController {
   StatusRequest statusRequest = StatusRequest.loading;
   StatusRequest statusRequestReview = StatusRequest.loading;
   StatusRequest statusRequestServices = StatusRequest.loading;
+  StatusRequest statusRequestPerviousWork = StatusRequest.loading;
   List<ServiceModelData> providerServices = [];
+  List<ProviderPerviousWorkModel> previousWork = [];
 
   @override
-  onInit() {
+  onInit() async {
     super.onInit();
     provId = Get.arguments['id'];
-    getProvider();
+    await getProvider();
     getServices();
+    getPreviousWork();
   }
 
   Future<void> getProvider() async {
@@ -64,6 +68,34 @@ class ProviderProfileController extends GetxController {
         statusRequestServices = StatusRequest.noData;
       } else {
         statusRequestServices = StatusRequest.success;
+      }
+    });
+    update();
+  }
+
+  Future<void> getPreviousWork() async {
+    statusRequestPerviousWork = StatusRequest.loading;
+    final response = await CustomRequest(
+        path: ApiConstance.getProviderPerviousWork,
+        data: {"provider_id": providerModel!.providerId},
+        fromJson: (json) {
+          return json["data"]
+              .map<ProviderPerviousWorkModel>(
+                  (model) => ProviderPerviousWorkModel.fromJson(model))
+              .toList();
+        }).sendGetRequest();
+    response.fold((l) {
+      statusRequestPerviousWork = StatusRequest.error;
+    }, (r) {
+      previousWork.clear();
+      print("&&&&&&&&&&&&&&&&&&&&&");
+      print(previousWork);
+      print("&&&&&&&&&&&&&&&&&&&&&");
+      previousWork = r;
+      if (r.isEmpty) {
+        statusRequestPerviousWork = StatusRequest.noData;
+      } else {
+        statusRequestPerviousWork = StatusRequest.success;
       }
     });
     update();
