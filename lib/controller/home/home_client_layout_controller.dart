@@ -58,7 +58,6 @@ class HomeClintLayoutController extends GetxController {
   ];
 
   onBNavPressed(int index) {
-    // currentIndex = index;
     convexController.animateTo(index);
     update();
   }
