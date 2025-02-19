@@ -1,6 +1,7 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/home/home_client_controller.dart';
 import 'package:b2b_partenership/controller/home/home_client_layout_controller.dart';
+import 'package:b2b_partenership/controller/settings/setting_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/widgets/home/category_widget.dart';
@@ -11,6 +12,8 @@ import 'package:b2b_partenership/widgets/home/provider_widget.dart';
 import 'package:b2b_partenership/widgets/home/search_widget.dart';
 import 'package:b2b_partenership/widgets/home/service_banner_widget.dart';
 import 'package:b2b_partenership/widgets/home/shop_banner_widget.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -25,6 +28,7 @@ class ClientHomeView extends StatefulWidget {
 
 class _ClientHomeViewState extends State<ClientHomeView>
     with TickerProviderStateMixin {
+  final settingController = Get.put(SettingController());
   @override
   Widget build(BuildContext context) {
     Get.put(HomeClientController());
@@ -41,7 +45,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
               style: TextStyle(fontSize: 13.sp, color: greyColor),
             ),
             Text(
-              "Ahlam Magdy",
+              settingController.menuModel!.data!.name!,
               style: TextStyle(fontSize: 16.sp),
             ),
           ],
@@ -55,8 +59,10 @@ class _ClientHomeViewState extends State<ClientHomeView>
                 border: Border.all(color: Colors.grey[300]!)),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image.network(
-                "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg",
+              child: CachedNetworkImage(
+                imageUrl: settingController.menuModel!.data!.image!,
+                errorWidget: (context, url, error) =>
+                    Icon(CupertinoIcons.person),
                 fit: BoxFit.cover,
               ),
             ),

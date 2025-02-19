@@ -17,12 +17,12 @@ class JobBannerWidget extends StatelessWidget {
       child: Stack(
         children: [
           ClipRRect(
-              borderRadius: BorderRadius.circular(10),
+              //borderRadius: BorderRadius.circular(10),
               child: Image.asset(
-                "assets/images/job.jpeg",
-                fit: BoxFit.cover,
-                width: double.infinity,
-              )),
+            "assets/images/job.jpeg",
+            fit: BoxFit.cover,
+            width: double.infinity,
+          )),
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(

@@ -14,6 +14,7 @@ class HomeSliders extends StatefulWidget {
 
 class _HomeSlidersState extends State<HomeSliders> {
   CarouselSliderController carouselController = CarouselSliderController();
+  
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,6 @@ class _HomeSlidersState extends State<HomeSliders> {
                           controller.changeSlider(index);
                         },
                         aspectRatio: 30 / 9,
-                        //pageSnapping: false,
                         animateToClosest: true,
                         height: height / 1.4,
                         autoPlay: true,
@@ -71,21 +71,6 @@ class _HomeSlidersState extends State<HomeSliders> {
                   ),
                 ),
               ),
-              // Positioned(
-              //   bottom: 35,
-              //   child: AnimatedSmoothIndicator(
-              //     effect: ScaleEffect(
-              //       activeDotColor: greencolor,
-              //       dotHeight: 10,
-              //       dotWidth: 10,
-              //       dotColor: Colors.white,
-              //       scale: 1.6,
-              //     ),
-              //     activeIndex: controller.currentpage,
-              //     count:
-              //         controller.banners.length, // Make sure this is not zero
-              //   ),
-              // ),
             ],
           ),
         );

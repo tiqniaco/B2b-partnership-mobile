@@ -1,3 +1,4 @@
+import 'package:b2b_partenership/controller/settings/setting_controller.dart';
 import 'package:b2b_partenership/views/home/client_home_view.dart';
 import 'package:b2b_partenership/views/orders/orders_view.dart';
 import 'package:b2b_partenership/views/save/save_view.dart';
@@ -63,8 +64,8 @@ class HomeClintLayoutController extends GetxController {
   }
 
   @override
-  void onInit() {
-    // currentIndex = 0;
+  Future<void> onInit() async {
+    await Get.put(SettingController()).getMenuModel();
     convexController.addListener(() {
       onBNavPressed(convexController.index);
     });

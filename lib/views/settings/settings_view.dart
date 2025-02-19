@@ -1,4 +1,6 @@
 import 'package:b2b_partenership/app_routes.dart';
+import 'package:b2b_partenership/controller/settings/setting_controller.dart';
+import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -11,152 +13,191 @@ class SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(SettingController());
     return Scaffold(
-      body: SafeArea(
-          child: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Container(
-                  height: 60.h,
-                  width: 60.h,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8),
-                      border: Border.all(color: Colors.grey[300]!)),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(8),
-                    child: Image.network(
-                      "https://img.freepik.com/free-photo/young-bearded-man-with-striped-shirt_273609-5677.jpg",
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-                Gap(10),
-                Text(
-                  "Ahlam",
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
-                ),
-                Text(
-                  "+34667455834734",
-                  style: TextStyle(color: greyColor, fontSize: 15.sp),
-                ),
-                Gap(10),
-                GridView(
-                  physics: NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 15,
-                      crossAxisSpacing: 15,
-                      childAspectRatio: 9 / 4.1),
-                  children: [
-                    boxWidget(Icons.work_outline, Colors.amber, "25", "Jobs",
-                        () {
-                      Get.toNamed(AppRoutes.getRequestServices);
-                    }),
-                    boxWidget(Icons.shopping_cart_outlined, Colors.blue, "123",
-                        "Shopping", () {
-                      Get.toNamed(AppRoutes.getRequestServices);
-                    }),
-                    boxWidget(CupertinoIcons.news, Colors.green, "34",
-                        "Post Services", () {
-                      Get.toNamed(AppRoutes.getRequestServices);
-                    }),
-                    boxWidget(Icons.headset_mic_outlined, Colors.red, "23",
-                        "Complaints", () {
-                      Get.toNamed(AppRoutes.getRequestServices);
-                    })
-                  ],
-                ),
-                Gap(20.h),
-                FractionallySizedBox(
-                  widthFactor: 10,
-                  child: Divider(
-                    thickness: 5,
-                    color: borderColor.withAlpha(40),
-                  ),
-                ),
-                Gap(10.h),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Personal information",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500, fontSize: 17.sp),
-                    ),
-                    Gap(20),
-                    rowWidget("Email", "ahlammagdy333@gmail.com"),
-                    FractionallySizedBox(
-                      widthFactor: 10,
-                      child: Divider(
-                        color: borderColor,
+      body: GetBuilder<SettingController>(
+        builder: (controller) => SafeArea(
+            child: controller.menuModel == null
+                ? Center(child: CircularProgressIndicator())
+                : SingleChildScrollView(
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 60.h,
+                              width: 60.h,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(color: Colors.grey[300]!)),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(8),
+                                child: Image.network(
+                                  controller.menuModel!.data!.image!,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                            ),
+                            Gap(10),
+                            Text(
+                              controller.menuModel!.data!.name!,
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 15.sp),
+                            ),
+                            Text(
+                              "+${controller.menuModel!.data!.countryCode}${controller.menuModel!.data!.phone}",
+                              style:
+                                  TextStyle(color: greyColor, fontSize: 15.sp),
+                            ),
+                            Gap(10),
+                            GridView(
+                              physics: NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              gridDelegate:
+                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      mainAxisSpacing: 15,
+                                      crossAxisSpacing: 15,
+                                      childAspectRatio: 9 / 4.1),
+                              children: [
+                                boxWidget(
+                                    Icons.work_outline,
+                                    Colors.amber,
+                                    controller.menuModel!.jobsCount.toString(),
+                                    "Jobs", () {
+                                  Get.toNamed(AppRoutes.getRequestServices);
+                                }),
+                                boxWidget(
+                                    Icons.shopping_cart_outlined,
+                                    Colors.blue,
+                                    controller.menuModel!.shoppingCount
+                                        .toString(),
+                                    "Shopping", () {
+                                  Get.toNamed(AppRoutes.getRequestServices);
+                                }),
+                                boxWidget(
+                                    CupertinoIcons.news,
+                                    Colors.green,
+                                    controller.menuModel!.servicesCount
+                                        .toString(),
+                                    "Post Services", () {
+                                  Get.toNamed(AppRoutes.getRequestServices);
+                                }),
+                                boxWidget(
+                                    Icons.headset_mic_outlined,
+                                    Colors.red,
+                                    controller.menuModel!.complaintsCount
+                                        .toString(),
+                                    "Complaints", () {
+                                  Get.toNamed(AppRoutes.getRequestServices);
+                                })
+                              ],
+                            ),
+                            Gap(20.h),
+                            FractionallySizedBox(
+                              widthFactor: 10,
+                              child: Divider(
+                                thickness: 5,
+                                color: borderColor.withAlpha(40),
+                              ),
+                            ),
+                            Gap(10.h),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Personal information",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 17.sp),
+                                ),
+                                Gap(20),
+                                rowWidget("Email",
+                                    controller.menuModel!.data!.email!),
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    color: borderColor,
+                                  ),
+                                ),
+                                rowWidget(
+                                    "City",
+                                    translateDatabase(
+                                        arabic: controller
+                                            .menuModel!.data!.governmentNameAr!,
+                                        english: controller.menuModel!.data!
+                                            .governmentNameEn!)),
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    color: borderColor,
+                                  ),
+                                ),
+                                rowWidget(
+                                    "Country",
+                                    translateDatabase(
+                                        arabic: controller
+                                            .menuModel!.data!.countryNameAr!,
+                                        english: controller
+                                            .menuModel!.data!.countryNameEn!)),
+                                Gap(30),
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    thickness: 5,
+                                    color: borderColor.withAlpha(40),
+                                  ),
+                                ),
+                                Gap(20),
+                                Text(
+                                  "Other Services",
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 17.sp),
+                                ),
+                                Gap(20),
+                                rowWithArrow(CupertinoIcons.person,
+                                    "Edit Profile", () {}),
+                                Gap(8),
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    color: borderColor,
+                                  ),
+                                ),
+                                Gap(8),
+                                rowWithArrow(CupertinoIcons.padlock,
+                                    "Change Password", () {}),
+                                Gap(8),
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    color: borderColor,
+                                  ),
+                                ),
+                                Gap(8),
+                                rowWithArrow(CupertinoIcons.delete_simple,
+                                    "Remove Account", () {}),
+                                Gap(8),
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    color: borderColor,
+                                  ),
+                                ),
+                                Gap(8),
+                                rowWithArrow(
+                                    Icons.logout_rounded, "Logout", () {}),
+                              ],
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                    rowWidget("City", "Giza"),
-                    FractionallySizedBox(
-                      widthFactor: 10,
-                      child: Divider(
-                        color: borderColor,
-                      ),
-                    ),
-                    rowWidget("Country", "Egypt"),
-                    Gap(30),
-                    FractionallySizedBox(
-                      widthFactor: 10,
-                      child: Divider(
-                        thickness: 5,
-                        color: borderColor.withAlpha(40),
-                      ),
-                    ),
-                    Gap(20),
-                    Text(
-                      "Other Services",
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500, fontSize: 17.sp),
-                    ),
-                    Gap(20),
-                    rowWithArrow(CupertinoIcons.person, "Edit Profile", () {}),
-                    Gap(8),
-                    FractionallySizedBox(
-                      widthFactor: 10,
-                      child: Divider(
-                        color: borderColor,
-                      ),
-                    ),
-                    Gap(8),
-                    rowWithArrow(
-                        CupertinoIcons.padlock, "Change Password", () {}),
-                    Gap(8),
-                    FractionallySizedBox(
-                      widthFactor: 10,
-                      child: Divider(
-                        color: borderColor,
-                      ),
-                    ),
-                    Gap(8),
-                    rowWithArrow(
-                        CupertinoIcons.delete_simple, "Remove Account", () {}),
-                    Gap(8),
-                    FractionallySizedBox(
-                      widthFactor: 10,
-                      child: Divider(
-                        color: borderColor,
-                      ),
-                    ),
-                    Gap(8),
-                    rowWithArrow(Icons.logout_rounded, "Logout", () {}),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      )),
+                  )),
+      ),
     );
   }
 
@@ -253,6 +294,4 @@ class SettingsView extends StatelessWidget {
       ],
     );
   }
-
-
 }

@@ -1,8 +1,8 @@
-import 'package:b2b_partenership/controller/provider_profile_controller.dart';
+import 'package:b2b_partenership/controller/previous_work/provider_profile_controller.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/widgets/in_category/service_widget_vertical.dart';
 import 'package:b2b_partenership/widgets/provider_profile/about_widget.dart';
-import 'package:b2b_partenership/widgets/provider_profile/previous_work.dart';
+import 'package:b2b_partenership/widgets/provider_profile/previous_work_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';

@@ -25,6 +25,9 @@ class ApiConstance {
   static final String deleteAccount = 'patient/$kUserId';
   static const String resetPassword = 'reset-password';
 
+  //client
+  static String getClientMenu(String id) => '/clients/$id';
+
   // home
   static const String getBanners = 'banners';
   static const String getTopServices = 'home/top-services';
@@ -51,6 +54,7 @@ class ApiConstance {
   static String getProviderPerviousWork = 'provider-previous-works';
   static String getTopCountriesProv(String id) =>
       'home/country/$id/top-providers';
+  static String getWorkImages = '/previous-work-images';
 
   // favorite
   static String getUserFavorite = 'favorite-providers';

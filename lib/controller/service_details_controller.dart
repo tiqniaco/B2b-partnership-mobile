@@ -198,4 +198,5 @@ class ServiceDetailsController extends GetxController {
       1,
     );
   }
+
 }

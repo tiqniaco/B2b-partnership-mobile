@@ -12,19 +12,19 @@ class ServiceBannerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
+          // borderRadius: BorderRadius.circular(10),
           border: Border.all(color: primaryColor, width: 0)),
       height: 133.h,
       width: double.infinity,
       child: Stack(
         children: [
           ClipRRect(
-              borderRadius: BorderRadius.circular(10),
+              // borderRadius: BorderRadius.circular(10),
               child: Image.asset(
-                "assets/images/man.jpeg",
-                fit: BoxFit.cover,
-                width: double.infinity,
-              )),
+            "assets/images/man.jpeg",
+            fit: BoxFit.cover,
+            width: double.infinity,
+          )),
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
