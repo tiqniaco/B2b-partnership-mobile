@@ -23,7 +23,7 @@ class ApiConstance {
   static const String profile = 'patient/profile';
   static final String updateProfile = 'patient/$kUserId';
   static final String deleteAccount = 'patient/$kUserId';
-  static const String resetPassword = 'reset-password';
+  static const String resetPassword = 'auth/reset-password';
 
   //client
   static String getClientMenu(String id) => '/clients/$id';
@@ -69,4 +69,7 @@ class ApiConstance {
   static String clearCart = "store/cart/clear";
   static String addToCart = "store/carts";
   static String checkout = "store/orders";
+
+  // Client Profile
+  static String updateClientProfile(String id) => 'clients/$id/update';
 }

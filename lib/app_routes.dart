@@ -1,4 +1,5 @@
 import 'package:b2b_partenership/views/auth/choose_account.dart';
+import 'package:b2b_partenership/views/auth/forget_password_email_view.dart';
 import 'package:b2b_partenership/views/auth/login_view.dart';
 import 'package:b2b_partenership/views/auth/provider_signup_view.dart';
 import 'package:b2b_partenership/views/auth/client_signup_view.dart';
@@ -13,6 +14,8 @@ import 'package:b2b_partenership/views/service_details_view.dart';
 import 'package:b2b_partenership/views/in_category/providers_in_categories.dart';
 import 'package:b2b_partenership/views/service_request/add_service_request.dart';
 import 'package:b2b_partenership/views/service_request/get_user_service_request.dart';
+import 'package:b2b_partenership/views/settings/change_password_view.dart';
+import 'package:b2b_partenership/views/settings/edit_client_profile_view.dart';
 import 'package:b2b_partenership/views/shop/shop_cart_view.dart';
 import 'package:b2b_partenership/views/shop/shop_view.dart';
 import 'package:b2b_partenership/views/splash/views/splash_view.dart';
@@ -62,6 +65,10 @@ class AppRoutes {
   static const String shopProductDetails = '/shopProductDetails';
   static const String shopCart = '/shopCart';
 
+  // Edit Client Profile
+  static const String editClientProfile = '/editClientProfile';
+  static const String changePassword = '/changePassword';
+
   static final List<GetPage<dynamic>> pages = [
     // base
     GetPage(
@@ -72,6 +79,10 @@ class AppRoutes {
     GetPage(
       name: login,
       page: () => const LoginView(),
+    ),
+    GetPage(
+      name: forgetPassword,
+      page: () => const ForgetPasswordEmailView(),
     ),
     GetPage(
       name: clientSignup,
@@ -156,5 +167,17 @@ class AppRoutes {
       name: shopCart,
       page: () => const ShopCartView(),
     ),
+
+    // Edit Client Profile
+    GetPage(
+      name: editClientProfile,
+      page: () => const EditClientProfileView(),
+    ),
+
+    // Change Password
+    GetPage(
+      name: changePassword,
+      page: () => const ChangePasswordView(),
+    )
   ];
 }

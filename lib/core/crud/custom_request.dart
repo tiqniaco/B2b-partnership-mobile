@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '/core/errors/failure.dart';
 import '/core/network/dio_logger.dart';
 import 'package:dartz/dartz.dart';
@@ -26,13 +28,12 @@ class CustomRequest<T> {
   final T Function(Map<String, dynamic>) fromJson;
   final Map<String, String> files;
 
-  CustomRequest({
-    required this.path,
-    required this.fromJson,
-    this.queryParameters = const {},
-    this.data = const {},
-    this.files= const {}
-  });
+  CustomRequest(
+      {required this.path,
+      required this.fromJson,
+      this.queryParameters = const {},
+      this.data = const {},
+      this.files = const {}});
 
 /*
 * It has sendGetRequest, sendPostRequest, sendPutRequest, sendDeleteRequest, sendPatchRequest methods to send the request
@@ -54,7 +55,17 @@ class CustomRequest<T> {
       return Right(jsonData);
     } catch (e) {
       if (e is DioException) {
+        if (kDebugMode) {
+          print("==== Error =====");
+          print("${e.response?.data}");
+          print("==== Error =====");
+        }
         return Left(ServerFailure.formDioException(e));
+      }
+      if (kDebugMode) {
+        print("==== Error =====");
+        print("$e");
+        print("==== Error =====");
       }
       return Left(ServerFailure(e.toString()));
     }
@@ -89,9 +100,18 @@ class CustomRequest<T> {
       return Right(jsonData);
     } catch (e) {
       if (e is DioException) {
+        if (kDebugMode) {
+          print("==== Error =====");
+          print("${e.response?.data}");
+          print("==== Error =====");
+        }
         return Left(ServerFailure.formDioException(e));
       }
-
+      if (kDebugMode) {
+        print("==== Error =====");
+        print("$e");
+        print("==== Error =====");
+      }
       return Left(ServerFailure(e.toString()));
     }
   }
@@ -109,7 +129,17 @@ class CustomRequest<T> {
       return Right(jsonData);
     } catch (e) {
       if (e is DioException) {
+        if (kDebugMode) {
+          print("==== Error =====");
+          print("${e.response?.data}");
+          print("==== Error =====");
+        }
         return Left(ServerFailure.formDioException(e));
+      }
+      if (kDebugMode) {
+        print("==== Error =====");
+        print("$e");
+        print("==== Error =====");
       }
       return Left(ServerFailure(e.toString()));
     }
@@ -128,7 +158,17 @@ class CustomRequest<T> {
       return Right(jsonData);
     } catch (e) {
       if (e is DioException) {
+        if (kDebugMode) {
+          print("==== Error =====");
+          print("${e.response?.data}");
+          print("==== Error =====");
+        }
         return Left(ServerFailure.formDioException(e));
+      }
+      if (kDebugMode) {
+        print("==== Error =====");
+        print("$e");
+        print("==== Error =====");
       }
       return Left(ServerFailure(e.toString()));
     }
@@ -147,7 +187,17 @@ class CustomRequest<T> {
       return Right(jsonData);
     } catch (e) {
       if (e is DioException) {
+        if (kDebugMode) {
+          print("==== Error =====");
+          print("${e.response?.data}");
+          print("==== Error =====");
+        }
         return Left(ServerFailure.formDioException(e));
+      }
+      if (kDebugMode) {
+        print("==== Error =====");
+        print("$e");
+        print("==== Error =====");
       }
       return Left(ServerFailure(e.toString()));
     }

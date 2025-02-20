@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/settings/setting_controller.dart';
+import 'package:b2b_partenership/core/functions/logout.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:flutter/cupertino.dart';
@@ -158,8 +159,18 @@ class SettingsView extends StatelessWidget {
                                       fontSize: 17.sp),
                                 ),
                                 Gap(20),
-                                rowWithArrow(CupertinoIcons.person,
-                                    "Edit Profile", () {}),
+                                rowWithArrow(
+                                  CupertinoIcons.person,
+                                  "Edit Profile",
+                                  () {
+                                    Get.toNamed(
+                                      AppRoutes.editClientProfile,
+                                      arguments: {
+                                        'model': controller.menuModel!.data,
+                                      },
+                                    );
+                                  },
+                                ),
                                 Gap(8),
                                 FractionallySizedBox(
                                   widthFactor: 10,
@@ -168,8 +179,13 @@ class SettingsView extends StatelessWidget {
                                   ),
                                 ),
                                 Gap(8),
-                                rowWithArrow(CupertinoIcons.padlock,
-                                    "Change Password", () {}),
+                                rowWithArrow(
+                                  CupertinoIcons.padlock,
+                                  "Change Password",
+                                  () {
+                                    Get.toNamed(AppRoutes.changePassword);
+                                  },
+                                ),
                                 Gap(8),
                                 FractionallySizedBox(
                                   widthFactor: 10,
@@ -189,7 +205,12 @@ class SettingsView extends StatelessWidget {
                                 ),
                                 Gap(8),
                                 rowWithArrow(
-                                    Icons.logout_rounded, "Logout", () {}),
+                                  Icons.logout_rounded,
+                                  "Logout",
+                                  () {
+                                    logout();
+                                  },
+                                ),
                               ],
                             ),
                           ],
@@ -268,30 +289,33 @@ class SettingsView extends StatelessWidget {
   }
 
   Widget rowWithArrow(IconData icon, String title, void Function() onPressed) {
-    return Row(
-      children: [
-        CircleAvatar(
-          radius: 18.sp,
-          backgroundColor: borderColor.withAlpha(30),
-          child: Icon(
-            icon,
-            color: Colors.black54,
-            size: 20.sp,
+    return InkWell(
+      onTap: onPressed,
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 18.sp,
+            backgroundColor: borderColor.withAlpha(30),
+            child: Icon(
+              icon,
+              color: Colors.black54,
+              size: 20.sp,
+            ),
           ),
-        ),
-        Gap(15),
-        Text(
-          title,
-          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300),
-        ),
-        Spacer(),
-        IconButton(
-            onPressed: onPressed,
-            icon: Icon(
-              Icons.arrow_forward_ios_rounded,
-              size: 15.sp,
-            ))
-      ],
+          Gap(15),
+          Text(
+            title,
+            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300),
+          ),
+          Spacer(),
+          IconButton(
+              onPressed: onPressed,
+              icon: Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 15.sp,
+              ))
+        ],
+      ),
     );
   }
 }

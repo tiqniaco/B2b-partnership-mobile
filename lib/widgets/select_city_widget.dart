@@ -6,7 +6,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SelectCityWidget extends StatelessWidget {
   const SelectCityWidget({
-    super.key, required this.value, required this.models, required this.onChanged,
+    super.key,
+    required this.value,
+    required this.models,
+    required this.onChanged,
   });
   final CityModel value;
   final List<CityModel> models;
@@ -42,17 +45,13 @@ class SelectCityWidget extends StatelessWidget {
         items: models.map((item) {
           return DropdownMenuItem<CityModel>(
             value: item,
-            child: Row(
-              children: [
-                Text(
-                  translateDatabase(
-                      arabic: item.nameAr!, english: item.nameEn!),
-                  style: TextStyle(
-                      fontSize: 12.sp,
-                      color: greyColor.withAlpha(160),
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
+            child: Text(
+              translateDatabase(arabic: item.nameAr!, english: item.nameEn!),
+              style: TextStyle(
+                fontSize: 12.sp,
+                color: greyColor.withAlpha(160),
+                fontWeight: FontWeight.bold,
+              ),
             ),
           );
         }).toList(),
@@ -60,7 +59,7 @@ class SelectCityWidget extends StatelessWidget {
         //  (value) {
         //   controller.onCityChanged(value);
         // },
-      
-    );
+
+        );
   }
 }
