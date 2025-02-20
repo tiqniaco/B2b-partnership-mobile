@@ -32,242 +32,244 @@ class _ClientHomeViewState extends State<ClientHomeView>
   @override
   Widget build(BuildContext context) {
     Get.put(HomeClientController());
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: whiteColor,
-        automaticallyImplyLeading: false,
-        titleSpacing: 20,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Welcome!",
-              style: TextStyle(fontSize: 13.sp, color: greyColor),
+    return GetBuilder<HomeClientController>(
+      builder: (HomeClientController controller) {
+        return Scaffold(
+          appBar: AppBar(
+            backgroundColor: whiteColor,
+            automaticallyImplyLeading: false,
+            titleSpacing: 20,
+            title: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Welcome!",
+                  style: TextStyle(fontSize: 13.sp, color: greyColor),
+                ),
+                Text(
+                  settingController.menuModel?.data?.name ?? "",
+                  style: TextStyle(fontSize: 16.sp),
+                ),
+              ],
             ),
-            Text(
-              settingController.menuModel!.data!.name!,
-              style: TextStyle(fontSize: 16.sp),
-            ),
-          ],
-        ),
-        actions: [
-          Container(
-            height: 42.h,
-            width: 42.h,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.grey[300]!)),
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(8),
-              child: CachedNetworkImage(
-                imageUrl: settingController.menuModel!.data!.image!,
-                errorWidget: (context, url, error) =>
-                    Icon(CupertinoIcons.person),
-                fit: BoxFit.cover,
+            actions: [
+              Container(
+                height: 42.h,
+                width: 42.h,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    border: Border.all(color: Colors.grey[300]!)),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: CachedNetworkImage(
+                    imageUrl: settingController.menuModel?.data?.image ?? "",
+                    errorWidget: (context, url, error) =>
+                        Icon(CupertinoIcons.person),
+                    fit: BoxFit.cover,
+                  ),
+                ),
               ),
-            ),
+              Gap(20)
+            ],
           ),
-          Gap(20)
-        ],
-      ),
-      body: GetBuilder<HomeClientController>(
-        builder: (controller) => ListView(
-          children: [
-            Gap(25),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: SearchWidget(
-                onTap: () {
-                  Get.put(HomeClintLayoutController(this)).onBNavPressed(2);
-                },
+          body: ListView(
+            children: [
+              Gap(25),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: SearchWidget(
+                  onTap: () {
+                    Get.put(HomeClintLayoutController(this)).onBNavPressed(2);
+                  },
+                ),
               ),
-            ),
-            Gap(5),
-            FractionallySizedBox(
-              widthFactor: 1,
-              child: Divider(),
-            ),
-            Gap(10),
-            CustomServerStatusWidget(
-                statusRequest: controller.statusRequestBanner,
-                child: HomeSliders()),
-            Gap(25),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: HomeRowWidget(
-                title: "Browse categories",
-                onTap: () {
-                  Get.toNamed(AppRoutes.seeAllCategories,
-                      arguments: {"categories": controller.specializations});
-                },
+              Gap(5),
+              FractionallySizedBox(
+                widthFactor: 1,
+                child: Divider(),
               ),
-            ),
-            Gap(18),
-            SizedBox(
-                height: 120.h,
-                child: CustomServerStatusWidget(
-                  statusRequest: controller.statusRequestSpecialization,
-                  child: CategoryWidget(
-                      specializations: controller.specializations),
-                )),
-            Gap(30),
-            FractionallySizedBox(
-              widthFactor: 1,
-              child: Divider(),
-            ),
-            Gap(20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: HomeRowWidget(
-                title: "Top Rated Providers",
-                onTap: () {
-                  Get.toNamed(AppRoutes.seeAll, arguments: {
-                    "providers": controller.topProviders,
-                    "title": "Top Rated Provider"
-                  });
-                },
+              Gap(10),
+              CustomServerStatusWidget(
+                  statusRequest: controller.statusRequestBanner,
+                  child: HomeSliders()),
+              Gap(25),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: HomeRowWidget(
+                  title: "Browse categories",
+                  onTap: () {
+                    Get.toNamed(AppRoutes.seeAllCategories,
+                        arguments: {"categories": controller.specializations});
+                  },
+                ),
               ),
-            ),
-            Gap(10),
-            SizedBox(
-                height: 235.h,
-                child: CustomServerStatusWidget(
-                    statusRequest: controller.statusRequestProviders,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      itemCount: controller.topProviders.length,
-                      separatorBuilder: (context, index) => Gap(20),
-                      itemBuilder: (context, index) => ProviderWidget(
-                        provider: controller.topProviders[index],
-                        toggleFavorite: () {
-                          controller.toggleFavorites(
-                              controller.topProviders[index].providerId!);
-                        },
-                      ),
-                    ))),
-            Gap(10),
-            FractionallySizedBox(
-              widthFactor: 1,
-              child: Divider(),
-            ),
-            Gap(25),
-            ServiceBannerWidget(),
-            Gap(15),
-            FractionallySizedBox(
-              widthFactor: 1,
-              child: Divider(),
-            ),
-            Gap(45),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: HomeRowWidget(
-                title: "Egypt Top Rated",
-                onTap: () {
-                  Get.toNamed(AppRoutes.seeAll, arguments: {
-                    "providers": controller.topEgypt,
-                    "title": "Egypt Top Rated"
-                  });
-                },
+              Gap(18),
+              SizedBox(
+                  height: 120.h,
+                  child: CustomServerStatusWidget(
+                    statusRequest: controller.statusRequestSpecialization,
+                    child: CategoryWidget(
+                        specializations: controller.specializations),
+                  )),
+              Gap(30),
+              FractionallySizedBox(
+                widthFactor: 1,
+                child: Divider(),
               ),
-            ),
-            Gap(15),
-            SizedBox(
-                height: 235.h,
-                child: CustomServerStatusWidget(
-                    statusRequest: controller.statusRequestProviders,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      itemCount: controller.topEgypt.length,
-                      separatorBuilder: (context, index) => Gap(20),
-                      itemBuilder: (context, index) => ProviderWidget(
-                        provider: controller.topEgypt[index],
-                        toggleFavorite: () {
-                          controller.toggleFavorites(
-                              controller.topEgypt[index].providerId!);
-                        },
-                      ),
-                    ))),
-            Gap(15),
-            FractionallySizedBox(
-              widthFactor: 1,
-              child: Divider(),
-            ),
-            Gap(25),
-            JobBannerWidget(),
-            Gap(55),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: HomeRowWidget(
-                title: "Saudi Arabia Top Rated",
-                onTap: () {
-                  Get.toNamed(AppRoutes.seeAll, arguments: {
-                    "providers": controller.topSaudi,
-                    "title": "Saudi Arabia Top Rated"
-                  });
-                },
+              Gap(20),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: HomeRowWidget(
+                  title: "Top Rated Providers",
+                  onTap: () {
+                    Get.toNamed(AppRoutes.seeAll, arguments: {
+                      "providers": controller.topProviders,
+                      "title": "Top Rated Provider"
+                    });
+                  },
+                ),
               ),
-            ),
-            Gap(20),
-            SizedBox(
-                height: 235.h,
-                child: CustomServerStatusWidget(
-                    statusRequest: controller.statusRequestProviders,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      itemCount: controller.topSaudi.length,
-                      separatorBuilder: (context, index) => Gap(20),
-                      itemBuilder: (context, index) => ProviderWidget(
-                        provider: controller.topSaudi[index],
-                        toggleFavorite: () {
-                          controller.toggleFavorites(
-                              controller.topSaudi[index].providerId!);
-                        },
-                      ),
-                    ))),
-            Gap(35),
-            FractionallySizedBox(
-              widthFactor: 1,
-              child: Divider(),
-            ),
-            Gap(25),
-            ShopBannerWidget(),
-            Gap(45),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: HomeRowWidget(
-                title: "UAE Top Rated",
-                onTap: () {
-                  Get.toNamed(AppRoutes.seeAll, arguments: {
-                    "providers": controller.topUAE,
-                    "title": "UAE Top Rated"
-                  });
-                },
-              ),
-            ),
-            Gap(20),
-            SizedBox(
-                height: 235.h,
-                child: CustomServerStatusWidget(
-                    statusRequest: controller.statusRequestProviders,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      itemCount: controller.topUAE.length,
-                      separatorBuilder: (context, index) => Gap(20),
-                      itemBuilder: (context, index) => ProviderWidget(
-                          provider: controller.topUAE[index],
+              Gap(10),
+              SizedBox(
+                  height: 235.h,
+                  child: CustomServerStatusWidget(
+                      statusRequest: controller.statusRequestProviders,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        itemCount: controller.topProviders.length,
+                        separatorBuilder: (context, index) => Gap(20),
+                        itemBuilder: (context, index) => ProviderWidget(
+                          provider: controller.topProviders[index],
                           toggleFavorite: () {
                             controller.toggleFavorites(
-                                controller.topUAE[index].providerId!);
-                          }),
-                    ))),
-            Gap(50)
-          ],
-        ),
-      ),
+                                controller.topProviders[index].providerId!);
+                          },
+                        ),
+                      ))),
+              Gap(10),
+              FractionallySizedBox(
+                widthFactor: 1,
+                child: Divider(),
+              ),
+              Gap(25),
+              ServiceBannerWidget(),
+              Gap(15),
+              FractionallySizedBox(
+                widthFactor: 1,
+                child: Divider(),
+              ),
+              Gap(45),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: HomeRowWidget(
+                  title: "Egypt Top Rated",
+                  onTap: () {
+                    Get.toNamed(AppRoutes.seeAll, arguments: {
+                      "providers": controller.topEgypt,
+                      "title": "Egypt Top Rated"
+                    });
+                  },
+                ),
+              ),
+              Gap(15),
+              SizedBox(
+                  height: 235.h,
+                  child: CustomServerStatusWidget(
+                      statusRequest: controller.statusRequestProviders,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        itemCount: controller.topEgypt.length,
+                        separatorBuilder: (context, index) => Gap(20),
+                        itemBuilder: (context, index) => ProviderWidget(
+                          provider: controller.topEgypt[index],
+                          toggleFavorite: () {
+                            controller.toggleFavorites(
+                                controller.topEgypt[index].providerId!);
+                          },
+                        ),
+                      ))),
+              Gap(15),
+              FractionallySizedBox(
+                widthFactor: 1,
+                child: Divider(),
+              ),
+              Gap(25),
+              JobBannerWidget(),
+              Gap(55),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: HomeRowWidget(
+                  title: "Saudi Arabia Top Rated",
+                  onTap: () {
+                    Get.toNamed(AppRoutes.seeAll, arguments: {
+                      "providers": controller.topSaudi,
+                      "title": "Saudi Arabia Top Rated"
+                    });
+                  },
+                ),
+              ),
+              Gap(20),
+              SizedBox(
+                  height: 235.h,
+                  child: CustomServerStatusWidget(
+                      statusRequest: controller.statusRequestProviders,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        itemCount: controller.topSaudi.length,
+                        separatorBuilder: (context, index) => Gap(20),
+                        itemBuilder: (context, index) => ProviderWidget(
+                          provider: controller.topSaudi[index],
+                          toggleFavorite: () {
+                            controller.toggleFavorites(
+                                controller.topSaudi[index].providerId!);
+                          },
+                        ),
+                      ))),
+              Gap(35),
+              FractionallySizedBox(
+                widthFactor: 1,
+                child: Divider(),
+              ),
+              Gap(25),
+              ShopBannerWidget(),
+              Gap(45),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: HomeRowWidget(
+                  title: "UAE Top Rated",
+                  onTap: () {
+                    Get.toNamed(AppRoutes.seeAll, arguments: {
+                      "providers": controller.topUAE,
+                      "title": "UAE Top Rated"
+                    });
+                  },
+                ),
+              ),
+              Gap(20),
+              SizedBox(
+                  height: 235.h,
+                  child: CustomServerStatusWidget(
+                      statusRequest: controller.statusRequestProviders,
+                      child: ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        padding: EdgeInsets.symmetric(horizontal: 20),
+                        itemCount: controller.topUAE.length,
+                        separatorBuilder: (context, index) => Gap(20),
+                        itemBuilder: (context, index) => ProviderWidget(
+                            provider: controller.topUAE[index],
+                            toggleFavorite: () {
+                              controller.toggleFavorites(
+                                  controller.topUAE[index].providerId!);
+                            }),
+                      ))),
+              Gap(50)
+            ],
+          ),
+        );
+      },
     );
   }
 
@@ -295,9 +297,10 @@ class _ClientHomeViewState extends State<ClientHomeView>
           Text(
             title,
             style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 12.sp,
-                color: blackColor),
+              fontWeight: FontWeight.bold,
+              fontSize: 12.sp,
+              color: blackColor,
+            ),
           )
         ],
       ),
