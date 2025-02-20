@@ -1,6 +1,8 @@
 import 'package:b2b_partenership/views/auth/choose_account.dart';
 import 'package:b2b_partenership/views/auth/forget_password_email_view.dart';
+import 'package:b2b_partenership/views/auth/forget_password_reset_view.dart';
 import 'package:b2b_partenership/views/auth/login_view.dart';
+import 'package:b2b_partenership/views/auth/o_t_p_view.dart';
 import 'package:b2b_partenership/views/auth/provider_signup_view.dart';
 import 'package:b2b_partenership/views/auth/client_signup_view.dart';
 import 'package:b2b_partenership/views/home/client_home_layout.dart';
@@ -35,6 +37,7 @@ class AppRoutes {
   static const String providerSignup = '/providerSignup';
   static const String forgetPassword = '/forget-password';
   static const String otp = '/otp';
+  static const String forgetPasswordReset = '/forget-password-reset';
   static const String resetPassword = '/reset-password';
   static const String checkEmail = "/check-email";
   static const String loginByPassword = "/login-by-password";
@@ -84,6 +87,15 @@ class AppRoutes {
       name: forgetPassword,
       page: () => const ForgetPasswordEmailView(),
     ),
+    GetPage(
+      name: otp,
+      page: () => const OTPView(),
+    ),
+    GetPage(
+      name: forgetPasswordReset,
+      page: () => const ForgetPasswordResetView(),
+    ),
+
     GetPage(
       name: clientSignup,
       page: () => const ClientSignupView(),

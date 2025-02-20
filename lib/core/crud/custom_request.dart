@@ -28,12 +28,13 @@ class CustomRequest<T> {
   final T Function(Map<String, dynamic>) fromJson;
   final Map<String, String> files;
 
-  CustomRequest(
-      {required this.path,
-      required this.fromJson,
-      this.queryParameters = const {},
-      this.data = const {},
-      this.files = const {}});
+  CustomRequest({
+    required this.path,
+    required this.fromJson,
+    this.queryParameters = const {},
+    this.data = const {},
+    this.files = const {},
+  });
 
 /*
 * It has sendGetRequest, sendPostRequest, sendPutRequest, sendDeleteRequest, sendPatchRequest methods to send the request

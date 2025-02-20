@@ -24,6 +24,9 @@ class ApiConstance {
   static final String updateProfile = 'patient/$kUserId';
   static final String deleteAccount = 'patient/$kUserId';
   static const String resetPassword = 'auth/reset-password';
+  static const String forgetPassword = 'auth/forget-password';
+  static const String sendOTP = 'send-otp';
+  static const String verifyOTP = 'verify-otp';
 
   //client
   static String getClientMenu(String id) => '/clients/$id';
