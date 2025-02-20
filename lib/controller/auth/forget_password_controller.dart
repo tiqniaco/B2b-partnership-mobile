@@ -22,12 +22,12 @@ class ForgetPasswordController extends GetxController {
     super.onClose();
   }
 
-  Future<void> sendOtp() async {
-    if (formKey.currentState?.validate() ?? false) {
+  Future<void> sendOtp({String? email}) async {
+    if (formKey.currentState?.validate() ?? false || email != null) {
       final result = await CustomRequest<String>(
         path: ApiConstance.sendOTP,
         data: {
-          "email": emailController.text,
+          "email": email ?? emailController.text,
         },
         fromJson: (json) {
           return json['message'];

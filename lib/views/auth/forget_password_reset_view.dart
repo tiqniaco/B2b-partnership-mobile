@@ -1,6 +1,5 @@
 import 'package:b2b_partenership/controller/auth/forget_password_reset_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
-import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/auth/auth_text_form.dart';
 import 'package:flutter/cupertino.dart';

@@ -17,6 +17,7 @@ class SelectCityWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<CityModel>(
+        isExpanded: true,
         value: value, //CountryModel
         decoration: InputDecoration(
           contentPadding:
