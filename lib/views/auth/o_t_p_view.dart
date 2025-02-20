@@ -36,8 +36,8 @@ class OTPView extends StatelessWidget {
                 height: 0.3.sh,
                 child: Lottie.asset(
                   AssetsData.loadingAnimation,
-                  repeat: false,
-                  height: 0.3.sh,
+                  repeat: true,
+                  height: 0.2.sh,
                 ),
               ),
               Text(
@@ -51,8 +51,8 @@ class OTPView extends StatelessWidget {
                 textDirection: TextDirection.ltr,
                 child: OtpTextField(
                   numberOfFields: 6,
-                  borderColor: deepBabyBlueColor,
-                  focusedBorderColor: deepBabyBlueColor,
+                  borderColor: primaryColor,
+                  focusedBorderColor: primaryColor,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   fillColor: whiteColor,
                   filled: true,

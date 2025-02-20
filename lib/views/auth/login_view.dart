@@ -46,7 +46,7 @@ class LoginView extends StatelessWidget {
                             fontWeight: FontWeight.w500),
                       ),
                       Text(
-                        "Login with your phone and password".tr,
+                        "Login with your email or phone and password".tr,
                         style: TextStyle(
                           fontSize: 10.sp,
                           color: Colors.black54,
@@ -57,10 +57,10 @@ class LoginView extends StatelessWidget {
                         validator: (val) {
                           return controller.validUserData(val);
                         },
-                        textFormController: controller.emailController,
-                        lable: "Email".tr,
+                        textFormController: controller.loginController,
+                        lable: "Email or Phone".tr,
                         preicon: CupertinoIcons.phone,
-                        hintText: "Enter your email".tr,
+                        hintText: "Enter your email or phone".tr,
                       ),
                       Gap(20.h),
                       AuthTextForm(
@@ -105,7 +105,7 @@ class LoginView extends StatelessWidget {
                         child: CustomLoadingButton(
                           text: "Login".tr,
                           onPressed: () {
-                            controller.login();
+                            return controller.login();
                           },
                           backgroundColor: primaryColor,
                           height: 0.06.sh,

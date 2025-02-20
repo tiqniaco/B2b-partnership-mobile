@@ -7,17 +7,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 class SelectCountryWidget extends StatelessWidget {
   const SelectCountryWidget({
     super.key,
-    required this.enabled, required this.value, required this.models, required this.onChanged,
+    required this.enabled,
+    required this.value,
+    required this.models,
+    required this.onChanged,
   });
 
   final bool enabled;
-   final CountryModel value;
+  final CountryModel value;
   final List<CountryModel> models;
   final void Function(CountryModel?) onChanged;
 
   @override
   Widget build(BuildContext context) {
-    return  DropdownButtonFormField<CountryModel>(
+    return DropdownButtonFormField<CountryModel>(
+        isExpanded: true,
         value: value,
         decoration: InputDecoration(
           enabled: enabled,
@@ -52,24 +56,26 @@ class SelectCountryWidget extends StatelessWidget {
                 Image.network(
                   item.flag!,
                   width: 23.h,
-                  height: 23.h,
                   fit: BoxFit.cover,
                 ),
-                const SizedBox(width: 10),
-                Text(
-                  translateDatabase(
-                      arabic: item.nameAr!, english: item.nameEn!),
-                  style: TextStyle(
+                SizedBox(width: 8.w),
+                Expanded(
+                  child: Text(
+                    translateDatabase(
+                        arabic: item.nameAr!, english: item.nameEn!),
+                    style: TextStyle(
                       fontSize: 12.sp,
                       color: greyColor.withAlpha(160),
-                      fontWeight: FontWeight.bold),
+                      fontWeight: FontWeight.bold,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
                 ),
               ],
             ),
           );
         }).toList(),
-        onChanged:onChanged
-    
-    );
+        onChanged: onChanged);
   }
 }

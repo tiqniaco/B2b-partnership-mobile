@@ -1,3 +1,6 @@
+import 'package:b2b_partenership/app_routes.dart';
+import 'package:b2b_partenership/core/crud/custom_request.dart';
+import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:get/get.dart';
 
@@ -26,31 +29,37 @@ class OTPController extends GetxController {
       AppSnackBars.warning(message: "OTP must be 6 digits".tr);
       return;
     } else {
-      //verifyOTP();
+      verifyOTP();
     }
   }
 
-  // Future<void> verifyOTP() async {
-  //   final result = await _repo.verifyOTP(email: email, otp: otp);
-  //   result.fold(
-  //     (error) {
-  //       errorLogger(error.errMsg);
-  //       AppSnackBars.error(message: error.errMsg);
-  //     },
-  //     (data) {
-  //       AppSnackBars.success(
-  //         message: "OTP Verified Successfully".tr,
-  //       );
-  //       Get.offNamed(
-  //         AppRoutes.forgetPasswordReset,
-  //         arguments: {
-  //           "email": email,
-  //         },
-  //       );
-  //     },
-  //   );
-  // }
+  Future<void> verifyOTP() async {
+    final result = await CustomRequest<String>(
+      path: ApiConstance.verifyOTP,
+      data: {
+        "email": email,
+        "otp": otp,
+      },
+      fromJson: (json) {
+        return json['message'];
+      },
+    ).sendPostRequest();
 
-
-
+    result.fold(
+      (error) {
+        AppSnackBars.error(message: error.errMsg);
+      },
+      (data) {
+        AppSnackBars.success(
+          message: "OTP Verified Successfully".tr,
+        );
+        Get.offNamed(
+          AppRoutes.forgetPasswordReset,
+          arguments: {
+            "email": email,
+          },
+        );
+      },
+    );
+  }
 }
