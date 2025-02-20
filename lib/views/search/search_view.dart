@@ -7,7 +7,7 @@ import 'package:b2b_partenership/widgets/search/select_specialization_filter.dar
 import 'package:b2b_partenership/widgets/search/select_sup_specialization_filter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pannable_rating_bar/flutter_pannable_rating_bar.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -36,7 +36,9 @@ class SearchView extends StatelessWidget {
                         hintStyle: TextStyle(fontSize: 14.sp),
                         hintText: "Search ...",
                         suffixIcon: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            controller.search();
+                          },
                           child: Icon(
                             Icons.search,
                             color: greyColor,
@@ -64,17 +66,23 @@ class SearchView extends StatelessWidget {
                           showCategorySheet(context);
                         }),
                         customWidget(CupertinoIcons.refresh_thin, "Reset", () {
-                          showLocationSheet(context);
+                          controller.resetFunction();
                         })
                       ],
                     ),
                   ),
                   Gap(10),
-                  Text(
-                    "123456 provider",
-                    style: TextStyle(
-                        fontSize: 15.sp, fontWeight: FontWeight.normal),
-                  ),
+                  controller.searchList.isNotEmpty
+                      ? Text(
+                          "${controller.searchList.length} provider",
+                          style: TextStyle(
+                              fontSize: 15.sp, fontWeight: FontWeight.normal),
+                        )
+                      : Text(
+                          "${controller.topProviders.length} provider",
+                          style: TextStyle(
+                              fontSize: 15.sp, fontWeight: FontWeight.normal),
+                        ),
                   Gap(10),
                 ],
               ),
@@ -88,12 +96,17 @@ class SearchView extends StatelessWidget {
                   childAspectRatio: 6 / 9.8),
               scrollDirection: Axis.vertical,
               padding: EdgeInsets.symmetric(horizontal: 15),
-              itemCount: controller.topProviders.length,
+              itemCount: controller.searchList.isNotEmpty
+                  ? controller.searchList.length
+                  : controller.topProviders.length,
               itemBuilder: (context, index) => ProviderWidget(
-                  provider: controller.topProviders[index],
+                  provider: controller.searchList.isNotEmpty
+                      ? controller.searchList[index]
+                      : controller.topProviders[index],
                   toggleFavorite: () {
-                    controller.toggleFavorites(
-                        controller.topProviders[index].providerId.toString());
+                    controller.toggleFavorites(controller.searchList.isNotEmpty
+                        ? controller.searchList[index].providerId.toString()
+                        : controller.topProviders[index].providerId.toString());
                   }),
             )),
           ],
@@ -187,22 +200,22 @@ class SearchView extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        PannableRatingBar(
-                          spacing: 10,
-                          rate: ratingController.rating,
-                          items: List.generate(
-                              5,
-                              (index) => RatingWidget(
-                                    selectedColor: Colors.amber,
-                                    unSelectedColor: Colors.grey,
-                                    child: Icon(
-                                      CupertinoIcons.star_fill,
-                                      size: 30.sp,
-                                    ),
-                                  )),
-                          onHover: (value) {},
-                          onChanged: (value) {
-                            ratingController.onTapRating(value);
+                        RatingBar.builder(
+                          //ignoreGestures: true,
+                          itemSize: 25.sp,
+                          initialRating: ratingController.rating,
+                          minRating: 1,
+                          direction: Axis.horizontal,
+                          allowHalfRating: false,
+                          itemCount: 5,
+                          itemPadding: EdgeInsets.symmetric(horizontal: 1.0),
+                          itemBuilder: (context, _) => Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                          onRatingUpdate: (rating) {
+                            print(rating);
+                            ratingController.onTapRating(rating);
                           },
                         ),
                         Gap(20),
@@ -223,11 +236,15 @@ class SearchView extends StatelessWidget {
                       child: Row(
                         children: [
                           Expanded(
-                            child: buttonWidget("Clear Filter", () {}, false),
+                            child: buttonWidget("Clear Filter", () {
+                              ratingController.resetRating();
+                            }, false),
                           ),
                           Gap(20),
                           Expanded(
-                            child: buttonWidget("Apply Filter", () {}, true),
+                            child: buttonWidget("Apply Filter", () {
+                              ratingController.search();
+                            }, true),
                           )
                         ],
                       ),
@@ -243,8 +260,8 @@ class SearchView extends StatelessWidget {
     return showModalBottomSheet(
         context: context,
         builder: (context) => GetBuilder<SearchControllerIM>(
-            id: "rating",
-            builder: (ratingController) {
+            id: "location",
+            builder: (locationController) {
               return Container(
                 padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
@@ -285,11 +302,15 @@ class SearchView extends StatelessWidget {
                       child: Row(
                         children: [
                           Expanded(
-                            child: buttonWidget("Clear Filter", () {}, false),
+                            child: buttonWidget("Clear Filter", () {
+                              locationController.resetLoaction();
+                            }, false),
                           ),
                           Gap(20),
                           Expanded(
-                            child: buttonWidget("Apply Filter", () {}, true),
+                            child: buttonWidget("Apply Filter", () {
+                              locationController.search();
+                            }, true),
                           )
                         ],
                       ),
@@ -305,8 +326,8 @@ class SearchView extends StatelessWidget {
     return showModalBottomSheet(
         context: context,
         builder: (context) => GetBuilder<SearchControllerIM>(
-            id: "rating",
-            builder: (ratingController) {
+            id: "category",
+            builder: (categoryController) {
               return Container(
                 padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
@@ -345,11 +366,15 @@ class SearchView extends StatelessWidget {
                       child: Row(
                         children: [
                           Expanded(
-                            child: buttonWidget("Clear Filter", () {}, false),
+                            child: buttonWidget("Clear Filter", () {
+                              categoryController.resetCategory();
+                            }, false),
                           ),
                           Gap(20),
                           Expanded(
-                            child: buttonWidget("Apply Filter", () {}, true),
+                            child: buttonWidget("Apply Filter", () {
+                              categoryController.search();
+                            }, true),
                           )
                         ],
                       ),

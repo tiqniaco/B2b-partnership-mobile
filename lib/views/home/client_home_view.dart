@@ -265,6 +265,11 @@ class _ClientHomeViewState extends State<ClientHomeView>
                                   controller.topUAE[index].providerId!);
                             }),
                       ))),
+              TextButton(
+                  onPressed: () {
+                    Get.toNamed(AppRoutes.providerHomeLayout);
+                  },
+                  child: Text("GO TO PROVIDER")),
               Gap(50)
             ],
           ),

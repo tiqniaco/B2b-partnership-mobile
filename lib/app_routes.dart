@@ -4,6 +4,7 @@ import 'package:b2b_partenership/views/auth/provider_signup_view.dart';
 import 'package:b2b_partenership/views/auth/client_signup_view.dart';
 import 'package:b2b_partenership/views/home/client_home_layout.dart';
 import 'package:b2b_partenership/views/home/client_home_view.dart';
+import 'package:b2b_partenership/views/home/provider_home_layout.dart';
 import 'package:b2b_partenership/views/home/provider_home_view.dart';
 import 'package:b2b_partenership/views/provider_profile/previous_work_view.dart';
 import 'package:b2b_partenership/views/provider_profile/provider_profile_view.dart';
@@ -39,7 +40,8 @@ class AppRoutes {
 
   // home
   static const String clintHome = '/clintHome';
-  static const String providerHome = '/providerHome';
+  static const String providerHomeLayout = '/providerHomeLayout';
+  static const String providerHomeView = '/providerHomeView';
   static const String clientHomeLayout = '/clientHomeLayout';
   static const String seeAll = '/seeAll';
   static const String seeAllCategories = '/seeAllCategories';
@@ -93,8 +95,12 @@ class AppRoutes {
       page: () => ClientHomeView(),
     ),
     GetPage(
-      name: providerHome,
+      name: providerHomeView,
       page: () => const ProviderHomeView(),
+    ),
+     GetPage(
+      name: providerHomeLayout,
+      page: () => const ProviderHomeLayout(),
     ),
     GetPage(
       name: clientHomeLayout,

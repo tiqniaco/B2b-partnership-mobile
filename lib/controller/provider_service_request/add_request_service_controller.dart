@@ -1,81 +1,102 @@
-// ignore_for_file: avoid_print
+import 'dart:io';
 
-import 'package:b2b_partenership/controller/save/saved_controller.dart';
 import 'package:b2b_partenership/core/crud/custom_request.dart';
+import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
+import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:b2b_partenership/models/city_model.dart';
 import 'package:b2b_partenership/models/country_model.dart';
-import 'package:b2b_partenership/models/provider_model.dart';
 import 'package:b2b_partenership/models/specialize_model.dart';
 import 'package:b2b_partenership/models/sub_specialize_model.dart';
+import 'package:b2b_partenership/widgets/request_services/request_service1.dart';
+import 'package:b2b_partenership/widgets/request_services/request_service2.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 
-import '../../core/enums/status_request.dart';
+class AddRequestServiceController extends GetxController {
+  final TextEditingController clientIdController = TextEditingController();
+  final TextEditingController governmentIdController = TextEditingController();
+  final TextEditingController subSpecializationIdController =
+      TextEditingController();
+  final TextEditingController titleArController = TextEditingController();
+  final TextEditingController titleEnController = TextEditingController();
+  final TextEditingController addressController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
 
-class SearchControllerIM extends GetxController {
-  double rating = 0;
-  List<ProviderModel> topProviders = [];
-  List<ProviderModel> searchList = [];
+  late CountryModel selectedCountry;
+  late CityModel selectedCity;
+  late SpecializeModel selectedSpecialization;
+  late SubSpecializeModel selectedSubSpecialization;
+
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   List<CountryModel> countries = [];
   List<CityModel> cities = [];
-  StatusRequest statusRequestProviders = StatusRequest.loading;
-  late TextEditingController searchController;
-  CountryModel? selectedCountry;
-  CityModel? selectedCity;
-  SpecializeModel? selectedSpecialization;
-  SubSpecializeModel? selectedSubSpecialization;
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   List<SpecializeModel> specializations = [];
   List<SubSpecializeModel> subSpecializations = [];
-  late String role;
   int currentStep = 0;
+
+  List<Widget> get steps => [
+        const RequestService1(),
+        const RequestService2(),
+      ];
+
   StatusRequest statusRequest = StatusRequest.loading;
   StatusRequest statusRequestCity = StatusRequest.loading;
+  StatusRequest statusRequestCountry = StatusRequest.loading;
   StatusRequest statusRequestSpecialization = StatusRequest.loading;
   StatusRequest statusRequestSupSpecialization = StatusRequest.loading;
-  late String id;
-  bool enable = false;
+  File? imageFile;
 
   @override
   Future<void> onInit() async {
-    getProviders();
-    searchController = TextEditingController();
-
     await getCountries();
-    // getCities();
+    getCities();
     await getSpecialization();
-    getProviders();
+    getSupSpecialization();
     super.onInit();
+  }
+
+  void nextStep() {
+    if (currentStep < steps.length - 1) {
+      currentStep++;
+      update();
+    }
+  }
+
+  void previousStep() {
+    if (currentStep > 0) {
+      currentStep--;
+      update();
+    }
   }
 
   onCountryChanged(value) {
     selectedCountry = value;
     debugPrint('Selected Country: $value');
-    enable = true;
     getCities();
-    update(['location']);
+    update();
   }
 
   onCityChanged(value) {
     selectedCity = value;
     debugPrint('Selected city: $value');
-    update(['location']);
+    update();
   }
 
-  onSpecializeChanged(value) async {
+  onSpecializeChanged(value) {
     selectedSpecialization = value;
     debugPrint('Selected specialize: $value');
-    await getSupSpecialization();
-    update(['category']);
+    getSupSpecialization();
+    update();
   }
 
   onSubSpecializeChanged(value) {
     selectedSubSpecialization = value;
     debugPrint('Selected sub specialize: $value');
-    update(['category']);
+    update();
   }
 
   validUserData(val) {
@@ -84,27 +105,50 @@ class SearchControllerIM extends GetxController {
     }
   }
 
-  Future<void> search() async {
-    if (formKey.currentState!.validate()) {
+  galleryImage() async {
+    XFile? xfile = await ImagePicker().pickImage(source: ImageSource.gallery);
+    imageFile = File(xfile!.path);
+    Get.defaultDialog(
+        content: SizedBox(
+          width: 300,
+          height: 300,
+          child: Image.file(
+            imageFile!,
+            fit: BoxFit.cover,
+          ),
+        ),
+        onCancel: () {
+          imageFile = null;
+          update();
+        },
+        onConfirm: () {
+          // add();
+          Get.back();
+        });
+    update();
+  }
+
+  Future<void> addServices() async {
+    if (formKey.currentState?.validate() ?? false) {
+      formKey.currentState!.save();
       statusRequest = StatusRequest.loading;
 
-      final result = await CustomRequest<List<ProviderModel>>(
-          path: ApiConstance.register,
+      final result = await CustomRequest<Map<String, dynamic>>(
+          path: ApiConstance.addServiceRequest,
           fromJson: (json) {
-            return json['data']
-                .map<ProviderModel>(
-                    (element) => ProviderModel.fromJson(element))
-                .toList();
+            return json;
+          },
+          files: {
+            if (imageFile != null) "image": imageFile!.path,
           },
           data: {
-            "search": searchController.text,
-            if (selectedSubSpecialization != null)
-              "sub_specialization_id": selectedSubSpecialization!.id,
-            if (selectedSpecialization != null)
-              "specialization_id": selectedSpecialization!.id,
-            if (selectedCountry != null) "country_id": selectedCountry!.id,
-            if (selectedCity != null) "government_id": selectedCity!.id,
-            if (selectedSpecialization != null) "rate": "provider",
+            "client_id": Get.find<AppPreferences>().getUserRoleId(),
+            "governments_id": selectedCity.id,
+            "sub_specialization_id": selectedSubSpecialization.id,
+            "title_ar": titleEnController.text,
+            "title_en": titleEnController.text,
+            "address": addressController.text,
+            "description": descriptionController.text,
           }).sendPostRequest();
       result.fold((l) {
         statusRequest = StatusRequest.error;
@@ -112,37 +156,20 @@ class SearchControllerIM extends GetxController {
         AppSnackBars.error(message: l.errMsg);
         update();
       }, (r) {
-        searchList.clear();
-        searchList = r;
+        Get.back();
+        AppSnackBars.success(message: r['message']);
         statusRequest = StatusRequest.success;
+
         update();
       });
+    } else {
+     
+      AppSnackBars.warning(message: "please fill all fields");
     }
   }
 
-  resetFunction() {
-    searchController.clear();
-    selectedCity = null;
-    selectedCountry = null;
-    selectedSpecialization = null;
-    selectedSubSpecialization = null;
-    update();
-  }
-
-  resetLoaction() {
-    selectedCountry = null;
-    selectedCity = null;
-    update(['location']);
-  }
-
-  resetCategory() {
-    selectedSpecialization = null;
-    selectedSubSpecialization = null;
-    update(['category']);
-  }
-
   Future<void> getCountries() async {
-    statusRequest = StatusRequest.loading;
+    statusRequestCountry = StatusRequest.loading;
     final result = await CustomRequest<List<CountryModel>>(
       path: ApiConstance.countries,
       fromJson: (json) {
@@ -153,17 +180,16 @@ class SearchControllerIM extends GetxController {
     ).sendGetRequest();
 
     result.fold((l) {
-      statusRequest = StatusRequest.error;
+      statusRequestCountry = StatusRequest.error;
       Logger().e(l.errMsg);
       update();
     }, (r) {
-      print(r);
       countries = r;
-      //selectedCountry = r[0];
+      selectedCountry = r[0];
       if (r.isEmpty) {
-        statusRequest = StatusRequest.noData;
+        statusRequestCountry = StatusRequest.noData;
       } else {
-        statusRequest = StatusRequest.success;
+        statusRequestCountry = StatusRequest.success;
       }
       update();
     });
@@ -173,7 +199,7 @@ class SearchControllerIM extends GetxController {
     statusRequestCity = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.cities,
-        data: {"country_id": selectedCountry!.id},
+        data: {"country_id": selectedCountry.id},
         fromJson: (json) {
           return json['data']
               .map<CityModel>((city) => CityModel.fromJson(city))
@@ -187,7 +213,7 @@ class SearchControllerIM extends GetxController {
       if (r.isEmpty) {
         statusRequestCity = StatusRequest.noData;
       } else {
-        //selectedCity = r[0];
+        selectedCity = r[0];
         statusRequestCity = StatusRequest.success;
       }
     });
@@ -213,7 +239,7 @@ class SearchControllerIM extends GetxController {
       if (r.isEmpty) {
         statusRequestSpecialization = StatusRequest.noData;
       } else {
-        //selectedSpecialization = r[0];
+        selectedSpecialization = r[0];
         statusRequestSpecialization = StatusRequest.success;
       }
     });
@@ -224,7 +250,7 @@ class SearchControllerIM extends GetxController {
     statusRequestSupSpecialization = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getSupSpecialization,
-        data: {"specialization_id": selectedSpecialization!.id},
+        data: {"specialization_id": selectedSpecialization.id},
         fromJson: (json) {
           return json['data']
               .map<SubSpecializeModel>(
@@ -241,7 +267,7 @@ class SearchControllerIM extends GetxController {
       if (r.isEmpty) {
         statusRequestSupSpecialization = StatusRequest.noData;
       } else {
-        //  selectedSubSpecialization = r[0];
+        selectedSubSpecialization = r[0];
         statusRequestSupSpecialization = StatusRequest.success;
       }
     });
@@ -250,49 +276,10 @@ class SearchControllerIM extends GetxController {
 
   @override
   void dispose() {
-    searchController.dispose();
+    titleArController.dispose();
+    titleEnController.dispose();
+    descriptionController.dispose();
+    addressController.dispose();
     super.dispose();
-  }
-
-  onTapRating(double index) {
-    rating = index;
-    print(rating);
-    update(["rating"]);
-  }
-
-  resetRating() {
-    rating = 0;
-    update(['rating']);
-  }
-
-  Future<void> getProviders() async {
-    statusRequestProviders = StatusRequest.loading;
-    final response = await CustomRequest(
-        path: ApiConstance.getTopProviders,
-        fromJson: (json) {
-          return json["data"]
-              .map<ProviderModel>((service) => ProviderModel.fromJson(service))
-              .toList();
-        }).sendGetRequest();
-    response.fold((l) {
-      statusRequestProviders = StatusRequest.error;
-    }, (r) {
-      topProviders.clear();
-      topProviders = r;
-      if (r.isEmpty) {
-        statusRequestProviders = StatusRequest.noData;
-      } else {
-        statusRequestProviders = StatusRequest.success;
-      }
-    });
-    update();
-  }
-
-  toggleFavorites(String provId) async {
-    final savedController = SavedController();
-    await savedController.onTapFavorite(provId);
-    getProviders();
-
-    update();
   }
 }
