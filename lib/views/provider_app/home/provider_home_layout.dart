@@ -1,6 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
-import 'package:b2b_partenership/controller/home/provider_home_layout_controller.dart';
+import 'package:b2b_partenership/controller/provider/home/provider_home_layout_controller.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

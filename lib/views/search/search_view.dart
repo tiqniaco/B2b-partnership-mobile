@@ -109,6 +109,9 @@ class SearchView extends StatelessWidget {
                         : controller.topProviders[index].providerId.toString());
                   }),
             )),
+
+
+            
           ],
         ));
       }),

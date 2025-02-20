@@ -10,7 +10,7 @@ import 'package:b2b_partenership/models/sub_specialize_model.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
-import '../../core/enums/status_request.dart';
+import '../../../core/enums/status_request.dart';
 
 class ProviderHomeController extends GetxController {
   int currentPage = 0;

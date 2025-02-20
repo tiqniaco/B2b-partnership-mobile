@@ -138,19 +138,19 @@ class LoginView extends StatelessWidget {
                           ),
                         ],
                       ),
-                      InkWell(
-                        onTap: () {
-                          Get.toNamed(AppRoutes.clientHomeLayout);
-                        },
-                        child: Text(
-                          "home".tr,
-                          style: TextStyle(
-                            fontSize: 13.sp,
-                            fontWeight: FontWeight.w500,
-                            color: blackColor,
-                          ),
-                        ),
-                      ),
+                      // InkWell(
+                      //   onTap: () {
+                      //     Get.toNamed(AppRoutes.clientHomeLayout);
+                      //   },
+                      //   child: Text(
+                      //     "home".tr,
+                      //     style: TextStyle(
+                      //       fontSize: 13.sp,
+                      //       fontWeight: FontWeight.w500,
+                      //       color: blackColor,
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),

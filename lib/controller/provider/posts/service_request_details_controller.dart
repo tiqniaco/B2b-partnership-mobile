@@ -37,7 +37,6 @@ class ServiceRequestDetailsController extends GetxController {
   }
 
   Future<void> getPriceOffers() async {
-    print("get price");
     if (currentPage < totalPage) {
       isPageLoading = true;
       update();

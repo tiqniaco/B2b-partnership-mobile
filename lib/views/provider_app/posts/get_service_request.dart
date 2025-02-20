@@ -5,7 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-import '../../controller/provider_service_request/get_provider_request_service_controller.dart';
+import '../../../controller/provider/posts/get_provider_request_service_controller.dart';
 
 class GetServiceRequest extends StatelessWidget {
   GetServiceRequest({super.key});

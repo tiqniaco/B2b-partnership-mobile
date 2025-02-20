@@ -1,5 +1,5 @@
 import 'package:b2b_partenership/app_routes.dart';
-import 'package:b2b_partenership/controller/settings/provider_setting_controller.dart';
+import 'package:b2b_partenership/controller/provider/setting/provider_setting_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:flutter/cupertino.dart';
