@@ -1,28 +1,27 @@
-
-
 // ignore_for_file: deprecated_member_use
 
+import 'package:b2b_partenership/controller/provider/home/provider_home_layout_controller.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
-import 'package:b2b_partenership/controller/home/home_client_layout_controller.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class ClientHomeLayout extends StatefulWidget {
-  const ClientHomeLayout({super.key});
+class ProviderHomeLayout extends StatefulWidget {
+  const ProviderHomeLayout({super.key});
 
   @override
-  State<ClientHomeLayout> createState() => _ClientHomeLayoutState();
+  State<ProviderHomeLayout> createState() => _ProviderHomeLayoutState();
 }
 
-class _ClientHomeLayoutState extends State<ClientHomeLayout>
+class _ProviderHomeLayoutState extends State<ProviderHomeLayout>
     with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<HomeClintLayoutController>(
-      init: HomeClintLayoutController(this),
+    return GetBuilder<ProviderHomeLayoutController>(
+      init: ProviderHomeLayoutController(this),
       builder: (controller) => Scaffold(
         backgroundColor: backgroundColor,
         body: TabBarView(
@@ -50,12 +49,14 @@ class _ClientHomeLayoutState extends State<ClientHomeLayout>
               title: "Home",
             ),
             TabItem(
-              icon: SvgPicture.asset("assets/svgs/bag2.svg",
-                  height: 20.sp,
+              icon: Icon(
+                  CupertinoIcons
+                      .news, //SvgPicture.asset("assets/svgs/bag2.svg",
+                  // height: 20.sp,
                   color: controller.currentIndex == 1
                       ? primaryColor
                       : unSelectedBNavColor),
-              title: "Orders",
+              title: "Posts",
             ),
             TabItem(
               icon: Container(

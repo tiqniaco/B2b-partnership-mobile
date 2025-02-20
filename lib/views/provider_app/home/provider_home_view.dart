@@ -1,7 +1,7 @@
 import 'package:b2b_partenership/app_routes.dart';
-import 'package:b2b_partenership/controller/home/home_client_controller.dart';
 import 'package:b2b_partenership/controller/home/home_client_layout_controller.dart';
-import 'package:b2b_partenership/controller/settings/setting_controller.dart';
+import 'package:b2b_partenership/controller/provider/home/provider_home_controller.dart';
+import 'package:b2b_partenership/controller/provider/setting/provider_setting_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/widgets/home/category_widget.dart';
@@ -19,21 +19,21 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class ClientHomeView extends StatefulWidget {
-  const ClientHomeView({super.key});
+class ProviderHomeView extends StatefulWidget {
+  const ProviderHomeView({super.key});
 
   @override
-  State<ClientHomeView> createState() => _ClientHomeViewState();
+  State<ProviderHomeView> createState() => _ProviderHomeViewState();
 }
 
-class _ClientHomeViewState extends State<ClientHomeView>
+class _ProviderHomeViewState extends State<ProviderHomeView>
     with TickerProviderStateMixin {
-  final settingController = Get.put(SettingController());
+  final settingController = Get.put(ProviderSettingController());
   @override
   Widget build(BuildContext context) {
-    Get.put(HomeClientController());
-    return GetBuilder<HomeClientController>(
-      builder: (HomeClientController controller) {
+    Get.put(ProviderHomeController());
+    return GetBuilder<ProviderHomeController>(
+      builder: (ProviderHomeController controller) {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: whiteColor,
@@ -269,7 +269,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                   onPressed: () {
                     Get.toNamed(AppRoutes.providerHomeLayout);
                   },
-                  child: Text("PROVIDER")),
+                  child: Text("Clients")),
               Gap(50)
             ],
           ),

@@ -88,9 +88,6 @@ class ProviderProfileController extends GetxController {
       statusRequestPerviousWork = StatusRequest.error;
     }, (r) {
       previousWork.clear();
-      print("&&&&&&&&&&&&&&&&&&&&&");
-      print(previousWork);
-      print("&&&&&&&&&&&&&&&&&&&&&");
       previousWork = r;
       if (r.isEmpty) {
         statusRequestPerviousWork = StatusRequest.noData;
