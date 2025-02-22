@@ -1,6 +1,6 @@
 // import 'package:firebase_messaging/firebase_messaging.dart';
 
-import 'dart:developer';
+// import 'dart:developer';
 
 import 'package:b2b_partenership/core/theme/app_color.dart';
 

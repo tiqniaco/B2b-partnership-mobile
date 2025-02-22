@@ -1,14 +1,7 @@
-// import 'dart:developer';
-
-
-
-
-
-
 import 'dart:developer';
 
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:b2b_partenership/core/functions/get_access_token.dart';
+import 'package:permission_handler/permission_handler.dart';
 import '/core/constants/app_constants.dart';
 import '/core/theme/app_color.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -16,56 +9,52 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 class NotificationsService {
   final AwesomeNotifications _awesomeNotifications = AwesomeNotifications();
 
+  NotificationsService() {
+    initialize();
+  }
+
   // Initializes the awesome_notifications package and sets up the handlers
   // for background, foreground, and app opened with notification events.
   Future<void> initialize() async {
-    // Check if the user has granted the app permission to show notifications
-    // and request permission if not.
-    await AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
-      if (!isAllowed) {
-        // Show a friendly dialog box to the user to request permission.
-        // This is very important to not harm the user experience.
-        AwesomeNotifications().requestPermissionToSendNotifications();
-      }
-    });
-    // Initialize the awesome_notifications package with the default
-    // notification channel.
-    await _awesomeNotifications.initialize(
-      null,
-      [
-        NotificationChannel(
-          channelKey: kNotificationChannelKey,
-          channelName: kNotificationChannelName,
-          channelDescription: kNotificationChannelDescription,
-          defaultColor: primaryColor,
-          ledColor: whiteColor,
-          importance: NotificationImportance.High,
-          enableLights: true,
-          enableVibration: true,
-          playSound: true,
-          // icon: 'resource://drawable/ic_launcher',
-        ),
-      ],
-      channelGroups: [
-        NotificationChannelGroup(
-          channelGroupKey: kNotificationGroupKey,
-          channelGroupName: kNotificationGroupAlertSummary,
-        )
-      ],
-    );
-    await FirebaseMessaging.instance.subscribeToTopic('all');
+    try {
+      await AwesomeNotifications().isNotificationAllowed().then((isAllowed) {
+        if (!isAllowed) {
+          Permission.notification.request();
+        }
+      });
 
-    // Set up the handlers for background, foreground, and app opened with
-    // notification events.
-    FirebaseMessaging.onBackgroundMessage(_backgroundHandler);
-    FirebaseMessaging.onMessage.listen(_foregroundHandler);
-    FirebaseMessaging.onMessageOpenedApp.listen(_openAppWithNotification);
+      await _awesomeNotifications.initialize(
+        null,
+        [
+          NotificationChannel(
+            channelKey: kNotificationChannelKey,
+            channelName: kNotificationChannelName,
+            channelDescription: kNotificationChannelDescription,
+            defaultColor: primaryColor,
+            ledColor: whiteColor,
+            importance: NotificationImportance.High,
+            enableLights: true,
+            enableVibration: true,
+            playSound: true,
+            // icon: 'resource://drawable/ic_launcher',
+          ),
+        ],
+        channelGroups: [
+          NotificationChannelGroup(
+            channelGroupKey: kNotificationGroupKey,
+            channelGroupName: kNotificationGroupAlertSummary,
+          )
+        ],
+      );
 
-    log(await getAccessToken(), name: 'NotificationsService');
-    log(await getFirebaseToken(), name: 'NotificationsService');
+      FirebaseMessaging.onBackgroundMessage(_backgroundHandler);
+      FirebaseMessaging.onMessage.listen(_foregroundHandler);
+      FirebaseMessaging.onMessageOpenedApp.listen(_openAppWithNotification);
 
-    /// Use this method to detect when a new notification is created
-    await initialListeners();
+      await initialListeners();
+    } catch (e) {
+      log(e.toString(), name: 'NotificationsService');
+    }
   }
 
   Future<String> getFirebaseToken() async {

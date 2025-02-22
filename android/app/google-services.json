@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "701759991705",
+    "project_id": "b2b-partnership-47ae1",
+    "storage_bucket": "b2b-partnership-47ae1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:701759991705:android:e4e41674af34821e5bad08",
+        "android_client_info": {
+          "package_name": "com.example.b2b_partenership"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAX319V0Jp9sQiO6_tpycTcZdHhRkqAUTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
