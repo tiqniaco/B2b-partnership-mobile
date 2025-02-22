@@ -24,6 +24,8 @@ import 'package:b2b_partenership/views/shop/shop_view.dart';
 import 'package:b2b_partenership/views/splash/views/splash_view.dart';
 import 'package:get/get.dart';
 
+import 'views/complaints/complaints_view.dart';
+import 'views/notifications/views/notification_view.dart';
 import 'views/service_request/service_request_details.dart';
 import 'views/shop/shop_product_details_view.dart';
 
@@ -74,6 +76,12 @@ class AppRoutes {
   static const String editClientProfile = '/editClientProfile';
   static const String changePassword = '/changePassword';
 
+  // Complaints
+  static const String complaints = '/complaints';
+
+  // Notification
+  static const String notification = '/notification';
+
   static final List<GetPage<dynamic>> pages = [
     // base
     GetPage(
@@ -121,7 +129,7 @@ class AppRoutes {
       name: providerHomeView,
       page: () => const ProviderHomeView(),
     ),
-     GetPage(
+    GetPage(
       name: providerHomeLayout,
       page: () => const ProviderHomeLayout(),
     ),
@@ -196,6 +204,18 @@ class AppRoutes {
     GetPage(
       name: changePassword,
       page: () => const ChangePasswordView(),
-    )
+    ),
+
+    // Complaints
+    GetPage(
+      name: complaints,
+      page: () => const ComplaintsView(),
+    ),
+
+    // Notification
+    GetPage(
+      name: notification,
+      page: () => const NotificationView(),
+    ),
   ];
 }

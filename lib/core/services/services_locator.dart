@@ -1,6 +1,8 @@
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'notifications_service.dart';
+
 class ServicesLocator extends GetxService {
   late SharedPreferences sharedPreferences;
   Future<ServicesLocator> init() async {
@@ -13,5 +15,5 @@ class ServicesLocator extends GetxService {
 
 initialServices() async {
   await Get.putAsync(() => ServicesLocator().init());
-  // await Get.putAsync(() => NotificationsService().initialize());
+  Get.put(NotificationsService());
 }

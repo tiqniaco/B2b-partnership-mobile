@@ -27,9 +27,7 @@ class AppPreferences {
 
   Future<void> init({bool fromLogin = false}) async {
     if (getAppLanguageCode() == '') {
-      kAppLanguageCode = getAppLanguageCode() ??
-          Get.deviceLocale?.languageCode ??
-          kDefaultLanguage;
+      kAppLanguageCode = getAppLanguageCode() ?? kDefaultLanguage;
       setAppLanguageCode(kAppLanguageCode);
       Get.updateLocale(Locale(kAppLanguageCode));
     } else {

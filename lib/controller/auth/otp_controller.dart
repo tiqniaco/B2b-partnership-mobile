@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:b2b_partenership/app_routes.dart';
+import 'package:b2b_partenership/controller/auth/forget_password_controller.dart';
+import 'package:b2b_partenership/controller/auth/signup_controller.dart';
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
@@ -7,10 +11,19 @@ import 'package:get/get.dart';
 class OTPController extends GetxController {
   String otp = "";
   String email = "";
+  String role = "";
+  bool fromAuth = false;
+  bool isLoading = false;
+  String message = "";
 
   @override
   void onInit() {
     email = Get.arguments['email'] ?? "";
+    fromAuth = Get.arguments['fromAuth'] ?? false;
+    role = Get.arguments['role'] ?? "";
+    if (fromAuth) {
+      Get.put(ForgetPasswordController()).sendOtp(email: email);
+    }
     super.onInit();
   }
 
@@ -34,6 +47,9 @@ class OTPController extends GetxController {
   }
 
   Future<void> verifyOTP() async {
+    isLoading = true;
+    message = "Verifying OTP...".tr;
+    update();
     final result = await CustomRequest<String>(
       path: ApiConstance.verifyOTP,
       data: {
@@ -47,19 +63,42 @@ class OTPController extends GetxController {
 
     result.fold(
       (error) {
+        isLoading = false;
+        message = "";
+        update();
         AppSnackBars.error(message: error.errMsg);
       },
-      (data) {
+      (data) async {
         AppSnackBars.success(
           message: "OTP Verified Successfully".tr,
         );
-        Get.offNamed(
-          AppRoutes.forgetPasswordReset,
-          arguments: {
-            "email": email,
-          },
-        );
+        if (fromAuth) {
+          message = "Creating Account...".tr;
+          update();
+          final controller = Get.put(SignupController());
+          await Future.wait([
+            controller.role == "provider"
+                ? controller.signupProvider()
+                : controller.signupClient(),
+          ]);
+          isLoading = false;
+          message = "";
+          update();
+          // Get.offAllNamed(AppRoutes.login);
+        } else {
+          Get.offNamed(
+            AppRoutes.forgetPasswordReset,
+            arguments: {
+              "email": email,
+            },
+          );
+        }
       },
     );
+  }
+
+  Future<void> resendOTP() async {
+    log(email, name: 'Email');
+    // Get.put(ForgetPasswordController()).sendOtp(email: email);
   }
 }

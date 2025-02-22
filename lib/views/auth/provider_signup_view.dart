@@ -14,8 +14,9 @@ class ProviderSignupView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(SignupController());
+    // Get.put(SignupController());
     return GetBuilder<SignupController>(
+      init: SignupController(),
       builder: (controller) => Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(
@@ -90,9 +91,17 @@ class ProviderSignupView extends StatelessWidget {
                           Logger().f(controller.currentStep);
                           if (controller.currentStep ==
                               controller.providerSteps.length - 1) {
-                            return controller.role == "provider"
-                                ? controller.signupProvider()
-                                : controller.signupClient();
+                            return Get.toNamed(
+                              AppRoutes.otp,
+                              arguments: {
+                                'email': controller.emailController.text,
+                                'fromAuth': true,
+                                'role': controller.role,
+                              },
+                            );
+                            // controller.role == "provider"
+                            //     ? controller.signupProvider()
+                            //     : controller.signupClient();
                           } else {
                             return controller.nextStep;
                           }
