@@ -156,6 +156,7 @@ class EditClientProfileController extends GetxController {
         AppSnackBars.error(message: l.errMsg);
         update();
       }, (r) {
+        Get.back();
         AppSnackBars.success(message: r);
         Get.put(SettingController()).getMenuModel();
         update();

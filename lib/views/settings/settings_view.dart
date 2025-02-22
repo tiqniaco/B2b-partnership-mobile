@@ -17,133 +17,91 @@ class SettingsView extends StatelessWidget {
     Get.put(SettingController());
     return Scaffold(
       body: GetBuilder<SettingController>(
-        builder: (controller) => SafeArea(
-            child: controller.menuModel == null
-                ? Center(child: CircularProgressIndicator())
-                : SingleChildScrollView(
-                    child: Center(
-                      child: Padding(
-                        padding: const EdgeInsets.all(20.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            Container(
-                              height: 60.h,
-                              width: 60.h,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(color: Colors.grey[300]!)),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.network(
-                                  controller.menuModel!.data!.image!,
-                                  fit: BoxFit.cover,
+        builder: (controller) => Stack(
+          children: [
+            SafeArea(
+                child: controller.menuModel == null
+                    ? Center(child: CircularProgressIndicator())
+                    : SingleChildScrollView(
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 60.h,
+                                  width: 60.h,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      border:
+                                          Border.all(color: Colors.grey[300]!)),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(8),
+                                    child: Image.network(
+                                      controller.menuModel!.data!.image!,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            ),
-                            Gap(10),
-                            Text(
-                              controller.menuModel!.data!.name!,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15.sp),
-                            ),
-                            Text(
-                              "+${controller.menuModel!.data!.countryCode}${controller.menuModel!.data!.phone}",
-                              style:
-                                  TextStyle(color: greyColor, fontSize: 15.sp),
-                            ),
-                            Gap(10),
-                            GridView(
-                              physics: NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              gridDelegate:
-                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      mainAxisSpacing: 15,
-                                      crossAxisSpacing: 15,
-                                      childAspectRatio: 9 / 4.1),
-                              children: [
-                                boxWidget(
-                                    Icons.work_outline,
-                                    Colors.amber,
-                                    controller.menuModel!.jobsCount.toString(),
-                                    "Jobs", () {
-                                  Get.toNamed(AppRoutes.getRequestServices);
-                                }),
-                                boxWidget(
-                                    Icons.shopping_cart_outlined,
-                                    Colors.blue,
-                                    controller.menuModel!.shoppingCount
-                                        .toString(),
-                                    "Shopping", () {
-                                  Get.toNamed(AppRoutes.getRequestServices);
-                                }),
-                                boxWidget(
-                                    CupertinoIcons.news,
-                                    Colors.green,
-                                    controller.menuModel!.servicesCount
-                                        .toString(),
-                                    "Post Services", () {
-                                  Get.toNamed(AppRoutes.getRequestServices);
-                                }),
-                                boxWidget(
-                                    Icons.headset_mic_outlined,
-                                    Colors.red,
-                                    controller.menuModel!.complaintsCount
-                                        .toString(),
-                                    "Complaints", () {
-                                  Get.toNamed(AppRoutes.getRequestServices);
-                                })
-                              ],
-                            ),
-                            Gap(20.h),
-                            FractionallySizedBox(
-                              widthFactor: 10,
-                              child: Divider(
-                                thickness: 5,
-                                color: borderColor.withAlpha(40),
-                              ),
-                            ),
-                            Gap(10.h),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
+                                Gap(10),
                                 Text(
-                                  "Personal information",
+                                  controller.menuModel!.data!.name!,
                                   style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 17.sp),
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15.sp),
                                 ),
-                                Gap(20),
-                                rowWidget("Email",
-                                    controller.menuModel!.data!.email!),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor,
-                                  ),
+                                Text(
+                                  "+${controller.menuModel!.data!.countryCode}${controller.menuModel!.data!.phone}",
+                                  style: TextStyle(
+                                      color: greyColor, fontSize: 15.sp),
                                 ),
-                                rowWidget(
-                                    "City",
-                                    translateDatabase(
-                                        arabic: controller
-                                            .menuModel!.data!.governmentNameAr!,
-                                        english: controller.menuModel!.data!
-                                            .governmentNameEn!)),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor,
-                                  ),
+                                Gap(10),
+                                GridView(
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                          crossAxisCount: 2,
+                                          mainAxisSpacing: 15,
+                                          crossAxisSpacing: 15,
+                                          childAspectRatio: 9 / 4.1),
+                                  children: [
+                                    boxWidget(
+                                        Icons.work_outline,
+                                        Colors.amber,
+                                        controller.menuModel!.jobsCount
+                                            .toString(),
+                                        "Jobs", () {
+                                      Get.toNamed(AppRoutes.getRequestServices);
+                                    }),
+                                    boxWidget(
+                                        Icons.shopping_cart_outlined,
+                                        Colors.blue,
+                                        controller.menuModel!.shoppingCount
+                                            .toString(),
+                                        "Shopping", () {
+                                      Get.toNamed(AppRoutes.getRequestServices);
+                                    }),
+                                    boxWidget(
+                                        CupertinoIcons.news,
+                                        Colors.green,
+                                        controller.menuModel!.servicesCount
+                                            .toString(),
+                                        "Post Services", () {
+                                      Get.toNamed(AppRoutes.getRequestServices);
+                                    }),
+                                    boxWidget(
+                                        Icons.headset_mic_outlined,
+                                        Colors.red,
+                                        controller.menuModel!.complaintsCount
+                                            .toString(),
+                                        "Complaints", () {
+                                      Get.toNamed(AppRoutes.complaints);
+                                    })
+                                  ],
                                 ),
-                                rowWidget(
-                                    "Country",
-                                    translateDatabase(
-                                        arabic: controller
-                                            .menuModel!.data!.countryNameAr!,
-                                        english: controller
-                                            .menuModel!.data!.countryNameEn!)),
-                                Gap(30),
+                                Gap(20.h),
                                 FractionallySizedBox(
                                   widthFactor: 10,
                                   child: Divider(
@@ -151,73 +109,154 @@ class SettingsView extends StatelessWidget {
                                     color: borderColor.withAlpha(40),
                                   ),
                                 ),
-                                Gap(20),
-                                Text(
-                                  "Other Services",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 17.sp),
-                                ),
-                                Gap(20),
-                                rowWithArrow(
-                                  CupertinoIcons.person,
-                                  "Edit Profile",
-                                  () {
-                                    Get.toNamed(
-                                      AppRoutes.editClientProfile,
-                                      arguments: {
-                                        'model': controller.menuModel!.data,
+                                Gap(10.h),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Personal information",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 17.sp),
+                                    ),
+                                    Gap(20),
+                                    rowWidget("Email",
+                                        controller.menuModel!.data!.email!),
+                                    FractionallySizedBox(
+                                      widthFactor: 10,
+                                      child: Divider(
+                                        color: borderColor,
+                                      ),
+                                    ),
+                                    rowWidget(
+                                        "City",
+                                        translateDatabase(
+                                            arabic: controller.menuModel!.data!
+                                                .governmentNameAr!,
+                                            english: controller.menuModel!.data!
+                                                .governmentNameEn!)),
+                                    FractionallySizedBox(
+                                      widthFactor: 10,
+                                      child: Divider(
+                                        color: borderColor,
+                                      ),
+                                    ),
+                                    rowWidget(
+                                        "Country",
+                                        translateDatabase(
+                                            arabic: controller.menuModel!.data!
+                                                .countryNameAr!,
+                                            english: controller.menuModel!.data!
+                                                .countryNameEn!)),
+                                    Gap(30),
+                                    FractionallySizedBox(
+                                      widthFactor: 10,
+                                      child: Divider(
+                                        thickness: 5,
+                                        color: borderColor.withAlpha(40),
+                                      ),
+                                    ),
+                                    Gap(20),
+                                    Text(
+                                      "Other Services",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 17.sp),
+                                    ),
+                                    Gap(20),
+                                    rowWithArrow(
+                                      CupertinoIcons.person,
+                                      "Edit Profile",
+                                      () {
+                                        Get.toNamed(
+                                          AppRoutes.editClientProfile,
+                                          arguments: {
+                                            'model': controller.menuModel!.data,
+                                          },
+                                        );
                                       },
-                                    );
-                                  },
-                                ),
-                                Gap(8),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor,
-                                  ),
-                                ),
-                                Gap(8),
-                                rowWithArrow(
-                                  CupertinoIcons.padlock,
-                                  "Change Password",
-                                  () {
-                                    Get.toNamed(AppRoutes.changePassword);
-                                  },
-                                ),
-                                Gap(8),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor,
-                                  ),
-                                ),
-                                Gap(8),
-                                rowWithArrow(CupertinoIcons.delete_simple,
-                                    "Remove Account", () {}),
-                                Gap(8),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor,
-                                  ),
-                                ),
-                                Gap(8),
-                                rowWithArrow(
-                                  Icons.logout_rounded,
-                                  "Logout",
-                                  () {
-                                    logout();
-                                  },
+                                    ),
+                                    Gap(8),
+                                    FractionallySizedBox(
+                                      widthFactor: 10,
+                                      child: Divider(
+                                        color: borderColor,
+                                      ),
+                                    ),
+                                    Gap(8),
+                                    rowWithArrow(
+                                      CupertinoIcons.padlock,
+                                      "Change Password",
+                                      () {
+                                        Get.toNamed(AppRoutes.changePassword);
+                                      },
+                                    ),
+                                    Gap(8),
+                                    FractionallySizedBox(
+                                      widthFactor: 10,
+                                      child: Divider(
+                                        color: borderColor,
+                                      ),
+                                    ),
+                                    Gap(8),
+                                    rowWithArrow(
+                                      CupertinoIcons.delete_simple,
+                                      "Remove Account",
+                                      () {
+                                        controller.removeAccountDialog();
+                                      },
+                                    ),
+                                    Gap(8),
+                                    FractionallySizedBox(
+                                      widthFactor: 10,
+                                      child: Divider(
+                                        color: borderColor,
+                                      ),
+                                    ),
+                                    Gap(8),
+                                    rowWithArrow(
+                                      Icons.logout_rounded,
+                                      "Logout",
+                                      () {
+                                        logoutDialog();
+                                      },
+                                    ),
+                                  ],
                                 ),
                               ],
                             ),
+                          ),
+                        ),
+                      )),
+            if (controller.removeAccountLoading)
+              Container(
+                width: 1.sw,
+                height: 1.sh,
+                color: Colors.black26.withAlpha(80),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ...[
+                      Container(
+                        width: 80.w,
+                        height: 80.w,
+                        decoration: BoxDecoration(
+                          color: whiteColor,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CircularProgressIndicator(),
                           ],
                         ),
-                      ),
-                    ),
-                  )),
+                      )
+                    ],
+                  ],
+                ),
+              ),
+          ],
+        ),
       ),
     );
   }

@@ -10,7 +10,7 @@ import '../constants/app_constants.dart';
 import '/core/network/api_constance.dart';
 import '/core/services/app_prefs.dart';
 
-Future<void> logout() async {
+Future<void> logoutDialog() async {
   Get.defaultDialog<bool>(
     title: 'Logout?'.tr,
     middleText: 'Are you sure you want to logout?'.tr,
@@ -18,12 +18,12 @@ Future<void> logout() async {
     confirmTextColor: whiteColor,
     textCancel: 'No'.tr,
     onConfirm: () {
-      _logout();
+      logout();
     },
   );
 }
 
-Future<void> _logout() async {
+Future<void> logout() async {
   /// Clear all shared preferences
   await Get.find<AppPreferences>().clear();
   Get.offAllNamed(AppRoutes.initial);

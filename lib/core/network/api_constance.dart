@@ -22,11 +22,11 @@ class ApiConstance {
   static const String loginWithGoogle = 'patient/auth/login-with-google';
   static const String profile = 'patient/profile';
   static final String updateProfile = 'patient/$kUserId';
-  static final String deleteAccount = 'patient/$kUserId';
   static const String resetPassword = 'auth/reset-password';
   static const String forgetPassword = 'auth/forget-password';
   static const String sendOTP = 'send-otp';
   static const String verifyOTP = 'verify-otp';
+  static const String deleteAccount = 'auth/delete-account';
 
   //client
   static String getClientMenu(String id) => '/clients/$id';
@@ -75,4 +75,8 @@ class ApiConstance {
 
   // Client Profile
   static String updateClientProfile(String id) => 'clients/$id/update';
+
+  // Complaints
+  static String addComplaint = 'complaints';
+  static String getComplaints = 'complaints';
 }
