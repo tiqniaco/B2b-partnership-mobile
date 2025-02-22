@@ -47,10 +47,12 @@ class ApiConstance {
   static String getServiceDetails(String id) => 'provider-service/$id';
   static const String getReviewServices = 'provider-service-reviews';
   static const String getFeatureServices = 'provider-service-features';
+  static const String getAllPendingServices = 'request-services';
 
   //provider
   static String getProviderProfileDetails(String id) => 'providers/$id';
   static String getProviderServices(String id) => 'providers/$id/services';
+  static String getProviderMenu(String id) => 'providers/$id';
   static String getServicesInCategory(String id) =>
       'specializations/$id/services';
   static String getProvidersInCategory = 'specializations/providers';

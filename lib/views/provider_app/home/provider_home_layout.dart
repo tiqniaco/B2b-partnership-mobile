@@ -79,7 +79,7 @@ class _ProviderHomeLayoutState extends State<ProviderHomeLayout>
                   color: controller.currentIndex == 3
                       ? primaryColor
                       : unSelectedBNavColor),
-              title: "Saved",
+              title: "My Services",
             ),
             TabItem(
               icon: SvgPicture.asset("assets/svgs/setting.svg",

@@ -1,9 +1,11 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/provider/setting/provider_setting_controller.dart';
+import 'package:b2b_partenership/core/functions/logout.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -142,6 +144,108 @@ class ProviderSettingView extends StatelessWidget {
                                             .menuModel!.data!.countryNameAr!,
                                         english: controller
                                             .menuModel!.data!.countryNameEn!)),
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    color: borderColor.withAlpha(40),
+                                  ),
+                                ),
+                                rowWidget(
+                                    "Category",
+                                    translateDatabase(
+                                        arabic: controller.menuModel!.data!
+                                            .specializationNameAr!,
+                                        english: controller.menuModel!.data!
+                                            .specializationNameEn!)),
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    color: borderColor.withAlpha(40),
+                                  ),
+                                ),
+                                rowWidget(
+                                    "Sub Category",
+                                    translateDatabase(
+                                        arabic: controller.menuModel!.data!
+                                            .subSpecializationNameAr!,
+                                        english: controller.menuModel!.data!
+                                            .subSpecializationNameEn!)),
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    color: borderColor.withAlpha(40),
+                                  ),
+                                ),
+                                rowWidget(
+                                    "Company Type",
+                                    translateDatabase(
+                                        arabic: controller.menuModel!.data!
+                                            .providerTypeNameAr!,
+                                        english: controller.menuModel!.data!
+                                            .providerTypeNameEn!)),
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    color: borderColor.withAlpha(40),
+                                  ),
+                                ),
+                                Gap(10),
+                                Text(
+                                  "Commercial Papers",
+                                  style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                                Gap(20),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  height: 200,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: PDF().cachedFromUrl(
+                                      controller
+                                          .menuModel!.data!.commercialRegister!,
+                                      placeholder: (progress) =>
+                                          Center(child: Text('loading...')),
+                                      errorWidget: (error) =>
+                                          Center(child: Text(error.toString())),
+                                    ),
+                                  ),
+                                ),
+                                Gap(15),
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    color: borderColor.withAlpha(40),
+                                  ),
+                                ),
+                                Gap(10),
+                                Text(
+                                  "Tax Papers",
+                                  style: TextStyle(
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w300),
+                                ),
+                                Gap(20),
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    // border: Border.all(color: primaryColor, width: 2)
+                                  ),
+                                  height: 200,
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: PDF().cachedFromUrl(
+                                      controller.menuModel!.data!.taxCard!,
+                                      placeholder: (progress) =>
+                                          Center(child: Text('loading...')),
+                                      errorWidget: (error) =>
+                                          Center(child: Text(error.toString())),
+                                    ),
+                                  ),
+                                ),
                                 Gap(30),
                                 FractionallySizedBox(
                                   widthFactor: 10,
@@ -188,8 +292,10 @@ class ProviderSettingView extends StatelessWidget {
                                   ),
                                 ),
                                 Gap(8),
-                                rowWithArrow(
-                                    Icons.logout_rounded, "Logout", () {}),
+                                rowWithArrow(Icons.logout_rounded, "Logout",
+                                    () {
+                                  logout();
+                                }),
                               ],
                             ),
                           ],

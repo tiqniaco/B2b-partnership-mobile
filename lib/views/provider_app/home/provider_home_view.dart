@@ -1,17 +1,15 @@
 import 'package:b2b_partenership/app_routes.dart';
-import 'package:b2b_partenership/controller/home/home_client_layout_controller.dart';
 import 'package:b2b_partenership/controller/provider/home/provider_home_controller.dart';
+import 'package:b2b_partenership/controller/provider/home/provider_home_layout_controller.dart';
 import 'package:b2b_partenership/controller/provider/setting/provider_setting_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/widgets/home/banner_widget.dart';
 import 'package:b2b_partenership/widgets/home/category_widget.dart';
 import 'package:b2b_partenership/widgets/home/home_row_widget.dart';
 import 'package:b2b_partenership/widgets/home/home_slider.dart';
-import 'package:b2b_partenership/widgets/home/job_banner_widget.dart';
 import 'package:b2b_partenership/widgets/home/provider_widget.dart';
 import 'package:b2b_partenership/widgets/home/search_widget.dart';
-import 'package:b2b_partenership/widgets/home/service_banner_widget.dart';
-import 'package:b2b_partenership/widgets/home/shop_banner_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -79,7 +77,8 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: SearchWidget(
                   onTap: () {
-                    Get.put(HomeClintLayoutController(this)).onBNavPressed(2);
+                    Get.put(ProviderHomeLayoutController(this))
+                        .onBNavPressed(2);
                   },
                 ),
               ),
@@ -153,7 +152,16 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
                 child: Divider(),
               ),
               Gap(25),
-              ServiceBannerWidget(),
+              BannerWidget(
+                image: "assets/images/man.jpeg",
+                title: "Freelance Services!!",
+                onPressed: () {
+                  Get.put(ProviderHomeLayoutController(this)).onBNavPressed(1);
+                },
+                description:
+                    "You can browse the services available \n for freelance work",
+                buttonTitle: 'View Now',
+              ),
               Gap(15),
               FractionallySizedBox(
                 widthFactor: 1,
@@ -196,7 +204,16 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
                 child: Divider(),
               ),
               Gap(25),
-              JobBannerWidget(),
+              BannerWidget(
+                image: "assets/images/job.jpeg",
+                title: "Need employees?",
+                onPressed: () {
+                  // Get.toNamed(AppRoutes.getRequestServices);
+                },
+                description: "You can add the available\njob for recruitment",
+                buttonTitle: 'Add Now',
+              ),
+              //JobBannerWidget(),
               Gap(55),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -234,7 +251,15 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
                 child: Divider(),
               ),
               Gap(25),
-              ShopBannerWidget(),
+              BannerWidget(
+                image: "assets/images/product.jpeg",
+                title: "Shopping?",
+                onPressed: () {
+                  Get.toNamed(AppRoutes.shop);
+                },
+                description: "Order whatever you need\nfrom the shop",
+                buttonTitle: 'Order Now',
+              ),
               Gap(45),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),

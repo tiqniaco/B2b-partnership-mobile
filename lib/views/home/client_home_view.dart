@@ -4,14 +4,12 @@ import 'package:b2b_partenership/controller/home/home_client_layout_controller.d
 import 'package:b2b_partenership/controller/settings/setting_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/widgets/home/banner_widget.dart';
 import 'package:b2b_partenership/widgets/home/category_widget.dart';
 import 'package:b2b_partenership/widgets/home/home_row_widget.dart';
 import 'package:b2b_partenership/widgets/home/home_slider.dart';
-import 'package:b2b_partenership/widgets/home/job_banner_widget.dart';
 import 'package:b2b_partenership/widgets/home/provider_widget.dart';
 import 'package:b2b_partenership/widgets/home/search_widget.dart';
-import 'package:b2b_partenership/widgets/home/service_banner_widget.dart';
-import 'package:b2b_partenership/widgets/home/shop_banner_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -153,7 +151,16 @@ class _ClientHomeViewState extends State<ClientHomeView>
                 child: Divider(),
               ),
               Gap(25),
-              ServiceBannerWidget(),
+              BannerWidget(
+                image: "assets/images/man.jpeg",
+                title: "Need Custom Service?",
+                onPressed: () {
+                  Get.toNamed(AppRoutes.getRequestServices);
+                },
+                description: "you can post your custom services\nrequest",
+                buttonTitle: 'Post Now',
+              ),
+              // ServiceBannerWidget(),
               Gap(15),
               FractionallySizedBox(
                 widthFactor: 1,
@@ -196,7 +203,16 @@ class _ClientHomeViewState extends State<ClientHomeView>
                 child: Divider(),
               ),
               Gap(25),
-              JobBannerWidget(),
+              BannerWidget(
+                image: "assets/images/job.jpeg",
+                title: "Are you looking for a job?",
+                onPressed: () {
+                  Get.toNamed(AppRoutes.getRequestServices);
+                },
+                description: "See our Employment\nopportunities",
+                buttonTitle: 'View Now',
+              ),
+              //JobBannerWidget(),
               Gap(55),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -234,7 +250,16 @@ class _ClientHomeViewState extends State<ClientHomeView>
                 child: Divider(),
               ),
               Gap(25),
-              ShopBannerWidget(),
+              BannerWidget(
+                image: "assets/images/product.jpeg",
+                title: "Shopping?",
+                onPressed: () {
+                  Get.toNamed(AppRoutes.getRequestServices);
+                },
+                description: "Order whatever you need\nfrom the shop",
+                buttonTitle: 'Order Now',
+              ),
+              //ShopBannerWidget(),
               Gap(45),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -265,11 +290,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                                   controller.topUAE[index].providerId!);
                             }),
                       ))),
-              TextButton(
-                  onPressed: () {
-                    Get.toNamed(AppRoutes.providerHomeLayout);
-                  },
-                  child: Text("PROVIDER")),
+
               Gap(50)
             ],
           ),

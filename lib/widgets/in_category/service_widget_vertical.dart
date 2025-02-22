@@ -95,11 +95,10 @@ class ServiceWidgetVertical extends StatelessWidget {
                                                             5)))),
                                         onPressed: () {},
                                         child: Text(
-                                          "Book Now",
+                                          "View Details",
                                           style: TextStyle(fontSize: 11.sp),
                                         )),
                                   )
-                               
                                 ],
                               )
                             ],
@@ -107,7 +106,6 @@ class ServiceWidgetVertical extends StatelessWidget {
                         ),
                       ],
                     ),
-                    // Gap(10),
                   ],
                 ),
               ),

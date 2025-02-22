@@ -1,9 +1,8 @@
-import 'dart:io';
-
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
-import 'package:b2b_partenership/core/services/app_prefs.dart';
+import 'package:b2b_partenership/models/city_model.dart';
+import 'package:b2b_partenership/models/country_model.dart';
 import 'package:b2b_partenership/models/service_request_model.dart';
 import 'package:b2b_partenership/models/specialize_model.dart';
 import 'package:b2b_partenership/models/sub_specialize_model.dart';
@@ -12,45 +11,44 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 class GetProviderRequestServiceController extends GetxController {
-  // late CountryModel selectedCountry;
-  // late CityModel selectedCity;
-  late SpecializeModel selectedSpecialization;
-  late SubSpecializeModel selectedSubSpecialization;
+  CountryModel? selectedCountry;
+  CityModel? selectedCity;
+  SpecializeModel? selectedSpecialization;
+  SubSpecializeModel? selectedSubSpecialization;
 
-  // List<CountryModel> countries = [];
-  // List<CityModel> cities = [];
+  List<CountryModel> countries = [];
+  List<CityModel> cities = [];
   List<ServiceRequestModel> services = [];
   List<SpecializeModel> specializations = [];
   List<SubSpecializeModel> subSpecializations = [];
 
   StatusRequest statusRequest = StatusRequest.loading;
-  // StatusRequest statusRequestCity = StatusRequest.loading;
-  // StatusRequest statusRequestCountry = StatusRequest.loading;
+  StatusRequest statusRequestCity = StatusRequest.loading;
+  StatusRequest statusRequestCountry = StatusRequest.loading;
   StatusRequest statusRequestSpecialization = StatusRequest.loading;
   StatusRequest statusRequestSupSpecialization = StatusRequest.loading;
-  File? imageFile;
 
   @override
   Future<void> onInit() async {
-    // await getCountries();
-    // getCities();
     getServices();
+    await getCountries();
     await getSpecialization();
-    getSupSpecialization();
+
     super.onInit();
   }
 
-  // onCountryChanged(value) {
-  //   selectedCountry = value;
-  //   debugPrint('Selected Country: $value');
-  //   update();
-  // }
+  onCountryChanged(value) {
+    selectedCountry = value;
+    debugPrint('Selected Country: $value');
+    getCities();
+    update();
+  }
 
-  // onCityChanged(value) {
-  //   selectedCity = value;
-  //   debugPrint('Selected city: $value');
-  //   update();
-  // }
+  onCityChanged(value) {
+    selectedCity = value;
+    debugPrint('Selected city: $value');
+    update();
+  }
 
   onSpecializeChanged(value) {
     selectedSpecialization = value;
@@ -84,7 +82,7 @@ class GetProviderRequestServiceController extends GetxController {
       if (r.isEmpty) {
         statusRequestSpecialization = StatusRequest.noData;
       } else {
-        selectedSpecialization = r[0];
+        //selectedSpecialization = r[0];
         statusRequestSpecialization = StatusRequest.success;
       }
     });
@@ -95,7 +93,7 @@ class GetProviderRequestServiceController extends GetxController {
     statusRequestSupSpecialization = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getSupSpecialization,
-        data: {"specialization_id": selectedSpecialization.id},
+        data: {"specialization_id": selectedSpecialization!.id},
         fromJson: (json) {
           return json['data']
               .map<SubSpecializeModel>(
@@ -112,7 +110,7 @@ class GetProviderRequestServiceController extends GetxController {
       if (r.isEmpty) {
         statusRequestSupSpecialization = StatusRequest.noData;
       } else {
-        selectedSubSpecialization = r[0];
+        // selectedSubSpecialization = r[0];
         statusRequestSupSpecialization = StatusRequest.success;
       }
     });
@@ -122,9 +120,15 @@ class GetProviderRequestServiceController extends GetxController {
   Future<void> getServices() async {
     statusRequest = StatusRequest.loading;
     final response = await CustomRequest(
-        path: ApiConstance.getClientServiceRequest(
-            Get.find<AppPreferences>().getUserRoleId()),
-        // data: {"specialization_id": selectedSpecialization.id},
+        path: ApiConstance.getAllPendingServices,
+        data: {
+          if (selectedSpecialization != null)
+            "specialization_id": selectedSpecialization!.id,
+          if (selectedSubSpecialization != null)
+            "sub_specialization_id": selectedSubSpecialization!.id,
+          if (selectedCountry != null) "country_id": selectedCountry!.id,
+          if (selectedCity != null) "government_id": selectedCity!.id,
+        },
         fromJson: (json) {
           return json['data']
               .map<ServiceRequestModel>(
@@ -148,54 +152,54 @@ class GetProviderRequestServiceController extends GetxController {
     update();
   }
 
-  // Future<void> getCountries() async {
-  //   statusRequestCountry = StatusRequest.loading;
-  //   final result = await CustomRequest<List<CountryModel>>(
-  //     path: ApiConstance.countries,
-  //     fromJson: (json) {
-  //       return json['data']
-  //           .map<CountryModel>((element) => CountryModel.fromJson(element))
-  //           .toList(); //. json['data'];
-  //     },
-  //   ).sendGetRequest();
-  //   result.fold((l) {
-  //     statusRequestCountry = StatusRequest.error;
-  //     Logger().e(l.errMsg);
-  //     update();
-  //   }, (r) {
-  //     countries = r;
-  //     selectedCountry = r[0];
-  //     if (r.isEmpty) {
-  //       statusRequestCountry = StatusRequest.noData;
-  //     } else {
-  //       statusRequestCountry = StatusRequest.success;
-  //     }
-  //     update();
-  //   });
-  // }
+  Future<void> getCountries() async {
+    statusRequestCountry = StatusRequest.loading;
+    final result = await CustomRequest<List<CountryModel>>(
+      path: ApiConstance.countries,
+      fromJson: (json) {
+        return json['data']
+            .map<CountryModel>((element) => CountryModel.fromJson(element))
+            .toList(); //. json['data'];
+      },
+    ).sendGetRequest();
+    result.fold((l) {
+      statusRequestCountry = StatusRequest.error;
+      Logger().e(l.errMsg);
+      update();
+    }, (r) {
+      countries = r;
+      //selectedCountry = r[0];
+      if (r.isEmpty) {
+        statusRequestCountry = StatusRequest.noData;
+      } else {
+        statusRequestCountry = StatusRequest.success;
+      }
+      update();
+    });
+  }
 
-  // Future<void> getCities() async {
-  //   statusRequestCity = StatusRequest.loading;
-  //   final response = await CustomRequest(
-  //       path: ApiConstance.cities,
-  //       data: {"country_id": selectedCountry.id},
-  //       fromJson: (json) {
-  //         return json['data']
-  //             .map<CityModel>((city) => CityModel.fromJson(city))
-  //             .toList();
-  //       }).sendGetRequest();
-  //   response.fold((l) {
-  //     statusRequestCity = StatusRequest.error;
-  //   }, (r) {
-  //     cities.clear();
-  //     cities = r;
-  //     if (r.isEmpty) {
-  //       statusRequestCity = StatusRequest.noData;
-  //     } else {
-  //       selectedCity = r[0];
-  //       statusRequestCity = StatusRequest.success;
-  //     }
-  //   });
-  //   update();
-  // }
+  Future<void> getCities() async {
+    statusRequestCity = StatusRequest.loading;
+    final response = await CustomRequest(
+        path: ApiConstance.cities,
+        data: {"country_id": selectedCountry!.id},
+        fromJson: (json) {
+          return json['data']
+              .map<CityModel>((city) => CityModel.fromJson(city))
+              .toList();
+        }).sendGetRequest();
+    response.fold((l) {
+      statusRequestCity = StatusRequest.error;
+    }, (r) {
+      cities.clear();
+      cities = r;
+      if (r.isEmpty) {
+        statusRequestCity = StatusRequest.noData;
+      } else {
+        //selectedCity = r[0];
+        statusRequestCity = StatusRequest.success;
+      }
+    });
+    update();
+  }
 }

@@ -4,13 +4,13 @@ import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
-import 'package:b2b_partenership/models/client_menu_model.dart';
+import 'package:b2b_partenership/models/provider_menu_model.dart';
 
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 class ProviderSettingController extends GetxController {
-  ClientMenuModel? menuModel;
+  ProviderMenuModel? menuModel;
   StatusRequest statusRequest = StatusRequest.loading;
 
   @override
@@ -23,10 +23,10 @@ class ProviderSettingController extends GetxController {
     print("get details .........");
     var id = Get.find<AppPreferences>().getUserRoleId();
     statusRequest = StatusRequest.loading;
-    final result = await CustomRequest<ClientMenuModel>(
-      path: ApiConstance.getClientMenu(id),
+    final result = await CustomRequest<ProviderMenuModel>(
+      path: ApiConstance.getProviderMenu(id),
       fromJson: (json) {
-        return ClientMenuModel.fromJson(json);
+        return ProviderMenuModel.fromJson(json);
       },
     ).sendGetRequest();
     result.fold((l) {
