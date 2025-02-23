@@ -19,9 +19,6 @@ class GetMyServiceController extends GetxController {
   }
 
   Future<void> getServices() async {
-    print("*****************************");
-    print(Get.find<AppPreferences>().getUserRoleId());
-    print("*****************************");
     statusRequestServices = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getProviderServices(

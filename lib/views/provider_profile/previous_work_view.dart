@@ -15,10 +15,11 @@ class PreviousWorkView extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(PreviousDetailsWorkController());
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: whiteColor,
-        ),
-        body: GetBuilder<PreviousDetailsWorkController>(builder: (controller) {
+      appBar: AppBar(
+        backgroundColor: whiteColor,
+      ),
+      body: GetBuilder<PreviousDetailsWorkController>(
+        builder: (controller) {
           return SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -52,6 +53,8 @@ class PreviousWorkView extends StatelessWidget {
               ],
             ),
           );
-        }));
+        },
+      ),
+    );
   }
 }

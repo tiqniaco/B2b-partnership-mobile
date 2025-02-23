@@ -1,4 +1,6 @@
+import 'package:b2b_partenership/core/services/date_time_convertor.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/models/order_model.dart';
 import 'package:b2b_partenership/widgets/orders/print_type.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +8,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 class OrderWidget extends StatelessWidget {
-  const OrderWidget({super.key});
+  const OrderWidget({
+    super.key,
+    required this.orderModel,
+  });
+
+  final OrderModel orderModel;
 
   @override
   Widget build(BuildContext context) {
@@ -18,13 +25,15 @@ class OrderWidget extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            padding: EdgeInsets.all(10),
+            padding: EdgeInsets.all(10.w),
             decoration: BoxDecoration(
-                color: primaryColor,
-                border: Border(bottom: BorderSide(color: borderColor)),
-                borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10),
-                    topRight: Radius.circular(10))),
+              color: primaryColor,
+              border: Border(bottom: BorderSide(color: borderColor)),
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+            ),
             child: Row(
               children: [
                 Text(
@@ -35,7 +44,7 @@ class OrderWidget extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 Text(
-                  "54467",
+                  orderModel.id.toString(),
                   style: TextStyle(
                       color: whiteColor,
                       fontSize: 14.sp,
@@ -43,15 +52,16 @@ class OrderWidget extends StatelessWidget {
                 ),
                 Spacer(),
                 PrintType(
-                  type: "completed",
+                  type: orderModel.status,
                 ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.more_vert,
-                    color: whiteColor,
-                  ),
-                )
+                // IconButton(
+                //   onPressed: () {},
+                //   icon: Icon(
+                //     Icons.more_vert,
+                //     color: whiteColor,
+                //   ),
+                // )
+                Gap(4.w),
               ],
             ),
           ),
@@ -60,21 +70,35 @@ class OrderWidget extends StatelessWidget {
             child: Column(
               children: [
                 Gap(10),
-                rowWidget("Date", "13 gan, 2023", CupertinoIcons.calendar),
+                rowWidget(
+                  "Date",
+                  DateTimeConvertor.formatDate(
+                    orderModel.createdAt,
+                  ),
+                  CupertinoIcons.calendar,
+                ),
                 Gap(10),
                 Divider(
                   color: borderColor,
                 ),
                 Gap(10),
                 rowWidget(
-                    "Schedule", "12:00 am - 10:00 pm", CupertinoIcons.clock),
+                  "Expiry Date",
+                  DateTimeConvertor.formatDate(
+                    orderModel.expirationDate,
+                  ),
+                  CupertinoIcons.clock,
+                ),
                 Gap(10),
                 Divider(
                   color: borderColor,
                 ),
                 Gap(10),
                 rowWidget(
-                    "Billed", "150 \$", CupertinoIcons.money_dollar_circle)
+                  "Billed",
+                  "${orderModel.totalPrice} \$",
+                  CupertinoIcons.money_dollar_circle,
+                )
               ],
             ),
           )

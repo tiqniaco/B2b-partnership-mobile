@@ -1,6 +1,9 @@
+import 'package:b2b_partenership/app_routes.dart';
+import 'package:b2b_partenership/controller/home/home_client_layout_controller.dart';
 import 'package:b2b_partenership/controller/in_category/providers_in_category_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/views/search/search_view.dart';
 import 'package:b2b_partenership/widgets/home/provider_widget.dart';
 import 'package:b2b_partenership/widgets/home/search_widget.dart';
 import 'package:b2b_partenership/widgets/home/sub_category_widget.dart';
@@ -9,9 +12,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class ProvidersInCategories extends StatelessWidget {
+class ProvidersInCategories extends StatefulWidget {
   const ProvidersInCategories({super.key});
 
+  @override
+  State<ProvidersInCategories> createState() => _ProvidersInCategoriesState();
+}
+
+class _ProvidersInCategoriesState extends State<ProvidersInCategories>
+    with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     Get.put(ProvidersInCategoryController());
@@ -72,7 +81,11 @@ class ProvidersInCategories extends StatelessWidget {
             Gap(25),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: SearchWidget(),
+              child: SearchWidget(
+                onTap: () {
+                  Get.toNamed(AppRoutes.search);
+                },
+              ),
             ),
             Gap(5),
             FractionallySizedBox(

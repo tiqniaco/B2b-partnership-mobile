@@ -70,10 +70,10 @@ class SettingsView extends StatelessWidget {
                                           child: CircleAvatar(
                                             radius: 20.sp,
                                             backgroundColor:
-                                                primaryColor.withAlpha(30),
+                                                blackColor.withAlpha(30),
                                             child: Icon(
                                               FontAwesomeIcons.bell,
-                                              color: primaryColor,
+                                              color: blackColor,
                                               size: 20.sp,
                                             ),
                                           ),
@@ -119,7 +119,7 @@ class SettingsView extends StatelessWidget {
                                         controller.menuModel!.shoppingCount
                                             .toString(),
                                         "Shopping", () {
-                                      Get.toNamed(AppRoutes.getRequestServices);
+                                      Get.toNamed(AppRoutes.shop);
                                     }),
                                     boxWidget(
                                         CupertinoIcons.news,

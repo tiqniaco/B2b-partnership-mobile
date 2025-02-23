@@ -1,4 +1,5 @@
 import 'package:b2b_partenership/controller/orders/orders_controller.dart';
+import 'package:b2b_partenership/core/enums/store_order_status_enum.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,19 +26,21 @@ class OrderFilter extends StatelessWidget {
               border: Border.all(color: borderColor),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: DropdownButton<String>(
+            child: DropdownButton<StoreOrderStatusEnum>(
               underline: SizedBox.shrink(),
               value: controller.selectedStatus,
-              items: controller.orderStatus.map((String status) {
-                return DropdownMenuItem<String>(
+              items: StoreOrderStatusEnum.values.map((
+                StoreOrderStatusEnum status,
+              ) {
+                return DropdownMenuItem<StoreOrderStatusEnum>(
                   value: status,
                   child: Text(
-                    status,
+                    status.text,
                     style: TextStyle(color: greyColor),
                   ),
                 );
               }).toList(),
-              onChanged: (String? newValue) {
+              onChanged: (StoreOrderStatusEnum? newValue) {
                 controller.onStatusChanged(newValue!);
               },
             ),

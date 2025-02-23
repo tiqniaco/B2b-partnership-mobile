@@ -26,6 +26,7 @@ import 'package:get/get.dart';
 
 import 'views/complaints/complaints_view.dart';
 import 'views/notifications/views/notification_view.dart';
+import 'views/search/search_view.dart';
 import 'views/service_request/service_request_details.dart';
 import 'views/shop/shop_product_details_view.dart';
 
@@ -81,6 +82,8 @@ class AppRoutes {
 
   // Notification
   static const String notification = '/notification';
+
+  static const String search = '/search';
 
   static final List<GetPage<dynamic>> pages = [
     // base
@@ -216,6 +219,10 @@ class AppRoutes {
     GetPage(
       name: notification,
       page: () => const NotificationView(),
+    ),
+    GetPage(
+      name: search,
+      page: () => SearchView(),
     ),
   ];
 }
