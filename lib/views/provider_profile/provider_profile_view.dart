@@ -156,13 +156,14 @@ class ProviderProfileView extends StatelessWidget {
                                         left: 10, bottom: 10, right: 10),
                                     alignment: Alignment.center,
                                     decoration: BoxDecoration(
-                                        border: Border(
-                                      bottom: BorderSide(
-                                          width: 2,
-                                          color: controller.isAbout
-                                              ? primaryColor
-                                              : whiteColor),
-                                    )),
+                                      border: Border(
+                                        bottom: BorderSide(
+                                            width: 2,
+                                            color: controller.isAbout
+                                                ? primaryColor
+                                                : whiteColor),
+                                      ),
+                                    ),
                                     child: Text(
                                       "About".tr,
                                       style: TextStyle(

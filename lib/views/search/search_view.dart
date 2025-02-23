@@ -18,104 +18,126 @@ class SearchView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Get.put(SearchControllerIM());
-    return Scaffold(
-      body: GetBuilder<SearchControllerIM>(builder: (controller) {
-        return SafeArea(
-            child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  TextFormField(
-                    decoration: InputDecoration(
-                        filled: true,
-                        fillColor: borderColor.withAlpha(30),
-                        contentPadding: EdgeInsets.all(14),
-                        hintStyle: TextStyle(fontSize: 14.sp),
-                        hintText: "Search ...",
-                        suffixIcon: InkWell(
-                          onTap: () {
-                            controller.search();
-                          },
-                          child: Icon(
-                            Icons.search,
-                            color: greyColor,
-                          ),
-                        )),
+    return GetBuilder<SearchControllerIM>(builder: (controller) {
+      return Scaffold(
+        appBar: AppBar(
+          backgroundColor: whiteColor,
+          title: TextFormField(
+            decoration: InputDecoration(
+                filled: true,
+                fillColor: borderColor.withAlpha(30),
+                contentPadding: EdgeInsets.all(14),
+                hintStyle: TextStyle(fontSize: 14.sp),
+                hintText: "Search ...",
+                suffixIcon: InkWell(
+                  onTap: () {
+                    controller.search();
+                  },
+                  child: Icon(
+                    Icons.search,
+                    color: greyColor,
                   ),
-                  Gap(15),
-                  SizedBox(
-                    height: 40,
-                    child: GridView(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 1,
-                          mainAxisSpacing: 10,
-                          childAspectRatio: 3.4 / 9.7),
-                      scrollDirection: Axis.horizontal,
-                      children: [
-                        customWidget(Icons.star_border_rounded, "Rating", () {
-                          showRatingSheet(context);
-                        }),
-                        customWidget(Icons.location_on_outlined, "Location",
-                            () {
-                          showLocationSheet(context);
-                        }),
-                        customWidget(Icons.category_outlined, "Category", () {
-                          showCategorySheet(context);
-                        }),
-                        customWidget(CupertinoIcons.refresh_thin, "Reset", () {
-                          controller.resetFunction();
-                        })
-                      ],
+                )),
+          ),
+        ),
+        body: Form(
+          key: controller.formKey,
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // TextFormField(
+                    //   decoration: InputDecoration(
+                    //       filled: true,
+                    //       fillColor: borderColor.withAlpha(30),
+                    //       contentPadding: EdgeInsets.all(14),
+                    //       hintStyle: TextStyle(fontSize: 14.sp),
+                    //       hintText: "Search ...",
+                    //       suffixIcon: InkWell(
+                    //         onTap: () {
+                    //           controller.search();
+                    //         },
+                    //         child: Icon(
+                    //           Icons.search,
+                    //           color: greyColor,
+                    //         ),
+                    //       )),
+                    // ),
+                    Gap(15),
+                    SizedBox(
+                      height: 40,
+                      child: GridView(
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 1,
+                            mainAxisSpacing: 10,
+                            childAspectRatio: 3.4 / 9.7),
+                        scrollDirection: Axis.horizontal,
+                        children: [
+                          customWidget(Icons.star_border_rounded, "Rating", () {
+                            showRatingSheet(context);
+                          }),
+                          customWidget(Icons.location_on_outlined, "Location",
+                              () {
+                            showLocationSheet(context);
+                          }),
+                          customWidget(Icons.category_outlined, "Category", () {
+                            showCategorySheet(context);
+                          }),
+                          customWidget(CupertinoIcons.refresh_thin, "Reset",
+                              () {
+                            controller.resetFunction();
+                          })
+                        ],
+                      ),
                     ),
-                  ),
-                  Gap(10),
-                  controller.searchList.isNotEmpty
-                      ? Text(
-                          "${controller.searchList.length} provider",
-                          style: TextStyle(
-                              fontSize: 15.sp, fontWeight: FontWeight.normal),
-                        )
-                      : Text(
-                          "${controller.topProviders.length} provider",
-                          style: TextStyle(
-                              fontSize: 15.sp, fontWeight: FontWeight.normal),
-                        ),
-                  Gap(10),
-                ],
+                    Gap(10),
+                    controller.searchList.isNotEmpty
+                        ? Text(
+                            "${controller.searchList.length} provider",
+                            style: TextStyle(
+                                fontSize: 15.sp, fontWeight: FontWeight.normal),
+                          )
+                        : Text(
+                            "${controller.topProviders.length} provider",
+                            style: TextStyle(
+                                fontSize: 15.sp, fontWeight: FontWeight.normal),
+                          ),
+                    Gap(10),
+                  ],
+                ),
               ),
-            ),
-            Expanded(
-                child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 15,
-                  crossAxisSpacing: 10,
-                  childAspectRatio: 6 / 9.8),
-              scrollDirection: Axis.vertical,
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              itemCount: controller.searchList.isNotEmpty
-                  ? controller.searchList.length
-                  : controller.topProviders.length,
-              itemBuilder: (context, index) => ProviderWidget(
-                  provider: controller.searchList.isNotEmpty
-                      ? controller.searchList[index]
-                      : controller.topProviders[index],
-                  toggleFavorite: () {
-                    controller.toggleFavorites(controller.searchList.isNotEmpty
-                        ? controller.searchList[index].providerId.toString()
-                        : controller.topProviders[index].providerId.toString());
-                  }),
-            )),
-
-
-            
-          ],
-        ));
-      }),
-    );
+              Expanded(
+                  child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 15,
+                    crossAxisSpacing: 10,
+                    childAspectRatio: 6 / 9.8),
+                scrollDirection: Axis.vertical,
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                itemCount: controller.searchList.isNotEmpty
+                    ? controller.searchList.length
+                    : controller.topProviders.length,
+                itemBuilder: (context, index) => ProviderWidget(
+                    provider: controller.searchList.isNotEmpty
+                        ? controller.searchList[index]
+                        : controller.topProviders[index],
+                    toggleFavorite: () {
+                      controller.toggleFavorites(controller
+                              .searchList.isNotEmpty
+                          ? controller.searchList[index].providerId.toString()
+                          : controller.topProviders[index].providerId
+                              .toString());
+                    }),
+              )),
+            ],
+          ),
+        ),
+      );
+    });
   }
 
   Widget customWidget(IconData icon, String title, Function() onTap) {

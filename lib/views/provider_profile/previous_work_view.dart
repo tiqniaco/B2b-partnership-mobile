@@ -1,6 +1,7 @@
 import 'package:b2b_partenership/controller/previous_work/previous_work_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/widgets/provider_profile/work_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -14,10 +15,11 @@ class PreviousWorkView extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(PreviousDetailsWorkController());
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: whiteColor,
-        ),
-        body: GetBuilder<PreviousDetailsWorkController>(builder: (controller) {
+      appBar: AppBar(
+        backgroundColor: whiteColor,
+      ),
+      body: GetBuilder<PreviousDetailsWorkController>(
+        builder: (controller) {
           return SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,6 +53,8 @@ class PreviousWorkView extends StatelessWidget {
               ],
             ),
           );
-        }));
+        },
+      ),
+    );
   }
 }
