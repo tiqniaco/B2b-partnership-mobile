@@ -18,36 +18,38 @@ class PreviousWorkView extends StatelessWidget {
           backgroundColor: whiteColor,
         ),
         body: GetBuilder<PreviousDetailsWorkController>(builder: (controller) {
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              //WorkSlider(),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10.0.w),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Gap(10),
-                    Text(
-                      translateDatabase(
-                          arabic: controller.model.titleAr!,
-                          english: controller.model.titleEn!),
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500, fontSize: 18.sp),
-                    ),
-                    Gap(10),
-                    ReadMoreText(
-                      "${controller.model.description!} ",
-                      style: TextStyle(
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.normal,
+          return SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0.w),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Gap(10),
+                      Text(
+                        translateDatabase(
+                            arabic: controller.model.titleAr!,
+                            english: controller.model.titleEn!),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w500, fontSize: 18.sp),
                       ),
-                    ),
-                    Gap(15),
-                  ],
+                      Gap(10),
+                      ReadMoreText(
+                        "${controller.model.description!} ",
+                        style: TextStyle(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.normal,
+                        ),
+                      ),
+                      Gap(15),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+                SizedBox(height: 500.h, child: WorkImage()),
+              ],
+            ),
           );
         }));
   }
