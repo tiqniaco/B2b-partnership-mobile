@@ -33,11 +33,13 @@ class SearchControllerIM extends GetxController {
   late String role;
   int currentStep = 0;
   StatusRequest statusRequest = StatusRequest.loading;
+  StatusRequest statusRequestSearch = StatusRequest.loading;
   StatusRequest statusRequestCity = StatusRequest.loading;
   StatusRequest statusRequestSpecialization = StatusRequest.loading;
   StatusRequest statusRequestSupSpecialization = StatusRequest.loading;
   late String id;
   bool enable = false;
+  bool isSearch = false;
 
   @override
   Future<void> onInit() async {
@@ -86,10 +88,9 @@ class SearchControllerIM extends GetxController {
 
   Future<void> search() async {
     if (formKey.currentState!.validate()) {
-      statusRequest = StatusRequest.loading;
-
+      statusRequestSearch = StatusRequest.loading;
       final result = await CustomRequest<List<ProviderModel>>(
-          path: ApiConstance.register,
+          path: ApiConstance.search,
           fromJson: (json) {
             return json['data']
                 .map<ProviderModel>(
@@ -97,24 +98,32 @@ class SearchControllerIM extends GetxController {
                 .toList();
           },
           data: {
-            "search": searchController.text,
+            if (searchController.text.isNotEmpty)
+              "search": searchController.text,
             if (selectedSubSpecialization != null)
               "sub_specialization_id": selectedSubSpecialization!.id,
             if (selectedSpecialization != null)
               "specialization_id": selectedSpecialization!.id,
             if (selectedCountry != null) "country_id": selectedCountry!.id,
             if (selectedCity != null) "government_id": selectedCity!.id,
-            if (selectedSpecialization != null) "rate": "provider",
+            if (rating != 0) "rate": rating.toInt(),
           }).sendPostRequest();
       result.fold((l) {
-        statusRequest = StatusRequest.error;
+        statusRequestSearch = StatusRequest.error;
         Logger().e(l.errMsg);
         AppSnackBars.error(message: l.errMsg);
         update();
       }, (r) {
+        isSearch = true;
+        Get.back();
         searchList.clear();
         searchList = r;
-        statusRequest = StatusRequest.success;
+        print(searchList);
+        if (searchList.isEmpty) {
+          statusRequestSearch = StatusRequest.noData;
+        } else {
+          statusRequestSearch = StatusRequest.success;
+        }
         update();
       });
     }
@@ -126,6 +135,10 @@ class SearchControllerIM extends GetxController {
     selectedCountry = null;
     selectedSpecialization = null;
     selectedSubSpecialization = null;
+    searchList.clear();
+    rating = 0;
+    isSearch = false;
+
     update();
   }
 

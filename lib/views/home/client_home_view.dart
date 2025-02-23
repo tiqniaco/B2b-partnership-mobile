@@ -254,12 +254,11 @@ class _ClientHomeViewState extends State<ClientHomeView>
                 image: "assets/images/product.jpeg",
                 title: "Shopping?",
                 onPressed: () {
-                  Get.toNamed(AppRoutes.getRequestServices);
+                  Get.toNamed(AppRoutes.shop);
                 },
                 description: "Order whatever you need\nfrom the shop",
                 buttonTitle: 'Order Now',
               ),
-              //ShopBannerWidget(),
               Gap(45),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -301,7 +300,6 @@ class _ClientHomeViewState extends State<ClientHomeView>
 
   containerWidget(Color bgColor, String title) {
     return Container(
-      // margin: EdgeInsets.all(5),
       height: 130.h,
       width: 94.h,
       decoration: BoxDecoration(
@@ -310,9 +308,8 @@ class _ClientHomeViewState extends State<ClientHomeView>
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-            decoration: BoxDecoration(
-                color: whiteColor, // const Color.fromARGB(255, 239, 229, 229),
-                shape: BoxShape.circle),
+            decoration:
+                BoxDecoration(color: whiteColor, shape: BoxShape.circle),
             child: Image.asset(
               "assets/images/job.png",
               height: 50.h,

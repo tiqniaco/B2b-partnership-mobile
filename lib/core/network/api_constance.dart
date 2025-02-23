@@ -37,6 +37,7 @@ class ApiConstance {
   static const String getTopProviders = 'home/top-providers';
   static const String getNewServices = 'home/new-services';
   static const String getJobs = 'home/new-jobs';
+  static const String search = 'specializations/providers';
 
   // service request
   static const String addServiceRequest = 'request-services';
