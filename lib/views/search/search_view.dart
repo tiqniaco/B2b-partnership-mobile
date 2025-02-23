@@ -109,9 +109,6 @@ class SearchView extends StatelessWidget {
                         : controller.topProviders[index].providerId.toString());
                   }),
             )),
-
-
-            
           ],
         ));
       }),
@@ -217,7 +214,6 @@ class SearchView extends StatelessWidget {
                             color: Colors.amber,
                           ),
                           onRatingUpdate: (rating) {
-                            print(rating);
                             ratingController.onTapRating(rating);
                           },
                         ),
