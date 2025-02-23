@@ -1,15 +1,15 @@
+import 'package:b2b_partenership/core/crud/custom_request.dart';
+import 'package:b2b_partenership/core/enums/status_request.dart';
+import 'package:b2b_partenership/core/enums/store_order_status_enum.dart';
+import 'package:b2b_partenership/core/network/api_constance.dart';
+import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
+import 'package:b2b_partenership/models/order_model.dart';
 import 'package:get/get.dart';
 
 class OrdersController extends GetxController {
-  String selectedStatus = 'All';
-  List<String> orderStatus = [
-    'All',
-    'Pending',
-    'Active',
-    'Complete',
-    "Delivered",
-    "Canceled",
-  ];
+  StatusRequest statusRequest = StatusRequest.loading;
+  StoreOrderStatusEnum selectedStatus = StoreOrderStatusEnum.all;
+  List<OrderModel> orders = [];
 
   String selectedPayment = 'All';
   List<String> paymentStatus = [
@@ -18,13 +18,53 @@ class OrdersController extends GetxController {
     'Complete',
   ];
 
-  onStatusChanged(String newValue) {
+  @override
+  void onInit() async {
+    await getOrders();
+    super.onInit();
+  }
+
+  onStatusChanged(StoreOrderStatusEnum newValue) {
     selectedStatus = newValue;
+    getOrders();
     update();
   }
 
   onPaymentChanged(String newValue) {
     selectedPayment = newValue;
     update();
+  }
+
+  Future<void> getOrders() async {
+    statusRequest = StatusRequest.loading;
+    update();
+    final result = await CustomRequest<List<OrderModel>>(
+      path: ApiConstance.getOrders,
+      data: {
+        if (selectedStatus != StoreOrderStatusEnum.all)
+          'status': selectedStatus.value,
+      },
+      fromJson: (json) {
+        return List<OrderModel>.from(
+          json['data'].map(
+            (x) => OrderModel.fromJson(x),
+          ),
+        );
+      },
+    ).sendGetRequest();
+
+    result.fold((l) {
+      statusRequest = StatusRequest.error;
+      AppSnackBars.error(message: l.errMsg);
+      update();
+    }, (r) {
+      orders = r;
+      if (orders.isEmpty) {
+        statusRequest = StatusRequest.noData;
+      } else {
+        statusRequest = StatusRequest.success;
+      }
+      update();
+    });
   }
 }
