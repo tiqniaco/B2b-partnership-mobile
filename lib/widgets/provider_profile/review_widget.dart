@@ -1,4 +1,5 @@
-import 'package:b2b_partenership/controller/service_details_controller.dart';
+import 'package:b2b_partenership/controller/previous_work/provider_profile_controller.dart';
+import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -9,16 +10,16 @@ class ReviewWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(ServiceDetailsController());
-    return GetBuilder<ServiceDetailsController>(builder: (controller) {
+    Get.put(ProviderProfileController());
+    return GetBuilder<ProviderProfileController>(builder: (controller) {
       return ListView.builder(
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         padding: EdgeInsets.all(16),
-        itemCount: controller.servicesReview.length,
+        itemCount: controller.reviews.length,
         itemBuilder: (context, index) {
-          final review = controller.servicesReview[index];
+          final review = controller.reviews[index];
           return ReviewItem(
             name: review.name!,
             rating: int.parse(review.rating!),
@@ -70,7 +71,7 @@ class ReviewItem extends StatelessWidget {
                     children: List.generate(5, (index) {
                       return Icon(
                         index < rating ? Icons.star : Icons.star_border,
-                        color: Colors.orange,
+                        color: starColor,
                         size: 15.sp,
                       );
                     }),

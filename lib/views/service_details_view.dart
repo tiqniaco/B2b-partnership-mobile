@@ -2,9 +2,9 @@
 
 import 'package:b2b_partenership/controller/service_details_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
+import 'package:b2b_partenership/core/services/date_time_convertor.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/widgets/service_details.dart/feature_widget.dart';
-import 'package:b2b_partenership/widgets/service_details.dart/review_widget.dart';
 import 'package:b2b_partenership/widgets/service_details.dart/seller_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -213,7 +213,8 @@ class ServiceDetailsView extends StatelessWidget {
                                 Row(
                                   children: [
                                     Text(
-                                      controller.servicesReview.length
+                                      DateTimeConvertor.timeAgo(controller
+                                              .service!.data!.createdAt!)
                                           .toString(),
                                       style: TextStyle(
                                           color: Colors.green,
@@ -222,7 +223,7 @@ class ServiceDetailsView extends StatelessWidget {
                                     ),
                                     Gap(7),
                                     Text(
-                                      'Reviews Number',
+                                      'Date',
                                       style: TextStyle(
                                         fontSize: 13.sp,
                                       ),
@@ -336,37 +337,7 @@ class ServiceDetailsView extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: InkWell(
-                                  onTap: () {
-                                    controller.ontapReview();
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.only(bottom: 10),
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                width: 3,
-                                                color: controller.isReviews
-                                                    ? primaryColor
-                                                    : Colors.white))),
-                                    child: Text(
-                                      "Review".tr,
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                        color: controller.isReviews
-                                            ? primaryColor
-                                            : blackColor,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
+                            
                           Divider(
                             height: 0,
                             color: const Color.fromARGB(255, 198, 137, 139),
@@ -384,14 +355,14 @@ class ServiceDetailsView extends StatelessWidget {
                                 )
                               : controller.isSaller
                                   ? SellerWidget()
-                                  : controller.isReviews
-                                      ? ReviewWidget()
+                                  
+                                      
                                       : SizedBox.shrink(),
                         ],
                       ),
-                    ),
+                    
                   ],
-                ),
+                      ))])
               );
       }),
     );

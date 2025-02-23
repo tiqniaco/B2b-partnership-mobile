@@ -1,35 +1,6 @@
-import 'package:b2b_partenership/controller/service_details_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
-import 'package:get/get.dart';
-
-class ProfileServicesWidget extends StatelessWidget {
-  const ProfileServicesWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    Get.put(ServiceDetailsController());
-    return GetBuilder<ServiceDetailsController>(builder: (controller) {
-      return ListView.builder(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        physics: NeverScrollableScrollPhysics(),
-        padding: EdgeInsets.all(16),
-        itemCount: controller.servicesReview.length,
-        itemBuilder: (context, index) {
-          final review = controller.servicesReview[index];
-          return ReviewItem(
-            name: review.review!,
-            rating: int.parse(review.rating!),
-            comment: review.review!,
-            color: controller.getRandomColor(),
-          );
-        },
-      );
-    });
-  }
-}
 
 class ReviewItem extends StatelessWidget {
   final String name;

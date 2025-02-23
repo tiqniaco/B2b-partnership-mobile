@@ -60,6 +60,7 @@ class ApiConstance {
   static String getTopCountriesProv(String id) =>
       'home/country/$id/top-providers';
   static String getWorkImages = '/previous-work-images';
+  static String addReview = '/provider-service-reviews';
 
   // favorite
   static String getUserFavorite = 'favorite-providers';

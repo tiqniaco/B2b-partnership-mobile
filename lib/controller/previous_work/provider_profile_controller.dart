@@ -1,32 +1,140 @@
+import 'dart:math';
+
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
+import 'package:b2b_partenership/core/services/app_prefs.dart';
+import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:b2b_partenership/models/pervious_work_model.dart';
 import 'package:b2b_partenership/models/provider_model.dart';
+import 'package:b2b_partenership/models/review_model.dart';
 import 'package:b2b_partenership/models/services_model.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_pannable_rating_bar/flutter_pannable_rating_bar.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 class ProviderProfileController extends GetxController {
-  bool isAbout = false;
-  bool isServices = true;
-  bool isWork = false;
+  late PageController pageController;
+  int selectedIndex = 0;
   ProviderModel? providerModel;
   late String provId;
+  int rating = 0;
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   StatusRequest statusRequest = StatusRequest.loading;
   StatusRequest statusRequestReview = StatusRequest.loading;
   StatusRequest statusRequestServices = StatusRequest.loading;
   StatusRequest statusRequestPerviousWork = StatusRequest.loading;
   List<ServiceModelData> providerServices = [];
   List<ProviderPerviousWorkModel> previousWork = [];
+  List<ReviewModel> reviews = [];
+  TextEditingController reviewController = TextEditingController();
 
   @override
   onInit() async {
     super.onInit();
+    pageController = PageController(initialPage: selectedIndex);
     provId = Get.arguments['id'];
     await getProvider();
     getServices();
     getPreviousWork();
+    getReview();
+  }
+
+  void addReviewDialog() {
+    Get.dialog(
+      GetBuilder<ProviderProfileController>(
+        init: ProviderProfileController(),
+        builder: (ProviderProfileController controller) {
+          return AlertDialog(
+            title: const Text('Add Review'),
+            content: Form(
+              key: formKey,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextFormField(
+                    controller: reviewController,
+                    decoration:
+                        const InputDecoration(hintText: 'Enter your review'),
+                  ),
+                  const SizedBox(height: 20),
+                  PannableRatingBar(
+                    maxRating: 5,
+                    minRating: 0,
+                    direction: Axis.horizontal,
+                    alignment: WrapAlignment.center,
+                    gestureType: GestureType.tapOnly,
+                    rate: rating.toDouble(),
+                    onChanged: (rating) {
+                      this.rating = rating.ceil();
+
+                      update();
+                    },
+                    items: List.generate(
+                      5,
+                      (index) {
+                        return RatingWidget(
+                          child: Icon(
+                            FontAwesomeIcons.solidStar,
+                            size: 25.w,
+                          ),
+                          selectedColor: starColor,
+                          unSelectedColor: greyColor,
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Get.back(); // close dialog
+                  _addReview();
+                },
+                child: const Text('Submit'),
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  // _addReview() async {
+  //   final result = await _repo.addReview(
+  //     doctorId: int.parse(appointmentModel!.doctorId),
+  //     rating: rating,
+  //     comment:
+  //         reviewController.text == '' ? 'No comment' : reviewController.text,
+  //   );
+  //   result.fold((failure) {
+  //     AppSnackBars.error(message: failure.errMsg);
+  //   }, (data) {
+  //     AppSnackBars.success(message: 'Review added successfully');
+  //   });
+  // }
+
+  @override
+  void onClose() {
+    pageController.dispose();
+    super.onClose();
+  }
+
+  void onPageChanged(int index) {
+    selectedIndex = index;
+    update();
+  }
+
+  void onTabTapped(int index) {
+    selectedIndex = index;
+    pageController.jumpToPage(index);
+    update();
   }
 
   Future<void> getProvider() async {
@@ -43,7 +151,6 @@ class ProviderProfileController extends GetxController {
       update();
     }, (r) {
       providerModel = r;
-      //print(r);
       statusRequest = StatusRequest.success;
       update();
     });
@@ -64,11 +171,8 @@ class ProviderProfileController extends GetxController {
     }, (r) {
       providerServices.clear();
       providerServices = r;
-      if (r.isEmpty) {
-        statusRequestServices = StatusRequest.noData;
-      } else {
-        statusRequestServices = StatusRequest.success;
-      }
+      statusRequestServices =
+          r.isEmpty ? StatusRequest.noData : StatusRequest.success;
     });
     update();
   }
@@ -89,33 +193,75 @@ class ProviderProfileController extends GetxController {
     }, (r) {
       previousWork.clear();
       previousWork = r;
+      statusRequestPerviousWork =
+          r.isEmpty ? StatusRequest.noData : StatusRequest.success;
+    });
+    update();
+  }
+
+  Future<void> getReview() async {
+    statusRequestReview = StatusRequest.loading;
+    final response = await CustomRequest(
+        path: ApiConstance.getReviewServices,
+        data: {"provider_id": provId},
+        fromJson: (json) {
+          return json['data']
+              .map<ReviewModel>((type) => ReviewModel.fromJson(type))
+              .toList();
+        }).sendGetRequest();
+    response.fold((l) {
+      statusRequestReview = StatusRequest.error;
+      Logger().e(l.errMsg);
+    }, (r) {
+      reviews.clear();
+      statusRequestReview = StatusRequest.success;
+      reviews = r;
       if (r.isEmpty) {
-        statusRequestPerviousWork = StatusRequest.noData;
+        statusRequestReview = StatusRequest.noData;
       } else {
-        statusRequestPerviousWork = StatusRequest.success;
+        statusRequestReview = StatusRequest.success;
       }
     });
     update();
   }
 
-  onTapAbout() {
-    isAbout = true;
-    isServices = false;
-    isWork = false;
-    update();
+  Color getRandomColor() {
+    final random = Random();
+    return Color.fromRGBO(
+      100 + random.nextInt(156),
+      100 + random.nextInt(156),
+      100 + random.nextInt(156),
+      1,
+    );
   }
 
-  onTapService() {
-    isAbout = false;
-    isServices = true;
-    isWork = false;
-    update();
-  }
+  Future<void> _addReview() async {
+    if (formKey.currentState!.validate()) {
+      statusRequest = StatusRequest.loading;
 
-  onTapWork() {
-    isAbout = false;
-    isServices = false;
-    isWork = true;
-    update();
+      final result = await CustomRequest<Map<String, dynamic>>(
+          path: ApiConstance.addReview,
+          fromJson: (json) {
+            return json;
+          },
+          data: {
+            "rating": rating,
+            "review": reviewController.text,
+            "user_id": Get.find<AppPreferences>().getUserId(),
+            "provider_id": provId
+          }).sendPostRequest();
+      result.fold((l) {
+        statusRequest = StatusRequest.error;
+        Logger().e(l.errMsg);
+        AppSnackBars.error(message: l.errMsg);
+        update();
+      }, (r) {
+        AppSnackBars.success(message: r['message']);
+        rating = 0;
+        reviewController.clear();
+        getReview();
+        update();
+      });
+    }
   }
 }

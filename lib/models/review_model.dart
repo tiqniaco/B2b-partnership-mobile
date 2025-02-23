@@ -1,4 +1,4 @@
-class ServiceReviewModel {
+class ReviewModel {
   int? id;
   String? review;
   String? rating;
@@ -8,7 +8,7 @@ class ServiceReviewModel {
   String? userId;
   String? createdAt;
 
-  ServiceReviewModel(
+  ReviewModel(
       {this.id,
       this.review,
       this.rating,
@@ -18,7 +18,7 @@ class ServiceReviewModel {
       this.userId,
       this.createdAt});
 
-  ServiceReviewModel.fromJson(Map<String, dynamic> json) {
+  ReviewModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     review = json['review'];
     rating = json['rating'];
