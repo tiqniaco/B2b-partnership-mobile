@@ -302,7 +302,7 @@ class SearchView extends StatelessWidget {
                         children: [
                           Expanded(
                             child: buttonWidget("Clear Filter", () {
-                              locationController.resetLoaction();
+                              locationController.resetLocation();
                             }, false),
                           ),
                           Gap(20),
