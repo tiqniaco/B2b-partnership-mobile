@@ -22,8 +22,11 @@ class ApiConstance {
   static const String loginWithGoogle = 'patient/auth/login-with-google';
   static const String profile = 'patient/profile';
   static final String updateProfile = 'patient/$kUserId';
-  static final String deleteAccount = 'patient/$kUserId';
-  static const String resetPassword = 'reset-password';
+  static const String resetPassword = 'auth/reset-password';
+  static const String forgetPassword = 'auth/forget-password';
+  static const String sendOTP = 'send-otp';
+  static const String verifyOTP = 'verify-otp';
+  static const String deleteAccount = 'auth/delete-account';
 
   //client
   static String getClientMenu(String id) => '/clients/$id';
@@ -44,10 +47,12 @@ class ApiConstance {
   static String getServiceDetails(String id) => 'provider-service/$id';
   static const String getReviewServices = 'provider-service-reviews';
   static const String getFeatureServices = 'provider-service-features';
+  static const String getAllPendingServices = 'request-services';
 
   //provider
   static String getProviderProfileDetails(String id) => 'providers/$id';
   static String getProviderServices(String id) => 'providers/$id/services';
+  static String getProviderMenu(String id) => 'providers/$id';
   static String getServicesInCategory(String id) =>
       'specializations/$id/services';
   static String getProvidersInCategory = 'specializations/providers';
@@ -69,4 +74,14 @@ class ApiConstance {
   static String clearCart = "store/cart/clear";
   static String addToCart = "store/carts";
   static String checkout = "store/orders";
+
+  // Client Profile
+  static String updateClientProfile(String id) => 'clients/$id/update';
+
+  // Complaints
+  static String addComplaint = 'complaints';
+  static String getComplaints = 'complaints';
+
+  // Notifications
+  static String getNotifications = 'notifications';
 }

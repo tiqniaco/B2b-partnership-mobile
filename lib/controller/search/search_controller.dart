@@ -3,6 +3,7 @@
 import 'package:b2b_partenership/controller/save/saved_controller.dart';
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
+import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:b2b_partenership/models/city_model.dart';
 import 'package:b2b_partenership/models/country_model.dart';
 import 'package:b2b_partenership/models/provider_model.dart';
@@ -17,6 +18,7 @@ import '../../core/enums/status_request.dart';
 class SearchControllerIM extends GetxController {
   double rating = 0;
   List<ProviderModel> topProviders = [];
+  List<ProviderModel> searchList = [];
   List<CountryModel> countries = [];
   List<CityModel> cities = [];
   StatusRequest statusRequestProviders = StatusRequest.loading;
@@ -54,26 +56,26 @@ class SearchControllerIM extends GetxController {
     debugPrint('Selected Country: $value');
     enable = true;
     getCities();
-    update();
+    update(['location']);
   }
 
   onCityChanged(value) {
     selectedCity = value;
     debugPrint('Selected city: $value');
-    update();
+    update(['location']);
   }
 
   onSpecializeChanged(value) async {
     selectedSpecialization = value;
     debugPrint('Selected specialize: $value');
     await getSupSpecialization();
-    update();
+    update(['category']);
   }
 
   onSubSpecializeChanged(value) {
     selectedSubSpecialization = value;
     debugPrint('Selected sub specialize: $value');
-    update();
+    update(['category']);
   }
 
   validUserData(val) {
@@ -82,52 +84,62 @@ class SearchControllerIM extends GetxController {
     }
   }
 
-  // Future<void> signupProvider() async {
-  //   if (formKey.currentState!.validate()) {
-  //     statusRequest = StatusRequest.loading;
-  //     if (imageFile == null) {
-  //       AppSnackBars.warning(message: "upload profile image");
-  //     } else if (commercePdfFile == null) {
-  //       AppSnackBars.warning(message: "upload commercial register pdf file");
-  //     } else if (taxPdfFile == null) {
-  //       AppSnackBars.warning(message: "upload tax card pdf file");
-  //     } else {
-  //       final result = await CustomRequest<Map<String, dynamic>>(
-  //           path: ApiConstance.register,
-  //           fromJson: (json) {
-  //             return json;
-  //           },
-  //           files: {
-  //             "image": imageFile!.path,
-  //             "commercial_register": commercePdfFile!.path,
-  //             "tax_card": taxPdfFile!.path,
-  //           },
-  //           data: {
-  //             "name": usernameController.text,
-  //             "email": emailController.text,
-  //             "password": passwordController.text,
-  //             "country_code": selectedCountry.code,
-  //             "phone": phoneController.text,
-  //             "role": "provider",
-  //             "government_id": selectedCity.id,
-  //             "sub_specialization_id": selectedSubSpecialization.id,
-  //             "provider_types_id": selectedType.id,
-  //             "bio": bioController.text,
-  //           }).sendPostRequest();
-  //       result.fold((l) {
-  //         statusRequest = StatusRequest.error;
-  //         Logger().e(l.errMsg);
-  //         AppSnackBars.error(message: l.errMsg);
-  //         update();
-  //       }, (r) {
-  //         AppSnackBars.success(message: r['message']);
-  //         statusRequest = StatusRequest.success;
-  //         Get.offAllNamed(AppRoutes.login);
-  //         update();
-  //       });
-  //     }
-  //   }
-  // }
+  Future<void> search() async {
+    if (formKey.currentState!.validate()) {
+      statusRequest = StatusRequest.loading;
+
+      final result = await CustomRequest<List<ProviderModel>>(
+          path: ApiConstance.register,
+          fromJson: (json) {
+            return json['data']
+                .map<ProviderModel>(
+                    (element) => ProviderModel.fromJson(element))
+                .toList();
+          },
+          data: {
+            "search": searchController.text,
+            if (selectedSubSpecialization != null)
+              "sub_specialization_id": selectedSubSpecialization!.id,
+            if (selectedSpecialization != null)
+              "specialization_id": selectedSpecialization!.id,
+            if (selectedCountry != null) "country_id": selectedCountry!.id,
+            if (selectedCity != null) "government_id": selectedCity!.id,
+            if (selectedSpecialization != null) "rate": "provider",
+          }).sendPostRequest();
+      result.fold((l) {
+        statusRequest = StatusRequest.error;
+        Logger().e(l.errMsg);
+        AppSnackBars.error(message: l.errMsg);
+        update();
+      }, (r) {
+        searchList.clear();
+        searchList = r;
+        statusRequest = StatusRequest.success;
+        update();
+      });
+    }
+  }
+
+  resetFunction() {
+    searchController.clear();
+    selectedCity = null;
+    selectedCountry = null;
+    selectedSpecialization = null;
+    selectedSubSpecialization = null;
+    update();
+  }
+
+  resetLoaction() {
+    selectedCountry = null;
+    selectedCity = null;
+    update(['location']);
+  }
+
+  resetCategory() {
+    selectedSpecialization = null;
+    selectedSubSpecialization = null;
+    update(['category']);
+  }
 
   Future<void> getCountries() async {
     statusRequest = StatusRequest.loading;
@@ -276,7 +288,6 @@ class SearchControllerIM extends GetxController {
     update();
   }
 
-
   toggleFavorites(String provId) async {
     final savedController = SavedController();
     await savedController.onTapFavorite(provId);
@@ -284,6 +295,4 @@ class SearchControllerIM extends GetxController {
 
     update();
   }
-
-
 }

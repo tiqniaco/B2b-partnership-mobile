@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '/core/errors/failure.dart';
 import '/core/network/dio_logger.dart';
 import 'package:dartz/dartz.dart';
@@ -31,7 +33,7 @@ class CustomRequest<T> {
     required this.fromJson,
     this.queryParameters = const {},
     this.data = const {},
-    this.files= const {}
+    this.files = const {},
   });
 
 /*
@@ -54,7 +56,17 @@ class CustomRequest<T> {
       return Right(jsonData);
     } catch (e) {
       if (e is DioException) {
+        if (kDebugMode) {
+          print("==== Error =====");
+          print("${e.response?.data}");
+          print("==== Error =====");
+        }
         return Left(ServerFailure.formDioException(e));
+      }
+      if (kDebugMode) {
+        print("==== Error =====");
+        print("$e");
+        print("==== Error =====");
       }
       return Left(ServerFailure(e.toString()));
     }
@@ -89,9 +101,18 @@ class CustomRequest<T> {
       return Right(jsonData);
     } catch (e) {
       if (e is DioException) {
+        if (kDebugMode) {
+          print("==== Error =====");
+          print("${e.response?.data}");
+          print("==== Error =====");
+        }
         return Left(ServerFailure.formDioException(e));
       }
-
+      if (kDebugMode) {
+        print("==== Error =====");
+        print("$e");
+        print("==== Error =====");
+      }
       return Left(ServerFailure(e.toString()));
     }
   }
@@ -109,7 +130,17 @@ class CustomRequest<T> {
       return Right(jsonData);
     } catch (e) {
       if (e is DioException) {
+        if (kDebugMode) {
+          print("==== Error =====");
+          print("${e.response?.data}");
+          print("==== Error =====");
+        }
         return Left(ServerFailure.formDioException(e));
+      }
+      if (kDebugMode) {
+        print("==== Error =====");
+        print("$e");
+        print("==== Error =====");
       }
       return Left(ServerFailure(e.toString()));
     }
@@ -128,7 +159,17 @@ class CustomRequest<T> {
       return Right(jsonData);
     } catch (e) {
       if (e is DioException) {
+        if (kDebugMode) {
+          print("==== Error =====");
+          print("${e.response?.data}");
+          print("==== Error =====");
+        }
         return Left(ServerFailure.formDioException(e));
+      }
+      if (kDebugMode) {
+        print("==== Error =====");
+        print("$e");
+        print("==== Error =====");
       }
       return Left(ServerFailure(e.toString()));
     }
@@ -147,7 +188,17 @@ class CustomRequest<T> {
       return Right(jsonData);
     } catch (e) {
       if (e is DioException) {
+        if (kDebugMode) {
+          print("==== Error =====");
+          print("${e.response?.data}");
+          print("==== Error =====");
+        }
         return Left(ServerFailure.formDioException(e));
+      }
+      if (kDebugMode) {
+        print("==== Error =====");
+        print("$e");
+        print("==== Error =====");
       }
       return Left(ServerFailure(e.toString()));
     }

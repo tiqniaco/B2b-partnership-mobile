@@ -1,3 +1,7 @@
+import 'package:b2b_partenership/app_routes.dart';
+import 'package:b2b_partenership/core/crud/custom_request.dart';
+import 'package:b2b_partenership/core/network/api_constance.dart';
+import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -18,26 +22,34 @@ class ForgetPasswordController extends GetxController {
     super.onClose();
   }
 
-  // Future<void> sendOtp() async {
-  //   if (formKey.currentState?.validate() ?? false) {
-  //     final result = await _repo.sendOTP(email: emailController.text);
-  //     result.fold(
-  //       (error) {
-  //         errorLogger(error.errMsg);
-  //         AppSnackBars.error(message: error.errMsg);
-  //       },
-  //       (data) {
-  //         AppSnackBars.success(
-  //           message: "OTP Send Successfully, please check your mail!".tr,
-  //         );
-  //         Get.toNamed(
-  //           AppRoutes.otp,
-  //           arguments: {
-  //             "email": emailController.text,
-  //           },
-  //         );
-  //       },
-  //     );
-  //   }
-  // }
+  Future<void> sendOtp({String? email}) async {
+    if (formKey.currentState?.validate() ?? false || email != null) {
+      final result = await CustomRequest<String>(
+        path: ApiConstance.sendOTP,
+        data: {
+          "email": email ?? emailController.text,
+        },
+        fromJson: (json) {
+          return json['message'];
+        },
+      ).sendPostRequest();
+
+      result.fold(
+        (error) {
+          AppSnackBars.error(message: error.errMsg);
+        },
+        (data) {
+          AppSnackBars.success(
+            message: "OTP Send Successfully, please check your mail!".tr,
+          );
+          Get.toNamed(
+            AppRoutes.otp,
+            arguments: {
+              "email": emailController.text,
+            },
+          );
+        },
+      );
+    }
+  }
 }

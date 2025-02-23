@@ -1,6 +1,5 @@
 import 'package:b2b_partenership/controller/auth/forget_password_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
-import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/auth/auth_text_form.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-
 
 class ForgetPasswordEmailView extends StatelessWidget {
   const ForgetPasswordEmailView({super.key});
@@ -54,10 +52,9 @@ class ForgetPasswordEmailView extends StatelessWidget {
                     ),
                     Gap(20.h),
                     CustomLoadingButton(
-                      backgroundColor: deepBabyBlueColor,
                       text: "Send".tr,
                       onPressed: () {
-                       // return controller.sendOtp();
+                        return controller.sendOtp();
                       },
                     )
                   ],

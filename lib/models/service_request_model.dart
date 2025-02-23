@@ -78,7 +78,7 @@ class ServiceRequestModel {
     email = json['email'];
     userCountryCode = json['user_country_code'];
     phone = json['phone'];
-    clientImage = json['client_image'];
+    clientImage = kBaseImageUrl + json['client_image'];
     specializationId = json['specialization_id'];
     specializationNameAr = json['specialization_name_ar'];
     specializationNameEn = json['specialization_name_en'];

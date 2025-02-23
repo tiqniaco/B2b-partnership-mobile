@@ -12,7 +12,7 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 class LoginController extends GetxController {
-  late TextEditingController emailController;
+  late TextEditingController loginController;
   late TextEditingController passwordController;
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
   StatusRequest statusRequest = StatusRequest.loading;
@@ -23,14 +23,14 @@ class LoginController extends GetxController {
 
   @override
   void onInit() {
-    emailController = TextEditingController();
+    loginController = TextEditingController();
     passwordController = TextEditingController();
     super.onInit();
   }
 
   @override
   void dispose() {
-    emailController.dispose();
+    loginController.dispose();
     passwordController.dispose();
     super.dispose();
   }
@@ -56,7 +56,7 @@ class LoginController extends GetxController {
             return json;
           },
           data: {
-            "email": emailController.text,
+            "login": loginController.text,
             "password": passwordController.text,
           }).sendPostRequest();
       result.fold((l) {
@@ -77,7 +77,7 @@ class LoginController extends GetxController {
         Get.find<AppPreferences>().setUserRole(r['role']);
         ApiConstance.token = r['token'];
         if (r['role'] == 'provider') {
-          Get.offAllNamed(AppRoutes.providerHome);
+          Get.offAllNamed(AppRoutes.providerHomeLayout);
         } else {
           Get.offAllNamed(AppRoutes.clientHomeLayout);
         }

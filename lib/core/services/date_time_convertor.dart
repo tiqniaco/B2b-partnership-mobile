@@ -36,8 +36,9 @@ class DateTimeConvertor {
 
   static String timeAgo(String dateTime, {String locale = 'en'}) {
     // Parse the input date string
-    DateTime parsedDate =
-        DateTime.parse(dateTime).add(const Duration(hours: 2));
+    DateTime parsedDate = DateTime.parse(dateTime).add(
+      const Duration(hours: 2),
+    );
 
     // Register Arabic messages if locale is 'ar'
     if (locale == 'ar') {
