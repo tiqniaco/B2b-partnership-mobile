@@ -6,6 +6,7 @@ import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/utils/font_manager.dart';
+import 'package:b2b_partenership/widgets/shop/shop_item_product_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -197,7 +198,9 @@ class ShopView extends StatelessWidget {
                     itemCount: controller.shopProducts.length,
                     itemBuilder: (context, index) {
                       final product = controller.shopProducts[index];
-                      return GestureDetector(
+                      return ShopProductItemWidget(
+                        product: product,
+                        showCategories: controller.showCategories,
                         onTap: () {
                           Get.toNamed(
                             AppRoutes.shopProductDetails,
@@ -206,103 +209,6 @@ class ShopView extends StatelessWidget {
                             },
                           );
                         },
-                        child: Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: borderColor,
-                              width: 1.w,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          clipBehavior: Clip.hardEdge,
-                          padding: EdgeInsets.symmetric(horizontal: 8.0.w),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Expanded(
-                                child: FractionallySizedBox(
-                                  widthFactor: 1.2,
-                                  child: Stack(
-                                    children: [
-                                      CustomNetworkImage(
-                                        imageUrl: product.image,
-                                        fit: BoxFit.cover,
-                                        width: double.infinity,
-                                      ),
-                                      if (product.discount != "0")
-                                        PositionedDirectional(
-                                          top: 8.h,
-                                          end: 8.w,
-                                          child: Container(
-                                            padding: EdgeInsets.symmetric(
-                                              horizontal: 5.w,
-                                              vertical: 2.h,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: Colors.red,
-                                              borderRadius:
-                                                  BorderRadius.circular(4.r),
-                                            ),
-                                            child: Text(
-                                              "-${product.discount}%",
-                                              style: getBoldStyle.copyWith(
-                                                fontSize: 10.sp,
-                                                color: whiteColor,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Gap(8.h),
-                              Text(
-                                translateDatabase(
-                                  arabic: product.titleAr,
-                                  english: product.titleEn,
-                                ),
-                                style: getLightStyle.copyWith(
-                                  fontWeight: FontManager.mediumFontWeight,
-                                  fontSize:
-                                      controller.showCategories ? 11.sp : 13.sp,
-                                ),
-                                textAlign: TextAlign.center,
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              Row(
-                                children: [
-                                  if (product.discount != "0")
-                                    Text(
-                                      "${product.price}\$",
-                                      style: getLightStyle.copyWith(
-                                        fontSize: controller.showCategories
-                                            ? 11.sp
-                                            : 13.sp,
-                                        color: blackColor.withAlpha(150),
-                                        decoration: TextDecoration.lineThrough,
-                                      ),
-                                    ),
-                                  Gap(5.w),
-                                  Text(
-                                    product.discount != "0"
-                                        ? "${double.parse(product.price) - (double.parse(product.discount) / 100 * double.parse(product.price))}\$"
-                                        : "${product.price}\$",
-                                    style: getLightStyle.copyWith(
-                                        fontWeight:
-                                            FontManager.semiBoldFontWeight,
-                                        fontSize: controller.showCategories
-                                            ? 11.sp
-                                            : 13.sp,
-                                        color: primaryColor),
-                                  ),
-                                ],
-                              ),
-                              Gap(8.h),
-                            ],
-                          ),
-                        ),
                       );
                     },
                   ),

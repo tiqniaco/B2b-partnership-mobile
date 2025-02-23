@@ -75,6 +75,7 @@ class ApiConstance {
   static String addToCart = "store/carts";
   static String checkout = "store/orders";
   static String getOrders = 'store/orders';
+  static String getOrderDetails(String id) => 'store/orders/$id';
 
   // Client Profile
   static String updateClientProfile(String id) => 'clients/$id/update';
