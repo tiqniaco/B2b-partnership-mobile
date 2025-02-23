@@ -1,13 +1,11 @@
 // ignore_for_file: avoid_print
 
-import 'dart:math';
 
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/models/service_feature_model.dart';
-import 'package:b2b_partenership/models/service_review_model.dart';
 import 'package:b2b_partenership/models/services_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,10 +17,10 @@ import 'package:logger/logger.dart';
 class ServiceDetailsController extends GetxController {
   bool isOverView = true;
   bool isSaller = false;
-  bool isReviews = false;
+
   late int serviceId;
   List<ServiceFeatureModel> serviceFeaturs = [];
-  List<ServiceReviewModel> servicesReview = [];
+  // List<ServiceReviewModel> servicesReview = [];
   ServiceModel? service;
   StatusRequest statusRequest = StatusRequest.loading;
   StatusRequest statusRequestFeature = StatusRequest.loading;
@@ -33,30 +31,30 @@ class ServiceDetailsController extends GetxController {
     serviceId = int.parse(Get.arguments['id']);
     getService();
     getServiceFeature();
-    getServiceReview();
+   // getServiceReview();
     super.onInit();
   }
 
   ontapOverView() {
     isOverView = true;
     isSaller = false;
-    isReviews = false;
+
     update();
   }
 
   ontapSaller() {
     isOverView = false;
     isSaller = true;
-    isReviews = false;
+
     update();
   }
 
-  ontapReview() {
-    isOverView = false;
-    isSaller = false;
-    isReviews = true;
-    update();
-  }
+  // ontapReview() {
+  //   isOverView = false;
+  //   isSaller = false;
+  //   isReviews = true;
+  //   update();
+  // }
 
   Future<void> getService() async {
     print("get details .........");
@@ -108,33 +106,33 @@ class ServiceDetailsController extends GetxController {
     update();
   }
 
-  Future<void> getServiceReview() async {
-    print("get reviews .........");
-    statusRequestReview = StatusRequest.loading;
-    final response = await CustomRequest(
-        path: ApiConstance.getReviewServices,
-        data: {"provider_service_id": serviceId},
-        fromJson: (json) {
-          return json['data']
-              .map<ServiceReviewModel>(
-                  (type) => ServiceReviewModel.fromJson(type))
-              .toList();
-        }).sendGetRequest();
-    response.fold((l) {
-      statusRequestReview = StatusRequest.error;
-      Logger().e(l.errMsg);
-    }, (r) {
-      servicesReview.clear();
-      statusRequestReview = StatusRequest.success;
-      servicesReview = r;
-      if (r.isEmpty) {
-        statusRequestReview = StatusRequest.noData;
-      } else {
-        statusRequestReview = StatusRequest.success;
-      }
-    });
-    update();
-  }
+  // Future<void> getServiceReview() async {
+  //   print("get reviews .........");
+  //   statusRequestReview = StatusRequest.loading;
+  //   final response = await CustomRequest(
+  //       path: ApiConstance.getReviewServices,
+  //       data: {"provider_service_id": serviceId},
+  //       fromJson: (json) {
+  //         return json['data']
+  //             .map<ServiceReviewModel>(
+  //                 (type) => ServiceReviewModel.fromJson(type))
+  //             .toList();
+  //       }).sendGetRequest();
+  //   response.fold((l) {
+  //     statusRequestReview = StatusRequest.error;
+  //     Logger().e(l.errMsg);
+  //   }, (r) {
+  //     servicesReview.clear();
+  //     statusRequestReview = StatusRequest.success;
+  //     servicesReview = r;
+  //     if (r.isEmpty) {
+  //       statusRequestReview = StatusRequest.noData;
+  //     } else {
+  //       statusRequestReview = StatusRequest.success;
+  //     }
+  //   });
+  //   update();
+  // }
 
   contactMethods() {
     Get.defaultDialog(
@@ -189,14 +187,6 @@ class ServiceDetailsController extends GetxController {
         ));
   }
 
-  Color getRandomColor() {
-    final random = Random();
-    return Color.fromRGBO(
-      100 + random.nextInt(156),
-      100 + random.nextInt(156),
-      100 + random.nextInt(156),
-      1,
-    );
-  }
+  
 
 }

@@ -15,8 +15,7 @@ class PreviousWork extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(ProviderProfileController());
     return GetBuilder<ProviderProfileController>(
-        builder: (controller) => Expanded(
-                child: CustomServerStatusWidget(
+        builder: (controller) => CustomServerStatusWidget(
               statusRequest: controller.statusRequestPerviousWork,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -69,6 +68,6 @@ class PreviousWork extends StatelessWidget {
                   ),
                 ),
               ),
-            )));
+            ));
   }
 }

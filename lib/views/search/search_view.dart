@@ -1,4 +1,5 @@
 import 'package:b2b_partenership/controller/search/search_controller.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/widgets/home/provider_widget.dart';
 import 'package:b2b_partenership/widgets/search/select_city_filter.dart';
@@ -49,23 +50,6 @@ class SearchView extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    // TextFormField(
-                    //   decoration: InputDecoration(
-                    //       filled: true,
-                    //       fillColor: borderColor.withAlpha(30),
-                    //       contentPadding: EdgeInsets.all(14),
-                    //       hintStyle: TextStyle(fontSize: 14.sp),
-                    //       hintText: "Search ...",
-                    //       suffixIcon: InkWell(
-                    //         onTap: () {
-                    //           controller.search();
-                    //         },
-                    //         child: Icon(
-                    //           Icons.search,
-                    //           color: greyColor,
-                    //         ),
-                    //       )),
-                    // ),
                     Gap(15),
                     SizedBox(
                       height: 40,
@@ -94,7 +78,7 @@ class SearchView extends StatelessWidget {
                       ),
                     ),
                     Gap(10),
-                    controller.searchList.isNotEmpty
+                    controller.isSearch
                         ? Text(
                             "${controller.searchList.length} provider",
                             style: TextStyle(
@@ -110,28 +94,37 @@ class SearchView extends StatelessWidget {
                 ),
               ),
               Expanded(
-                  child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 15,
-                    crossAxisSpacing: 10,
-                    childAspectRatio: 6 / 9.8),
-                scrollDirection: Axis.vertical,
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                itemCount: controller.searchList.isNotEmpty
-                    ? controller.searchList.length
-                    : controller.topProviders.length,
-                itemBuilder: (context, index) => ProviderWidget(
-                    provider: controller.searchList.isNotEmpty
-                        ? controller.searchList[index]
-                        : controller.topProviders[index],
-                    toggleFavorite: () {
-                      controller.toggleFavorites(controller
-                              .searchList.isNotEmpty
-                          ? controller.searchList[index].providerId.toString()
-                          : controller.topProviders[index].providerId
-                              .toString());
-                    }),
+                  child: CustomServerStatusWidget(
+                statusRequest: controller.isSearch
+                    ? controller.statusRequestSearch
+                    : controller.statusRequest,
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 15,
+                      crossAxisSpacing: 10,
+                      childAspectRatio: 6 / 9.8),
+                  scrollDirection: Axis.vertical,
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  itemCount: controller.isSearch
+                      ? controller.searchList.length
+                      : controller.topProviders.length,
+                  itemBuilder: (context, index) => controller.isSearch
+                      ? ProviderWidget(
+                          provider: controller.searchList[index],
+                          toggleFavorite: () {
+                            controller.toggleFavorites(controller
+                                .searchList[index].providerId
+                                .toString());
+                          })
+                      : ProviderWidget(
+                          provider: controller.topProviders[index],
+                          toggleFavorite: () {
+                            controller.toggleFavorites(controller
+                                .topProviders[index].providerId
+                                .toString());
+                          }),
+                ),
               )),
             ],
           ),

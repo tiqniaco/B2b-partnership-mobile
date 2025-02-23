@@ -66,9 +66,7 @@ class ProviderWidget extends StatelessWidget {
                                   size: 15.sp,
                                 ),
                               )),
-                      onHover: (value) {
-                        // the rating value is updated every time the cursor moves over a new item.
-                      },
+                      onHover: (value) {},
                     ),
                     Text(
                       provider.bio!,

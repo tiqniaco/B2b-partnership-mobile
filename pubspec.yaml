@@ -84,12 +84,6 @@ flutter:
   fonts:
     - family: Ibm
       fonts:
-      #  - asset: assets/fonts/ibm_plex_sans_arabic_bold.ttf
-      #    weight: 900
-
-      #  - asset: assets/fonts/Nunito/Nunito-ExtraBold.ttf
-      #    weight: 800
-
        - asset: assets/fonts/ibm_plex_sans_arabic_bold.ttf
          weight: 700
 

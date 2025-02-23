@@ -37,6 +37,7 @@ class ApiConstance {
   static const String getTopProviders = 'home/top-providers';
   static const String getNewServices = 'home/new-services';
   static const String getJobs = 'home/new-jobs';
+  static const String search = 'specializations/providers';
 
   // service request
   static const String addServiceRequest = 'request-services';
@@ -60,6 +61,7 @@ class ApiConstance {
   static String getTopCountriesProv(String id) =>
       'home/country/$id/top-providers';
   static String getWorkImages = '/previous-work-images';
+  static String addReview = '/provider-service-reviews';
 
   // favorite
   static String getUserFavorite = 'favorite-providers';

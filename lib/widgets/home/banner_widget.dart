@@ -56,15 +56,15 @@ class BannerWidget extends StatelessWidget {
                       fontSize: 13.sp,
                       fontWeight: FontWeight.normal),
                 ),
-                
                 Gap(20),
                 ElevatedButton(
                     style: ButtonStyle(
+                        padding: WidgetStatePropertyAll(
+                            EdgeInsets.symmetric(horizontal: 10)),
                         backgroundColor: WidgetStatePropertyAll(whiteColor)),
                     onPressed: onPressed,
-                   
                     child: Text(
-                      buttonTitle, //"Post Now",
+                      buttonTitle,
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 12.sp,
