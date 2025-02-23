@@ -129,7 +129,7 @@ class SearchControllerIM extends GetxController {
     update();
   }
 
-  resetLoaction() {
+  resetLocation() {
     selectedCountry = null;
     selectedCity = null;
     update(['location']);

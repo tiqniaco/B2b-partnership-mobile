@@ -239,7 +239,6 @@ class SearchView extends StatelessWidget {
                             color: Colors.amber,
                           ),
                           onRatingUpdate: (rating) {
-                            print(rating);
                             ratingController.onTapRating(rating);
                           },
                         ),
@@ -328,7 +327,7 @@ class SearchView extends StatelessWidget {
                         children: [
                           Expanded(
                             child: buttonWidget("Clear Filter", () {
-                              locationController.resetLoaction();
+                              locationController.resetLocation();
                             }, false),
                           ),
                           Gap(20),
