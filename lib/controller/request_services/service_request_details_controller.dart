@@ -11,6 +11,7 @@ class ServiceRequestDetailsController extends GetxController {
   late ServiceRequestModel model;
   List<ModelData> priceOffers = [];
   StatusRequest statusRequest = StatusRequest.loading;
+  StatusRequest statusRequestOffers = StatusRequest.loading;
   int currentPage = 0;
   int totalPage = 1;
   bool isPageLoading = false;
@@ -68,25 +69,25 @@ class ServiceRequestDetailsController extends GetxController {
     }
   }
 
-  // Future<void> nextPage() async {
-  //   if (currentPage < totalPage) {
-  //     isPageLoading = true;
-  //     update();
-  //     final result = await allPatientsRepo.getAllPatient(
-  //       page: currentPage + 1,
-  //       search: searchController.text == '' ? null : searchController.text,
-  //     );
-  //     result.fold((failure) {
-  //       AppSnackBars.error(message: failure.errMsg);
-  //       isPageLoading = false;
-  //       update();
-  //     }, (data) {
-  //       totalPage = data.lastPage!;
-  //       currentPage = data.currentPage!;
-  //       list.addAll(data.data!);
-  //       isPageLoading = false;
-  //       update();
-  //     });
-  //   }
-  // }
+  Future<void> acceptPriceOffers(String id) async {
+    statusRequestOffers = StatusRequest.loading;
+    update();
+    final response = await CustomRequest<Map<String, dynamic>>(
+        path: ApiConstance.acceptPriceOffers(id),
+        fromJson: (json) {
+          return json;
+        }).sendPatchRequest();
+    response.fold((l) {
+      statusRequestOffers = StatusRequest.error;
+      Logger().e(l.errMsg);
+    }, (r) {
+      statusRequestOffers = StatusRequest.success;
+      priceOffers.clear();
+      currentPage = 0;
+      totalPage = 0;
+      getPriceOffers();
+    });
+
+    update();
+  }
 }

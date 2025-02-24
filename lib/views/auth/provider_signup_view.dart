@@ -87,25 +87,24 @@ class ProviderSignupView extends StatelessWidget {
                       child: controller.providerSteps[controller.currentStep],
                     ),
                     CustomLoadingButton(
-                        onPressed: () {
-                          Logger().f(controller.currentStep);
-                          if (controller.currentStep ==
-                              controller.providerSteps.length - 1) {
-                            return Get.toNamed(
-                              AppRoutes.otp,
-                              arguments: {
-                                'email': controller.emailController.text,
-                                'fromAuth': true,
-                                'role': controller.role,
-                              },
-                            );
-                            // controller.role == "provider"
-                            //     ? controller.signupProvider()
-                            //     : controller.signupClient();
-                          } else {
-                            return controller.nextStep;
-                          }
-                        },
+                        onPressed: () => controller.goToOtp(),
+
+                        //  () {
+                        //  // Logger().f(controller.currentStep);
+                        //   if (controller.currentStep ==
+                        //       controller.providerSteps.length - 1) {
+                        //     return Get.toNamed(
+                        //       AppRoutes.otp,
+                        //       arguments: {
+                        //         'email': controller.emailController.text,
+                        //         'fromAuth': true,
+                        //         'role': controller.role,
+                        //       },
+                        //     );
+                        //   } else {
+                        //     return controller.nextStep;
+                        //   }
+                        // },
                         text: controller.currentStep ==
                                 controller.providerSteps.length - 1
                             ? 'Finish'

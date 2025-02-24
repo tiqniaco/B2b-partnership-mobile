@@ -5,6 +5,7 @@ import 'dart:io';
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
+import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:b2b_partenership/models/city_model.dart';
 import 'package:b2b_partenership/models/country_model.dart';
@@ -222,6 +223,31 @@ class SignupController extends GetxController {
     update();
   }
 
+
+
+///----------------
+///
+
+goToOtp() {
+                         // Logger().f(controller.currentStep);
+                          if (currentStep ==
+                              providerSteps.length - 1) {
+                            return Get.toNamed(
+                              AppRoutes.otp,
+                              arguments: {
+                                'email': emailController.text,
+                                'fromAuth': true,
+                                'role': role,
+                              },
+                            );
+                          } else {
+                            return nextStep;
+                          }
+                        }
+
+
+
+
   Future<void> signupProvider() async {
     if (formKey.currentState!.validate()) {
       statusRequest = StatusRequest.loading;
@@ -263,15 +289,13 @@ class SignupController extends GetxController {
         }, (r) {
           AppSnackBars.success(message: r['message']);
           statusRequest = StatusRequest.success;
-
-          // Get.toNamed(
-          //   AppRoutes.otp,
-          //   arguments: {
-          //     'email': emailController.text,
-          //     'fromAuth': true,
-          //   },
-          // );
-          Get.offAllNamed(AppRoutes.login);
+          //Get.find<AppPreferences>().setToken(r['token']);
+          //Get.find<AppPreferences>().setUserId(r['user_id'].toString());
+          Get.find<AppPreferences>().setUserRoleId(r['role_id'].toString());
+          Get.find<AppPreferences>().setUserRole(r['role']);
+          Get.offAllNamed(
+            AppRoutes.login,
+          );
           update();
         });
       }
@@ -311,15 +335,9 @@ class SignupController extends GetxController {
           AppSnackBars.success(message: r['message']);
           statusRequest = StatusRequest.success;
 
-          // Get.toNamed(
-          //   AppRoutes.otp,
-          //   arguments: {
-          //     'email': emailController.text,
-          //     'fromAuth': true,
-          //   },
-          // );
-          Get.offAllNamed(AppRoutes.login);
-
+          Get.offAllNamed(
+            AppRoutes.login,
+          );
           update();
         });
       }

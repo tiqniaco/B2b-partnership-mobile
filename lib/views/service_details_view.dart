@@ -72,7 +72,7 @@ class ServiceDetailsView extends StatelessWidget {
                       fit: BoxFit.cover,
                       imageUrl: controller.service!.data!.image!,
                       errorWidget: (context, url, error) => Image.asset(
-                        'assets/images/default.jpg', // ضع رابط الصورة هنا
+                        'assets/images/default.jpg', 
                         width: double.infinity,
                         height: 265.h,
                         fit: BoxFit.cover,
@@ -182,15 +182,8 @@ class ServiceDetailsView extends StatelessWidget {
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
-                              // Text(
-                              //   '\$${controller.service!.data!.price!}',
-                              //   style: TextStyle(
-                              //     letterSpacing: 2,
-                              //     color: primaryColor,
-                              //     fontSize: 15.sp,
-                              //     fontWeight: FontWeight.bold,
-                              //   ),
-                              // ),
+
+                        
                             ],
                           ),
                         ),
@@ -281,7 +274,7 @@ class ServiceDetailsView extends StatelessWidget {
                                     const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: InkWell(
                                   onTap: () {
-                                    controller.ontapOverView();
+                                    controller.onTapOverView();
                                   },
                                   child: Container(
                                     padding: EdgeInsets.only(bottom: 10),
@@ -311,7 +304,7 @@ class ServiceDetailsView extends StatelessWidget {
                                     const EdgeInsets.symmetric(horizontal: 8.0),
                                 child: InkWell(
                                   onTap: () {
-                                    controller.ontapSaller();
+                                    controller.onTapSeller();
                                   },
                                   child: Container(
                                     padding: EdgeInsets.only(bottom: 10),
@@ -320,14 +313,14 @@ class ServiceDetailsView extends StatelessWidget {
                                         border: Border(
                                             bottom: BorderSide(
                                                 width: 3,
-                                                color: controller.isSaller
+                                                color: controller.isSeller
                                                     ? primaryColor
                                                     : Colors.white))),
                                     child: Text(
                                       "About Seller".tr,
                                       style: TextStyle(
                                         fontSize: 14.sp,
-                                        color: controller.isSaller
+                                        color: controller.isSeller
                                             ? primaryColor
                                             : blackColor,
                                       ),
@@ -351,7 +344,7 @@ class ServiceDetailsView extends StatelessWidget {
                                       fontWeight: FontWeight.w500),
                                 ),
                               )
-                            : controller.isSaller
+                            : controller.isSeller
                                 ? SellerWidget()
                                 : SizedBox.shrink(),
                       ],

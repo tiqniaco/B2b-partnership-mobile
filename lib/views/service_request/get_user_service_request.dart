@@ -21,13 +21,6 @@ class GetUserServiceRequest extends StatelessWidget {
             fontSize: 24,
             fontWeight: FontWeight.bold,
             color: primaryColor,
-            shadows: [
-              Shadow(
-                offset: Offset(2, 2),
-                blurRadius: 4,
-                color: Colors.black.withOpacity(0.5),
-              ),
-            ],
           ),
         ),
       ),
@@ -44,11 +37,11 @@ class GetUserServiceRequest extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Text("${controller.services.length} providers founded",
+              child: Text("${controller.services.length} Services founded",
                   style: TextStyle(
                       color: Colors.black87,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 15.sp)),
+                      //fontWeight: FontWeight.w500,
+                      fontSize: 12.sp)),
             ),
             Gap(10),
             Expanded(
