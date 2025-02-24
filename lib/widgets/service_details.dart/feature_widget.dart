@@ -17,9 +17,9 @@ class FeatureWidget extends StatelessWidget {
         shrinkWrap: true,
         physics: NeverScrollableScrollPhysics(),
         padding: EdgeInsets.symmetric(horizontal: 16),
-        itemCount: controller.serviceFeaturs.length,
+        itemCount: controller.serviceFeatures.length,
         itemBuilder: (context, index) {
-          final feature = controller.serviceFeaturs[index];
+          final feature = controller.serviceFeatures[index];
           return FeaturItem(
             feature: translateDatabase(
                 arabic: feature.featureAr!, english: feature.featureEn!),

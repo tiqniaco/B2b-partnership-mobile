@@ -1,6 +1,5 @@
 // ignore_for_file: avoid_print
 
-
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
@@ -16,11 +15,10 @@ import 'package:logger/logger.dart';
 
 class ServiceDetailsController extends GetxController {
   bool isOverView = true;
-  bool isSaller = false;
+  bool isSeller = false;
 
   late int serviceId;
-  List<ServiceFeatureModel> serviceFeaturs = [];
-  // List<ServiceReviewModel> servicesReview = [];
+  List<ServiceFeatureModel> serviceFeatures = [];
   ServiceModel? service;
   StatusRequest statusRequest = StatusRequest.loading;
   StatusRequest statusRequestFeature = StatusRequest.loading;
@@ -31,30 +29,23 @@ class ServiceDetailsController extends GetxController {
     serviceId = int.parse(Get.arguments['id']);
     getService();
     getServiceFeature();
-   // getServiceReview();
+    // getServiceReview();
     super.onInit();
   }
 
-  ontapOverView() {
+  onTapOverView() {
     isOverView = true;
-    isSaller = false;
+    isSeller = false;
 
     update();
   }
 
-  ontapSaller() {
+  onTapSeller() {
     isOverView = false;
-    isSaller = true;
+    isSeller = true;
 
     update();
   }
-
-  // ontapReview() {
-  //   isOverView = false;
-  //   isSaller = false;
-  //   isReviews = true;
-  //   update();
-  // }
 
   Future<void> getService() async {
     print("get details .........");
@@ -93,9 +84,9 @@ class ServiceDetailsController extends GetxController {
       print("==================================");
       Logger().e(l.errMsg);
     }, (r) {
-      serviceFeaturs.clear();
+      serviceFeatures.clear();
       statusRequestFeature = StatusRequest.success;
-      serviceFeaturs = r;
+      serviceFeatures = r;
 
       if (r.isEmpty) {
         statusRequestFeature = StatusRequest.noData;
@@ -105,34 +96,6 @@ class ServiceDetailsController extends GetxController {
     });
     update();
   }
-
-  // Future<void> getServiceReview() async {
-  //   print("get reviews .........");
-  //   statusRequestReview = StatusRequest.loading;
-  //   final response = await CustomRequest(
-  //       path: ApiConstance.getReviewServices,
-  //       data: {"provider_service_id": serviceId},
-  //       fromJson: (json) {
-  //         return json['data']
-  //             .map<ServiceReviewModel>(
-  //                 (type) => ServiceReviewModel.fromJson(type))
-  //             .toList();
-  //       }).sendGetRequest();
-  //   response.fold((l) {
-  //     statusRequestReview = StatusRequest.error;
-  //     Logger().e(l.errMsg);
-  //   }, (r) {
-  //     servicesReview.clear();
-  //     statusRequestReview = StatusRequest.success;
-  //     servicesReview = r;
-  //     if (r.isEmpty) {
-  //       statusRequestReview = StatusRequest.noData;
-  //     } else {
-  //       statusRequestReview = StatusRequest.success;
-  //     }
-  //   });
-  //   update();
-  // }
 
   contactMethods() {
     Get.defaultDialog(
@@ -186,7 +149,4 @@ class ServiceDetailsController extends GetxController {
           ],
         ));
   }
-
-  
-
 }

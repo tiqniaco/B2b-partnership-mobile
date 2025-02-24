@@ -71,14 +71,10 @@ class ServiceRequestDetails extends StatelessWidget {
                             onTap: () {
                               Get.back();
                             },
-                            child: CircleAvatar(
-                                radius: 17.r,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(left: 10),
-                                  child: Icon(
-                                    Icons.arrow_back_ios,
-                                  ),
-                                )),
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              size: 20.sp,
+                            ),
                           ),
                         Gap(10),
                         Text(
@@ -181,11 +177,6 @@ class ServiceRequestDetails extends StatelessWidget {
                           separatorBuilder: (context, index) => Gap(15),
                           itemCount: controller.priceOffers.length),
                     ),
-                    // if (controller.isPageLoading) ...[
-                    //   Gap(10.h),
-                    //   const Center(child: CircularProgressIndicator()),
-                    //   Gap(10.h),
-                    // ],
                   ],
                 ),
               )

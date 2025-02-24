@@ -43,6 +43,8 @@ class ApiConstance {
   static const String addServiceRequest = 'request-services';
   static String getClientServiceRequest(String id) => 'clients/$id/services';
   static const String getServicePriceOffer = 'request-offers';
+  static String acceptPriceOffers(String id) =>
+      'request-offers/$id/accept-offer';
 
   //service details
   static String getServiceDetails(String id) => 'provider-service/$id';
