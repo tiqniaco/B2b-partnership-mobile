@@ -18,6 +18,7 @@ class SelectSupSpecializationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<SubSpecializeModel>(
+      isExpanded: true,
       value: value,
       decoration: InputDecoration(
         contentPadding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
@@ -45,16 +46,12 @@ class SelectSupSpecializationWidget extends StatelessWidget {
       items: models.map((item) {
         return DropdownMenuItem<SubSpecializeModel>(
           value: item,
-          child: Row(
-            children: [
-              Text(
-                translateDatabase(arabic: item.nameAr!, english: item.nameEn!),
-                style: TextStyle(
-                    fontSize: 12.sp,
-                    color: greyColor.withAlpha(160),
-                    fontWeight: FontWeight.bold),
-              ),
-            ],
+          child: Text(
+            translateDatabase(arabic: item.nameAr!, english: item.nameEn!),
+            style: TextStyle(
+                fontSize: 12.sp,
+                color: greyColor.withAlpha(160),
+                fontWeight: FontWeight.bold),
           ),
         );
       }).toList(),

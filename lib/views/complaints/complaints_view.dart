@@ -37,16 +37,16 @@ class ComplaintsView extends StatelessWidget {
               ],
             ),
           ),
-          body: CustomServerStatusWidget(
-            statusRequest: controller.statusRequest,
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: 10.w,
-                vertical: 10.h,
-              ),
-              child: Column(
-                children: [
-                  Expanded(
+          body: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 10.w,
+              vertical: 10.h,
+            ),
+            child: Column(
+              children: [
+                Expanded(
+                  child: CustomServerStatusWidget(
+                    statusRequest: controller.statusRequest,
                     child: CustomScrollView(
                       reverse: true,
                       slivers: [
@@ -61,8 +61,14 @@ class ComplaintsView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Gap(12.h),
-                  Row(
+                ),
+                Gap(12.h),
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 10.w,
+                    vertical: 10.h,
+                  ),
+                  child: Row(
                     children: [
                       AvatarGlow(
                         animate: controller.isRecording,
@@ -118,8 +124,8 @@ class ComplaintsView extends StatelessWidget {
                       ),
                     ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         );

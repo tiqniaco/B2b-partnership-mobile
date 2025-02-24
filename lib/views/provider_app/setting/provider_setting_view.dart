@@ -79,7 +79,7 @@ class ProviderSettingView extends StatelessWidget {
                                     controller.menuModel!.shoppingCount
                                         .toString(),
                                     "Shopping", () {
-                                  Get.toNamed(AppRoutes.getRequestServices);
+                                  Get.toNamed(AppRoutes.shop);
                                 }),
                                 boxWidget(
                                     CupertinoIcons.news,
@@ -87,7 +87,7 @@ class ProviderSettingView extends StatelessWidget {
                                     controller.menuModel!.servicesCount
                                         .toString(),
                                     "Orders", () {
-                                  Get.toNamed(AppRoutes.getRequestServices);
+                                  Get.toNamed(AppRoutes.shopOrders);
                                 }),
                                 boxWidget(
                                     Icons.headset_mic_outlined,
@@ -95,7 +95,7 @@ class ProviderSettingView extends StatelessWidget {
                                     controller.menuModel!.complaintsCount
                                         .toString(),
                                     "Complaints", () {
-                                  Get.toNamed(AppRoutes.getRequestServices);
+                                  Get.toNamed(AppRoutes.complaints);
                                 })
                               ],
                             ),
