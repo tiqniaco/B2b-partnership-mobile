@@ -56,7 +56,7 @@ class ProviderSignup3 extends StatelessWidget {
                     ),
                   Gap(5),
                   SizedBox(
-                    width: 75.h,
+                    width: 80.h,
                     child: ElevatedButton(
                         onPressed: () {
                           controller.pickPDF("c");
@@ -102,9 +102,10 @@ class ProviderSignup3 extends StatelessWidget {
                     ),
                   Gap(5),
                   SizedBox(
-                    width: 75.h,
+                    width: 80.h,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
+                            //padding: EdgeInsets.symmetric(horizontal: 10),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30))),
                         onPressed: () {

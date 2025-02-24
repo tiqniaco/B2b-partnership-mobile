@@ -28,7 +28,7 @@ class GetServiceRequest extends StatelessWidget {
                       fontSize: 15.sp)),
               Gap(3),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -82,7 +82,7 @@ class GetServiceRequest extends StatelessWidget {
       child: InkWell(
         onTap: onTap,
         child: Material(
-          color: thirdColor.withAlpha(60),
+          color: thirdColor.withAlpha(30),
           borderRadius: BorderRadius.circular(5),
           // elevation: 1,
           child: Padding(

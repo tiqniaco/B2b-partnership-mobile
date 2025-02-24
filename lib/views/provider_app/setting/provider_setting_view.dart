@@ -374,30 +374,33 @@ class ProviderSettingView extends StatelessWidget {
   }
 
   Widget rowWithArrow(IconData icon, String title, void Function() onPressed) {
-    return Row(
-      children: [
-        CircleAvatar(
-          radius: 18.sp,
-          backgroundColor: borderColor.withAlpha(30),
-          child: Icon(
-            icon,
-            color: Colors.black54,
-            size: 20.sp,
+    return InkWell(
+      onTap: onPressed,
+      child: Row(
+        children: [
+          CircleAvatar(
+            radius: 18.sp,
+            backgroundColor: borderColor.withAlpha(30),
+            child: Icon(
+              icon,
+              color: Colors.black54,
+              size: 20.sp,
+            ),
           ),
-        ),
-        Gap(15),
-        Text(
-          title,
-          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300),
-        ),
-        Spacer(),
-        IconButton(
-            onPressed: onPressed,
-            icon: Icon(
-              Icons.arrow_forward_ios_rounded,
-              size: 15.sp,
-            ))
-      ],
+          Gap(15),
+          Text(
+            title,
+            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300),
+          ),
+          Spacer(),
+          IconButton(
+              onPressed: onPressed,
+              icon: Icon(
+                Icons.arrow_forward_ios_rounded,
+                size: 15.sp,
+              ))
+        ],
+      ),
     );
   }
 }
