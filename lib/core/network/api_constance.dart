@@ -94,4 +94,6 @@ class ApiConstance {
 
   // Notifications
   static String getNotifications = 'notifications';
+
+  static String updateProviderProfile(String id) => "providers/$id/update";
 }

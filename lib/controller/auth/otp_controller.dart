@@ -15,14 +15,17 @@ class OTPController extends GetxController {
   bool fromAuth = false;
   bool isLoading = false;
   String message = "";
+  String? verifiedOTP = "";
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     email = Get.arguments['email'] ?? "";
     fromAuth = Get.arguments['fromAuth'] ?? false;
     role = Get.arguments['role'] ?? "";
     if (fromAuth) {
-      Get.put(ForgetPasswordController()).sendOtp(email: email);
+      verifiedOTP = await Get.put(ForgetPasswordController()).sendOtp(
+        email: email,
+      );
     }
     super.onInit();
   }
@@ -42,63 +45,70 @@ class OTPController extends GetxController {
       AppSnackBars.warning(message: "OTP must be 6 digits".tr);
       return;
     } else {
-      verifyOTP();
+      verifyOTP(verifiedOTP == otp);
     }
   }
 
-  Future<void> verifyOTP() async {
+  Future<void> verifyOTP(bool verified) async {
     isLoading = true;
     message = "Verifying OTP...".tr;
     update();
-    final result = await CustomRequest<String>(
-      path: ApiConstance.verifyOTP,
-      data: {
-        "email": email,
-        "otp": otp,
-      },
-      fromJson: (json) {
-        return json['message'];
-      },
-    ).sendPostRequest();
-
-    result.fold(
-      (error) {
+    if (fromAuth) {
+      if (verified) {
+        message = "Creating Account...".tr;
+        update();
+        final controller = Get.put(SignupController());
+        await Future.wait([
+          controller.role == "provider"
+              ? controller.signupProvider()
+              : controller.signupClient(),
+        ]);
         isLoading = false;
         message = "";
         update();
-        AppSnackBars.error(message: error.errMsg);
-      },
-      (data) async {
-        AppSnackBars.success(
-          message: "OTP Verified Successfully".tr,
-        );
-        if (fromAuth) {
-          message = "Creating Account...".tr;
-          update();
-          final controller = Get.put(SignupController());
-          await Future.wait([
-            controller.role == "provider"
-                ? controller.signupProvider()
-                : controller.signupClient(),
-          ]);
+        // Get.offAllNamed(AppRoutes.login);
+      } else {
+        AppSnackBars.error(message: "Not a valid OTP".tr);
+        message = "";
+        isLoading = false;
+        update();
+      }
+    } else {
+      final result = await CustomRequest<String>(
+        path: ApiConstance.verifyOTP,
+        data: {
+          "email": email,
+          "otp": otp,
+        },
+        fromJson: (json) {
+          return json['message'];
+        },
+      ).sendPostRequest();
+      result.fold(
+        (error) {
           isLoading = false;
           message = "";
           update();
-          // Get.offAllNamed(AppRoutes.login);
-        } else {
+          AppSnackBars.error(message: error.errMsg);
+        },
+        (data) async {
+          AppSnackBars.success(
+            message: "OTP Verified Successfully".tr,
+          );
+
           Get.offNamed(
             AppRoutes.forgetPasswordReset,
             arguments: {
               "email": email,
             },
           );
-        }
-      },
-    );
+        },
+      );
+    }
   }
 
   Future<void> resendOTP() async {
     log(email, name: 'Email');
-    // Get.put(ForgetPasswordController()).sendOtp(email: email);
+    Get.put(ForgetPasswordController()).sendOtp(email: email);
   }
 }

@@ -37,80 +37,92 @@ class ComplaintsView extends StatelessWidget {
               ],
             ),
           ),
-          body: CustomServerStatusWidget(
-            statusRequest: controller.statusRequest,
-            child: CustomScrollView(
-              reverse: true,
-              slivers: [
-                SliverPadding(
+          body: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 10.w,
+              vertical: 10.h,
+            ),
+            child: Column(
+              children: [
+                Expanded(
+                  child: CustomServerStatusWidget(
+                    statusRequest: controller.statusRequest,
+                    child: CustomScrollView(
+                      reverse: true,
+                      slivers: [
+                        SliverList.separated(
+                          itemBuilder: (context, index) =>
+                              ComplaintsMessageWidget(
+                            model: controller.complaints[index],
+                          ),
+                          separatorBuilder: (context, index) => Gap(10.h),
+                          itemCount: controller.complaints.length,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                Gap(12.h),
+                Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: 10.w,
                     vertical: 10.h,
                   ),
-                  sliver: SliverList.separated(
-                    itemBuilder: (context, index) => ComplaintsMessageWidget(
-                      model: controller.complaints[index],
-                    ),
-                    separatorBuilder: (context, index) => Gap(10.h),
-                    itemCount: controller.complaints.length,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          bottomNavigationBar: BottomAppBar(
-            child: Row(
-              children: [
-                AvatarGlow(
-                  animate: controller.isRecording,
-                  glowColor: primaryColor,
-                  child: Container(
-                    width: 40.w,
-                    height: 40.w,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50.r),
-                      color: primaryColor,
-                    ),
-                    child: FloatingActionButton(
-                      onPressed: () {
-                        if (!controller.isRecording) {
-                          controller.record();
-                        } else {
-                          controller.stopRecord();
-                        }
-                      },
-                      child: Icon(
-                        controller.isRecording
-                            ? FontAwesomeIcons.stop
-                            : FontAwesomeIcons.microphone,
-                        color: whiteColor,
-                        size: 18.w,
+                  child: Row(
+                    children: [
+                      AvatarGlow(
+                        animate: controller.isRecording,
+                        glowColor: primaryColor,
+                        child: Container(
+                          width: 40.w,
+                          height: 40.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50.r),
+                            color: primaryColor,
+                          ),
+                          child: FloatingActionButton(
+                            onPressed: () {
+                              if (!controller.isRecording) {
+                                controller.record();
+                              } else {
+                                controller.stopRecord();
+                              }
+                            },
+                            child: Icon(
+                              controller.isRecording
+                                  ? FontAwesomeIcons.stop
+                                  : FontAwesomeIcons.microphone,
+                              color: whiteColor,
+                              size: 18.w,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-                Gap(10.w),
-                Expanded(
-                  child: TextFormField(
-                    controller: controller.complaintController,
-                    decoration: InputDecoration(
-                      hintText: "Enter your complaints...".tr,
-                      hintStyle: getLightStyle.copyWith(
-                        color: greyColor,
+                      Gap(10.w),
+                      Expanded(
+                        child: TextFormField(
+                          controller: controller.complaintController,
+                          decoration: InputDecoration(
+                            hintText: "Enter your complaints...".tr,
+                            hintStyle: getLightStyle.copyWith(
+                              color: greyColor,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                          ),
+                        ),
                       ),
-                      filled: true,
-                      fillColor: Colors.white,
-                    ),
-                  ),
-                ),
-                // Gap(10.w),
-                IconButton(
-                  onPressed: () {
-                    controller.sendComplaint();
-                  },
-                  icon: Icon(
-                    FontAwesomeIcons.paperPlane,
-                    color: primaryColor,
+                      // Gap(10.w),
+                      IconButton(
+                        onPressed: () {
+                          controller.sendComplaint();
+                        },
+                        icon: Icon(
+                          FontAwesomeIcons.paperPlane,
+                          color: primaryColor,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],

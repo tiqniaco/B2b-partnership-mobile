@@ -42,39 +42,4 @@ class SettingController extends GetxController {
       update();
     });
   }
-
-  void removeAccountDialog() {
-    Get.defaultDialog(
-      title: "Remove Account".tr,
-      middleText: "Are you sure you want to remove your account?".tr,
-      textCancel: "No".tr,
-      textConfirm: "Yes".tr,
-      onConfirm: () {
-        Get.back();
-        _removeAccount();
-      },
-    );
-  }
-
-  Future<void> _removeAccount() async {
-    removeAccountLoading = true;
-    update();
-    final result = await CustomRequest<String>(
-      path: ApiConstance.deleteAccount,
-      fromJson: (json) {
-        return json['message'];
-      },
-    ).sendPostRequest();
-    result.fold((l) {
-      statusRequest = StatusRequest.error;
-      AppSnackBars.error(message: l.errMsg);
-      removeAccountLoading = false;
-      update();
-    }, (r) {
-      AppSnackBars.success(message: r);
-      removeAccountLoading = false;
-      logout();
-      update();
-    });
-  }
 }

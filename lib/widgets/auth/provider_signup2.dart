@@ -48,7 +48,13 @@ class ProviderSignup2 extends StatelessWidget {
           CustomPhoneWidget(),
           if (controller.role == "provider") ...[
             Gap(10.h),
-            SelectProviderWidget(),
+            SelectProviderWidget(
+              providerTypes: controller.providerTypes,
+              value: controller.selectedType,
+              onChanged: (value) {
+                controller.onProviderTypeChanged(value);
+              },
+            ),
             Gap(20.h),
             SelectSpecializationWidget(
               value: controller.selectedSpecialization,

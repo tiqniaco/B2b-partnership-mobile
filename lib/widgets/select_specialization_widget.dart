@@ -17,6 +17,7 @@ class SelectSpecializationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<SpecializeModel>(
+        isExpanded: true,
         value: value, //controller.selectedSpecialization,
         decoration: InputDecoration(
           contentPadding:
@@ -45,17 +46,12 @@ class SelectSpecializationWidget extends StatelessWidget {
         items: models.map((item) {
           return DropdownMenuItem<SpecializeModel>(
             value: item,
-            child: Row(
-              children: [
-                Text(
-                  translateDatabase(
-                      arabic: item.nameAr!, english: item.nameEn!),
-                  style: TextStyle(
-                      fontSize: 12.sp,
-                      color: greyColor.withAlpha(160),
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
+            child: Text(
+              translateDatabase(arabic: item.nameAr!, english: item.nameEn!),
+              style: TextStyle(
+                  fontSize: 12.sp,
+                  color: greyColor.withAlpha(160),
+                  fontWeight: FontWeight.bold),
             ),
           );
         }).toList(),

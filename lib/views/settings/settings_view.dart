@@ -1,6 +1,7 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/settings/setting_controller.dart';
 import 'package:b2b_partenership/core/functions/logout.dart';
+import 'package:b2b_partenership/core/functions/remove_account.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/widgets/language_widget.dart';
@@ -207,7 +208,7 @@ class SettingsView extends StatelessWidget {
                                       "Edit Profile",
                                       () {
                                         Get.toNamed(
-                                          AppRoutes.editClientProfile,
+                                          AppRoutes.editProviderProfile,
                                           arguments: {
                                             'model': controller.menuModel!.data,
                                           },
@@ -250,7 +251,11 @@ class SettingsView extends StatelessWidget {
                                       CupertinoIcons.delete_simple,
                                       "Remove Account",
                                       () {
-                                        controller.removeAccountDialog();
+                                        removeAccountDialog(
+                                          removeAccountLoading:
+                                              controller.removeAccountLoading,
+                                          update: controller.update,
+                                        );
                                       },
                                     ),
                                     Gap(8),

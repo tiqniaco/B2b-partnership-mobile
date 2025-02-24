@@ -19,7 +19,7 @@ class OrdersView extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: whiteColor,
-              automaticallyImplyLeading: false,
+              // automaticallyImplyLeading: false,
               title: Text("My Orders"),
             ),
             body: Padding(

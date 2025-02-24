@@ -1,8 +1,10 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/provider/setting/provider_setting_controller.dart';
 import 'package:b2b_partenership/core/functions/logout.dart';
+import 'package:b2b_partenership/core/functions/remove_account.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/widgets/language_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
@@ -77,7 +79,7 @@ class ProviderSettingView extends StatelessWidget {
                                     controller.menuModel!.shoppingCount
                                         .toString(),
                                     "Shopping", () {
-                                  Get.toNamed(AppRoutes.getRequestServices);
+                                  Get.toNamed(AppRoutes.shop);
                                 }),
                                 boxWidget(
                                     CupertinoIcons.news,
@@ -85,7 +87,7 @@ class ProviderSettingView extends StatelessWidget {
                                     controller.menuModel!.servicesCount
                                         .toString(),
                                     "Orders", () {
-                                  Get.toNamed(AppRoutes.getRequestServices);
+                                  Get.toNamed(AppRoutes.shopOrders);
                                 }),
                                 boxWidget(
                                     Icons.headset_mic_outlined,
@@ -93,7 +95,7 @@ class ProviderSettingView extends StatelessWidget {
                                     controller.menuModel!.complaintsCount
                                         .toString(),
                                     "Complaints", () {
-                                  Get.toNamed(AppRoutes.getRequestServices);
+                                  Get.toNamed(AppRoutes.complaints);
                                 })
                               ],
                             ),
@@ -262,8 +264,18 @@ class ProviderSettingView extends StatelessWidget {
                                       fontSize: 17.sp),
                                 ),
                                 Gap(20),
-                                rowWithArrow(CupertinoIcons.person,
-                                    "Edit Profile", () {}),
+                                rowWithArrow(
+                                  CupertinoIcons.person,
+                                  "Edit Profile",
+                                  () {
+                                    Get.toNamed(
+                                      AppRoutes.editProviderProfile,
+                                      arguments: {
+                                        'model': controller.menuModel!.data,
+                                      },
+                                    );
+                                  },
+                                ),
                                 Gap(8),
                                 FractionallySizedBox(
                                   widthFactor: 10,
@@ -272,8 +284,7 @@ class ProviderSettingView extends StatelessWidget {
                                   ),
                                 ),
                                 Gap(8),
-                                rowWithArrow(CupertinoIcons.padlock,
-                                    "Change Password", () {}),
+                                LanguageWidget(),
                                 Gap(8),
                                 FractionallySizedBox(
                                   widthFactor: 10,
@@ -282,8 +293,13 @@ class ProviderSettingView extends StatelessWidget {
                                   ),
                                 ),
                                 Gap(8),
-                                rowWithArrow(CupertinoIcons.delete_simple,
-                                    "Remove Account", () {}),
+                                rowWithArrow(
+                                  CupertinoIcons.padlock,
+                                  "Change Password",
+                                  () {
+                                    Get.toNamed(AppRoutes.changePassword);
+                                  },
+                                ),
                                 Gap(8),
                                 FractionallySizedBox(
                                   widthFactor: 10,
@@ -292,10 +308,32 @@ class ProviderSettingView extends StatelessWidget {
                                   ),
                                 ),
                                 Gap(8),
-                                rowWithArrow(Icons.logout_rounded, "Logout",
-                                    () {
-                                  logout();
-                                }),
+                                rowWithArrow(
+                                  CupertinoIcons.delete_simple,
+                                  "Remove Account",
+                                  () {
+                                    removeAccountDialog(
+                                      removeAccountLoading:
+                                          controller.removeAccountLoading,
+                                      update: controller.update,
+                                    );
+                                  },
+                                ),
+                                Gap(8),
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    color: borderColor,
+                                  ),
+                                ),
+                                Gap(8),
+                                rowWithArrow(
+                                  Icons.logout_rounded,
+                                  "Logout",
+                                  () {
+                                    logoutDialog();
+                                  },
+                                ),
                               ],
                             ),
                           ],

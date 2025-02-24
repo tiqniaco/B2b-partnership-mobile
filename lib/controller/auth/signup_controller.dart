@@ -223,30 +223,24 @@ class SignupController extends GetxController {
     update();
   }
 
+  ///----------------
+  ///
 
-
-///----------------
-///
-
-goToOtp() {
-                         // Logger().f(controller.currentStep);
-                          if (currentStep ==
-                              providerSteps.length - 1) {
-                            return Get.toNamed(
-                              AppRoutes.otp,
-                              arguments: {
-                                'email': emailController.text,
-                                'fromAuth': true,
-                                'role': role,
-                              },
-                            );
-                          } else {
-                            return nextStep;
-                          }
-                        }
-
-
-
+  goToOtp() {
+    // Logger().f(controller.currentStep);
+    if (currentStep == providerSteps.length - 1) {
+      return Get.toNamed(
+        AppRoutes.otp,
+        arguments: {
+          'email': emailController.text,
+          'fromAuth': true,
+          'role': role,
+        },
+      );
+    } else {
+      return nextStep;
+    }
+  }
 
   Future<void> signupProvider() async {
     if (formKey.currentState!.validate()) {

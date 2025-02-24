@@ -12,6 +12,7 @@ class ProviderModel {
   String? taxCard;
   String? bio;
   String? rating;
+  String? providerTypeId;
   String? providerTypeNameAr;
   String? providerTypeNameEn;
   String? specializationId;
@@ -50,6 +51,7 @@ class ProviderModel {
       this.taxCard,
       this.bio,
       this.rating,
+      this.providerTypeId,
       this.providerTypeNameAr,
       this.providerTypeNameEn,
       this.specializationId,
@@ -88,6 +90,7 @@ class ProviderModel {
     taxCard = kBaseImageUrl + json['tax_card'];
     bio = json['bio'];
     rating = json['rating'];
+    providerTypeId = json['provider_type_id'];
     providerTypeNameAr = json['provider_type_name_ar'];
     providerTypeNameEn = json['provider_type_name_en'];
     specializationId = json['specialization_id'];

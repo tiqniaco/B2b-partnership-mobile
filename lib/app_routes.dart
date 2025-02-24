@@ -7,6 +7,7 @@ import 'package:b2b_partenership/views/auth/provider_signup_view.dart';
 import 'package:b2b_partenership/views/auth/client_signup_view.dart';
 import 'package:b2b_partenership/views/home/client_home_layout.dart';
 import 'package:b2b_partenership/views/home/client_home_view.dart';
+import 'package:b2b_partenership/views/orders/orders_view.dart';
 import 'package:b2b_partenership/views/provider_app/home/provider_home_layout.dart';
 import 'package:b2b_partenership/views/provider_app/home/provider_home_view.dart';
 import 'package:b2b_partenership/views/provider_profile/previous_work_view.dart';
@@ -28,6 +29,7 @@ import 'views/complaints/complaints_view.dart';
 import 'views/notifications/views/notification_view.dart';
 import 'views/orders/order_details_view.dart';
 import 'views/orders/order_item_view.dart';
+import 'views/provider_app/setting/edit_provider_profile_view.dart';
 import 'views/search/search_view.dart';
 import 'views/service_request/service_request_details.dart';
 import 'views/shop/shop_product_details_view.dart';
@@ -74,6 +76,7 @@ class AppRoutes {
   static const String shop = '/shop';
   static const String shopProductDetails = '/shopProductDetails';
   static const String shopCart = '/shopCart';
+  static const String shopOrders = '/orders';
 
   // Edit Client Profile
   static const String editClientProfile = '/editClientProfile';
@@ -90,6 +93,9 @@ class AppRoutes {
   // Order Details
   static const String orderDetails = '/orderDetails';
   static const String orderItem = '/orderItem';
+
+  // Edit Provider Profile
+  static const String editProviderProfile = "/edit-provider-profile";
 
   static final List<GetPage<dynamic>> pages = [
     // base
@@ -231,7 +237,11 @@ class AppRoutes {
       page: () => SearchView(),
     ),
 
-    // Order Details
+    // Order
+    GetPage(
+      name: shopOrders,
+      page: () => const OrdersView(),
+    ),
     GetPage(
       name: orderDetails,
       page: () => const OrderDetailsView(),
@@ -239,6 +249,12 @@ class AppRoutes {
     GetPage(
       name: orderItem,
       page: () => const OrderItemView(),
+    ),
+
+    // Edit Provider Profile
+    GetPage(
+      name: editProviderProfile,
+      page: () => const EditProviderProfileView(),
     ),
   ];
 }
