@@ -163,7 +163,44 @@ class AddRequestServiceController extends GetxController {
         update();
       });
     } else {
-     
+      AppSnackBars.warning(message: "please fill all fields");
+    }
+  }
+
+  Future<void> addServicesForProvider() async {
+    if (formKey.currentState?.validate() ?? false) {
+      formKey.currentState!.save();
+      statusRequest = StatusRequest.loading;
+      final result = await CustomRequest<Map<String, dynamic>>(
+          path: ApiConstance.addServiceRequest,
+          fromJson: (json) {
+            return json;
+          },
+          files: {
+            if (imageFile != null) "image": imageFile!.path,
+          },
+          data: {
+            "client_id": Get.find<AppPreferences>().getUserRoleId(),
+            "governments_id": selectedCity.id,
+            "sub_specialization_id": selectedSubSpecialization.id,
+            "title_ar": titleEnController.text,
+            "title_en": titleEnController.text,
+            "address": addressController.text,
+            "description": descriptionController.text,
+          }).sendPostRequest();
+      result.fold((l) {
+        statusRequest = StatusRequest.error;
+        Logger().e(l.errMsg);
+        AppSnackBars.error(message: l.errMsg);
+        update();
+      }, (r) {
+        Get.back();
+        AppSnackBars.success(message: r['message']);
+        statusRequest = StatusRequest.success;
+
+        update();
+      });
+    } else {
       AppSnackBars.warning(message: "please fill all fields");
     }
   }

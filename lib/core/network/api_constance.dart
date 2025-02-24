@@ -45,6 +45,9 @@ class ApiConstance {
   static const String getServicePriceOffer = 'request-offers';
   static String acceptPriceOffers(String id) =>
       'request-offers/$id/accept-offer';
+  static const String addPriceOffer = 'request-offers';
+  static const String getProviderOffersInPost = 'provider-offers';
+  static String deletePriceOffer(String id) => 'request-offers/$id';
 
   //service details
   static String getServiceDetails(String id) => 'provider-service/$id';
@@ -64,6 +67,7 @@ class ApiConstance {
       'home/country/$id/top-providers';
   static String getWorkImages = '/previous-work-images';
   static String addReview = '/provider-service-reviews';
+  static String addNewService = '/provider-service';
 
   // favorite
   static String getUserFavorite = 'favorite-providers';

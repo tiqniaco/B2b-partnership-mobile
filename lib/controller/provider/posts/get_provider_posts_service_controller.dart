@@ -10,7 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
-class GetProviderRequestServiceController extends GetxController {
+class GetProviderPostsServiceController extends GetxController {
   CountryModel? selectedCountry;
   CityModel? selectedCity;
   SpecializeModel? selectedSpecialization;
@@ -202,4 +202,159 @@ class GetProviderRequestServiceController extends GetxController {
     });
     update();
   }
+
+  resetFunction() {
+    selectedCity = null;
+    selectedCountry = null;
+    selectedSpecialization = null;
+    selectedSubSpecialization = null;
+    getServices();
+    update();
+  }
+
+  resetLocation() {
+    selectedCountry = null;
+    selectedCity = null;
+    update(['location']);
+  }
+
+  resetCategory() {
+    selectedSpecialization = null;
+    selectedSubSpecialization = null;
+    update(['category']);
+  }
+
+  // onCountryChanged(value) {
+  //   selectedCountry = value;
+  //   debugPrint('Selected Country: $value');
+  //   enable = true;
+  //   getCities();
+  //   update(['location']);
+  // }
+
+  // onCityChanged(value) {
+  //   selectedCity = value;
+  //   debugPrint('Selected city: $value');
+  //   update(['location']);
+  // }
+
+  // onSpecializeChanged(value) async {
+  //   selectedSpecialization = value;
+  //   debugPrint('Selected specialize: $value');
+  //   await getSupSpecialization();
+  //   update(['category']);
+  // }
+
+  // onSubSpecializeChanged(value) {
+  //   selectedSubSpecialization = value;
+  //   debugPrint('Selected sub specialize: $value');
+  //   update(['category']);
+  // }
+
+  // Future<void> getCountries() async {
+  //   statusRequest = StatusRequest.loading;
+  //   final result = await CustomRequest<List<CountryModel>>(
+  //     path: ApiConstance.countries,
+  //     fromJson: (json) {
+  //       return json['data']
+  //           .map<CountryModel>((element) => CountryModel.fromJson(element))
+  //           .toList(); //. json['data'];
+  //     },
+  //   ).sendGetRequest();
+
+  //   result.fold((l) {
+  //     statusRequest = StatusRequest.error;
+  //     Logger().e(l.errMsg);
+  //     update();
+  //   }, (r) {
+  //     print(r);
+  //     countries = r;
+  //     //selectedCountry = r[0];
+  //     if (r.isEmpty) {
+  //       statusRequest = StatusRequest.noData;
+  //     } else {
+  //       statusRequest = StatusRequest.success;
+  //     }
+  //     update();
+  //   });
+  // }
+
+  // Future<void> getCities() async {
+  //   statusRequestCity = StatusRequest.loading;
+  //   final response = await CustomRequest(
+  //       path: ApiConstance.cities,
+  //       data: {"country_id": selectedCountry!.id},
+  //       fromJson: (json) {
+  //         return json['data']
+  //             .map<CityModel>((city) => CityModel.fromJson(city))
+  //             .toList();
+  //       }).sendGetRequest();
+  //   response.fold((l) {
+  //     statusRequestCity = StatusRequest.error;
+  //   }, (r) {
+  //     cities.clear();
+  //     cities = r;
+  //     if (r.isEmpty) {
+  //       statusRequestCity = StatusRequest.noData;
+  //     } else {
+  //       //selectedCity = r[0];
+  //       statusRequestCity = StatusRequest.success;
+  //     }
+  //   });
+  //   update();
+  // }
+
+  // Future<void> getSpecialization() async {
+  //   statusRequestSpecialization = StatusRequest.loading;
+  //   final response = await CustomRequest(
+  //       path: ApiConstance.getSpecialization,
+  //       fromJson: (json) {
+  //         return json['data']
+  //             .map<SpecializeModel>((e) => SpecializeModel.fromJson(e))
+  //             .toList();
+  //       }).sendGetRequest();
+  //   response.fold((l) {
+  //     statusRequestSpecialization = StatusRequest.error;
+  //     Logger().e(l.errMsg);
+  //   }, (r) {
+  //     specializations.clear();
+  //     statusRequestSpecialization = StatusRequest.success;
+  //     specializations = r;
+  //     if (r.isEmpty) {
+  //       statusRequestSpecialization = StatusRequest.noData;
+  //     } else {
+  //       //selectedSpecialization = r[0];
+  //       statusRequestSpecialization = StatusRequest.success;
+  //     }
+  //   });
+  //   update();
+  // }
+
+  // Future<void> getSupSpecialization() async {
+  //   statusRequestSupSpecialization = StatusRequest.loading;
+  //   final response = await CustomRequest(
+  //       path: ApiConstance.getSupSpecialization,
+  //       data: {"specialization_id": selectedSpecialization!.id},
+  //       fromJson: (json) {
+  //         return json['data']
+  //             .map<SubSpecializeModel>(
+  //                 (type) => SubSpecializeModel.fromJson(type))
+  //             .toList();
+  //       }).sendGetRequest();
+  //   response.fold((l) {
+  //     statusRequestSupSpecialization = StatusRequest.error;
+  //     Logger().e(l.errMsg);
+  //   }, (r) {
+  //     subSpecializations.clear();
+  //     statusRequestSupSpecialization = StatusRequest.success;
+  //     subSpecializations = r;
+  //     if (r.isEmpty) {
+  //       statusRequestSupSpecialization = StatusRequest.noData;
+  //     } else {
+  //       //  selectedSubSpecialization = r[0];
+  //       statusRequestSupSpecialization = StatusRequest.success;
+  //     }
+  //   });
+  //   update();
+  // }
 }

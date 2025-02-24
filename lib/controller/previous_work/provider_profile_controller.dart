@@ -24,6 +24,7 @@ class ProviderProfileController extends GetxController {
   late String provId;
   int rating = 0;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+    TextEditingController reviewController = TextEditingController();
   StatusRequest statusRequest = StatusRequest.loading;
   StatusRequest statusRequestReview = StatusRequest.loading;
   StatusRequest statusRequestServices = StatusRequest.loading;
@@ -31,7 +32,7 @@ class ProviderProfileController extends GetxController {
   List<ServiceModelData> providerServices = [];
   List<ProviderPerviousWorkModel> previousWork = [];
   List<ReviewModel> reviews = [];
-  TextEditingController reviewController = TextEditingController();
+
 
   @override
   onInit() async {
@@ -105,20 +106,6 @@ class ProviderProfileController extends GetxController {
       ),
     );
   }
-
-  // _addReview() async {
-  //   final result = await _repo.addReview(
-  //     doctorId: int.parse(appointmentModel!.doctorId),
-  //     rating: rating,
-  //     comment:
-  //         reviewController.text == '' ? 'No comment' : reviewController.text,
-  //   );
-  //   result.fold((failure) {
-  //     AppSnackBars.error(message: failure.errMsg);
-  //   }, (data) {
-  //     AppSnackBars.success(message: 'Review added successfully');
-  //   });
-  // }
 
   @override
   void onClose() {
@@ -264,4 +251,6 @@ class ProviderProfileController extends GetxController {
       });
     }
   }
+
+
 }
