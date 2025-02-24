@@ -22,7 +22,8 @@ class ForgetPasswordController extends GetxController {
     super.onClose();
   }
 
-  Future<void> sendOtp({String? email}) async {
+  Future<String?> sendOtp({String? email}) async {
+    String otp = "";
     if (formKey.currentState?.validate() ?? false || email != null) {
       final result = await CustomRequest<String>(
         path: ApiConstance.sendOTP,
@@ -30,13 +31,15 @@ class ForgetPasswordController extends GetxController {
           "email": email ?? emailController.text,
         },
         fromJson: (json) {
+          otp = json['otp'].toString();
           return json['message'];
         },
       ).sendPostRequest();
 
-      result.fold(
+      return result.fold(
         (error) {
           AppSnackBars.error(message: error.errMsg);
+          return null;
         },
         (data) {
           AppSnackBars.success(
@@ -48,8 +51,10 @@ class ForgetPasswordController extends GetxController {
               "email": emailController.text,
             },
           );
+          return otp;
         },
       );
     }
+    return null;
   }
 }

@@ -28,6 +28,7 @@ import 'views/complaints/complaints_view.dart';
 import 'views/notifications/views/notification_view.dart';
 import 'views/orders/order_details_view.dart';
 import 'views/orders/order_item_view.dart';
+import 'views/provider_app/setting/edit_provider_profile_view.dart';
 import 'views/search/search_view.dart';
 import 'views/service_request/service_request_details.dart';
 import 'views/shop/shop_product_details_view.dart';
@@ -90,6 +91,9 @@ class AppRoutes {
   // Order Details
   static const String orderDetails = '/orderDetails';
   static const String orderItem = '/orderItem';
+
+  // Edit Provider Profile
+  static const String editProviderProfile = "/edit-provider-profile";
 
   static final List<GetPage<dynamic>> pages = [
     // base
@@ -239,6 +243,12 @@ class AppRoutes {
     GetPage(
       name: orderItem,
       page: () => const OrderItemView(),
+    ),
+
+    // Edit Provider Profile
+    GetPage(
+      name: editProviderProfile,
+      page: () => const EditProviderProfileView(),
     ),
   ];
 }

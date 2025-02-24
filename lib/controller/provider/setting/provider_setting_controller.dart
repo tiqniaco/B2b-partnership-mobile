@@ -12,6 +12,7 @@ import 'package:logger/logger.dart';
 class ProviderSettingController extends GetxController {
   ProviderMenuModel? menuModel;
   StatusRequest statusRequest = StatusRequest.loading;
+  bool removeAccountLoading = false;
 
   @override
   void onInit() {

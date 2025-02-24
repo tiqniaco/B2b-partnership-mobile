@@ -264,13 +264,14 @@ class SignupController extends GetxController {
           AppSnackBars.success(message: r['message']);
           statusRequest = StatusRequest.success;
 
-          Get.toNamed(
-            AppRoutes.otp,
-            arguments: {
-              'email': emailController.text,
-              'fromAuth': true,
-            },
-          );
+          // Get.toNamed(
+          //   AppRoutes.otp,
+          //   arguments: {
+          //     'email': emailController.text,
+          //     'fromAuth': true,
+          //   },
+          // );
+          Get.offAllNamed(AppRoutes.login);
           update();
         });
       }
@@ -310,13 +311,15 @@ class SignupController extends GetxController {
           AppSnackBars.success(message: r['message']);
           statusRequest = StatusRequest.success;
 
-          Get.toNamed(
-            AppRoutes.otp,
-            arguments: {
-              'email': emailController.text,
-              'fromAuth': true,
-            },
-          );
+          // Get.toNamed(
+          //   AppRoutes.otp,
+          //   arguments: {
+          //     'email': emailController.text,
+          //     'fromAuth': true,
+          //   },
+          // );
+          Get.offAllNamed(AppRoutes.login);
+
           update();
         });
       }
