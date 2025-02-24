@@ -26,6 +26,8 @@ import 'package:get/get.dart';
 
 import 'views/complaints/complaints_view.dart';
 import 'views/notifications/views/notification_view.dart';
+import 'views/orders/order_details_view.dart';
+import 'views/orders/order_item_view.dart';
 import 'views/search/search_view.dart';
 import 'views/service_request/service_request_details.dart';
 import 'views/shop/shop_product_details_view.dart';
@@ -84,6 +86,10 @@ class AppRoutes {
   static const String notification = '/notification';
 
   static const String search = '/search';
+
+  // Order Details
+  static const String orderDetails = '/orderDetails';
+  static const String orderItem = '/orderItem';
 
   static final List<GetPage<dynamic>> pages = [
     // base
@@ -223,6 +229,16 @@ class AppRoutes {
     GetPage(
       name: search,
       page: () => SearchView(),
+    ),
+
+    // Order Details
+    GetPage(
+      name: orderDetails,
+      page: () => const OrderDetailsView(),
+    ),
+    GetPage(
+      name: orderItem,
+      page: () => const OrderItemView(),
     ),
   ];
 }
