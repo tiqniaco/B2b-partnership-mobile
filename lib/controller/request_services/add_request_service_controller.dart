@@ -48,6 +48,7 @@ class AddRequestServiceController extends GetxController {
   StatusRequest statusRequestCountry = StatusRequest.loading;
   StatusRequest statusRequestSpecialization = StatusRequest.loading;
   StatusRequest statusRequestSupSpecialization = StatusRequest.loading;
+
   File? imageFile;
 
   @override

@@ -26,7 +26,7 @@ class MyService extends StatelessWidget {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Get.toNamed(AppRoutes.addServicesRequest);
+            Get.toNamed(AppRoutes.addProviderService);
           },
           shape: CircleBorder(),
           child: Icon(Icons.add),

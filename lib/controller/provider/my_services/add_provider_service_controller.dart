@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:b2b_partenership/core/crud/custom_request.dart';
@@ -9,14 +10,21 @@ import 'package:b2b_partenership/models/city_model.dart';
 import 'package:b2b_partenership/models/country_model.dart';
 import 'package:b2b_partenership/models/specialize_model.dart';
 import 'package:b2b_partenership/models/sub_specialize_model.dart';
+import 'package:b2b_partenership/widgets/request_services/build_text_form.dart';
 import 'package:b2b_partenership/widgets/request_services/request_service1.dart';
 import 'package:b2b_partenership/widgets/request_services/request_service2.dart';
+import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
 
-class AddRequestServiceController extends GetxController {
+import 'get_my_service_controller.dart';
+
+class AddProviderServiceController extends GetxController {
+  final formKey = GlobalKey<FormState>();
   final TextEditingController clientIdController = TextEditingController();
   final TextEditingController governmentIdController = TextEditingController();
   final TextEditingController subSpecializationIdController =
@@ -25,13 +33,14 @@ class AddRequestServiceController extends GetxController {
   final TextEditingController titleEnController = TextEditingController();
   final TextEditingController addressController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
+  final TextEditingController overviewController = TextEditingController();
+  final TextEditingController videoController = TextEditingController();
 
   late CountryModel selectedCountry;
-  late CityModel selectedCity;
+  CityModel? selectedCity;
   late SpecializeModel selectedSpecialization;
   late SubSpecializeModel selectedSubSpecialization;
 
-  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   List<CountryModel> countries = [];
   List<CityModel> cities = [];
   List<SpecializeModel> specializations = [];
@@ -50,12 +59,50 @@ class AddRequestServiceController extends GetxController {
   StatusRequest statusRequestSupSpecialization = StatusRequest.loading;
   File? imageFile;
 
+  bool get isLoading =>
+      statusRequestCity == StatusRequest.loading ||
+      statusRequestCountry == StatusRequest.loading ||
+      statusRequestSpecialization == StatusRequest.loading ||
+      statusRequestSupSpecialization == StatusRequest.loading;
+
+  List<ServiceFeatureModel> features = [];
+
+  List<Map<String, TextEditingController>> featuresControllers = [];
+
+  void increaseFeatures() {
+    featuresControllers.add({
+      "arabic": TextEditingController(),
+      "english": TextEditingController(),
+    });
+    features.add(ServiceFeatureModel(
+      index: features.length,
+      widget: featureWidget(
+        arController: featuresControllers.last["arabic"]!,
+        enController: featuresControllers.last["english"]!,
+        index: features.length,
+      ),
+    ));
+    update();
+  }
+
+  void removeFeatures(int index) {
+    print(features.toString());
+    if (features.length > 1) {
+      features.removeAt(index);
+      featuresControllers[index]['arabic']?.dispose();
+      featuresControllers[index]['english']?.dispose();
+      featuresControllers.removeAt(index);
+      update();
+    }
+  }
+
   @override
   Future<void> onInit() async {
     await getCountries();
     getCities();
     await getSpecialization();
     getSupSpecialization();
+    increaseFeatures();
     super.onInit();
   }
 
@@ -100,7 +147,8 @@ class AddRequestServiceController extends GetxController {
   }
 
   validUserData(val) {
-    if (val.isEmpty) {
+    print(val.runtimeType);
+    if (val?.isEmpty ?? true) {
       return "can't be empty".tr;
     }
   }
@@ -129,42 +177,63 @@ class AddRequestServiceController extends GetxController {
   }
 
   Future<void> addServices() async {
-    if (formKey.currentState?.validate() ?? false) {
-      formKey.currentState!.save();
-      statusRequest = StatusRequest.loading;
+    try {
+      if (imageFile == null) {
+        AppSnackBars.warning(message: "please select image");
+      }
+      if (formKey.currentState?.validate() ?? false) {
+        formKey.currentState!.save();
+        statusRequest = StatusRequest.loading;
+        Map<String, String> features = {};
+        for (int index = 0; index < featuresControllers.length; index++) {
+          features.addAll({
+            "features_ar[$index]":
+                featuresControllers[index]["arabic"]?.text ?? "",
+            "features_en[$index]":
+                featuresControllers[index]["english"]?.text ?? "",
+          });
+        }
 
-      final result = await CustomRequest<Map<String, dynamic>>(
-          path: ApiConstance.addServiceRequest,
-          fromJson: (json) {
-            return json;
-          },
-          files: {
-            if (imageFile != null) "image": imageFile!.path,
-          },
-          data: {
-            "client_id": Get.find<AppPreferences>().getUserRoleId(),
-            "governments_id": selectedCity.id,
-            "sub_specialization_id": selectedSubSpecialization.id,
-            "title_ar": titleEnController.text,
-            "title_en": titleEnController.text,
-            "address": addressController.text,
-            "description": descriptionController.text,
-          }).sendPostRequest();
-      result.fold((l) {
-        statusRequest = StatusRequest.error;
-        Logger().e(l.errMsg);
-        AppSnackBars.error(message: l.errMsg);
-        update();
-      }, (r) {
-        Get.back();
-        AppSnackBars.success(message: r['message']);
-        statusRequest = StatusRequest.success;
+        final result = await CustomRequest<Map<String, dynamic>>(
+            path: ApiConstance.addProviderService,
+            fromJson: (json) {
+              return json;
+            },
+            files: {
+              "image": imageFile!.path,
+            },
+            data: {
+              "provider_id": Get.find<AppPreferences>().getUserRoleId(),
+              "governments_id": selectedCity?.id,
+              "sub_specialization_id": selectedSubSpecialization.id,
+              "name_ar": titleEnController.text,
+              "name_en": titleEnController.text,
+              "address": addressController.text,
+              "description": descriptionController.text,
+              "overview": overviewController.text,
+              if (videoController.text.isNotEmpty)
+                "video": videoController.text,
+              ...features,
+            }).sendPostRequest();
 
-        update();
-      });
-    } else {
-     
-      AppSnackBars.warning(message: "please fill all fields");
+        result.fold((l) {
+          statusRequest = StatusRequest.error;
+          Logger().e(l.errMsg);
+          AppSnackBars.error(message: l.errMsg);
+          update();
+        }, (r) {
+          Get.back();
+          Get.put(GetMyServiceController()).getServices();
+          AppSnackBars.success(message: r['message']);
+          statusRequest = StatusRequest.success;
+
+          update();
+        });
+      } else {
+        AppSnackBars.warning(message: "please fill all fields");
+      }
+    } catch (e) {
+      debugPrint(e.toString());
     }
   }
 
@@ -274,6 +343,29 @@ class AddRequestServiceController extends GetxController {
     update();
   }
 
+  StepState getStepStats(bool selected) {
+    return selected ? StepState.editing : StepState.indexed;
+  }
+
+  void onStepContinue() {
+    if (currentStep < 2) {
+      currentStep++;
+      update();
+    }
+  }
+
+  void onStepCancel() {
+    if (currentStep > 0) {
+      currentStep--;
+      update();
+    }
+  }
+
+  void onStepTaped(int value) {
+    currentStep = value;
+    update();
+  }
+
   @override
   void dispose() {
     titleArController.dispose();
@@ -282,4 +374,49 @@ class AddRequestServiceController extends GetxController {
     addressController.dispose();
     super.dispose();
   }
+}
+
+Widget featureWidget({
+  required TextEditingController arController,
+  required TextEditingController enController,
+  required int index,
+}) {
+  final controller = Get.put(AddProviderServiceController());
+  return Column(
+    children: [
+      Gap(20.h),
+      buildTextField(
+        arController,
+        "Feature Arabic Title",
+        Icons.featured_play_list,
+        "enter feature arabic title",
+        (val) {
+          return controller.validUserData(val);
+        },
+      ),
+      Gap(20.h),
+      buildTextField(
+        enController,
+        "Feature English Title",
+        Icons.featured_play_list,
+        "enter feature english title",
+        (val) {
+          return controller.validUserData(val);
+        },
+      ),
+    ],
+  );
+}
+
+class ServiceFeatureModel extends Equatable {
+  final int index;
+  final Widget widget;
+
+  const ServiceFeatureModel({
+    required this.index,
+    required this.widget,
+  });
+
+  @override
+  List<Object?> get props => [index, widget];
 }

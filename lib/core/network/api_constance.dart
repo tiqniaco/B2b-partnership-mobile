@@ -68,6 +68,7 @@ class ApiConstance {
   static String getWorkImages = '/previous-work-images';
   static String addReview = '/provider-service-reviews';
   static String addNewService = '/provider-service';
+  static String addProviderService = "provider-service";
 
   // favorite
   static String getUserFavorite = 'favorite-providers';

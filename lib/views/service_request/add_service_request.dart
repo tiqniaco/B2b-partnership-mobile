@@ -66,19 +66,19 @@ class AddServiceRequest extends StatelessWidget {
                     child: controller.steps[controller.currentStep],
                   ),
                   CustomLoadingButton(
-                      borderRadius: 12,
-                      onPressed: () {
-                        if (controller.currentStep ==
-                            controller.steps.length - 1) {
-                          return controller.addServices();
-                        } else {
-                          return controller.nextStep;
-                        }
-                      },
-                      text:
-                          controller.currentStep == controller.steps.length - 1
-                              ? 'Submit'
-                              : 'Next'),
+                    borderRadius: 12,
+                    onPressed: () {
+                      if (controller.currentStep ==
+                          controller.steps.length - 1) {
+                        return controller.addServices();
+                      } else {
+                        return controller.nextStep;
+                      }
+                    },
+                    text: controller.currentStep == controller.steps.length - 1
+                        ? 'Submit'
+                        : 'Next',
+                  ),
                   Gap(300)
                 ],
               ),
