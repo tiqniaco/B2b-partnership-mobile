@@ -9,13 +9,13 @@ import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:b2b_partenership/models/service_feature_model.dart';
 import 'package:b2b_partenership/models/services_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ServiceDetailsController extends GetxController {
   bool isOverView = true;
@@ -111,63 +111,90 @@ class ServiceDetailsController extends GetxController {
             children: [
               if (service?.provider?.contactPhone != null)
                 ProviderContactMethodWidget(
-                  onTap: () {},
+                  onTap: () {
+                    _launchURL('tel://${service?.provider?.contactPhone}');
+                  },
                   icon: FontAwesomeIcons.phone,
                   value: service?.provider?.contactPhone ?? "",
                   iconColor: Colors.green,
                 ),
               if (service?.provider?.contactEmail != null)
                 ProviderContactMethodWidget(
-                  onTap: () {},
+                  onTap: () {
+                    _launchURL('mailto://${service?.provider?.contactEmail}');
+                  },
                   icon: FontAwesomeIcons.envelope,
                   value: service?.provider?.contactEmail ?? "",
                   iconColor: Colors.red,
                 ),
               if (service?.provider?.contactWhatsapp != null)
                 ProviderContactMethodWidget(
-                  onTap: () {},
+                  onTap: () {
+                    _launchURL(
+                      'https://wa.me/+${service?.provider?.contactWhatsapp}',
+                    );
+                  },
                   icon: FontAwesomeIcons.whatsapp,
                   value: service?.provider?.contactWhatsapp ?? "",
                   iconColor: whatsappColor,
                 ),
               if (service?.provider?.contactTelegram != null)
                 ProviderContactMethodWidget(
-                  onTap: () {},
+                  onTap: () {
+                    _launchURL('${service?.provider?.contactTelegram}');
+                  },
                   icon: FontAwesomeIcons.telegram,
                   value: service?.provider?.contactTelegram ?? "",
                   iconColor: telegramColor,
                 ),
               if (service?.provider?.contactInstagram != null)
                 ProviderContactMethodWidget(
-                  onTap: () {},
+                  onTap: () {
+                    _launchURL('${service?.provider?.contactInstagram}');
+                  },
                   icon: FontAwesomeIcons.instagram,
-                  value: service?.provider?.contactInstagram ?? "",
+                  value: "Instagram",
                   iconColor: instagramColor,
                 ),
               if (service?.provider?.contactFacebook != null)
                 ProviderContactMethodWidget(
-                  onTap: () {},
+                  onTap: () {
+                    _launchURL('${service?.provider?.contactFacebook}');
+                  },
                   icon: FontAwesomeIcons.facebook,
-                  value: service?.provider?.contactFacebook ?? "",
+                  value: "Facebook",
                   iconColor: facebookColor,
                 ),
               if (service?.provider?.contactLinkedin != null)
                 ProviderContactMethodWidget(
-                  onTap: () {},
+                  onTap: () {
+                    _launchURL('${service?.provider?.contactLinkedin}');
+                  },
                   icon: FontAwesomeIcons.linkedin,
-                  value: service?.provider?.contactLinkedin ?? "",
+                  value: "LinkedIn",
                   iconColor: linkedinColor,
                 ),
               if (service?.provider?.contactWebsite != null)
                 ProviderContactMethodWidget(
-                  onTap: () {},
+                  onTap: () {
+                    _launchURL(service?.provider?.contactWebsite ?? "");
+                  },
                   icon: Icons.web,
                   value: service?.provider?.contactWebsite ?? "",
                   iconColor: Colors.blue,
                 ),
+              Gap(10.h),
             ],
           ),
         ));
+  }
+
+  Future<void> _launchURL(String url) async {
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
+    } else {
+      print('Could not launch $url');
+    }
   }
 
   void deleteServiceDialog() {
