@@ -99,6 +99,8 @@ class OrderDetailsView extends StatelessWidget {
                                 AppRoutes.orderItem,
                                 arguments: {
                                   "product": controller.model!.items[index],
+                                  'orderStatus':
+                                      controller.model?.data.status ?? "",
                                 },
                               );
                             },

@@ -29,6 +29,9 @@ class OrderItemView extends StatelessWidget {
           child: Column(
             children: [
               CustomLoadingButton(
+                backgroundColor: controller.orderStatus == "completed"
+                    ? primaryColor
+                    : greyColor,
                 onPressed: () {
                   return controller.download();
                 },

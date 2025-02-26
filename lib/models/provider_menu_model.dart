@@ -5,7 +5,7 @@ class ProviderMenuModel {
   String? message;
   int? jobsCount;
   int? shoppingCount;
-  int? servicesCount;
+  int? ordersCount;
   int? complaintsCount;
   ProviderModel? data;
 
@@ -14,7 +14,7 @@ class ProviderMenuModel {
       this.message,
       this.jobsCount,
       this.shoppingCount,
-      this.servicesCount,
+      this.ordersCount,
       this.complaintsCount,
       this.data});
 
@@ -23,7 +23,7 @@ class ProviderMenuModel {
     message = json['message'];
     jobsCount = json['jobsCount'];
     shoppingCount = json['shoppingCount'];
-    servicesCount = json['servicesCount'];
+    ordersCount = json['ordersCount'];
     complaintsCount = json['complaintsCount'];
     data = json['data'] != null ? ProviderModel.fromJson(json['data']) : null;
   }
@@ -34,7 +34,7 @@ class ProviderMenuModel {
     data['message'] = message;
     data['jobsCount'] = jobsCount;
     data['shoppingCount'] = shoppingCount;
-    data['servicesCount'] = servicesCount;
+    data['ordersCount'] = ordersCount;
     data['complaintsCount'] = complaintsCount;
     if (this.data != null) {
       data['data'] = this.data!.toJson();

@@ -84,7 +84,7 @@ class ProviderSettingView extends StatelessWidget {
                                 boxWidget(
                                     CupertinoIcons.news,
                                     Colors.green,
-                                    controller.menuModel!.servicesCount
+                                    controller.menuModel!.ordersCount
                                         .toString(),
                                     "Orders", () {
                                   Get.toNamed(AppRoutes.shopOrders);
