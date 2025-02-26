@@ -23,8 +23,7 @@ class NotificationWidget extends GetView<NotifyController> {
       child: Container(
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-          //border: Border.all(width: 0.2, color: greencolor),
-          color: Colors.grey[100]!.withOpacity(0.7),
+          color: Colors.grey[100]!.withAlpha(100),
           borderRadius: BorderRadius.circular(10.r),
         ),
         child: Column(

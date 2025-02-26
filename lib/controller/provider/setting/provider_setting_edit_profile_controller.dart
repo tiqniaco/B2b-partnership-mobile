@@ -329,23 +329,23 @@ class ProviderSettingEditProfileController extends GetxController {
       if (fileName == "c") {
         commercePdfFile = File(result.files.single.path!);
         commercialController.text = result.files.single.name;
-        print("File selected: ${commercePdfFile!.path}");
+        debugPrint("File selected: ${commercePdfFile!.path}");
       } else {
         taxPdfFile = File(result.files.single.path!);
         taxCartController.text = result.files.single.name;
-        print("File selected: ${taxPdfFile!.path}");
+        debugPrint("File selected: ${taxPdfFile!.path}");
       }
     } else {
-      print("No file selected");
+      debugPrint("No file selected");
     }
     printFiles();
     update();
   }
 
   printFiles() {
-    print("=============================");
-    print(commercePdfFile);
-    print(taxPdfFile);
-    print("=============================");
+    debugPrint("=============================");
+    debugPrint(commercePdfFile?.path ?? "");
+    debugPrint(taxPdfFile?.path ?? "");
+    debugPrint("=============================");
   }
 }

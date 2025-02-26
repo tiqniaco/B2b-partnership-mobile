@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:b2b_partenership/core/crud/custom_request.dart';
@@ -86,7 +85,7 @@ class AddProviderServiceController extends GetxController {
   }
 
   void removeFeatures(int index) {
-    print(features.toString());
+    debugPrint(features.toString());
     if (features.length > 1) {
       features.removeAt(index);
       featuresControllers[index]['arabic']?.dispose();
@@ -147,7 +146,6 @@ class AddProviderServiceController extends GetxController {
   }
 
   validUserData(val) {
-    print(val.runtimeType);
     if (val?.isEmpty ?? true) {
       return "can't be empty".tr;
     }

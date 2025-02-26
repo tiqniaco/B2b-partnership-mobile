@@ -26,7 +26,7 @@ class ComplaintsController extends GetxController {
   final complaintController = TextEditingController();
   StatusRequest statusRequest = StatusRequest.loading;
 
-  var recorder;
+  dynamic recorder;
   late audio_players.AudioPlayer audioPlayer;
   Duration? sliderValue;
   audio_players.PlayerState playerState = audio_players.PlayerState.stopped;
@@ -246,7 +246,7 @@ class ComplaintsController extends GetxController {
                           217,
                           207,
                           195,
-                        ).withOpacity(0.5),
+                        ).withAlpha(80),
                       ),
                       child: Column(
                         children: [
