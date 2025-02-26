@@ -2,6 +2,7 @@
 
 import 'package:b2b_partenership/controller/service_details_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
+import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/services/date_time_convertor.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/widgets/service_details.dart/feature_widget.dart';
@@ -9,6 +10,7 @@ import 'package:b2b_partenership/widgets/service_details.dart/seller_widget.dart
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
@@ -20,9 +22,10 @@ class ServiceDetailsView extends StatelessWidget {
     return Scaffold(
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
-            border: Border(
-          top: BorderSide(color: borderColor),
-        )),
+          border: Border(
+            top: BorderSide(color: borderColor),
+          ),
+        ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 35),
           child: Row(
@@ -72,7 +75,7 @@ class ServiceDetailsView extends StatelessWidget {
                       fit: BoxFit.cover,
                       imageUrl: controller.service!.data!.image!,
                       errorWidget: (context, url, error) => Image.asset(
-                        'assets/images/default.jpg', 
+                        'assets/images/default.jpg',
                         width: double.infinity,
                         height: 265.h,
                         fit: BoxFit.cover,
@@ -117,6 +120,27 @@ class ServiceDetailsView extends StatelessWidget {
                         ),
                       ),
                     ),
+                    if (Get.find<AppPreferences>().getUserRole() ==
+                            "provider" &&
+                        Get.find<AppPreferences>().getUserRoleId() ==
+                            controller.service?.provider?.providerId)
+                      Positioned(
+                        top: 60,
+                        right: 16,
+                        child: CircleAvatar(
+                          backgroundColor: whiteColor,
+                          child: IconButton(
+                            icon: Icon(
+                              FontAwesomeIcons.trash,
+                              color: primaryColor,
+                              size: 15.sp,
+                            ),
+                            onPressed: () {
+                              controller.deleteServiceDialog();
+                            },
+                          ),
+                        ),
+                      ),
                   ],
                 ),
                 Padding(
@@ -182,8 +206,6 @@ class ServiceDetailsView extends StatelessWidget {
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
-
-                        
                             ],
                           ),
                         ),

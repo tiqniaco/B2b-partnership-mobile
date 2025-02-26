@@ -45,11 +45,13 @@ class ServiceModelData {
   String? rating;
   String? overview;
   String? video;
+  String? countryId;
   String? countryNameAr;
   String? countryNameEn;
   String? governmentsId;
   String? governmentNameAr;
   String? governmentNameEn;
+  String? specializationId;
   String? specializationNameAr;
   String? specializationNameEn;
   String? subSpecializationId;
@@ -71,11 +73,13 @@ class ServiceModelData {
       this.rating,
       this.overview,
       this.video,
+      this.countryId,
       this.countryNameAr,
       this.countryNameEn,
       this.governmentsId,
       this.governmentNameAr,
       this.governmentNameEn,
+      this.specializationId,
       this.specializationNameAr,
       this.specializationNameEn,
       this.subSpecializationId,
@@ -97,11 +101,13 @@ class ServiceModelData {
     rating = json['rating'];
     overview = json['overview'];
     video = json['video'];
+    countryId = json['country_id'];
     countryNameAr = json['country_name_ar'];
     countryNameEn = json['country_name_en'];
     governmentsId = json['governments_id'];
     governmentNameAr = json['government_name_ar'];
     governmentNameEn = json['government_name_en'];
+    specializationId = json['specialization_id'];
     specializationNameAr = json['specialization_name_ar'];
     specializationNameEn = json['specialization_name_en'];
     subSpecializationId = json['sub_specialization_id'];
@@ -125,11 +131,13 @@ class ServiceModelData {
     data['rating'] = rating;
     data['overview'] = overview;
     data['video'] = video;
+    data['country_id'] = countryId;
     data['country_name_ar'] = countryNameAr;
     data['country_name_en'] = countryNameEn;
     data['governments_id'] = governmentsId;
     data['government_name_ar'] = governmentNameAr;
     data['government_name_en'] = governmentNameEn;
+    data['specialization_id'] = specializationId;
     data['specialization_name_ar'] = specializationNameAr;
     data['specialization_name_en'] = specializationNameEn;
     data['sub_specialization_id'] = subSpecializationId;

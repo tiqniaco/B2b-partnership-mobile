@@ -10,41 +10,43 @@ import 'package:get/get.dart';
 class MyService extends StatelessWidget {
   MyService({super.key});
   final controller = Get.put(GetMyServiceController());
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: whiteColor,
-          title: Text(
-            'My Services',
-            style: TextStyle(
-              fontSize: 17.sp,
-              fontWeight: FontWeight.bold,
-              color: blackColor,
-            ),
+      appBar: AppBar(
+        backgroundColor: whiteColor,
+        title: Text(
+          'My Services',
+          style: TextStyle(
+            fontSize: 17.sp,
+            fontWeight: FontWeight.bold,
+            color: blackColor,
           ),
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            Get.toNamed(AppRoutes.addProviderService);
-          },
-          shape: CircleBorder(),
-          child: Icon(Icons.add),
-        ),
-        body: GetBuilder<GetMyServiceController>(
-          builder: (controller) => CustomServerStatusWidget(
-            statusRequest: controller.statusRequestServices,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: ServiceWidgetVertical(
-                    services: controller.providerServices,
-                  ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Get.toNamed(AppRoutes.addProviderService);
+        },
+        shape: CircleBorder(),
+        child: Icon(Icons.add),
+      ),
+      body: GetBuilder<GetMyServiceController>(
+        builder: (controller) => CustomServerStatusWidget(
+          statusRequest: controller.statusRequestServices,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: ServiceWidgetVertical(
+                  services: controller.providerServices,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

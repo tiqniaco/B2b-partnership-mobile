@@ -294,6 +294,7 @@ class ProviderServiceStep1 extends StatelessWidget {
           (val) {
             return controller.validUserData(val);
           },
+          hasValidation: false,
         ),
         Gap(12.h),
       ],

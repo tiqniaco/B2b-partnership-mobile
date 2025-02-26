@@ -27,6 +27,7 @@ const purpleColor = Color(0xff7b6caf);
 const pinkColor = Color(0xffea908f);
 const pageColor = Color.fromARGB(255, 224, 220, 220);
 const greenColor = Color(0xff7e8d36);
+const blueColor = Colors.blue;
 // my colors   //  #B59C65
 const testBackg = Color(0xffD1E2F5);
 const deepBaby = Color(0xff6D8CC1);
@@ -96,6 +97,10 @@ const Color notAvailableBackgroundColor = Color(0xfff0d9d9);
 // Social media colors
 const Color whatsappColor = Color(0xff25d366);
 const Color emailColor = Color(0xff0077b5);
+const Color telegramColor = Color(0xff2ca5e0);
+const Color instagramColor = Color(0xffe1306c);
+const Color facebookColor = Color(0xff3b5998);
+const Color linkedinColor = Color(0xff0a66c2);
 
 // Gradient color for login button
 const LinearGradient loginButtonGradientColor = LinearGradient(

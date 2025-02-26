@@ -69,6 +69,8 @@ class ApiConstance {
   static String addReview = '/provider-service-reviews';
   static String addNewService = '/provider-service';
   static String addProviderService = "provider-service";
+  static String updateProviderService(String id) =>
+      "provider-service/$id/update";
 
   // favorite
   static String getUserFavorite = 'favorite-providers';
@@ -97,4 +99,11 @@ class ApiConstance {
   static String getNotifications = 'notifications';
 
   static String updateProviderProfile(String id) => "providers/$id/update";
+
+  static String deleteProviderService(String id) => "provider-service/$id";
+
+  // provider-service-features
+  static const String addProviderServiceFeatures = "provider-service-features";
+  static String deleteProviderServiceFeature(String id) =>
+      "provider-service-features/$id";
 }

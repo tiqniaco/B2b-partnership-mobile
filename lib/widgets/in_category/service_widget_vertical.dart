@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
+import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/models/services_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -79,26 +80,86 @@ class ServiceWidgetVertical extends StatelessWidget {
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 1,
                                   ),
-                                  Spacer(),
-                                  SizedBox(
-                                    width: 100,
-                                    height: 26.h,
-                                    child: ElevatedButton(
-                                        style: ButtonStyle(
-                                            padding: WidgetStatePropertyAll(
-                                                EdgeInsets.symmetric(
-                                                    horizontal: 10)),
-                                            shape: WidgetStatePropertyAll(
-                                                RoundedRectangleBorder(
+                                  Gap(8.h),
+                                  Expanded(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Expanded(
+                                          flex: 1,
+                                          child: Visibility(
+                                            visible: Get.find<AppPreferences>()
+                                                    .getUserRole() ==
+                                                "provider",
+                                            child: ElevatedButton(
+                                              style: ButtonStyle(
+                                                backgroundColor:
+                                                    WidgetStatePropertyAll(
+                                                  Colors.green,
+                                                ),
+                                                padding: WidgetStatePropertyAll(
+                                                  EdgeInsets.symmetric(
+                                                    horizontal: 10,
+                                                  ),
+                                                ),
+                                                shape: WidgetStatePropertyAll(
+                                                  RoundedRectangleBorder(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                            5)))),
-                                        onPressed: () {},
-                                        child: Text(
-                                          "View Details",
-                                          style: TextStyle(fontSize: 11.sp),
-                                        )),
-                                  )
+                                                      5,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              onPressed: () {
+                                                Get.toNamed(
+                                                  AppRoutes.editProviderService,
+                                                  arguments: {
+                                                    "service": services[index],
+                                                  },
+                                                );
+                                              },
+                                              child: Text(
+                                                "Edit",
+                                                style:
+                                                    TextStyle(fontSize: 11.sp),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Gap(4.w),
+                                        Expanded(
+                                          flex: 2,
+                                          child: ElevatedButton(
+                                            style: ButtonStyle(
+                                              padding: WidgetStatePropertyAll(
+                                                  EdgeInsets.symmetric(
+                                                      horizontal: 10)),
+                                              shape: WidgetStatePropertyAll(
+                                                RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(5),
+                                                ),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              Get.toNamed(
+                                                AppRoutes.serviceDetails,
+                                                arguments: {
+                                                  "id": services[index].id,
+                                                },
+                                              );
+                                            },
+                                            child: Text(
+                                              "View Details",
+                                              style: TextStyle(fontSize: 11.sp),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ],
                               )
                             ],

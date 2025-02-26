@@ -1,30 +1,29 @@
 import 'dart:io';
 
+import 'package:b2b_partenership/controller/provider/my_services/get_my_service_controller.dart';
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:b2b_partenership/models/city_model.dart';
 import 'package:b2b_partenership/models/country_model.dart';
+import 'package:b2b_partenership/models/service_feature_model.dart';
+import 'package:b2b_partenership/models/services_model.dart';
 import 'package:b2b_partenership/models/specialize_model.dart';
 import 'package:b2b_partenership/models/sub_specialize_model.dart';
+import 'package:b2b_partenership/views/provider_app/my_services/widgets/edit_provider_service_details_widget.dart';
+import 'package:b2b_partenership/views/provider_app/my_services/widgets/edit_provider_service_features_widget.dart';
 import 'package:b2b_partenership/widgets/request_services/build_text_form.dart';
-import 'package:b2b_partenership/widgets/request_services/request_service1.dart';
-import 'package:b2b_partenership/widgets/request_services/request_service2.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:logger/logger.dart';
 
-import 'get_my_service_controller.dart';
-
-class AddProviderServiceController extends GetxController {
+class EditProviderServiceController extends GetxController {
+  ServiceModelData? service;
   final formKey = GlobalKey<FormState>();
-  final TextEditingController clientIdController = TextEditingController();
   final TextEditingController governmentIdController = TextEditingController();
   final TextEditingController subSpecializationIdController =
       TextEditingController();
@@ -35,88 +34,103 @@ class AddProviderServiceController extends GetxController {
   final TextEditingController overviewController = TextEditingController();
   final TextEditingController videoController = TextEditingController();
 
-  late CountryModel selectedCountry;
+  final arFeatureController = TextEditingController();
+  final enFeatureController = TextEditingController();
+
+  CountryModel? selectedCountry;
   CityModel? selectedCity;
-  late SpecializeModel selectedSpecialization;
-  late SubSpecializeModel selectedSubSpecialization;
+  SpecializeModel? selectedSpecialization;
+  SubSpecializeModel? selectedSubSpecialization;
+  File? imageFile;
+  String image = "";
 
   List<CountryModel> countries = [];
   List<CityModel> cities = [];
   List<SpecializeModel> specializations = [];
   List<SubSpecializeModel> subSpecializations = [];
-  int currentStep = 0;
-
-  List<Widget> get steps => [
-        const RequestService1(),
-        const RequestService2(),
-      ];
-
   StatusRequest statusRequest = StatusRequest.loading;
   StatusRequest statusRequestCity = StatusRequest.loading;
   StatusRequest statusRequestCountry = StatusRequest.loading;
   StatusRequest statusRequestSpecialization = StatusRequest.loading;
   StatusRequest statusRequestSupSpecialization = StatusRequest.loading;
-  File? imageFile;
+  StatusRequest statusRequestFeature = StatusRequest.loading;
 
-  bool get isLoading =>
-      statusRequestCity == StatusRequest.loading ||
-      statusRequestCountry == StatusRequest.loading ||
-      statusRequestSpecialization == StatusRequest.loading ||
-      statusRequestSupSpecialization == StatusRequest.loading;
+  List<ServiceFeatureModel> serviceFeatures = [];
 
-  List<ServiceFeatureModel> features = [];
+  final tabs = [
+    Tab(
+      text: 'Service Details',
+    ),
+    Tab(
+      text: 'Features',
+    ),
+  ];
 
-  List<Map<String, TextEditingController>> featuresControllers = [];
-
-  void increaseFeatures() {
-    featuresControllers.add({
-      "arabic": TextEditingController(),
-      "english": TextEditingController(),
-    });
-    features.add(ServiceFeatureModel(
-      index: features.length,
-      widget: featureWidget(
-        arController: featuresControllers.last["arabic"]!,
-        enController: featuresControllers.last["english"]!,
-        index: features.length,
-      ),
-    ));
-    update();
-  }
-
-  void removeFeatures(int index) {
-    debugPrint(features.toString());
-    if (features.length > 1) {
-      features.removeAt(index);
-      featuresControllers[index]['arabic']?.dispose();
-      featuresControllers[index]['english']?.dispose();
-      featuresControllers.removeAt(index);
-      update();
-    }
-  }
+  tabBarViews(EditProviderServiceController controller) => [
+        EditProviderServiceDetailsWidget(controller: controller),
+        EditProviderServiceFeaturesWidget(controller: controller),
+      ];
 
   @override
   Future<void> onInit() async {
+    service = Get.arguments["service"];
+    titleArController.text = service?.nameAr ?? "";
+    titleEnController.text = service?.nameEn ?? "";
+    addressController.text = service?.address ?? "";
+    descriptionController.text = service?.description ?? "";
+    overviewController.text = service?.overview ?? "";
+    videoController.text = service?.video ?? "";
+    image = service?.image ?? "";
+
+    await getServiceFeature();
     await getCountries();
-    getCities();
+    selectedCountry = countries.firstWhere(
+      (element) => element.id!.toString() == service!.countryId!,
+    );
+    await getCities();
+    selectedCity = cities.firstWhere(
+      (element) => element.id!.toString() == service!.governmentsId!,
+    );
     await getSpecialization();
-    getSupSpecialization();
-    increaseFeatures();
+    selectedSpecialization = specializations.firstWhere(
+      (element) => element.id!.toString() == service!.specializationId!,
+    );
+    await getSupSpecialization();
+    selectedSubSpecialization = subSpecializations.firstWhere(
+      (element) => element.id!.toString() == service!.subSpecializationId!,
+    );
     super.onInit();
   }
 
-  void nextStep() {
-    if (currentStep < steps.length - 1) {
-      currentStep++;
-      update();
-    }
-  }
+  Future<void> getServiceFeature() async {
+    statusRequestFeature = StatusRequest.loading;
+    update();
+    final response = await CustomRequest<List<ServiceFeatureModel>>(
+        path: ApiConstance.getFeatureServices,
+        data: {
+          "provider_service_id": service!.id,
+        },
+        fromJson: (json) {
+          return json['data']
+              .map<ServiceFeatureModel>(
+                  (type) => ServiceFeatureModel.fromJson(type))
+              .toList();
+        }).sendGetRequest();
 
-  void previousStep() {
-    if (currentStep > 0) {
-      currentStep--;
-      update();
-    }
+    response.fold((l) {
+      statusRequestFeature = StatusRequest.error;
+    }, (r) {
+      serviceFeatures.clear();
+      statusRequestFeature = StatusRequest.success;
+      serviceFeatures = r;
+
+      if (r.isEmpty) {
+        statusRequestFeature = StatusRequest.noData;
+      } else {
+        statusRequestFeature = StatusRequest.success;
+      }
+    });
+    update();
   }
 
   onCountryChanged(value) {
@@ -174,37 +188,21 @@ class AddProviderServiceController extends GetxController {
     update();
   }
 
-  Future<void> addServices() async {
+  Future<void> updateServices() async {
     try {
-      if (imageFile == null) {
-        AppSnackBars.warning(message: "please select image");
-        return;
-      }
       if (formKey.currentState?.validate() ?? false) {
-        formKey.currentState!.save();
-        statusRequest = StatusRequest.loading;
-        Map<String, String> features = {};
-        for (int index = 0; index < featuresControllers.length; index++) {
-          features.addAll({
-            "features_ar[$index]":
-                featuresControllers[index]["arabic"]?.text ?? "",
-            "features_en[$index]":
-                featuresControllers[index]["english"]?.text ?? "",
-          });
-        }
-
         final result = await CustomRequest<Map<String, dynamic>>(
-            path: ApiConstance.addProviderService,
+            path: ApiConstance.updateProviderService(service?.id ?? ""),
             fromJson: (json) {
               return json;
             },
             files: {
-              "image": imageFile!.path,
+              if (imageFile != null) "image": imageFile!.path,
             },
             data: {
               "provider_id": Get.find<AppPreferences>().getUserRoleId(),
               "governments_id": selectedCity?.id,
-              "sub_specialization_id": selectedSubSpecialization.id,
+              "sub_specialization_id": selectedSubSpecialization?.id,
               "name_ar": titleEnController.text,
               "name_en": titleEnController.text,
               "address": addressController.text,
@@ -212,16 +210,14 @@ class AddProviderServiceController extends GetxController {
               "overview": overviewController.text,
               if (videoController.text.isNotEmpty)
                 "video": videoController.text,
-              ...features,
             }).sendPostRequest();
 
         result.fold((l) {
           statusRequest = StatusRequest.error;
-          Logger().e(l.errMsg);
           AppSnackBars.error(message: l.errMsg);
           update();
         }, (r) {
-          Get.back();
+          // Get.back();
           Get.put(GetMyServiceController()).getServices();
           AppSnackBars.success(message: r['message']);
           statusRequest = StatusRequest.success;
@@ -249,7 +245,6 @@ class AddProviderServiceController extends GetxController {
 
     result.fold((l) {
       statusRequestCountry = StatusRequest.error;
-      Logger().e(l.errMsg);
       update();
     }, (r) {
       countries = r;
@@ -267,7 +262,7 @@ class AddProviderServiceController extends GetxController {
     statusRequestCity = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.cities,
-        data: {"country_id": selectedCountry.id},
+        data: {"country_id": selectedCountry?.id},
         fromJson: (json) {
           return json['data']
               .map<CityModel>((city) => CityModel.fromJson(city))
@@ -299,7 +294,6 @@ class AddProviderServiceController extends GetxController {
         }).sendGetRequest();
     response.fold((l) {
       statusRequestSpecialization = StatusRequest.error;
-      Logger().e(l.errMsg);
     }, (r) {
       specializations.clear();
       statusRequestSpecialization = StatusRequest.success;
@@ -318,7 +312,7 @@ class AddProviderServiceController extends GetxController {
     statusRequestSupSpecialization = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getSupSpecialization,
-        data: {"specialization_id": selectedSpecialization.id},
+        data: {"specialization_id": selectedSpecialization?.id},
         fromJson: (json) {
           return json['data']
               .map<SubSpecializeModel>(
@@ -327,7 +321,6 @@ class AddProviderServiceController extends GetxController {
         }).sendGetRequest();
     response.fold((l) {
       statusRequestSupSpecialization = StatusRequest.error;
-      Logger().e(l.errMsg);
     }, (r) {
       subSpecializations.clear();
       statusRequestSupSpecialization = StatusRequest.success;
@@ -342,80 +335,120 @@ class AddProviderServiceController extends GetxController {
     update();
   }
 
-  StepState getStepStats(bool selected) {
-    return selected ? StepState.editing : StepState.indexed;
+  void removeServiceFeatureDialog({
+    required int? id,
+  }) {
+    Get.defaultDialog(
+      title: 'Remove Service Feature',
+      middleText: 'Are you sure you want to remove this service feature?',
+      textConfirm: 'Yes',
+      textCancel: 'No',
+      onConfirm: () {
+        _removeServiceFeature(id: id);
+      },
+    );
   }
 
-  void onStepContinue() {
-    if (currentStep < 2) {
-      currentStep++;
-      update();
+  Future<void> _removeServiceFeature({
+    required int? id,
+  }) async {
+    if (id == null) {
+      AppSnackBars.error(message: "Invalid service feature ID");
+      return;
     }
-  }
 
-  void onStepCancel() {
-    if (currentStep > 0) {
-      currentStep--;
-      update();
-    }
-  }
+    statusRequest = StatusRequest.loading;
+    final response = await CustomRequest<String>(
+      path: ApiConstance.deleteProviderServiceFeature(id.toString()),
+      fromJson: (json) {
+        return json['message'];
+      },
+    ).sendDeleteRequest();
 
-  void onStepTaped(int value) {
-    currentStep = value;
+    response.fold((l) {
+      statusRequest = StatusRequest.error;
+      AppSnackBars.error(message: l.errMsg);
+    }, (r) {
+      Get.back();
+      AppSnackBars.success(message: "Service feature removed successfully");
+      statusRequest = StatusRequest.success;
+      Get.put(GetMyServiceController()).getServices(); // Refresh the data
+      getServiceFeature();
+    });
+
     update();
   }
 
-  @override
-  void dispose() {
-    titleArController.dispose();
-    titleEnController.dispose();
-    descriptionController.dispose();
-    addressController.dispose();
-    super.dispose();
+  Future<void> addNewServiceFeatureDialog() async {
+    await Get.bottomSheet(
+      Container(
+        padding: EdgeInsets.all(16.0),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
+        ),
+        height: 0.35.sh,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            buildTextField(
+              arFeatureController,
+              'Feature Name (Arabic)',
+              Icons.abc,
+              "Enter arabic name",
+              (val) {
+                return validUserData(val);
+              },
+              labelWidth: 200.w,
+            ),
+            SizedBox(height: 16.h),
+            buildTextField(
+              enFeatureController,
+              'Feature Name (English)',
+              Icons.abc,
+              "Enter english name",
+              (val) {
+                return validUserData(val);
+              },
+              labelWidth: 200.w,
+            ),
+            SizedBox(height: 20),
+            CustomLoadingButton(
+              onPressed: () {
+                return _addNewServiceFeature();
+              },
+              text: "Add",
+            )
+          ],
+        ),
+      ),
+    );
   }
-}
 
-Widget featureWidget({
-  required TextEditingController arController,
-  required TextEditingController enController,
-  required int index,
-}) {
-  final controller = Get.put(AddProviderServiceController());
-  return Column(
-    children: [
-      Gap(20.h),
-      buildTextField(
-        arController,
-        "Feature Arabic Title",
-        Icons.featured_play_list,
-        "enter feature arabic title",
-        (val) {
-          return controller.validUserData(val);
-        },
-      ),
-      Gap(20.h),
-      buildTextField(
-        enController,
-        "Feature English Title",
-        Icons.featured_play_list,
-        "enter feature english title",
-        (val) {
-          return controller.validUserData(val);
-        },
-      ),
-    ],
-  );
-}
+  Future<void> _addNewServiceFeature() async {
+    final response = await CustomRequest<ServiceFeatureModel>(
+      path: ApiConstance.addProviderServiceFeatures,
+      data: {
+        "provider_service_id": service?.id?.toString(),
+        "feature_ar": arFeatureController.text,
+        "feature_en": enFeatureController.text,
+      },
+      fromJson: (json) {
+        return ServiceFeatureModel.fromJson(json['data']);
+      },
+    ).sendPostRequest();
 
-class ServiceFeatureModel extends Equatable {
-  final int index;
-  final Widget widget;
+    response.fold((l) {
+      statusRequest = StatusRequest.error;
+      AppSnackBars.error(message: l.errMsg);
+    }, (r) {
+      Get.back();
+      AppSnackBars.success(message: "Service feature removed successfully");
+      statusRequest = StatusRequest.success;
+      Get.put(GetMyServiceController()).getServices(); // Refresh the data
+      getServiceFeature();
+    });
 
-  const ServiceFeatureModel({
-    required this.index,
-    required this.widget,
-  });
-
-  @override
-  List<Object?> get props => [index, widget];
+    update();
+  }
 }

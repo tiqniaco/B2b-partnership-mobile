@@ -30,6 +30,7 @@ import 'views/notifications/views/notification_view.dart';
 import 'views/orders/order_details_view.dart';
 import 'views/orders/order_item_view.dart';
 import 'views/provider_app/my_services/add_provider_service_view.dart';
+import 'views/provider_app/my_services/edit_provider_service_view.dart';
 import 'views/provider_app/setting/edit_provider_profile_view.dart';
 import 'views/search/search_view.dart';
 import 'views/service_request/service_request_details.dart';
@@ -98,6 +99,7 @@ class AppRoutes {
   // Edit Provider Profile
   static const String editProviderProfile = "/edit-provider-profile";
   static const String addProviderService = "/add-provider-service";
+  static const String editProviderService = "/edit-provider-service";
 
   static final List<GetPage<dynamic>> pages = [
     // base
@@ -261,6 +263,10 @@ class AppRoutes {
     GetPage(
       name: addProviderService,
       page: () => const AddProviderServiceView(),
+    ),
+    GetPage(
+      name: editProviderService,
+      page: () => const EditProviderServiceView(),
     ),
   ];
 }
