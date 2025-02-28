@@ -71,6 +71,8 @@ class ApiConstance {
   static String addProviderService = "provider-service";
   static String updateProviderService(String id) =>
       "provider-service/$id/update";
+  static String providerSwitchAccount = "auth/switch-provider-account";
+  static String clientSwitchAccount = "auth/switch-client-account";
 
   // favorite
   static String getUserFavorite = 'favorite-providers';

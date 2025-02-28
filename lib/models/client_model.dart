@@ -16,6 +16,7 @@ class ClientModel {
   String? governmentNameEn;
   String? createdAt;
   String? updatedAt;
+  String? providerId;
 
   ClientModel(
       {this.userId,
@@ -32,7 +33,8 @@ class ClientModel {
       this.governmentNameAr,
       this.governmentNameEn,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.providerId});
 
   ClientModel.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];
@@ -50,6 +52,7 @@ class ClientModel {
     governmentNameEn = json['government_name_en'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    providerId = json['provider_id'];
   }
 
   Map<String, dynamic> toJson() {
@@ -69,6 +72,7 @@ class ClientModel {
     data['government_name_en'] = governmentNameEn;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
+    data['provider_id'] = providerId;
     return data;
   }
 }

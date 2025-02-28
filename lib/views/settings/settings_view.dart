@@ -71,7 +71,7 @@ class SettingsView extends StatelessWidget {
                                           child: CircleAvatar(
                                             radius: 20.sp,
                                             backgroundColor:
-                                                blackColor.withAlpha(30),
+                                                blackColor.withAlpha(10),
                                             child: Icon(
                                               FontAwesomeIcons.bell,
                                               color: blackColor,
@@ -95,6 +95,48 @@ class SettingsView extends StatelessWidget {
                                   style: TextStyle(
                                       color: greyColor, fontSize: 15.sp),
                                 ),
+                                Gap(10),
+                                if (controller.menuModel!.data!.providerId !=
+                                        null &&
+                                    controller.menuModel!.data!.providerId !=
+                                        "")
+                                  InkWell(
+                                    onTap: () {
+                                      controller.switchAccount();
+                                    },
+                                    child: Material(
+                                      borderRadius: BorderRadius.circular(5),
+                                      elevation: 0.5,
+                                      child: Container(
+                                        alignment: Alignment.center,
+                                        width: double.infinity,
+                                        padding: EdgeInsets.all(12),
+                                        decoration: BoxDecoration(
+                                          color: primaryColor.withAlpha(40),
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              "Switch to Provider Account",
+                                              style: TextStyle(
+                                                  color: blackColor,
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 14.sp),
+                                            ),
+                                            Gap(10),
+                                            Icon(
+                                              Icons.restart_alt_rounded,
+                                              size: 17.sp,
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
                                 Gap(10),
                                 GridView(
                                   physics: NeverScrollableScrollPhysics(),
