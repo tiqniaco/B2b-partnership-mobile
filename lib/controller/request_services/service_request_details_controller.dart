@@ -68,7 +68,6 @@ class ServiceRequestDetailsController extends GetxController {
     }
   }
 
- 
   void addPriceDialog() {
     Get.dialog(
       GetBuilder<ServiceRequestDetailsController>(

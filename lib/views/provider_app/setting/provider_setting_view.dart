@@ -55,6 +55,37 @@ class ProviderSettingView extends StatelessWidget {
                               style:
                                   TextStyle(color: greyColor, fontSize: 15.sp),
                             ),
+                            Gap(8.h),
+                            InkWell(
+                              onTap: () {
+                                controller.switchAccount();
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(3),
+                                    color: primaryColor.withAlpha(40)),
+                                width: double.infinity,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Switch to Client Account".tr,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500,
+                                          fontSize: 14.sp),
+                                    ),
+                                    Gap(10),
+                                    Icon(
+                                      Icons.restart_alt_rounded,
+                                      size: 17.sp,
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ),
                             Gap(10),
                             GridView(
                               physics: NeverScrollableScrollPhysics(),
