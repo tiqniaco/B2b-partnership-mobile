@@ -1,6 +1,5 @@
 import 'package:b2b_partenership/controller/provider/provider_contacts_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
-import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_sliver_server_status_widget.dart';
 import 'package:b2b_partenership/widgets/request_services/build_text_form.dart';
 import 'package:flutter/material.dart';
