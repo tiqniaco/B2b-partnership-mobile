@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
@@ -274,6 +275,20 @@ class ProviderSettingView extends StatelessWidget {
                                         'model': controller.menuModel!.data,
                                       },
                                     );
+                                  },
+                                ),
+                                Gap(8),
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    color: borderColor,
+                                  ),
+                                ),
+                                rowWithArrow(
+                                  FontAwesomeIcons.addressCard,
+                                  "Mange your Contacts",
+                                  () {
+                                    Get.toNamed(AppRoutes.providerContacts);
                                   },
                                 ),
                                 Gap(8),

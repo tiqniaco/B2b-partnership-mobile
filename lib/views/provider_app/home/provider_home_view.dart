@@ -290,11 +290,11 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
                                   controller.topUAE[index].providerId!);
                             }),
                       ))),
-              TextButton(
-                  onPressed: () {
-                    Get.toNamed(AppRoutes.providerHomeLayout);
-                  },
-                  child: Text("Clients")),
+              // TextButton(
+              //     onPressed: () {
+              //       Get.toNamed(AppRoutes.providerHomeLayout);
+              //     },
+              //     child: Text("Clients")),
               Gap(50)
             ],
           ),

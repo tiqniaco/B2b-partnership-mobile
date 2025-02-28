@@ -106,4 +106,8 @@ class ApiConstance {
   static const String addProviderServiceFeatures = "provider-service-features";
   static String deleteProviderServiceFeature(String id) =>
       "provider-service-features/$id";
+
+  static String getProviderContacts(String providerId) =>
+      "provider/$providerId/contacts";
+  static const String addOrUpdateProviderContacts = "provider-contacts";
 }
