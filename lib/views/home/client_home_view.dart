@@ -207,7 +207,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                 image: "assets/images/job.jpeg",
                 title: "Are you looking for a job?",
                 onPressed: () {
-                  Get.toNamed(AppRoutes.getRequestServices);
+                  Get.toNamed(AppRoutes.jobs);
                 },
                 description: "See our Employment\nopportunities",
                 buttonTitle: 'View Now',
