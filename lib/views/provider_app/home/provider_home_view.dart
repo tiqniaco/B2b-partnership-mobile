@@ -251,6 +251,11 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
                 child: Divider(),
               ),
               Gap(25),
+              // TextButton(
+              //     onPressed: () {
+              //       Get.find<AppPreferences>().clear();
+              //     },
+              //     child: Text("clear")),
               BannerWidget(
                 image: "assets/images/product.jpeg",
                 title: "Shopping?",

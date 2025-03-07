@@ -226,16 +226,27 @@ class SignupController extends GetxController {
   ///----------------
 
   goToOtp() {
-    // Logger().f(controller.currentStep);
     if (currentStep == providerSteps.length - 1) {
-      return Get.toNamed(
-        AppRoutes.otp,
-        arguments: {
-          'email': emailController.text,
-          'fromAuth': true,
-          'role': role,
-        },
-      );
+      if (formKey.currentState!.validate()) {
+        statusRequest = StatusRequest.loading;
+        if (imageFile == null) {
+          AppSnackBars.warning(message: "upload profile image");
+        } else if (commercePdfFile == null) {
+          AppSnackBars.warning(message: "upload commercial register pdf file");
+        } else if (taxPdfFile == null) {
+          AppSnackBars.warning(message: "upload tax card pdf file");
+        } else {
+          return Get.toNamed(
+            AppRoutes.otp,
+            arguments: {
+              'email': emailController.text,
+              'fromAuth': true,
+              'role': role,
+            },
+          );
+        }
+      }
+      print("not valid");
     } else {
       return nextStep;
     }
@@ -284,9 +295,8 @@ class SignupController extends GetxController {
           statusRequest = StatusRequest.success;
           Get.find<AppPreferences>().setUserRoleId(r['role_id'].toString());
           Get.find<AppPreferences>().setUserRole(r['role']);
-          Get.offAllNamed(
-            AppRoutes.login,
-          );
+          Get.find<AppPreferences>().setStep("1");
+          Get.offAllNamed(AppRoutes.authNoteScreen, arguments: {"code": "0"});
           update();
         });
       }
@@ -325,7 +335,6 @@ class SignupController extends GetxController {
         }, (r) {
           AppSnackBars.success(message: r['message']);
           statusRequest = StatusRequest.success;
-
           Get.offAllNamed(
             AppRoutes.login,
           );

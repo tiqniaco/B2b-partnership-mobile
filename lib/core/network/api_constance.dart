@@ -27,6 +27,7 @@ class ApiConstance {
   static const String sendOTP = 'send-otp';
   static const String verifyOTP = 'verify-otp';
   static const String deleteAccount = 'auth/delete-account';
+  static const String getVerifyCode = 'auth/get-verify-code';
 
   //client
   static String getClientMenu(String id) => '/clients/$id';

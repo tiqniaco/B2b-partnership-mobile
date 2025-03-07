@@ -66,7 +66,6 @@ class OTPController extends GetxController {
         isLoading = false;
         message = "";
         update();
-        // Get.offAllNamed(AppRoutes.login);
       } else {
         AppSnackBars.error(message: "Not a valid OTP".tr);
         message = "";

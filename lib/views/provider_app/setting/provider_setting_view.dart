@@ -9,7 +9,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
@@ -315,22 +314,14 @@ class ProviderSettingView extends StatelessWidget {
                                     color: borderColor,
                                   ),
                                 ),
+                                Gap(8),
                                 rowWithArrow(
-                                  FontAwesomeIcons.addressCard,
+                                  CupertinoIcons.phone,
                                   "Mange your Contacts",
                                   () {
                                     Get.toNamed(AppRoutes.providerContacts);
                                   },
                                 ),
-                                Gap(8),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor,
-                                  ),
-                                ),
-                                Gap(8),
-                                LanguageWidget(),
                                 Gap(8),
                                 FractionallySizedBox(
                                   widthFactor: 10,
@@ -380,6 +371,15 @@ class ProviderSettingView extends StatelessWidget {
                                     logoutDialog();
                                   },
                                 ),
+                                Gap(8),
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    color: borderColor,
+                                  ),
+                                ),
+                                Gap(8),
+                                LanguageWidget(),
                               ],
                             ),
                           ],

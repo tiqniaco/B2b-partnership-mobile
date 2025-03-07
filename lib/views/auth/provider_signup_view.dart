@@ -87,23 +87,6 @@ class ProviderSignupView extends StatelessWidget {
                     ),
                     CustomLoadingButton(
                         onPressed: () => controller.goToOtp(),
-
-                        //  () {
-                        //  // Logger().f(controller.currentStep);
-                        //   if (controller.currentStep ==
-                        //       controller.providerSteps.length - 1) {
-                        //     return Get.toNamed(
-                        //       AppRoutes.otp,
-                        //       arguments: {
-                        //         'email': controller.emailController.text,
-                        //         'fromAuth': true,
-                        //         'role': controller.role,
-                        //       },
-                        //     );
-                        //   } else {
-                        //     return controller.nextStep;
-                        //   }
-                        // },
                         text: controller.currentStep ==
                                 controller.providerSteps.length - 1
                             ? 'Finish'

@@ -1,3 +1,4 @@
+import 'package:b2b_partenership/views/auth/auth_note_screen.dart';
 import 'package:b2b_partenership/views/auth/choose_account.dart';
 import 'package:b2b_partenership/views/auth/forget_password_email_view.dart';
 import 'package:b2b_partenership/views/auth/forget_password_reset_view.dart';
@@ -55,6 +56,7 @@ class AppRoutes {
   static const String checkEmail = "/check-email";
   static const String loginByPassword = "/login-by-password";
   static const String chooseAccount = "/chooseAccount";
+  static const String authNoteScreen = "/authNoteScreen";
 
   // home
   static const String clintHome = '/clintHome';
@@ -135,10 +137,10 @@ class AppRoutes {
       page: () => const ForgetPasswordResetView(),
     ),
 
-    // GetPage(
-    //   name: clientSignup,
-    //   page: () => const ClientSignupView(),
-    // ),
+    GetPage(
+      name: authNoteScreen,
+      page: () => AuthNoteScreen(),
+    ),
     GetPage(
       name: providerSignup,
       page: () => const ProviderSignupView(),

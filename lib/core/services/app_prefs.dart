@@ -16,6 +16,7 @@ enum SharedKey {
   userEmail,
   phone,
   userRole,
+  step,
 }
 
 class AppPreferences {
@@ -106,6 +107,22 @@ class AppPreferences {
       SharedKey.userId.toString(),
       userId,
     );
+  }
+
+  /// set step
+  Future<void> setStep(String step) async {
+    await _sharedPreferences.setString(
+      SharedKey.step.toString(),
+      step,
+    );
+  }
+
+  /// get step
+  String getStep() {
+    return _sharedPreferences.getString(
+          SharedKey.step.toString(),
+        ) ??
+        '';
   }
 
   /// Save the userId to the shared preferences

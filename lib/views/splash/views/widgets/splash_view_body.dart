@@ -1,4 +1,7 @@
 import 'package:b2b_partenership/app_routes.dart';
+import 'package:b2b_partenership/core/crud/custom_request.dart';
+import 'package:b2b_partenership/core/enums/status_request.dart';
+import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 
 import '/core/constants/app_constants.dart';
@@ -18,6 +21,8 @@ class _SplashViewBodyState extends State<SplashViewBody>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<Offset> _slidingAnimation;
+  late String code;
+  StatusRequest statusRequest = StatusRequest.loading;
 
   @override
   initState() {
@@ -45,14 +50,45 @@ class _SplashViewBodyState extends State<SplashViewBody>
   }
 
   Future<void> _navigateToNext() async {
-    Future.delayed(kSplashDuration, () {
+    Future.delayed(kSplashDuration, () async {
       if (Get.find<AppPreferences>().getUserRole() == "client") {
         Get.offNamed(AppRoutes.clientHomeLayout);
       } else if (Get.find<AppPreferences>().getUserRole() == "provider") {
-        Get.offNamed(AppRoutes.providerHomeLayout);
+        await getVerifyCode();
+        if (code == "0") {
+          Get.toNamed(AppRoutes.authNoteScreen, arguments: {"code": code});
+        } else if (code == "1") {
+          if (Get.find<AppPreferences>().getStep() == "1") {
+            Get.toNamed(AppRoutes.authNoteScreen, arguments: {"code": code});
+          } else {
+            Get.offNamed(AppRoutes.providerHomeLayout);
+          }
+        }
       } else {
         Get.offNamed(AppRoutes.login);
       }
+    });
+  }
+
+  Future<void> getVerifyCode() async {
+    statusRequest = StatusRequest.loading;
+    final result = await CustomRequest<Map<String, dynamic>>(
+        path: ApiConstance.getVerifyCode,
+        fromJson: (json) {
+          return json;
+        },
+        data: {
+          "provider_id": Get.find<AppPreferences>().getUserRoleId(),
+        }).sendPostRequest();
+
+    result.fold((l) {
+      statusRequest = StatusRequest.error;
+    }, (r) {
+      statusRequest = StatusRequest.success;
+      code = r['verified_code'];
+      print("====================");
+      print(code);
+      print("====================");
     });
   }
 
