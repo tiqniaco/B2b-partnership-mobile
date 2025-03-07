@@ -112,4 +112,9 @@ class ApiConstance {
   static String getProviderContacts(String providerId) =>
       "provider/$providerId/contacts";
   static const String addOrUpdateProviderContacts = "provider-contacts";
+
+  // Jobs
+  static const String jobs = "jobs";
+  static String deleteJob(String id) => 'jobs/$id';
+  static String jobApplication = 'job-application';
 }

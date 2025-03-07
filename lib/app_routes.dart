@@ -25,6 +25,9 @@ import 'package:b2b_partenership/views/splash/views/splash_view.dart';
 import 'package:get/get.dart';
 
 import 'views/complaints/complaints_view.dart';
+import 'views/job_application/job_application_view.dart';
+import 'views/jobs/job_details_view.dart';
+import 'views/jobs/jobs_view.dart';
 import 'views/notifications/views/notification_view.dart';
 import 'views/orders/order_details_view.dart';
 import 'views/orders/order_item_view.dart';
@@ -103,6 +106,10 @@ class AppRoutes {
 
 // Provider Contacts
   static const String providerContacts = '/providerContacts';
+
+  static const String jobs = '/jobs';
+  static const String jobDetails = '/jobDetails';
+  static const String jobApplication = '/jobApplication';
 
   static final List<GetPage<dynamic>> pages = [
     // base
@@ -275,6 +282,20 @@ class AppRoutes {
     GetPage(
       name: providerContacts,
       page: () => const ProviderContactsView(),
+    ),
+
+    GetPage(
+      name: jobs,
+      page: () => JobsView(),
+    ),
+    GetPage(
+      name: jobDetails,
+      page: () => const JobDetailsView(),
+    ),
+
+    GetPage(
+      name: jobApplication,
+      page: () => const JobApplicationView(),
     ),
   ];
 }
