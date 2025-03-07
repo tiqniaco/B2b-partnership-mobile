@@ -4,7 +4,6 @@ import 'package:b2b_partenership/views/auth/forget_password_reset_view.dart';
 import 'package:b2b_partenership/views/auth/login_view.dart';
 import 'package:b2b_partenership/views/auth/o_t_p_view.dart';
 import 'package:b2b_partenership/views/auth/provider_signup_view.dart';
-import 'package:b2b_partenership/views/auth/client_signup_view.dart';
 import 'package:b2b_partenership/views/home/client_home_layout.dart';
 import 'package:b2b_partenership/views/home/client_home_view.dart';
 import 'package:b2b_partenership/views/orders/orders_view.dart';
@@ -44,7 +43,7 @@ class AppRoutes {
 
   /// Auth routes
   static const String login = '/login';
-  static const String clientSignup = '/clientSignup';
+  //static const String clientSignup = '/clientSignup';
   static const String providerSignup = '/providerSignup';
   static const String forgetPassword = '/forget-password';
   static const String otp = '/otp';
@@ -129,10 +128,10 @@ class AppRoutes {
       page: () => const ForgetPasswordResetView(),
     ),
 
-    GetPage(
-      name: clientSignup,
-      page: () => const ClientSignupView(),
-    ),
+    // GetPage(
+    //   name: clientSignup,
+    //   page: () => const ClientSignupView(),
+    // ),
     GetPage(
       name: providerSignup,
       page: () => const ProviderSignupView(),

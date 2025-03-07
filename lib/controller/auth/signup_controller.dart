@@ -224,7 +224,6 @@ class SignupController extends GetxController {
   }
 
   ///----------------
-  ///
 
   goToOtp() {
     // Logger().f(controller.currentStep);
@@ -283,8 +282,6 @@ class SignupController extends GetxController {
         }, (r) {
           AppSnackBars.success(message: r['message']);
           statusRequest = StatusRequest.success;
-          //Get.find<AppPreferences>().setToken(r['token']);
-          //Get.find<AppPreferences>().setUserId(r['user_id'].toString());
           Get.find<AppPreferences>().setUserRoleId(r['role_id'].toString());
           Get.find<AppPreferences>().setUserRole(r['role']);
           Get.offAllNamed(
