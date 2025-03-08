@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
-class JobWidget extends StatelessWidget {
-  const JobWidget({
+class HomeJobWidget extends StatelessWidget {
+  const HomeJobWidget({
     super.key,
     //required this.spacializations
   });

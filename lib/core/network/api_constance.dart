@@ -118,4 +118,7 @@ class ApiConstance {
   static const String jobs = "jobs";
   static String deleteJob(String id) => 'jobs/$id';
   static String jobApplication = 'job-application';
+
+  // Client Job Applications
+  static String clientJobApplications = 'client/job-application';
 }

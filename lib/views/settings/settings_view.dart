@@ -149,13 +149,16 @@ class SettingsView extends StatelessWidget {
                                           childAspectRatio: 9 / 4.1),
                                   children: [
                                     boxWidget(
-                                        Icons.work_outline,
-                                        Colors.amber,
-                                        controller.menuModel!.jobsCount
-                                            .toString(),
-                                        "Jobs", () {
-                                      Get.toNamed(AppRoutes.getRequestServices);
-                                    }),
+                                      Icons.work_outline,
+                                      Colors.amber,
+                                      controller.menuModel!.jobsCount
+                                          .toString(),
+                                      "Job Applications",
+                                      () {
+                                        Get.toNamed(
+                                            AppRoutes.clientJobApplications);
+                                      },
+                                    ),
                                     boxWidget(
                                         Icons.shopping_cart_outlined,
                                         Colors.blue,
@@ -387,7 +390,7 @@ class SettingsView extends StatelessWidget {
                 ),
                 Text(
                   subTitle,
-                  style: TextStyle(color: greyColor, fontSize: 13.sp),
+                  style: TextStyle(color: greyColor, fontSize: 12.sp),
                 ),
               ],
             )
