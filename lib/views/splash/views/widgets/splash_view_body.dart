@@ -82,13 +82,11 @@ class _SplashViewBodyState extends State<SplashViewBody>
         }).sendPostRequest();
 
     result.fold((l) {
+      // Get.find<AppPreferences>().clear();
       statusRequest = StatusRequest.error;
     }, (r) {
       statusRequest = StatusRequest.success;
       code = r['verified_code'];
-      print("====================");
-      print(code);
-      print("====================");
     });
   }
 
