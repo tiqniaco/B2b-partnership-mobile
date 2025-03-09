@@ -26,7 +26,7 @@ const purpleColor = Color(0xff7b6caf);
 //const redColor = Color(0xffd15136);
 const pinkColor = Color(0xffea908f);
 const pageColor = Color.fromARGB(255, 224, 220, 220);
-const greenColor = Color(0xff7e8d36);
+const greenColor = Colors.green;
 const blueColor = Colors.blue;
 // my colors   //  #B59C65
 const testBackg = Color(0xffD1E2F5);
@@ -62,6 +62,7 @@ final blackWithOpacityColor = const Color(0xFF000000).withOpacity(0.5);
 // Other colors
 const whiteColor = Color(0xFFFFFFFF);
 const greyColor = Color(0xFF9A9A9D);
+const darkGreyColor = Color(0xFF535353);
 const textFormFieldFilledColor = whiteColor; // Color(0xFFededed);
 const lightGreyColor = Color(0xFFf7f7f7);
 // const borderColor = Color(0xFFdbdbdb);
