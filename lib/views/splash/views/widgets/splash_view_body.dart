@@ -82,7 +82,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
         }).sendPostRequest();
 
     result.fold((l) {
-      // Get.find<AppPreferences>().clear();
+      Get.find<AppPreferences>().clear();
       statusRequest = StatusRequest.error;
     }, (r) {
       statusRequest = StatusRequest.success;
