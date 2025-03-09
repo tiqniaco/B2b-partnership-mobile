@@ -3,6 +3,7 @@ import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/auth/auth_text_form.dart';
 import 'package:b2b_partenership/widgets/select_city_widget.dart';
 import 'package:b2b_partenership/widgets/select_country_widget.dart';
@@ -183,11 +184,15 @@ class EditClientProfileView extends StatelessWidget {
                                             color: blackColor,
                                           ),
                                           Gap(5),
-                                          Image.network(
+                                          // Image.network(
+                                          //   controller.selectedCountry.flag!,
+                                          //   width: 23.h,
+                                          //   height: 23.h,
+                                          //   fit: BoxFit.cover,
+                                          // )
+                                          Text(
                                             controller.selectedCountry.flag!,
-                                            width: 23.h,
-                                            height: 23.h,
-                                            fit: BoxFit.cover,
+                                            style: getMediumStyle,
                                           ),
                                           Gap(6),
                                           Text(
