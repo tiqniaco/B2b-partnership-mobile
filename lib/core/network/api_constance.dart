@@ -124,4 +124,10 @@ class ApiConstance {
 
   // Client Job Applications
   static String clientJobApplications = 'client/job-application';
+
+  // Provider Job Applications
+  static String providerJobApplications = 'job-applications';
+
+  static String changeJobApplicationStatus(String id) =>
+      "job-applications/$id/update-status";
 }

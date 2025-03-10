@@ -50,4 +50,5 @@ class AssetsData {
   static const String cardiologyAndVascularDiseaseSVG =
       '${_baseSVGsPath}Cardiology and Vascular Disease.svg';
   static const String heartRateSVG = '${_baseSVGsPath}heart-rate.svg';
+  static const String jobApplicationSVG = '${_baseSVGsPath}job-application.svg';
 }

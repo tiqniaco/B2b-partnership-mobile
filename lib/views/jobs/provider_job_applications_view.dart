@@ -1,9 +1,10 @@
 import 'package:b2b_partenership/app_routes.dart';
-import 'package:b2b_partenership/controller/job_application/client_job_applications_controller.dart';
+import 'package:b2b_partenership/controller/jobs/provider_job_applications_controller.dart';
 import 'package:b2b_partenership/core/enums/job_application_status_enum.dart';
-import 'package:b2b_partenership/core/enums/jobs_contract_type_enum.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_sliver_server_status_widget.dart';
+import 'package:b2b_partenership/core/services/date_time_convertor.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/utils/font_manager.dart';
@@ -12,21 +13,20 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class ClientJobApplicationsView extends StatelessWidget {
-  const ClientJobApplicationsView({super.key});
+class ProviderJobApplicationsView extends StatelessWidget {
+  const ProviderJobApplicationsView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ClientJobApplicationsController>(
-      init: ClientJobApplicationsController(),
-      builder: (ClientJobApplicationsController controller) {
+    return GetBuilder<ProviderJobApplicationsController>(
+      init: ProviderJobApplicationsController(),
+      builder: (ProviderJobApplicationsController controller) {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: primaryColor,
-            titleSpacing: 0.0,
             iconTheme: IconThemeData(color: whiteColor),
-            title: const Text(
-              "Job Applications",
+            title: Text(
+              'Job Applications',
               style: TextStyle(
                 color: whiteColor,
               ),
@@ -89,6 +89,17 @@ class ClientJobApplicationsView extends StatelessWidget {
                       ),
                     ),
                   ),
+                  SliverToBoxAdapter(
+                    child: Container(
+                      margin: EdgeInsets.only(bottom: 10.h),
+                      child: Text(
+                        '${controller.jobApplications.length} applications found',
+                        style: getLightStyle.copyWith(
+                          fontWeight: FontManager.mediumFontWeight,
+                        ),
+                      ),
+                    ),
+                  ),
                   CustomSliverServerStatusWidget(
                     statusRequest: controller.statusRequest,
                     child: SliverList.separated(
@@ -116,14 +127,10 @@ class ClientJobApplicationsView extends StatelessWidget {
                             ),
                             child: Row(
                               children: [
-                                CircleAvatar(
-                                  backgroundColor: whiteColor,
-                                  radius: 35.r,
-                                  child: CustomNetworkImage(
-                                    imageUrl: model.providerImage,
-                                    fit: BoxFit.contain,
-                                    shape: BoxShape.circle,
-                                  ),
+                                CustomNetworkImage(
+                                  imageUrl: model.clientImage,
+                                  fit: BoxFit.fitWidth,
+                                  width: 0.22.sw,
                                 ),
                                 Gap(12.w),
                                 Expanded(
@@ -131,29 +138,48 @@ class ClientJobApplicationsView extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text.rich(
-                                        TextSpan(children: [
-                                          TextSpan(
-                                            text: "Status: ",
-                                            style: getRegularStyle.copyWith(
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text.rich(
+                                            TextSpan(children: [
+                                              TextSpan(
+                                                text: "Status: ",
+                                                style: getRegularStyle.copyWith(
+                                                  fontWeight: FontManager
+                                                      .mediumFontWeight,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text: model.applicationStatus
+                                                    .name.capitalizeFirst,
+                                                style: getRegularStyle.copyWith(
+                                                  fontWeight: FontManager
+                                                      .mediumFontWeight,
+                                                  color: model
+                                                      .applicationStatus.color,
+                                                ),
+                                              ),
+                                            ]),
+                                          ),
+                                          Gap(8.w),
+                                          Text(
+                                            DateTimeConvertor.timeAgo(
+                                              model.createdAt,
+                                            ),
+                                            style: getLightStyle.copyWith(
                                               fontWeight:
                                                   FontManager.mediumFontWeight,
+                                              color: greyColor,
+                                              fontSize: 10.sp,
                                             ),
                                           ),
-                                          TextSpan(
-                                            text: model.applicationStatus.name
-                                                .capitalizeFirst,
-                                            style: getRegularStyle.copyWith(
-                                              fontWeight:
-                                                  FontManager.mediumFontWeight,
-                                              color: primaryColor,
-                                            ),
-                                          ),
-                                        ]),
+                                        ],
                                       ),
                                       Gap(5.h),
                                       Text(
-                                        "Company: ${model.providerName}",
+                                        "Name: ${model.clientName}",
                                         style: getRegularStyle.copyWith(
                                           fontWeight:
                                               FontManager.mediumFontWeight,
@@ -161,7 +187,7 @@ class ClientJobApplicationsView extends StatelessWidget {
                                       ),
                                       Gap(5.h),
                                       Text(
-                                        "Job Title: ${model.jobTitle}",
+                                        "Expected Salary: ${model.expectedSalary}\$",
                                         style: getRegularStyle.copyWith(
                                           fontWeight:
                                               FontManager.mediumFontWeight,
@@ -169,21 +195,56 @@ class ClientJobApplicationsView extends StatelessWidget {
                                       ),
                                       Gap(5.h),
                                       Text(
-                                        "Contract Type: ${model.jobContractType.text}",
+                                        "Years of experience: ${model.yearsOfExperience}",
                                         style: getLightStyle,
                                       ),
                                       Gap(5.h),
                                       Text(
-                                        "Expiry Date: ${model.jobExpirationDate}",
+                                        "Available to start: ${model.availableToStartDate}",
                                         style: getLightStyle,
                                       ),
-                                      if (model.jobSalary != "null") ...[
-                                        Gap(5.h),
-                                        Text(
-                                          "Salary: ${model.jobSalary}",
-                                          style: getLightStyle,
-                                        )
-                                      ],
+                                      Gap(8.h),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                            child: CustomLoadingButton(
+                                              onPressed: () {
+                                                return controller
+                                                    .changeJobApplicationStatus(
+                                                  applicationId:
+                                                      model.jobApplicationId,
+                                                  status:
+                                                      JobApplicationStatusEnum
+                                                          .accepted,
+                                                );
+                                              },
+                                              borderRadius: 5.r,
+                                              height: 0.045.sh,
+                                              backgroundColor: greenColor,
+                                              text: "Accept",
+                                            ),
+                                          ),
+                                          Gap(12.w),
+                                          Expanded(
+                                            child: CustomLoadingButton(
+                                              onPressed: () {
+                                                return controller
+                                                    .changeJobApplicationStatus(
+                                                  applicationId:
+                                                      model.jobApplicationId,
+                                                  status:
+                                                      JobApplicationStatusEnum
+                                                          .rejected,
+                                                );
+                                              },
+                                              borderRadius: 5.r,
+                                              height: 0.045.sh,
+                                              backgroundColor: redColor,
+                                              text: "Reject",
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -192,9 +253,9 @@ class ClientJobApplicationsView extends StatelessWidget {
                           ),
                         );
                       },
-                      separatorBuilder: (context, index) => const Divider(),
+                      separatorBuilder: (context, index) => Gap(10.h),
                     ),
-                  ),
+                  )
                 ],
               ),
             ),
