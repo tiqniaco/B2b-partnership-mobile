@@ -35,133 +35,129 @@ class SearchJobApplicationsView extends StatelessWidget {
               horizontal: 16.w,
               vertical: 10.h,
             ),
-            child: RefreshIndicator(
-              onRefresh: () => controller.getJobApplications(),
-              child: CustomScrollView(
-                controller: controller.scrollController,
-                slivers: [
-                  SliverToBoxAdapter(
-                    child: Container(
-                      margin: EdgeInsets.only(bottom: 10.h),
-                      child: TextFormField(
-                        controller: controller.searchController,
-                        decoration: InputDecoration(
-                          labelText: 'Search'.tr,
-                          hintText: 'Search about job applications'.tr,
-                          suffixIcon: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              IconButton(
-                                icon: Icon(
-                                  FontAwesomeIcons.arrowsRotate,
-                                  color: primaryColor,
-                                  size: 15.sp,
-                                ),
-                                onPressed: () {
-                                  controller.searchController.clear();
-                                  controller.getJobApplications();
-                                },
+            child: CustomScrollView(
+              controller: controller.scrollController,
+              slivers: [
+                SliverToBoxAdapter(
+                  child: Container(
+                    margin: EdgeInsets.only(bottom: 10.h),
+                    child: TextFormField(
+                      controller: controller.searchController,
+                      decoration: InputDecoration(
+                        labelText: 'Search'.tr,
+                        hintText: 'Search about job applications'.tr,
+                        suffixIcon: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: Icon(
+                                FontAwesomeIcons.arrowsRotate,
+                                color: primaryColor,
+                                size: 15.sp,
                               ),
-                              IconButton(
-                                icon: Icon(
-                                  FontAwesomeIcons.magnifyingGlass,
-                                  color: primaryColor,
-                                  size: 15.sp,
+                              onPressed: () {
+                                controller.searchController.clear();
+                                controller.getJobApplications();
+                              },
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                FontAwesomeIcons.magnifyingGlass,
+                                color: primaryColor,
+                                size: 15.sp,
+                              ),
+                              onPressed: () {
+                                if (controller
+                                    .searchController.text.isNotEmpty) {
+                                  controller.getJobApplications();
+                                }
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+                      onFieldSubmitted: (value) {
+                        if (value.isEmpty) return;
+                        controller.getJobApplications();
+                      },
+                    ),
+                  ),
+                ),
+                CustomSliverServerStatusWidget(
+                  statusRequest: controller.statusRequest,
+                  child: SliverList.separated(
+                    itemCount: controller.jobApplications.length,
+                    itemBuilder: (context, index) {
+                      final model = controller.jobApplications[index];
+                      return InkWell(
+                        onTap: () {
+                          Get.toNamed(
+                            AppRoutes.jobApplicationDetails,
+                            arguments: {
+                              "model": model,
+                              "showStatus": false,
+                            },
+                          );
+                        },
+                        child: Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 16.w,
+                            vertical: 10.h,
+                          ),
+                          decoration: BoxDecoration(
+                            color: whiteColor,
+                            border: Border.all(color: borderColor),
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: Row(
+                            children: [
+                              CustomNetworkImage(
+                                imageUrl: model.clientImage,
+                                fit: BoxFit.fitWidth,
+                                width: 0.22.sw,
+                              ),
+                              Gap(12.w),
+                              Expanded(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Name: ${model.clientName}",
+                                      style: getRegularStyle.copyWith(
+                                        fontWeight:
+                                            FontManager.mediumFontWeight,
+                                      ),
+                                    ),
+                                    Gap(5.h),
+                                    Text(
+                                      "Expected Salary: ${model.expectedSalary}\$",
+                                      style: getRegularStyle.copyWith(
+                                        fontWeight:
+                                            FontManager.mediumFontWeight,
+                                      ),
+                                    ),
+                                    Gap(5.h),
+                                    Text(
+                                      "Years of experience: ${model.yearsOfExperience}",
+                                      style: getLightStyle,
+                                    ),
+                                    Gap(5.h),
+                                    Text(
+                                      "Available to start: ${model.availableToStartDate}",
+                                      style: getLightStyle,
+                                    ),
+                                  ],
                                 ),
-                                onPressed: () {
-                                  if (controller
-                                      .searchController.text.isNotEmpty) {
-                                    controller.getJobApplications();
-                                  }
-                                },
                               ),
                             ],
                           ),
                         ),
-                        onFieldSubmitted: (value) {
-                          if (value.isEmpty) return;
-                          controller.getJobApplications();
-                        },
-                      ),
-                    ),
+                      );
+                    },
+                    separatorBuilder: (context, index) => Gap(10.h),
                   ),
-                  CustomSliverServerStatusWidget(
-                    statusRequest: controller.statusRequest,
-                    child: SliverList.separated(
-                      itemCount: controller.jobApplications.length,
-                      itemBuilder: (context, index) {
-                        final model = controller.jobApplications[index];
-                        return InkWell(
-                          onTap: () {
-                            Get.toNamed(
-                              AppRoutes.jobApplicationDetails,
-                              arguments: {
-                                "model": model,
-                                "showStatus": false,
-                              },
-                            );
-                          },
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 16.w,
-                              vertical: 10.h,
-                            ),
-                            decoration: BoxDecoration(
-                              color: whiteColor,
-                              border: Border.all(color: borderColor),
-                              borderRadius: BorderRadius.circular(8.r),
-                            ),
-                            child: Row(
-                              children: [
-                                CustomNetworkImage(
-                                  imageUrl: model.clientImage,
-                                  fit: BoxFit.fitWidth,
-                                  width: 0.22.sw,
-                                ),
-                                Gap(12.w),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Name: ${model.clientName}",
-                                        style: getRegularStyle.copyWith(
-                                          fontWeight:
-                                              FontManager.mediumFontWeight,
-                                        ),
-                                      ),
-                                      Gap(5.h),
-                                      Text(
-                                        "Expected Salary: ${model.expectedSalary}\$",
-                                        style: getRegularStyle.copyWith(
-                                          fontWeight:
-                                              FontManager.mediumFontWeight,
-                                        ),
-                                      ),
-                                      Gap(5.h),
-                                      Text(
-                                        "Years of experience: ${model.yearsOfExperience}",
-                                        style: getLightStyle,
-                                      ),
-                                      Gap(5.h),
-                                      Text(
-                                        "Available to start: ${model.availableToStartDate}",
-                                        style: getLightStyle,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                      separatorBuilder: (context, index) => Gap(10.h),
-                    ),
-                  )
-                ],
-              ),
+                )
+              ],
             ),
           ),
         );
