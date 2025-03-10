@@ -78,7 +78,7 @@ class ProviderJobsView extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10.r),
                             ),
                             child: Text(
-                              'Search for employment opportunities',
+                              'Search for job seekers',
                               style: getRegularStyle.copyWith(
                                 color: primaryColor,
                               ),
