@@ -1,4 +1,5 @@
 import 'package:b2b_partenership/app_routes.dart';
+import 'package:b2b_partenership/core/services/app_prefs.dart';
 
 import '/controller/jobs/job_details_controller.dart';
 import '/core/enums/jobs_contract_type_enum.dart';
@@ -23,24 +24,27 @@ class JobDetailsView extends StatelessWidget {
       init: JobDetailsController(),
       builder: (JobDetailsController controller) {
         return Scaffold(
-          floatingActionButton: FloatingActionButton.extended(
-            onPressed: () {
-              Get.toNamed(AppRoutes.jobApplication, arguments: {
-                "jobId": controller.jobDetailsModel?.id,
-              });
-            },
-            icon: Icon(
-              FontAwesomeIcons.briefcase,
-              color: whiteColor,
-            ),
-            label: Text(
-              "Apply Now".tr,
-              style: getLightStyle.copyWith(
-                color: whiteColor,
-                fontWeight: FontManager.semiBoldFontWeight,
-              ),
-            ),
-          ),
+          floatingActionButton:
+              Get.find<AppPreferences>().getUserRole() == "client"
+                  ? FloatingActionButton.extended(
+                      onPressed: () {
+                        Get.toNamed(AppRoutes.jobApplication, arguments: {
+                          "jobId": controller.jobDetailsModel?.id,
+                        });
+                      },
+                      icon: Icon(
+                        FontAwesomeIcons.briefcase,
+                        color: whiteColor,
+                      ),
+                      label: Text(
+                        "Apply Now".tr,
+                        style: getLightStyle.copyWith(
+                          color: whiteColor,
+                          fontWeight: FontManager.semiBoldFontWeight,
+                        ),
+                      ),
+                    )
+                  : null,
           body: SafeArea(
             top: false,
             child: CustomScrollView(

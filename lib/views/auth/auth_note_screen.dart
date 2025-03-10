@@ -20,7 +20,7 @@ class AuthNoteScreen extends StatelessWidget {
           : Padding(
               padding: const EdgeInsets.all(20.0),
               child: Center(
-                  child: controller.code == 1
+                  child: controller.code == "1"
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

@@ -34,6 +34,8 @@ import 'views/jobs/jobs_view.dart';
 import 'views/notifications/views/notification_view.dart';
 import 'views/orders/order_details_view.dart';
 import 'views/orders/order_item_view.dart';
+import 'views/provider_app/jobs/add_new_job_view.dart';
+import 'views/provider_app/jobs/provider_jobs_view.dart';
 import 'views/provider_app/my_services/add_provider_service_view.dart';
 import 'views/provider_app/my_services/edit_provider_service_view.dart';
 import 'views/provider_app/setting/edit_provider_profile_view.dart';
@@ -116,6 +118,8 @@ class AppRoutes {
   static const String jobApplication = '/jobApplication';
   static const String clientJobApplications = '/clientJobApplications';
   static const String jobApplicationDetails = '/jobApplicationDetails';
+  static const String providerJobs = '/providerJobs';
+  static const String addNewJob = '/addNewJob';
 
   static final List<GetPage<dynamic>> pages = [
     // base
@@ -311,6 +315,16 @@ class AppRoutes {
     GetPage(
       name: jobApplicationDetails,
       page: () => const JobApplicationDetailsView(),
+    ),
+
+    GetPage(
+      name: providerJobs,
+      page: () => const ProviderJobsView(),
+    ),
+
+    GetPage(
+      name: addNewJob,
+      page: () => const AddNewJobView(),
     ),
   ];
 }

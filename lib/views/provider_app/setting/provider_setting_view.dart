@@ -102,7 +102,7 @@ class ProviderSettingView extends StatelessWidget {
                                     Colors.amber,
                                     controller.menuModel!.jobsCount.toString(),
                                     "Jobs", () {
-                                  Get.toNamed(AppRoutes.getRequestServices);
+                                  Get.toNamed(AppRoutes.providerJobs);
                                 }),
                                 boxWidget(
                                     Icons.shopping_cart_outlined,
