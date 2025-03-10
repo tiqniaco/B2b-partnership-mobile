@@ -7,6 +7,7 @@ import 'package:b2b_partenership/views/auth/o_t_p_view.dart';
 import 'package:b2b_partenership/views/auth/provider_signup_view.dart';
 import 'package:b2b_partenership/views/home/client_home_layout.dart';
 import 'package:b2b_partenership/views/home/client_home_view.dart';
+import 'package:b2b_partenership/views/job_application/search_job_applications_view.dart';
 import 'package:b2b_partenership/views/orders/orders_view.dart';
 import 'package:b2b_partenership/views/provider_app/home/provider_home_layout.dart';
 import 'package:b2b_partenership/views/provider_app/home/provider_home_view.dart';
@@ -122,6 +123,7 @@ class AppRoutes {
   static const String providerJobs = '/providerJobs';
   static const String addNewJob = '/addNewJob';
   static const String providerJobApplications = '/providerJobApplications';
+  static const String searchJobApplications = '/searchJobApplications';
 
   static final List<GetPage<dynamic>> pages = [
     // base
@@ -331,6 +333,10 @@ class AppRoutes {
     GetPage(
       name: providerJobApplications,
       page: () => const ProviderJobApplicationsView(),
+    ),
+    GetPage(
+      name: searchJobApplications,
+      page: () => const SearchJobApplicationsView(),
     ),
   ];
 }

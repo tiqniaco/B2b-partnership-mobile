@@ -47,17 +47,17 @@ class JobApplicationDetailsView extends StatelessWidget {
                   SizedBox(height: 8.h),
                   if (Get.find<AppPreferences>().getUserRole() == "client") ...[
                     _buildProviderInfo(controller),
-                    SizedBox(height: 10.h),
                   ],
                   if (Get.find<AppPreferences>().getUserRole() ==
                       "provider") ...[
                     _buildClientInfo(controller),
-                    SizedBox(height: 10.h),
                   ],
-                  _buildStatusBadge(
-                    controller.model?.applicationStatus ??
-                        JobApplicationStatusEnum.pending,
-                  ),
+                  SizedBox(height: 10.h),
+                  if (controller.showStatus)
+                    _buildStatusBadge(
+                      controller.model?.applicationStatus ??
+                          JobApplicationStatusEnum.pending,
+                    ),
                 ],
               ),
             ),

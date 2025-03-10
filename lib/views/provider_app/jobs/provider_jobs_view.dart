@@ -1,3 +1,4 @@
+import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/provider/jobs/provider_jobs_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_sliver_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
@@ -58,15 +59,30 @@ class ProviderJobsView extends StatelessWidget {
                   child: CustomScrollView(
                     slivers: [
                       SliverToBoxAdapter(
-                        child: Container(
-                          margin: EdgeInsetsDirectional.only(
-                            start: 16.w,
-                            end: 16.w,
-                            bottom: 6.h,
-                            top: 16.h,
-                          ),
-                          child: Row(
-                            children: [],
+                        child: InkWell(
+                          onTap: () {
+                            Get.toNamed(AppRoutes.searchJobApplications);
+                          },
+                          child: Container(
+                            margin: EdgeInsetsDirectional.only(
+                              start: 16.w,
+                              end: 16.w,
+                              top: 10.h,
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 16.w,
+                              vertical: 10.h,
+                            ),
+                            decoration: BoxDecoration(
+                              color: primaryColor.withAlpha(20),
+                              borderRadius: BorderRadius.circular(10.r),
+                            ),
+                            child: Text(
+                              'Search for employment opportunities',
+                              style: getRegularStyle.copyWith(
+                                color: primaryColor,
+                              ),
+                            ),
                           ),
                         ),
                       ),
