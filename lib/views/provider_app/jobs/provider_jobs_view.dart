@@ -1,4 +1,3 @@
-import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/provider/jobs/provider_jobs_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_sliver_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
