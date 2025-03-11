@@ -3,6 +3,7 @@ import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/models/specialize_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class SelectSpecializationWidget extends StatelessWidget {
   const SelectSpecializationWidget({
@@ -18,7 +19,7 @@ class SelectSpecializationWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButtonFormField<SpecializeModel>(
         isExpanded: true,
-        value: value, //controller.selectedSpecialization,
+        value: value, 
         decoration: InputDecoration(
           contentPadding:
               EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
@@ -31,7 +32,7 @@ class SelectSpecializationWidget extends StatelessWidget {
             borderSide: const BorderSide(color: pageColor, width: 1.5),
           ),
           label: Text(
-            'Select Category',
+            'Select Category'.tr,
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 17.sp,
@@ -47,7 +48,7 @@ class SelectSpecializationWidget extends StatelessWidget {
           return DropdownMenuItem<SpecializeModel>(
             value: item,
             child: Text(
-              translateDatabase(arabic: item.nameAr!, english: item.nameEn!),
+              translateDatabase(arabic: item.nameAr??"", english: item.nameEn??""),
               style: TextStyle(
                   fontSize: 12.sp,
                   color: greyColor.withAlpha(160),
@@ -56,10 +57,6 @@ class SelectSpecializationWidget extends StatelessWidget {
           );
         }).toList(),
         onChanged: onChanged
-        // (value) {
-        //   controller.onSpecializeChanged(value);
-        // },
-
         );
   }
 }

@@ -23,54 +23,59 @@ class ProviderSignup2 extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(
-                child: SelectCountryWidget(
-                  enabled: false,
-                  value: controller.selectedCountry,
-                  models: controller.countries,
-                  onChanged: (val) {
-                    controller.onCountryChanged(val);
-                  },
+              if (controller.countries.isNotEmpty)
+                Expanded(
+                  child: SelectCountryWidget(
+                    enabled: false,
+                    value: controller.selectedCountry,
+                    models: controller.countries,
+                    onChanged: (val) {
+                      controller.onCountryChanged(val);
+                    },
+                  ),
                 ),
-              ),
               Gap(10),
-              Expanded(
-                  child: SelectCityWidget(
-                value: controller.selectedCity,
-                models: controller.cities,
-                onChanged: (val) {
-                  controller.onCityChanged(val);
-                },
-              )),
+              if (controller.cities.isNotEmpty)
+                Expanded(
+                    child: SelectCityWidget(
+                  value: controller.selectedCity,
+                  models: controller.cities,
+                  onChanged: (val) {
+                    controller.onCityChanged(val);
+                  },
+                )),
             ],
           ),
           Gap(20.h),
-          CustomPhoneWidget(),
+          if (controller.countries.isNotEmpty) CustomPhoneWidget(),
           if (controller.role == "provider") ...[
             Gap(10.h),
-            SelectProviderWidget(
-              providerTypes: controller.providerTypes,
-              value: controller.selectedType,
-              onChanged: (value) {
-                controller.onProviderTypeChanged(value);
-              },
-            ),
+            if (controller.providerTypes.isNotEmpty)
+              SelectProviderWidget(
+                providerTypes: controller.providerTypes,
+                value: controller.selectedType,
+                onChanged: (value) {
+                  controller.onProviderTypeChanged(value);
+                },
+              ),
             Gap(20.h),
-            SelectSpecializationWidget(
-              value: controller.selectedSpecialization,
-              models: controller.specializations,
-              onChanged: (val) {
-                controller.onSpecializeChanged(val);
-              },
-            ),
+            if (controller.specializations.isNotEmpty)
+              SelectSpecializationWidget(
+                value: controller.selectedSpecialization,
+                models: controller.specializations,
+                onChanged: (val) {
+                  controller.onSpecializeChanged(val);
+                },
+              ),
             Gap(20.h),
-            SelectSupSpecializationWidget(
-              value: controller.selectedSubSpecialization,
-              models: controller.subSpecializations,
-              onChanged: (val) {
-                controller.onSubSpecializeChanged(val);
-              },
-            )
+            if (controller.subSpecializations.isNotEmpty)
+              SelectSupSpecializationWidget(
+                value: controller.selectedSubSpecialization,
+                models: controller.subSpecializations,
+                onChanged: (val) {
+                  controller.onSubSpecializeChanged(val);
+                },
+              )
           ],
           Gap(20.h),
         ],

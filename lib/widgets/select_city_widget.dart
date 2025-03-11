@@ -3,6 +3,7 @@ import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/models/city_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class SelectCityWidget extends StatelessWidget {
   const SelectCityWidget({
@@ -31,7 +32,7 @@ class SelectCityWidget extends StatelessWidget {
             borderSide: const BorderSide(color: pageColor, width: 1.5),
           ),
           label: Text(
-            'Select City',
+            'Select City'.tr,
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 17.sp,
@@ -47,7 +48,7 @@ class SelectCityWidget extends StatelessWidget {
           return DropdownMenuItem<CityModel>(
             value: item,
             child: Text(
-              translateDatabase(arabic: item.nameAr!, english: item.nameEn!),
+              translateDatabase(arabic: item.nameAr??"", english: item.nameEn??""),
               style: TextStyle(
                 fontSize: 12.sp,
                 color: greyColor.withAlpha(160),
@@ -57,9 +58,7 @@ class SelectCityWidget extends StatelessWidget {
           );
         }).toList(),
         onChanged: onChanged
-        //  (value) {
-        //   controller.onCityChanged(value);
-        // },
+       
 
         );
   }

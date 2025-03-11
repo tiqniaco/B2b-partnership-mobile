@@ -76,7 +76,7 @@ class ProviderSignup1 extends StatelessWidget {
 
           Gap(20.h),
           AuthTextForm(
-            lable: "Full Name".tr,
+            lable: "Name".tr,
             preicon: CupertinoIcons.person,
             hintText: "Enter your full name".tr,
             textFormController: controller.usernameController,
@@ -84,17 +84,6 @@ class ProviderSignup1 extends StatelessWidget {
               return controller.validUserData(val);
             },
           ),
-
-          // Gap(20.h),
-          // AuthTextForm(
-          //   lable: "Phone".tr,
-          //   preicon: CupertinoIcons.phone,
-          //   hintText: "Enter your phone".tr,
-          //   textFormController: controller.phoneController,
-          //   validator: (val) {
-          //     return controller.validUserData(val);
-          //   },
-          // ),
 
           Gap(20.h),
           AuthTextForm(

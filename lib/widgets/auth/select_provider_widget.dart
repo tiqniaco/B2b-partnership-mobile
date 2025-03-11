@@ -3,6 +3,7 @@ import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/models/provider_type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class SelectProviderWidget extends StatelessWidget {
   const SelectProviderWidget({
@@ -31,7 +32,7 @@ class SelectProviderWidget extends StatelessWidget {
           borderSide: const BorderSide(color: pageColor, width: 1.5),
         ),
         label: Text(
-          'Provider Type',
+          'Provider Type'.tr,
           style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 17.sp,
@@ -49,7 +50,7 @@ class SelectProviderWidget extends StatelessWidget {
           child: Row(
             children: [
               Text(
-                translateDatabase(arabic: item.nameAr!, english: item.nameEn!),
+                translateDatabase(arabic: item.nameAr??"", english: item.nameEn??""),
                 style: TextStyle(
                     fontSize: 12.sp,
                     color: greyColor.withAlpha(160),

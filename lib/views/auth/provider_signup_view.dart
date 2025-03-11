@@ -56,7 +56,7 @@ class ProviderSignupView extends StatelessWidget {
                     ),
                     Gap(20),
                     Text(
-                      "Create a New Account",
+                      "Create a New Account".tr,
                       style: TextStyle(
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w500,
@@ -68,7 +68,7 @@ class ProviderSignupView extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                              'Step ${controller.currentStep + 1} of ${controller.providerSteps.length}  '),
+                              '${"Step".tr} ${controller.currentStep + 1} ${"of".tr} ${controller.providerSteps.length}  '),
                           Expanded(
                             child: LinearProgressIndicator(
                               borderRadius: BorderRadius.circular(30),
@@ -89,14 +89,14 @@ class ProviderSignupView extends StatelessWidget {
                         onPressed: () => controller.goToOtp(),
                         text: controller.currentStep ==
                                 controller.providerSteps.length - 1
-                            ? 'Finish'
-                            : 'Next'),
+                            ? 'Finish'.tr
+                            : 'Next'.tr),
                     Gap(10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "Already have account?".tr,
+                          "Already have an account?".tr,
                           style: TextStyle(
                             fontSize: 12.sp,
                             color: Colors.black54,

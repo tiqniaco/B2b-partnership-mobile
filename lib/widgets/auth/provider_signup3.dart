@@ -65,7 +65,7 @@ class ProviderSignup3 extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30))),
                         child: Text(
-                          "Upload",
+                          "Upload".tr,
                           style: TextStyle(fontSize: 12.sp),
                         )),
                   ),
@@ -114,7 +114,7 @@ class ProviderSignup3 extends StatelessWidget {
                           );
                         },
                         child: Text(
-                          "Upload",
+                          "Upload".tr,
                           style: TextStyle(fontSize: 12.sp),
                         )),
                   ),

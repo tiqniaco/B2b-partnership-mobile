@@ -21,7 +21,7 @@ class CustomPhoneWidget extends StatelessWidget {
           decoration: InputDecoration(
             floatingLabelBehavior: FloatingLabelBehavior.always,
             label: Text(
-              "Phone",
+              "Phone".tr,
               style: TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 17.sp,
@@ -38,11 +38,8 @@ class CustomPhoneWidget extends StatelessWidget {
                     color: blackColor,
                   ),
                   Gap(5),
-                  Image.network(
+                  Text(
                     controller.selectedCountry.flag!,
-                    width: 23.h,
-                    height: 23.h,
-                    fit: BoxFit.cover,
                   ),
                   Gap(6),
                   Text("+${controller.selectedCountry.code}"),

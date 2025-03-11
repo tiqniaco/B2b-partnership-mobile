@@ -3,6 +3,7 @@ import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/models/sub_specialize_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class SelectSupSpecializationWidget extends StatelessWidget {
   const SelectSupSpecializationWidget({
@@ -31,7 +32,7 @@ class SelectSupSpecializationWidget extends StatelessWidget {
           borderSide: const BorderSide(color: pageColor, width: 1.5),
         ),
         label: Text(
-          'Select Sub Category',
+          'Select Sub Category'.tr,
           style: TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 17.sp,
@@ -47,7 +48,7 @@ class SelectSupSpecializationWidget extends StatelessWidget {
         return DropdownMenuItem<SubSpecializeModel>(
           value: item,
           child: Text(
-            translateDatabase(arabic: item.nameAr!, english: item.nameEn!),
+            translateDatabase(arabic: item.nameAr??"", english: item.nameEn??""),
             style: TextStyle(
                 fontSize: 12.sp,
                 color: greyColor.withAlpha(160),

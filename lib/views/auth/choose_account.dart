@@ -42,7 +42,7 @@ class ChooseAccount extends StatelessWidget {
                   ),
                   Gap(20.h),
                   Text(
-                    "Join as a Client or Service Provider",
+                    "Join as a Client or Service Provider".tr,
                     style: TextStyle(
                         fontSize: 16.sp,
                         // fontWeight: FontWeight.bold,
@@ -51,16 +51,16 @@ class ChooseAccount extends StatelessWidget {
                   Gap(30),
                   containerWidget(
                       "assets/images/client.jpg",
-                      "I'm a client",
-                      "Looking for help with a project.",
+                      "I'm a client".tr,
+                      "Looking for help with a project.".tr,
                       controller.isClient, () {
                     controller.onTapClient();
                   }),
                   Gap(10.h),
                   containerWidget(
                       "assets/images/provider.jpeg",
-                      "I'm a Service provider",
-                      "Looking for my favorite work.",
+                      "I'm a Service provider".tr,
+                      "Looking for my favorite work.".tr,
                       controller.isProvider, () {
                     controller.onTapProvider();
                   }),
@@ -81,7 +81,7 @@ class ChooseAccount extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Already have account?".tr,
+                        "Already have an account?".tr,
                         style: TextStyle(
                             fontSize: 12.sp,
                             color: greyColor,

@@ -3,6 +3,7 @@ import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/models/country_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class SelectCountryWidget extends StatelessWidget {
   const SelectCountryWidget({
@@ -36,7 +37,7 @@ class SelectCountryWidget extends StatelessWidget {
             borderSide: const BorderSide(color: pageColor, width: 1.5),
           ),
           label: Text(
-            'Select Country',
+            'Select Country'.tr,
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 17.sp,
@@ -53,16 +54,14 @@ class SelectCountryWidget extends StatelessWidget {
             value: item,
             child: Row(
               children: [
-                Image.network(
+                Text(
                   item.flag!,
-                  width: 23.h,
-                  fit: BoxFit.cover,
                 ),
                 SizedBox(width: 8.w),
                 Expanded(
                   child: Text(
                     translateDatabase(
-                        arabic: item.nameAr!, english: item.nameEn!),
+                        arabic: item.nameAr??"", english: item.nameEn??""),
                     style: TextStyle(
                       fontSize: 12.sp,
                       color: greyColor.withAlpha(160),
