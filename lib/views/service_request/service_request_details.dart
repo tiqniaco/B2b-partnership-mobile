@@ -4,6 +4,7 @@ import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/request_services/price_offer_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -130,9 +131,13 @@ class ServiceRequestDetails extends StatelessWidget {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                CachedNetworkImage(
-                                  imageUrl: controller.model.countryFlag!,
-                                  height: 20.h,
+                                // CachedNetworkImage(
+                                //   imageUrl: controller.model.countryFlag!,
+                                //   height: 20.h,
+                                // ),
+                                Text(
+                                  controller.model.countryFlag!,
+                                  style: getMediumStyle,
                                 ),
                                 Gap(10),
                                 Text(

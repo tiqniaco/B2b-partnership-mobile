@@ -7,6 +7,7 @@ import 'package:b2b_partenership/views/auth/o_t_p_view.dart';
 import 'package:b2b_partenership/views/auth/provider_signup_view.dart';
 import 'package:b2b_partenership/views/home/client_home_layout.dart';
 import 'package:b2b_partenership/views/home/client_home_view.dart';
+import 'package:b2b_partenership/views/job_application/search_job_applications_view.dart';
 import 'package:b2b_partenership/views/orders/orders_view.dart';
 import 'package:b2b_partenership/views/provider_app/home/provider_home_layout.dart';
 import 'package:b2b_partenership/views/provider_app/home/provider_home_view.dart';
@@ -31,9 +32,12 @@ import 'views/job_application/job_application_details_view.dart';
 import 'views/job_application/job_application_view.dart';
 import 'views/jobs/job_details_view.dart';
 import 'views/jobs/jobs_view.dart';
+import 'views/jobs/provider_job_applications_view.dart';
 import 'views/notifications/views/notification_view.dart';
 import 'views/orders/order_details_view.dart';
 import 'views/orders/order_item_view.dart';
+import 'views/provider_app/jobs/add_new_job_view.dart';
+import 'views/provider_app/jobs/provider_jobs_view.dart';
 import 'views/provider_app/my_services/add_provider_service_view.dart';
 import 'views/provider_app/my_services/edit_provider_service_view.dart';
 import 'views/provider_app/setting/edit_provider_profile_view.dart';
@@ -116,6 +120,10 @@ class AppRoutes {
   static const String jobApplication = '/jobApplication';
   static const String clientJobApplications = '/clientJobApplications';
   static const String jobApplicationDetails = '/jobApplicationDetails';
+  static const String providerJobs = '/providerJobs';
+  static const String addNewJob = '/addNewJob';
+  static const String providerJobApplications = '/providerJobApplications';
+  static const String searchJobApplications = '/searchJobApplications';
 
   static final List<GetPage<dynamic>> pages = [
     // base
@@ -311,6 +319,24 @@ class AppRoutes {
     GetPage(
       name: jobApplicationDetails,
       page: () => const JobApplicationDetailsView(),
+    ),
+
+    GetPage(
+      name: providerJobs,
+      page: () => const ProviderJobsView(),
+    ),
+
+    GetPage(
+      name: addNewJob,
+      page: () => const AddNewJobView(),
+    ),
+    GetPage(
+      name: providerJobApplications,
+      page: () => const ProviderJobApplicationsView(),
+    ),
+    GetPage(
+      name: searchJobApplications,
+      page: () => const SearchJobApplicationsView(),
     ),
   ];
 }

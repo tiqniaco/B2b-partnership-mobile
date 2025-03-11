@@ -58,8 +58,7 @@ class JobApplicationView extends StatelessWidget {
                     hint: "enter your cover letter",
                     formatter: FilteringTextInputFormatter.allow(
                       RegExp(
-                        r"^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFFa-zA-Z0-9.,!?()'\" +
-                            r"\s\n-]{0,1000}$",
+                        r"^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFFa-zA-Z0-9.,!?()'\" r"\s\n-]{0,1000}$",
                         unicode: false,
                       ),
                     ),

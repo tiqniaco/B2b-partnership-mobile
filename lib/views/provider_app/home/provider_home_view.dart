@@ -208,7 +208,7 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
                 image: "assets/images/job.jpeg",
                 title: "Need employees?",
                 onPressed: () {
-                  // Get.toNamed(AppRoutes.getRequestServices);
+                  Get.toNamed(AppRoutes.providerJobs);
                 },
                 description: "You can add the available\njob for recruitment",
                 buttonTitle: 'Add Now',

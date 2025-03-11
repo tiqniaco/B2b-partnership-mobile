@@ -18,10 +18,12 @@ class JobWidget extends StatelessWidget {
     required this.model,
     this.onTapDelete,
     this.hasDelete = false,
+    this.hasEdit = false,
   });
   final JobDetailsModel model;
   final bool hasDelete;
   final void Function()? onTapDelete;
+  final bool hasEdit;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -59,36 +61,11 @@ class JobWidget extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Company: ${model.name}",
-                        style: getRegularStyle.copyWith(
-                          fontWeight: FontManager.mediumFontWeight,
-                        ),
-                      ),
-                      if (hasDelete)
-                        InkWell(
-                          onTap: () {
-                            if (onTapDelete != null) {
-                              onTapDelete!();
-                            }
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: primaryColor,
-                            ),
-                            child: Icon(
-                              FontAwesomeIcons.xmark,
-                              size: 16.sp,
-                              color: whiteColor,
-                            ),
-                          ),
-                        ),
-                    ],
+                  Text(
+                    "Company: ${model.name}",
+                    style: getRegularStyle.copyWith(
+                      fontWeight: FontManager.mediumFontWeight,
+                    ),
                   ),
                   Gap(5.h),
                   Text(
@@ -116,6 +93,57 @@ class JobWidget extends StatelessWidget {
                   ],
                 ],
               ),
+            ),
+            Gap(8.w),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                if (hasDelete)
+                  InkWell(
+                    onTap: () {
+                      if (onTapDelete != null) {
+                        onTapDelete!();
+                      }
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(5),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: primaryColor,
+                      ),
+                      child: Icon(
+                        FontAwesomeIcons.xmark,
+                        size: 16.sp,
+                        color: whiteColor,
+                      ),
+                    ),
+                  ),
+                if (hasEdit) ...[
+                  Gap(8.h),
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(
+                        AppRoutes.addNewJob,
+                        arguments: {
+                          "model": model,
+                        },
+                      );
+                    },
+                    child: Container(
+                      padding: EdgeInsets.all(5.w),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: primaryColor,
+                      ),
+                      child: Icon(
+                        FontAwesomeIcons.penToSquare,
+                        size: 16.sp,
+                        color: whiteColor,
+                      ),
+                    ),
+                  )
+                ]
+              ],
             ),
           ],
         ),

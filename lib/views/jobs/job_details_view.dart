@@ -1,4 +1,7 @@
 import 'package:b2b_partenership/app_routes.dart';
+import 'package:b2b_partenership/core/services/app_prefs.dart';
+import 'package:b2b_partenership/core/utils/assets_data.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '/controller/jobs/job_details_controller.dart';
 import '/core/enums/jobs_contract_type_enum.dart';
@@ -23,24 +26,27 @@ class JobDetailsView extends StatelessWidget {
       init: JobDetailsController(),
       builder: (JobDetailsController controller) {
         return Scaffold(
-          floatingActionButton: FloatingActionButton.extended(
-            onPressed: () {
-              Get.toNamed(AppRoutes.jobApplication, arguments: {
-                "jobId": controller.jobDetailsModel?.id,
-              });
-            },
-            icon: Icon(
-              FontAwesomeIcons.briefcase,
-              color: whiteColor,
-            ),
-            label: Text(
-              "Apply Now".tr,
-              style: getLightStyle.copyWith(
-                color: whiteColor,
-                fontWeight: FontManager.semiBoldFontWeight,
-              ),
-            ),
-          ),
+          floatingActionButton:
+              Get.find<AppPreferences>().getUserRole() == "client"
+                  ? FloatingActionButton.extended(
+                      onPressed: () {
+                        Get.toNamed(AppRoutes.jobApplication, arguments: {
+                          "jobId": controller.jobDetailsModel?.id,
+                        });
+                      },
+                      icon: Icon(
+                        FontAwesomeIcons.briefcase,
+                        color: whiteColor,
+                      ),
+                      label: Text(
+                        "Apply Now".tr,
+                        style: getLightStyle.copyWith(
+                          color: whiteColor,
+                          fontWeight: FontManager.semiBoldFontWeight,
+                        ),
+                      ),
+                    )
+                  : null,
           body: SafeArea(
             top: false,
             child: CustomScrollView(
@@ -54,12 +60,62 @@ class JobDetailsView extends StatelessWidget {
                   iconTheme: const IconThemeData(color: whiteColor),
                   flexibleSpace: FlexibleSpaceBar(
                     collapseMode: CollapseMode.pin,
-                    title: Text(
-                      controller.jobDetailsModel?.name ?? "",
-                      style: getRegularStyle.copyWith(
-                        color: whiteColor,
-                        fontWeight: FontManager.mediumFontWeight,
-                      ),
+                    title: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            controller.jobDetailsModel?.name ?? "",
+                            style: getRegularStyle.copyWith(
+                              color: whiteColor,
+                              fontWeight: FontManager.mediumFontWeight,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                        if (Get.find<AppPreferences>().getUserRole() ==
+                            "provider")
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 5.w,
+                              vertical: 5.h,
+                            ),
+                            decoration: BoxDecoration(
+                              color: whiteColor,
+                              borderRadius: BorderRadius.circular(8),
+                              // shape: BoxShape.circle,
+                            ),
+                            margin: EdgeInsetsDirectional.only(end: 10.w),
+                            child: InkWell(
+                              onTap: () {
+                                Get.toNamed(
+                                  AppRoutes.providerJobApplications,
+                                  arguments: {
+                                    "jobId": controller.jobDetailsModel?.id
+                                        .toString(),
+                                  },
+                                );
+                              },
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "Show Applications".tr,
+                                    style: getLightStyle.copyWith(
+                                      fontSize: 8.sp,
+                                      color: primaryColor,
+                                      fontWeight: FontManager.mediumFontWeight,
+                                    ),
+                                  ),
+                                  SvgPicture.asset(
+                                    AssetsData.jobApplicationSVG,
+                                    height: 15.sp,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
                     background: Stack(
                       fit: StackFit.expand,

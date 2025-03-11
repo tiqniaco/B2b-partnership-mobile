@@ -253,7 +253,7 @@ class SettingsView extends StatelessWidget {
                                       "Edit Profile",
                                       () {
                                         Get.toNamed(
-                                          AppRoutes.editProviderProfile,
+                                          AppRoutes.editClientProfile,
                                           arguments: {
                                             'model': controller.menuModel!.data,
                                           },

@@ -9,8 +9,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'core/constants/app_constants.dart';
 import 'core/localization/localization.dart';
 
-class MedicalCenterApp extends StatelessWidget {
-  const MedicalCenterApp({super.key});
+class B2BPartnershipApp extends StatelessWidget {
+  const B2BPartnershipApp({super.key});
 
   @override
   Widget build(BuildContext context) {
