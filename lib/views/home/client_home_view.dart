@@ -41,7 +41,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Welcome!",
+                  "Welcome!".tr,
                   style: TextStyle(fontSize: 13.sp, color: greyColor),
                 ),
                 Text(
@@ -72,7 +72,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
           ),
           body: ListView(
             children: [
-              Gap(25),
+              Gap(15.h),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: SearchWidget(
@@ -81,44 +81,44 @@ class _ClientHomeViewState extends State<ClientHomeView>
                   },
                 ),
               ),
-              Gap(5),
+              Gap(4.h),
               FractionallySizedBox(
                 widthFactor: 1,
                 child: Divider(),
               ),
-              Gap(10),
+              Gap(8.h),
               CustomServerStatusWidget(
                   statusRequest: controller.statusRequestBanner,
                   child: HomeSliders()),
-              Gap(25),
+              Gap(20.h),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: HomeRowWidget(
-                  title: "Browse categories",
+                  title: "Browse categories".tr,
                   onTap: () {
                     Get.toNamed(AppRoutes.seeAllCategories,
                         arguments: {"categories": controller.specializations});
                   },
                 ),
               ),
-              Gap(18),
+              Gap(14.h),
               SizedBox(
-                  height: 120.h,
+                  height: 131.h,
                   child: CustomServerStatusWidget(
                     statusRequest: controller.statusRequestSpecialization,
                     child: CategoryWidget(
                         specializations: controller.specializations),
                   )),
-              Gap(30),
+              Gap(20.h),
               FractionallySizedBox(
                 widthFactor: 1,
                 child: Divider(),
               ),
-              Gap(20),
+              Gap(15.h),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: HomeRowWidget(
-                  title: "Top Rated Providers",
+                  title: "Top Rated Providers".tr,
                   onTap: () {
                     Get.toNamed(AppRoutes.seeAll, arguments: {
                       "providers": controller.topProviders,
@@ -127,7 +127,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                   },
                 ),
               ),
-              Gap(10),
+              Gap(10.h),
               SizedBox(
                   height: 235.h,
                   child: CustomServerStatusWidget(
@@ -153,12 +153,12 @@ class _ClientHomeViewState extends State<ClientHomeView>
               Gap(25),
               BannerWidget(
                 image: "assets/images/man.jpeg",
-                title: "Need Custom Service?",
+                title: "Need Custom Service?".tr,
                 onPressed: () {
                   Get.toNamed(AppRoutes.getRequestServices);
                 },
-                description: "you can post your custom services\nrequest",
-                buttonTitle: 'Post Now',
+                description: "you can post your custom services\nrequest".tr,
+                buttonTitle: 'Post Now'.tr,
               ),
               // ServiceBannerWidget(),
               Gap(15),
@@ -170,7 +170,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: HomeRowWidget(
-                  title: "Egypt Top Rated",
+                  title: "Egypt Top Rated".tr,
                   onTap: () {
                     Get.toNamed(AppRoutes.seeAll, arguments: {
                       "providers": controller.topEgypt,
@@ -205,19 +205,19 @@ class _ClientHomeViewState extends State<ClientHomeView>
               Gap(25),
               BannerWidget(
                 image: "assets/images/job.jpeg",
-                title: "Are you looking for a job?",
+                title: "Are you looking for a job?".tr,
                 onPressed: () {
                   Get.toNamed(AppRoutes.jobs);
                 },
-                description: "See our Employment\nopportunities",
-                buttonTitle: 'View Now',
+                description: "See our Employment\nopportunities".tr,
+                buttonTitle: 'View Now'.tr,
               ),
               //JobBannerWidget(),
               Gap(55),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: HomeRowWidget(
-                  title: "Saudi Arabia Top Rated",
+                  title: "Saudi Arabia Top Rated".tr,
                   onTap: () {
                     Get.toNamed(AppRoutes.seeAll, arguments: {
                       "providers": controller.topSaudi,
@@ -252,18 +252,18 @@ class _ClientHomeViewState extends State<ClientHomeView>
               Gap(25),
               BannerWidget(
                 image: "assets/images/product.jpeg",
-                title: "Shopping?",
+                title: "Shopping?".tr,
                 onPressed: () {
                   Get.toNamed(AppRoutes.shop);
                 },
-                description: "Order whatever you need\nfrom the shop",
-                buttonTitle: 'Order Now',
+                description: "Order whatever you need\nfrom the shop".tr,
+                buttonTitle: 'Order Now'.tr,
               ),
               Gap(45),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: HomeRowWidget(
-                  title: "UAE Top Rated",
+                  title: "UAE Top Rated".tr,
                   onTap: () {
                     Get.toNamed(AppRoutes.seeAll, arguments: {
                       "providers": controller.topUAE,

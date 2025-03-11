@@ -56,20 +56,23 @@ class BannerWidget extends StatelessWidget {
                       fontSize: 13.sp,
                       fontWeight: FontWeight.normal),
                 ),
-                Gap(20),
-                ElevatedButton(
-                    style: ButtonStyle(
-                        padding: WidgetStatePropertyAll(
-                            EdgeInsets.symmetric(horizontal: 10)),
-                        backgroundColor: WidgetStatePropertyAll(whiteColor)),
-                    onPressed: onPressed,
-                    child: Text(
-                      buttonTitle,
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12.sp,
-                          color: blackColor),
-                    ))
+                Gap(8.h),
+                SizedBox(
+                  height: 33.h,
+                  child: ElevatedButton(
+                      style: ButtonStyle(
+                          padding: WidgetStatePropertyAll(
+                              EdgeInsets.symmetric(horizontal: 10)),
+                          backgroundColor: WidgetStatePropertyAll(whiteColor)),
+                      onPressed: onPressed,
+                      child: Text(
+                        buttonTitle,
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 12.sp,
+                            color: blackColor),
+                      )),
+                )
               ],
             ),
           ),

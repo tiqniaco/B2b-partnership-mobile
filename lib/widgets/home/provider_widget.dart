@@ -23,7 +23,7 @@ class ProviderWidget extends StatelessWidget {
       child: Container(
         width: 145.h,
         height: 120.h,
-        padding: EdgeInsets.all(18),
+        padding: EdgeInsets.all(15),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
             border: Border.all(color: Colors.grey.withAlpha(80))),
@@ -37,7 +37,7 @@ class ProviderWidget extends StatelessWidget {
                   child: CachedNetworkImage(
                     imageUrl: provider.image!,
                     height: 70.h,
-                    width: 85.h,
+                    width: 95.h,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -73,7 +73,7 @@ class ProviderWidget extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Colors.black54,
-                          fontSize: 14.sp,
+                          fontSize: 12.sp,
                           fontWeight: FontWeight.normal),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -82,9 +82,9 @@ class ProviderWidget extends StatelessWidget {
                 ),
               ],
             ),
-            Gap(9),
+            Gap(3.h),
             Divider(),
-            Gap(9),
+            Gap(2.h),
             Row(
               children: [
                 Row(
@@ -94,12 +94,12 @@ class ProviderWidget extends StatelessWidget {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(color: Colors.grey[200]!)),
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(8),
                         child: provider.isFavorite == "1"
                             ? InkWell(
                                 onTap: toggleFavorite,
                                 child: Icon(
-                                  size: 20.sp,
+                                  size: 17.sp,
                                   Icons.bookmarks,
                                   color: primaryColor,
                                 ),
@@ -107,14 +107,14 @@ class ProviderWidget extends StatelessWidget {
                             : InkWell(
                                 onTap: toggleFavorite,
                                 child: Icon(
-                                  size: 20.sp,
+                                  size: 17.sp,
                                   Icons.bookmarks_outlined,
                                   color: Colors.black54,
                                 ),
                               ),
                       ),
                     ),
-                    Gap(15),
+                    Gap(10.w),
                     SizedBox(
                       width: 80.w,
                       height: 32.h,
