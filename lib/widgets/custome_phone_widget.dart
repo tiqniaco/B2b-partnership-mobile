@@ -1,6 +1,5 @@
 import 'package:b2b_partenership/controller/auth/signup_controller.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
-import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
