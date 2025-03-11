@@ -21,7 +21,7 @@ class SeeAll extends StatelessWidget {
                 crossAxisCount: 2,
                 mainAxisSpacing: 15,
                 crossAxisSpacing: 10,
-                childAspectRatio: 6 / 9.8),
+                childAspectRatio: 6 / 9.2),
             scrollDirection: Axis.vertical,
             padding: EdgeInsets.symmetric(horizontal: 15),
             itemCount: controller.providers.length,

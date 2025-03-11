@@ -31,7 +31,7 @@ class SearchWidget extends StatelessWidget {
             Text(
               "Search ...",
               style: TextStyle(
-                  fontSize: 14.sp,
+                  fontSize: 13.sp,
                   color: const Color.fromARGB(255, 124, 124, 124),
                   fontWeight: FontWeight.w500),
             ),

@@ -113,7 +113,7 @@ class _ProvidersInCategoriesState extends State<ProvidersInCategories>
                   crossAxisCount: 2,
                   mainAxisSpacing: 15,
                   crossAxisSpacing: 10,
-                  childAspectRatio: 6 / 9.8),
+                  childAspectRatio: 6 / 9.1),
               scrollDirection: Axis.vertical,
               padding: EdgeInsets.symmetric(horizontal: 15),
               itemCount: controller.providers.length,

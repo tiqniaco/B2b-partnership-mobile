@@ -25,7 +25,7 @@ class SeeAllCategories extends StatelessWidget {
                   crossAxisCount: 2,
                   mainAxisSpacing: 15,
                   crossAxisSpacing: 10,
-                  childAspectRatio: 9 / 7.7),
+                  childAspectRatio: 9 / 7.8),
               scrollDirection: Axis.vertical,
               padding: EdgeInsets.symmetric(horizontal: 15),
               itemCount: controller.categories.length,
