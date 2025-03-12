@@ -21,7 +21,7 @@ class BannerWidget extends StatelessWidget {
     return Container(
       decoration:
           BoxDecoration(border: Border.all(color: primaryColor, width: 0)),
-      height: 133.h,
+      height: 140.h,
       width: double.infinity,
       child: Stack(
         children: [

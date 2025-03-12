@@ -30,8 +30,9 @@ class ServiceRequestDetails extends StatelessWidget {
                   if (controller.model.image != null) ...[
                     ClipRRect(
                       borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(40.r),
-                          topRight: Radius.circular(40.r)),
+                        topLeft: Radius.circular(18.r),
+                        topRight: Radius.circular(18.r),
+                      ),
                       child: CachedNetworkImage(
                         imageUrl: "$kBaseImageUrl${controller.model.image}",
                         height: 160.h,

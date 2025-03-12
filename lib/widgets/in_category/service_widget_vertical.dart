@@ -20,20 +20,29 @@ class ServiceWidgetVertical extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
         scrollDirection: Axis.vertical,
-        padding: EdgeInsets.only(bottom: 20, left: 20, right: 20, top: 5),
+        padding: EdgeInsets.symmetric(
+          vertical: 12.h,
+          horizontal: 12.w,
+        ),
         itemCount: services.length,
-        separatorBuilder: (context, index) => Gap(20),
+        separatorBuilder: (context, index) => Gap(16.h),
         itemBuilder: (context, index) => InkWell(
               onTap: () {
                 Get.toNamed(AppRoutes.serviceDetails,
                     arguments: {"id": services[index].id});
               },
               child: Container(
-                height: 116.h,
-                padding: EdgeInsets.all(18),
+                height: 120.h,
+                padding: EdgeInsets.symmetric(
+                  horizontal: 15.w,
+                  vertical: 10.h,
+                ),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: Colors.grey.withAlpha(80))),
+                  borderRadius: BorderRadius.circular(12.r),
+                  border: Border.all(
+                    color: Colors.grey.withAlpha(80),
+                  ),
+                ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [

@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/controller/previous_work/provider_profile_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
+import 'package:b2b_partenership/core/global/widgets/app_pdf_view.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -66,6 +67,23 @@ class AboutWidget extends StatelessWidget {
                         color: blackColor,
                         fontWeight: FontWeight.w500),
                   ),
+                  Spacer(),
+                  InkWell(
+                    onTap: () {
+                      Get.to(
+                        () => AppPdfView(
+                          url: controller.providerModel!.commercialRegister!,
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "View",
+                      style: TextStyle(
+                          fontSize: 13.sp,
+                          color: primaryColor,
+                          fontWeight: FontWeight.w500),
+                    ),
+                  ),
                 ],
               ),
               Gap(20),
@@ -77,7 +95,7 @@ class AboutWidget extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     // border: Border.all(color: primaryColor, width: 2)
                   ),
-                  height: 300,
+                  height: 230.h,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: PDF().cachedFromUrl(
@@ -100,6 +118,23 @@ class AboutWidget extends StatelessWidget {
                         fontSize: 13.sp,
                         color: blackColor,
                         fontWeight: FontWeight.w500),
+                  ),
+                  Spacer(),
+                  InkWell(
+                    onTap: () {
+                      Get.to(
+                        () => AppPdfView(
+                          url: controller.providerModel!.taxCard!,
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "View",
+                      style: TextStyle(
+                          fontSize: 13.sp,
+                          color: primaryColor,
+                          fontWeight: FontWeight.w500),
+                    ),
                   ),
                 ],
               ),
@@ -137,6 +172,7 @@ class AboutWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
+          flex: 2,
           child: Row(
             children: [
               Gap(10),
@@ -150,18 +186,14 @@ class AboutWidget extends StatelessWidget {
             ],
           ),
         ),
-        //Gap(10.w),
+        Gap(10.w),
         Expanded(
-          child: Row(
-            children: [
-              Gap(30.w),
-              Text(
-                value,
-                style: TextStyle(fontSize: 13.sp, color: Colors.black54),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
+          flex: 3,
+          child: Text(
+            value,
+            style: TextStyle(fontSize: 13.sp, color: Colors.black54),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
         )
       ],

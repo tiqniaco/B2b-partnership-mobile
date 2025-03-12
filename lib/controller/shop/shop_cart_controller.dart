@@ -111,7 +111,7 @@ class ShopCartController extends GetxController {
 
     result.fold(
       (error) {
-        statusRequest = StatusRequest.error;
+        // statusRequest = StatusRequest.error;
         update();
         Logger().e(error.errMsg);
         AppSnackBars.warning(message: error.errMsg);

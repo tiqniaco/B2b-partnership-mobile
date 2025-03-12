@@ -70,10 +70,14 @@ class SearchView extends StatelessWidget {
                           customWidget(Icons.category_outlined, "Category", () {
                             showCategorySheet(context);
                           }),
-                          customWidget(CupertinoIcons.refresh_thin, "Reset",
-                              () {
-                            controller.resetFunction();
-                          })
+                          customWidget(
+                            CupertinoIcons.refresh_thin,
+                            "Reset",
+                            () {
+                              controller.resetFunction();
+                            },
+                            arrowIcon: Icons.refresh,
+                          )
                         ],
                       ),
                     ),
@@ -97,7 +101,7 @@ class SearchView extends StatelessWidget {
                   child: CustomServerStatusWidget(
                 statusRequest: controller.isSearch
                     ? controller.statusRequestSearch
-                    : controller.statusRequest,
+                    : controller.statusRequestProviders,
                 child: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
@@ -133,7 +137,13 @@ class SearchView extends StatelessWidget {
     });
   }
 
-  Widget customWidget(IconData icon, String title, Function() onTap) {
+  Widget customWidget(
+    IconData icon,
+    String title,
+    Function() onTap, {
+    bool isShowArrow = false,
+    IconData? arrowIcon,
+  }) {
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -150,7 +160,7 @@ class SearchView extends StatelessWidget {
             ),
             Gap(5),
             Icon(
-              Icons.keyboard_arrow_down_outlined,
+              arrowIcon ?? Icons.keyboard_arrow_down_outlined,
               color: blackColor,
             ),
           ],
@@ -402,7 +412,4 @@ class SearchView extends StatelessWidget {
               );
             }));
   }
-
-
-
 }

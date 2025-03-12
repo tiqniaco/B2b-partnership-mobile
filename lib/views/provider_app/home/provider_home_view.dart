@@ -104,7 +104,7 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
               ),
               Gap(18),
               SizedBox(
-                  height: 120.h,
+                  height: 140.h,
                   child: CustomServerStatusWidget(
                     statusRequest: controller.statusRequestSpecialization,
                     child: CategoryWidget(

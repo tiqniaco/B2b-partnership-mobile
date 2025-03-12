@@ -138,6 +138,7 @@ class SearchControllerIM extends GetxController {
     searchList.clear();
     rating = 0;
     isSearch = false;
+    getProviders();
 
     update();
   }
@@ -280,6 +281,7 @@ class SearchControllerIM extends GetxController {
 
   Future<void> getProviders() async {
     statusRequestProviders = StatusRequest.loading;
+    update();
     final response = await CustomRequest(
         path: ApiConstance.getTopProviders,
         fromJson: (json) {

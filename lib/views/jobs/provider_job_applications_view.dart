@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:widget_zoom/widget_zoom.dart';
 
 class ProviderJobApplicationsView extends StatelessWidget {
   const ProviderJobApplicationsView({super.key});
@@ -127,10 +128,52 @@ class ProviderJobApplicationsView extends StatelessWidget {
                             ),
                             child: Row(
                               children: [
-                                CustomNetworkImage(
-                                  imageUrl: model.clientImage,
-                                  fit: BoxFit.fitWidth,
-                                  width: 0.22.sw,
+                                SizedBox(
+                                  width: 0.25.sw,
+                                  child: Column(
+                                    children: [
+                                      WidgetZoom(
+                                        heroAnimationTag: "clientImage",
+                                        zoomWidget: CustomNetworkImage(
+                                          imageUrl: model.clientImage,
+                                          fit: BoxFit.fitWidth,
+                                          width: 0.25.sw,
+                                        ),
+                                      ),
+                                      Gap(8.h),
+                                      CustomLoadingButton(
+                                        onPressed: () {
+                                          return controller
+                                              .changeJobApplicationStatus(
+                                            applicationId:
+                                                model.jobApplicationId,
+                                            status: JobApplicationStatusEnum
+                                                .accepted,
+                                          );
+                                        },
+                                        borderRadius: 5.r,
+                                        height: 0.045.sh,
+                                        backgroundColor: greenColor,
+                                        text: "Accept",
+                                      ),
+                                      Gap(2.h),
+                                      CustomLoadingButton(
+                                        onPressed: () {
+                                          return controller
+                                              .changeJobApplicationStatus(
+                                            applicationId:
+                                                model.jobApplicationId,
+                                            status: JobApplicationStatusEnum
+                                                .rejected,
+                                          );
+                                        },
+                                        borderRadius: 5.r,
+                                        height: 0.045.sh,
+                                        backgroundColor: redColor,
+                                        text: "Reject",
+                                      ),
+                                    ],
+                                  ),
                                 ),
                                 Gap(12.w),
                                 Expanded(
@@ -202,48 +245,6 @@ class ProviderJobApplicationsView extends StatelessWidget {
                                       Text(
                                         "Available to start: ${model.availableToStartDate}",
                                         style: getLightStyle,
-                                      ),
-                                      Gap(8.h),
-                                      Row(
-                                        children: [
-                                          Expanded(
-                                            child: CustomLoadingButton(
-                                              onPressed: () {
-                                                return controller
-                                                    .changeJobApplicationStatus(
-                                                  applicationId:
-                                                      model.jobApplicationId,
-                                                  status:
-                                                      JobApplicationStatusEnum
-                                                          .accepted,
-                                                );
-                                              },
-                                              borderRadius: 5.r,
-                                              height: 0.045.sh,
-                                              backgroundColor: greenColor,
-                                              text: "Accept",
-                                            ),
-                                          ),
-                                          Gap(12.w),
-                                          Expanded(
-                                            child: CustomLoadingButton(
-                                              onPressed: () {
-                                                return controller
-                                                    .changeJobApplicationStatus(
-                                                  applicationId:
-                                                      model.jobApplicationId,
-                                                  status:
-                                                      JobApplicationStatusEnum
-                                                          .rejected,
-                                                );
-                                              },
-                                              borderRadius: 5.r,
-                                              height: 0.045.sh,
-                                              backgroundColor: redColor,
-                                              text: "Reject",
-                                            ),
-                                          ),
-                                        ],
                                       ),
                                     ],
                                   ),

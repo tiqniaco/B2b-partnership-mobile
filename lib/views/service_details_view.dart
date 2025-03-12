@@ -13,6 +13,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ServiceDetailsView extends StatelessWidget {
   ServiceDetailsView({super.key});
@@ -27,12 +28,15 @@ class ServiceDetailsView extends StatelessWidget {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0, vertical: 35),
+          padding: EdgeInsets.symmetric(
+            horizontal: 20.w,
+            vertical: 16.h,
+          ),
           child: Row(
             children: [
               Expanded(
                 child: Container(
-                  height: 63,
+                  height: 50.h,
                   decoration: BoxDecoration(
                       color: primaryColor,
                       borderRadius: BorderRadius.circular(15)),
@@ -48,14 +52,14 @@ class ServiceDetailsView extends StatelessWidget {
                   ),
                 ),
               ),
-              Gap(10),
-              IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    color: Colors.black54,
-                    Icons.chat_outlined,
-                    size: 35.sp,
-                  ))
+              // Gap(10),
+              // IconButton(
+              //     onPressed: () {},
+              //     icon: Icon(
+              //       color: Colors.black54,
+              //       Icons.chat_outlined,
+              //       size: 35.sp,
+              //     ))
             ],
           ),
         ),
@@ -149,24 +153,29 @@ class ServiceDetailsView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Gap(10),
-                        InkWell(
-                          onTap: () {},
-                          child: Container(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 17, vertical: 12),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.green,
-                            ),
-                            child: Text(
-                              'Watch Video',
-                              style: TextStyle(
-                                  fontSize: 13.sp,
-                                  color: whiteColor,
-                                  fontWeight: FontWeight.bold),
+                        if (controller.service?.data?.video != null)
+                          InkWell(
+                            onTap: () {
+                              launchUrlString(
+                                controller.service?.data?.video ?? "",
+                              );
+                            },
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 17, vertical: 12),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.green,
+                              ),
+                              child: Text(
+                                'Watch Video',
+                                style: TextStyle(
+                                    fontSize: 13.sp,
+                                    color: whiteColor,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ),
-                        ),
                         SizedBox(height: 13),
                         Text(
                           translateDatabase(
@@ -230,15 +239,9 @@ class ServiceDetailsView extends StatelessWidget {
                                             .service!.data!.createdAt!)
                                         .toString(),
                                     style: TextStyle(
-                                        color: Colors.green,
-                                        fontSize: 18.sp,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Gap(7),
-                                  Text(
-                                    'Date',
-                                    style: TextStyle(
-                                      fontSize: 13.sp,
+                                      color: Colors.green,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ],
@@ -253,9 +256,10 @@ class ServiceDetailsView extends StatelessWidget {
                                   Text(
                                     controller.service!.data!.rating!,
                                     style: TextStyle(
-                                        color: Colors.orange,
-                                        fontSize: 18.sp,
-                                        fontWeight: FontWeight.bold),
+                                      color: Colors.orange,
+                                      fontSize: 15.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                   Gap(3),
                                   Icon(
