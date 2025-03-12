@@ -19,6 +19,7 @@ class SelectCountryPost extends StatelessWidget {
     return GetBuilder<GetProviderPostsServiceController>(
       builder: (controller) => DropdownButtonFormField<CountryModel>(
         // value: controller.selectedCountry,
+        isExpanded: true,
         decoration: InputDecoration(
           enabled: enabled,
           contentPadding:

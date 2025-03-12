@@ -172,6 +172,7 @@ class AboutWidget extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
+          flex: 2,
           child: Row(
             children: [
               Gap(10),
@@ -185,18 +186,14 @@ class AboutWidget extends StatelessWidget {
             ],
           ),
         ),
-        //Gap(10.w),
+        Gap(10.w),
         Expanded(
-          child: Row(
-            children: [
-              Gap(30.w),
-              Text(
-                value,
-                style: TextStyle(fontSize: 13.sp, color: Colors.black54),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
+          flex: 3,
+          child: Text(
+            value,
+            style: TextStyle(fontSize: 13.sp, color: Colors.black54),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
         )
       ],

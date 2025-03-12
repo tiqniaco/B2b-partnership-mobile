@@ -3,6 +3,7 @@ import 'package:b2b_partenership/controller/provider/setting/provider_setting_co
 import 'package:b2b_partenership/core/functions/logout.dart';
 import 'package:b2b_partenership/core/functions/remove_account.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
+import 'package:b2b_partenership/core/global/widgets/app_pdf_view.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/widgets/language_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -223,11 +224,34 @@ class ProviderSettingView extends StatelessWidget {
                                   ),
                                 ),
                                 Gap(10),
-                                Text(
-                                  "Commercial Papers",
-                                  style: TextStyle(
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w300),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Commercial Papers",
+                                      style: TextStyle(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w300),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        Get.to(
+                                          () => AppPdfView(
+                                            url: controller.menuModel!.data!
+                                                .commercialRegister!,
+                                          ),
+                                        );
+                                      },
+                                      child: Text(
+                                        "View",
+                                        style: TextStyle(
+                                            fontSize: 13.sp,
+                                            color: primaryColor,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 Gap(20),
                                 Container(
@@ -255,11 +279,34 @@ class ProviderSettingView extends StatelessWidget {
                                   ),
                                 ),
                                 Gap(10),
-                                Text(
-                                  "Tax Papers",
-                                  style: TextStyle(
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w300),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Tax Papers",
+                                      style: TextStyle(
+                                          fontSize: 14.sp,
+                                          fontWeight: FontWeight.w300),
+                                    ),
+                                    InkWell(
+                                      onTap: () {
+                                        Get.to(
+                                          () => AppPdfView(
+                                            url: controller
+                                                .menuModel!.data!.taxCard!,
+                                          ),
+                                        );
+                                      },
+                                      child: Text(
+                                        "View",
+                                        style: TextStyle(
+                                            fontSize: 13.sp,
+                                            color: primaryColor,
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 Gap(20),
                                 Container(
@@ -372,14 +419,14 @@ class ProviderSettingView extends StatelessWidget {
                                   },
                                 ),
                                 Gap(8),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor,
-                                  ),
-                                ),
-                                Gap(8),
-                                LanguageWidget(),
+                                // FractionallySizedBox(
+                                //   widthFactor: 10,
+                                //   child: Divider(
+                                //     color: borderColor,
+                                //   ),
+                                // ),
+                                // Gap(8),
+                                // LanguageWidget(),
                               ],
                             ),
                           ],

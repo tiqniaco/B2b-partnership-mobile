@@ -140,7 +140,7 @@ class SellerWidget extends StatelessWidget {
   Widget titleWidget(String title) {
     return Text(
       title,
-      style: TextStyle(fontSize: 15.sp, color: Colors.black54),
+      style: TextStyle(fontSize: 14.sp, color: Colors.black54),
     );
   }
 
@@ -148,7 +148,12 @@ class SellerWidget extends StatelessWidget {
     return Text(
       value,
       style: TextStyle(
-          fontSize: 16.sp, color: blackColor, fontWeight: FontWeight.w500),
+        fontSize: 14.sp,
+        color: blackColor,
+        fontWeight: FontWeight.w500,
+      ),
+      maxLines: 2,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }
