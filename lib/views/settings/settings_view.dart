@@ -4,8 +4,6 @@ import 'package:b2b_partenership/core/functions/logout.dart';
 import 'package:b2b_partenership/core/functions/remove_account.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
-import 'package:b2b_partenership/widgets/language_widget.dart';
-// import 'package:b2b_partenership/widgets/language_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -262,15 +260,15 @@ class SettingsView extends StatelessWidget {
                                       },
                                     ),
                                     Gap(8),
-                                    FractionallySizedBox(
-                                      widthFactor: 10,
-                                      child: Divider(
-                                        color: borderColor,
-                                      ),
-                                    ),
-                                    Gap(8),
-                                    LanguageWidget(),
-                                    Gap(8),
+                                    // FractionallySizedBox(
+                                    //   widthFactor: 10,
+                                    //   child: Divider(
+                                    //     color: borderColor,
+                                    //   ),
+                                    // ),
+                                    // Gap(8),
+                                    // LanguageWidget(),
+                                    // Gap(8),
                                     FractionallySizedBox(
                                       widthFactor: 10,
                                       child: Divider(
