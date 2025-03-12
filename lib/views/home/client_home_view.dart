@@ -122,7 +122,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                   onTap: () {
                     Get.toNamed(AppRoutes.seeAll, arguments: {
                       "providers": controller.topProviders,
-                      "title": "Top Rated Provider"
+                      "title": "Top Rated Provider".tr
                     });
                   },
                 ),
@@ -174,7 +174,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                   onTap: () {
                     Get.toNamed(AppRoutes.seeAll, arguments: {
                       "providers": controller.topEgypt,
-                      "title": "Egypt Top Rated"
+                      "title": "Egypt Top Rated".tr
                     });
                   },
                 ),
@@ -210,7 +210,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                   Get.toNamed(AppRoutes.jobs);
                 },
                 description: "See our Employment\nopportunities".tr,
-                buttonTitle: 'View Now'.tr,
+                buttonTitle: 'View'.tr,
               ),
               //JobBannerWidget(),
               Gap(55),
@@ -221,7 +221,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                   onTap: () {
                     Get.toNamed(AppRoutes.seeAll, arguments: {
                       "providers": controller.topSaudi,
-                      "title": "Saudi Arabia Top Rated"
+                      "title": "Saudi Arabia Top Rated".tr
                     });
                   },
                 ),
@@ -267,7 +267,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                   onTap: () {
                     Get.toNamed(AppRoutes.seeAll, arguments: {
                       "providers": controller.topUAE,
-                      "title": "UAE Top Rated"
+                      "title": "UAE Top Rated".tr
                     });
                   },
                 ),

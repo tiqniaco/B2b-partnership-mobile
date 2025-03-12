@@ -27,6 +27,8 @@ const Map<String, String> en = {
   "View": "View",
   "Country": "Country",
   "Notifications": "Notifications",
+  "Search ...": "Search ...",
+  "See all": "See all",
 
   // auth
   "Welcome Back!": "Welcome Back!",
@@ -74,10 +76,10 @@ const Map<String, String> en = {
   'Provider Type': 'Provider Type',
   "Bio": "Bio",
   "Description of the Company ....": "Description of the Company ....",
-   "Commercial Register": "Commercial Register",
-    "No file selected   ": "No file selected   ",
-                              "Upload": "Upload",
-                              "Tax Card": "Tax Card",
+  "Commercial Register": "Commercial Register",
+  "No file selected   ": "No file selected   ",
+  "Upload": "Upload",
+  "Tax Card": "Tax Card",
 
   // home
   "Home": "Home",
@@ -88,6 +90,22 @@ const Map<String, String> en = {
   "Work Categories": "Work Categories",
   "Provider Types": "Provider Types",
   "Locations": "Locations",
+  "Browse categories": "Browse categories",
+  "Top Rated Providers": "Top Rated Providers",
+  "Egypt Top Rated": "Egypt Top Rated",
+  "Saudi Arabia Top Rated": "Saudi Arabia Top Rated",
+  "UAE Top Rated": "UAE Top Rated",
+  "Saved": "Saved",
+  "Need Custom Service?": "Need Custom Service?",
+  "you can post your custom services\nrequest":
+      "you can post your custom services\nrequest",
+  'Post Now': 'Post Now',
+  "Are you looking for a job?": "Are you looking for a job?",
+  "See our Employment\nopportunities": "See our Employment\nopportunities",
+  "Shopping?": "Shopping?",
+  "Order whatever you need\nfrom the shop":
+      "Order whatever you need\nfrom the shop",
+  'Order Now':'Order Now',
 
   // manage category
   "Category & Subcategory": "Category & Subcategory",

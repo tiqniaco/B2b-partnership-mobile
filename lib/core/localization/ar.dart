@@ -27,6 +27,8 @@ const Map<String, String> ar = {
   "View": "مشاهدة",
   "Country": "الدولة",
   "Notifications": "الاشعارات",
+  "Search ...": "بحث ...",
+  "See all": "مشاهدة الكل",
 
   // auth
   "Welcome Back!": "مرحبا بعودتك!",
@@ -92,6 +94,21 @@ const Map<String, String> ar = {
   "Work Categories": "فئات العمل",
   "Provider Types": "اقسام مقدمي الخدمات",
   "Locations": "الاماكن",
+  "Browse categories": "تصفح الفئات",
+  "Top Rated Providers": "الاعلي تقييما",
+  "Egypt Top Rated": "الاعلي تقييم في مصر",
+  "Saudi Arabia Top Rated": 'الاعلي تقييم في السعودية',
+  "UAE Top Rated": "الاعلي تقييم في الامارات",
+  "Saved": "المحفوظات",
+  "Need Custom Service?": "تريد خدمة معينة؟",
+  "you can post your custom services\nrequest":
+      "يمكنك الان نشر الخدمة\nالتي تحتاجها",
+  'Post Now': "نشر الان",
+  "Are you looking for a job?": "هل تبحث عن وظيفة؟",
+  "See our Employment\nopportunities": "يمكن الان رؤية الوظائف\nالمتاحة عندنا",
+  "Shopping?": "هل تريد التسوق؟",
+  "Order whatever you need\nfrom the shop": "اطلب كل ما تريد\nمن المتجر",
+  'Order Now': "اطلب الان",
 
   // manage category
   "Category & Subcategory": "الفئات الرئيسية & الفرعية",

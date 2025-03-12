@@ -5,6 +5,7 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:b2b_partenership/controller/home/home_client_layout_controller.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
@@ -47,7 +48,7 @@ class _ClientHomeLayoutState extends State<ClientHomeLayout>
                   color: controller.currentIndex == 0
                       ? primaryColor
                       : unSelectedBNavColor),
-              title: "Home",
+              title: "Home".tr,
             ),
             TabItem(
               icon: SvgPicture.asset("assets/svgs/bag2.svg",
@@ -55,7 +56,7 @@ class _ClientHomeLayoutState extends State<ClientHomeLayout>
                   color: controller.currentIndex == 1
                       ? primaryColor
                       : unSelectedBNavColor),
-              title: "Orders",
+              title: "Orders".tr,
             ),
             TabItem(
               icon: Container(
@@ -70,7 +71,7 @@ class _ClientHomeLayoutState extends State<ClientHomeLayout>
                   ),
                 ),
               ),
-              title: "Search",
+              title: "Search".tr,
             ),
             TabItem(
               icon: SvgPicture.asset("assets/svgs/save.svg",
@@ -78,7 +79,7 @@ class _ClientHomeLayoutState extends State<ClientHomeLayout>
                   color: controller.currentIndex == 3
                       ? primaryColor
                       : unSelectedBNavColor),
-              title: "Saved",
+              title: "Saved".tr,
             ),
             TabItem(
               icon: SvgPicture.asset("assets/svgs/setting.svg",
@@ -86,7 +87,7 @@ class _ClientHomeLayoutState extends State<ClientHomeLayout>
                   color: controller.currentIndex == 4
                       ? primaryColor
                       : unSelectedBNavColor),
-              title: "Menu",
+              title: "Menu".tr,
             ),
           ],
           initialActiveIndex: controller.currentIndex,

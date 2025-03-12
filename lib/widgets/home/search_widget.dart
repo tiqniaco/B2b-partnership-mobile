@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class SearchWidget extends StatelessWidget {
   const SearchWidget({super.key, this.onTap});
@@ -29,7 +30,7 @@ class SearchWidget extends StatelessWidget {
                 )),
             Gap(20),
             Text(
-              "Search ...",
+              "Search ...".tr,
               style: TextStyle(
                   fontSize: 13.sp,
                   color: const Color.fromARGB(255, 124, 124, 124),
