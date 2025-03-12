@@ -22,7 +22,8 @@ class B2BPartnershipApp extends StatelessWidget {
         ScreenUtil.init(context);
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          locale: Get.locale ?? kDefaultLocale,
+          locale: Locale('en'),
+          //  Get.locale ?? kDefaultLocale,
           defaultTransition: kDefaultAppTransitionAnimation,
           initialBinding: AppBindings(),
           theme: AppThemes.light,

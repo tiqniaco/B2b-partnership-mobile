@@ -35,7 +35,7 @@ class CustomLoadingButton extends StatelessWidget {
         type: EasyButtonType.elevated,
         borderRadius: borderRadius,
         buttonColor: backgroundColor ?? primaryColor,
-        height: height ?? 0.055.sh,
+        height: height ?? 0.056.sh,
         width: width ?? 100.sw,
         idleStateWidget: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -50,9 +50,7 @@ class CustomLoadingButton extends StatelessWidget {
             ),
           ],
         ),
-        loadingStateWidget: const CustomLoadingWidget(
-            
-            ),
+        loadingStateWidget: const CustomLoadingWidget(),
       ),
     );
   }

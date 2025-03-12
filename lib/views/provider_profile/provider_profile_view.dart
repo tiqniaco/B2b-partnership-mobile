@@ -51,7 +51,8 @@ class ProviderProfileView extends StatelessWidget {
                             onPageChanged: controller.onPageChanged,
                             children: [
                               ServiceWidgetVertical(
-                                  services: controller.providerServices),
+                                services: controller.providerServices,
+                              ),
                               AboutWidget(),
                               PreviousWork(),
                               ReviewWidget()

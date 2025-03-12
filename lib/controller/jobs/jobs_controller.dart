@@ -124,7 +124,7 @@ class JobsController extends GetxController {
                 ),
               ),
               width: 1.sw,
-              height: 0.62.sh,
+              height: 0.68.sh,
               padding: EdgeInsets.symmetric(
                 horizontal: 15.w,
                 vertical: 16.h,
@@ -234,6 +234,7 @@ class JobsController extends GetxController {
               ),
             );
           }),
+      isScrollControlled: true,
     );
   }
 

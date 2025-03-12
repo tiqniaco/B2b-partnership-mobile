@@ -88,50 +88,48 @@ class ProviderWidget extends StatelessWidget {
             Gap(2.h),
             Row(
               children: [
-                Row(
-                  children: [
-                    InkWell(
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(color: Colors.grey[200]!)),
-                        padding: EdgeInsets.all(8),
-                        child: provider.isFavorite == "1"
-                            ? InkWell(
-                                onTap: toggleFavorite,
-                                child: Icon(
-                                  size: 17.sp,
-                                  Icons.bookmarks,
-                                  color: primaryColor,
-                                ),
-                              )
-                            : InkWell(
-                                onTap: toggleFavorite,
-                                child: Icon(
-                                  size: 17.sp,
-                                  Icons.bookmarks_outlined,
-                                  color: Colors.black54,
-                                ),
-                              ),
-                      ),
-                    ),
-                    Gap(10.w),
-                    SizedBox(
-                      width: 80.w,
-                      height: 32.h,
-                      child: ElevatedButton(
-                          onPressed: () {
-                            Get.toNamed(AppRoutes.providerProfile, arguments: {
-                              "id": provider.providerId.toString()
-                            });
-                          },
-                          child: Text(
-                            "View",
-                            style: TextStyle(
-                                fontSize: 11.sp, fontWeight: FontWeight.bold),
-                          )),
-                    )
-                  ],
+                InkWell(
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.grey[200]!)),
+                    padding: EdgeInsets.all(8),
+                    child: provider.isFavorite == "1"
+                        ? InkWell(
+                            onTap: toggleFavorite,
+                            child: Icon(
+                              size: 17.sp,
+                              Icons.bookmarks,
+                              color: primaryColor,
+                            ),
+                          )
+                        : InkWell(
+                            onTap: toggleFavorite,
+                            child: Icon(
+                              size: 17.sp,
+                              Icons.bookmarks_outlined,
+                              color: Colors.black54,
+                            ),
+                          ),
+                  ),
+                ),
+                Gap(10.w),
+                Expanded(
+                  child: SizedBox(
+                    width: 80.w,
+                    height: 32.h,
+                    child: ElevatedButton(
+                        onPressed: () {
+                          Get.toNamed(AppRoutes.providerProfile, arguments: {
+                            "id": provider.providerId.toString()
+                          });
+                        },
+                        child: Text(
+                          "View",
+                          style: TextStyle(
+                              fontSize: 11.sp, fontWeight: FontWeight.bold),
+                        )),
+                  ),
                 )
               ],
             )

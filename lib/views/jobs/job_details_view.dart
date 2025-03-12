@@ -60,6 +60,7 @@ class JobDetailsView extends StatelessWidget {
                   iconTheme: const IconThemeData(color: whiteColor),
                   flexibleSpace: FlexibleSpaceBar(
                     collapseMode: CollapseMode.pin,
+                    centerTitle: true,
                     title: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -205,12 +206,12 @@ class JobDetailsView extends StatelessWidget {
                           isShowArrow: true,
                           arrowIcon: FontAwesomeIcons.phone,
                           onTap: () async {
-                            if (await canLaunchUrlString(
-                              "tel:+${controller.jobDetailsModel?.countryCode ?? ""} ${controller.jobDetailsModel?.phone ?? ""}",
-                            )) {
+                            try {
                               launchUrlString(
                                 "tel:+${controller.jobDetailsModel?.countryCode ?? ""} ${controller.jobDetailsModel?.phone ?? ""}",
                               );
+                            } catch (e) {
+                              debugPrint(e.toString());
                             }
                           },
                         ),
@@ -221,12 +222,12 @@ class JobDetailsView extends StatelessWidget {
                           isShowArrow: true,
                           arrowIcon: FontAwesomeIcons.envelope,
                           onTap: () async {
-                            if (await canLaunchUrlString(
-                              "mailto:${controller.jobDetailsModel?.email ?? ""}",
-                            )) {
-                              launchUrlString(
+                            try {
+                              await launchUrlString(
                                 "mailto:${controller.jobDetailsModel?.email ?? ""}",
                               );
+                            } catch (e) {
+                              debugPrint(e.toString());
                             }
                           },
                         ),
@@ -238,13 +239,13 @@ class JobDetailsView extends StatelessWidget {
                           isShowArrow: true,
                           arrowIcon: FontAwesomeIcons.globe,
                           onTap: () async {
-                            if (await canLaunchUrlString(
-                              controller.jobDetailsModel?.contactWebsite ?? "",
-                            )) {
+                            try {
                               launchUrlString(
                                 controller.jobDetailsModel?.contactWebsite ??
                                     "",
                               );
+                            } catch (e) {
+                              debugPrint(e.toString());
                             }
                           },
                         ),

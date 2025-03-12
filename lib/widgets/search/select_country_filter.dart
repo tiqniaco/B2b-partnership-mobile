@@ -19,6 +19,7 @@ class SelectCountryFilter extends StatelessWidget {
     return GetBuilder<SearchControllerIM>(
       builder: (controller) => DropdownButtonFormField<CountryModel>(
         // value: controller.selectedCountry,
+        isExpanded: true,
         decoration: InputDecoration(
           enabled: enabled,
           contentPadding:
@@ -50,11 +51,12 @@ class SelectCountryFilter extends StatelessWidget {
             value: item,
             child: Row(
               children: [
-                Image.network(
+                Text(
                   item.flag!,
-                  width: 23.h,
-                  height: 23.h,
-                  fit: BoxFit.cover,
+                  style: TextStyle(
+                      fontSize: 16.sp,
+                      color: greyColor.withAlpha(160),
+                      fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(width: 10),
                 Text(

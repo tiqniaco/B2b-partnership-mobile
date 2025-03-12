@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '/core/network/api_constance.dart';
@@ -28,14 +28,14 @@ class AppPreferences {
 
   Future<void> init({bool fromLogin = false}) async {
     if (getAppLanguageCode() == '') {
-      kAppLanguageCode = getAppLanguageCode() ?? kDefaultLanguage;
-      setAppLanguageCode(kAppLanguageCode);
-      Get.updateLocale(Locale(kAppLanguageCode));
+      // kAppLanguageCode = getAppLanguageCode() ?? kDefaultLanguage;
+      // setAppLanguageCode(kAppLanguageCode);
+      // Get.updateLocale(Locale(kAppLanguageCode));
     } else {
-      kAppLanguageCode = getAppLanguageCode() ??
-          Get.deviceLocale?.languageCode ??
-          kDefaultLanguage;
-      Get.updateLocale(Locale(kAppLanguageCode));
+      // kAppLanguageCode = getAppLanguageCode() ??
+      //     Get.deviceLocale?.languageCode ??
+      //     kDefaultLanguage;
+      // Get.updateLocale(Locale(kAppLanguageCode));
     }
     kFirstTime = getFirstTime();
     ApiConstance.token = getToken();

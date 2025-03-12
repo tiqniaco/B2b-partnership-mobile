@@ -36,7 +36,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
           appBar: AppBar(
             backgroundColor: whiteColor,
             automaticallyImplyLeading: false,
-            titleSpacing: 20,
+            titleSpacing: 16.w,
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -103,12 +103,14 @@ class _ClientHomeViewState extends State<ClientHomeView>
               ),
               Gap(14.h),
               SizedBox(
-                  height: 131.h,
-                  child: CustomServerStatusWidget(
-                    statusRequest: controller.statusRequestSpecialization,
-                    child: CategoryWidget(
-                        specializations: controller.specializations),
-                  )),
+                height: 140.h,
+                child: CustomServerStatusWidget(
+                  statusRequest: controller.statusRequestSpecialization,
+                  child: CategoryWidget(
+                    specializations: controller.specializations,
+                  ),
+                ),
+              ),
               Gap(20.h),
               FractionallySizedBox(
                 widthFactor: 1,
