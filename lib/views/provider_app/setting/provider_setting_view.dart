@@ -5,7 +5,7 @@ import 'package:b2b_partenership/core/functions/remove_account.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/app_pdf_view.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
-import 'package:b2b_partenership/widgets/language_widget.dart';
+// import 'package:b2b_partenership/widgets/language_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
