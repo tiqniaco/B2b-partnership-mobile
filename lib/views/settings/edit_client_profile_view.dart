@@ -24,7 +24,7 @@ class EditClientProfileView extends StatelessWidget {
       builder: (EditClientProfileController controller) {
         return Scaffold(
             appBar: AppBar(
-              title: const Text("Edit Client Profile"),
+              title: Text("Edit Profile".tr),
             ),
             body: controller.statusRequestCity == StatusRequest.loading ||
                     controller.statusRequestCountry == StatusRequest.loading ||
@@ -108,7 +108,7 @@ class EditClientProfileView extends StatelessWidget {
                                 ),
                                 Gap(20.h),
                                 AuthTextForm(
-                                  lable: "Full Name".tr,
+                                  lable: "Name".tr,
                                   preicon: CupertinoIcons.person,
                                   hintText: "Enter your full name".tr,
                                   textFormController: controller.nameController,
@@ -166,7 +166,7 @@ class EditClientProfileView extends StatelessWidget {
                                     floatingLabelBehavior:
                                         FloatingLabelBehavior.always,
                                     label: Text(
-                                      "Phone",
+                                      "Phone".tr,
                                       style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 17.sp,
@@ -230,7 +230,7 @@ class EditClientProfileView extends StatelessWidget {
                 onPressed: () {
                   return controller.updateProfile();
                 },
-                text: "Update".tr,
+                text: "Save".tr,
               ),
             ));
       },

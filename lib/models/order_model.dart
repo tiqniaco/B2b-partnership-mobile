@@ -3,11 +3,11 @@ import 'package:equatable/equatable.dart';
 class OrderModel extends Equatable {
   final int id;
   final String userId;
-  final String status;
-  final String totalPrice;
-  final String expirationDate;
-  final String createdAt;
-  final String updatedAt;
+  final String? status;
+  final String? totalPrice;
+  final String? expirationDate;
+  final String? createdAt;
+  final String? updatedAt;
 
   const OrderModel({
     required this.id,

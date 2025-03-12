@@ -4,6 +4,7 @@ import 'package:b2b_partenership/core/functions/logout.dart';
 import 'package:b2b_partenership/core/functions/remove_account.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/widgets/language_widget.dart';
 // import 'package:b2b_partenership/widgets/language_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -153,7 +154,7 @@ class SettingsView extends StatelessWidget {
                                       Colors.amber,
                                       controller.menuModel!.jobsCount
                                           .toString(),
-                                      "Job Applications",
+                                      "Jobs".tr,
                                       () {
                                         Get.toNamed(
                                             AppRoutes.clientJobApplications);
@@ -164,7 +165,7 @@ class SettingsView extends StatelessWidget {
                                         Colors.blue,
                                         controller.menuModel!.shoppingCount
                                             .toString(),
-                                        "Shopping", () {
+                                        "Shopping".tr, () {
                                       Get.toNamed(AppRoutes.shop);
                                     }),
                                     boxWidget(
@@ -172,7 +173,7 @@ class SettingsView extends StatelessWidget {
                                         Colors.green,
                                         controller.menuModel!.servicesCount
                                             .toString(),
-                                        "Post Services", () {
+                                        "Posts".tr, () {
                                       Get.toNamed(AppRoutes.getRequestServices);
                                     }),
                                     boxWidget(
@@ -180,7 +181,7 @@ class SettingsView extends StatelessWidget {
                                         Colors.red,
                                         controller.menuModel!.complaintsCount
                                             .toString(),
-                                        "Complaints", () {
+                                        "Complaints".tr, () {
                                       Get.toNamed(AppRoutes.complaints);
                                     })
                                   ],
@@ -198,13 +199,13 @@ class SettingsView extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Personal information",
+                                      "Personal Information".tr,
                                       style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 17.sp),
                                     ),
                                     Gap(20),
-                                    rowWidget("Email",
+                                    rowWidget("Email".tr,
                                         controller.menuModel!.data!.email!),
                                     FractionallySizedBox(
                                       widthFactor: 10,
@@ -213,7 +214,7 @@ class SettingsView extends StatelessWidget {
                                       ),
                                     ),
                                     rowWidget(
-                                        "City",
+                                        "City".tr,
                                         translateDatabase(
                                             arabic: controller.menuModel!.data!
                                                 .governmentNameAr!,
@@ -226,7 +227,7 @@ class SettingsView extends StatelessWidget {
                                       ),
                                     ),
                                     rowWidget(
-                                        "Country",
+                                        "Country".tr,
                                         translateDatabase(
                                             arabic: controller.menuModel!.data!
                                                 .countryNameAr!,
@@ -242,7 +243,7 @@ class SettingsView extends StatelessWidget {
                                     ),
                                     Gap(20),
                                     Text(
-                                      "Other Services",
+                                      "Other Services".tr,
                                       style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 17.sp),
@@ -250,7 +251,7 @@ class SettingsView extends StatelessWidget {
                                     Gap(20),
                                     rowWithArrow(
                                       CupertinoIcons.person,
-                                      "Edit Profile",
+                                      "Edit Profile".tr,
                                       () {
                                         Get.toNamed(
                                           AppRoutes.editClientProfile,
@@ -260,15 +261,15 @@ class SettingsView extends StatelessWidget {
                                         );
                                       },
                                     ),
-                                    // Gap(8),
-                                    // FractionallySizedBox(
-                                    //   widthFactor: 10,
-                                    //   child: Divider(
-                                    //     color: borderColor,
-                                    //   ),
-                                    // ),
-                                    // Gap(8),
-                                    // LanguageWidget(),
+                                    Gap(8),
+                                    FractionallySizedBox(
+                                      widthFactor: 10,
+                                      child: Divider(
+                                        color: borderColor,
+                                      ),
+                                    ),
+                                    Gap(8),
+                                    LanguageWidget(),
                                     Gap(8),
                                     FractionallySizedBox(
                                       widthFactor: 10,
@@ -279,7 +280,7 @@ class SettingsView extends StatelessWidget {
                                     Gap(8),
                                     rowWithArrow(
                                       CupertinoIcons.padlock,
-                                      "Change Password",
+                                      "Change Password".tr,
                                       () {
                                         Get.toNamed(AppRoutes.changePassword);
                                       },
@@ -294,7 +295,7 @@ class SettingsView extends StatelessWidget {
                                     Gap(8),
                                     rowWithArrow(
                                       CupertinoIcons.delete_simple,
-                                      "Remove Account",
+                                      "Remove Account".tr,
                                       () {
                                         removeAccountDialog(
                                           removeAccountLoading:
@@ -313,7 +314,7 @@ class SettingsView extends StatelessWidget {
                                     Gap(8),
                                     rowWithArrow(
                                       Icons.logout_rounded,
-                                      "Logout",
+                                      "Logout".tr,
                                       () {
                                         logoutDialog();
                                       },
@@ -390,7 +391,7 @@ class SettingsView extends StatelessWidget {
                 ),
                 Text(
                   subTitle,
-                  style: TextStyle(color: greyColor, fontSize: 11.sp),
+                  style: TextStyle(color: greyColor, fontSize: 13.sp),
                 ),
               ],
             )

@@ -125,7 +125,7 @@ class ProviderWidget extends StatelessWidget {
                           });
                         },
                         child: Text(
-                          "View",
+                          "View".tr,
                           style: TextStyle(
                               fontSize: 11.sp, fontWeight: FontWeight.bold),
                         )),

@@ -100,7 +100,8 @@ class _ProvidersInCategoriesState extends State<ProvidersInCategories>
             Gap(15),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Text("${controller.providers.length} providers founded",
+              child: Text(
+                  "${controller.providers.length} ${"providers founded".tr}",
                   style: TextStyle(
                       color: Colors.black87,
                       fontWeight: FontWeight.w500,

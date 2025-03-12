@@ -161,8 +161,8 @@ class ServiceWidgetVertical extends StatelessWidget {
                                               );
                                             },
                                             child: Text(
-                                              "View Details",
-                                              style: TextStyle(fontSize: 11.sp),
+                                              "View".tr,
+                                              style: TextStyle(fontSize: 13.sp),
                                             ),
                                           ),
                                         ),

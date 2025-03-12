@@ -29,7 +29,7 @@ class SearchView extends StatelessWidget {
                 fillColor: borderColor.withAlpha(30),
                 contentPadding: EdgeInsets.all(14),
                 hintStyle: TextStyle(fontSize: 14.sp),
-                hintText: "Search ...",
+                hintText: "Search ...".tr,
                 suffixIcon: InkWell(
                   onTap: () {
                     controller.search();
@@ -60,19 +60,21 @@ class SearchView extends StatelessWidget {
                             childAspectRatio: 3.4 / 9.7),
                         scrollDirection: Axis.horizontal,
                         children: [
-                          customWidget(Icons.star_border_rounded, "Rating", () {
+                          customWidget(Icons.star_border_rounded, "Rating".tr,
+                              () {
                             showRatingSheet(context);
                           }),
-                          customWidget(Icons.location_on_outlined, "Location",
-                              () {
+                          customWidget(
+                              Icons.location_on_outlined, "Location".tr, () {
                             showLocationSheet(context);
                           }),
-                          customWidget(Icons.category_outlined, "Category", () {
+                          customWidget(Icons.category_outlined, "Category".tr,
+                              () {
                             showCategorySheet(context);
                           }),
                           customWidget(
                             CupertinoIcons.refresh_thin,
-                            "Reset",
+                            "Reset".tr,
                             () {
                               controller.resetFunction();
                             },
@@ -84,12 +86,12 @@ class SearchView extends StatelessWidget {
                     Gap(10),
                     controller.isSearch
                         ? Text(
-                            "${controller.searchList.length} provider",
+                            "${controller.searchList.length} ${"Provider".tr}",
                             style: TextStyle(
                                 fontSize: 15.sp, fontWeight: FontWeight.normal),
                           )
                         : Text(
-                            "${controller.topProviders.length} provider",
+                            "${controller.topProviders.length} ${"Provider".tr}",
                             style: TextStyle(
                                 fontSize: 15.sp, fontWeight: FontWeight.normal),
                           ),
@@ -180,7 +182,7 @@ class SearchView extends StatelessWidget {
             border: Border.all(color: greyColor),
             borderRadius: BorderRadius.circular(5)),
         child: Text(
-          title,
+          title.tr,
           style: TextStyle(
               fontWeight: FontWeight.normal,
               fontSize: 13.sp,
@@ -220,7 +222,7 @@ class SearchView extends StatelessWidget {
                     ),
                     Gap(6),
                     Text(
-                      "Rating Filter:",
+                      "Rating Filter:".tr,
                       style: TextStyle(
                           fontSize: 15.sp, fontWeight: FontWeight.w500),
                     ),
@@ -313,7 +315,7 @@ class SearchView extends StatelessWidget {
                     ),
                     Gap(6),
                     Text(
-                      "Location Filter:",
+                      "Location Filter:".tr,
                       style: TextStyle(
                           fontSize: 15.sp, fontWeight: FontWeight.w500),
                     ),
@@ -379,7 +381,7 @@ class SearchView extends StatelessWidget {
                     ),
                     Gap(6),
                     Text(
-                      "Category Filter:",
+                      "Category Filter:".tr,
                       style: TextStyle(
                           fontSize: 15.sp, fontWeight: FontWeight.w500),
                     ),

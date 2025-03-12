@@ -1,4 +1,5 @@
 import 'package:b2b_partenership/controller/previous_work/provider_profile_controller.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/widgets/in_category/service_widget_vertical.dart';
@@ -50,12 +51,20 @@ class ProviderProfileView extends StatelessWidget {
                             controller: controller.pageController,
                             onPageChanged: controller.onPageChanged,
                             children: [
-                              ServiceWidgetVertical(
-                                services: controller.providerServices,
+                              CustomServerStatusWidget(
+                                emptyMessage:
+                                    "No services founded\ntry again later",
+                                statusRequest: controller.statusRequestServices,
+                                child: ServiceWidgetVertical(
+                                  services: controller.providerServices,
+                                ),
                               ),
                               AboutWidget(),
                               PreviousWork(),
-                              ReviewWidget()
+                              CustomServerStatusWidget(
+                                  emptyMessage: "No Reviews now\nlet's add one",
+                                  statusRequest: controller.statusRequestReview,
+                                  child: ReviewWidget())
                             ],
                           ),
                         ),

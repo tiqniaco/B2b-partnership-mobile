@@ -33,7 +33,7 @@ class LanguageWidget extends StatelessWidget {
             children: [
               ListTile(
                 title: Text(
-                  "English".tr,
+                  "English",
                   style: getRegularStyle,
                 ),
                 leading: Image.asset(

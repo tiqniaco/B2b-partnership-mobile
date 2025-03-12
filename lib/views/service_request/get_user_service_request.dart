@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/request_services/get_request_service_controller.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/widgets/request_services/service_item.dart';
 import 'package:flutter/material.dart';
@@ -44,16 +45,20 @@ class GetUserServiceRequest extends StatelessWidget {
                       fontSize: 12.sp)),
             ),
             Gap(10),
-            Expanded(
-                child: ListView.separated(
-              separatorBuilder: (context, index) => Gap(15),
-              scrollDirection: Axis.vertical,
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              itemCount: controller.services.length,
-              itemBuilder: (context, index) => ServiceItem(
-                model: controller.services[index],
-              ),
-            )),
+            CustomServerStatusWidget(
+              emptyMessage: "you don't add any service posts\nlet's add some",
+              statusRequest: controller.statusRequest,
+              child: Expanded(
+                  child: ListView.separated(
+                separatorBuilder: (context, index) => Gap(15),
+                scrollDirection: Axis.vertical,
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                itemCount: controller.services.length,
+                itemBuilder: (context, index) => ServiceItem(
+                  model: controller.services[index],
+                ),
+              )),
+            ),
           ],
         ),
       ),

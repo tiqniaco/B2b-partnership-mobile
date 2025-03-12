@@ -37,7 +37,7 @@ extension StoreOrderStatusEnumView on StoreOrderStatusEnum {
       case StoreOrderStatusEnum.completed:
         return 'Completed'.tr;
       case StoreOrderStatusEnum.canceled:
-        return 'Cancelled'.tr;
+        return 'Canceled'.tr;
     }
   }
 }

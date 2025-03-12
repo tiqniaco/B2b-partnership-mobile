@@ -63,15 +63,8 @@ class OrderWidget extends StatelessWidget {
                   ),
                   Spacer(),
                   PrintType(
-                    type: orderModel.status,
+                    type: orderModel.status!,
                   ),
-                  // IconButton(
-                  //   onPressed: () {},
-                  //   icon: Icon(
-                  //     Icons.more_vert,
-                  //     color: whiteColor,
-                  //   ),
-                  // )
                   Gap(4.w),
                 ],
               ),
@@ -81,23 +74,29 @@ class OrderWidget extends StatelessWidget {
               child: Column(
                 children: [
                   Gap(10),
-                  rowWidget(
-                    "Date",
-                    DateTimeConvertor.formatDate(
-                      orderModel.createdAt,
-                    ),
-                    CupertinoIcons.calendar,
-                  ),
+                  orderModel.createdAt != null
+                      ? rowWidget(
+                          "Date".tr,
+                          orderModel.createdAt!
+                          // DateTimeConvertor.formatDate(
+                          //   orderModel.createdAt!,
+                          // ),
+                          ,
+                          CupertinoIcons.calendar,
+                        )
+                      : Gap(0),
                   Gap(10),
                   Divider(
                     color: borderColor,
                   ),
                   Gap(10),
                   rowWidget(
-                    "Expiry Date",
+                    "Expiry Date".tr,
+                    // orderModel.expirationDate!
                     DateTimeConvertor.formatDate(
-                      orderModel.expirationDate,
+                      orderModel.expirationDate!,
                     ),
+
                     CupertinoIcons.clock,
                   ),
                   Gap(10),
@@ -106,7 +105,7 @@ class OrderWidget extends StatelessWidget {
                   ),
                   Gap(10),
                   rowWidget(
-                    "Billed",
+                    "Billed".tr,
                     "${orderModel.totalPrice} \$",
                     CupertinoIcons.money_dollar_circle,
                   )

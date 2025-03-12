@@ -238,6 +238,8 @@ const Map<String, String> ar = {
   'Select Status': 'اختر الحالة',
   'Update Status': 'تحديث الحالة',
   "Order Items": "اصناف الطلب",
+  "My Orders": "طلباتي",
+  "Complete": "مكتمل",
 
   // setting view
   "Orders": "الطلبات",
@@ -255,6 +257,8 @@ const Map<String, String> ar = {
   'Are you sure you want to logout?': 'هل أنت متأكد أنك تريد تسجيل الخروج؟',
   "Close": "اغلاق",
   "Call": "اتصال",
+  "Logout": "تسجيل الخروج",
+  "Shopping": "التسوق",
 
   // edit profile
   "uploading image is optional": "تحميل الصورة اختياري",
@@ -284,4 +288,9 @@ const Map<String, String> ar = {
   "Clear Filter": "مسح الفلتر",
   "Apply Filter": "تطبيق الفلتر",
   "Category Filter:": "فلتر التصنيف :",
+  "Rating": "التقييم",
+  "Rating Filter:": "فلتر التقييم:",
+  "Provider": "مقدم خدمة",
+  "Saved Provider": "مقدم محفوظ",
+  "providers founded": "مقدم موجود",
 };

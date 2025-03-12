@@ -23,7 +23,7 @@ class SaveView extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor: primaryColor,
         title: Text(
-          "Saved Providers",
+          "Saved".tr,
           style: TextStyle(color: whiteColor, fontWeight: FontWeight.w400),
         ),
       ),
@@ -43,7 +43,7 @@ class SaveView extends StatelessWidget {
                   ),
                   Gap(10),
                   Text(
-                    "Saved Providers",
+                    "Saved Provider".tr,
                     style:
                         TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
                   ),
@@ -69,7 +69,6 @@ class SaveView extends StatelessWidget {
                         controller.favorites[index].providerId.toString());
                   }),
             )),
-          
           ],
         );
       }),

@@ -37,28 +37,29 @@ class OrderDetailsView extends StatelessWidget {
                         child: Column(
                           children: [
                             OrderDetailsItemWidget(
-                              title: "Order Status: ",
-                              value: controller
-                                      .model?.data.status.capitalizeFirst ??
-                                  "",
+                              title: "${"Order Status".tr}: ",
+                              value:
+                                  "${controller.model?.data.status!.capitalizeFirst}"
+                                      .tr,
                             ),
                             Gap(10.h),
                             OrderDetailsItemWidget(
-                              title: "Order Date: ",
-                              value: DateTimeConvertor.formatDate(
-                                controller.model?.data.createdAt ?? "",
-                              ),
-                            ),
+                                title: "${"Order Date".tr}: ",
+                                value: controller.model?.data.createdAt ?? ""
+                                // DateTimeConvertor.formatDate(
+                                //   controller.model?.data.createdAt ?? "",
+                                // ),
+                                ),
                             Gap(10.h),
                             OrderDetailsItemWidget(
-                              title: "Order Expiration Date: ",
+                              title: "${"Order Expiration Date".tr}: ",
                               value: DateTimeConvertor.formatDate(
                                 controller.model?.data.expirationDate ?? "",
                               ),
                             ),
                             Gap(10.h),
                             OrderDetailsItemWidget(
-                              title: "Order Total: ",
+                              title: "${"Order Total".tr}: ",
                               value:
                                   "${controller.model?.data.totalPrice.toString() ?? ""}\$",
                             ),
@@ -72,7 +73,7 @@ class OrderDetailsView extends StatelessWidget {
                           children: [
                             Divider(),
                             Text(
-                              "Order Items:",
+                              "${"Order Items".tr}:",
                               style: getSemiBoldStyle.copyWith(
                                 fontWeight: FontManager.boldFontWeight,
                                 color: primaryColor,

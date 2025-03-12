@@ -105,7 +105,7 @@ const Map<String, String> en = {
   "Shopping?": "Shopping?",
   "Order whatever you need\nfrom the shop":
       "Order whatever you need\nfrom the shop",
-  'Order Now':'Order Now',
+  'Order Now': 'Order Now',
 
   // manage category
   "Category & Subcategory": "Category & Subcategory",
@@ -235,6 +235,8 @@ const Map<String, String> en = {
   'Select Status': 'Select Status',
   'Update Status': 'Update Status',
   "Order Items": "Order Items",
+  "My Orders": "My Orders",
+  "Complete": "Complete",
 
   // setting view
   "Orders": "Orders",
@@ -251,6 +253,7 @@ const Map<String, String> en = {
       'Are you sure you want to logout?': 'Are you sure you want to logout?',
   "Close": "Close",
   "Call": "Call",
+  "Shopping": "Shopping",
 
   // edit profile
   "uploading image is optional": "uploading image is optional",
@@ -280,4 +283,9 @@ const Map<String, String> en = {
   "Clear Filter": "Clear Filter",
   "Apply Filter": "Apply Filter",
   "Category Filter:": "Category Filter:",
+  "Rating": "Rating",
+  "Rating Filter:": "Rating Filter:",
+  "Provider": "Provider",
+  "Saved Provider": "Saved Providers",
+  "providers founded": "providers founded",
 };
