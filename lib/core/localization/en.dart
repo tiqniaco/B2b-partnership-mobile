@@ -110,6 +110,9 @@ const Map<String, String> en = {
   "Freelance Services!!": "Freelance Services!!",
   "You can browse the services available \n for freelance work":
       "You can browse the services available \n for freelance work",
+  "You can add the available\njob for recruitment":
+      "You can add the available\njob for recruitment",
+  "Need employees?": "Need employees?",
 
   // manage category
   "Category & Subcategory": "Category & Subcategory",
@@ -194,7 +197,21 @@ const Map<String, String> en = {
   "Experience (years)": "Experience (years)",
   "Enter years of experience": "Enter years of experience",
   "Salary (Optional)": "Salary (Optional)",
-  "Enter salary":"Enter salary",
+  "Enter salary": "Enter salary",
+  "Full Time": "Full Time",
+  "Part Time": "Part Time",
+  "Intern": "Intern",
+  "Freelance": "Freelance",
+  "Select expiry date": "Select expiry date",
+  "Please select an expiry date": "Please select an expiry date",
+  "Preferred Gender": "Preferred Gender",
+  "Male": "Male",
+  "Female": "Female",
+  "Any": "Any",
+  "Delete Job": "Delete Job",
+  "Are you sure you want to\ndelete this job?":
+      "Are you sure you want to\ndelete this job?",
+  "Show Applications": "Show Applications",
 
   // waiting providers
   "Waiting providers": "Waiting providers",

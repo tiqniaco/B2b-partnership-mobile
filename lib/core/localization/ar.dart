@@ -113,6 +113,9 @@ const Map<String, String> ar = {
   "Freelance Services!!": "خدمات حرة!!",
   "You can browse the services available \n for freelance work":
       "يمكنك تصفح الخدمات المتاحة\nللعمل الحر",
+  "You can add the available\njob for recruitment":
+      "يمكنك اضافة الوظائف \nالمتاحة للتوظيف",
+  "Need employees?": "تحتاج موظفين؟",
 
   // manage category
   "Category & Subcategory": "الفئات الرئيسية & الفرعية",
@@ -198,6 +201,19 @@ const Map<String, String> ar = {
   "Enter years of experience": "ادخل سنوات الخبرة",
   "Salary (Optional)": "الراتب (اختياري)",
   "Enter salary": "ادخل الراتب",
+  "Full Time": "دوام كامل",
+  "Part Time": "دوام جزئي",
+  "Intern": "تدريب",
+  "Freelance": "عمل حر",
+  "Select expiry date": "اختر تاريخ الانتهاء",
+  "Please select an expiry date": "الرجاء اختيار تاريخ الانتهاء",
+  "Preferred Gender": "الجنس المطلوب",
+  "Male": "ذكر",
+  "Female": "انثى",
+  "Any": "الكل",
+  "Delete Job": "حذف الوظيفة",
+  "Are you sure you want to\ndelete this job?": "هل انت متأكد من\n حذف الوظيفة",
+  "Show Applications": "عرض الطلبات",
 
   // waiting providers
   "Waiting providers": "مقدمي الخدمات قيد الانتظار",

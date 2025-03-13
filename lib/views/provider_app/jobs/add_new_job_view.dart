@@ -219,7 +219,7 @@ class AddNewJobView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: DropdownButtonFormField<JobsContractTypeEnum>(
         decoration: InputDecoration(
-          labelText: "Contract Type",
+          labelText: "Contract Type".tr,
           border: OutlineInputBorder(),
         ),
         value: controller.selectedContractType,
@@ -259,11 +259,11 @@ class AddNewJobView extends StatelessWidget {
           }
         },
         validator: (value) => value == null || value.isEmpty
-            ? "Please select an expiry date"
+            ? "Please select an expiry date".tr
             : null,
         decoration: InputDecoration(
-          labelText: "Expiry Date",
-          hintText: "Select expiry date",
+          labelText: "Expiry Date".tr,
+          hintText: "Select expiry date".tr,
           border: OutlineInputBorder(),
           suffixIcon: Icon(Icons.calendar_today),
         ),
@@ -277,7 +277,7 @@ class AddNewJobView extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: DropdownButtonFormField<JobGenderEnum>(
         decoration: InputDecoration(
-          labelText: "Preferred Gender",
+          labelText: "Preferred Gender".tr,
           border: OutlineInputBorder(),
         ),
         value: controller.selectedGender,

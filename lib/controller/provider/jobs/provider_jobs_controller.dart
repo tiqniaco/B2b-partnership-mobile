@@ -52,8 +52,8 @@ class ProviderJobsController extends GetxController {
 
   void deleteJobsDialog(id) {
     Get.defaultDialog(
-      title: "Delete Job",
-      middleText: "Are you sure you want to\ndelete this job?",
+      title: "Delete Job".tr,
+      middleText: "Are you sure you want to\ndelete this job?".tr,
       textConfirm: "Yes",
       textCancel: "No",
       onConfirm: () {
