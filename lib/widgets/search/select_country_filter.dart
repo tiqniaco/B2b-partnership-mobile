@@ -32,9 +32,9 @@ class SelectCountryFilter extends StatelessWidget {
             borderRadius: BorderRadius.circular(7),
             borderSide: const BorderSide(color: pageColor, width: 1.5),
           ),
-          hintText: "All Countries",
+          hintText: "All Countries".tr,
           label: Text(
-            'Select Country',
+            'Select Country'.tr,
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 17.sp,

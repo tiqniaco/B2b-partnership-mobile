@@ -34,7 +34,7 @@ class ProviderJobsView extends StatelessWidget {
             ),
             titleSpacing: 0,
             title: Text(
-              "Your Jobs".toUpperCase(),
+              "MY JOBS".tr,
               style: getSemiBoldStyle.copyWith(
                 letterSpacing: 1.5.w,
                 color: whiteColor,

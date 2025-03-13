@@ -59,10 +59,10 @@ class EditProviderServiceController extends GetxController {
 
   final tabs = [
     Tab(
-      text: 'Service Details',
+      text: 'Service Details'.tr,
     ),
     Tab(
-      text: 'Features',
+      text: 'Features'.tr,
     ),
   ];
 
@@ -393,9 +393,9 @@ class EditProviderServiceController extends GetxController {
           children: [
             buildTextField(
               arFeatureController,
-              'Feature Name (Arabic)',
+              'Feature Name (Arabic)'.tr,
               Icons.abc,
-              "Enter arabic name",
+              "Enter arabic name".tr,
               (val) {
                 return validUserData(val);
               },
@@ -404,9 +404,9 @@ class EditProviderServiceController extends GetxController {
             SizedBox(height: 16.h),
             buildTextField(
               enFeatureController,
-              'Feature Name (English)',
+              'Feature Name (English)'.tr,
               Icons.abc,
-              "Enter english name",
+              "Enter english name".tr,
               (val) {
                 return validUserData(val);
               },
@@ -417,7 +417,7 @@ class EditProviderServiceController extends GetxController {
               onPressed: () {
                 return _addNewServiceFeature();
               },
-              text: "Add",
+              text: "Add".tr,
             )
           ],
         ),

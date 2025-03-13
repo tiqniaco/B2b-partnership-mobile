@@ -130,7 +130,7 @@ class ServiceWidgetVertical extends StatelessWidget {
                                                 );
                                               },
                                               child: Text(
-                                                "Edit",
+                                                "Edit".tr,
                                                 style:
                                                     TextStyle(fontSize: 11.sp),
                                               ),

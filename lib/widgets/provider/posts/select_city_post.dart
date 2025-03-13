@@ -27,9 +27,9 @@ class SelectCityPost extends StatelessWidget {
             borderRadius: BorderRadius.circular(7),
             borderSide: const BorderSide(color: pageColor, width: 1.5),
           ),
-          hintText: "All Cities",
+          hintText: "All Cities".tr,
           label: Text(
-            'Select City',
+            'Select City'.tr,
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 17.sp,

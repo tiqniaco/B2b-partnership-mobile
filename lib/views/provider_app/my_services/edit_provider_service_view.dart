@@ -15,7 +15,7 @@ class EditProviderServiceView extends StatelessWidget {
           child: Scaffold(
             appBar: AppBar(
               title: Text(
-                'Edit Service',
+                'Edit Service'.tr,
               ),
               bottom: TabBar(
                 tabs: controller.tabs,

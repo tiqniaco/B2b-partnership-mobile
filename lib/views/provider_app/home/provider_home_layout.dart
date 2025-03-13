@@ -5,6 +5,7 @@ import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,7 +47,7 @@ class _ProviderHomeLayoutState extends State<ProviderHomeLayout>
                   color: controller.currentIndex == 0
                       ? primaryColor
                       : unSelectedBNavColor),
-              title: "Home",
+              title: "Home".tr,
             ),
             TabItem(
               icon: Icon(
@@ -56,7 +57,7 @@ class _ProviderHomeLayoutState extends State<ProviderHomeLayout>
                   color: controller.currentIndex == 1
                       ? primaryColor
                       : unSelectedBNavColor),
-              title: "Posts",
+              title: "Posts".tr,
             ),
             TabItem(
               icon: Container(
@@ -79,7 +80,7 @@ class _ProviderHomeLayoutState extends State<ProviderHomeLayout>
                   color: controller.currentIndex == 3
                       ? primaryColor
                       : unSelectedBNavColor),
-              title: "My Services",
+              title: "My Services".tr,
             ),
             TabItem(
               icon: SvgPicture.asset("assets/svgs/setting.svg",
@@ -87,7 +88,7 @@ class _ProviderHomeLayoutState extends State<ProviderHomeLayout>
                   color: controller.currentIndex == 4
                       ? primaryColor
                       : unSelectedBNavColor),
-              title: "Menu",
+              title: "Menu".tr,
             ),
           ],
           initialActiveIndex: controller.currentIndex,

@@ -48,18 +48,10 @@ class ServiceDetailsView extends StatelessWidget {
                       backgroundColor: primaryColor,
                       minimumSize: Size(double.infinity, 50),
                     ),
-                    child: Text('Book Appointment'),
+                    child: Text('Book Appointment'.tr),
                   ),
                 ),
               ),
-              // Gap(10),
-              // IconButton(
-              //     onPressed: () {},
-              //     icon: Icon(
-              //       color: Colors.black54,
-              //       Icons.chat_outlined,
-              //       size: 35.sp,
-              //     ))
             ],
           ),
         ),
@@ -115,7 +107,7 @@ class ServiceDetailsView extends StatelessWidget {
                       right: 0,
                       child: Center(
                         child: Text(
-                          "Service List",
+                          "Service List".tr,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 20,
@@ -168,7 +160,7 @@ class ServiceDetailsView extends StatelessWidget {
                                 color: Colors.green,
                               ),
                               child: Text(
-                                'Watch Video',
+                                'Watch Video'.tr,
                                 style: TextStyle(
                                     fontSize: 13.sp,
                                     color: whiteColor,
@@ -196,27 +188,6 @@ class ServiceDetailsView extends StatelessWidget {
                             SizedBox(width: 10),
                             Text(controller.service!.provider!.name!),
                           ],
-                        ),
-                        SizedBox(height: 20),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 20, horizontal: 15),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: borderColor),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                'Our Package',
-                                style: TextStyle(
-                                  fontSize: 15.sp,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ],
-                          ),
                         ),
                         SizedBox(height: 25),
                         FeatureWidget(),
@@ -275,7 +246,7 @@ class ServiceDetailsView extends StatelessWidget {
                                   ),
                                   Gap(7),
                                   Text(
-                                    'Service Ratings',
+                                    'Service Ratings'.tr,
                                     style: TextStyle(
                                       fontSize: 13.sp,
                                     ),

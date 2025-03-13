@@ -24,7 +24,7 @@ class ProviderProfileController extends GetxController {
   late String provId;
   int rating = 0;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-    TextEditingController reviewController = TextEditingController();
+  TextEditingController reviewController = TextEditingController();
   StatusRequest statusRequest = StatusRequest.loading;
   StatusRequest statusRequestReview = StatusRequest.loading;
   StatusRequest statusRequestServices = StatusRequest.loading;
@@ -32,7 +32,6 @@ class ProviderProfileController extends GetxController {
   List<ServiceModelData> providerServices = [];
   List<ProviderPerviousWorkModel> previousWork = [];
   List<ReviewModel> reviews = [];
-
 
   @override
   onInit() async {
@@ -51,7 +50,7 @@ class ProviderProfileController extends GetxController {
         init: ProviderProfileController(),
         builder: (ProviderProfileController controller) {
           return AlertDialog(
-            title: const Text('Add Review'),
+            title: Text('Add Review'.tr),
             content: Form(
               key: formKey,
               child: Column(
@@ -60,7 +59,7 @@ class ProviderProfileController extends GetxController {
                   TextFormField(
                     controller: reviewController,
                     decoration:
-                        const InputDecoration(hintText: 'Enter your review'),
+                        InputDecoration(hintText: 'Enter your review'.tr),
                   ),
                   const SizedBox(height: 20),
                   PannableRatingBar(
@@ -98,7 +97,7 @@ class ProviderProfileController extends GetxController {
                   Get.back(); // close dialog
                   _addReview();
                 },
-                child: const Text('Submit'),
+                child: Text('Send'.tr),
               ),
             ],
           );
@@ -251,6 +250,4 @@ class ProviderProfileController extends GetxController {
       });
     }
   }
-
-
 }

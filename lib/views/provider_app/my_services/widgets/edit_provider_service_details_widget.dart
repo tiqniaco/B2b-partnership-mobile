@@ -9,6 +9,7 @@ import 'package:b2b_partenership/widgets/select_sup_specialization_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class EditProviderServiceDetailsWidget extends StatelessWidget {
   const EditProviderServiceDetailsWidget({
@@ -67,14 +68,11 @@ class EditProviderServiceDetailsWidget extends StatelessWidget {
                     ),
                   ),
                   Gap(40.h),
-                  // buildTextField(controller.titleArController, 'Title (Arabic)',
-                  //     Icons.title, "enter title in arabic"),
-                  // Gap(30),
                   buildTextField(
                     controller.titleEnController,
-                    'Title',
+                    'Title'.tr,
                     Icons.title,
-                    "enter title",
+                    "enter title".tr,
                     (val) {
                       return controller.validUserData(val);
                     },
@@ -82,9 +80,9 @@ class EditProviderServiceDetailsWidget extends StatelessWidget {
                   Gap(20.h),
                   buildTextField(
                     controller.descriptionController,
-                    'Description',
+                    'Description'.tr,
                     Icons.description,
-                    "enter service description",
+                    "enter service description".tr,
                     (val) {
                       return controller.validUserData(val);
                     },
@@ -92,9 +90,9 @@ class EditProviderServiceDetailsWidget extends StatelessWidget {
                   Gap(20.h),
                   buildTextField(
                     controller.addressController,
-                    'Address',
+                    'Address'.tr,
                     Icons.location_on,
-                    "enter your address",
+                    "enter address".tr,
                     (val) {
                       return controller.validUserData(val);
                     },
@@ -102,9 +100,9 @@ class EditProviderServiceDetailsWidget extends StatelessWidget {
                   Gap(20.h),
                   buildTextField(
                     controller.overviewController,
-                    'Overview',
+                    'Overview'.tr,
                     Icons.location_on,
-                    "enter service overview",
+                    "enter service overview".tr,
                     (val) {
                       return controller.validUserData(val);
                     },
@@ -112,9 +110,9 @@ class EditProviderServiceDetailsWidget extends StatelessWidget {
                   Gap(20.h),
                   buildTextField(
                     controller.videoController,
-                    'Video Link',
+                    'Video Link'.tr,
                     Icons.location_on,
-                    "enter service video (optional)",
+                    "enter service video (optional)".tr,
                     (val) {
                       return controller.validUserData(val);
                     },
@@ -157,7 +155,7 @@ class EditProviderServiceDetailsWidget extends StatelessWidget {
                     onPressed: () {
                       return controller.updateServices();
                     },
-                    text: "Edit",
+                    text: "Edit".tr,
                   ),
                 ],
               ),

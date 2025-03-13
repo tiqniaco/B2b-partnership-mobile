@@ -5,6 +5,7 @@ import 'package:b2b_partenership/core/functions/remove_account.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/app_pdf_view.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/widgets/language_widget.dart';
 // import 'package:b2b_partenership/widgets/language_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -102,7 +103,7 @@ class ProviderSettingView extends StatelessWidget {
                                     Icons.work_outline,
                                     Colors.amber,
                                     controller.menuModel!.jobsCount.toString(),
-                                    "Jobs", () {
+                                    "Jobs".tr, () {
                                   Get.toNamed(AppRoutes.providerJobs);
                                 }),
                                 boxWidget(
@@ -110,7 +111,7 @@ class ProviderSettingView extends StatelessWidget {
                                     Colors.blue,
                                     controller.menuModel!.shoppingCount
                                         .toString(),
-                                    "Shopping", () {
+                                    "Shopping".tr, () {
                                   Get.toNamed(AppRoutes.shop);
                                 }),
                                 boxWidget(
@@ -118,7 +119,7 @@ class ProviderSettingView extends StatelessWidget {
                                     Colors.green,
                                     controller.menuModel!.ordersCount
                                         .toString(),
-                                    "Orders", () {
+                                    "Orders".tr, () {
                                   Get.toNamed(AppRoutes.shopOrders);
                                 }),
                                 boxWidget(
@@ -126,7 +127,7 @@ class ProviderSettingView extends StatelessWidget {
                                     Colors.red,
                                     controller.menuModel!.complaintsCount
                                         .toString(),
-                                    "Complaints", () {
+                                    "Complaints".tr, () {
                                   Get.toNamed(AppRoutes.complaints);
                                 })
                               ],
@@ -144,13 +145,13 @@ class ProviderSettingView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Personal information",
+                                  "Personal Information".tr,
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 17.sp),
                                 ),
                                 Gap(20),
-                                rowWidget("Email",
+                                rowWidget("Email".tr,
                                     controller.menuModel!.data!.email!),
                                 FractionallySizedBox(
                                   widthFactor: 10,
@@ -159,7 +160,7 @@ class ProviderSettingView extends StatelessWidget {
                                   ),
                                 ),
                                 rowWidget(
-                                    "City",
+                                    "City".tr,
                                     translateDatabase(
                                         arabic: controller
                                             .menuModel!.data!.governmentNameAr!,
@@ -172,7 +173,7 @@ class ProviderSettingView extends StatelessWidget {
                                   ),
                                 ),
                                 rowWidget(
-                                    "Country",
+                                    "Country".tr,
                                     translateDatabase(
                                         arabic: controller
                                             .menuModel!.data!.countryNameAr!,
@@ -185,7 +186,7 @@ class ProviderSettingView extends StatelessWidget {
                                   ),
                                 ),
                                 rowWidget(
-                                    "Category",
+                                    "Category".tr,
                                     translateDatabase(
                                         arabic: controller.menuModel!.data!
                                             .specializationNameAr!,
@@ -198,7 +199,7 @@ class ProviderSettingView extends StatelessWidget {
                                   ),
                                 ),
                                 rowWidget(
-                                    "Sub Category",
+                                    "Sub Category".tr,
                                     translateDatabase(
                                         arabic: controller.menuModel!.data!
                                             .subSpecializationNameAr!,
@@ -211,7 +212,7 @@ class ProviderSettingView extends StatelessWidget {
                                   ),
                                 ),
                                 rowWidget(
-                                    "Company Type",
+                                    "Company Type".tr,
                                     translateDatabase(
                                         arabic: controller.menuModel!.data!
                                             .providerTypeNameAr!,
@@ -229,7 +230,7 @@ class ProviderSettingView extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "Commercial Papers",
+                                      "Commercial Papers".tr,
                                       style: TextStyle(
                                           fontSize: 14.sp,
                                           fontWeight: FontWeight.w300),
@@ -244,7 +245,7 @@ class ProviderSettingView extends StatelessWidget {
                                         );
                                       },
                                       child: Text(
-                                        "View",
+                                        "View".tr,
                                         style: TextStyle(
                                             fontSize: 13.sp,
                                             color: primaryColor,
@@ -284,7 +285,7 @@ class ProviderSettingView extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "Tax Papers",
+                                      "Tax Papers".tr,
                                       style: TextStyle(
                                           fontSize: 14.sp,
                                           fontWeight: FontWeight.w300),
@@ -299,7 +300,7 @@ class ProviderSettingView extends StatelessWidget {
                                         );
                                       },
                                       child: Text(
-                                        "View",
+                                        "View".tr,
                                         style: TextStyle(
                                             fontSize: 13.sp,
                                             color: primaryColor,
@@ -336,7 +337,7 @@ class ProviderSettingView extends StatelessWidget {
                                 ),
                                 Gap(20),
                                 Text(
-                                  "Other Services",
+                                  "Other Services".tr,
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 17.sp),
@@ -344,7 +345,7 @@ class ProviderSettingView extends StatelessWidget {
                                 Gap(20),
                                 rowWithArrow(
                                   CupertinoIcons.person,
-                                  "Edit Profile",
+                                  "Edit Profile".tr,
                                   () {
                                     Get.toNamed(
                                       AppRoutes.editProviderProfile,
@@ -364,7 +365,7 @@ class ProviderSettingView extends StatelessWidget {
                                 Gap(8),
                                 rowWithArrow(
                                   CupertinoIcons.phone,
-                                  "Mange your Contacts",
+                                  "Mange your Contacts".tr,
                                   () {
                                     Get.toNamed(AppRoutes.providerContacts);
                                   },
@@ -379,7 +380,7 @@ class ProviderSettingView extends StatelessWidget {
                                 Gap(8),
                                 rowWithArrow(
                                   CupertinoIcons.padlock,
-                                  "Change Password",
+                                  "Change Password".tr,
                                   () {
                                     Get.toNamed(AppRoutes.changePassword);
                                   },
@@ -394,7 +395,7 @@ class ProviderSettingView extends StatelessWidget {
                                 Gap(8),
                                 rowWithArrow(
                                   CupertinoIcons.delete_simple,
-                                  "Remove Account",
+                                  "Remove Account".tr,
                                   () {
                                     removeAccountDialog(
                                       removeAccountLoading:
@@ -413,20 +414,20 @@ class ProviderSettingView extends StatelessWidget {
                                 Gap(8),
                                 rowWithArrow(
                                   Icons.logout_rounded,
-                                  "Logout",
+                                  "Logout".tr,
                                   () {
                                     logoutDialog();
                                   },
                                 ),
                                 Gap(8),
-                                // FractionallySizedBox(
-                                //   widthFactor: 10,
-                                //   child: Divider(
-                                //     color: borderColor,
-                                //   ),
-                                // ),
-                                // Gap(8),
-                                // LanguageWidget(),
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    color: borderColor,
+                                  ),
+                                ),
+                                Gap(8),
+                                LanguageWidget(),
                               ],
                             ),
                           ],

@@ -24,39 +24,38 @@ class RequestService1 extends StatelessWidget {
                     )
                   : Container(
                       height: 130.h,
-                      width: 180.h,
+                      width: double.infinity,
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
-                        borderRadius: BorderRadius.circular(40),
+                        borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Icon(Icons.image,
-                          size: 50, color: Colors.grey.shade700),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(Icons.image,
+                              size: 50, color: Colors.grey.shade700),
+                          Gap(10),
+                          Text("upload image is (optional)".tr),
+                        ],
+                      ),
                     ),
             ),
           ),
-          Gap(10),
-          Text("upload service image (optional)"),
           Gap(40),
-          // buildTextField(controller.titleArController, 'Title (Arabic)',
-          //     Icons.title, "enter title in arabic"),
-          // Gap(30),
-          buildTextField(
-              controller.titleEnController, 'Title', Icons.title, "enter title",
-              (val) {
+          buildTextField(controller.titleEnController, 'Name'.tr, Icons.title,
+              "enter service name".tr, (val) {
             return controller.validUserData(val);
           }),
           Gap(30),
-
-          buildTextField(controller.descriptionController, 'Description',
-              Icons.description, "enter service description", (val) {
+          buildTextField(controller.descriptionController, 'Description'.tr,
+              Icons.description, "enter service description".tr, (val) {
             return controller.validUserData(val);
           }),
           Gap(30),
-          buildTextField(controller.addressController, 'Address',
-              Icons.location_on, "enter your address", (val) {
+          buildTextField(controller.addressController, 'Address'.tr,
+              Icons.location_on, "enter service address".tr, (val) {
             return controller.validUserData(val);
           }),
-
           Gap(20),
         ],
       );

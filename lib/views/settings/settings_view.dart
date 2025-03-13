@@ -122,7 +122,7 @@ class SettingsView extends StatelessWidget {
                                               MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              "Switch to Provider Account",
+                                              "Switch to Provider Account".tr,
                                               style: TextStyle(
                                                   color: blackColor,
                                                   fontWeight: FontWeight.w500,

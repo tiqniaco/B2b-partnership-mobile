@@ -170,7 +170,7 @@ class ServiceRequestDetails extends StatelessWidget {
                           ? Column(
                               children: [
                                 Text(
-                                  "Price Offers",
+                                  "Price Offers".tr,
                                   style: TextStyle(
                                     fontSize: 15.sp,
                                     fontWeight: FontWeight.bold,
@@ -210,7 +210,7 @@ class ServiceRequestDetails extends StatelessWidget {
                                         controller.addPriceDialog();
                                       },
                                       child: Text(
-                                        "Add price offer",
+                                        "Add price offer".tr,
                                         style: TextStyle(
                                             fontSize: 15.sp,
                                             fontWeight: FontWeight.w500),

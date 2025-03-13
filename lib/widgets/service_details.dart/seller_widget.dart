@@ -48,7 +48,7 @@ class SellerWidget extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            'Seller Rating',
+                            'Seller Rating'.tr,
                             style: TextStyle(color: Colors.black54),
                           ),
                           Gap(10),
@@ -94,14 +94,14 @@ class SellerWidget extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      titleWidget("From"),
+                      titleWidget("From".tr),
                       Gap(10),
                       valueWidget(translateDatabase(
                           arabic: controller.service!.provider!.countryNameAr!,
                           english:
                               controller.service!.provider!.countryNameEn!)),
                       Spacer(),
-                      titleWidget("Seller Since"),
+                      titleWidget("Seller Since".tr),
                       Gap(10),
                       valueWidget(
                           getYear(controller.service!.provider!.createdAt!)
@@ -111,7 +111,7 @@ class SellerWidget extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      titleWidget("Department"),
+                      titleWidget("Department".tr),
                       Gap(10),
                       valueWidget(translateDatabase(
                           arabic: controller
@@ -119,7 +119,7 @@ class SellerWidget extends StatelessWidget {
                           english: controller
                               .service!.provider!.specializationNameEn!)),
                       Spacer(),
-                      titleWidget("Specailization"),
+                      titleWidget("Specialization".tr),
                       Gap(10),
                       valueWidget(translateDatabase(
                           arabic: controller

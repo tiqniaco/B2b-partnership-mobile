@@ -17,7 +17,7 @@ class GetUserServiceRequest extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: whiteColor,
         title: Text(
-          'Your Service',
+          'Your Posted Services'.tr,
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
@@ -38,11 +38,12 @@ class GetUserServiceRequest extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Text("${controller.services.length} Services founded",
-                  style: TextStyle(
-                      color: Colors.black87,
-                      //fontWeight: FontWeight.w500,
-                      fontSize: 12.sp)),
+              child:
+                  Text("${controller.services.length} ${"Service founded".tr}",
+                      style: TextStyle(
+                          color: Colors.black87,
+                          //fontWeight: FontWeight.w500,
+                          fontSize: 12.sp)),
             ),
             Gap(10),
             CustomServerStatusWidget(

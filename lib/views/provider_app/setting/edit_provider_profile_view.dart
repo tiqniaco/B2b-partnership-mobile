@@ -26,7 +26,7 @@ class EditProviderProfileView extends StatelessWidget {
       builder: (ProviderSettingEditProfileController controller) {
         return Scaffold(
             appBar: AppBar(
-              title: const Text("Edit Provider Profile"),
+              title: Text("Edit Profile".tr),
             ),
             body: controller.statusRequestCity == StatusRequest.loading ||
                     controller.statusRequestCountry == StatusRequest.loading ||
@@ -116,7 +116,7 @@ class EditProviderProfileView extends StatelessWidget {
                                 ),
                                 Gap(20.h),
                                 AuthTextForm(
-                                  lable: "Full Name".tr,
+                                  lable: "Name".tr,
                                   preicon: CupertinoIcons.person,
                                   hintText: "Enter your full name".tr,
                                   textFormController: controller.nameController,
@@ -187,7 +187,7 @@ class EditProviderProfileView extends StatelessWidget {
                                     floatingLabelBehavior:
                                         FloatingLabelBehavior.always,
                                     label: Text(
-                                      "Phone",
+                                      "Phone".tr,
                                       style: TextStyle(
                                           fontWeight: FontWeight.w500,
                                           fontSize: 17.sp,
@@ -205,12 +205,8 @@ class EditProviderProfileView extends StatelessWidget {
                                             color: blackColor,
                                           ),
                                           Gap(5),
-                                          Image.network(
-                                            controller.selectedCountry.flag!,
-                                            width: 23.h,
-                                            height: 23.h,
-                                            fit: BoxFit.cover,
-                                          ),
+                                          Text(
+                                              controller.selectedCountry.flag!),
                                           Gap(6),
                                           Text(
                                               "+${controller.selectedCountry.code}"),
@@ -309,7 +305,7 @@ class EditProviderProfileView extends StatelessWidget {
                                                           BorderRadius.circular(
                                                               30))),
                                               child: Text(
-                                                "Upload",
+                                                "Upload".tr,
                                                 style:
                                                     TextStyle(fontSize: 12.sp),
                                               )),
@@ -362,7 +358,7 @@ class EditProviderProfileView extends StatelessWidget {
                                                 );
                                               },
                                               child: Text(
-                                                "Upload",
+                                                "Upload".tr,
                                                 style:
                                                     TextStyle(fontSize: 12.sp),
                                               )),
@@ -385,7 +381,7 @@ class EditProviderProfileView extends StatelessWidget {
                 onPressed: () {
                   return controller.updateProfile();
                 },
-                text: "Update".tr,
+                text: "Save".tr,
               ),
             ));
       },

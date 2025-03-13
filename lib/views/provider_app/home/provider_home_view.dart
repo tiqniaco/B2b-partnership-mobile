@@ -41,7 +41,7 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Welcome!",
+                  "Welcome!".tr,
                   style: TextStyle(fontSize: 13.sp, color: greyColor),
                 ),
                 Text(
@@ -95,7 +95,7 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: HomeRowWidget(
-                  title: "Browse categories",
+                  title: "Browse categories".tr,
                   onTap: () {
                     Get.toNamed(AppRoutes.seeAllCategories,
                         arguments: {"categories": controller.specializations});
@@ -119,7 +119,7 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: HomeRowWidget(
-                  title: "Top Rated Providers",
+                  title: "Top Rated Providers".tr,
                   onTap: () {
                     Get.toNamed(AppRoutes.seeAll, arguments: {
                       "providers": controller.topProviders,
@@ -154,13 +154,14 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
               Gap(25),
               BannerWidget(
                 image: "assets/images/man.jpeg",
-                title: "Freelance Services!!",
+                title: "Freelance Services!!".tr,
                 onPressed: () {
                   Get.put(ProviderHomeLayoutController(this)).onBNavPressed(1);
                 },
                 description:
-                    "You can browse the services available \n for freelance work",
-                buttonTitle: 'View Now',
+                    "You can browse the services available \n for freelance work"
+                        .tr,
+                buttonTitle: 'View'.tr,
               ),
               Gap(15),
               FractionallySizedBox(
@@ -171,7 +172,7 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: HomeRowWidget(
-                  title: "Egypt Top Rated",
+                  title: "Egypt Top Rated".tr,
                   onTap: () {
                     Get.toNamed(AppRoutes.seeAll, arguments: {
                       "providers": controller.topEgypt,
@@ -206,19 +207,20 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
               Gap(25),
               BannerWidget(
                 image: "assets/images/job.jpeg",
-                title: "Need employees?",
+                title: "Need employees?".tr,
                 onPressed: () {
                   Get.toNamed(AppRoutes.providerJobs);
                 },
-                description: "You can add the available\njob for recruitment",
-                buttonTitle: 'Add Now',
+                description:
+                    "You can add the available\njob for recruitment".tr,
+                buttonTitle: 'Add'.tr,
               ),
               //JobBannerWidget(),
               Gap(55),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: HomeRowWidget(
-                  title: "Saudi Arabia Top Rated",
+                  title: "Saudi Arabia Top Rated".tr,
                   onTap: () {
                     Get.toNamed(AppRoutes.seeAll, arguments: {
                       "providers": controller.topSaudi,
@@ -251,25 +253,20 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
                 child: Divider(),
               ),
               Gap(25),
-              // TextButton(
-              //     onPressed: () {
-              //       Get.find<AppPreferences>().clear();
-              //     },
-              //     child: Text("clear")),
               BannerWidget(
                 image: "assets/images/product.jpeg",
-                title: "Shopping?",
+                title: "Shopping?".tr,
                 onPressed: () {
                   Get.toNamed(AppRoutes.shop);
                 },
-                description: "Order whatever you need\nfrom the shop",
-                buttonTitle: 'Order Now',
+                description: "Order whatever you need\nfrom the shop".tr,
+                buttonTitle: 'Order Now'.tr,
               ),
               Gap(45),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: HomeRowWidget(
-                  title: "UAE Top Rated",
+                  title: "UAE Top Rated".tr,
                   onTap: () {
                     Get.toNamed(AppRoutes.seeAll, arguments: {
                       "providers": controller.topUAE,
@@ -295,11 +292,7 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
                                   controller.topUAE[index].providerId!);
                             }),
                       ))),
-              // TextButton(
-              //     onPressed: () {
-              //       Get.toNamed(AppRoutes.providerHomeLayout);
-              //     },
-              //     child: Text("Clients")),
+
               Gap(50)
             ],
           ),

@@ -15,7 +15,7 @@ class SelectSupSpecializationFilter extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<SearchControllerIM>(
       builder: (controller) => DropdownButtonFormField<SubSpecializeModel>(
-        value: controller.selectedSubSpecialization, //CountryModel
+        value: controller.selectedSubSpecialization,
         decoration: InputDecoration(
           contentPadding:
               EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
@@ -27,9 +27,9 @@ class SelectSupSpecializationFilter extends StatelessWidget {
             borderRadius: BorderRadius.circular(7),
             borderSide: const BorderSide(color: pageColor, width: 1.5),
           ),
-          hintText: "All sub Categories",
+          hintText: "All sub Categories".tr,
           label: Text(
-            'Select Sub Category',
+            'Select Sub Category'.tr,
             style: TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 17.sp,

@@ -32,7 +32,7 @@ class AddNewJobView extends StatelessWidget {
             backgroundColor: primaryColor,
             iconTheme: IconThemeData(color: whiteColor),
             title: Text(
-              controller.model != null ? 'Update Job' : 'Add New Job',
+              controller.model != null ? 'Edit Job'.tr : 'Add New Job'.tr,
               style: TextStyle(
                 color: whiteColor,
               ),
@@ -50,15 +50,15 @@ class AddNewJobView extends StatelessWidget {
                   // Job Title
                   _buildTextField(
                     controller.titleController,
-                    "Job Title",
-                    "Enter job title",
+                    "Job Title".tr,
+                    "Enter job title".tr,
                   ),
 
                   // Description
                   _buildTextField(
                     controller.descriptionController,
-                    "Job Description",
-                    "Enter job description",
+                    "Description".tr,
+                    "Enter job description".tr,
                     maxLines: 4,
                     keyboardType: TextInputType.multiline,
                   ),
@@ -66,15 +66,15 @@ class AddNewJobView extends StatelessWidget {
                   // Skills
                   _buildTextField(
                     controller.skillsController,
-                    "Required Skills",
-                    "Enter required skills (comma separated)",
+                    "Required Skills".tr,
+                    "Enter required skills (comma separated)".tr,
                   ),
 
                   // Experience
                   _buildTextField(
                     controller.experienceController,
-                    "Experience (years)",
-                    "Enter years of experience",
+                    "Experience (years)".tr,
+                    "Enter years of experience".tr,
                     keyboardType: TextInputType.number,
                   ),
 
@@ -90,8 +90,8 @@ class AddNewJobView extends StatelessWidget {
                   // Salary (Optional)
                   _buildTextField(
                     controller.salaryController,
-                    "Salary (Optional)",
-                    "Enter salary",
+                    "Salary (Optional)".tr,
+                    "Enter salary".tr,
                     keyboardType: TextInputType.number,
                     isOptional: true,
                   ),
@@ -176,7 +176,7 @@ class AddNewJobView extends StatelessWidget {
                     }
                     return controller.addNewJob();
                   },
-                  text: controller.model != null ? "Update Job" : "Add New Job",
+                  text: controller.model != null ? "Save".tr : "Add".tr,
                 ),
               ],
             ),

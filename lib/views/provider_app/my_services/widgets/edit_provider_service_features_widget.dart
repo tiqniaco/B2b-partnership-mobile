@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class EditProviderServiceFeaturesWidget extends StatelessWidget {
   const EditProviderServiceFeaturesWidget({
@@ -57,12 +58,12 @@ class EditProviderServiceFeaturesWidget extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             EditFeatureTextRowWidget(
-                              title: "Arabic Title:",
+                              title: "Arabic Title:".tr,
                               value: feature.featureAr!,
                             ),
                             Gap(4.h),
                             EditFeatureTextRowWidget(
-                              title: "English Title:",
+                              title: "English Title:".tr,
                               value: feature.featureEn!,
                             ),
                           ],
@@ -77,7 +78,7 @@ class EditProviderServiceFeaturesWidget extends StatelessWidget {
                                 id: feature.id,
                               );
                             },
-                            child: Text("- Remove"),
+                            child: Text("- ${"Delete".tr}"),
                           ),
                         ),
                     ],

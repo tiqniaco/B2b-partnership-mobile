@@ -17,7 +17,7 @@ class ProviderContactsView extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(
-            title: Text('My Contacts'),
+            title: Text('My Contacts'.tr),
           ),
           body: CustomScrollView(
             slivers: [
@@ -35,9 +35,9 @@ class ProviderContactsView extends StatelessWidget {
                         Gap(20.h),
                         buildTextField(
                           controller.phoneController,
-                          'Phone',
+                          'Phone'.tr,
                           Icons.phone,
-                          'enter phone number',
+                          'enter phone number'.tr,
                           (val) {
                             return "";
                           },
@@ -46,9 +46,9 @@ class ProviderContactsView extends StatelessWidget {
                         Gap(20.h),
                         buildTextField(
                           controller.emailController,
-                          'Email',
+                          'Email'.tr,
                           Icons.email,
-                          'enter email',
+                          'enter email'.tr,
                           (val) {
                             return "";
                           },
@@ -57,9 +57,9 @@ class ProviderContactsView extends StatelessWidget {
                         Gap(20.h),
                         buildTextField(
                           controller.whatsappController,
-                          'Address',
+                          'Address'.tr,
                           Icons.location_on,
-                          'enter address',
+                          'enter address'.tr,
                           (val) {
                             return "";
                           },
@@ -68,9 +68,9 @@ class ProviderContactsView extends StatelessWidget {
                         Gap(20.h),
                         buildTextField(
                           controller.telegramController,
-                          'Telegram',
+                          'Telegram'.tr,
                           Icons.telegram,
-                          'enter telegram',
+                          'enter telegram'.tr,
                           (val) {
                             return "";
                           },
@@ -79,9 +79,9 @@ class ProviderContactsView extends StatelessWidget {
                         Gap(20.h),
                         buildTextField(
                           controller.instagramController,
-                          'Instagram',
+                          'Instagram'.tr,
                           Icons.location_on,
-                          'enter instagram',
+                          'enter instagram'.tr,
                           (val) {
                             return "";
                           },
@@ -90,9 +90,9 @@ class ProviderContactsView extends StatelessWidget {
                         Gap(20.h),
                         buildTextField(
                           controller.facebookController,
-                          'Facebook',
+                          'Facebook'.tr,
                           Icons.facebook,
-                          'enter facebook',
+                          'enter facebook'.tr,
                           (val) {
                             return "";
                           },
@@ -101,9 +101,9 @@ class ProviderContactsView extends StatelessWidget {
                         Gap(20.h),
                         buildTextField(
                           controller.linkedinController,
-                          'Linkedin',
+                          'Linkedin'.tr,
                           Icons.location_on,
-                          'enter linkedin',
+                          'enter linkedin'.tr,
                           (val) {
                             return "";
                           },
@@ -112,9 +112,9 @@ class ProviderContactsView extends StatelessWidget {
                         Gap(20.h),
                         buildTextField(
                           controller.websiteController,
-                          'Website',
+                          'Website'.tr,
                           Icons.web,
-                          'enter website',
+                          'enter website'.tr,
                           (val) {
                             return "";
                           },

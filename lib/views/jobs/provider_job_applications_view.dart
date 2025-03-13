@@ -27,7 +27,7 @@ class ProviderJobApplicationsView extends StatelessWidget {
             backgroundColor: primaryColor,
             iconTheme: IconThemeData(color: whiteColor),
             title: Text(
-              'Job Applications',
+              'Job Applications'.tr,
               style: TextStyle(
                 color: whiteColor,
               ),
@@ -73,7 +73,7 @@ class ProviderJobApplicationsView extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(8.r),
                                   ),
                                   child: Text(
-                                    e.name.capitalizeFirst!,
+                                    e.name.capitalizeFirst!.tr,
                                     style: getRegularStyle.copyWith(
                                       fontWeight: FontWeight.w500,
                                       color:

@@ -32,7 +32,7 @@ class AddServiceRequest extends StatelessWidget {
                       size: 20.sp,
                     )),
             iconTheme: IconThemeData(color: blackColor),
-            title: Text('Add Service',
+            title: Text('Add Service'.tr,
                 style: TextStyle(fontSize: 20.sp, color: blackColor)),
             backgroundColor: whiteColor,
             elevation: 0,
@@ -47,7 +47,7 @@ class AddServiceRequest extends StatelessWidget {
                   Row(
                     children: [
                       Text(
-                          'Step ${controller.currentStep + 1} of ${controller.steps.length}  '),
+                          '${"Step".tr} ${controller.currentStep + 1} ${"of".tr} ${controller.steps.length}  '),
                       Expanded(
                         child: LinearProgressIndicator(
                           borderRadius: BorderRadius.circular(30),
@@ -76,8 +76,8 @@ class AddServiceRequest extends StatelessWidget {
                       }
                     },
                     text: controller.currentStep == controller.steps.length - 1
-                        ? 'Submit'
-                        : 'Next',
+                        ? 'Add'.tr
+                        : 'Next'.tr,
                   ),
                   Gap(300)
                 ],

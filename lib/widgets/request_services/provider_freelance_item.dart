@@ -27,9 +27,9 @@ class ProviderFreelanceItem extends StatelessWidget {
           color: whiteColor,
           boxShadow: [
             BoxShadow(
-              color: Colors.grey.withAlpha(40), 
+              color: Colors.grey.withAlpha(40),
               spreadRadius: 1,
-              blurRadius: 5, 
+              blurRadius: 5,
               offset: Offset(0, 3),
             ),
           ],
@@ -129,7 +129,7 @@ class ProviderFreelanceItem extends StatelessWidget {
                                       arguments: {"model": model});
                                 },
                                 child: Text(
-                                  "Show Service",
+                                  "Show Service".tr,
                                   style: TextStyle(
                                       fontSize: 11.sp,
                                       fontWeight: FontWeight.bold),
