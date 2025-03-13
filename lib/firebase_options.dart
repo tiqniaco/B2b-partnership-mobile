@@ -52,7 +52,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyAX319V0Jp9sQiO6_tpycTcZdHhRkqAUTU',
-    appId: '1:701759991705:android:e4e41674af34821e5bad08',
+    appId: '1:701759991705:android:91fc75c1cab805815bad08',
     messagingSenderId: '701759991705',
     projectId: 'b2b-partnership-47ae1',
     storageBucket: 'b2b-partnership-47ae1.firebasestorage.app',
@@ -60,11 +60,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBG-hVOtRwMduoMRSCzcLctrnMXNIBkkA4',
-    appId: '1:701759991705:ios:5fec92185dee3fb65bad08',
+    appId: '1:701759991705:ios:99e9ed4965cba8eb5bad08',
     messagingSenderId: '701759991705',
     projectId: 'b2b-partnership-47ae1',
     storageBucket: 'b2b-partnership-47ae1.firebasestorage.app',
-    iosBundleId: 'com.example.b2bPartenership',
+    iosBundleId: 'tiqniq.b2b.partnership.app',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
@@ -85,4 +85,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'b2b-partnership-47ae1.firebasestorage.app',
     measurementId: 'G-CX0QJSY4J4',
   );
+
 }

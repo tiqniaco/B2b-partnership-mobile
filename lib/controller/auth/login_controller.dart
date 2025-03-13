@@ -68,8 +68,8 @@ class LoginController extends GetxController {
         AppSnackBars.success(message: r['message']);
         statusRequest = StatusRequest.success;
         subscribeTopics(
-          r['user_id'],
-          r['role'],
+          role: r['role'].toString(),
+          roleId: r['role_id'].toString(),
         );
         Get.find<AppPreferences>().setToken(r['token']);
         Get.find<AppPreferences>().setUserId(r['user_id'].toString());
