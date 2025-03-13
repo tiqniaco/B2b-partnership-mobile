@@ -154,7 +154,9 @@ class _ClientHomeViewState extends State<ClientHomeView>
               ),
               Gap(25),
               BannerWidget(
-                image: "assets/images/man.jpeg",
+                image: Get.locale?.languageCode == "en"
+                    ? "assets/images/man.jpeg"
+                    : "assets/images/man_ar.png",
                 title: "Need Custom Service?".tr,
                 onPressed: () {
                   Get.toNamed(AppRoutes.getRequestServices);
@@ -206,7 +208,9 @@ class _ClientHomeViewState extends State<ClientHomeView>
               ),
               Gap(25),
               BannerWidget(
-                image: "assets/images/job.jpeg",
+                image: Get.locale?.languageCode == "en"
+                    ? "assets/images/job.jpeg"
+                    : "assets/images/job_ar.png",
                 title: "Are you looking for a job?".tr,
                 onPressed: () {
                   Get.toNamed(AppRoutes.jobs);
@@ -253,7 +257,9 @@ class _ClientHomeViewState extends State<ClientHomeView>
               ),
               Gap(25),
               BannerWidget(
-                image: "assets/images/product.jpeg",
+                image: Get.locale?.languageCode == "en"
+                    ? "assets/images/product.jpeg"
+                    : "assets/images/product_ar.png",
                 title: "Shopping?".tr,
                 onPressed: () {
                   Get.toNamed(AppRoutes.shop);

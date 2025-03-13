@@ -153,7 +153,9 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
               ),
               Gap(25),
               BannerWidget(
-                image: "assets/images/man.jpeg",
+                image: Get.locale?.languageCode == "en"
+                    ? "assets/images/man.jpeg"
+                    : "assets/images/man_ar.png",
                 title: "Freelance Services!!".tr,
                 onPressed: () {
                   Get.put(ProviderHomeLayoutController(this)).onBNavPressed(1);
@@ -206,7 +208,9 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
               ),
               Gap(25),
               BannerWidget(
-                image: "assets/images/job.jpeg",
+                image: Get.locale?.languageCode == "en"
+                    ? "assets/images/job.jpeg"
+                    : "assets/images/job_ar.png",
                 title: "Need employees?".tr,
                 onPressed: () {
                   Get.toNamed(AppRoutes.providerJobs);
@@ -254,7 +258,9 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
               ),
               Gap(25),
               BannerWidget(
-                image: "assets/images/product.jpeg",
+                image: Get.locale?.languageCode == "en"
+                    ? "assets/images/product.jpeg"
+                    : "assets/images/product_ar.png",
                 title: "Shopping?".tr,
                 onPressed: () {
                   Get.toNamed(AppRoutes.shop);

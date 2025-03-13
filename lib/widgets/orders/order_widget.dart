@@ -74,17 +74,16 @@ class OrderWidget extends StatelessWidget {
               child: Column(
                 children: [
                   Gap(10),
-                  orderModel.createdAt != null
-                      ? rowWidget(
-                          "Date".tr,
-                          orderModel.createdAt!
-                          // DateTimeConvertor.formatDate(
-                          //   orderModel.createdAt!,
-                          // ),
-                          ,
-                          CupertinoIcons.calendar,
-                        )
-                      : Gap(0),
+                  rowWidget(
+                    "Date".tr,
+                    orderModel.createdAt != null &&
+                            orderModel.createdAt != "null"
+                        ? DateTimeConvertor.formatDate(
+                            orderModel.createdAt!,
+                          )
+                        : "Invalid Date",
+                    CupertinoIcons.calendar,
+                  ),
                   Gap(10),
                   Divider(
                     color: borderColor,

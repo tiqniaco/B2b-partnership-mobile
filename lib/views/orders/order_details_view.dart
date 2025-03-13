@@ -44,12 +44,15 @@ class OrderDetailsView extends StatelessWidget {
                             ),
                             Gap(10.h),
                             OrderDetailsItemWidget(
-                                title: "${"Order Date".tr}: ",
-                                value: controller.model?.data.createdAt ?? ""
-                                // DateTimeConvertor.formatDate(
-                                //   controller.model?.data.createdAt ?? "",
-                                // ),
-                                ),
+                              title: "${"Order Date".tr}: ",
+                              value: controller.model?.data.createdAt !=
+                                          "null" &&
+                                      controller.model?.data.createdAt != null
+                                  ? DateTimeConvertor.formatDate(
+                                      controller.model?.data.createdAt ?? "",
+                                    )
+                                  : "Invalid Date",
+                            ),
                             Gap(10.h),
                             OrderDetailsItemWidget(
                               title: "${"Order Expiration Date".tr}: ",
