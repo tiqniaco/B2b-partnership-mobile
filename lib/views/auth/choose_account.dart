@@ -34,11 +34,17 @@ class ChooseAccount extends StatelessWidget {
                           ))
                     ],
                   ),
-                  Image.asset(
-                    "assets/images/logo.png",
-                    height: 160.h,
-                    // width: 100,
-                    fit: BoxFit.fill,
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                    clipBehavior: Clip.antiAlias,
+                    child: Image.asset(
+                      "assets/images/logo.png",
+                      height: 160.h,
+                      // width: 100,
+                      fit: BoxFit.fill,
+                    ),
                   ),
                   Gap(20.h),
                   Text(

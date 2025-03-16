@@ -47,10 +47,16 @@ class ProviderSignupView extends StatelessWidget {
                                     )),
                           ],
                         ),
-                        Image.asset(
-                          "assets/images/logo.png",
-                          height: 70.h,
-                          fit: BoxFit.fill,
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.r),
+                          ),
+                          clipBehavior: Clip.antiAlias,
+                          child: Image.asset(
+                            "assets/images/logo.png",
+                            height: 70.h,
+                            fit: BoxFit.fill,
+                          ),
                         ),
                       ],
                     ),
