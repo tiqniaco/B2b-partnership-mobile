@@ -231,20 +231,33 @@ class SignupController extends GetxController {
         statusRequest = StatusRequest.loading;
         if (imageFile == null) {
           AppSnackBars.warning(message: "upload profile image");
-        } else if (commercePdfFile == null) {
-          AppSnackBars.warning(message: "upload commercial register pdf file");
-        } else if (taxPdfFile == null) {
-          AppSnackBars.warning(message: "upload tax card pdf file");
-        } else {
-          return Get.toNamed(
-            AppRoutes.otp,
-            arguments: {
-              'email': emailController.text,
-              'fromAuth': true,
-              'role': role,
-            },
-          );
+          return;
         }
+        if (usernameController.text.isEmpty ||
+            emailController.text.isEmpty ||
+            passwordController.text.isEmpty ||
+            phoneController.text.isEmpty) {
+          AppSnackBars.warning(
+              message: "All fields are required, please fill them");
+          return;
+        }
+
+        if (role == "provider") {
+          if (commercePdfFile == null) {
+            AppSnackBars.warning(
+                message: "upload commercial register pdf file");
+          } else if (taxPdfFile == null) {
+            AppSnackBars.warning(message: "upload tax card pdf file");
+          }
+        }
+        return Get.toNamed(
+          AppRoutes.otp,
+          arguments: {
+            'email': emailController.text,
+            'fromAuth': true,
+            'role': role,
+          },
+        );
       }
       print("not valid");
     } else {
