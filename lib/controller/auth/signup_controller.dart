@@ -229,10 +229,10 @@ class SignupController extends GetxController {
     if (currentStep == providerSteps.length - 1) {
       if (formKey.currentState!.validate()) {
         statusRequest = StatusRequest.loading;
-        if (imageFile == null) {
-          AppSnackBars.warning(message: "upload profile image");
-          return;
-        }
+        // if (imageFile == null) {
+        //   AppSnackBars.warning(message: "upload profile image");
+        //   return;
+        // }
         if (usernameController.text.isEmpty ||
             emailController.text.isEmpty ||
             passwordController.text.isEmpty ||
@@ -268,9 +268,10 @@ class SignupController extends GetxController {
   Future<void> signupProvider() async {
     if (formKey.currentState!.validate()) {
       statusRequest = StatusRequest.loading;
-      if (imageFile == null) {
-        AppSnackBars.warning(message: "upload profile image");
-      } else if (commercePdfFile == null) {
+      // if (imageFile == null) {
+      //   AppSnackBars.warning(message: "upload profile image");
+      // } else
+      if (commercePdfFile == null) {
         AppSnackBars.warning(message: "upload commercial register pdf file");
       } else if (taxPdfFile == null) {
         AppSnackBars.warning(message: "upload tax card pdf file");
@@ -281,7 +282,7 @@ class SignupController extends GetxController {
               return json;
             },
             files: {
-              "image": imageFile!.path,
+              if (imageFile != null) "image": imageFile!.path,
               "commercial_register": commercePdfFile!.path,
               "tax_card": taxPdfFile!.path,
             },
@@ -319,42 +320,42 @@ class SignupController extends GetxController {
   Future<void> signupClient() async {
     if (formKey.currentState!.validate()) {
       statusRequest = StatusRequest.loading;
-      if (imageFile == null) {
-        AppSnackBars.warning(message: "upload profile image");
-      } else {
-        final result = await CustomRequest<Map<String, dynamic>>(
-            path: ApiConstance.register,
-            fromJson: (json) {
-              return json;
-            },
-            files: {
-              "image": imageFile!.path,
-            },
-            data: {
-              "name": usernameController.text,
-              "email": emailController.text,
-              "password": passwordController.text,
-              "country_code": selectedCountry.code,
-              "phone": phoneController.text,
-              "role": "client",
-              "government_id": selectedCity.id,
-            }).sendPostRequest();
+      // if (imageFile == null) {
+      //   AppSnackBars.warning(message: "upload profile image");
+      // } else {
+      final result = await CustomRequest<Map<String, dynamic>>(
+          path: ApiConstance.register,
+          fromJson: (json) {
+            return json;
+          },
+          files: {
+            if (imageFile != null) "image": imageFile!.path,
+          },
+          data: {
+            "name": usernameController.text,
+            "email": emailController.text,
+            "password": passwordController.text,
+            "country_code": selectedCountry.code,
+            "phone": phoneController.text,
+            "role": "client",
+            "government_id": selectedCity.id,
+          }).sendPostRequest();
 
-        result.fold((l) {
-          statusRequest = StatusRequest.error;
-          Logger().e(l.errMsg);
-          AppSnackBars.error(message: l.errMsg);
-          update();
-        }, (r) {
-          AppSnackBars.success(message: r['message']);
-          statusRequest = StatusRequest.success;
-          Get.offAllNamed(
-            AppRoutes.login,
-          );
-          update();
-        });
-      }
+      result.fold((l) {
+        statusRequest = StatusRequest.error;
+        Logger().e(l.errMsg);
+        AppSnackBars.error(message: l.errMsg);
+        update();
+      }, (r) {
+        AppSnackBars.success(message: r['message']);
+        statusRequest = StatusRequest.success;
+        Get.offAllNamed(
+          AppRoutes.login,
+        );
+        update();
+      });
     }
+    // }
   }
 
   Future<void> getCountries() async {

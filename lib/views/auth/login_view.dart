@@ -1,6 +1,10 @@
 import 'package:b2b_partenership/controller/auth/login_controller.dart';
+import 'package:b2b_partenership/core/enums/language_enum.dart';
+import 'package:b2b_partenership/core/functions/change_app_lang.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/utils/assets_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -29,6 +33,97 @@ class LoginView extends StatelessWidget {
                 key: controller.loginFormKey,
                 child: Column(
                   children: [
+                    Container(
+                      padding: EdgeInsets.symmetric(horizontal: 20.w),
+                      margin: EdgeInsetsDirectional.only(
+                        top: 10.h,
+                      ),
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: InkWell(
+                        onTap: () {
+                          Get.bottomSheet(Container(
+                            height: 0.2.sh,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20.r),
+                                topRight: Radius.circular(20.r),
+                              ),
+                              color: Colors.white,
+                            ),
+                            padding: EdgeInsets.symmetric(
+                              // horizontal: 10.w,
+                              vertical: 10.h,
+                            ),
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  title: Text(
+                                    "English",
+                                    style: getRegularStyle,
+                                  ),
+                                  leading: Image.asset(
+                                    AssetsData.englishImage,
+                                    width: 20.w,
+                                  ),
+                                  onTap: () {
+                                    changeAppLang(
+                                      context: Get.context!,
+                                      lang: LanguageEnum.en,
+                                    );
+                                  },
+                                ),
+                                ListTile(
+                                  title: Text(
+                                    'العربية',
+                                    style: getRegularStyle,
+                                  ),
+                                  leading: Image.asset(
+                                    AssetsData.arabicImage,
+                                    width: 20.w,
+                                  ),
+                                  onTap: () {
+                                    changeAppLang(
+                                      context: Get.context!,
+                                      lang: LanguageEnum.ar,
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ));
+                        },
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              Get.locale?.languageCode == 'ar'
+                                  ? 'العربية'
+                                  : 'English',
+                              style: getRegularStyle.copyWith(
+                                shadows: [
+                                  const Shadow(
+                                    blurRadius: 10.0,
+                                    color: Colors.white, //.withOpacity(0.7),
+                                    offset: Offset(5.0, 5.0),
+                                  ),
+                                ],
+                                fontVariations: [
+                                  const FontVariation('wght', 400),
+                                  const FontVariation('wdth', 100),
+                                ],
+                              ),
+                            ),
+                            Gap(5.w),
+                            Image.asset(
+                              Get.locale?.languageCode == 'ar'
+                                  ? AssetsData.arabicImage
+                                  : AssetsData.englishImage,
+                              width: 16.w,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     Gap(0.05.sh),
                     Container(
                       decoration: BoxDecoration(
