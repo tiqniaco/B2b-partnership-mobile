@@ -1,6 +1,7 @@
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
+import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/models/notification_model.dart';
 import 'package:get/get.dart';
 
@@ -21,6 +22,10 @@ class NotifyController extends GetxController {
     update();
     final result = await CustomRequest<List<NotificationModel>>(
       path: ApiConstance.getNotifications,
+      data: {
+        'id': Get.find<AppPreferences>().getUserId(),
+        'role': Get.find<AppPreferences>().getUserRole(),
+      },
       fromJson: (json) {
         return List<NotificationModel>.from(
           json['data'].map(
