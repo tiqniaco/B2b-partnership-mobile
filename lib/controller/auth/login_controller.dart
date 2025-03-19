@@ -69,7 +69,7 @@ class LoginController extends GetxController {
         statusRequest = StatusRequest.success;
         subscribeTopics(
           role: r['role'].toString(),
-          roleId: r['role_id'].toString(),
+          userId: r['user_id'].toString(),
         );
         Get.find<AppPreferences>().setToken(r['token']);
         Get.find<AppPreferences>().setUserId(r['user_id'].toString());

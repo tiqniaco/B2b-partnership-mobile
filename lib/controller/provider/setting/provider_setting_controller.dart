@@ -87,7 +87,7 @@ class ProviderSettingController extends GetxController {
       token = r['token'];
       Get.find<AppPreferences>().clear();
       subscribeTopics(
-        roleId: (clientModel.clientId!),
+        userId: (clientModel.userId!),
         role: "client",
       );
       Get.find<AppPreferences>().setToken(r['token']);
