@@ -3,6 +3,7 @@
 import 'package:b2b_partenership/controller/save/saved_controller.dart';
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
+import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/models/banner_model.dart';
 import 'package:b2b_partenership/models/provider_model.dart';
 import 'package:b2b_partenership/models/specialize_model.dart';
@@ -79,6 +80,10 @@ class HomeClientController extends GetxController {
     statusRequestProviders = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getTopProviders,
+        data: {
+          if (Get.find<AppPreferences>().getUserId() != "")
+            "user_id": Get.find<AppPreferences>().getUserId()
+        },
         fromJson: (json) {
           return json["data"]
               .map<ProviderModel>((service) => ProviderModel.fromJson(service))
@@ -102,6 +107,10 @@ class HomeClientController extends GetxController {
     statusRequestTopEgypt = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getTopCountriesProv("11"),
+        data: {
+          if (Get.find<AppPreferences>().getUserId() != "")
+            "user_id": Get.find<AppPreferences>().getUserId()
+        },
         fromJson: (json) {
           return json["data"]
               .map<ProviderModel>((service) => ProviderModel.fromJson(service))
@@ -135,6 +144,10 @@ class HomeClientController extends GetxController {
     statusRequestTopSaudi = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getTopCountriesProv("12"),
+        data: {
+          if (Get.find<AppPreferences>().getUserId() != "")
+            "user_id": Get.find<AppPreferences>().getUserId()
+        },
         fromJson: (json) {
           return json['data']
               .map<ProviderModel>((type) => ProviderModel.fromJson(type))
@@ -159,6 +172,10 @@ class HomeClientController extends GetxController {
     statusRequestTopUAE = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getTopCountriesProv("14"),
+        data: {
+          if (Get.find<AppPreferences>().getUserId() != "")
+            "user_id": Get.find<AppPreferences>().getUserId()
+        },
         fromJson: (json) {
           return json['data']
               .map<ProviderModel>((type) => ProviderModel.fromJson(type))

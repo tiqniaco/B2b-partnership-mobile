@@ -3,6 +3,7 @@
 import 'package:b2b_partenership/controller/save/saved_controller.dart';
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
+import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:b2b_partenership/models/city_model.dart';
 import 'package:b2b_partenership/models/country_model.dart';
@@ -98,6 +99,8 @@ class SearchControllerIM extends GetxController {
                 .toList();
           },
           data: {
+            if (Get.find<AppPreferences>().getUserId() != "")
+              "user_id": Get.find<AppPreferences>().getUserId(),
             if (searchController.text.isNotEmpty)
               "search": searchController.text,
             if (selectedSubSpecialization != null)
