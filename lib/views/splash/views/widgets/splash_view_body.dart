@@ -65,7 +65,8 @@ class _SplashViewBodyState extends State<SplashViewBody>
           }
         }
       } else {
-        Get.offNamed(AppRoutes.login);
+        // Get.offNamed(AppRoutes.login);
+        Get.offNamed(AppRoutes.clientHomeLayout);
       }
     });
   }

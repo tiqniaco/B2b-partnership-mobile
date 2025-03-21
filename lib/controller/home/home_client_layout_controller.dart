@@ -1,10 +1,10 @@
 import 'package:b2b_partenership/controller/home/home_client_controller.dart';
 import 'package:b2b_partenership/controller/settings/setting_controller.dart';
 import 'package:b2b_partenership/views/home/client_home_view.dart';
-import 'package:b2b_partenership/views/orders/orders_view.dart';
-import 'package:b2b_partenership/views/save/save_view.dart';
+import 'package:b2b_partenership/views/jobs/jobs_view.dart';
 import 'package:b2b_partenership/views/search/search_view.dart';
 import 'package:b2b_partenership/views/settings/settings_view.dart';
+import 'package:b2b_partenership/views/shop/shop_view.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -53,9 +53,9 @@ class HomeClintLayoutController extends GetxController {
 
   final screens = [
     ClientHomeView(),
-    const OrdersView(),
+    const ShopView(),
     const SearchView(),
-    const SaveView(),
+    const JobsView(),
     const SettingsView(),
   ];
 

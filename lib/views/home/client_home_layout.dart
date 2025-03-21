@@ -1,12 +1,7 @@
-
-
-// ignore_for_file: deprecated_member_use
-
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:b2b_partenership/controller/home/home_client_layout_controller.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -51,12 +46,12 @@ class _ClientHomeLayoutState extends State<ClientHomeLayout>
               title: "Home".tr,
             ),
             TabItem(
-              icon: SvgPicture.asset("assets/svgs/bag2.svg",
+              icon: SvgPicture.asset("assets/svgs/shop.svg",
                   height: 20.sp,
                   color: controller.currentIndex == 1
                       ? primaryColor
                       : unSelectedBNavColor),
-              title: "Orders".tr,
+              title: "Shop".tr,
             ),
             TabItem(
               icon: Container(
@@ -74,12 +69,12 @@ class _ClientHomeLayoutState extends State<ClientHomeLayout>
               title: "Search".tr,
             ),
             TabItem(
-              icon: SvgPicture.asset("assets/svgs/save.svg",
+              icon: SvgPicture.asset("assets/svgs/job.svg",
                   height: 20.sp,
                   color: controller.currentIndex == 3
                       ? primaryColor
                       : unSelectedBNavColor),
-              title: "Saved".tr,
+              title: "Jobs".tr,
             ),
             TabItem(
               icon: SvgPicture.asset("assets/svgs/setting.svg",

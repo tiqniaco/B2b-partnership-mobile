@@ -22,7 +22,7 @@ class SavedController extends GetxController {
   Future<void> getProviders() async {
     statusRequestProviders = StatusRequest.loading;
     update();
-    final response = await CustomRequest(
+    final response = await CustomRequest<List<ProviderModel>>(
         path: ApiConstance.getUserFavorite,
         data: {"user_id": Get.find<AppPreferences>().getUserId()},
         fromJson: (json) {
@@ -32,6 +32,7 @@ class SavedController extends GetxController {
         }).sendGetRequest();
     response.fold((l) {
       statusRequestProviders = StatusRequest.error;
+      update();
     }, (r) {
       favorites.clear();
       favorites = r;
@@ -40,8 +41,8 @@ class SavedController extends GetxController {
       } else {
         statusRequestProviders = StatusRequest.success;
       }
+      update();
     });
-    update();
   }
 
   Future<void> onTapFavorite(String provId) async {

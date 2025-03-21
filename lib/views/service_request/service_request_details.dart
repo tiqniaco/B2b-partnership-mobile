@@ -42,9 +42,9 @@ class ServiceRequestDetails extends StatelessWidget {
                     ),
                   ],
                   SizedBox.shrink(),
-                  Positioned(
+                  PositionedDirectional(
                       top: 30.h,
-                      left: 10.h,
+                      start: 10.h,
                       child: InkWell(
                         onTap: () {
                           Get.back();

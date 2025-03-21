@@ -91,11 +91,14 @@ class ServiceDetailsView extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Positioned(
+                    PositionedDirectional(
                       top: 50,
-                      left: 16,
+                      start: 16,
                       child: IconButton(
-                        icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                        icon: Icon(
+                          Icons.arrow_back_ios,
+                          color: Colors.white,
+                        ),
                         onPressed: () {
                           Get.back();
                         },
@@ -120,9 +123,9 @@ class ServiceDetailsView extends StatelessWidget {
                             "provider" &&
                         Get.find<AppPreferences>().getUserRoleId() ==
                             controller.service?.provider?.providerId)
-                      Positioned(
+                      PositionedDirectional(
                         top: 60,
-                        right: 16,
+                        end: 16,
                         child: CircleAvatar(
                           backgroundColor: whiteColor,
                           child: IconButton(

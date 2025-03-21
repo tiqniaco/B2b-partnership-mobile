@@ -3,11 +3,14 @@ import 'package:b2b_partenership/controller/settings/setting_controller.dart';
 import 'package:b2b_partenership/core/functions/logout.dart';
 import 'package:b2b_partenership/core/functions/remove_account.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
+import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/widgets/language_widget.dart';
+import 'package:b2b_partenership/widgets/please_login_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -17,9 +20,12 @@ class SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(SettingController());
+    if (ApiConstance.token.isEmpty) {
+      return const PleaseLoginWidget();
+    }
     return Scaffold(
       body: GetBuilder<SettingController>(
+        init: SettingController(),
         builder: (controller) => Stack(
           children: [
             SafeArea(
@@ -38,62 +44,88 @@ class SettingsView extends StatelessWidget {
                                     children: [
                                       Align(
                                         alignment: AlignmentDirectional.center,
-                                        child: Container(
-                                          height: 60.h,
-                                          width: 60.h,
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(8),
-                                              border: Border.all(
-                                                  color: Colors.grey[300]!)),
-                                          child: ClipRRect(
-                                            borderRadius:
-                                                BorderRadius.circular(8),
-                                            child: Image.network(
-                                              controller
-                                                  .menuModel!.data!.image!,
-                                              fit: BoxFit.cover,
+                                        child: Column(
+                                          children: [
+                                            Container(
+                                              height: 60.h,
+                                              width: 60.h,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(8),
+                                                  border: Border.all(
+                                                      color:
+                                                          Colors.grey[300]!)),
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                child: Image.network(
+                                                  controller
+                                                      .menuModel!.data!.image!,
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
                                             ),
-                                          ),
+                                            Gap(10),
+                                            Text(
+                                              controller.menuModel!.data!.name!,
+                                              style: TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 15.sp),
+                                            ),
+                                            Text(
+                                              "+${controller.menuModel!.data!.countryCode}${controller.menuModel!.data!.phone}",
+                                              style: TextStyle(
+                                                  color: greyColor,
+                                                  fontSize: 15.sp),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                       PositionedDirectional(
                                         top: 0,
                                         end: 0,
-                                        child: InkWell(
-                                          borderRadius:
-                                              BorderRadius.circular(20.r),
-                                          onTap: () {
-                                            Get.toNamed(
-                                              AppRoutes.notification,
-                                            );
-                                          },
-                                          child: CircleAvatar(
-                                            radius: 20.sp,
-                                            backgroundColor:
-                                                blackColor.withAlpha(10),
-                                            child: Icon(
-                                              FontAwesomeIcons.bell,
-                                              color: blackColor,
-                                              size: 20.sp,
+                                        child: Column(
+                                          children: [
+                                            InkWell(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.r),
+                                              onTap: () {
+                                                Get.toNamed(
+                                                  AppRoutes.notification,
+                                                );
+                                              },
+                                              child: CircleAvatar(
+                                                radius: 20.sp,
+                                                backgroundColor:
+                                                    blackColor.withAlpha(10),
+                                                child: Icon(
+                                                  FontAwesomeIcons.bell,
+                                                  color: blackColor,
+                                                  size: 20.sp,
+                                                ),
+                                              ),
                                             ),
-                                          ),
+                                            Gap(4.h),
+                                            InkWell(
+                                              borderRadius:
+                                                  BorderRadius.circular(20.r),
+                                              onTap: () {
+                                                Get.toNamed(AppRoutes.save);
+                                              },
+                                              child: CircleAvatar(
+                                                  radius: 20.sp,
+                                                  backgroundColor:
+                                                      blackColor.withAlpha(10),
+                                                  child: SvgPicture.asset(
+                                                    'assets/svgs/save.svg',
+                                                    height: 20.sp,
+                                                  )),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
                                   ),
-                                ),
-                                Gap(10),
-                                Text(
-                                  controller.menuModel!.data!.name!,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 15.sp),
-                                ),
-                                Text(
-                                  "+${controller.menuModel!.data!.countryCode}${controller.menuModel!.data!.phone}",
-                                  style: TextStyle(
-                                      color: greyColor, fontSize: 15.sp),
                                 ),
                                 Gap(10),
                                 if (controller.menuModel!.data!.providerId !=

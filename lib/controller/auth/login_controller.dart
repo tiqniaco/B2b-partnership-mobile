@@ -80,7 +80,10 @@ class LoginController extends GetxController {
           Get.find<AppPreferences>().setStep("2");
           Get.offAllNamed(AppRoutes.providerHomeLayout);
         } else {
-          Get.offAllNamed(AppRoutes.clientHomeLayout);
+          Get.offNamedUntil(
+            AppRoutes.clientHomeLayout,
+            (route) => false,
+          );
         }
 
         update();

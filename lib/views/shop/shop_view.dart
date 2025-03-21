@@ -10,6 +10,7 @@ import 'package:b2b_partenership/widgets/shop/shop_item_product_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
@@ -77,6 +78,17 @@ class ShopView extends StatelessWidget {
                     CupertinoIcons.shopping_cart,
                     color: blackColor,
                     size: 24.sp,
+                  ),
+                ),
+              ),
+              Container(
+                margin: EdgeInsetsDirectional.only(end: 8.w),
+                child: IconButton(
+                  onPressed: () {
+                    Get.toNamed(AppRoutes.shopOrders);
+                  },
+                  icon: SvgPicture.asset(
+                    'assets/svgs/bag2.svg',
                   ),
                 ),
               ),

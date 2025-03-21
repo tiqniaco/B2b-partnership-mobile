@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:b2b_partenership/controller/save/saved_controller.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/widgets/home/provider_widget.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,6 @@ class SaveView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(SavedController());
     return Scaffold(
       appBar: AppBar(
         shape: RoundedRectangleBorder(
@@ -27,51 +27,58 @@ class SaveView extends StatelessWidget {
           style: TextStyle(color: whiteColor, fontWeight: FontWeight.w400),
         ),
       ),
-      body: GetBuilder<SavedController>(builder: (controller) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  top: 10.0, bottom: 5, left: 10, right: 10),
-              child: Row(
-                children: [
-                  Text(
-                    controller.favorites.length.toString(),
-                    style:
-                        TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
+      body: GetBuilder<SavedController>(
+          init: SavedController(),
+          builder: (controller) {
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                      top: 10.0, bottom: 5, left: 10, right: 10),
+                  child: Row(
+                    children: [
+                      Text(
+                        controller.favorites.length.toString(),
+                        style: TextStyle(
+                            fontSize: 15.sp, fontWeight: FontWeight.w500),
+                      ),
+                      Gap(10),
+                      Text(
+                        "Saved Provider".tr,
+                        style: TextStyle(
+                            fontSize: 15.sp, fontWeight: FontWeight.w500),
+                      ),
+                    ],
                   ),
-                  Gap(10),
-                  Text(
-                    "Saved Provider".tr,
-                    style:
-                        TextStyle(fontSize: 15.sp, fontWeight: FontWeight.w500),
+                ),
+                Divider(),
+                Gap(10),
+                Expanded(
+                  child: CustomServerStatusWidget(
+                    statusRequest: controller.statusRequestProviders,
+                    child: GridView.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 15,
+                          crossAxisSpacing: 10,
+                          childAspectRatio: 6 / 9.8),
+                      scrollDirection: Axis.vertical,
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      itemCount: controller.favorites.length,
+                      itemBuilder: (context, index) => ProviderWidget(
+                          provider: controller.favorites[index],
+                          toggleFavorite: () {
+                            controller.onTapFavorite(controller
+                                .favorites[index].providerId
+                                .toString());
+                          }),
+                    ),
                   ),
-                ],
-              ),
-            ),
-            Divider(),
-            Gap(10),
-            Expanded(
-                child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 15,
-                  crossAxisSpacing: 10,
-                  childAspectRatio: 6 / 9.8),
-              scrollDirection: Axis.vertical,
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              itemCount: controller.favorites.length,
-              itemBuilder: (context, index) => ProviderWidget(
-                  provider: controller.favorites[index],
-                  toggleFavorite: () {
-                    controller.onTapFavorite(
-                        controller.favorites[index].providerId.toString());
-                  }),
-            )),
-          ],
-        );
-      }),
+                ),
+              ],
+            );
+          }),
     );
   }
 }

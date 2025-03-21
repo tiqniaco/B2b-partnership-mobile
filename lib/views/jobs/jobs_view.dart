@@ -24,16 +24,7 @@ class JobsView extends StatelessWidget {
             iconTheme: IconThemeData(
               color: whiteColor,
             ),
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios_new,
-                size: 20.sp,
-              ),
-              onPressed: () {
-                Get.back();
-              },
-            ),
-            titleSpacing: 0,
+            centerTitle: true,
             title: Text(
               "Jobs".toUpperCase(),
               style: getSemiBoldStyle.copyWith(

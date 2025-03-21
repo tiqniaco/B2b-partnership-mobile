@@ -82,8 +82,13 @@ class ProviderProfileView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           IconButton(
-              onPressed: () => Get.back(),
-              icon: Icon(Icons.arrow_back_ios, size: 23.sp, color: greyColor)),
+            onPressed: () => Get.back(),
+            icon: Icon(
+              Icons.arrow_back_ios,
+              size: 23.sp,
+              color: greyColor,
+            ),
+          ),
           CircleAvatar(
             radius: 33.r,
             backgroundColor: Colors.grey[200],

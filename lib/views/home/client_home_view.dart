@@ -2,8 +2,12 @@ import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/home/home_client_controller.dart';
 import 'package:b2b_partenership/controller/home/home_client_layout_controller.dart';
 import 'package:b2b_partenership/controller/settings/setting_controller.dart';
+import 'package:b2b_partenership/core/enums/language_enum.dart';
+import 'package:b2b_partenership/core/functions/change_app_lang.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/utils/assets_data.dart';
 import 'package:b2b_partenership/widgets/home/banner_widget.dart';
 import 'package:b2b_partenership/widgets/home/category_widget.dart';
 import 'package:b2b_partenership/widgets/home/home_row_widget.dart';
@@ -26,7 +30,7 @@ class ClientHomeView extends StatefulWidget {
 
 class _ClientHomeViewState extends State<ClientHomeView>
     with TickerProviderStateMixin {
-  final settingController = Get.put(SettingController());
+  final settingController = Get.put(SettingController())..getMenuModel();
   @override
   Widget build(BuildContext context) {
     Get.put(HomeClientController());
@@ -37,6 +41,70 @@ class _ClientHomeViewState extends State<ClientHomeView>
             backgroundColor: whiteColor,
             automaticallyImplyLeading: false,
             titleSpacing: 16.w,
+            leading: Container(
+              padding: EdgeInsets.all(10.w),
+
+              // alignment: AlignmentDirectional.centerEnd,
+              child: InkWell(
+                onTap: () {
+                  Get.bottomSheet(Container(
+                    height: 0.2.sh,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20.r),
+                        topRight: Radius.circular(20.r),
+                      ),
+                      color: Colors.white,
+                    ),
+                    padding: EdgeInsets.symmetric(
+                      // horizontal: 10.w,
+                      vertical: 10.h,
+                    ),
+                    child: Column(
+                      children: [
+                        ListTile(
+                          title: Text(
+                            "English",
+                            style: getRegularStyle,
+                          ),
+                          leading: Image.asset(
+                            AssetsData.englishImage,
+                            width: 20.w,
+                          ),
+                          onTap: () {
+                            changeAppLang(
+                              context: Get.context!,
+                              lang: LanguageEnum.en,
+                            );
+                          },
+                        ),
+                        ListTile(
+                          title: Text(
+                            'العربية',
+                            style: getRegularStyle,
+                          ),
+                          leading: Image.asset(
+                            AssetsData.arabicImage,
+                            width: 20.w,
+                          ),
+                          onTap: () {
+                            changeAppLang(
+                              context: Get.context!,
+                              lang: LanguageEnum.ar,
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ));
+                },
+                child: Image.asset(
+                  Get.locale?.languageCode == 'ar'
+                      ? AssetsData.arabicImage
+                      : AssetsData.englishImage,
+                ),
+              ),
+            ),
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -213,7 +281,8 @@ class _ClientHomeViewState extends State<ClientHomeView>
                     : "assets/images/job_ar.png",
                 title: "Are you looking for a job?".tr,
                 onPressed: () {
-                  Get.toNamed(AppRoutes.jobs);
+                  // Get.toNamed(AppRoutes.jobs);
+                  Get.put(HomeClintLayoutController(this)).onBNavPressed(3);
                 },
                 description: "See our Employment\nopportunities".tr,
                 buttonTitle: 'View'.tr,
@@ -262,7 +331,8 @@ class _ClientHomeViewState extends State<ClientHomeView>
                     : "assets/images/product_ar.png",
                 title: "Shopping?".tr,
                 onPressed: () {
-                  Get.toNamed(AppRoutes.shop);
+                  // Get.toNamed(AppRoutes.shop);
+                  Get.put(HomeClintLayoutController(this)).onBNavPressed(1);
                 },
                 description: "Order whatever you need\nfrom the shop".tr,
                 buttonTitle: 'Order Now'.tr,

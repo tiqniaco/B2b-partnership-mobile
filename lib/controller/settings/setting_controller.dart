@@ -28,6 +28,9 @@ class SettingController extends GetxController {
   }
 
   Future<void> getMenuModel() async {
+    if (ApiConstance.token.isEmpty) {
+      return;
+    }
     print("get details .........");
     var id = Get.find<AppPreferences>().getUserRoleId();
     statusRequest = StatusRequest.loading;

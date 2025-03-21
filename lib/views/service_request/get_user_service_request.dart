@@ -1,7 +1,9 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/request_services/get_request_service_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
+import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/widgets/please_login_widget.dart';
 import 'package:b2b_partenership/widgets/request_services/service_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,10 +11,12 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 class GetUserServiceRequest extends StatelessWidget {
-  GetUserServiceRequest({super.key});
-  final controller = Get.put(GetRequestServiceController());
+  const GetUserServiceRequest({super.key});
   @override
   Widget build(BuildContext context) {
+    if (ApiConstance.token.isEmpty) {
+      return const PleaseLoginWidget();
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: whiteColor,
@@ -33,6 +37,7 @@ class GetUserServiceRequest extends StatelessWidget {
         child: Icon(Icons.add),
       ),
       body: GetBuilder<GetRequestServiceController>(
+        init: GetRequestServiceController(),
         builder: (controller) => Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
