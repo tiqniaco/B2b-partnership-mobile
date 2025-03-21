@@ -31,7 +31,7 @@ class AddProviderServiceView extends StatelessWidget {
               ),
             ),
             iconTheme: IconThemeData(color: blackColor),
-            title: Text('Add Service',
+            title: Text('Add Service'.tr,
                 style: TextStyle(fontSize: 20.sp, color: blackColor)),
             backgroundColor: whiteColor,
             elevation: 0,
@@ -53,7 +53,7 @@ class AddProviderServiceView extends StatelessWidget {
                           controller.currentStep > 0
                               ? TextButton(
                                   onPressed: controls.onStepCancel,
-                                  child: Text('Previous'),
+                                  child: Text('Previous'.tr),
                                 )
                               : SizedBox.shrink(),
                           Gap(10.w),
@@ -63,7 +63,7 @@ class AddProviderServiceView extends StatelessWidget {
                               height: 30.h,
                               width: 0.23.sw,
                               onPressed: controller.onStepContinue,
-                              text: "Next",
+                              text: "Next".tr,
                             )
                           else
                             CustomLoadingButton(
@@ -73,7 +73,7 @@ class AddProviderServiceView extends StatelessWidget {
                               onPressed: () {
                                 return controller.addServices();
                               },
-                              text: "Add",
+                              text: "Add".tr,
                             ),
                         ],
                       );
@@ -85,7 +85,7 @@ class AddProviderServiceView extends StatelessWidget {
                         state: controller.getStepStats(
                           controller.currentStep == 0,
                         ),
-                        title: Text('Service Details'),
+                        title: Text('Service Details'.tr),
                         content: ProviderServiceStep1(
                           controller: controller,
                         ),
@@ -93,7 +93,7 @@ class AddProviderServiceView extends StatelessWidget {
 
                       /// Step 2
                       Step(
-                        title: Text('Location'),
+                        title: Text('Location'.tr),
                         state: controller.getStepStats(
                           controller.currentStep == 1,
                         ),
@@ -108,7 +108,7 @@ class AddProviderServiceView extends StatelessWidget {
                         state: controller.getStepStats(
                           controller.currentStep == 2,
                         ),
-                        title: Text('Service Features'),
+                        title: Text('Service Features'.tr),
                         content: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -136,7 +136,7 @@ class AddProviderServiceView extends StatelessWidget {
                                 onPressed: () {
                                   controller.increaseFeatures();
                                 },
-                                child: Text("+ Add More"),
+                                child: Text("+ Add More".tr),
                               ),
                             ),
                           ],
@@ -248,9 +248,9 @@ class ProviderServiceStep1 extends StatelessWidget {
         // Gap(30),
         buildTextField(
           controller.titleEnController,
-          'Title',
+          'Title'.tr,
           Icons.title,
-          "enter title",
+          "enter title".tr,
           (val) {
             return controller.validUserData(val);
           },
@@ -258,9 +258,9 @@ class ProviderServiceStep1 extends StatelessWidget {
         Gap(20.h),
         buildTextField(
           controller.descriptionController,
-          'Description',
+          'Description'.tr,
           Icons.description,
-          "enter service description",
+          "enter service description".tr,
           (val) {
             return controller.validUserData(val);
           },
@@ -268,9 +268,9 @@ class ProviderServiceStep1 extends StatelessWidget {
         Gap(20.h),
         buildTextField(
           controller.addressController,
-          'Address',
+          'Address'.tr,
           Icons.location_on,
-          "enter your address",
+          "enter address".tr,
           (val) {
             return controller.validUserData(val);
           },
@@ -278,9 +278,9 @@ class ProviderServiceStep1 extends StatelessWidget {
         Gap(20.h),
         buildTextField(
           controller.overviewController,
-          'Overview',
+          'Overview'.tr,
           Icons.location_on,
-          "enter service overview",
+          "enter service overview".tr,
           (val) {
             return controller.validUserData(val);
           },
@@ -288,9 +288,9 @@ class ProviderServiceStep1 extends StatelessWidget {
         Gap(20.h),
         buildTextField(
           controller.videoController,
-          'Video Link',
+          'Video Link'.tr,
           Icons.location_on,
-          "enter service video (optional)",
+          "enter service video (optional)".tr,
           (val) {
             return controller.validUserData(val);
           },

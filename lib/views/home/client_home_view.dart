@@ -2,12 +2,8 @@ import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/home/home_client_controller.dart';
 import 'package:b2b_partenership/controller/home/home_client_layout_controller.dart';
 import 'package:b2b_partenership/controller/settings/setting_controller.dart';
-import 'package:b2b_partenership/core/enums/language_enum.dart';
-import 'package:b2b_partenership/core/functions/change_app_lang.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
-import 'package:b2b_partenership/core/theme/text_style.dart';
-import 'package:b2b_partenership/core/utils/assets_data.dart';
 import 'package:b2b_partenership/widgets/home/banner_widget.dart';
 import 'package:b2b_partenership/widgets/home/category_widget.dart';
 import 'package:b2b_partenership/widgets/home/home_row_widget.dart';
@@ -41,70 +37,69 @@ class _ClientHomeViewState extends State<ClientHomeView>
             backgroundColor: whiteColor,
             automaticallyImplyLeading: false,
             titleSpacing: 16.w,
-            leading: Container(
-              padding: EdgeInsets.all(10.w),
-
-              // alignment: AlignmentDirectional.centerEnd,
-              child: InkWell(
-                onTap: () {
-                  Get.bottomSheet(Container(
-                    height: 0.2.sh,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20.r),
-                        topRight: Radius.circular(20.r),
-                      ),
-                      color: Colors.white,
-                    ),
-                    padding: EdgeInsets.symmetric(
-                      // horizontal: 10.w,
-                      vertical: 10.h,
-                    ),
-                    child: Column(
-                      children: [
-                        ListTile(
-                          title: Text(
-                            "English",
-                            style: getRegularStyle,
-                          ),
-                          leading: Image.asset(
-                            AssetsData.englishImage,
-                            width: 20.w,
-                          ),
-                          onTap: () {
-                            changeAppLang(
-                              context: Get.context!,
-                              lang: LanguageEnum.en,
-                            );
-                          },
-                        ),
-                        ListTile(
-                          title: Text(
-                            'العربية',
-                            style: getRegularStyle,
-                          ),
-                          leading: Image.asset(
-                            AssetsData.arabicImage,
-                            width: 20.w,
-                          ),
-                          onTap: () {
-                            changeAppLang(
-                              context: Get.context!,
-                              lang: LanguageEnum.ar,
-                            );
-                          },
-                        ),
-                      ],
-                    ),
-                  ));
-                },
-                child: Image.asset(
-                  Get.locale?.languageCode == 'ar'
-                      ? AssetsData.arabicImage
-                      : AssetsData.englishImage,
-                ),
-              ),
-            ),
+            // leading: Container(
+            //   padding: EdgeInsets.all(10.w),
+            //   // alignment: AlignmentDirectional.centerEnd,
+            //   child: InkWell(
+            //     onTap: () {
+            //       Get.bottomSheet(Container(
+            //         height: 0.2.sh,
+            //         decoration: BoxDecoration(
+            //           borderRadius: BorderRadius.only(
+            //             topLeft: Radius.circular(20.r),
+            //             topRight: Radius.circular(20.r),
+            //           ),
+            //           color: Colors.white,
+            //         ),
+            //         padding: EdgeInsets.symmetric(
+            //           // horizontal: 10.w,
+            //           vertical: 10.h,
+            //         ),
+            //         child: Column(
+            //           children: [
+            //             ListTile(
+            //               title: Text(
+            //                 "English",
+            //                 style: getRegularStyle,
+            //               ),
+            //               leading: Image.asset(
+            //                 AssetsData.englishImage,
+            //                 width: 20.w,
+            //               ),
+            //               onTap: () {
+            //                 changeAppLang(
+            //                   context: Get.context!,
+            //                   lang: LanguageEnum.en,
+            //                 );
+            //               },
+            //             ),
+            //             ListTile(
+            //               title: Text(
+            //                 'العربية',
+            //                 style: getRegularStyle,
+            //               ),
+            //               leading: Image.asset(
+            //                 AssetsData.arabicImage,
+            //                 width: 20.w,
+            //               ),
+            //               onTap: () {
+            //                 changeAppLang(
+            //                   context: Get.context!,
+            //                   lang: LanguageEnum.ar,
+            //                 );
+            //               },
+            //             ),
+            //           ],
+            //         ),
+            //       ));
+            //     },
+            //     child: Image.asset(
+            //       Get.locale?.languageCode == 'ar'
+            //           ? AssetsData.arabicImage
+            //           : AssetsData.englishImage,
+            //     ),
+            //   ),
+            // ),
             title: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -120,8 +115,8 @@ class _ClientHomeViewState extends State<ClientHomeView>
             ),
             actions: [
               Container(
-                height: 42.h,
-                width: 42.h,
+                height: 40.h,
+                width: 40.h,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     border: Border.all(color: Colors.grey[300]!)),
@@ -215,7 +210,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                           },
                         ),
                       ))),
-              Gap(10),
+              Gap(20.h),
               FractionallySizedBox(
                 widthFactor: 1,
                 child: Divider(),
@@ -233,12 +228,12 @@ class _ClientHomeViewState extends State<ClientHomeView>
                 buttonTitle: 'Post Now'.tr,
               ),
               // ServiceBannerWidget(),
-              Gap(15),
+              Gap(20.h),
               FractionallySizedBox(
                 widthFactor: 1,
                 child: Divider(),
               ),
-              Gap(45),
+              Gap(15.h),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: HomeRowWidget(
@@ -251,7 +246,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                   },
                 ),
               ),
-              Gap(15),
+              Gap(20.h),
               SizedBox(
                   height: 235.h,
                   child: CustomServerStatusWidget(
@@ -269,12 +264,12 @@ class _ClientHomeViewState extends State<ClientHomeView>
                           },
                         ),
                       ))),
-              Gap(15),
+              Gap(20.h),
               FractionallySizedBox(
                 widthFactor: 1,
                 child: Divider(),
               ),
-              Gap(25),
+              Gap(20.h),
               BannerWidget(
                 image: Get.locale?.languageCode == "en"
                     ? "assets/images/job.jpeg"
@@ -287,8 +282,13 @@ class _ClientHomeViewState extends State<ClientHomeView>
                 description: "See our Employment\nopportunities".tr,
                 buttonTitle: 'View'.tr,
               ),
+              Gap(20.h),
+              FractionallySizedBox(
+                widthFactor: 1,
+                child: Divider(),
+              ),
               //JobBannerWidget(),
-              Gap(55),
+              Gap(15.h),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: HomeRowWidget(
@@ -301,7 +301,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                   },
                 ),
               ),
-              Gap(20),
+              Gap(20.h),
               SizedBox(
                   height: 235.h,
                   child: CustomServerStatusWidget(
@@ -319,25 +319,29 @@ class _ClientHomeViewState extends State<ClientHomeView>
                           },
                         ),
                       ))),
-              Gap(35),
+              Gap(20.h),
               FractionallySizedBox(
                 widthFactor: 1,
                 child: Divider(),
               ),
-              Gap(25),
+              Gap(20.h),
               BannerWidget(
                 image: Get.locale?.languageCode == "en"
                     ? "assets/images/product.jpeg"
                     : "assets/images/product_ar.png",
                 title: "Shopping?".tr,
                 onPressed: () {
-                  // Get.toNamed(AppRoutes.shop);
                   Get.put(HomeClintLayoutController(this)).onBNavPressed(1);
                 },
                 description: "Order whatever you need\nfrom the shop".tr,
                 buttonTitle: 'Order Now'.tr,
               ),
-              Gap(45),
+              Gap(20.h),
+              FractionallySizedBox(
+                widthFactor: 1,
+                child: Divider(),
+              ),
+              Gap(15.h),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: HomeRowWidget(
@@ -350,7 +354,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                   },
                 ),
               ),
-              Gap(20),
+              Gap(20.h),
               SizedBox(
                   height: 235.h,
                   child: CustomServerStatusWidget(

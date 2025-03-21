@@ -17,7 +17,7 @@ class MyService extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: whiteColor,
         title: Text(
-          'My Services',
+          'My Services'.tr,
           style: TextStyle(
             fontSize: 17.sp,
             fontWeight: FontWeight.bold,

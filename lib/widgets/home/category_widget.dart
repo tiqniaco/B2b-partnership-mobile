@@ -17,7 +17,7 @@ class CategoryWidget extends StatelessWidget {
         padding: EdgeInsets.symmetric(horizontal: 20),
         scrollDirection: Axis.horizontal,
         itemCount: specializations.length,
-        separatorBuilder: (context, index) => Gap(20),
+        separatorBuilder: (context, index) => Gap(10.w),
         itemBuilder: (context, index) => InkWell(
               onTap: () {
                 Get.toNamed(AppRoutes.providersInCategory,

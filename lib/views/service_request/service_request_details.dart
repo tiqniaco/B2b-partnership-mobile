@@ -49,13 +49,14 @@ class ServiceRequestDetails extends StatelessWidget {
                         onTap: () {
                           Get.back();
                         },
-                        child: CircleAvatar(
-                            radius: 20.r,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: Icon(
-                                Icons.arrow_back_ios,
-                              ),
+                        child: Container(
+                            alignment: Alignment.center,
+                            padding: EdgeInsets.all(10),
+                            child: Icon(
+                              Icons.arrow_back_ios,
+                              size: 25.sp,
+                              color: whiteColor
+                                 
                             )),
                       )),
                 ],

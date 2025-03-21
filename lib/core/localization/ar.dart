@@ -215,6 +215,29 @@ const Map<String, String> ar = {
   "Are you sure you want to\ndelete this job?": "هل انت متأكد من\n حذف الوظيفة",
   "Show Applications": "عرض الطلبات",
 
+  // Job Application
+  'Job Application': "طلب توظيف",
+  "Years of Experience": "سنين الخبرة",
+  "ex: 2": "مثال: 2",
+  "Cover Letter": "نقاط هامة",
+  "Choose File": "اختيار ملف",
+  "Upload Resume": "رفع CV",
+  'Submit Application': "ارسال الطلب",
+  "enter your answer": "اكتب اجابتك",
+  "What makes you the ideal candidate for this position?":
+      "ما الذي يجعلك المرشح المثالي لهذا المنصب؟",
+  "Expected Salary": "الراتب المتوقع",
+  "enter your expected salary (numbers only)":
+      "ادخل الراتب المتوقع (الراتب المتوقع)",
+  "enter your available to start date": "أدخل تاريخ البدء المتاح لك",
+  "Available to Start Date": "متاح لتاريخ البدء",
+  "enter your skills": "ادخل مهاراتك",
+  "Skills": "المهارات",
+  "JOBS": "الوظائف",
+  "Select Expiry Date": "اختر تاريخ الانتهاء",
+  "Filter": "فلتر",
+  "Sub Specialization": "الفئة الفرعية",
+
   // waiting providers
   "Waiting providers": "مقدمي الخدمات قيد الانتظار",
   "Reject": "رفض",
@@ -349,6 +372,14 @@ const Map<String, String> ar = {
   'Your Posted Services': "خدماتك المنشورة",
   "Price Offers": "عروض الاسعار",
   "Add price offer": "اضافة عرض سعر",
+  'Previous': "السابق",
+  'Service Features': "ميزات الخدمة",
+  "+ Add More": "اضافة المزيد +",
+  "- Remove": " حذف -",
+  "Feature Title (Arabic)": "عنوان الميزة(بالعربية)",
+  "enter feature title in arabic": "ادخل عنوان الميزة بالعربية",
+  "Feature Title (English)": "عنوان الميزة (بالانجليزية)",
+  "enter feature title in english": "ادخل عنوان الميزة بالانجليزية",
 
   // contact
   'enter phone number': "ادخل رقم الهاتف",
@@ -381,4 +412,12 @@ const Map<String, String> ar = {
   "Enter arabic name": "ادخل الاسم باللغة العربية",
   'Feature Name (English)': "اسم الميزة باللغة الانجليزية",
   "Enter english name": "ادخل الاسم باللغة الانجليزية",
+  'Add Price Offer': "اضف عرض سعر",
+  'offer price': "سعر العرض",
+  'offer description': "وصف العرض",
+  'Submit': "ارسال",
+  "pending": "قيد الانتظار",
+  "You're not logged in": "انت لم تسجل الدخول",
+  "Please log in to access this feature.":
+      "الرجاء تسجيل الدخول للحصول علي كل الميزات",
 };

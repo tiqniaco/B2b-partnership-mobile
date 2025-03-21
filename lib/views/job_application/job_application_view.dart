@@ -33,7 +33,7 @@ class JobApplicationView extends StatelessWidget {
             ),
             backgroundColor: primaryColor,
             title: Text(
-              'Job Application',
+              'Job Application'.tr,
               style: TextStyle(
                 color: whiteColor,
               ),
@@ -46,19 +46,20 @@ class JobApplicationView extends StatelessWidget {
               child: ListView(
                 children: [
                   _buildTextField(
-                    label: "Years of Experience",
-                    hint: "ex: 2",
+                    label: "Years of Experience".tr,
+                    hint: "ex: 2".tr,
                     maxLines: 1,
                     formatter: FilteringTextInputFormatter.digitsOnly,
                     controller: controller.yearsOfExperienceController,
                     keyboardType: TextInputType.number,
                   ),
                   _buildTextField(
-                    label: "Cover Letter",
-                    hint: "enter your cover letter",
+                    label: "Cover Letter".tr,
+                    hint: "enter your cover letter".tr,
                     formatter: FilteringTextInputFormatter.allow(
                       RegExp(
-                        r"^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFFa-zA-Z0-9.,!?()'\" r"\s\n-]{0,1000}$",
+                        r"^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFFa-zA-Z0-9.,!?()'\"
+                        r"\s\n-]{0,1000}$",
                         unicode: false,
                       ),
                     ),
@@ -67,8 +68,8 @@ class JobApplicationView extends StatelessWidget {
                     maxLines: null,
                   ),
                   _buildTextField(
-                    label: "Skills",
-                    hint: "enter your skills",
+                    label: "Skills".tr,
+                    hint: "enter your skills".tr,
                     formatter: FilteringTextInputFormatter.allow(
                       RegExp(
                         r"^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFFa-zA-Z0-9\s,-]{0,1000}$",
@@ -78,8 +79,8 @@ class JobApplicationView extends StatelessWidget {
                     keyboardType: TextInputType.text,
                   ),
                   _buildTextField(
-                    label: "Available to Start Date",
-                    hint: "enter your available to start date",
+                    label: "Available to Start Date".tr,
+                    hint: "enter your available to start date".tr,
                     controller: controller.availableToStartDateController,
                     keyboardType: TextInputType.text,
                     maxLines: 1,
@@ -99,16 +100,17 @@ class JobApplicationView extends StatelessWidget {
                     },
                   ),
                   _buildTextField(
-                    label: "Expected Salary",
+                    label: "Expected Salary".tr,
                     formatter: FilteringTextInputFormatter.digitsOnly,
-                    hint: "enter your expected salary (numbers only)",
+                    hint: "enter your expected salary (numbers only)".tr,
                     controller: controller.expectedSalaryController,
                     keyboardType: TextInputType.number,
                   ),
                   _buildTextField(
                     label:
-                        "What makes you the ideal candidate for this position?",
-                    hint: "enter your answer",
+                        "What makes you the ideal candidate for this position?"
+                            .tr,
+                    hint: "enter your answer".tr,
                     formatter: FilteringTextInputFormatter.allow(
                       RegExp(
                         r"^[\u0600-\u06FF\u0750-\u077F\u08A0-\u08FF\uFB50-\uFDFF\uFE70-\uFEFFa-zA-Z0-9.,!?()'\"
@@ -123,7 +125,7 @@ class JobApplicationView extends StatelessWidget {
                   _buildResumeUpload(controller),
                   Gap(20.h),
                   CustomLoadingButton(
-                    text: 'Submit Application',
+                    text: 'Submit Application'.tr,
                     onPressed: () {
                       return controller.submit();
                     },
@@ -193,7 +195,7 @@ class JobApplicationView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "Upload Resume",
+            "Upload Resume".tr,
             style: getLightStyle.copyWith(
               fontWeight: FontManager.semiBoldFontWeight,
             ),

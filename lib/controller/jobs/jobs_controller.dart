@@ -132,7 +132,7 @@ class JobsController extends GetxController {
               child: Column(
                 children: [
                   _buildDropdown<SpecializeModel>(
-                    label: "Specialization",
+                    label: "Specialization".tr,
                     items: specializationList,
                     selectedValue: selectedSpecialization,
                     onChanged: (value) {
@@ -144,7 +144,7 @@ class JobsController extends GetxController {
                         statusRequestSpecialization == StatusRequest.loading,
                   ),
                   _buildDropdown<SubSpecializeModel>(
-                    label: "Sub Specialization",
+                    label: "Sub Specialization".tr,
                     items: subSpecializationList,
                     selectedValue: selectedSubSpecialization,
                     onChanged: (value) {
@@ -155,7 +155,7 @@ class JobsController extends GetxController {
                         statusRequestSupSpecialization == StatusRequest.loading,
                   ),
                   _buildDropdown<CountryModel>(
-                    label: "Country",
+                    label: "Country".tr,
                     items: countryList,
                     selectedValue: selectedCountry,
                     onChanged: (value) {
@@ -166,7 +166,7 @@ class JobsController extends GetxController {
                     isLoading: statusRequestCountry == StatusRequest.loading,
                   ),
                   _buildDropdown<CityModel>(
-                    label: "Government",
+                    label: "City".tr,
                     items: governmentList,
                     selectedValue: selectedCity,
                     onChanged: (value) {
@@ -176,7 +176,7 @@ class JobsController extends GetxController {
                     isLoading: statusRequestCity == StatusRequest.loading,
                   ),
                   _buildDropdown<JobsContractTypeEnum>(
-                    label: "Contract Type",
+                    label: "Contract Type".tr,
                     items: contractTypeList,
                     selectedValue: selectedContractType,
                     onChanged: (JobsContractTypeEnum? value) {
@@ -198,7 +198,7 @@ class JobsController extends GetxController {
                         children: [
                           Text(
                             selectedExpiryDate == null
-                                ? "Select Expiry Date"
+                                ? "Select Expiry Date".tr
                                 : DateFormat('yyyy-MM-dd')
                                     .format(selectedExpiryDate!),
                             style: TextStyle(fontSize: 16),

@@ -52,8 +52,8 @@ class ServiceWidgetVertical extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                           child: CachedNetworkImage(
                             imageUrl: services[index].image!,
-                            height: 70.h,
-                            width: 75.h,
+                            height: 90.h,
+                            width: 85.h,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -68,105 +68,102 @@ class ServiceWidgetVertical extends StatelessWidget {
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                     color: Colors.black54,
-                                    fontSize: 15.sp,
+                                    fontSize: 14.sp,
                                     fontWeight: FontWeight.w600),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              Gap(10),
+                              Gap(3.h),
+                              Text(
+                                translateDatabase(
+                                    arabic:
+                                        services[index].specializationNameAr!,
+                                    english:
+                                        services[index].specializationNameEn!),
+                                style: TextStyle(
+                                    fontSize: 12.sp,
+                                    color: greyColor,
+                                    fontWeight: FontWeight.w500),
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                              ),
+                              Gap(5.h),
                               Row(
                                 children: [
-                                  Text(
-                                    translateDatabase(
-                                        arabic: services[index]
-                                            .specializationNameAr!,
-                                        english: services[index]
-                                            .specializationNameEn!),
-                                    style: TextStyle(
-                                        fontSize: 12.sp,
-                                        color: greyColor,
-                                        fontWeight: FontWeight.w500),
-                                    overflow: TextOverflow.ellipsis,
-                                    maxLines: 1,
-                                  ),
-                                  Gap(8.h),
                                   Expanded(
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Expanded(
-                                          flex: 1,
-                                          child: Visibility(
-                                            visible: Get.find<AppPreferences>()
-                                                    .getUserRole() ==
-                                                "provider",
-                                            child: ElevatedButton(
-                                              style: ButtonStyle(
-                                                backgroundColor:
-                                                    WidgetStatePropertyAll(
-                                                  Colors.green,
-                                                ),
-                                                padding: WidgetStatePropertyAll(
-                                                  EdgeInsets.symmetric(
-                                                    horizontal: 10,
-                                                  ),
-                                                ),
-                                                shape: WidgetStatePropertyAll(
-                                                  RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                      5,
-                                                    ),
-                                                  ),
+                                    flex: 1,
+                                    child: Visibility(
+                                      visible: Get.find<AppPreferences>()
+                                              .getUserRole() ==
+                                          "provider",
+                                      child: SizedBox(
+                                        height: 32.h,
+                                        child: ElevatedButton(
+                                          style: ButtonStyle(
+                                            backgroundColor:
+                                                WidgetStatePropertyAll(
+                                              Colors.green,
+                                            ),
+                                            padding: WidgetStatePropertyAll(
+                                              EdgeInsets.symmetric(
+                                                horizontal: 10,
+                                              ),
+                                            ),
+                                            shape: WidgetStatePropertyAll(
+                                              RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                  5,
                                                 ),
                                               ),
-                                              onPressed: () {
-                                                Get.toNamed(
-                                                  AppRoutes.editProviderService,
-                                                  arguments: {
-                                                    "service": services[index],
-                                                  },
-                                                );
+                                            ),
+                                          ),
+                                          onPressed: () {
+                                            Get.toNamed(
+                                              AppRoutes.editProviderService,
+                                              arguments: {
+                                                "service": services[index],
                                               },
-                                              child: Text(
-                                                "Edit".tr,
-                                                style:
-                                                    TextStyle(fontSize: 11.sp),
-                                              ),
+                                            );
+                                          },
+                                          child: Text(
+                                            "Edit".tr,
+                                            style: TextStyle(fontSize: 11.sp),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Gap(4.w),
+                                  Expanded(
+                                    flex: 2,
+                                    child: SizedBox(
+                                      height: 32.h,
+                                      child: ElevatedButton(
+                                        style: ButtonStyle(
+                                          padding: WidgetStatePropertyAll(
+                                              EdgeInsets.symmetric(
+                                                  horizontal: 10)),
+                                          shape: WidgetStatePropertyAll(
+                                            RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(5),
                                             ),
                                           ),
                                         ),
-                                        Gap(4.w),
-                                        Expanded(
-                                          flex: 2,
-                                          child: ElevatedButton(
-                                            style: ButtonStyle(
-                                              padding: WidgetStatePropertyAll(
-                                                  EdgeInsets.symmetric(
-                                                      horizontal: 10)),
-                                              shape: WidgetStatePropertyAll(
-                                                RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(5),
-                                                ),
-                                              ),
-                                            ),
-                                            onPressed: () {
-                                              Get.toNamed(
-                                                AppRoutes.serviceDetails,
-                                                arguments: {
-                                                  "id": services[index].id,
-                                                },
-                                              );
+                                        onPressed: () {
+                                          Get.toNamed(
+                                            AppRoutes.serviceDetails,
+                                            arguments: {
+                                              "id": services[index].id,
                                             },
-                                            child: Text(
-                                              "View".tr,
-                                              style: TextStyle(fontSize: 13.sp),
-                                            ),
-                                          ),
+                                          );
+                                        },
+                                        child: Text(
+                                          "View".tr,
+                                          style: TextStyle(fontSize: 13.sp),
                                         ),
-                                      ],
+                                      ),
                                     ),
                                   ),
                                 ],

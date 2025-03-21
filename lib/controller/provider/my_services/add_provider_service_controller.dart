@@ -386,9 +386,9 @@ Widget featureWidget({
       Gap(20.h),
       buildTextField(
         arController,
-        "Feature Arabic Title",
+        "Feature Title (Arabic)".tr,
         Icons.featured_play_list,
-        "enter feature arabic title",
+        "enter feature title in arabic".tr,
         (val) {
           return controller.validUserData(val);
         },
@@ -396,9 +396,9 @@ Widget featureWidget({
       Gap(20.h),
       buildTextField(
         enController,
-        "Feature English Title",
+        "Feature Title (English)".tr,
         Icons.featured_play_list,
-        "enter feature english title",
+        "enter feature title in english".tr,
         (val) {
           return controller.validUserData(val);
         },

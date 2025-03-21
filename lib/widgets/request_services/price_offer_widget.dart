@@ -17,7 +17,7 @@ class PriceOfferWidget extends GetView<ServiceRequestDetailsController> {
     return InkWell(
       onTap: () {
         Get.defaultDialog(
-            title: "Description",
+            title: "Description".tr,
             titleStyle: TextStyle(fontSize: 13.sp),
             content: Text(model.offerDescription!,
                 style: TextStyle(fontSize: 13.sp)));
@@ -71,7 +71,7 @@ class PriceOfferWidget extends GetView<ServiceRequestDetailsController> {
                           color: greyColor,
                         ),
                         child: Text(
-                          "Accepted",
+                          "Accepted".tr,
                           style: TextStyle(
                               fontSize: 11.sp,
                               color: whiteColor,
@@ -93,7 +93,7 @@ class PriceOfferWidget extends GetView<ServiceRequestDetailsController> {
                                   .acceptPriceOffers(model.requestOfferId!);
                             },
                             child: Text(
-                              "Accept",
+                              "Accept".tr,
                               style: TextStyle(fontSize: 11.sp),
                             )),
                       )
@@ -108,7 +108,7 @@ class PriceOfferWidget extends GetView<ServiceRequestDetailsController> {
                             color: greyColor,
                           ),
                           child: Text(
-                            model.requestOfferStatus!,
+                            model.requestOfferStatus!.tr,
                             style: TextStyle(
                                 fontSize: 11.sp,
                                 color: whiteColor,

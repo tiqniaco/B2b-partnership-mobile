@@ -26,7 +26,7 @@ class JobsView extends StatelessWidget {
             ),
             centerTitle: true,
             title: Text(
-              "Jobs".toUpperCase(),
+              "JOBS".tr,
               style: getSemiBoldStyle.copyWith(
                 letterSpacing: 1.5.w,
                 color: whiteColor,
@@ -51,7 +51,7 @@ class JobsView extends StatelessWidget {
                           child: TextFormField(
                             controller: controller.searchController,
                             decoration: InputDecoration(
-                              labelText: "Search".tr,
+                              labelText: "Search...".tr,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10),
                               ),

@@ -119,6 +119,9 @@ class ProviderWidget extends StatelessWidget {
                     width: 80.w,
                     height: 32.h,
                     child: ElevatedButton(
+                        style: ButtonStyle(
+                            padding: WidgetStatePropertyAll(
+                                EdgeInsets.symmetric(horizontal: 0))),
                         onPressed: () {
                           Get.toNamed(AppRoutes.providerProfile, arguments: {
                             "id": provider.providerId.toString()

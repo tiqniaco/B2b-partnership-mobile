@@ -213,6 +213,29 @@ const Map<String, String> en = {
       "Are you sure you want to\ndelete this job?",
   "Show Applications": "Show Applications",
 
+  // Job Application
+  'Job Application': 'Job Application',
+  "Years of Experience": "Years of Experience",
+  "ex: 2": "ex: 2",
+  "Cover Letter": "Cover Letter",
+  "Choose File": "Choose File",
+  "Upload Resume": "Upload Resume",
+  'Submit Application': 'Submit Application',
+  "enter your answer": "enter your answer",
+  "What makes you the ideal candidate for this position?":
+      "What makes you the ideal candidate for this position?",
+  "Expected Salary": "Expected Salary",
+  "enter your expected salary (numbers only)":
+      "enter your expected salary (numbers only)",
+  "enter your available to start date": "enter your available to start date",
+  "Available to Start Date": "Available to Start Date",
+  "enter your skills": "enter your skills",
+  "Skills": "Skills",
+  "JOBS": "JOBS",
+  "Select Expiry Date": "Select Expiry Date",
+  "Filter": "Filter",
+  "Sub Specialization": "Sub Specialization",
+
   // waiting providers
   "Waiting providers": "Waiting providers",
   "Reject": "Reject",
@@ -345,6 +368,18 @@ const Map<String, String> en = {
   'Your Posted Services': 'Your Posted Services',
   "Price Offers": "Price Offers",
   "Add price offer": "Add price offer",
+  'Previous': 'Previous',
+  'Service Features': 'Service Features',
+  "+ Add More": "+ Add More",
+  "- Remove": "- Remove",
+  "Feature Title (Arabic)": "Feature Title (Arabic)",
+  "enter feature title in arabic": "enter feature title in arabic",
+  "Feature Title (English)": "Feature Title (English)",
+  "enter feature title in english": "enter feature title in english",
+  'Add Price Offer': 'Add Price Offer',
+  'offer price': 'offer price',
+  'offer description': 'offer description',
+  'Submit': 'Submit',
 
   // contact
   'enter phone number': 'enter phone number',
@@ -377,4 +412,8 @@ const Map<String, String> en = {
   "Enter arabic name": "Enter arabic name",
   'Feature Name (English)': 'Feature Name (English)',
   "Enter english name": "Enter english name",
+  "pending": "pending",
+  "You're not logged in": "You're not logged in",
+  "Please log in to access this feature.":
+      "Please log in to access this feature.",
 };

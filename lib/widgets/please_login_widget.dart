@@ -36,7 +36,7 @@ class PleaseLoginWidget extends StatelessWidget {
                 ),
                 SizedBox(height: 16.h),
                 Text(
-                  "You're not logged in",
+                  "You're not logged in".tr,
                   style: TextStyle(
                     fontSize: 19.sp,
                     fontWeight: FontWeight.w600,

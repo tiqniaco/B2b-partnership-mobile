@@ -217,7 +217,7 @@ class JobDetailsView extends StatelessWidget {
                         ),
                         _buildCard(
                           icon: FontAwesomeIcons.envelope,
-                          title: "Email",
+                          title: "Email".tr,
                           value: controller.jobDetailsModel?.email ?? "",
                           isShowArrow: true,
                           arrowIcon: FontAwesomeIcons.envelope,
@@ -233,7 +233,7 @@ class JobDetailsView extends StatelessWidget {
                         ),
                         _buildCard(
                           icon: FontAwesomeIcons.globe,
-                          title: "Website",
+                          title: "Website".tr,
                           value:
                               controller.jobDetailsModel?.contactWebsite ?? "",
                           isShowArrow: true,
@@ -294,8 +294,8 @@ class JobDetailsView extends StatelessWidget {
           trimLines: 4,
           colorClickableText: primaryColor,
           trimMode: TrimMode.Line,
-          trimCollapsedText: 'Show more'.tr,
-          trimExpandedText: 'Show less'.tr,
+          trimCollapsedText: 'See more'.tr,
+          trimExpandedText: 'See less'.tr,
         ),
         trailing: isShowArrow
             ? IconButton(

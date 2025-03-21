@@ -74,7 +74,7 @@ class ServiceRequestDetailsController extends GetxController {
         init: ServiceRequestDetailsController(),
         builder: (ServiceRequestDetailsController controller) {
           return AlertDialog(
-            title: const Text('Add Price Offer'),
+            title: Text('Add Price Offer'.tr),
             titleTextStyle: TextStyle(
                 fontSize: 12.sp,
                 fontWeight: FontWeight.bold,
@@ -89,7 +89,7 @@ class ServiceRequestDetailsController extends GetxController {
                     maxLines: null,
                     decoration: InputDecoration(
                         hintStyle: TextStyle(fontSize: 13.sp),
-                        hintText: 'offer price'),
+                        hintText: 'offer price'.tr),
                   ),
                   const SizedBox(height: 20),
                   TextFormField(
@@ -97,7 +97,7 @@ class ServiceRequestDetailsController extends GetxController {
                     maxLines: null,
                     decoration: InputDecoration(
                         hintStyle: TextStyle(fontSize: 13.sp),
-                        hintText: 'offer description'),
+                        hintText: 'offer description'.tr),
                   ),
                 ],
               ),
@@ -108,7 +108,7 @@ class ServiceRequestDetailsController extends GetxController {
                   Get.back(); // close dialog
                   _addOffer();
                 },
-                child: const Text('Submit'),
+                child: Text('Submit'.tr),
               ),
             ],
           );
