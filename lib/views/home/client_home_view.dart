@@ -140,7 +140,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: SearchWidget(
                   onTap: () {
-                    Get.put(HomeClintLayoutController(this)).onBNavPressed(2);
+                    Get.put(HomeClintLayoutController()).onBNavPressed(2);
                   },
                 ),
               ),
@@ -277,7 +277,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                 title: "Are you looking for a job?".tr,
                 onPressed: () {
                   // Get.toNamed(AppRoutes.jobs);
-                  Get.put(HomeClintLayoutController(this)).onBNavPressed(3);
+                  Get.put(HomeClintLayoutController()).onBNavPressed(3);
                 },
                 description: "See our Employment\nopportunities".tr,
                 buttonTitle: 'View'.tr,
@@ -331,7 +331,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                     : "assets/images/product_ar.png",
                 title: "Shopping?".tr,
                 onPressed: () {
-                  Get.put(HomeClintLayoutController(this)).onBNavPressed(1);
+                  Get.put(HomeClintLayoutController()).onBNavPressed(1);
                 },
                 description: "Order whatever you need\nfrom the shop".tr,
                 buttonTitle: 'Order Now'.tr,

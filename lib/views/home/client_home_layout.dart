@@ -18,9 +18,20 @@ class ClientHomeLayout extends StatefulWidget {
 class _ClientHomeLayoutState extends State<ClientHomeLayout>
     with TickerProviderStateMixin {
   @override
+  void initState() {
+    Get.put(HomeClintLayoutController()).convexController = TabController(
+      length: 5,
+      vsync: this,
+    );
+
+    ;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeClintLayoutController>(
-      init: HomeClintLayoutController(this),
+      init: HomeClintLayoutController(),
       builder: (controller) => Scaffold(
         backgroundColor: backgroundColor,
         body: TabBarView(

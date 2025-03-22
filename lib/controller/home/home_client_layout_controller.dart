@@ -14,12 +14,7 @@ import 'package:get/get.dart';
 class HomeClintLayoutController extends GetxController {
   late TabController convexController;
 
-  HomeClintLayoutController(
-    TickerProvider vsync,
-  ) : convexController = TabController(
-          length: 5,
-          vsync: vsync,
-        );
+  // HomeClintLayoutController();
 
   int get currentIndex => convexController.index;
 
