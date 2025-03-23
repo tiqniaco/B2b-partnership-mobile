@@ -74,7 +74,7 @@ class ProviderJobApplicationsView extends StatelessWidget {
                                   ),
                                   child: Text(
                                     e.name.capitalizeFirst!.tr,
-                                    style: getRegularStyle.copyWith(
+                                    style: getRegularStyle(context).copyWith(
                                       fontWeight: FontWeight.w500,
                                       color:
                                           controller.jobApplicationStatus == e
@@ -95,7 +95,7 @@ class ProviderJobApplicationsView extends StatelessWidget {
                       margin: EdgeInsets.only(bottom: 10.h),
                       child: Text(
                         '${controller.jobApplications.length} applications found',
-                        style: getLightStyle.copyWith(
+                        style: getLightStyle(context).copyWith(
                           fontWeight: FontManager.mediumFontWeight,
                         ),
                       ),
@@ -189,7 +189,8 @@ class ProviderJobApplicationsView extends StatelessWidget {
                                             TextSpan(children: [
                                               TextSpan(
                                                 text: "Status: ",
-                                                style: getRegularStyle.copyWith(
+                                                style: getRegularStyle(context)
+                                                    .copyWith(
                                                   fontWeight: FontManager
                                                       .mediumFontWeight,
                                                 ),
@@ -197,7 +198,8 @@ class ProviderJobApplicationsView extends StatelessWidget {
                                               TextSpan(
                                                 text: model.applicationStatus
                                                     .name.capitalizeFirst,
-                                                style: getRegularStyle.copyWith(
+                                                style: getRegularStyle(context)
+                                                    .copyWith(
                                                   fontWeight: FontManager
                                                       .mediumFontWeight,
                                                   color: model
@@ -211,7 +213,7 @@ class ProviderJobApplicationsView extends StatelessWidget {
                                             DateTimeConvertor.timeAgo(
                                               model.createdAt,
                                             ),
-                                            style: getLightStyle.copyWith(
+                                            style: getLightStyle(context).copyWith(
                                               fontWeight:
                                                   FontManager.mediumFontWeight,
                                               color: greyColor,
@@ -223,7 +225,7 @@ class ProviderJobApplicationsView extends StatelessWidget {
                                       Gap(5.h),
                                       Text(
                                         "Name: ${model.clientName}",
-                                        style: getRegularStyle.copyWith(
+                                        style: getRegularStyle(context).copyWith(
                                           fontWeight:
                                               FontManager.mediumFontWeight,
                                         ),
@@ -231,7 +233,7 @@ class ProviderJobApplicationsView extends StatelessWidget {
                                       Gap(5.h),
                                       Text(
                                         "Expected Salary: ${model.expectedSalary}\$",
-                                        style: getRegularStyle.copyWith(
+                                        style: getRegularStyle(context).copyWith(
                                           fontWeight:
                                               FontManager.mediumFontWeight,
                                         ),
@@ -239,12 +241,12 @@ class ProviderJobApplicationsView extends StatelessWidget {
                                       Gap(5.h),
                                       Text(
                                         "Years of experience: ${model.yearsOfExperience}",
-                                        style: getLightStyle,
+                                        style: getLightStyle(context),
                                       ),
                                       Gap(5.h),
                                       Text(
                                         "Available to start: ${model.availableToStartDate}",
-                                        style: getLightStyle,
+                                        style: getLightStyle(context),
                                       ),
                                     ],
                                   ),

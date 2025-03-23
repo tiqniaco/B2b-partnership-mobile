@@ -34,7 +34,7 @@ class LanguageWidget extends StatelessWidget {
               ListTile(
                 title: Text(
                   "English",
-                  style: getRegularStyle,
+                  style: getRegularStyle(context),
                 ),
                 leading: Image.asset(
                   AssetsData.englishImage,
@@ -50,7 +50,7 @@ class LanguageWidget extends StatelessWidget {
               ListTile(
                 title: Text(
                   'العربية',
-                  style: getRegularStyle,
+                  style: getRegularStyle(context),
                 ),
                 leading: Image.asset(
                   AssetsData.arabicImage,
@@ -88,7 +88,7 @@ class LanguageWidget extends StatelessWidget {
           const Spacer(),
           Text(
             Get.locale?.languageCode == 'ar' ? 'العربية 🇸🇦' : 'English 🇬🇧',
-            style: getRegularStyle.copyWith(
+            style: getRegularStyle(context).copyWith(
               shadows: [
                 const Shadow(
                   blurRadius: 10.0,

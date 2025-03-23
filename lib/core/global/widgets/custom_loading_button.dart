@@ -42,10 +42,9 @@ class CustomLoadingButton extends StatelessWidget {
           children: [
             Text(
               text,
-              style: getRegularStyle.copyWith(
+              style: getMediumStyle(context).copyWith(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
-                fontSize: 14.sp,
               ),
             ),
           ],

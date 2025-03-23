@@ -34,9 +34,8 @@ class CustomEmptyWidget extends StatelessWidget {
               : Get.locale?.languageCode == 'ar'
                   ? 'لا يوجد بيانات'
                   : 'No Data',
-          style: getMediumStyle.copyWith(
+          style: getMediumStyle(context).copyWith(
             color: blackWithOpacityColor,
-            fontSize: 14.sp,
           ),
           textAlign: TextAlign.center,
         ),

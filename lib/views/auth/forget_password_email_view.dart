@@ -32,7 +32,7 @@ class ForgetPasswordEmailView extends StatelessWidget {
                       "Please enter your email to send an OTP to reset your password"
                           .tr,
                       textAlign: TextAlign.center,
-                      style: getMediumStyle,
+                      style: getMediumStyle(context),
                       maxLines: 3,
                     ),
                     Gap(25.h),

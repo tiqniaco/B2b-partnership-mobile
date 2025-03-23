@@ -7,6 +7,7 @@ import 'package:b2b_partenership/models/shop_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class ShopProductItemWidget extends StatelessWidget {
   const ShopProductItemWidget({
@@ -62,8 +63,8 @@ class ShopProductItemWidget extends StatelessWidget {
                           ),
                           child: Text(
                             "-${product.discount}%",
-                            style: getBoldStyle.copyWith(
-                              fontSize: 10.sp,
+                            style: getLightStyle(context).copyWith(
+                              fontWeight: FontManager.boldFontWeight,
                               color: whiteColor,
                             ),
                           ),
@@ -79,10 +80,15 @@ class ShopProductItemWidget extends StatelessWidget {
                 arabic: product.titleAr,
                 english: product.titleEn,
               ),
-              style: getLightStyle.copyWith(
-                fontWeight: FontManager.mediumFontWeight,
-                fontSize: showCategories ? 11.sp : 13.sp,
-              ),
+              style: context.isTablet
+                  ? getLightStyle(context).copyWith(
+                      fontSize: showCategories ? 8.sp : 9.sp,
+                      fontWeight: FontManager.mediumFontWeight,
+                    )
+                  : getLightStyle(context).copyWith(
+                      fontWeight: FontManager.mediumFontWeight,
+                      fontSize: showCategories ? 11.sp : 13.sp,
+                    ),
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -92,21 +98,34 @@ class ShopProductItemWidget extends StatelessWidget {
                 if (product.discount != "0")
                   Text(
                     "${product.price}\$",
-                    style: getLightStyle.copyWith(
-                      fontSize: showCategories ? 11.sp : 13.sp,
-                      color: blackColor.withAlpha(150),
-                      decoration: TextDecoration.lineThrough,
-                    ),
+                    style: context.isTablet
+                        ? getLightStyle(context).copyWith(
+                            fontSize: showCategories ? 8.sp : 9.sp,
+                            color: blackColor.withAlpha(150),
+                            decoration: TextDecoration.lineThrough,
+                          )
+                        : getLightStyle(context).copyWith(
+                            fontSize: showCategories ? 11.sp : 13.sp,
+                            color: blackColor.withAlpha(150),
+                            decoration: TextDecoration.lineThrough,
+                          ),
                   ),
                 Gap(5.w),
                 Text(
                   product.discount != "0"
                       ? "${double.parse(product.price) - (double.parse(product.discount) / 100 * double.parse(product.price))}\$"
                       : "${product.price}\$",
-                  style: getLightStyle.copyWith(
-                      fontWeight: FontManager.semiBoldFontWeight,
-                      fontSize: showCategories ? 11.sp : 13.sp,
-                      color: primaryColor),
+                  style: context.isTablet
+                      ? getLightStyle(context).copyWith(
+                          fontSize: showCategories ? 8.sp : 9.sp,
+                          color: primaryColor,
+                          fontWeight: FontManager.semiBoldFontWeight,
+                        )
+                      : getLightStyle(context).copyWith(
+                          fontWeight: FontManager.semiBoldFontWeight,
+                          fontSize: showCategories ? 11.sp : 13.sp,
+                          color: primaryColor,
+                        ),
                 ),
               ],
             ),

@@ -25,9 +25,8 @@ class CustomNoConnectionWidget extends StatelessWidget {
             Get.locale?.languageCode == 'ar'
                 ? 'لا يوجد اتصال بالانترنت'
                 : 'No Internet Connection',
-            style: getMediumStyle.copyWith(
+            style: getMediumStyle(context).copyWith(
               color: blackWithOpacityColor,
-              fontSize: 16.sp,
             ),
           ),
         ],

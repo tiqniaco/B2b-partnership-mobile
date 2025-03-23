@@ -4,6 +4,7 @@ import 'package:b2b_partenership/core/enums/jobs_contract_type_enum.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/models/city_model.dart';
 import 'package:b2b_partenership/models/country_model.dart';
 import 'package:b2b_partenership/models/specialize_model.dart';
@@ -124,7 +125,7 @@ class JobsController extends GetxController {
                 ),
               ),
               width: 1.sw,
-              height: 0.68.sh,
+              height: Get.context!.isTablet ? 0.52.sh : 0.6.sh,
               padding: EdgeInsets.symmetric(
                 horizontal: 15.w,
                 vertical: 16.h,
@@ -187,8 +188,10 @@ class JobsController extends GetxController {
                   GestureDetector(
                     onTap: () => _selectDate(),
                     child: Container(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 15, horizontal: 10),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 10.h,
+                        horizontal: 8.w,
+                      ),
                       decoration: BoxDecoration(
                         border: Border.all(color: Colors.grey),
                         borderRadius: BorderRadius.circular(10),
@@ -201,7 +204,7 @@ class JobsController extends GetxController {
                                 ? "Select Expiry Date".tr
                                 : DateFormat('yyyy-MM-dd')
                                     .format(selectedExpiryDate!),
-                            style: TextStyle(fontSize: 16),
+                            style: getRegularStyle(Get.context!),
                           ),
                           Icon(
                             Icons.calendar_today,
@@ -425,12 +428,22 @@ Widget _buildDropdown<T>({
   return Skeletonizer(
     enabled: isLoading,
     child: Container(
-      padding: const EdgeInsets.only(bottom: 10),
+      padding: EdgeInsets.only(bottom: 10.h),
       child: DropdownButton<T>(
         isExpanded: true,
-        hint: Text(label),
+        hint: Text(
+          label,
+          style: getRegularStyle(Get.context!).copyWith(
+            color: blackWithOpacityColor,
+          ),
+        ),
+        style: getRegularStyle(Get.context!),
         value: selectedValue,
         onChanged: onChanged,
+        icon: Icon(
+          Icons.keyboard_arrow_down,
+          size: 20.r,
+        ),
         items: items.map((T value) {
           String title = switch (value.runtimeType) {
             const (SpecializeModel) => translateDatabase(
@@ -455,7 +468,9 @@ Widget _buildDropdown<T>({
           };
           return DropdownMenuItem<T>(
             value: value,
-            child: Text(title),
+            child: Text(
+              title,
+            ),
           );
         }).toList(),
       ),

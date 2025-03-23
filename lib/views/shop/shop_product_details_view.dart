@@ -86,9 +86,9 @@ class ShopProductDetailsView extends StatelessWidget {
                               ),
                               child: Text(
                                 "-${controller.product.discount}%",
-                                style: getBoldStyle.copyWith(
-                                  fontSize: 13.sp,
+                                style: getRegularStyle(context).copyWith(
                                   color: whiteColor,
+                                  fontWeight: FontManager.boldFontWeight,
                                 ),
                               ),
                             ),
@@ -119,8 +119,8 @@ class ShopProductDetailsView extends StatelessWidget {
                           if (controller.product.discount != "0")
                             Text(
                               "${controller.product.price}\$",
-                              style: getLightStyle.copyWith(
-                                fontSize: 14.sp,
+                              style: getRegularStyle(context).copyWith(
+                                fontWeight: FontManager.lightFontWeight,
                                 color: blackColor.withAlpha(150),
                                 decoration: TextDecoration.lineThrough,
                               ),
@@ -130,9 +130,8 @@ class ShopProductDetailsView extends StatelessWidget {
                             controller.product.discount != "0"
                                 ? "${double.parse(controller.product.price) - (double.parse(controller.product.discount) / 100 * double.parse(controller.product.price))}\$"
                                 : "${controller.product.price}\$",
-                            style: getLightStyle.copyWith(
+                            style: getRegularStyle(context).copyWith(
                                 fontWeight: FontManager.boldFontWeight,
-                                fontSize: 15.sp,
                                 color: primaryColor),
                           ),
                         ],

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '/core/theme/app_color.dart';
-import '/core/theme/text_style.dart';
 import '../utils/font_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -29,8 +28,8 @@ class AppThemes {
               centerTitle: false,
               foregroundColor: backgroundColor,
               surfaceTintColor: backgroundColor,
-              titleTextStyle: getBoldStyle.copyWith(
-                fontSize: 18.sp,
+              titleTextStyle: TextStyle(
+                fontSize: 18,
                 fontWeight: FontWeight.w600,
                 color: blackColor,
                 fontFamily: FontManager.defaultFontFamily,
@@ -53,11 +52,11 @@ class AppThemes {
 
         /// Define the default text form field theme.
         inputDecorationTheme: InputDecorationTheme(
-          hintStyle: getRegularStyle.copyWith(
+          hintStyle: TextStyle(
             fontSize: 16.sp,
             color: blackWithOpacityColor,
           ),
-          labelStyle: getRegularStyle.copyWith(
+          labelStyle: TextStyle(
             fontSize: 15.sp,
             color: blackColor,
           ),

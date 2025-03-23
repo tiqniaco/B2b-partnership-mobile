@@ -104,7 +104,7 @@ class ComplaintsView extends StatelessWidget {
                           controller: controller.complaintController,
                           decoration: InputDecoration(
                             hintText: "Enter your complaints...".tr,
-                            hintStyle: getLightStyle.copyWith(
+                            hintStyle: getLightStyle(context).copyWith(
                               color: greyColor,
                             ),
                             filled: true,

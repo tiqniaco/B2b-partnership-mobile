@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+
 import '/core/theme/app_color.dart';
 import '../utils/font_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,42 +21,42 @@ TextStyle _getTextStyle({
   );
 }
 
-TextStyle get getBoldStyle {
+TextStyle getBoldStyle(BuildContext context) {
   return _getTextStyle(
     fontWeight: FontManager.boldFontWeight,
-    fontSize: 25.sp,
+    fontSize: context.isTablet ? 15.sp : 22.sp,
     color: blackColor,
   );
 }
 
-TextStyle get getSemiBoldStyle {
+TextStyle getSemiBoldStyle(BuildContext context) {
   return _getTextStyle(
     fontWeight: FontManager.semiBoldFontWeight,
-    fontSize: 18.sp,
+    fontSize: context.isTablet ? 12.sp : 18.sp,
     color: blackColor,
   );
 }
 
-TextStyle get getMediumStyle {
+TextStyle getMediumStyle(BuildContext context) {
   return _getTextStyle(
     fontWeight: FontManager.mediumFontWeight,
-    fontSize: 16.sp,
+    fontSize: context.isTablet ? 10.sp : 16.sp,
     color: blackColor,
   );
 }
 
-TextStyle get getRegularStyle {
+TextStyle getRegularStyle(BuildContext context) {
   return _getTextStyle(
     fontWeight: FontManager.regularFontWeight,
-    fontSize: 14.sp,
+    fontSize: context.isTablet ? 8.sp : 14.sp,
     color: blackColor,
   );
 }
 
-TextStyle get getLightStyle {
+TextStyle getLightStyle(BuildContext context) {
   return _getTextStyle(
     fontWeight: FontManager.lightFontWeight,
-    fontSize: 12.sp,
+    fontSize: context.isTablet ? 7.sp : 12.sp,
     color: blackColor,
   );
 }

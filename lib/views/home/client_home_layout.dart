@@ -23,8 +23,6 @@ class _ClientHomeLayoutState extends State<ClientHomeLayout>
       length: 5,
       vsync: this,
     );
-
-    ;
     super.initState();
   }
 

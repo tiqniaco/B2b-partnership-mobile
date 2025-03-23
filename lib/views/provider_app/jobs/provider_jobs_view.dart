@@ -35,7 +35,7 @@ class ProviderJobsView extends StatelessWidget {
             titleSpacing: 0,
             title: Text(
               "MY JOBS".tr,
-              style: getSemiBoldStyle.copyWith(
+              style: getSemiBoldStyle(context).copyWith(
                 letterSpacing: 1.5.w,
                 color: whiteColor,
               ),
@@ -79,7 +79,7 @@ class ProviderJobsView extends StatelessWidget {
                             ),
                             child: Text(
                               'Search for job seekers'.tr,
-                              style: getRegularStyle.copyWith(
+                              style: getRegularStyle(context).copyWith(
                                 color: primaryColor,
                               ),
                             ),

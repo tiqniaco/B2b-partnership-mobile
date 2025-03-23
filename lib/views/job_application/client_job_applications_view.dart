@@ -73,7 +73,7 @@ class ClientJobApplicationsView extends StatelessWidget {
                                   ),
                                   child: Text(
                                     e.name.capitalizeFirst!.tr,
-                                    style: getRegularStyle.copyWith(
+                                    style: getRegularStyle(context).copyWith(
                                       fontWeight: FontWeight.w500,
                                       color:
                                           controller.jobApplicationStatus == e
@@ -135,7 +135,8 @@ class ClientJobApplicationsView extends StatelessWidget {
                                         TextSpan(children: [
                                           TextSpan(
                                             text: "Status: ",
-                                            style: getRegularStyle.copyWith(
+                                            style: getRegularStyle(context)
+                                                .copyWith(
                                               fontWeight:
                                                   FontManager.mediumFontWeight,
                                             ),
@@ -143,7 +144,8 @@ class ClientJobApplicationsView extends StatelessWidget {
                                           TextSpan(
                                             text: model.applicationStatus.name
                                                 .capitalizeFirst,
-                                            style: getRegularStyle.copyWith(
+                                            style: getRegularStyle(context)
+                                                .copyWith(
                                               fontWeight:
                                                   FontManager.mediumFontWeight,
                                               color: primaryColor,
@@ -154,7 +156,7 @@ class ClientJobApplicationsView extends StatelessWidget {
                                       Gap(5.h),
                                       Text(
                                         "Company: ${model.providerName}",
-                                        style: getRegularStyle.copyWith(
+                                        style: getRegularStyle(context).copyWith(
                                           fontWeight:
                                               FontManager.mediumFontWeight,
                                         ),
@@ -162,7 +164,7 @@ class ClientJobApplicationsView extends StatelessWidget {
                                       Gap(5.h),
                                       Text(
                                         "Job Title: ${model.jobTitle}",
-                                        style: getRegularStyle.copyWith(
+                                        style: getRegularStyle(context).copyWith(
                                           fontWeight:
                                               FontManager.mediumFontWeight,
                                         ),
@@ -170,18 +172,18 @@ class ClientJobApplicationsView extends StatelessWidget {
                                       Gap(5.h),
                                       Text(
                                         "Contract Type: ${model.jobContractType.text}",
-                                        style: getLightStyle,
+                                        style: getLightStyle(context),
                                       ),
                                       Gap(5.h),
                                       Text(
                                         "Expiry Date: ${model.jobExpirationDate}",
-                                        style: getLightStyle,
+                                        style: getLightStyle(context),
                                       ),
                                       if (model.jobSalary != "null") ...[
                                         Gap(5.h),
                                         Text(
                                           "Salary: ${model.jobSalary}",
-                                          style: getLightStyle,
+                                          style: getLightStyle(context),
                                         )
                                       ],
                                     ],

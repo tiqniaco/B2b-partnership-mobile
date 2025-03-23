@@ -123,7 +123,7 @@ class SearchJobApplicationsView extends StatelessWidget {
                                   children: [
                                     Text(
                                       "Name: ${model.clientName}",
-                                      style: getRegularStyle.copyWith(
+                                      style: getRegularStyle(context).copyWith(
                                         fontWeight:
                                             FontManager.mediumFontWeight,
                                       ),
@@ -131,7 +131,7 @@ class SearchJobApplicationsView extends StatelessWidget {
                                     Gap(5.h),
                                     Text(
                                       "Expected Salary: ${model.expectedSalary}\$",
-                                      style: getRegularStyle.copyWith(
+                                      style: getRegularStyle(context).copyWith(
                                         fontWeight:
                                             FontManager.mediumFontWeight,
                                       ),
@@ -139,12 +139,12 @@ class SearchJobApplicationsView extends StatelessWidget {
                                     Gap(5.h),
                                     Text(
                                       "Years of experience: ${model.yearsOfExperience}",
-                                      style: getLightStyle,
+                                      style: getLightStyle(context),
                                     ),
                                     Gap(5.h),
                                     Text(
                                       "Available to start: ${model.availableToStartDate}",
-                                      style: getLightStyle,
+                                      style: getLightStyle(context),
                                     ),
                                   ],
                                 ),

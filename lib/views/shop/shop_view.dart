@@ -24,21 +24,26 @@ class ShopView extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(
-            titleSpacing: 0,
+            titleSpacing: 5.w,
+            toolbarHeight: context.isTablet ? 50.h : null,
             title: Row(
               children: [
                 SizedBox(
-                  width: 0.5.sw,
+                  width: context.isTablet ? 0.4.sw : 0.5.sw,
                   child: TextFormField(
                     controller: controller.searchController,
-                    style: getRegularStyle,
+                    style: getRegularStyle(context),
                     decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: context.isTablet ? 10.h : 0,
+                        horizontal: context.isTablet ? 10.w : 20.w,
+                      ),
                       hintText: 'Search...'.tr,
-                      hintStyle: getRegularStyle,
+                      hintStyle: getRegularStyle(context),
                       border: InputBorder.none,
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(color: greyColor),
-                        borderRadius: BorderRadius.circular(30),
+                        borderRadius: BorderRadius.circular(20.r),
                       ),
                     ),
                     onFieldSubmitted: (value) {
@@ -48,25 +53,20 @@ class ShopView extends StatelessWidget {
                     },
                   ),
                 ),
+                Gap(1.w),
                 IconButton(
                   onPressed: () {
                     controller.getShopProducts(firstTime: true);
                   },
                   icon: Icon(
                     CupertinoIcons.search,
+                    size: context.isTablet ? 13.w : 18.w,
                     color: blackColor,
                   ),
                 ),
               ],
             ),
             backgroundColor: whiteColor,
-            // bottom: PreferredSize(
-            //   preferredSize: Size.fromHeight(1.h),
-            //   child: Container(
-            //     height: 1.h,
-            //     color: dividerColor,
-            //   ),
-            // ),
             actions: [
               Container(
                 margin: EdgeInsetsDirectional.only(end: 8.w),
@@ -77,7 +77,7 @@ class ShopView extends StatelessWidget {
                   icon: Icon(
                     CupertinoIcons.shopping_cart,
                     color: blackColor,
-                    size: 24.sp,
+                    size: context.isTablet ? 16.w : 24.w,
                   ),
                 ),
               ),
@@ -89,6 +89,7 @@ class ShopView extends StatelessWidget {
                   },
                   icon: SvgPicture.asset(
                     'assets/svgs/bag2.svg',
+                    width: context.isTablet ? 16.w : 24.w,
                   ),
                 ),
               ),
@@ -136,7 +137,7 @@ class ShopView extends StatelessWidget {
                                     english:
                                         controller.shopCategories[index].nameEn,
                                   ),
-                                  style: getLightStyle.copyWith(
+                                  style: getLightStyle(context).copyWith(
                                     fontWeight: controller.selectedCategory ==
                                             controller.shopCategories[index]
                                         ? FontManager.boldFontWeight
@@ -145,7 +146,7 @@ class ShopView extends StatelessWidget {
                                             controller.shopCategories[index]
                                         ? primaryColor
                                         : greyColor,
-                                    fontSize: 9.5.sp,
+                                    fontSize: context.isTablet ? 7.sp : 9.5.sp,
                                   ),
                                 )
                               ],
@@ -188,7 +189,7 @@ class ShopView extends StatelessWidget {
                                 ? Icons.arrow_back_ios_new
                                 : Icons.arrow_forward_ios_outlined,
                             color: whiteColor,
-                            size: 16.sp,
+                            size: context.isTablet ? 12.sp : 16.sp,
                           ),
                         ),
                       ),
@@ -202,7 +203,10 @@ class ShopView extends StatelessWidget {
                   child: GridView.builder(
                     padding: EdgeInsets.all(10),
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
+                      crossAxisCount:
+                          context.isTablet && !controller.showCategories
+                              ? 3
+                              : 2,
                       crossAxisSpacing: 10.w,
                       mainAxisSpacing: 15.h,
                       childAspectRatio: 1 / 1.2,

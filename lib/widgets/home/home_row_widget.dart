@@ -11,13 +11,16 @@ class HomeRowWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title,
-            style: TextStyle(
-                color: Colors.black87,
-                fontWeight: FontWeight.w500,
-                fontSize: 17.sp)),
-        Spacer(),
+        Text(
+          title,
+          style: TextStyle(
+            color: Colors.black87,
+            fontWeight: FontWeight.w500,
+            fontSize: context.isTablet ? 13.sp : 17.sp,
+          ),
+        ),
         InkWell(
           onTap: onTap,
           child: Row(
@@ -25,14 +28,15 @@ class HomeRowWidget extends StatelessWidget {
               Text(
                 "See all".tr,
                 style: TextStyle(
-                    color: primaryColor,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16.sp),
+                  color: primaryColor,
+                  fontWeight: FontWeight.w500,
+                  fontSize: context.isTablet ? 11.sp : 16.sp,
+                ),
               ),
               Gap(10),
               Icon(
                 Icons.arrow_forward_ios,
-                size: 15.sp,
+                size: 12.w,
                 color: primaryColor,
               )
             ],

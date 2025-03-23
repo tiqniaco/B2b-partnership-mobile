@@ -139,7 +139,7 @@ class ServiceRequestDetails extends StatelessWidget {
                                 // ),
                                 Text(
                                   controller.model.countryFlag!,
-                                  style: getMediumStyle,
+                                  style: getMediumStyle(context),
                                 ),
                                 Gap(10),
                                 Text(

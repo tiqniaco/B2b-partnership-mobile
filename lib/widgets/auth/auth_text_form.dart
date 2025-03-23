@@ -1,28 +1,30 @@
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/utils/font_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class AuthTextForm extends StatelessWidget {
-  const AuthTextForm(
-      {super.key,
-      required this.hintText,
-      this.suficon,
-      this.textFormController,
-      this.validator,
-      this.keyboardType,
-      this.obscureText,
-      this.preicon,
-      this.onTapIconsuf,
-      this.sufcolor,
-      required this.lable,
-      this.formBorderColor = pageColor,
-      this.minLines,
-      this.maxLines,
-      this.sufix,
-      this.enabled});
+  const AuthTextForm({
+    super.key,
+    required this.hintText,
+    this.suficon,
+    this.textFormController,
+    this.validator,
+    this.keyboardType,
+    this.obscureText,
+    this.preicon,
+    this.onTapIconsuf,
+    this.sufcolor,
+    required this.lable,
+    this.formBorderColor = pageColor,
+    this.minLines,
+    this.maxLines,
+    this.sufix,
+    this.enabled,
+  });
   final Color? sufcolor;
   final String hintText;
   final IconData? suficon;
@@ -58,17 +60,18 @@ class AuthTextForm extends StatelessWidget {
         floatingLabelBehavior: FloatingLabelBehavior.always,
         contentPadding: EdgeInsets.symmetric(
           horizontal: context.isTablet ? 10.w : 12.w,
-          vertical: context.isTablet ? 15.h : 12.h,
+          vertical: 12.h,
         ),
         label: Text(
           lable!,
-          style: TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 17.sp,
-              color: Colors.black87),
+          style: getMediumStyle(context).copyWith(
+            color: Colors.black87,
+          ),
         ),
-        floatingLabelStyle: getRegularStyle,
-        labelStyle: TextStyle(fontSize: 18.sp),
+        floatingLabelStyle: getRegularStyle(context),
+        labelStyle: getSemiBoldStyle(context).copyWith(
+          fontWeight: FontManager.regularFontWeight,
+        ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(7.r),
           borderSide: const BorderSide(color: blackColor, width: 1),
@@ -91,11 +94,11 @@ class AuthTextForm extends StatelessWidget {
           borderRadius: BorderRadius.circular(7.0),
         ),
         hintText: hintText.tr,
-        hintStyle: TextStyle(
-            fontSize: 12.sp,
-            color: greyColor.withAlpha(160),
-            fontWeight: FontWeight.bold),
-        errorStyle: TextStyle(fontSize: 10.sp),
+        hintStyle: getLightStyle(context).copyWith(
+          color: greyColor.withAlpha(160),
+          fontWeight: FontWeight.bold,
+        ),
+        errorStyle: getLightStyle(context),
       ),
     );
   }

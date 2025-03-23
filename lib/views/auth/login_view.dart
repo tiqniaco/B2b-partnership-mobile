@@ -5,6 +5,7 @@ import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart'
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/utils/assets_data.dart';
+import 'package:b2b_partenership/core/utils/font_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -59,7 +60,7 @@ class LoginView extends StatelessWidget {
                                 ListTile(
                                   title: Text(
                                     "English",
-                                    style: getRegularStyle,
+                                    style: getRegularStyle(context),
                                   ),
                                   leading: Image.asset(
                                     AssetsData.englishImage,
@@ -75,7 +76,7 @@ class LoginView extends StatelessWidget {
                                 ListTile(
                                   title: Text(
                                     'العربية',
-                                    style: getRegularStyle,
+                                    style: getRegularStyle(context),
                                   ),
                                   leading: Image.asset(
                                     AssetsData.arabicImage,
@@ -99,7 +100,7 @@ class LoginView extends StatelessWidget {
                               Get.locale?.languageCode == 'ar'
                                   ? 'العربية'
                                   : 'English',
-                              style: getRegularStyle.copyWith(
+                              style: getRegularStyle(context).copyWith(
                                 shadows: [
                                   const Shadow(
                                     blurRadius: 10.0,
@@ -145,15 +146,11 @@ class LoginView extends StatelessWidget {
                           Gap(10.h),
                           Text(
                             "Welcome Back!".tr,
-                            style: TextStyle(
-                                fontSize: 17.sp,
-                                color: blackColor,
-                                fontWeight: FontWeight.w500),
+                            style: getSemiBoldStyle(context),
                           ),
                           Text(
                             "Login with your email or phone and password".tr,
-                            style: TextStyle(
-                              fontSize: 10.sp,
+                            style: getLightStyle(context).copyWith(
                               color: Colors.black54,
                             ),
                           ),
@@ -195,9 +192,7 @@ class LoginView extends StatelessWidget {
                                 },
                                 child: Text(
                                   "Forget Password?".tr,
-                                  style: TextStyle(
-                                    fontSize: 13.sp,
-                                    color: blackColor,
+                                  style: getRegularStyle(context).copyWith(
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
@@ -222,8 +217,8 @@ class LoginView extends StatelessWidget {
                             children: [
                               Text(
                                 "Don't have account?".tr,
-                                style: TextStyle(
-                                  fontSize: 12.sp,
+                                style: getRegularStyle(context).copyWith(
+                                  fontWeight: FontManager.regularFontWeight,
                                   color: Colors.black54,
                                 ),
                               ),
@@ -234,8 +229,7 @@ class LoginView extends StatelessWidget {
                                 },
                                 child: Text(
                                   "Create New".tr,
-                                  style: TextStyle(
-                                    fontSize: 13.sp,
+                                  style: getMediumStyle(context).copyWith(
                                     fontWeight: FontWeight.w500,
                                     color: blackColor,
                                   ),

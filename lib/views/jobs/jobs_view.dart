@@ -20,6 +20,7 @@ class JobsView extends StatelessWidget {
       builder: (JobsController controller) {
         return Scaffold(
           appBar: AppBar(
+            toolbarHeight: context.isTablet ? 40.h : null,
             backgroundColor: primaryColor,
             iconTheme: IconThemeData(
               color: whiteColor,
@@ -27,7 +28,7 @@ class JobsView extends StatelessWidget {
             centerTitle: true,
             title: Text(
               "JOBS".tr,
-              style: getSemiBoldStyle.copyWith(
+              style: getSemiBoldStyle(context).copyWith(
                 letterSpacing: 1.5.w,
                 color: whiteColor,
               ),
@@ -51,9 +52,16 @@ class JobsView extends StatelessWidget {
                           child: TextFormField(
                             controller: controller.searchController,
                             decoration: InputDecoration(
-                              labelText: "Search...".tr,
+                              contentPadding: EdgeInsets.symmetric(
+                                horizontal: 12.w,
+                                vertical: 12.h,
+                              ),
+                              labelText: "Search".tr,
+                              labelStyle: getMediumStyle(context).copyWith(
+                                color: hintColor,
+                              ),
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(8.r),
                               ),
                               suffixIcon: Row(
                                 mainAxisSize: MainAxisSize.min,
@@ -62,22 +70,24 @@ class JobsView extends StatelessWidget {
                                     icon: Icon(
                                       FontAwesomeIcons.sliders,
                                       color: primaryColor,
-                                      size: 16.sp,
+                                      size: context.isTablet ? 10.w : 16.w,
                                     ),
                                     onPressed: () {
                                       controller.showFilterDialog();
                                     },
                                   ),
+                                  if (context.isTablet) Gap(4.w),
                                   IconButton(
                                     icon: Icon(
                                       FontAwesomeIcons.magnifyingGlass,
                                       color: primaryColor,
-                                      size: 16.sp,
+                                      size: context.isTablet ? 10.w : 16.w,
                                     ),
                                     onPressed: () {
                                       controller.getJobs(refresh: true);
                                     },
                                   ),
+                                  if (context.isTablet) Gap(6.w),
                                 ],
                               ),
                             ),

@@ -1,6 +1,7 @@
 import 'package:b2b_partenership/controller/search/search_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/models/country_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,10 +21,13 @@ class SelectCountryFilter extends StatelessWidget {
       builder: (controller) => DropdownButtonFormField<CountryModel>(
         // value: controller.selectedCountry,
         isExpanded: true,
+
         decoration: InputDecoration(
           enabled: enabled,
-          contentPadding:
-              EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
+          contentPadding: EdgeInsets.symmetric(
+            vertical: context.isTablet ? 8.h : 10.h,
+            horizontal: 12.w,
+          ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(7.r),
             borderSide: const BorderSide(color: blackColor, width: 1),
@@ -33,17 +37,21 @@ class SelectCountryFilter extends StatelessWidget {
             borderSide: const BorderSide(color: pageColor, width: 1.5),
           ),
           hintText: "All Countries".tr,
+          hintStyle: getMediumStyle(context).copyWith(
+            fontWeight: FontWeight.w500,
+            color: hintColor,
+          ),
           label: Text(
             'Select Country'.tr,
-            style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 17.sp,
-                color: Colors.black87),
+            style: getMediumStyle(context).copyWith(
+              fontWeight: FontWeight.w500,
+              color: Colors.black87,
+            ),
           ),
         ),
         icon: Icon(
           Icons.keyboard_arrow_down_outlined,
-          size: 23.sp,
+          size: 23.r,
           color: greyColor,
         ),
         items: controller.countries.map((item) {
@@ -53,8 +61,7 @@ class SelectCountryFilter extends StatelessWidget {
               children: [
                 Text(
                   item.flag!,
-                  style: TextStyle(
-                      fontSize: 16.sp,
+                  style: getMediumStyle(context).copyWith(
                       color: greyColor.withAlpha(160),
                       fontWeight: FontWeight.bold),
                 ),
@@ -62,8 +69,7 @@ class SelectCountryFilter extends StatelessWidget {
                 Text(
                   translateDatabase(
                       arabic: item.nameAr!, english: item.nameEn!),
-                  style: TextStyle(
-                      fontSize: 12.sp,
+                  style: getMediumStyle(context).copyWith(
                       color: greyColor.withAlpha(160),
                       fontWeight: FontWeight.bold),
                 ),

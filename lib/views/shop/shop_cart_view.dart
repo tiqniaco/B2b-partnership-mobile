@@ -6,6 +6,7 @@ import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/utils/font_manager.dart';
 import 'package:b2b_partenership/widgets/please_login_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -71,15 +72,13 @@ class ShopCartView extends StatelessWidget {
                     ),
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: getRegularStyle.copyWith(
-                      fontSize: 14.sp,
-                    ),
+                    style: getRegularStyle(context),
                   ),
                   subtitle: Text(
                     '${double.parse(controller.carts[index].product.price) - (double.parse(controller.carts[index].product.price) * double.parse(controller.carts[index].product.discount) / 100)}\$',
-                    style: getSemiBoldStyle.copyWith(
+                    style: getRegularStyle(context).copyWith(
                       color: primaryColor,
-                      fontSize: 13.sp,
+                      fontWeight: FontManager.semiBoldFontWeight,
                     ),
                   ),
                   trailing: IconButton(
@@ -112,14 +111,14 @@ class ShopCartView extends StatelessWidget {
                   children: [
                     Text(
                       "Total: ".tr,
-                      style: getSemiBoldStyle.copyWith(
-                        fontSize: 16.sp,
+                      style: getMediumStyle(context).copyWith(
+                        fontWeight: FontManager.semiBoldFontWeight,
                       ),
                     ),
                     Text(
                       "${controller.calculateTotalPrice()}\$",
-                      style: getSemiBoldStyle.copyWith(
-                        fontSize: 16.sp,
+                      style: getMediumStyle(context).copyWith(
+                        fontWeight: FontManager.semiBoldFontWeight,
                         color: primaryColor,
                       ),
                     ),

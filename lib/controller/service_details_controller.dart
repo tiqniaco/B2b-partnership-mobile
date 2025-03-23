@@ -103,7 +103,7 @@ class ServiceDetailsController extends GetxController {
 
   contactMethods() {
     Get.defaultDialog(
-        titleStyle: getMediumStyle,
+        titleStyle: getMediumStyle(Get.context!),
         title: "Contact with",
         content: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.w),

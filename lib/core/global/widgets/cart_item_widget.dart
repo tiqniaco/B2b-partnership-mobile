@@ -56,7 +56,7 @@ class CartItemWidget extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: getBoldStyle.copyWith(
+                    style: getBoldStyle(context).copyWith(
                       fontSize: 16.sp,
                     ),
                     maxLines: 2,
@@ -64,8 +64,7 @@ class CartItemWidget extends StatelessWidget {
                   Gap(4.h),
                   Text(
                     '${AppStrings.EGP.tr} $price',
-                    style: getRegularStyle.copyWith(
-                      fontSize: 14.sp,
+                    style: getRegularStyle(context).copyWith(
                       color: primaryColor,
                     ),
                   ),
@@ -99,15 +98,11 @@ class CartItemWidget extends StatelessWidget {
                 if (fromOrderDetails)
                   Text(
                     AppStrings.quantity.tr,
-                    style: getBoldStyle.copyWith(
-                      fontSize: 14.sp,
-                    ),
+                    style: getBoldStyle(context),
                   ),
                 Text(
                   '$quantity',
-                  style: getBoldStyle.copyWith(
-                    fontSize: 16.sp,
-                  ),
+                  style: getBoldStyle(context),
                 ),
                 if (!fromOrderDetails)
                   InkWell(

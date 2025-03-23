@@ -1,5 +1,7 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/utils/font_manager.dart';
 import 'package:b2b_partenership/models/provider_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +11,11 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 class ProviderWidget extends StatelessWidget {
-  const ProviderWidget(
-      {super.key, required this.provider, required this.toggleFavorite});
+  const ProviderWidget({
+    super.key,
+    required this.provider,
+    required this.toggleFavorite,
+  });
   final ProviderModel provider;
   final void Function() toggleFavorite;
   @override
@@ -21,7 +26,7 @@ class ProviderWidget extends StatelessWidget {
             arguments: {"id": provider.providerId.toString()});
       },
       child: Container(
-        width: 145.h,
+        width: context.isTablet ? 95.w : 140.w,
         height: 90.h,
         padding: EdgeInsets.all(15),
         decoration: BoxDecoration(
@@ -37,45 +42,46 @@ class ProviderWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(10),
                   child: CachedNetworkImage(
                     imageUrl: provider.image!,
-                    height: 70.h,
-                    width: 95.h,
-                    fit: BoxFit.cover,
+                    height: 90.h,
+                    fit: BoxFit.fitHeight,
                   ),
                 ),
-                Gap(5),
+                Gap(4.h),
                 Column(
                   children: [
                     Text(
                       provider.name!,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w600),
+                      style: getRegularStyle(context).copyWith(
+                        fontWeight: FontWeight.w600,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     PannableRatingBar(
                       rate: double.parse(provider.rating!),
                       items: List.generate(
-                          5,
-                          (index) => RatingWidget(
-                                selectedColor: Colors.amber,
-                                unSelectedColor: Colors.grey,
-                                child: Icon(
-                                  Icons.star,
-                                  size: 15.sp,
-                                ),
-                              )),
+                        5,
+                        (index) => RatingWidget(
+                          selectedColor: Colors.amber,
+                          unSelectedColor: Colors.grey,
+                          child: Icon(
+                            Icons.star,
+                            size: context.isTablet ? 12.w : 15.w,
+                          ),
+                        ),
+                      ),
                       onHover: (value) {},
                     ),
+                    Gap(2.h),
                     Text(
                       provider.bio!,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                          color: Colors.black54,
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.normal),
+                      style: getLightStyle(context).copyWith(
+                        color: Colors.black54,
+                        fontSize: context.isTablet ? 8.sp : 12.sp,
+                        fontWeight: FontWeight.normal,
+                      ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -98,7 +104,7 @@ class ProviderWidget extends StatelessWidget {
                         ? InkWell(
                             onTap: toggleFavorite,
                             child: Icon(
-                              size: 17.sp,
+                              size: context.isTablet ? 12.sp : 17.sp,
                               Icons.bookmarks,
                               color: primaryColor,
                             ),
@@ -106,7 +112,7 @@ class ProviderWidget extends StatelessWidget {
                         : InkWell(
                             onTap: toggleFavorite,
                             child: Icon(
-                              size: 17.sp,
+                              size: context.isTablet ? 12.sp : 17.sp,
                               Icons.bookmarks_outlined,
                               color: Colors.black54,
                             ),
@@ -116,22 +122,31 @@ class ProviderWidget extends StatelessWidget {
                 Gap(10.w),
                 Expanded(
                   child: SizedBox(
-                    width: 80.w,
-                    height: 32.h,
+                    height: context.isTablet ? 28.h : 32.h,
                     child: ElevatedButton(
-                        style: ButtonStyle(
-                            padding: WidgetStatePropertyAll(
-                                EdgeInsets.symmetric(horizontal: 0))),
-                        onPressed: () {
-                          Get.toNamed(AppRoutes.providerProfile, arguments: {
-                            "id": provider.providerId.toString()
-                          });
-                        },
-                        child: Text(
-                          "View".tr,
-                          style: TextStyle(
-                              fontSize: 11.sp, fontWeight: FontWeight.bold),
-                        )),
+                      style: ButtonStyle(
+                        padding: WidgetStatePropertyAll(
+                          EdgeInsets.symmetric(
+                            horizontal: 0,
+                          ),
+                        ),
+                      ),
+                      onPressed: () {
+                        Get.toNamed(
+                          AppRoutes.providerProfile,
+                          arguments: {
+                            "id": provider.providerId.toString(),
+                          },
+                        );
+                      },
+                      child: Text(
+                        "View".tr,
+                        style: getLightStyle(context).copyWith(
+                          fontWeight: FontManager.boldFontWeight,
+                          color: whiteColor,
+                        ),
+                      ),
+                    ),
                   ),
                 )
               ],

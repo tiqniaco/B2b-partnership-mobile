@@ -34,7 +34,7 @@ class NotificationWidget extends GetView<NotifyController> {
               children: [
                 Text(
                   model.title,
-                  style: getRegularStyle.copyWith(
+                  style: getRegularStyle(context).copyWith(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -43,7 +43,7 @@ class NotificationWidget extends GetView<NotifyController> {
                     model.createdAt,
                   ),
                   //model.notificationsDate!,
-                  style: getLightStyle.copyWith(
+                  style: getLightStyle(context).copyWith(
                     color: primaryColor,
                   ),
                 ),
@@ -53,9 +53,7 @@ class NotificationWidget extends GetView<NotifyController> {
               model.message,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
-              style: getRegularStyle.copyWith(
-                fontSize: context.isTablet ? 7.sp : 13.sp,
-              ),
+              style: getRegularStyle(context),
             ),
           ],
         ),

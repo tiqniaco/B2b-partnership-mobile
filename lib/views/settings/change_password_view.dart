@@ -31,7 +31,7 @@ class ChangePasswordView extends StatelessWidget {
                     Text(
                       "Please enter your old, new and confirm new Password".tr,
                       textAlign: TextAlign.center,
-                      style: getMediumStyle.copyWith(height: 1.5),
+                      style: getMediumStyle(context).copyWith(height: 1.5),
                       maxLines: 3,
                     ),
                     Gap(25.h),

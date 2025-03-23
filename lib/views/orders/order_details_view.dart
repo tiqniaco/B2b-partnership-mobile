@@ -77,7 +77,7 @@ class OrderDetailsView extends StatelessWidget {
                             Divider(),
                             Text(
                               "${"Order Items".tr}:",
-                              style: getSemiBoldStyle.copyWith(
+                              style: getSemiBoldStyle(context).copyWith(
                                 fontWeight: FontManager.boldFontWeight,
                                 color: primaryColor,
                               ),
@@ -148,13 +148,13 @@ class OrderDetailsItemWidget extends StatelessWidget {
         children: [
           Text(
             title,
-            style: getMediumStyle.copyWith(
+            style: getMediumStyle(context).copyWith(
               fontWeight: FontManager.semiBoldFontWeight,
             ),
           ),
           Text(
             value,
-            style: getMediumStyle.copyWith(
+            style: getMediumStyle(context).copyWith(
               fontWeight: FontManager.semiBoldFontWeight,
               color: primaryColor,
             ),

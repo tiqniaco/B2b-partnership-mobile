@@ -41,16 +41,16 @@ class JobApplicationDetailsView extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildJobInfo(controller),
+                  _buildJobInfo(controller, context),
                   SizedBox(height: 8.h),
-                  _buildApplicantInfo(controller),
+                  _buildApplicantInfo(controller, context),
                   SizedBox(height: 8.h),
                   if (Get.find<AppPreferences>().getUserRole() == "client") ...[
-                    _buildProviderInfo(controller),
+                    _buildProviderInfo(controller, context),
                   ],
                   if (Get.find<AppPreferences>().getUserRole() ==
                       "provider") ...[
-                    _buildClientInfo(controller),
+                    _buildClientInfo(controller, context),
                   ],
                   SizedBox(height: 10.h),
                   if (controller.showStatus)
@@ -67,7 +67,10 @@ class JobApplicationDetailsView extends StatelessWidget {
     );
   }
 
-  Widget _buildJobInfo(JobApplicationDetailsController controller) {
+  Widget _buildJobInfo(
+    JobApplicationDetailsController controller,
+    BuildContext context,
+  ) {
     return Card(
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -78,14 +81,14 @@ class JobApplicationDetailsView extends StatelessWidget {
           children: [
             Text(
               controller.model?.jobTitle ?? "",
-              style: getSemiBoldStyle.copyWith(
+              style: getSemiBoldStyle(context).copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 5.h),
             Text(
               "${controller.model?.jobContractType.text} | Gender: ${controller.model?.jobGender}",
-              style: getLightStyle.copyWith(
+              style: getLightStyle(context).copyWith(
                 color: darkGreyColor,
                 fontWeight: FontWeight.w400,
               ),
@@ -93,7 +96,7 @@ class JobApplicationDetailsView extends StatelessWidget {
             SizedBox(height: 10.h),
             ReadMoreText(
               controller.model?.jobDescription ?? "",
-              style: getLightStyle.copyWith(
+              style: getLightStyle(context).copyWith(
                 color: blackColor,
               ),
             ),
@@ -103,7 +106,8 @@ class JobApplicationDetailsView extends StatelessWidget {
     );
   }
 
-  Widget _buildApplicantInfo(JobApplicationDetailsController controller) {
+  Widget _buildApplicantInfo(
+      JobApplicationDetailsController controller, BuildContext context) {
     return Card(
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -114,7 +118,7 @@ class JobApplicationDetailsView extends StatelessWidget {
           children: [
             Text(
               "Applicant Info",
-              style: getRegularStyle.copyWith(
+              style: getRegularStyle(context).copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -122,31 +126,35 @@ class JobApplicationDetailsView extends StatelessWidget {
             _buildInfoRow(
               "Years of Experience",
               controller.model?.yearsOfExperience ?? "",
+              context: context,
             ),
             Divider(),
             _buildInfoRow(
               "Expected Salary",
               "\$${controller.model!.expectedSalary}",
+              context: context,
             ),
             Divider(),
-            _buildInfoRow(
-              "Available Start Date",
-              controller.model?.availableToStartDate ?? "",
-            ),
+            _buildInfoRow("Available Start Date",
+                controller.model?.availableToStartDate ?? "",
+                context: context),
             Divider(),
             _buildInfoRow(
               "Skills",
               controller.model?.jobSkills ?? "",
+              context: context,
             ),
             Divider(),
             _buildInfoRow(
               "Why Ideal?",
               controller.model?.whyIdealCandidate ?? "",
+              context: context,
             ),
             Divider(),
             _buildInfoRow(
               "Cover Letter",
               controller.model?.coverLetter ?? "",
+              context: context,
             ),
             Divider(),
             Row(
@@ -154,7 +162,7 @@ class JobApplicationDetailsView extends StatelessWidget {
               children: [
                 Text(
                   "Resume",
-                  style: getLightStyle.copyWith(
+                  style: getLightStyle(context).copyWith(
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -181,7 +189,8 @@ class JobApplicationDetailsView extends StatelessWidget {
     );
   }
 
-  Widget _buildProviderInfo(JobApplicationDetailsController controller) {
+  Widget _buildProviderInfo(
+      JobApplicationDetailsController controller, BuildContext context) {
     return Card(
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -204,7 +213,7 @@ class JobApplicationDetailsView extends StatelessWidget {
                   children: [
                     Text(
                       controller.model?.providerName ?? "",
-                      style: getMediumStyle.copyWith(
+                      style: getMediumStyle(context).copyWith(
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -222,18 +231,19 @@ class JobApplicationDetailsView extends StatelessWidget {
             _buildInfoRow(
               "Phone",
               "+${controller.model?.providerCountryCode ?? ""} ${controller.model?.providerPhone ?? ""}",
+              context: context,
             ),
-            _buildInfoRow(
-              "Rating",
-              "⭐ ${double.parse(controller.model?.providerRating ?? "0")}",
-            ),
+            _buildInfoRow("Rating",
+                "⭐ ${double.parse(controller.model?.providerRating ?? "0")}",
+                context: context),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildClientInfo(JobApplicationDetailsController controller) {
+  Widget _buildClientInfo(
+      JobApplicationDetailsController controller, BuildContext context) {
     return Card(
       elevation: 3,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
@@ -244,7 +254,7 @@ class JobApplicationDetailsView extends StatelessWidget {
           children: [
             Text(
               "Client Info",
-              style: getRegularStyle.copyWith(
+              style: getRegularStyle(context).copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -262,14 +272,14 @@ class JobApplicationDetailsView extends StatelessWidget {
                     children: [
                       SizedBox(height: 5.h),
                       _buildClientInfoRow(
-                        "Name",
-                        controller.model?.clientName ?? "",
-                      ),
+                          "Name", controller.model?.clientName ?? "",
+                          context: context),
                       Divider(),
                       _buildClientInfoRow(
                         "Email",
                         controller.model?.clientEmail ?? "",
                         icon: FontAwesomeIcons.envelope,
+                        context: context,
                         onTap: () {
                           if (controller.model?.clientEmail != null) {
                             launchUrlString(
@@ -283,6 +293,7 @@ class JobApplicationDetailsView extends StatelessWidget {
                         "Phone",
                         "+${controller.model?.clientCountryCode ?? ""} ${controller.model?.clientPhone ?? ""}",
                         icon: FontAwesomeIcons.phone,
+                        context: context,
                         onTap: () {
                           if (controller.model?.clientPhone != null) {
                             launchUrlString(
@@ -302,7 +313,11 @@ class JobApplicationDetailsView extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoRow(String title, String value) {
+  Widget _buildInfoRow(
+    String title,
+    String value, {
+    required BuildContext context,
+  }) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 4.h),
       child: Row(
@@ -310,7 +325,7 @@ class JobApplicationDetailsView extends StatelessWidget {
         children: [
           Text(
             title,
-            style: getLightStyle.copyWith(
+            style: getLightStyle(context).copyWith(
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -319,7 +334,7 @@ class JobApplicationDetailsView extends StatelessWidget {
             child: ReadMoreText(
               value,
               trimLines: 1,
-              style: getLightStyle.copyWith(
+              style: getLightStyle(context).copyWith(
                 fontWeight: FontWeight.w400,
                 color: Colors.black87,
                 fontSize: 10.sp,
@@ -343,7 +358,7 @@ class JobApplicationDetailsView extends StatelessWidget {
         ),
         child: Text(
           status.name.toUpperCase(),
-          style: getLightStyle.copyWith(
+          style: getLightStyle(Get.context!).copyWith(
             color: status.color,
             fontWeight: FontWeight.bold,
           ),
@@ -357,6 +372,7 @@ class JobApplicationDetailsView extends StatelessWidget {
     String value, {
     void Function()? onTap,
     IconData? icon,
+    required BuildContext context,
   }) {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 4.h),
@@ -365,7 +381,7 @@ class JobApplicationDetailsView extends StatelessWidget {
         children: [
           Text(
             title,
-            style: getLightStyle.copyWith(
+            style: getLightStyle(context).copyWith(
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -374,7 +390,7 @@ class JobApplicationDetailsView extends StatelessWidget {
             child: ReadMoreText(
               value,
               trimLines: 1,
-              style: getLightStyle.copyWith(
+              style: getLightStyle(context).copyWith(
                 fontWeight: FontWeight.w400,
                 color: Colors.black87,
                 fontSize: 10.sp,

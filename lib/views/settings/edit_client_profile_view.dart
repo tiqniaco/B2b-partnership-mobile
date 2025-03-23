@@ -192,7 +192,7 @@ class EditClientProfileView extends StatelessWidget {
                                           // )
                                           Text(
                                             controller.selectedCountry.flag!,
-                                            style: getMediumStyle,
+                                            style: getMediumStyle(context),
                                           ),
                                           Gap(6),
                                           Text(

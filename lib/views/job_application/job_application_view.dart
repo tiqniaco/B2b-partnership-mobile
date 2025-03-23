@@ -46,6 +46,7 @@ class JobApplicationView extends StatelessWidget {
               child: ListView(
                 children: [
                   _buildTextField(
+                    context: context,
                     label: "Years of Experience".tr,
                     hint: "ex: 2".tr,
                     maxLines: 1,
@@ -54,6 +55,7 @@ class JobApplicationView extends StatelessWidget {
                     keyboardType: TextInputType.number,
                   ),
                   _buildTextField(
+                    context: context,
                     label: "Cover Letter".tr,
                     hint: "enter your cover letter".tr,
                     formatter: FilteringTextInputFormatter.allow(
@@ -68,6 +70,7 @@ class JobApplicationView extends StatelessWidget {
                     maxLines: null,
                   ),
                   _buildTextField(
+                    context: context,
                     label: "Skills".tr,
                     hint: "enter your skills".tr,
                     formatter: FilteringTextInputFormatter.allow(
@@ -79,6 +82,7 @@ class JobApplicationView extends StatelessWidget {
                     keyboardType: TextInputType.text,
                   ),
                   _buildTextField(
+                    context: context,
                     label: "Available to Start Date".tr,
                     hint: "enter your available to start date".tr,
                     controller: controller.availableToStartDateController,
@@ -100,6 +104,7 @@ class JobApplicationView extends StatelessWidget {
                     },
                   ),
                   _buildTextField(
+                    context: context,
                     label: "Expected Salary".tr,
                     formatter: FilteringTextInputFormatter.digitsOnly,
                     hint: "enter your expected salary (numbers only)".tr,
@@ -107,6 +112,7 @@ class JobApplicationView extends StatelessWidget {
                     keyboardType: TextInputType.number,
                   ),
                   _buildTextField(
+                    context: context,
                     label:
                         "What makes you the ideal candidate for this position?"
                             .tr,
@@ -122,7 +128,7 @@ class JobApplicationView extends StatelessWidget {
                     keyboardType: TextInputType.multiline,
                     maxLines: null,
                   ),
-                  _buildResumeUpload(controller),
+                  _buildResumeUpload(controller, context),
                   Gap(20.h),
                   CustomLoadingButton(
                     text: 'Submit Application'.tr,
@@ -140,6 +146,7 @@ class JobApplicationView extends StatelessWidget {
   }
 
   Widget _buildTextField({
+    required BuildContext context,
     required String label,
     required String hint,
     required TextEditingController controller,
@@ -157,7 +164,7 @@ class JobApplicationView extends StatelessWidget {
         children: [
           Text(
             label,
-            style: getLightStyle.copyWith(
+            style: getLightStyle(context).copyWith(
               fontWeight: FontManager.semiBoldFontWeight,
             ),
           ),
@@ -171,7 +178,7 @@ class JobApplicationView extends StatelessWidget {
             maxLines: maxLines,
             decoration: InputDecoration(
               hintText: hint,
-              hintStyle: getLightStyle.copyWith(
+              hintStyle: getLightStyle(context).copyWith(
                 color: greyColor,
               ),
             ),
@@ -188,7 +195,8 @@ class JobApplicationView extends StatelessWidget {
     );
   }
 
-  Widget _buildResumeUpload(JobApplicationController controller) {
+  Widget _buildResumeUpload(
+      JobApplicationController controller, BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Column(
@@ -196,7 +204,7 @@ class JobApplicationView extends StatelessWidget {
         children: [
           Text(
             "Upload Resume".tr,
-            style: getLightStyle.copyWith(
+            style: getLightStyle(context).copyWith(
               fontWeight: FontManager.semiBoldFontWeight,
             ),
           ),
@@ -216,7 +224,7 @@ class JobApplicationView extends StatelessWidget {
                 ),
                 child: Text(
                   "Choose File".tr,
-                  style: getRegularStyle.copyWith(
+                  style: getRegularStyle(context).copyWith(
                     color: whiteColor,
                   ),
                 ),
@@ -225,7 +233,7 @@ class JobApplicationView extends StatelessWidget {
               if (controller.resumeFile != null)
                 Text(
                   controller.resumeFile?.path.split('/').last ?? '',
-                  style: getLightStyle.copyWith(
+                  style: getLightStyle(context).copyWith(
                     color: primaryColor,
                   ),
                 ),

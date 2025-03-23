@@ -63,32 +63,32 @@ class JobWidget extends StatelessWidget {
                 children: [
                   Text(
                     "${"Company".tr}: ${model.name}",
-                    style: getRegularStyle.copyWith(
+                    style: getRegularStyle(context).copyWith(
                       fontWeight: FontManager.mediumFontWeight,
                     ),
                   ),
                   Gap(3.h),
                   Text(
                     "${"Job Title".tr}: ${model.title}",
-                    style: getRegularStyle.copyWith(
+                    style: getRegularStyle(context).copyWith(
                       fontWeight: FontManager.mediumFontWeight,
                     ),
                   ),
                   Gap(3.h),
                   Text(
                     "${"Contract Type".tr}: ${model.contractType.text}",
-                    style: getLightStyle,
+                    style: getLightStyle(context),
                   ),
                   Gap(3.h),
                   Text(
                     "${"Expiry Date".tr}: ${model.expiryDate}",
-                    style: getLightStyle,
+                    style: getLightStyle(context),
                   ),
                   if (model.salary != "null") ...[
                     Gap(5.h),
                     Text(
                       "${"Salary".tr}: ${model.salary}",
-                      style: getLightStyle,
+                      style: getLightStyle(context),
                     )
                   ],
                 ],

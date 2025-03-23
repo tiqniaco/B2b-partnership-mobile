@@ -23,7 +23,7 @@ class CustomErrorWidget extends StatelessWidget {
           Lottie.asset(
             AssetsData.serverErrorAnimation,
             repeat: false,
-            height: 0.21.sh,
+            height: 100.h,
           ),
           Text(
             message != null
@@ -31,10 +31,11 @@ class CustomErrorWidget extends StatelessWidget {
                 : Get.locale?.languageCode == 'ar'
                     ? 'حدث خطأ ما، يرجى المحاولة مرة أخرى'
                     : 'Error occurred, please try again later!',
-            style: getMediumStyle.copyWith(
+            style: getMediumStyle(context).copyWith(
               color: blackWithOpacityColor,
-              fontSize: 16.sp,
             ),
+            maxLines: 5,
+            textAlign: TextAlign.center,
           ),
         ],
       ),

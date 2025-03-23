@@ -110,7 +110,7 @@ class EditFeatureTextRowWidget extends StatelessWidget {
       children: [
         Text(
           title,
-          style: getLightStyle.copyWith(
+          style: getLightStyle(context).copyWith(
             fontWeight: FontManager.mediumFontWeight,
           ),
         ),
@@ -118,7 +118,7 @@ class EditFeatureTextRowWidget extends StatelessWidget {
         Expanded(
           child: Text(
             value,
-            style: getLightStyle.copyWith(
+            style: getLightStyle(context).copyWith(
               fontWeight: FontManager.semiBoldFontWeight,
             ),
             maxLines: 3,

@@ -1,7 +1,9 @@
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class BannerWidget extends StatelessWidget {
   const BannerWidget(
@@ -21,7 +23,7 @@ class BannerWidget extends StatelessWidget {
     return Container(
       decoration:
           BoxDecoration(border: Border.all(color: primaryColor, width: 0)),
-      height: 140.h,
+      height: context.isTablet ? 170.h : 140.h,
       width: double.infinity,
       child: Stack(
         children: [
@@ -34,16 +36,17 @@ class BannerWidget extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   title, //"Need Custom Service?",
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w600),
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: context.isTablet ? 12.sp : 16.sp,
+                  ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -53,25 +56,37 @@ class BannerWidget extends StatelessWidget {
                   textAlign: TextAlign.start,
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 13.sp,
+                      fontSize: context.isTablet ? 9.sp : 13.sp,
                       fontWeight: FontWeight.normal),
                 ),
                 Gap(8.h),
                 SizedBox(
                   height: 33.h,
+                  width: context.isTablet ? 65.w : 90.w,
                   child: ElevatedButton(
-                      style: ButtonStyle(
-                          padding: WidgetStatePropertyAll(
-                              EdgeInsets.symmetric(horizontal: 10)),
-                          backgroundColor: WidgetStatePropertyAll(whiteColor)),
-                      onPressed: onPressed,
-                      child: Text(
-                        buttonTitle,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 12.sp,
-                            color: blackColor),
-                      )),
+                    style: ButtonStyle(
+                      padding: WidgetStatePropertyAll(
+                        EdgeInsets.symmetric(
+                          horizontal: 10,
+                        ),
+                      ),
+                      backgroundColor: WidgetStatePropertyAll(
+                        whiteColor,
+                      ),
+                      shape: WidgetStatePropertyAll(
+                        RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8.r)),
+                      ),
+                    ),
+                    onPressed: onPressed,
+                    child: Text(
+                      buttonTitle,
+                      style: getLightStyle(context).copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: blackColor,
+                      ),
+                    ),
+                  ),
                 )
               ],
             ),

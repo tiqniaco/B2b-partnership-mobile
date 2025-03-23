@@ -40,7 +40,7 @@ class JobDetailsView extends StatelessWidget {
                       ),
                       label: Text(
                         "Apply Now".tr,
-                        style: getLightStyle.copyWith(
+                        style: getLightStyle(context).copyWith(
                           color: whiteColor,
                           fontWeight: FontManager.semiBoldFontWeight,
                         ),
@@ -52,7 +52,7 @@ class JobDetailsView extends StatelessWidget {
             child: CustomScrollView(
               slivers: [
                 SliverAppBar(
-                  expandedHeight: 250.h,
+                  expandedHeight: context.isTablet ? 300.h : 250.h,
                   floating: false,
                   pinned: true,
                   backgroundColor: primaryColor,
@@ -68,7 +68,7 @@ class JobDetailsView extends StatelessWidget {
                         Expanded(
                           child: Text(
                             controller.jobDetailsModel?.name ?? "",
-                            style: getRegularStyle.copyWith(
+                            style: getRegularStyle(context).copyWith(
                               color: whiteColor,
                               fontWeight: FontManager.mediumFontWeight,
                             ),
@@ -102,15 +102,15 @@ class JobDetailsView extends StatelessWidget {
                                 children: [
                                   Text(
                                     "Show Applications".tr,
-                                    style: getLightStyle.copyWith(
-                                      fontSize: 8.sp,
+                                    style: getLightStyle(context).copyWith(
+                                      fontSize: context.isTablet ? 4.sp : 8.sp,
                                       color: primaryColor,
                                       fontWeight: FontManager.mediumFontWeight,
                                     ),
                                   ),
                                   SvgPicture.asset(
                                     AssetsData.jobApplicationSVG,
-                                    height: 15.sp,
+                                    height: 15.w,
                                   ),
                                 ],
                               ),
@@ -123,7 +123,7 @@ class JobDetailsView extends StatelessWidget {
                       children: [
                         Image.network(
                           controller.jobDetailsModel?.image ?? "",
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fitWidth,
                         ),
                         Container(
                           color: Colors.black.withAlpha(70),
@@ -138,22 +138,26 @@ class JobDetailsView extends StatelessWidget {
                     delegate: SliverChildListDelegate(
                       [
                         _buildCard(
+                          context: context,
                           icon: FontAwesomeIcons.briefcase,
                           title: "Position".tr,
                           value: controller.jobDetailsModel?.title ?? "",
                         ),
                         _buildCard(
+                          context: context,
                           icon: FontAwesomeIcons.graduationCap,
                           title: "Specialization".tr,
                           value:
                               "${translateDatabase(arabic: controller.jobDetailsModel?.specializationNameAr ?? "", english: controller.jobDetailsModel?.specializationNameEn ?? "")}, ${translateDatabase(arabic: controller.jobDetailsModel?.subSpecializationNameAr ?? "", english: controller.jobDetailsModel?.subSpecializationNameEn ?? "")}",
                         ),
                         _buildCard(
+                          context: context,
                           icon: FontAwesomeIcons.fileLines,
                           title: "Description".tr,
                           value: controller.jobDetailsModel?.description ?? "",
                         ),
                         _buildCard(
+                          context: context,
                           icon: FontAwesomeIcons.briefcase,
                           title: "Contract Type".tr,
                           value:
@@ -161,21 +165,25 @@ class JobDetailsView extends StatelessWidget {
                                   "",
                         ),
                         _buildCard(
+                          context: context,
                           icon: FontAwesomeIcons.venusMars,
                           title: "Gender".tr,
                           value: controller.jobDetailsModel?.gender ?? "",
                         ),
                         _buildCard(
+                          context: context,
                           icon: FontAwesomeIcons.code,
                           title: "Skills Required".tr,
                           value: controller.jobDetailsModel?.skills ?? "",
                         ),
                         _buildCard(
+                          context: context,
                           icon: FontAwesomeIcons.userClock,
                           title: "Experience".tr,
                           value: controller.jobDetailsModel?.experience ?? "",
                         ),
                         _buildCard(
+                          context: context,
                           icon: FontAwesomeIcons.dollarSign,
                           title: "Salary".tr,
                           value: controller.jobDetailsModel!.salary == "null"
@@ -183,22 +191,26 @@ class JobDetailsView extends StatelessWidget {
                               : controller.jobDetailsModel!.salary,
                         ),
                         _buildCard(
+                          context: context,
                           icon: FontAwesomeIcons.calendarDays,
                           title: "Expiry Date".tr,
                           value: controller.jobDetailsModel?.expiryDate ?? "",
                         ),
                         _buildCard(
+                          context: context,
                           icon: FontAwesomeIcons.locationDot,
                           title: "Address".tr,
                           value:
                               "${translateDatabase(arabic: controller.jobDetailsModel?.countryNameAr ?? "", english: controller.jobDetailsModel?.countryNameEn ?? "")}, ${translateDatabase(arabic: controller.jobDetailsModel?.governmentNameAr ?? "", english: controller.jobDetailsModel?.governmentNameEn ?? "")}",
                         ),
                         _buildCard(
+                          context: context,
                           icon: FontAwesomeIcons.building,
                           title: "Company".tr,
                           value: controller.jobDetailsModel?.name ?? "",
                         ),
                         _buildCard(
+                          context: context,
                           icon: FontAwesomeIcons.phone,
                           title: "Phone".tr,
                           value:
@@ -216,6 +228,7 @@ class JobDetailsView extends StatelessWidget {
                           },
                         ),
                         _buildCard(
+                          context: context,
                           icon: FontAwesomeIcons.envelope,
                           title: "Email".tr,
                           value: controller.jobDetailsModel?.email ?? "",
@@ -232,6 +245,7 @@ class JobDetailsView extends StatelessWidget {
                           },
                         ),
                         _buildCard(
+                          context: context,
                           icon: FontAwesomeIcons.globe,
                           title: "Website".tr,
                           value:
@@ -264,6 +278,7 @@ class JobDetailsView extends StatelessWidget {
 
   /// 🔷 **Reusable Card UI**
   Widget _buildCard({
+    required BuildContext context,
     required IconData icon,
     required String title,
     required String value,
@@ -280,17 +295,17 @@ class JobDetailsView extends StatelessWidget {
         leading: Icon(
           icon,
           color: primaryColor,
-          size: 20.sp,
+          size: 20.r,
         ),
         title: Text(
           title,
-          style: getRegularStyle.copyWith(
+          style: getRegularStyle(context).copyWith(
             fontWeight: FontManager.boldFontWeight,
           ),
         ),
         subtitle: ReadMoreText(
           value,
-          style: getRegularStyle,
+          style: getRegularStyle(context),
           trimLines: 4,
           colorClickableText: primaryColor,
           trimMode: TrimMode.Line,
@@ -303,7 +318,7 @@ class JobDetailsView extends StatelessWidget {
                 icon: Icon(
                   arrowIcon ?? Icons.arrow_forward_ios_rounded,
                   color: arrowColor ?? primaryColor,
-                  size: 16.sp,
+                  size: 16.r,
                 ),
               )
             : null,

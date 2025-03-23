@@ -16,7 +16,7 @@ class SearchWidget extends StatelessWidget {
       child: Container(
         height: 40.h,
         padding: EdgeInsets.symmetric(
-          horizontal: 16.w,
+          horizontal: 12.w,
           vertical: 8.h,
         ),
         decoration: BoxDecoration(
@@ -29,20 +29,21 @@ class SearchWidget extends StatelessWidget {
                 child: Icon(
                   CupertinoIcons.search,
                   color: greyColor,
-                  size: 21.sp,
+                  size: 21.h,
                 )),
             Gap(20),
             Text(
               "Search ...".tr,
               style: TextStyle(
-                  fontSize: 13.sp,
-                  color: const Color.fromARGB(255, 124, 124, 124),
-                  fontWeight: FontWeight.w500),
+                fontSize: context.isTablet ? 10.sp : 13.sp,
+                color: const Color.fromARGB(255, 124, 124, 124),
+                fontWeight: FontWeight.w500,
+              ),
             ),
             Spacer(),
             Icon(
               FontAwesomeIcons.sliders,
-              size: 15.sp,
+              size: 15.h,
               color: greyColor,
             )
           ],

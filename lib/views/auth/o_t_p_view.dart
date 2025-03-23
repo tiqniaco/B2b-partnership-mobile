@@ -39,7 +39,7 @@ class OTPView extends StatelessWidget {
                     child: Text(
                       "We have sent a verification code to your email".tr,
                       textAlign: TextAlign.center,
-                      style: getMediumStyle,
+                      style: getMediumStyle(context),
                       maxLines: 3,
                     ),
                   ),
@@ -53,15 +53,15 @@ class OTPView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       fillColor: whiteColor,
                       filled: true,
-
                       fieldWidth: 0.128.sw,
-                
-                      contentPadding: EdgeInsets.zero,
+
+                      contentPadding: EdgeInsets.symmetric(
+                        vertical: 12.h,
+                      ),
                       borderRadius: BorderRadius.circular(10),
                       showFieldAsBox: true,
                       keyboardType: TextInputType.number,
-                      textStyle: getSemiBoldStyle.copyWith(
-                        fontSize: 17.sp,
+                      textStyle: getMediumStyle(context).copyWith(
                         fontWeight: FontWeight.w500,
                       ),
                       onCodeChanged: (String code) {
@@ -82,8 +82,10 @@ class OTPView extends StatelessWidget {
                       child: Text(
                         'Re Send'.tr,
                         textAlign: TextAlign.start,
-                        style: getSemiBoldStyle.copyWith(
-                            color: secondaryColor, fontWeight: FontWeight.w800),
+                        style: getSemiBoldStyle(context).copyWith(
+                          color: secondaryColor,
+                          fontWeight: FontWeight.w800,
+                        ),
                       ),
                     ),
                   ),

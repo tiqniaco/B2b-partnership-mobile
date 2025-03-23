@@ -30,7 +30,7 @@ class PrintType extends StatelessWidget {
       alignment: Alignment.center,
       child: Text(
         title,
-        style: getLightStyle.copyWith(
+        style: getLightStyle(Get.context!).copyWith(
           fontSize: Get.context!.isTablet ? 7.5.sp : null,
           color: whiteColor,
           fontWeight: FontWeight.bold,
