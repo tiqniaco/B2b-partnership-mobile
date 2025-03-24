@@ -416,4 +416,5 @@ const Map<String, String> en = {
   "You're not logged in": "You're not logged in",
   "Please log in to access this feature.":
       "Please log in to access this feature.",
+  "About us": "About us",
 };

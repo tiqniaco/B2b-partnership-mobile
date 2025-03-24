@@ -420,4 +420,5 @@ const Map<String, String> ar = {
   "You're not logged in": "انت لم تسجل الدخول",
   "Please log in to access this feature.":
       "الرجاء تسجيل الدخول للحصول علي كل الميزات",
+  "About us": "من نحن",
 };

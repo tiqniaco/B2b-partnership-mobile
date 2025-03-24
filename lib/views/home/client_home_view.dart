@@ -50,6 +50,48 @@ class _ClientHomeViewState extends State<ClientHomeView>
               height: context.isTablet ? 70.h : null,
               child: Row(
                 children: [
+                  Gap(10.w),
+                  Container(
+                    height: 40.h,
+                    width: 40.h,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(color: Colors.grey[300]!)),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8),
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            settingController.menuModel?.data?.image ?? "",
+                        errorWidget: (context, url, error) => Icon(
+                          CupertinoIcons.person,
+                          size: 18.h,
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
+                  Gap(10.w),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Welcome!".tr,
+                          style: TextStyle(
+                            fontSize: context.isTablet ? 11.sp : 13.sp,
+                            color: greyColor,
+                          ),
+                        ),
+                        Text(
+                          settingController.menuModel?.data?.name ?? "",
+                          style: TextStyle(
+                            fontSize: context.isTablet ? 14.sp : 16.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                   Container(
                     padding: EdgeInsets.symmetric(
                       horizontal: 10.w,
@@ -108,53 +150,19 @@ class _ClientHomeViewState extends State<ClientHomeView>
                           ),
                         ));
                       },
-                      child: SvgPicture.asset(
+                      child:
+                          // Icon(
+                          //   Icons.language_outlined,
+                          //   color: greyColor,
+                          //   size: 25.sp,
+                          // )
+                          SvgPicture.asset(
                         AssetsData.languageSVG,
                         colorFilter: ColorFilter.mode(
-                          primaryColor,
+                          const Color.fromARGB(255, 33, 52, 157),
                           BlendMode.srcIn,
                         ),
                         height: 25.h,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Welcome!".tr,
-                          style: TextStyle(
-                            fontSize: context.isTablet ? 11.sp : 13.sp,
-                            color: greyColor,
-                          ),
-                        ),
-                        Text(
-                          settingController.menuModel?.data?.name ?? "",
-                          style: TextStyle(
-                            fontSize: context.isTablet ? 14.sp : 16.sp,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    height: 40.h,
-                    width: 40.h,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.grey[300]!)),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: CachedNetworkImage(
-                        imageUrl:
-                            settingController.menuModel?.data?.image ?? "",
-                        errorWidget: (context, url, error) => Icon(
-                          CupertinoIcons.person,
-                          size: 18.h,
-                        ),
-                        fit: BoxFit.cover,
                       ),
                     ),
                   ),

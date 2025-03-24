@@ -19,8 +19,10 @@ import 'package:b2b_partenership/views/service_details_view.dart';
 import 'package:b2b_partenership/views/in_category/providers_in_categories.dart';
 import 'package:b2b_partenership/views/service_request/add_service_request.dart';
 import 'package:b2b_partenership/views/service_request/get_user_service_request.dart';
+import 'package:b2b_partenership/views/settings/about_us_webview.dart';
 import 'package:b2b_partenership/views/settings/change_password_view.dart';
 import 'package:b2b_partenership/views/settings/edit_client_profile_view.dart';
+import 'package:b2b_partenership/views/settings/terms_and_conditions_webview.dart';
 import 'package:b2b_partenership/views/shop/shop_cart_view.dart';
 import 'package:b2b_partenership/views/shop/shop_view.dart';
 import 'package:b2b_partenership/views/splash/views/splash_view.dart';
@@ -118,6 +120,8 @@ class AppRoutes {
 
 // Provider Contacts
   static const String providerContacts = '/providerContacts';
+  static const String aboutUs = '/aboutUs';
+  static const String termsAndConditions = '/termsAndConditions';
 
   static const String jobs = '/jobs';
   static const String jobDetails = '/jobDetails';
@@ -241,6 +245,7 @@ class AppRoutes {
       page: () => const ShopCartView(),
     ),
 
+    //settings
     // Edit Client Profile
     GetPage(
       name: editClientProfile,
@@ -257,6 +262,14 @@ class AppRoutes {
     GetPage(
       name: complaints,
       page: () => const ComplaintsView(),
+    ),
+    GetPage(
+      name: aboutUs,
+      page: () => const AboutUsWebview(),
+    ),
+    GetPage(
+      name: termsAndConditions,
+      page: () => const TermsAndConditionsWebview(),
     ),
 
     // Notification
