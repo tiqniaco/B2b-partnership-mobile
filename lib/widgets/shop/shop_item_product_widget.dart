@@ -26,6 +26,8 @@ class ShopProductItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        height: 190.h,
+        width: 1.sp,
         decoration: BoxDecoration(
           border: Border.all(
             color: borderColor,
@@ -38,40 +40,75 @@ class ShopProductItemWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: FractionallySizedBox(
-                widthFactor: 1.2,
-                child: Stack(
-                  children: [
-                    CustomNetworkImage(
-                      imageUrl: product.image,
-                      fit: BoxFit.cover,
-                      width: double.infinity,
+            FractionallySizedBox(
+              widthFactor: 1.2,
+              child: Stack(
+                children: [
+                  CustomNetworkImage(
+                    imageUrl: product.image,
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                    height: 130.h,
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+                    width: double.infinity,
+                    height: 130.h,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.0),
+                      color: blackColor.withAlpha(170),
+                      gradient: LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [
+                          Colors.black,
+                          Colors.black.withAlpha(170),
+                          Colors.transparent,
+                        ],
+                      ),
                     ),
-                    if (product.discount != "0")
-                      PositionedDirectional(
-                        top: 8.h,
-                        end: 8.w,
-                        child: Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 5.w,
-                            vertical: 2.h,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(4.r),
-                          ),
-                          child: Text(
-                            "-${product.discount}%",
-                            style: getLightStyle(context).copyWith(
-                              fontWeight: FontManager.boldFontWeight,
-                              color: whiteColor,
-                            ),
+                    child: Text(
+                      translateDatabase(
+                        arabic: product.descriptionAr,
+                        english: product.descriptionEn,
+                      ),
+                      style: context.isTablet
+                          ? getBoldStyle(context).copyWith(
+                              fontSize: 12.sp,
+                              fontWeight: FontManager.mediumFontWeight,
+                              color: whiteColor)
+                          : getBoldStyle(context).copyWith(
+                              fontWeight: FontManager.mediumFontWeight,
+                              fontSize: 15.sp,
+                              color: whiteColor),
+                      textAlign: TextAlign.start,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ),
+                  if (product.discount != "0")
+                    PositionedDirectional(
+                      bottom: 0.h,
+                      end: 24.w,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 10.w,
+                          vertical: 7.h,
+                        ),
+                        decoration: BoxDecoration(
+                          color: primaryColor, // Colors.red,
+                          borderRadius: BorderRadius.circular(0.r),
+                        ),
+                        child: Text(
+                          "-${product.discount}%",
+                          style: getLightStyle(context).copyWith(
+                            fontWeight: FontManager.boldFontWeight,
+                            color: whiteColor,
                           ),
                         ),
                       ),
-                  ],
-                ),
+                    ),
+                ],
               ),
             ),
             Gap(8.h),
@@ -82,12 +119,12 @@ class ShopProductItemWidget extends StatelessWidget {
               ),
               style: context.isTablet
                   ? getLightStyle(context).copyWith(
-                      fontSize: showCategories ? 8.sp : 9.sp,
+                      fontSize: 9.sp,
                       fontWeight: FontManager.mediumFontWeight,
                     )
                   : getLightStyle(context).copyWith(
-                      fontWeight: FontManager.mediumFontWeight,
-                      fontSize: showCategories ? 11.sp : 13.sp,
+                      fontWeight: FontManager.regularFontWeight,
+                      fontSize: 15.sp,
                     ),
               textAlign: TextAlign.center,
               maxLines: 1,
@@ -100,31 +137,31 @@ class ShopProductItemWidget extends StatelessWidget {
                     "${product.price}\$",
                     style: context.isTablet
                         ? getLightStyle(context).copyWith(
-                            fontSize: showCategories ? 8.sp : 9.sp,
+                            fontSize: 12.sp,
                             color: blackColor.withAlpha(150),
                             decoration: TextDecoration.lineThrough,
                           )
                         : getLightStyle(context).copyWith(
-                            fontSize: showCategories ? 11.sp : 13.sp,
+                            fontSize: 16.sp,
                             color: blackColor.withAlpha(150),
                             decoration: TextDecoration.lineThrough,
                           ),
                   ),
-                Gap(5.w),
+                Gap(10.w),
                 Text(
                   product.discount != "0"
                       ? "${double.parse(product.price) - (double.parse(product.discount) / 100 * double.parse(product.price))}\$"
                       : "${product.price}\$",
                   style: context.isTablet
                       ? getLightStyle(context).copyWith(
-                          fontSize: showCategories ? 8.sp : 9.sp,
+                          fontSize: 9.sp,
                           color: primaryColor,
                           fontWeight: FontManager.semiBoldFontWeight,
                         )
                       : getLightStyle(context).copyWith(
-                          fontWeight: FontManager.semiBoldFontWeight,
-                          fontSize: showCategories ? 11.sp : 13.sp,
-                          color: primaryColor,
+                          fontWeight: FontManager.boldFontWeight,
+                          fontSize: 16.sp,
+                          color: Colors.amber,
                         ),
                 ),
               ],

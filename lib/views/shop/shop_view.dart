@@ -5,12 +5,10 @@ import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
-import 'package:b2b_partenership/core/utils/font_manager.dart';
 import 'package:b2b_partenership/widgets/shop/shop_item_product_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
@@ -34,6 +32,16 @@ class ShopView extends StatelessWidget {
                     controller: controller.searchController,
                     style: getRegularStyle(context),
                     decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        onPressed: () {
+                          controller.getShopProducts(firstTime: true);
+                        },
+                        icon: Icon(
+                          CupertinoIcons.search,
+                          size: context.isTablet ? 13.w : 18.w,
+                          color: blackColor,
+                        ),
+                      ),
                       contentPadding: EdgeInsets.symmetric(
                         vertical: context.isTablet ? 10.h : 0,
                         horizontal: context.isTablet ? 10.w : 20.w,
@@ -53,164 +61,217 @@ class ShopView extends StatelessWidget {
                     },
                   ),
                 ),
-                Gap(1.w),
-                IconButton(
-                  onPressed: () {
-                    controller.getShopProducts(firstTime: true);
-                  },
-                  icon: Icon(
-                    CupertinoIcons.search,
-                    size: context.isTablet ? 13.w : 18.w,
-                    color: blackColor,
-                  ),
-                ),
               ],
             ),
             backgroundColor: whiteColor,
             actions: [
               Container(
-                margin: EdgeInsetsDirectional.only(end: 8.w),
+                decoration:
+                    BoxDecoration(color: greenColor, shape: BoxShape.circle),
                 child: IconButton(
                   onPressed: () {
                     Get.toNamed(AppRoutes.shopCart);
                   },
                   icon: Icon(
-                    CupertinoIcons.shopping_cart,
-                    color: blackColor,
-                    size: context.isTablet ? 16.w : 24.w,
+                    CupertinoIcons.cart_fill,
+                    color: whiteColor,
+                    size: context.isTablet ? 16.w : 17.sp,
                   ),
                 ),
               ),
-              Container(
-                margin: EdgeInsetsDirectional.only(end: 8.w),
-                child: IconButton(
-                  onPressed: () {
-                    Get.toNamed(AppRoutes.shopOrders);
-                  },
-                  icon: SvgPicture.asset(
-                    'assets/svgs/bag2.svg',
-                    width: context.isTablet ? 16.w : 24.w,
-                  ),
+              Gap(10.w)
+            ],
+          ),
+          floatingActionButton: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Gap(30),
+              Material(
+                borderRadius: BorderRadius.circular(70),
+                elevation: 0.3,
+                child: CircleAvatar(
+                  backgroundColor: whiteColor,
+                  radius: 27.r,
+                  backgroundImage: AssetImage("assets/images/whats.png"),
                 ),
               ),
             ],
           ),
-          body: Row(
+          body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if (controller.showCategories)
-                SizedBox(
-                  width: 0.21.sw,
-                  height: 1.sh,
-                  child: CustomServerStatusWidget(
-                    statusRequest: controller.categoriesStatus,
-                    child: ListView.separated(
-                      scrollDirection: Axis.vertical,
-                      padding: EdgeInsets.symmetric(
-                        vertical: 10.h,
-                        horizontal: 4.w,
-                      ),
-                      itemBuilder: (context, index) {
+              SizedBox(
+                height: 125.h,
+                child: CustomServerStatusWidget(
+                  statusRequest: controller.categoriesStatus,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    padding: EdgeInsets.all(10),
+                    itemBuilder: (context, index) {
+                      if (index == 0) {
+                        return SizedBox(
+                          width: 140.w,
+                          height: 100.h,
+                          child: Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(5.r),
+                                child: Image.asset(
+                                  "assets/images/rr.png",
+                                  fit: BoxFit.fitHeight,
+                                  width: 140.w,
+                                  height: 110.h,
+                                ),
+                              ),
+                              Container(
+                                width: 140.w,
+                                height: 110.h,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(5.r),
+                                    color: blackColor.withAlpha(50)),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(20.0),
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Icon(
+                                      Icons.mediation_outlined,
+                                      color: Colors.white,
+                                      size: 20.sp,
+                                    ),
+                                    Gap(10.h),
+                                    Text(
+                                      "All fields",
+                                      style: TextStyle(
+                                          fontSize: 15.sp,
+                                          fontWeight: FontWeight.bold,
+                                          color: whiteColor),
+                                    ),
+                                    Gap(10.h),
+                                    InkWell(
+                                      onTap: () {
+                                        Get.toNamed(AppRoutes.allCategories,
+                                            arguments: {
+                                              "categories":
+                                                  controller.shopCategories
+                                            });
+                                      },
+                                      child: Container(
+                                          alignment: Alignment.center,
+                                          padding:
+                                              EdgeInsets.symmetric(vertical: 5),
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            color: whiteColor,
+                                          ),
+                                          child: Text(
+                                            "Show All",
+                                            style: TextStyle(
+                                                fontSize: 12.sp,
+                                                fontWeight: FontWeight.w600,
+                                                color: Colors.teal),
+                                          )),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      } else {
                         return InkWell(
-                          borderRadius: BorderRadius.circular(8.r),
-                          splashColor: primaryColor.withAlpha(10),
                           onTap: () {
-                            controller.onTapCategory(index);
+                            controller.onTapCategory(index - 1);
                           },
                           child: SizedBox(
-                            height: 70.h,
-                            child: Column(
+                            width: 100.w,
+                            height: 110.h,
+                            child: Stack(
                               children: [
-                                CircleAvatar(
-                                  radius: 18.r,
-                                  backgroundColor: primaryColor.withAlpha(10),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(5.r),
                                   child: CustomNetworkImage(
-                                    imageUrl:
-                                        controller.shopCategories[index].image,
-                                    // shape: BoxShape.circle,
+                                    imageUrl: controller
+                                        .shopCategories[index - 1].image,
+                                    width: 100.w,
+                                    height: 110.h,
                                   ),
                                 ),
-                                Gap(5.h),
-                                Text(
-                                  translateDatabase(
-                                    arabic:
-                                        controller.shopCategories[index].nameAr,
-                                    english:
-                                        controller.shopCategories[index].nameEn,
+                                Container(
+                                  width: 100.w,
+                                  height: 110.h,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(5.r),
+                                      color: blackColor.withAlpha(140)),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Icon(
+                                        Icons.mediation_outlined,
+                                        color: Colors.white,
+                                        size: 20.sp,
+                                      ),
+                                      Gap(10.h),
+                                      Spacer(),
+                                      Text(
+                                        translateDatabase(
+                                          arabic: controller
+                                              .shopCategories[index - 1].nameAr,
+                                          english: controller
+                                              .shopCategories[index - 1].nameEn,
+                                        ),
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                            fontSize: 14.sp,
+                                            fontWeight: FontWeight.bold,
+                                            color: whiteColor),
+                                      ),
+                                    ],
                                   ),
-                                  style: getLightStyle(context).copyWith(
-                                    fontWeight: controller.selectedCategory ==
-                                            controller.shopCategories[index]
-                                        ? FontManager.boldFontWeight
-                                        : FontManager.regularFontWeight,
-                                    color: controller.selectedCategory ==
-                                            controller.shopCategories[index]
-                                        ? primaryColor
-                                        : greyColor,
-                                    fontSize: context.isTablet ? 7.sp : 9.5.sp,
-                                  ),
-                                )
+                                ),
                               ],
                             ),
                           ),
                         );
-                      },
-                      separatorBuilder: (context, index) => Gap(10.h),
-                      itemCount: controller.shopCategories.length,
-                    ),
+                      }
+                    },
+                    separatorBuilder: (context, index) => Gap(5.w),
+                    itemCount: controller.shopCategories.length + 1,
                   ),
                 ),
-              Stack(
-                children: [
-                  PositionedDirectional(
-                    start: 0,
-                    top: 0,
-                    bottom: 0,
-                    end: 0,
-                    child: VerticalDivider(
-                      thickness: 2.w,
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: InkWell(
-                      borderRadius: BorderRadius.circular(8.r),
-                      onTap: () {
-                        controller.changeShowCategories();
-                      },
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.r),
-                        ),
-                        color: primaryColor,
-                        child: Padding(
-                          padding: EdgeInsets.all(8.r),
-                          child: Icon(
-                            controller.showCategories
-                                ? Icons.arrow_back_ios_new
-                                : Icons.arrow_forward_ios_outlined,
-                            color: whiteColor,
-                            size: context.isTablet ? 12.sp : 16.sp,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
+              ),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
+                child: Text(
+                  "Best Selling Bags",
+                  style: TextStyle(
+                      fontSize: 15.sp,
+                      fontWeight: FontWeight.w500,
+                      color: blackColor),
+                ),
               ),
               Expanded(
                 child: CustomServerStatusWidget(
                   statusRequest: controller.productsStatus,
-                  child: GridView.builder(
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) => Gap(20.h),
                     padding: EdgeInsets.all(10),
-                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount:
-                          context.isTablet && !controller.showCategories
-                              ? 3
-                              : 2,
-                      crossAxisSpacing: 10.w,
-                      mainAxisSpacing: 15.h,
-                      childAspectRatio: 1 / 1.2,
-                    ),
+                    // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    //   crossAxisCount: 1,
+                    //   crossAxisSpacing: 10.w,
+                    //   mainAxisSpacing: 15.h,
+                    //   childAspectRatio: 1.5,
+                    // ),
                     itemCount: controller.shopProducts.length,
                     itemBuilder: (context, index) {
                       final product = controller.shopProducts[index];
@@ -230,6 +291,7 @@ class ShopView extends StatelessWidget {
                   ),
                 ),
               ),
+              Gap(40)
             ],
           ),
         );

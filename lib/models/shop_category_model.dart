@@ -23,7 +23,7 @@ class ShopCategoryModel extends Equatable {
         id: int.parse(json["id"].toString()),
         nameAr: json["name_ar"].toString(),
         nameEn: json["name_en"].toString(),
-        image: kBaseImageUrl + json["image"].toString(),
+        image: "${kBaseImageUrl}images/store_categories/${json["image"]}",
         createdAt: json["created_at"].toString(),
         updatedAt: json["updated_at"].toString(),
       );

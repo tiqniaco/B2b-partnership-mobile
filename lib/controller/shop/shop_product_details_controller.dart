@@ -7,6 +7,13 @@ import 'package:get/get.dart';
 class ShopProductDetailsController extends GetxController {
   late ShopProductModel product;
 
+  List<String> items = [
+    "First step",
+    "Second step",
+    "Third step",
+    "Fourth step"
+  ];
+
   @override
   void onInit() {
     product = Get.arguments['product'] as ShopProductModel;
@@ -19,5 +26,11 @@ class ShopProductDetailsController extends GetxController {
       return;
     }
     await Get.put(ShopCartController()).addToCart(productId: product.id);
+  }
+
+  callBackFun(int index, bool isExpanded) {
+    print("hi call back $index");
+    isExpanded == !isExpanded;
+    update();
   }
 }

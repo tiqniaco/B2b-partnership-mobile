@@ -23,6 +23,7 @@ import 'package:b2b_partenership/views/settings/about_us_webview.dart';
 import 'package:b2b_partenership/views/settings/change_password_view.dart';
 import 'package:b2b_partenership/views/settings/edit_client_profile_view.dart';
 import 'package:b2b_partenership/views/settings/terms_and_conditions_webview.dart';
+import 'package:b2b_partenership/views/shop/all_categories.dart';
 import 'package:b2b_partenership/views/shop/shop_cart_view.dart';
 import 'package:b2b_partenership/views/shop/shop_view.dart';
 import 'package:b2b_partenership/views/splash/views/splash_view.dart';
@@ -93,6 +94,7 @@ class AppRoutes {
   static const String shopProductDetails = '/shopProductDetails';
   static const String shopCart = '/shopCart';
   static const String shopOrders = '/orders';
+   static const String allCategories = '/allCategories';
 
   // Edit Client Profile
   static const String editClientProfile = '/editClientProfile';
@@ -243,6 +245,10 @@ class AppRoutes {
     GetPage(
       name: shopCart,
       page: () => const ShopCartView(),
+    ),
+    GetPage(
+      name: allCategories,
+      page: () => const AllCategories(),
     ),
 
     //settings
