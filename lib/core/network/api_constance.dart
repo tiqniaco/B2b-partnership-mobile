@@ -83,6 +83,7 @@ class ApiConstance {
 
   static String shopCategories = 'store/categories';
   static String shopProducts = 'store/products';
+  static String shopProductDetails(String id) => 'store/products/$id';
   static String shopCart = "store/carts";
   static String deleteCartItem(int id) => "store/carts/$id";
   static String clearCart = "store/cart/clear";

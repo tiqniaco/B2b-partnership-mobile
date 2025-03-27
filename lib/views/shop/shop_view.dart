@@ -283,6 +283,7 @@ class ShopView extends StatelessWidget {
                             AppRoutes.shopProductDetails,
                             arguments: {
                               "product": product,
+                              "productId": product.id.toString(),
                             },
                           );
                         },
