@@ -97,7 +97,7 @@ class ShopCartController extends GetxController {
   }
 
   Future<void> addToCart({
-    required int productId,
+    required String productId,
   }) async {
     final result = await CustomRequest<String>(
       path: ApiConstance.addToCart,
