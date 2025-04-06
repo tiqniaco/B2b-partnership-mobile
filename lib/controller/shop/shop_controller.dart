@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
@@ -76,9 +78,11 @@ class ShopController extends GetxController {
     final result = await CustomRequest<List<ShopProductModel>>(
         path: ApiConstance.topRatedProducts,
         data: {
-          if (selectedCategory != null) 'category_id': selectedCategory!.id,
+          if (selectedCategory != null) 'category_id': selectedCategory?.id,
         },
         fromJson: (json) {
+          // log(json['data'].toString());
+
           final List<ShopProductModel> products = List<ShopProductModel>.from(
             json['data'].map((x) => ShopProductModel.fromJson(x)),
           );
@@ -88,7 +92,7 @@ class ShopController extends GetxController {
 
     result.fold(
       (error) {
-        Logger().e(error.errMsg);
+        // Logger().e(error.errMsg);
         productsStatus = StatusRequest.error;
         update();
       },

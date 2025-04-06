@@ -49,10 +49,10 @@ class CustomNetworkImage extends StatelessWidget {
           );
         },
         errorBuilder: (context, error, stackTrace) {
-          return Icon(
-            Icons.error,
-            color: dangerColor,
-            size: 10.h,
+          return Image.asset(
+            AssetsData.defaultImage,
+            fit: fit,
+            alignment: Alignment.center,
           );
         },
       ),

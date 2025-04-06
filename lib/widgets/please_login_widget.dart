@@ -2,6 +2,7 @@ import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/utils/font_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -25,72 +26,22 @@ class PleaseLoginWidget extends StatelessWidget {
           width: context.isTablet ? 0.75.sw : 1.sw,
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: InkWell(
-                  onTap: () {
-                    Get.toNamed(AppRoutes.aboutUs);
-                  },
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 18.sp,
-                        backgroundColor: borderColor.withAlpha(30),
-                        child: Icon(
-                          Icons.report_gmailerrorred,
-                          color: primaryColor,
-                          size: 20.sp,
-                        ),
-                      ),
-                      Gap(15),
-                      Text(
-                        "About us".tr,
-                        style: TextStyle(
-                            fontSize: 14.sp, fontWeight: FontWeight.bold),
-                      ),
-                      Spacer(),
-                      Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        size: 15.sp,
-                      )
-                    ],
-                  ),
-                ),
+              CustomLoginItemWidget(
+                icon: Icons.report_gmailerrorred,
+                title: "About us".tr,
+                onTap: () {
+                  Get.toNamed(AppRoutes.aboutUs);
+                },
               ),
               Gap(10.h),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: InkWell(
-                  onTap: () {
-                    Get.toNamed(AppRoutes.termsAndConditions);
-                  },
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        radius: 18.sp,
-                        backgroundColor: borderColor.withAlpha(30),
-                        child: Icon(
-                          CupertinoIcons.news,
-                          color: primaryColor,
-                          size: 20.sp,
-                        ),
-                      ),
-                      Gap(15),
-                      Text(
-                        "Terms & Conditions".tr,
-                        style: TextStyle(
-                            fontSize: 14.sp, fontWeight: FontWeight.bold),
-                      ),
-                      Spacer(),
-                      Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        size: 15.sp,
-                      )
-                    ],
-                  ),
-                ),
+              CustomLoginItemWidget(
+                icon: CupertinoIcons.news,
+                title: "Terms & Conditions".tr,
+                onTap: () {
+                  Get.toNamed(AppRoutes.termsAndConditions);
+                },
               ),
-              Gap(20.h),
+              Spacer(),
               Card(
                 elevation: 6,
                 shape: RoundedRectangleBorder(
@@ -131,8 +82,56 @@ class PleaseLoginWidget extends StatelessWidget {
                   ),
                 ),
               ),
+              Spacer(),
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class CustomLoginItemWidget extends StatelessWidget {
+  const CustomLoginItemWidget({
+    super.key,
+    this.onTap,
+    required this.icon,
+    required this.title,
+  });
+  final Function()? onTap;
+  final IconData icon;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      child: InkWell(
+        onTap: onTap,
+        child: Row(
+          children: [
+            CircleAvatar(
+              radius: 20.r,
+              backgroundColor: borderColor.withAlpha(30),
+              child: Icon(
+                icon,
+                color: primaryColor,
+                size: 20.r,
+              ),
+            ),
+            Gap(10.w),
+            Text(
+              title,
+              style: getMediumStyle(context).copyWith(
+                fontWeight: FontManager.boldFontWeight,
+              ),
+            ),
+            Spacer(),
+            Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 15.r,
+            )
+          ],
         ),
       ),
     );

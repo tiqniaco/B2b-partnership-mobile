@@ -2,6 +2,7 @@ import 'package:b2b_partenership/controller/previous_work/provider_profile_contr
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/in_category/service_widget_vertical.dart';
 import 'package:b2b_partenership/widgets/provider_profile/about_widget.dart';
 import 'package:b2b_partenership/widgets/provider_profile/previous_work_widget.dart';
@@ -85,36 +86,41 @@ class ProviderProfileView extends StatelessWidget {
             onPressed: () => Get.back(),
             icon: Icon(
               Icons.arrow_back_ios,
-              size: 23.sp,
+              size: 23.r,
               color: greyColor,
             ),
           ),
           CircleAvatar(
-            radius: 33.r,
+            radius: 30.r,
             backgroundColor: Colors.grey[200],
             backgroundImage:
                 CachedNetworkImageProvider(controller.providerModel!.image!),
           ),
-          Gap(10),
+          Gap(8.w),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(controller.providerModel!.name!,
-                  style:
-                      TextStyle(fontSize: 15.sp, fontWeight: FontWeight.bold)),
+              Text(
+                controller.providerModel!.name!,
+                style: getMediumStyle(Get.context!).copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               Row(
                 children: [
-                  Text(controller.providerModel!.rating!,
-                      style: TextStyle(
-                          color: greyColor,
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold)),
+                  Text(
+                    controller.providerModel!.rating!,
+                    style: getMediumStyle(Get.context!).copyWith(
+                      color: greyColor,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   Gap(5),
-                  Icon(Icons.circle, size: 4.sp, color: greyColor),
+                  Icon(Icons.circle, size: 4.r, color: greyColor),
                   Gap(5),
                   RatingBar.builder(
                     ignoreGestures: true,
-                    itemSize: 17.sp,
+                    itemSize: 17.r,
                     initialRating: 3,
                     minRating: 1,
                     direction: Axis.horizontal,

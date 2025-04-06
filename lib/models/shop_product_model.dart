@@ -2,7 +2,7 @@ import '/core/constants/app_constants.dart';
 import 'package:equatable/equatable.dart';
 
 class ShopProductModel extends Equatable {
-  final int id;
+  final String id;
   final String titleAr;
   final String titleEn;
   final String descriptionAr;
@@ -36,7 +36,7 @@ class ShopProductModel extends Equatable {
 
   factory ShopProductModel.fromJson(Map<String, dynamic> json) =>
       ShopProductModel(
-        id: int.parse(json["id"].toString()),
+        id: json["id"].toString(),
         titleAr: json["title_ar"].toString(),
         titleEn: json["title_en"].toString(),
         descriptionAr: json["description_ar"].toString(),

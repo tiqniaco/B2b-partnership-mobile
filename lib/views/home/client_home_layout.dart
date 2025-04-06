@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -38,68 +39,96 @@ class _ClientHomeLayoutState extends State<ClientHomeLayout>
             ...controller.screens,
           ],
         ),
-        bottomNavigationBar: ConvexAppBar(
-          controller: controller.convexController,
-          top: -30,
-          height: 60.h,
-          style: TabStyle.fixedCircle,
-          backgroundColor: whiteColor,
-          color: unSelectedBNavColor,
-          activeColor: primaryColor,
-          curveSize: 140,
-          items: [
-            TabItem(
-              icon: SvgPicture.asset("assets/svgs/home.svg",
-                  height: 20.sp,
-                  color: controller.currentIndex == 0
-                      ? primaryColor
-                      : unSelectedBNavColor),
-              title: "Home".tr,
-            ),
-            TabItem(
-              icon: SvgPicture.asset("assets/svgs/shop.svg",
-                  height: 20.sp,
-                  color: controller.currentIndex == 1
-                      ? primaryColor
-                      : unSelectedBNavColor),
-              title: "Shop".tr,
-            ),
-            TabItem(
-              icon: Container(
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: primaryColor),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
+        bottomNavigationBar: StyleProvider(
+          style: Style(),
+          child: ConvexAppBar(
+            controller: controller.convexController,
+            top: -10.h,
+            height: context.isTablet ? 55.h : 60.h,
+            style: TabStyle.fixedCircle,
+            backgroundColor: whiteColor,
+            color: unSelectedBNavColor,
+            activeColor: primaryColor,
+            curveSize: 140,
+            // chipBuilder: ,
+            items: [
+              TabItem(
+                icon: SvgPicture.asset("assets/svgs/home.svg",
+                    height: 20.sp,
+                    color: controller.currentIndex == 0
+                        ? primaryColor
+                        : unSelectedBNavColor),
+                title: "Home".tr,
+              ),
+              TabItem(
+                icon: SvgPicture.asset("assets/svgs/shop.svg",
+                    height: 20.sp,
+                    color: controller.currentIndex == 1
+                        ? primaryColor
+                        : unSelectedBNavColor),
+                title: "Shop".tr,
+              ),
+              TabItem(
+                icon: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: primaryColor,
+                  ),
                   child: Padding(
-                    padding: const EdgeInsets.only(bottom: 6.0, right: 7),
-                    child: SvgPicture.asset("assets/svgs/search.svg",
-                        height: 20.sp, color: Colors.white),
+                    padding: EdgeInsets.all(11.r),
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: 6.r, right: 7.r),
+                      child: SvgPicture.asset(
+                        "assets/svgs/search.svg",
+                        height: 20.r,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
+                title: "Search".tr,
               ),
-              title: "Search".tr,
-            ),
-            TabItem(
-              icon: SvgPicture.asset("assets/svgs/job.svg",
-                  height: 20.sp,
-                  color: controller.currentIndex == 3
-                      ? primaryColor
-                      : unSelectedBNavColor),
-              title: "Jobs".tr,
-            ),
-            TabItem(
-              icon: SvgPicture.asset("assets/svgs/setting.svg",
-                  height: 20.sp,
-                  color: controller.currentIndex == 4
-                      ? primaryColor
-                      : unSelectedBNavColor),
-              title: "Menu".tr,
-            ),
-          ],
-          initialActiveIndex: controller.currentIndex,
-          onTap: (index) => controller.onBNavPressed(index),
+              TabItem(
+                icon: SvgPicture.asset("assets/svgs/job.svg",
+                    height: 20.r,
+                    color: controller.currentIndex == 3
+                        ? primaryColor
+                        : unSelectedBNavColor),
+                title: "Jobs".tr,
+              ),
+              TabItem(
+                icon: SvgPicture.asset("assets/svgs/setting.svg",
+                    height: 20.sp,
+                    color: controller.currentIndex == 4
+                        ? primaryColor
+                        : unSelectedBNavColor),
+                title: "Menu".tr,
+              ),
+            ],
+            initialActiveIndex: controller.currentIndex,
+            onTap: (index) => controller.onBNavPressed(index),
+          ),
         ),
       ),
+    );
+  }
+}
+
+class Style extends StyleHook {
+  @override
+  double get activeIconSize => 20.r;
+
+  @override
+  double get activeIconMargin => 10;
+
+  @override
+  double get iconSize => 20.r;
+
+  @override
+  TextStyle textStyle(Color color, String? fontFamily) {
+    return getRegularStyle(Get.context!).copyWith(
+      fontFamily: fontFamily,
+      color: color,
     );
   }
 }

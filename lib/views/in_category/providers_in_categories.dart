@@ -1,7 +1,10 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/in_category/providers_in_category_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/utils/font_manager.dart';
 import 'package:b2b_partenership/widgets/home/provider_widget.dart';
 import 'package:b2b_partenership/widgets/home/search_widget.dart';
 import 'package:b2b_partenership/widgets/home/sub_category_widget.dart';
@@ -27,14 +30,19 @@ class _ProvidersInCategoriesState extends State<ProvidersInCategories>
         appBar: AppBar(
           backgroundColor: whiteColor,
           automaticallyImplyLeading: false,
+          toolbarHeight: context.isTablet ? 70.h : 40.h,
           titleSpacing: 20,
           title: Row(
             children: [
               InkWell(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Icon(Icons.arrow_back_ios)),
+                onTap: () {
+                  Get.back();
+                },
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  size: 18.r,
+                ),
+              ),
               Gap(5),
               Expanded(
                 child: Column(
@@ -42,13 +50,16 @@ class _ProvidersInCategoriesState extends State<ProvidersInCategories>
                   children: [
                     Text(
                       "Category!",
-                      style: TextStyle(fontSize: 13.sp, color: greyColor),
+                      style: getRegularStyle(context).copyWith(
+                        color: greyColor,
+                        fontWeight: FontManager.mediumFontWeight,
+                      ),
                     ),
                     Text(
                       translateDatabase(
                           arabic: controller.specialization.nameAr!,
                           english: controller.specialization.nameEn!),
-                      style: TextStyle(fontSize: 16.sp),
+                      style: getMediumStyle(context),
                     ),
                   ],
                 ),
@@ -70,7 +81,7 @@ class _ProvidersInCategoriesState extends State<ProvidersInCategories>
                 ),
               ),
             ),
-            Gap(20)
+            Gap(20.w)
           ],
         ),
         body: Column(
@@ -92,7 +103,7 @@ class _ProvidersInCategoriesState extends State<ProvidersInCategories>
             ),
             Gap(5),
             SizedBox(
-              height: 47,
+              height: 35.h,
               child: SubCategoryWidget(
                 subSpecializations: controller.subSpecializations,
               ),
@@ -101,29 +112,34 @@ class _ProvidersInCategoriesState extends State<ProvidersInCategories>
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
-                  "${controller.providers.length} ${"providers founded".tr}",
-                  style: TextStyle(
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 15.sp)),
+                "${controller.providers.length} ${"providers founded".tr}",
+                style: getMediumStyle(context).copyWith(
+                  color: Colors.black87,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
             Gap(10),
             Expanded(
-                child: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
+                child: CustomServerStatusWidget(
+              statusRequest: controller.statusRequestServices,
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: context.isTablet ? 3 : 2,
                   mainAxisSpacing: 15,
                   crossAxisSpacing: 10,
-                  childAspectRatio: 6 / 9.1),
-              scrollDirection: Axis.vertical,
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              itemCount: controller.providers.length,
-              itemBuilder: (context, index) => ProviderWidget(
-                  provider: controller.providers[index],
-                  toggleFavorite: () {
-                    controller.toggleFavorites(
-                        controller.providers[index].providerId.toString());
-                  }),
+                  childAspectRatio: context.isTablet ? 6 / 9 : 6 / 10,
+                ),
+                scrollDirection: Axis.vertical,
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                itemCount: controller.providers.length,
+                itemBuilder: (context, index) => ProviderWidget(
+                    provider: controller.providers[index],
+                    toggleFavorite: () {
+                      controller.toggleFavorites(
+                          controller.providers[index].providerId.toString());
+                    }),
+              ),
             )),
           ],
         ),

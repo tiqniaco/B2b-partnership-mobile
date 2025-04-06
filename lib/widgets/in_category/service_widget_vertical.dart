@@ -1,7 +1,10 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/utils/font_manager.dart';
 import 'package:b2b_partenership/models/services_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -50,10 +53,10 @@ class ServiceWidgetVertical extends StatelessWidget {
                       children: [
                         ClipRRect(
                           borderRadius: BorderRadius.circular(10),
-                          child: CachedNetworkImage(
+                          child: CustomNetworkImage(
                             imageUrl: services[index].image!,
                             height: 90.h,
-                            width: 85.h,
+                            width: context.isTablet ? 90.w : 110.w,
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -66,10 +69,10 @@ class ServiceWidgetVertical extends StatelessWidget {
                               Text(
                                 services[index].description!,
                                 textAlign: TextAlign.center,
-                                style: TextStyle(
-                                    color: Colors.black54,
-                                    fontSize: 14.sp,
-                                    fontWeight: FontWeight.w600),
+                                style: getRegularStyle(context).copyWith(
+                                  color: Colors.black54,
+                                  fontWeight: FontWeight.w600,
+                                ),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -80,8 +83,7 @@ class ServiceWidgetVertical extends StatelessWidget {
                                         services[index].specializationNameAr!,
                                     english:
                                         services[index].specializationNameEn!),
-                                style: TextStyle(
-                                    fontSize: 12.sp,
+                                style: getLightStyle(context).copyWith(
                                     color: greyColor,
                                     fontWeight: FontWeight.w500),
                                 overflow: TextOverflow.ellipsis,
@@ -136,7 +138,7 @@ class ServiceWidgetVertical extends StatelessWidget {
                                   ),
                                   Gap(4.w),
                                   Expanded(
-                                    flex: 2,
+                                    flex: context.isTablet ? 1 : 2,
                                     child: SizedBox(
                                       height: 32.h,
                                       child: ElevatedButton(
@@ -161,7 +163,12 @@ class ServiceWidgetVertical extends StatelessWidget {
                                         },
                                         child: Text(
                                           "View".tr,
-                                          style: TextStyle(fontSize: 13.sp),
+                                          style:
+                                              getRegularStyle(context).copyWith(
+                                            fontWeight:
+                                                FontManager.mediumFontWeight,
+                                            color: whiteColor,
+                                          ),
                                         ),
                                       ),
                                     ),
