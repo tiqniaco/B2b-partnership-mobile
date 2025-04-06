@@ -270,7 +270,6 @@ class ShopView extends StatelessWidget {
                   child: ListView.separated(
                     separatorBuilder: (context, index) => Gap(20.h),
                     padding: EdgeInsets.all(10),
-                   
                     itemCount: controller.shopProducts.length,
                     itemBuilder: (context, index) {
                       final product = controller.shopProducts[index];

@@ -47,7 +47,6 @@ class ShopController extends GetxController {
 
           return categories;
         }).sendGetRequest();
-
     result.fold(
       (error) {
         Logger().e(error.errMsg);
@@ -56,12 +55,9 @@ class ShopController extends GetxController {
       },
       (data) {
         shopCategories = data;
-
         if (data.isEmpty) {
           categoriesStatus = StatusRequest.noData;
         } else {
-          // selectedCategory = data[0];
-          // getShopProducts();
           categoriesStatus = StatusRequest.success;
         }
         update();
@@ -72,7 +68,6 @@ class ShopController extends GetxController {
   Future<void> getShopProducts() async {
     shopProducts.clear();
     productsStatus = StatusRequest.loading;
-
     final result = await CustomRequest<List<ShopProductModel>>(
         path: ApiConstance.topRatedProducts,
         data: {
@@ -82,10 +77,8 @@ class ShopController extends GetxController {
           final List<ShopProductModel> products = List<ShopProductModel>.from(
             json['data'].map((x) => ShopProductModel.fromJson(x)),
           );
-
           return products;
         }).sendGetRequest();
-
     result.fold(
       (error) {
         Logger().e(error.errMsg);
@@ -106,7 +99,6 @@ class ShopController extends GetxController {
 
   void onTapCategory(int index) {
     selectedCategory = shopCategories[index];
-    currentPage = 1;
     getShopProducts();
     update();
   }
