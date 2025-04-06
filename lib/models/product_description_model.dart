@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 import 'product_description_content_model.dart';
 
+// ignore: must_be_immutable
 class ProductDescriptionModel extends Equatable {
   final int id;
   final String titleEn;
@@ -10,8 +11,9 @@ class ProductDescriptionModel extends Equatable {
   final String createdAt;
   final String updatedAt;
   final List<ProductDescriptionContentModel> contents;
+  int? isExpanded;
 
-  const ProductDescriptionModel({
+   ProductDescriptionModel({
     required this.id,
     required this.titleEn,
     required this.titleAr,
@@ -19,6 +21,7 @@ class ProductDescriptionModel extends Equatable {
     required this.createdAt,
     required this.updatedAt,
     required this.contents,
+    this.isExpanded = 0,
   });
 
   factory ProductDescriptionModel.fromJson(Map<String, dynamic> json) =>

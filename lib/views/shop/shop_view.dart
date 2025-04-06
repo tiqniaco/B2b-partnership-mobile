@@ -284,6 +284,7 @@ class ShopView extends StatelessWidget {
                             arguments: {
                               "product": product,
                               "productId": product.id.toString(),
+                              
                             },
                           );
                         },

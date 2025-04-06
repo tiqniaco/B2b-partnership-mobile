@@ -5,7 +5,9 @@ import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/utils/font_manager.dart';
+import 'package:b2b_partenership/models/product_description_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -25,20 +27,35 @@ class ShopProductDetailsView extends StatelessWidget {
           backgroundColor: whiteColor,
         ),
         bottomNavigationBar: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 15.w,
-            vertical: 10.h,
-          ),
-          height: 0.1.sh,
-          child: Column(
+          padding:
+              EdgeInsets.only(left: 20.w, right: 20.w, bottom: 20.h, top: 15),
+          height: 0.11.sh,
+          width: 1.sw,
+          child: Row(
             children: [
-              CustomLoadingButton(
-                onPressed: () {
-                  return controller.addToCart();
-                },
-                backgroundColor:
-                    controller.product == null ? greyColor : primaryColor,
-                text: "Add To Cart".tr,
+              Container(
+                padding: EdgeInsets.all(12),
+                decoration: BoxDecoration(
+                    border: Border.all(color: greyColor.withAlpha(100)),
+                    color: whiteColor,
+                    borderRadius: BorderRadius.circular(8.r)),
+                child: Icon(
+                  CupertinoIcons.cart_fill,
+                  color: greenColor,
+                  size: context.isTablet ? 20.w : 25.sp,
+                ),
+              ),
+              Gap(8.w),
+              Expanded(
+                child: CustomLoadingButton(
+                  borderRadius: 10.r,
+                  onPressed: () {
+                    return controller.addToCart();
+                  },
+                  backgroundColor:
+                      controller.product == null ? greyColor : primaryColor,
+                  text: "Add To Cart".tr,
+                ),
               ),
             ],
           ),
@@ -64,25 +81,70 @@ class ShopProductDetailsView extends StatelessWidget {
                     ),
                   ),
                   Gap(20.h),
-                  WidgetZoom(
-                    heroAnimationTag:
-                        controller.product?.id.toString() ?? "hero",
-                    zoomWidget: ClipRRect(
-                      borderRadius: BorderRadius.circular(10.r),
-                      child: CachedNetworkImage(
-                        imageUrl: controller.product?.image ?? "",
-                        fit: BoxFit.cover,
-                        height: 120.h,
-                        width: double.infinity,
+                  Stack(
+                    alignment: AlignmentDirectional.bottomEnd,
+                    children: [
+                      WidgetZoom(
+                        heroAnimationTag:
+                            controller.product?.id.toString() ?? "hero",
+                        zoomWidget: ClipRRect(
+                          borderRadius: BorderRadius.circular(10.r),
+                          child: CachedNetworkImage(
+                            imageUrl: controller.product?.image ?? "",
+                            fit: BoxFit.cover,
+                            height: 120.h,
+                            width: double.infinity,
+                          ),
+                        ),
                       ),
-                    ),
+                      Container(
+                        height: 120.h,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8.0),
+                          color: blackColor.withAlpha(170),
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.black.withAlpha(200),
+                              Colors.transparent,
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 15.w,
+                          vertical: 5.h,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(4.r),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black26,
+                              blurRadius: 2,
+                              offset: Offset(0, 2),
+                            ),
+                          ],
+                        ),
+                        child: Text(
+                          "-${controller.product?.discount ?? "0"}%",
+                          style: getRegularStyle(context).copyWith(
+                            color: whiteColor,
+                            fontSize: 12.sp,
+                            fontWeight: FontManager.boldFontWeight,
+                          ),
+                        ),
+                      )
+                    ],
                   ),
                   Gap(20.h),
                   Text(
                     "Training Sessions",
                     style: TextStyle(
                       fontSize: 18.sp,
-                      //fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   Gap(20.h),
@@ -94,13 +156,15 @@ class ShopProductDetailsView extends StatelessWidget {
                     expansionCallback: (int index, bool isExpanded) {
                       controller.callBackFun(index, isExpanded);
                     },
-                    children:
-                        controller.items.map<ExpansionPanel>((String item) {
+                    children: controller.descriptions
+                        .map<ExpansionPanel>((ProductDescriptionModel item) {
                       return ExpansionPanel(
                           headerBuilder:
                               (BuildContext context, bool isExpanded) {
                             return Container(
                               decoration: BoxDecoration(
+                                // border:
+                                //     Border.all(color: greyColor.withAlpha(100)),
                                 borderRadius: BorderRadius.circular(8.0),
                                 color: isExpanded
                                     ? Colors.indigo.withAlpha(170)
@@ -131,7 +195,9 @@ class ShopProductDetailsView extends StatelessWidget {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          item,
+                                          translateDatabase(
+                                              arabic: item.titleAr,
+                                              english: item.titleEn),
                                           style: TextStyle(
                                             fontSize: 16.sp,
                                             color: blackColor,
@@ -151,8 +217,8 @@ class ShopProductDetailsView extends StatelessWidget {
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               separatorBuilder: (context, index) => Gap(10),
-                              itemCount: 5,
-                              itemBuilder: (context, index) => Row(
+                              itemCount: item.contents.length,
+                              itemBuilder: (context, i) => Row(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
@@ -166,7 +232,9 @@ class ShopProductDetailsView extends StatelessWidget {
                                   Gap(10.w),
                                   Expanded(
                                     child: Text(
-                                      "the first training stage the first training stage the first training stage",
+                                      translateDatabase(
+                                          arabic: item.contents[i].contentAr,
+                                          english: item.contents[i].contentEn),
                                       style: TextStyle(
                                         fontSize: 16.sp,
                                         color: blackColor,
@@ -177,74 +245,117 @@ class ShopProductDetailsView extends StatelessWidget {
                               ),
                             ),
                           ),
-                          isExpanded: true);
+                          isExpanded: item.isExpanded == 0 ? false : true);
                     }).toList(),
                   ),
-                  Gap(20.h),
-                  if (controller.product?.discount != "0")
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16.w,
-                        vertical: 6.h,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.red,
-                        borderRadius: BorderRadius.circular(4.r),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black26,
-                            blurRadius: 2,
-                            offset: Offset(0, 2),
-                          ),
-                        ],
-                      ),
-                      child: Text(
-                        "-${controller.product?.discount ?? "0"}%",
-                        style: getRegularStyle(context).copyWith(
-                          color: whiteColor,
-                          fontWeight: FontManager.boldFontWeight,
+                  Gap(30.h),
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(15),
+                    decoration: BoxDecoration(color: Colors.blueGrey),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Training package Price : ",
+                          style: TextStyle(
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.bold,
+                              color: whiteColor),
                         ),
-                      ),
+                        Gap(10.w),
+                        if (controller.product?.discount != "0")
+                          Text(
+                            "${controller.product?.price ?? "0"}\$",
+                            style: getRegularStyle(context).copyWith(
+                              fontWeight: FontManager.lightFontWeight,
+                              color: whiteColor.withAlpha(190),
+                              decorationColor: whiteColor.withAlpha(190),
+                              decoration: TextDecoration.lineThrough,
+                            ),
+                          ),
+                        Gap(10.w),
+                        Text(
+                          controller.product?.discount != "0"
+                              ? "${double.parse(controller.product?.price ?? "0") - (double.parse(controller.product?.discount ?? "0") / 100 * double.parse(controller.product?.price ?? "0"))}\$"
+                              : "${controller.product?.price ?? "0"}\$",
+                          style: getRegularStyle(context).copyWith(
+                              fontWeight: FontManager.boldFontWeight,
+                              color: Colors.amber),
+                        ),
+                      ],
                     ),
-                  if (controller.product?.discount != "0")
-                    Text(
-                      "${controller.product?.price ?? "0"}\$",
-                      style: getRegularStyle(context).copyWith(
-                        fontWeight: FontManager.lightFontWeight,
-                        color: blackColor.withAlpha(150),
-                        decoration: TextDecoration.lineThrough,
-                      ),
+
+                    // Text(
+                    //   "Training package data",
+                    //   style: TextStyle(
+                    //       fontSize: 15.sp,
+                    //       fontWeight: FontWeight.bold,
+                    //       color: whiteColor),
+                    // ),
+                  ),
+                  Gap(20.h),
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                    decoration: BoxDecoration(
+                        color: const Color.fromARGB(255, 250, 250, 249)),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Icon(Icons.report_gmailerrorred),
+                            Gap(10.w),
+                            Text(
+                              "About the training package".tr,
+                              style: TextStyle(
+                                fontSize: 18.sp,
+                                fontWeight: FontManager.semiBoldFontWeight,
+                              ),
+                            ),
+                          ],
+                        ),
+                        Gap(10.h),
+                        Text(
+                          translateDatabase(
+                                arabic: controller.product?.descriptionAr ?? "",
+                                english:
+                                    controller.product?.descriptionEn ?? "",
+                              ) +
+                              " ",
+                          style: TextStyle(
+                              fontSize: 15.sp,
+                              fontWeight: FontWeight.normal,
+                              color: const Color.fromARGB(255, 101, 101, 108)),
+                        ),
+                      ],
                     ),
-                  Gap(5.w),
-                  Text(
-                    controller.product?.discount != "0"
-                        ? "${double.parse(controller.product?.price ?? "0") - (double.parse(controller.product?.discount ?? "0") / 100 * double.parse(controller.product?.price ?? "0"))}\$"
-                        : "${controller.product?.price ?? "0"}\$",
-                    style: getRegularStyle(context).copyWith(
-                        fontWeight: FontManager.boldFontWeight,
-                        color: primaryColor),
+                  ),
+                  Gap(20.h),
+                  Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(15),
+                    decoration: BoxDecoration(color: Colors.blueGrey),
+                    child: Text(
+                      "Terms and condition",
+                      style: TextStyle(
+                          fontSize: 15.sp,
+                          fontWeight: FontWeight.bold,
+                          color: whiteColor),
+                    ),
                   ),
                   Gap(20.h),
                   Text(
-                    "Description:".tr,
-                    style: TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: FontManager.semiBoldFontWeight,
-                    ),
-                  ),
-                  Gap(4.h),
-                  ReadMoreText(
                     translateDatabase(
-                          arabic: controller.product?.descriptionAr ?? "",
-                          english: controller.product?.descriptionEn ?? "",
-                        ) +
-                        " ",
-                    style: TextStyle(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.normal,
+                      arabic: controller.product?.termsAndConditionsAr ?? "",
+                      english: controller.product?.termsAndConditionsEn ?? "",
                     ),
+                    style: TextStyle(
+                        fontSize: 15.sp,
+                        fontWeight: FontWeight.normal,
+                        color: blackColor),
                   ),
-                  Gap(20.h),
+                  Gap(40.h),
                 ],
               ),
             ),
@@ -254,121 +365,3 @@ class ShopProductDetailsView extends StatelessWidget {
     );
   }
 }
-
-// class FactoryCustomerOrder extends StatefulWidget {
-//   const FactoryCustomerOrder({super.key});
-
-//   @override
-//   State<FactoryCustomerOrder> createState() => _FactoryCustomerOrderState();
-// }
-
-// class _FactoryCustomerOrderState extends State<FactoryCustomerOrder> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return SingleChildScrollView(
-//         child: GetBuilder<SalesInvoiceController>(
-//       builder: (controller) => ExpansionPanelList(
-//         expansionCallback: (int index, bool isExpanded) {
-//           controller.callBackFun(index, isExpanded);
-//         },
-//         children: controller.ordersList
-//             .map<ExpansionPanel>((FactoryOrdersModel item) {
-//           return ExpansionPanel(
-//               headerBuilder: (BuildContext context, bool isExpanded) {
-//                 return Padding(
-//                   padding: const EdgeInsets.all(15.0),
-//                   child: Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: [
-//                       Row(
-//                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                         children: [
-//                           Container(
-//                             padding: const EdgeInsets.symmetric(horizontal: 8),
-//                             decoration: BoxDecoration(
-//                                 borderRadius: BorderRadius.circular(30),
-//                                 color: blackColor),
-//                             child: Text(
-//                               item.factoryOrdersSerial!,
-//                               style: const TextStyle(
-//                                   color: Colors.white,
-//                                   fontWeight: FontWeight.bold),
-//                             ),
-//                           ),
-//                           InkWell(
-//                             onTap: () {},
-//                             child: Icon(
-//                               Icons.print,
-//                               color: blackColor, // Colors.orange[800],
-//                               size: 40,
-//                             ),
-//                           )
-//                         ],
-//                       ),
-//                       const SizedBox(
-//                         height: 5,
-//                       ),
-//                       Row(
-//                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                         children: [
-//                           Text(
-//                             "Price before discount".tr,
-//                             style: const TextStyle(
-//                                 color: Colors.black,
-//                                 fontWeight: FontWeight.bold),
-//                           ),
-//                           Text(
-//                             item.factoryOrdersPriceBefore!.toString(),
-//                             style: const TextStyle(
-//                                 color: Colors.black,
-//                                 fontWeight: FontWeight.bold),
-//                           ),
-//                         ],
-//                       ),
-//                       Row(
-//                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                         children: [
-//                           Text(
-//                             "Discount Amount".tr,
-//                             style: const TextStyle(
-//                                 color: Colors.black,
-//                                 fontWeight: FontWeight.bold),
-//                           ),
-//                           Text(
-//                             "${item.factoryOrdersIsDiscount!.toString()} %",
-//                             style: const TextStyle(
-//                                 color: Colors.black,
-//                                 fontWeight: FontWeight.bold),
-//                           ),
-//                         ],
-//                       ),
-//                       Row(
-//                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//                         children: [
-//                           Text(
-//                             "Price after discount".tr,
-//                             style: const TextStyle(
-//                                 color: Colors.black,
-//                                 fontWeight: FontWeight.bold),
-//                           ),
-//                           Text(
-//                             item.factoryOrdersPriceAfter!.toString(),
-//                             style: const TextStyle(
-//                                 color: Colors.black,
-//                                 fontWeight: FontWeight.bold),
-//                           ),
-//                         ],
-//                       ),
-//                     ],
-//                   ),
-//                 );
-//               },
-//               body: Column(
-//                 children: [Text("booboobkob")],
-//               ),
-//               isExpanded: item.factoryOrdersIsExpanded == 0 ? false : true);
-//         }).toList(),
-//       ),
-//     ));
-//   }
-// }

@@ -47,12 +47,14 @@ class ShopProductDetailsController extends GetxController {
         update();
       },
       (data) {
+        // print(data);
         product = ShopProductModel.fromJson(data['data']);
         descriptions = List<ProductDescriptionModel>.from(
           data['descriptions'].map(
             (e) => ProductDescriptionModel.fromJson(e),
           ),
         );
+        print(descriptions);
         statusRequest = StatusRequest.success;
         update();
       },
@@ -71,8 +73,8 @@ class ShopProductDetailsController extends GetxController {
   }
 
   callBackFun(int index, bool isExpanded) {
-    print("hi call back $index");
-    isExpanded == !isExpanded;
+    descriptions[index].isExpanded = isExpanded == false ? 0 : 1;
+
     update();
   }
 }
