@@ -50,7 +50,7 @@ class ShopCartController extends GetxController {
   }
 
   Future<void> removeFromCart({
-    required int id,
+    required String id,
   }) async {
     final result = await CustomRequest<String>(
       path: ApiConstance.deleteCartItem(id),

@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/models/country_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -38,15 +39,15 @@ class SelectCountryWidget extends StatelessWidget {
           ),
           label: Text(
             'Select Country'.tr,
-            style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 17.sp,
-                color: Colors.black87),
+            style: getMediumStyle(context).copyWith(
+              fontWeight: FontWeight.w500,
+              color: Colors.black87,
+            ),
           ),
         ),
         icon: Icon(
           Icons.keyboard_arrow_down_outlined,
-          size: 23.sp,
+          size: 23.r,
           color: greyColor,
         ),
         items: models.map((item) {
@@ -54,17 +55,16 @@ class SelectCountryWidget extends StatelessWidget {
             value: item,
             child: Row(
               children: [
-               
                 Text(
                   item.flag!,
+                  style: getRegularStyle(context),
                 ),
                 SizedBox(width: 8.w),
                 Expanded(
                   child: Text(
                     translateDatabase(
-                        arabic: item.nameAr??"", english: item.nameEn??""),
-                    style: TextStyle(
-                      fontSize: 12.sp,
+                        arabic: item.nameAr ?? "", english: item.nameEn ?? ""),
+                    style: getLightStyle(context).copyWith(
                       color: greyColor.withAlpha(160),
                       fontWeight: FontWeight.bold,
                     ),

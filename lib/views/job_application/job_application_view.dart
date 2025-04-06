@@ -22,15 +22,15 @@ class JobApplicationView extends StatelessWidget {
           appBar: AppBar(
             titleSpacing: 0,
             iconTheme: IconThemeData(color: whiteColor),
-            leading: IconButton(
-              icon: Icon(
-                Icons.arrow_back_ios_new,
-                size: 20.sp,
-              ),
-              onPressed: () {
-                Get.back();
-              },
-            ),
+            // leading: IconButton(
+            //   icon: Icon(
+            //     Icons.arrow_back_ios_new,
+            //     size: 20.r,
+            //   ),
+            //   onPressed: () {
+            //     Get.back();
+            //   },
+            // ),
             backgroundColor: primaryColor,
             title: Text(
               'Job Application'.tr,

@@ -36,7 +36,9 @@ class ShopProductModel extends Equatable {
 
   factory ShopProductModel.fromJson(Map<String, dynamic> json) =>
       ShopProductModel(
-        id: json["id"].toString(),
+        id: json["id"] != null
+            ? json["id"].toString()
+            : json['product_id'].toString(),
         titleAr: json["title_ar"].toString(),
         titleEn: json["title_en"].toString(),
         descriptionAr: json["description_ar"].toString(),

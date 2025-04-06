@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/controller/previous_work/provider_profile_controller.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -49,36 +50,47 @@ class ReviewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         color: Colors.white,
-        margin: EdgeInsets.only(bottom: 20),
+        margin: EdgeInsets.only(bottom: 16.h),
         child: Row(
           children: [
             CircleAvatar(
               backgroundColor: color,
-              child: Text(name[0],
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold)),
+              radius: 18.r,
+              child: Text(
+                name[0],
+                style: getMediumStyle(context).copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-            Gap(15),
+            Gap(15.w),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(name,
-                      style: TextStyle(
-                          fontSize: 15.sp, fontWeight: FontWeight.bold)),
+                  Text(
+                    name,
+                    style: getMediumStyle(context).copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   Row(
                     mainAxisSize: MainAxisSize.min,
-                    children: List.generate(5, (index) {
-                      return Icon(
-                        index < rating ? Icons.star : Icons.star_border,
-                        color: starColor,
-                        size: 15.sp,
-                      );
-                    }),
+                    children: List.generate(
+                      5,
+                      (index) {
+                        return Icon(
+                          index < rating ? Icons.star : Icons.star_border,
+                          color: index < rating ? starColor : greyColor,
+                          size: 15.r,
+                        );
+                      },
+                    ),
                   ),
                   Text(
                     comment,
-                    style: TextStyle(fontSize: 13.sp),
+                    style: getRegularStyle(context),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,
                   )

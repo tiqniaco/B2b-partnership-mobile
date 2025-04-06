@@ -2,6 +2,8 @@ import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/auth/signup_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/utils/font_manager.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -37,14 +39,16 @@ class ProviderSignupView extends StatelessWidget {
                                     },
                                     icon: Icon(
                                       Icons.close,
-                                      size: 26.sp,
-                                    ))
+                                      size: 26.r,
+                                    ),
+                                  )
                                 : IconButton(
                                     onPressed: controller.previousStep,
                                     icon: Icon(
                                       Icons.arrow_back_ios,
-                                      size: 26.sp,
-                                    )),
+                                      size: 26.r,
+                                    ),
+                                  ),
                           ],
                         ),
                         Container(
@@ -63,8 +67,7 @@ class ProviderSignupView extends StatelessWidget {
                     Gap(20),
                     Text(
                       "Create a New Account".tr,
-                      style: TextStyle(
-                        fontSize: 20.sp,
+                      style: getSemiBoldStyle(context).copyWith(
                         fontWeight: FontWeight.w500,
                         color: blackColor,
                       ),
@@ -74,7 +77,11 @@ class ProviderSignupView extends StatelessWidget {
                       child: Row(
                         children: [
                           Text(
-                              '${"Step".tr} ${controller.currentStep + 1} ${"of".tr} ${controller.providerSteps.length}  '),
+                            '${"Step".tr} ${controller.currentStep + 1} ${"of".tr} ${controller.providerSteps.length}  ',
+                            style: getLightStyle(context).copyWith(
+                              fontWeight: FontManager.regularFontWeight,
+                            ),
+                          ),
                           Expanded(
                             child: LinearProgressIndicator(
                               borderRadius: BorderRadius.circular(30),
@@ -92,21 +99,26 @@ class ProviderSignupView extends StatelessWidget {
                       child: controller.providerSteps[controller.currentStep],
                     ),
                     CustomLoadingButton(
-                        onPressed: () => controller.goToOtp(),
-                        text: controller.currentStep ==
-                                controller.providerSteps.length - 1
-                            ? 'Finish'.tr
-                            : 'Next'.tr),
+                      onPressed: () => controller.goToOtp(),
+                      width: 0.75.sw,
+                      text: controller.currentStep ==
+                              controller.providerSteps.length - 1
+                          ? 'Finish'.tr
+                          : 'Next'.tr,
+                    ),
                     Gap(10),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           "Already have an account?".tr,
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            color: Colors.black54,
-                          ),
+                          style: context.isTablet
+                              ? getRegularStyle(context).copyWith(
+                                  color: greyColor, fontWeight: FontWeight.bold)
+                              : getLightStyle(context).copyWith(
+                                  color: greyColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
                         ),
                         Gap(5.w),
                         InkWell(
@@ -115,11 +127,15 @@ class ProviderSignupView extends StatelessWidget {
                           },
                           child: Text(
                             "Login".tr,
-                            style: TextStyle(
-                              fontSize: 13.sp,
-                              fontWeight: FontWeight.w600,
-                              color: primaryColor,
-                            ),
+                            style: context.isTablet
+                                ? getMediumStyle(context).copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: primaryColor,
+                                  )
+                                : getRegularStyle(context).copyWith(
+                                    fontWeight: FontWeight.w600,
+                                    color: primaryColor,
+                                  ),
                           ),
                         ),
                       ],

@@ -260,20 +260,18 @@ class ProviderContactMethodWidget extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CircleAvatar(
-                radius: 15.sp,
+                radius: 15.r,
                 backgroundColor: iconColor,
                 child: Icon(
                   icon,
-                  size: 13.sp,
+                  size: 13.r,
                 ),
               ),
               Gap(16.w),
               Expanded(
                 child: Text(
                   value,
-                  style: TextStyle(
-                    fontSize: 15.sp,
-                  ),
+                  style: getMediumStyle(Get.context!),
                   textAlign: TextAlign.center,
                 ),
               )

@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/controller/service_details_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -41,25 +42,26 @@ class FeaturItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        color: Colors.white,
-        margin: EdgeInsets.only(bottom: 5),
-        child: Row(
-          children: [
-            Icon(
-              Icons.check,
-              color: Colors.green,
-              size: 20.sp,
+      color: Colors.white,
+      margin: EdgeInsets.only(bottom: 5),
+      child: Row(
+        children: [
+          Icon(
+            Icons.check,
+            color: Colors.green,
+            size: 20.r,
+          ),
+          Gap(10),
+          Expanded(
+            child: Text(
+              feature,
+              style: getRegularStyle(context),
+              overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
-            Gap(10),
-            Expanded(
-              child: Text(
-                feature,
-                style: TextStyle(fontSize: 13.sp),
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-              ),
-            )
-          ],
-        ));
+          )
+        ],
+      ),
+    );
   }
 }

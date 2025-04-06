@@ -1,7 +1,10 @@
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 
 class AppPdfView extends StatefulWidget {
   const AppPdfView({super.key, required this.url});
@@ -19,19 +22,21 @@ class _AppPdfViewState extends State<AppPdfView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: context.isTablet ? 50.h : null,
         backgroundColor: primaryColor,
         iconTheme: const IconThemeData(color: whiteColor),
         title: Text(
           "PDF Viewer",
-          style: TextStyle(
+          style: getMediumStyle(context).copyWith(
             color: whiteColor,
           ),
         ),
         centerTitle: true,
         actions: [
           Text(
-            "${currentPage + 1} of $totalPages",
-            style: const TextStyle(
+            "${currentPage + 1} ${Get.locale?.languageCode == "en" ? "of" : "من"} $totalPages",
+            style: getRegularStyle(context).copyWith(
+              color: whiteColor,
               fontWeight: FontWeight.bold,
             ),
           ),
