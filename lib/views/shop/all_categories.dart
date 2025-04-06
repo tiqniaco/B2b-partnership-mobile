@@ -1,3 +1,4 @@
+import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/shop/all_categoties_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
@@ -16,7 +17,7 @@ class AllCategories extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: whiteColor,
-        title: Text("Categories List"),
+        title: Text("Categories List".tr),
       ),
       body: GetBuilder<AllCategoriesController>(
         builder: (controller) => Padding(
@@ -26,7 +27,8 @@ class AllCategories extends StatelessWidget {
             itemCount: controller.shopCategories.length,
             itemBuilder: (context, index) => InkWell(
               onTap: () {
-                // controller.onTapCategory(index - 1);
+                Get.toNamed(AppRoutes.productsInCategory,
+                    arguments: {"model": controller.shopCategories[index]});
               },
               child: SizedBox(
                 //width: 100.w,

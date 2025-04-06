@@ -26,7 +26,7 @@ class ProviderWidget extends StatelessWidget {
             arguments: {"id": provider.providerId.toString()});
       },
       child: Container(
-        width: context.isTablet ? 95.w : 140.w,
+        width: context.isTablet ? 95.w : 150.w,
         height: 90.h,
         padding: EdgeInsets.all(15),
         decoration: BoxDecoration(
@@ -89,7 +89,7 @@ class ProviderWidget extends StatelessWidget {
                 ),
               ],
             ),
-            Gap(3.h),
+            Gap(1.h),
             Divider(),
             Gap(2.h),
             Row(

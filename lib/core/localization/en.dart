@@ -274,6 +274,16 @@ const Map<String, String> en = {
   "Add New Product": "Add New Product",
   "No cover image selected": "No cover image selected",
   "Upload product": "Upload product",
+  "Show All": "Show All",
+  "All fields": "All fields",
+  "Best Selling Bags": "Best Selling Bags",
+  "Add To Cart": "Add To Cart",
+  "Training Sessions": "Training Sessions",
+  "Training bag Price : ": "Training bag Price : ",
+  "About the training bag": "About the training bag",
+  "Terms and condition": "Terms and condition",
+  "Categories List": "Categories List",
+  "Products List": "Products List",
 
   // orders
   "Order": "Order",

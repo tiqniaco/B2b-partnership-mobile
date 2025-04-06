@@ -34,7 +34,7 @@ class ShopView extends StatelessWidget {
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
                         onPressed: () {
-                          controller.getShopProducts(firstTime: true);
+                          controller.getShopProducts();
                         },
                         icon: Icon(
                           CupertinoIcons.search,
@@ -56,7 +56,7 @@ class ShopView extends StatelessWidget {
                     ),
                     onFieldSubmitted: (value) {
                       if (value.isNotEmpty) {
-                        controller.getShopProducts(firstTime: true);
+                        controller.getShopProducts();
                       }
                     },
                   ),
@@ -131,7 +131,11 @@ class ShopView extends StatelessWidget {
                                     color: blackColor.withAlpha(50)),
                               ),
                               Padding(
-                                padding: const EdgeInsets.all(20.0),
+                                padding: const EdgeInsets.only(
+                                    top: 20.0,
+                                    left: 20.0,
+                                    right: 20.0,
+                                    bottom: 10.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -141,15 +145,15 @@ class ShopView extends StatelessWidget {
                                       color: Colors.white,
                                       size: 20.sp,
                                     ),
-                                    Gap(10.h),
+                                    Gap(8.h),
                                     Text(
-                                      "All fields",
+                                      "All fields".tr,
                                       style: TextStyle(
                                           fontSize: 15.sp,
                                           fontWeight: FontWeight.bold,
                                           color: whiteColor),
                                     ),
-                                    Gap(10.h),
+                                    Gap(8.h),
                                     InkWell(
                                       onTap: () {
                                         Get.toNamed(AppRoutes.allCategories,
@@ -168,7 +172,7 @@ class ShopView extends StatelessWidget {
                                             color: whiteColor,
                                           ),
                                           child: Text(
-                                            "Show All",
+                                            "Show All".tr,
                                             style: TextStyle(
                                                 fontSize: 12.sp,
                                                 fontWeight: FontWeight.w600,
@@ -253,7 +257,7 @@ class ShopView extends StatelessWidget {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
                 child: Text(
-                  "Best Selling Bags",
+                  "Best Selling Bags".tr,
                   style: TextStyle(
                       fontSize: 15.sp,
                       fontWeight: FontWeight.w500,
@@ -266,25 +270,18 @@ class ShopView extends StatelessWidget {
                   child: ListView.separated(
                     separatorBuilder: (context, index) => Gap(20.h),
                     padding: EdgeInsets.all(10),
-                    // gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    //   crossAxisCount: 1,
-                    //   crossAxisSpacing: 10.w,
-                    //   mainAxisSpacing: 15.h,
-                    //   childAspectRatio: 1.5,
-                    // ),
+                   
                     itemCount: controller.shopProducts.length,
                     itemBuilder: (context, index) {
                       final product = controller.shopProducts[index];
                       return ShopProductItemWidget(
                         product: product,
-                        showCategories: controller.showCategories,
                         onTap: () {
                           Get.toNamed(
                             AppRoutes.shopProductDetails,
                             arguments: {
                               "product": product,
                               "productId": product.id.toString(),
-                              
                             },
                           );
                         },

@@ -12,11 +12,12 @@ class ShopController extends GetxController {
   List<ShopCategoryModel> shopCategories = [];
   List<ShopProductModel> shopProducts = [];
   ShopCategoryModel? selectedCategory;
-  int currentPage = 1;
-  int totalPages = 1;
+
   StatusRequest categoriesStatus = StatusRequest.loading;
   StatusRequest productsStatus = StatusRequest.loading;
   ScrollController productsScrollController = ScrollController();
+  int currentPage = 1;
+  int totalPages = 1;
 
   bool showCategories = true;
 
@@ -28,15 +29,7 @@ class ShopController extends GetxController {
   @override
   Future<void> onInit() async {
     await getShopCategories();
-    productsScrollController.addListener(() {
-      if (productsScrollController.position.pixels ==
-          productsScrollController.position.maxScrollExtent) {
-        if (currentPage < totalPages) {
-          currentPage++;
-          getShopProducts();
-        }
-      }
-    });
+    getShopProducts();
 
     super.onInit();
   }
@@ -67,8 +60,8 @@ class ShopController extends GetxController {
         if (data.isEmpty) {
           categoriesStatus = StatusRequest.noData;
         } else {
-          selectedCategory = data[0];
-          getShopProducts(firstTime: true);
+          // selectedCategory = data[0];
+          // getShopProducts();
           categoriesStatus = StatusRequest.success;
         }
         update();
@@ -76,23 +69,16 @@ class ShopController extends GetxController {
     );
   }
 
-  Future<void> getShopProducts({bool firstTime = false}) async {
-    if (firstTime) {
-      currentPage = 1;
-      shopProducts.clear();
-      productsStatus = StatusRequest.loading;
-      update();
-    }
+  Future<void> getShopProducts() async {
+    shopProducts.clear();
+    productsStatus = StatusRequest.loading;
+
     final result = await CustomRequest<List<ShopProductModel>>(
-        path: ApiConstance.shopProducts,
+        path: ApiConstance.topRatedProducts,
         data: {
-          'category_id': selectedCategory!.id,
-          'page': currentPage,
-          if (searchController.text.isNotEmpty) 'search': searchController.text,
+          if (selectedCategory != null) 'category_id': selectedCategory!.id,
         },
         fromJson: (json) {
-          currentPage = json['current_page'];
-          totalPages = json['last_page'];
           final List<ShopProductModel> products = List<ShopProductModel>.from(
             json['data'].map((x) => ShopProductModel.fromJson(x)),
           );
@@ -121,7 +107,7 @@ class ShopController extends GetxController {
   void onTapCategory(int index) {
     selectedCategory = shopCategories[index];
     currentPage = 1;
-    getShopProducts(firstTime: true);
+    getShopProducts();
     update();
   }
 }

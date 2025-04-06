@@ -233,7 +233,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
               ),
               Gap(10.h),
               SizedBox(
-                height: 235.h,
+                height: 240.h,
                 child: CustomServerStatusWidget(
                   statusRequest: controller.statusRequestProviders,
                   child: ListView.separated(
@@ -289,7 +289,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
               ),
               Gap(20.h),
               SizedBox(
-                  height: 235.h,
+                  height: 240.h,
                   child: CustomServerStatusWidget(
                       statusRequest: controller.statusRequestProviders,
                       child: ListView.separated(
@@ -344,7 +344,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
               ),
               Gap(20.h),
               SizedBox(
-                  height: 235.h,
+                  height: 240.h,
                   child: CustomServerStatusWidget(
                       statusRequest: controller.statusRequestProviders,
                       child: ListView.separated(
@@ -397,7 +397,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
               ),
               Gap(20.h),
               SizedBox(
-                  height: 235.h,
+                  height: 240.h,
                   child: CustomServerStatusWidget(
                       statusRequest: controller.statusRequestProviders,
                       child: ListView.separated(

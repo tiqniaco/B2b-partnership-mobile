@@ -276,6 +276,16 @@ const Map<String, String> ar = {
   "Add New Product": "اضافة منتج جديد",
   "No cover image selected": "لا يوجد صورة للغطاء",
   "Upload product": "رفع المنتج",
+  "Show All": "عرض الكل",
+  "All fields": "جميع المجالات",
+  "Best Selling Bags": "الحقائب الاكثر مبيعا",
+  "Add To Cart": "اضافة الى السلة",
+  "Training Sessions": "جلسات التدريب",
+  "Training bag Price : ": "سعر الحقيبة التدريبية : ",
+  "About the training bag": "حول الحقيبة التدريبية",
+  "Terms and condition": "الشروط والاحكام",
+  "Categories List": "قائمة الفئات",
+  "Products List": "قائمة المنتجات",
 
   // orders
   "Order": "الطلب",

@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:readmore/readmore.dart';
 import 'package:widget_zoom/widget_zoom.dart';
 
 class ShopProductDetailsView extends StatelessWidget {
@@ -141,7 +140,7 @@ class ShopProductDetailsView extends StatelessWidget {
                   ),
                   Gap(20.h),
                   Text(
-                    "Training Sessions",
+                    "Training Sessions".tr,
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
@@ -256,7 +255,7 @@ class ShopProductDetailsView extends StatelessWidget {
                     child: Row(
                       children: [
                         Text(
-                          "Training package Price : ",
+                          "Training bag Price : ".tr,
                           style: TextStyle(
                               fontSize: 15.sp,
                               fontWeight: FontWeight.bold,
@@ -307,7 +306,7 @@ class ShopProductDetailsView extends StatelessWidget {
                             Icon(Icons.report_gmailerrorred),
                             Gap(10.w),
                             Text(
-                              "About the training package".tr,
+                              "About the training bag".tr,
                               style: TextStyle(
                                 fontSize: 18.sp,
                                 fontWeight: FontManager.semiBoldFontWeight,
@@ -337,7 +336,7 @@ class ShopProductDetailsView extends StatelessWidget {
                     padding: EdgeInsets.all(15),
                     decoration: BoxDecoration(color: Colors.blueGrey),
                     child: Text(
-                      "Terms and condition",
+                      "Terms and condition".tr,
                       style: TextStyle(
                           fontSize: 15.sp,
                           fontWeight: FontWeight.bold,

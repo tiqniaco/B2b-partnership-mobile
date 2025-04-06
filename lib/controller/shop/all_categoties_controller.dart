@@ -7,5 +7,6 @@ class AllCategoriesController extends GetxController {
   void onInit() {
     shopCategories = Get.arguments["categories"];
     super.onInit();
+    
   }
 }

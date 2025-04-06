@@ -13,12 +13,10 @@ class ShopProductItemWidget extends StatelessWidget {
   const ShopProductItemWidget({
     super.key,
     required this.product,
-    required this.showCategories,
     required this.onTap,
   });
 
   final ShopProductModel product;
-  final bool showCategories;
   final void Function()? onTap;
 
   @override
