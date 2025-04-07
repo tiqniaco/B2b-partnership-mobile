@@ -10,9 +10,10 @@ import 'package:get/get.dart';
 
 class ShopProductDetailsController extends GetxController {
   StatusRequest statusRequest = StatusRequest.loading;
+  List<ProductDescriptionModel> descriptions = [];
   ShopProductModel? product;
   String productId = "";
-  List<ProductDescriptionModel> descriptions = [];
+  
 
   List<String> items = [
     "First step",
@@ -26,7 +27,6 @@ class ShopProductDetailsController extends GetxController {
     // product = Get.arguments['product'] as ShopProductModel;
     productId = Get.arguments?['productId'] as String;
     getProductDetails();
-
     super.onInit();
   }
 

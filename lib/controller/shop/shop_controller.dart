@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
