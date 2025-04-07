@@ -2,6 +2,7 @@ import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/see_all/see_all_category_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,12 +18,16 @@ class SeeAllCategories extends StatelessWidget {
     return GetBuilder<SeeAllCategoryController>(
       builder: (controller) => Scaffold(
           appBar: AppBar(
+            toolbarHeight: context.isTablet ? 45.h : null,
             backgroundColor: whiteColor,
-            title: Text("All Categories"),
+            title: Text(
+              "All Categories",
+              style: getMediumStyle(context),
+            ),
           ),
           body: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
+                  crossAxisCount: context.isTablet ? 3 : 2,
                   mainAxisSpacing: 15,
                   crossAxisSpacing: 10,
                   childAspectRatio: 9 / 7.8),
@@ -54,14 +59,19 @@ class SeeAllCategories extends StatelessWidget {
                               height: 32.h,
                             ),
                           ),
-                          Gap(8),
+                          Gap(8.h),
                           Text(
                             translateDatabase(
                                 arabic: controller.categories[index].nameAr!,
                                 english: controller.categories[index].nameEn!),
                             textAlign: TextAlign.center,
-                            style: TextStyle(
-                                fontSize: 12.sp, fontWeight: FontWeight.w400),
+                            style: context.isTablet
+                                ? getRegularStyle(context).copyWith(
+                                    fontWeight: FontWeight.w400,
+                                  )
+                                : getLightStyle(context).copyWith(
+                                    fontWeight: FontWeight.w400,
+                                  ),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),

@@ -74,8 +74,7 @@ class ShopProductDetailsView extends StatelessWidget {
                       arabic: controller.product?.titleAr ?? "",
                       english: controller.product?.titleEn ?? "",
                     ),
-                    style: TextStyle(
-                      fontSize: 18.sp,
+                    style: getSemiBoldStyle(context).copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -91,13 +90,13 @@ class ShopProductDetailsView extends StatelessWidget {
                           child: CachedNetworkImage(
                             imageUrl: controller.product?.image ?? "",
                             fit: BoxFit.cover,
-                            height: 120.h,
+                            height: context.isTablet ? 160.h : 120.h,
                             width: double.infinity,
                           ),
                         ),
                       ),
                       Container(
-                        height: 120.h,
+                        height: context.isTablet ? 160.h : 120.h,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           color: blackColor.withAlpha(170),
@@ -129,11 +128,15 @@ class ShopProductDetailsView extends StatelessWidget {
                         ),
                         child: Text(
                           "-${controller.product?.discount ?? "0"}%",
-                          style: getRegularStyle(context).copyWith(
-                            color: whiteColor,
-                            fontSize: 12.sp,
-                            fontWeight: FontManager.boldFontWeight,
-                          ),
+                          style: context.isTablet
+                              ? getRegularStyle(context).copyWith(
+                                  color: whiteColor,
+                                  fontWeight: FontManager.boldFontWeight,
+                                )
+                              : getLightStyle(context).copyWith(
+                                  color: whiteColor,
+                                  fontWeight: FontManager.boldFontWeight,
+                                ),
                         ),
                       )
                     ],
@@ -141,8 +144,7 @@ class ShopProductDetailsView extends StatelessWidget {
                   Gap(20.h),
                   Text(
                     "Training Sessions".tr,
-                    style: TextStyle(
-                      fontSize: 18.sp,
+                    style: getSemiBoldStyle(context).copyWith(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -197,8 +199,8 @@ class ShopProductDetailsView extends StatelessWidget {
                                           translateDatabase(
                                               arabic: item.titleAr,
                                               english: item.titleEn),
-                                          style: TextStyle(
-                                            fontSize: 16.sp,
+                                          style:
+                                              getMediumStyle(context).copyWith(
                                             color: blackColor,
                                           ),
                                         ),
@@ -224,7 +226,7 @@ class ShopProductDetailsView extends StatelessWidget {
                                     padding: const EdgeInsets.only(top: 8.0),
                                     child: Icon(
                                       Icons.check_circle,
-                                      size: 17.sp,
+                                      size: 17.r,
                                       color: greenColor,
                                     ),
                                   ),
@@ -234,8 +236,7 @@ class ShopProductDetailsView extends StatelessWidget {
                                       translateDatabase(
                                           arabic: item.contents[i].contentAr,
                                           english: item.contents[i].contentEn),
-                                      style: TextStyle(
-                                        fontSize: 16.sp,
+                                      style: getMediumStyle(context).copyWith(
                                         color: blackColor,
                                       ),
                                     ),
@@ -256,10 +257,10 @@ class ShopProductDetailsView extends StatelessWidget {
                       children: [
                         Text(
                           "Training bag Price : ".tr,
-                          style: TextStyle(
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.bold,
-                              color: whiteColor),
+                          style: getMediumStyle(context).copyWith(
+                            fontWeight: FontWeight.bold,
+                            color: whiteColor,
+                          ),
                         ),
                         Gap(10.w),
                         if (controller.product?.discount != "0")
@@ -272,7 +273,7 @@ class ShopProductDetailsView extends StatelessWidget {
                               decoration: TextDecoration.lineThrough,
                             ),
                           ),
-                        Gap(10.w),
+                        Gap(6.w),
                         Text(
                           controller.product?.discount != "0"
                               ? "${double.parse(controller.product?.price ?? "0") - (double.parse(controller.product?.discount ?? "0") / 100 * double.parse(controller.product?.price ?? "0"))}\$"
@@ -303,12 +304,14 @@ class ShopProductDetailsView extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.report_gmailerrorred),
+                            Icon(
+                              Icons.report_gmailerrorred,
+                              size: 24.r,
+                            ),
                             Gap(10.w),
                             Text(
                               "About the training bag".tr,
-                              style: TextStyle(
-                                fontSize: 18.sp,
+                              style: getSemiBoldStyle(context).copyWith(
                                 fontWeight: FontManager.semiBoldFontWeight,
                               ),
                             ),
@@ -322,10 +325,11 @@ class ShopProductDetailsView extends StatelessWidget {
                                     controller.product?.descriptionEn ?? "",
                               ) +
                               " ",
-                          style: TextStyle(
-                              fontSize: 15.sp,
-                              fontWeight: FontWeight.normal,
-                              color: const Color.fromARGB(255, 101, 101, 108)),
+                          style: getMediumStyle(context).copyWith(
+                            fontWeight: FontWeight.normal,
+                            color: const Color.fromARGB(255, 101, 101, 108),
+                          ),
+                          maxLines: 100,
                         ),
                       ],
                     ),
@@ -337,10 +341,8 @@ class ShopProductDetailsView extends StatelessWidget {
                     decoration: BoxDecoration(color: Colors.blueGrey),
                     child: Text(
                       "Terms and condition".tr,
-                      style: TextStyle(
-                          fontSize: 15.sp,
-                          fontWeight: FontWeight.bold,
-                          color: whiteColor),
+                      style: getMediumStyle(context).copyWith(
+                          fontWeight: FontWeight.bold, color: whiteColor),
                     ),
                   ),
                   Gap(20.h),
@@ -349,10 +351,11 @@ class ShopProductDetailsView extends StatelessWidget {
                       arabic: controller.product?.termsAndConditionsAr ?? "",
                       english: controller.product?.termsAndConditionsEn ?? "",
                     ),
-                    style: TextStyle(
-                        fontSize: 15.sp,
-                        fontWeight: FontWeight.normal,
-                        color: blackColor),
+                    style: getMediumStyle(context).copyWith(
+                      fontWeight: FontWeight.normal,
+                      color: blackColor,
+                    ),
+                    maxLines: 100,
                   ),
                   Gap(40.h),
                 ],

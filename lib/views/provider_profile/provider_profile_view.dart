@@ -47,6 +47,7 @@ class ProviderProfileView extends StatelessWidget {
                         _buildHeader(controller),
                         Gap(15),
                         _buildTabs(controller),
+                        Gap(8.h),
                         Expanded(
                           child: PageView(
                             controller: controller.pageController,
@@ -169,11 +170,17 @@ class ProviderProfileView extends StatelessWidget {
                         : whiteColor))),
         child: Text(
           title.tr,
-          style: TextStyle(
-            fontSize: 14.sp,
-            color:
-                controller.selectedIndex == index ? primaryColor : blackColor,
-          ),
+          style: Get.context!.isTablet
+              ? getMediumStyle(Get.context!).copyWith(
+                  color: controller.selectedIndex == index
+                      ? primaryColor
+                      : blackColor,
+                )
+              : getRegularStyle(Get.context!).copyWith(
+                  color: controller.selectedIndex == index
+                      ? primaryColor
+                      : blackColor,
+                ),
         ),
       ),
     );

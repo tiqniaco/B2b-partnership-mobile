@@ -24,7 +24,7 @@ class ShopProductItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: 190.h,
+        height: context.isTablet ? 200.h : 190.h,
         width: 1.sp,
         decoration: BoxDecoration(
           border: Border.all(
@@ -39,7 +39,7 @@ class ShopProductItemWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             FractionallySizedBox(
-              widthFactor: 1.2,
+              widthFactor: context.isTablet ? 1.1 : 1.2,
               child: Stack(
                 children: [
                   CustomNetworkImage(
@@ -71,13 +71,13 @@ class ShopProductItemWidget extends StatelessWidget {
                         english: product.descriptionEn,
                       ),
                       style: context.isTablet
-                          ? getBoldStyle(context).copyWith(
-                              fontSize: 12.sp,
+                          ? getSemiBoldStyle(context).copyWith(
+                              // fontSize: 12.sp,
                               fontWeight: FontManager.mediumFontWeight,
                               color: whiteColor)
-                          : getBoldStyle(context).copyWith(
+                          : getMediumStyle(context).copyWith(
                               fontWeight: FontManager.mediumFontWeight,
-                              fontSize: 15.sp,
+                              // fontSize: 15.sp,
                               color: whiteColor),
                       textAlign: TextAlign.start,
                       maxLines: 2,
@@ -87,7 +87,7 @@ class ShopProductItemWidget extends StatelessWidget {
                   if (product.discount != "0")
                     PositionedDirectional(
                       bottom: 0.h,
-                      end: 24.w,
+                      end: context.isTablet ? 10.w : 24.w,
                       child: Container(
                         padding: EdgeInsets.symmetric(
                           horizontal: 10.w,

@@ -3,6 +3,7 @@ import 'package:b2b_partenership/controller/service_details_controller.dart';
 import 'package:b2b_partenership/core/functions/get_year_date.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -31,7 +32,7 @@ class SellerWidget extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     backgroundColor: Colors.grey[200],
-                    radius: 27.sp,
+                    radius: 27.r,
                     backgroundImage: CachedNetworkImageProvider(
                         controller.service!.provider!.image!),
                   ),
@@ -41,34 +42,36 @@ class SellerWidget extends StatelessWidget {
                     children: [
                       Text(
                         controller.service!.provider!.name!,
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16.sp),
+                        style: getMediumStyle(context).copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       Gap(8),
                       Row(
                         children: [
                           Text(
                             'Seller Rating'.tr,
-                            style: TextStyle(color: Colors.black54),
+                            style: getLightStyle(context).copyWith(
+                              color: Colors.black54,
+                            ),
                           ),
                           Gap(10),
                           Text(
                             controller.service!.provider!.rating!,
-                            style: TextStyle(
+                            style: getMediumStyle(context).copyWith(
                                 color: Colors.orange,
-                                fontSize: 15.sp,
                                 fontWeight: FontWeight.bold),
                           ),
                           Gap(3),
                           Icon(
                             Icons.circle,
-                            size: 3.sp,
+                            size: 3.r,
                             color: greyColor,
                           ),
                           Gap(3),
                           Icon(
                             Icons.star,
-                            size: 15.sp,
+                            size: 15.r,
                             color: Colors.orange,
                           ),
                         ],
@@ -140,15 +143,16 @@ class SellerWidget extends StatelessWidget {
   Widget titleWidget(String title) {
     return Text(
       title,
-      style: TextStyle(fontSize: 14.sp, color: Colors.black54),
+      style: getRegularStyle(Get.context!).copyWith(
+        color: Colors.black54,
+      ),
     );
   }
 
   Widget valueWidget(String value) {
     return Text(
       value,
-      style: TextStyle(
-        fontSize: 14.sp,
+      style: getRegularStyle(Get.context!).copyWith(
         color: blackColor,
         fontWeight: FontWeight.w500,
       ),

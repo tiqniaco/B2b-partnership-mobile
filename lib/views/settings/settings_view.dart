@@ -5,6 +5,7 @@ import 'package:b2b_partenership/core/functions/remove_account.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/language_widget.dart';
 import 'package:b2b_partenership/widgets/please_login_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -47,14 +48,16 @@ class SettingsView extends StatelessWidget {
                                         child: Column(
                                           children: [
                                             Container(
-                                              height: 60.h,
-                                              width: 60.h,
+                                              height: context.isTablet
+                                                  ? 100.h
+                                                  : 60.h,
                                               decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(8),
-                                                  border: Border.all(
-                                                      color:
-                                                          Colors.grey[300]!)),
+                                                borderRadius:
+                                                    BorderRadius.circular(8),
+                                                border: Border.all(
+                                                  color: Colors.grey[300]!,
+                                                ),
+                                              ),
                                               child: ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(8),
@@ -68,15 +71,17 @@ class SettingsView extends StatelessWidget {
                                             Gap(10),
                                             Text(
                                               controller.menuModel!.data!.name!,
-                                              style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 15.sp),
+                                              style: getMediumStyle(context)
+                                                  .copyWith(
+                                                fontWeight: FontWeight.bold,
+                                              ),
                                             ),
                                             Text(
                                               "+${controller.menuModel!.data!.countryCode}${controller.menuModel!.data!.phone}",
-                                              style: TextStyle(
-                                                  color: greyColor,
-                                                  fontSize: 15.sp),
+                                              style: getMediumStyle(context)
+                                                  .copyWith(
+                                                color: greyColor,
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -95,13 +100,13 @@ class SettingsView extends StatelessWidget {
                                                 );
                                               },
                                               child: CircleAvatar(
-                                                radius: 20.sp,
+                                                radius: 20.r,
                                                 backgroundColor:
                                                     blackColor.withAlpha(10),
                                                 child: Icon(
                                                   FontAwesomeIcons.bell,
                                                   color: blackColor,
-                                                  size: 20.sp,
+                                                  size: 20.r,
                                                 ),
                                               ),
                                             ),
@@ -113,13 +118,14 @@ class SettingsView extends StatelessWidget {
                                                 Get.toNamed(AppRoutes.save);
                                               },
                                               child: CircleAvatar(
-                                                  radius: 20.sp,
-                                                  backgroundColor:
-                                                      blackColor.withAlpha(10),
-                                                  child: SvgPicture.asset(
-                                                    'assets/svgs/save.svg',
-                                                    height: 20.sp,
-                                                  )),
+                                                radius: 20.r,
+                                                backgroundColor:
+                                                    blackColor.withAlpha(10),
+                                                child: SvgPicture.asset(
+                                                  'assets/svgs/save.svg',
+                                                  height: 20.r,
+                                                ),
+                                              ),
                                             ),
                                           ],
                                         ),
@@ -154,15 +160,16 @@ class SettingsView extends StatelessWidget {
                                           children: [
                                             Text(
                                               "Switch to Provider Account".tr,
-                                              style: TextStyle(
-                                                  color: blackColor,
-                                                  fontWeight: FontWeight.w500,
-                                                  fontSize: 14.sp),
+                                              style: getRegularStyle(context)
+                                                  .copyWith(
+                                                color: blackColor,
+                                                fontWeight: FontWeight.w500,
+                                              ),
                                             ),
                                             Gap(10),
                                             Icon(
                                               Icons.restart_alt_rounded,
-                                              size: 17.sp,
+                                              size: 17.r,
                                             )
                                           ],
                                         ),
@@ -175,10 +182,15 @@ class SettingsView extends StatelessWidget {
                                   shrinkWrap: true,
                                   gridDelegate:
                                       SliverGridDelegateWithFixedCrossAxisCount(
-                                          crossAxisCount: 2,
-                                          mainAxisSpacing: 15,
-                                          crossAxisSpacing: 15,
-                                          childAspectRatio: 9 / 4.1),
+                                    crossAxisCount: context.isLargeTablet
+                                        ? 4
+                                        : context.isTablet
+                                            ? 3
+                                            : 2,
+                                    mainAxisSpacing: 15,
+                                    crossAxisSpacing: 15,
+                                    childAspectRatio: 9 / 4.1,
+                                  ),
                                   children: [
                                     boxWidget(
                                       Icons.work_outline,
@@ -231,9 +243,9 @@ class SettingsView extends StatelessWidget {
                                   children: [
                                     Text(
                                       "Personal Information".tr,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 17.sp),
+                                      style: getMediumStyle(context).copyWith(
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
                                     Gap(20),
                                     rowWidget("Email".tr,
@@ -275,9 +287,10 @@ class SettingsView extends StatelessWidget {
                                     Gap(20),
                                     Text(
                                       "Other Services".tr,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 17.sp),
+                                      style:
+                                          getMediumStyle(Get.context!).copyWith(
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
                                     Gap(20),
                                     rowWithArrow(
@@ -402,12 +415,12 @@ class SettingsView extends StatelessWidget {
         child: Row(
           children: [
             CircleAvatar(
-              radius: 19.sp,
+              radius: 19.r,
               backgroundColor: color.withAlpha(30),
               child: Icon(
                 icon,
                 color: color,
-                size: 20.sp,
+                size: 20.r,
               ),
             ),
             Gap(10),
@@ -417,12 +430,15 @@ class SettingsView extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
+                  style: getMediumStyle(Get.context!).copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 Text(
                   subTitle,
-                  style: TextStyle(color: greyColor, fontSize: 13.sp),
+                  style: getRegularStyle(Get.context!).copyWith(
+                    color: greyColor,
+                  ),
                 ),
               ],
             )
@@ -438,18 +454,22 @@ class SettingsView extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-              flex: 1,
-              child: Text(title,
-                  style:
-                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300))),
+            flex: 1,
+            child: Text(
+              title,
+              style: getRegularStyle(Get.context!).copyWith(
+                fontWeight: FontWeight.w300,
+              ),
+            ),
+          ),
           Expanded(
               flex: 2,
               child: Text(
                 data,
-                style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black54),
+                style: getRegularStyle(Get.context!).copyWith(
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black54,
+                ),
               ))
         ],
       ),
@@ -462,25 +482,27 @@ class SettingsView extends StatelessWidget {
       child: Row(
         children: [
           CircleAvatar(
-            radius: 18.sp,
+            radius: 18.r,
             backgroundColor: borderColor.withAlpha(30),
             child: Icon(
               icon,
               color: Colors.black54,
-              size: 20.sp,
+              size: 20.r,
             ),
           ),
           Gap(15),
           Text(
             title,
-            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300),
+            style: getRegularStyle(Get.context!).copyWith(
+              fontWeight: FontWeight.w300,
+            ),
           ),
           Spacer(),
           IconButton(
               onPressed: onPressed,
               icon: Icon(
                 Icons.arrow_forward_ios_rounded,
-                size: 15.sp,
+                size: 15.r,
               ))
         ],
       ),

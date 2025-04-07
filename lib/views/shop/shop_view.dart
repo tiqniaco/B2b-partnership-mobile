@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/shop/shop_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
@@ -9,6 +11,7 @@ import 'package:b2b_partenership/widgets/shop/shop_item_product_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
@@ -79,7 +82,22 @@ class ShopView extends StatelessWidget {
                   ),
                 ),
               ),
-              Gap(10.w)
+              Gap(10.w),
+              // Container(
+              //   decoration:
+              //       BoxDecoration(color: blueColor, shape: BoxShape.circle),
+              //   child: IconButton(
+              //     onPressed: () {
+              //       Get.toNamed(AppRoutes.shopOrders);
+              //     },
+              //     icon: SvgPicture.asset(
+              //       "assets/svgs/bag2.svg",
+              //       color: whiteColor,
+              //       width: context.isTablet ? 16.w : 17.w,
+              //     ),
+              //   ),
+              // ),
+              // Gap(10.w)
             ],
           ),
           floatingActionButton: Column(
@@ -143,13 +161,12 @@ class ShopView extends StatelessWidget {
                                     Icon(
                                       Icons.mediation_outlined,
                                       color: Colors.white,
-                                      size: 20.sp,
+                                      size: 20.r,
                                     ),
                                     Gap(8.h),
                                     Text(
                                       "All fields".tr,
-                                      style: TextStyle(
-                                          fontSize: 15.sp,
+                                      style: getMediumStyle(context).copyWith(
                                           fontWeight: FontWeight.bold,
                                           color: whiteColor),
                                     ),
@@ -163,21 +180,22 @@ class ShopView extends StatelessWidget {
                                             });
                                       },
                                       child: Container(
-                                          alignment: Alignment.center,
-                                          padding:
-                                              EdgeInsets.symmetric(vertical: 5),
-                                          decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(30),
-                                            color: whiteColor,
-                                          ),
-                                          child: Text(
-                                            "Show All".tr,
-                                            style: TextStyle(
-                                                fontSize: 12.sp,
-                                                fontWeight: FontWeight.w600,
-                                                color: Colors.teal),
-                                          )),
+                                        alignment: Alignment.center,
+                                        padding:
+                                            EdgeInsets.symmetric(vertical: 5),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          color: whiteColor,
+                                        ),
+                                        child: Text(
+                                          "Show All".tr,
+                                          style: TextStyle(
+                                              fontSize: 12.sp,
+                                              fontWeight: FontWeight.w600,
+                                              color: Colors.teal),
+                                        ),
+                                      ),
                                     )
                                   ],
                                 ),
@@ -221,7 +239,7 @@ class ShopView extends StatelessWidget {
                                       Icon(
                                         Icons.mediation_outlined,
                                         color: Colors.white,
-                                        size: 20.sp,
+                                        size: 20.r,
                                       ),
                                       Gap(10.h),
                                       Spacer(),
@@ -234,10 +252,10 @@ class ShopView extends StatelessWidget {
                                         ),
                                         maxLines: 2,
                                         overflow: TextOverflow.ellipsis,
-                                        style: TextStyle(
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.bold,
-                                            color: whiteColor),
+                                        style: getRegularStyle(context)
+                                            .copyWith(
+                                                fontWeight: FontWeight.bold,
+                                                color: whiteColor),
                                       ),
                                     ],
                                   ),
@@ -258,10 +276,10 @@ class ShopView extends StatelessWidget {
                     const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10),
                 child: Text(
                   "Best Selling Bags".tr,
-                  style: TextStyle(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.w500,
-                      color: blackColor),
+                  style: getMediumStyle(context).copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: blackColor,
+                  ),
                 ),
               ),
               Expanded(
@@ -276,11 +294,12 @@ class ShopView extends StatelessWidget {
                       return ShopProductItemWidget(
                         product: product,
                         onTap: () {
+                          log(product.id, name: "id");
                           Get.toNamed(
                             AppRoutes.shopProductDetails,
                             arguments: {
                               "product": product,
-                              "productId": product.id.toString(),
+                              "productId": product.id,
                             },
                           );
                         },

@@ -20,7 +20,6 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(LoginController());
     return Scaffold(
       backgroundColor: whiteColor,
       body: SizedBox(
@@ -204,6 +203,7 @@ class LoginView extends StatelessWidget {
                             height: 38.h,
                             child: CustomLoadingButton(
                               text: "Login".tr,
+                              width: context.isTablet ? 0.75.sw : null,
                               onPressed: () {
                                 return controller.login();
                               },

@@ -3,6 +3,7 @@ import 'package:b2b_partenership/controller/shop/all_categoties_controller.dart'
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -17,11 +18,20 @@ class AllCategories extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: whiteColor,
-        title: Text("Categories List".tr),
+        title: Text(
+          "Categories List".tr,
+          style: getMediumStyle(context).copyWith(
+            fontWeight: FontWeight.bold,
+            color: blackColor,
+          ),
+        ),
       ),
       body: GetBuilder<AllCategoriesController>(
         builder: (controller) => Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 15.0,
+            vertical: 20,
+          ),
           child: ListView.separated(
             separatorBuilder: (context, index) => Gap(20),
             itemCount: controller.shopCategories.length,
@@ -60,7 +70,7 @@ class AllCategories extends StatelessWidget {
                           Icon(
                             Icons.mediation_outlined,
                             color: Colors.white,
-                            size: 25.sp,
+                            size: 25.r,
                           ),
                           Gap(10.h),
                           Spacer(),
@@ -71,8 +81,8 @@ class AllCategories extends StatelessWidget {
                             ),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontSize: 17.sp,
+                            style: getSemiBoldStyle(context).copyWith(
+                                // fontSize: 17.sp,
                                 fontWeight: FontWeight.bold,
                                 color: whiteColor),
                           ),

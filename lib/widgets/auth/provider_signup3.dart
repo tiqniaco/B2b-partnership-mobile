@@ -1,4 +1,7 @@
 import 'package:b2b_partenership/controller/auth/signup_controller.dart';
+import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/utils/font_manager.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -51,23 +54,27 @@ class ProviderSignup3 extends StatelessWidget {
                       },
                       child: Icon(
                         Icons.close,
-                        size: 23.sp,
+                        size: 23.r,
                       ),
                     ),
                   Gap(5),
                   SizedBox(
-                    width: 80.h,
+                    width: context.isTablet ? 45.w : 80.w,
                     child: ElevatedButton(
-                        onPressed: () {
-                          controller.pickPDF("c");
-                        },
-                        style: ElevatedButton.styleFrom(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30))),
-                        child: Text(
-                          "Upload".tr,
-                          style: TextStyle(fontSize: 12.sp),
-                        )),
+                      onPressed: () {
+                        controller.pickPDF("c");
+                      },
+                      style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30))),
+                      child: Text(
+                        "Upload".tr,
+                        style: getLightStyle(context).copyWith(
+                          color: whiteColor,
+                          fontWeight: FontManager.mediumFontWeight,
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -97,12 +104,12 @@ class ProviderSignup3 extends StatelessWidget {
                       },
                       child: Icon(
                         Icons.close,
-                        size: 23.sp,
+                        size: 23.r,
                       ),
                     ),
                   Gap(5),
                   SizedBox(
-                    width: 80.h,
+                    width: context.isTablet ? 45.w : 80.w,
                     child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             //padding: EdgeInsets.symmetric(horizontal: 10),
@@ -115,7 +122,10 @@ class ProviderSignup3 extends StatelessWidget {
                         },
                         child: Text(
                           "Upload".tr,
-                          style: TextStyle(fontSize: 12.sp),
+                          style: getLightStyle(context).copyWith(
+                            color: whiteColor,
+                            fontWeight: FontManager.mediumFontWeight,
+                          ),
                         )),
                   ),
                 ],

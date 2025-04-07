@@ -70,12 +70,12 @@ class LanguageWidget extends StatelessWidget {
       child: Row(
         children: [
           CircleAvatar(
-            radius: 18.sp,
+            radius: 18.r,
             backgroundColor: borderColor.withAlpha(30),
             child: Icon(
               Icons.language,
               color: Colors.black54,
-              size: 20.sp,
+              size: 20.r,
             ),
           ),
           const SizedBox(
@@ -83,7 +83,8 @@ class LanguageWidget extends StatelessWidget {
           ),
           Text(
             "Change Language".tr,
-            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300),
+            style: getRegularStyle(Get.context!)
+                .copyWith(fontWeight: FontWeight.w300),
           ),
           const Spacer(),
           Text(

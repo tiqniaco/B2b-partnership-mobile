@@ -2,6 +2,7 @@ import 'package:b2b_partenership/controller/previous_work/provider_profile_contr
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/app_pdf_view.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
@@ -62,10 +63,10 @@ class AboutWidget extends StatelessWidget {
                   Gap(10),
                   Text(
                     "${"Commercial Papers".tr}: ",
-                    style: TextStyle(
-                        fontSize: 13.sp,
-                        color: blackColor,
-                        fontWeight: FontWeight.w500),
+                    style: getMediumStyle(context).copyWith(
+                      color: blackColor,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   Spacer(),
                   InkWell(
@@ -78,10 +79,10 @@ class AboutWidget extends StatelessWidget {
                     },
                     child: Text(
                       "View".tr,
-                      style: TextStyle(
-                          fontSize: 13.sp,
-                          color: primaryColor,
-                          fontWeight: FontWeight.w500),
+                      style: getRegularStyle(context).copyWith(
+                        color: primaryColor,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                 ],
@@ -114,10 +115,10 @@ class AboutWidget extends StatelessWidget {
                   Gap(10),
                   Text(
                     "${"Tax Papers".tr}: ",
-                    style: TextStyle(
-                        fontSize: 13.sp,
-                        color: blackColor,
-                        fontWeight: FontWeight.w500),
+                    style: getMediumStyle(context).copyWith(
+                      color: blackColor,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   Spacer(),
                   InkWell(
@@ -130,10 +131,8 @@ class AboutWidget extends StatelessWidget {
                     },
                     child: Text(
                       "View".tr,
-                      style: TextStyle(
-                          fontSize: 13.sp,
-                          color: primaryColor,
-                          fontWeight: FontWeight.w500),
+                      style: getRegularStyle(context).copyWith(
+                          color: primaryColor, fontWeight: FontWeight.w500),
                     ),
                   ),
                 ],
@@ -178,10 +177,15 @@ class AboutWidget extends StatelessWidget {
               Gap(10),
               Text(
                 "$title: ",
-                style: TextStyle(
-                    fontSize: 13.sp,
-                    color: blackColor,
-                    fontWeight: FontWeight.w500),
+                style: Get.context!.isTablet
+                    ? getMediumStyle(Get.context!).copyWith(
+                        color: blackColor,
+                        fontWeight: FontWeight.w500,
+                      )
+                    : getRegularStyle(Get.context!).copyWith(
+                        color: blackColor,
+                        fontWeight: FontWeight.w500,
+                      ),
               ),
             ],
           ),
@@ -191,7 +195,15 @@ class AboutWidget extends StatelessWidget {
           flex: 3,
           child: Text(
             value,
-            style: TextStyle(fontSize: 13.sp, color: Colors.black54),
+            style: Get.context!.isTablet
+                ? getMediumStyle(Get.context!).copyWith(
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w500,
+                  )
+                : getRegularStyle(Get.context!).copyWith(
+                    color: Colors.black54,
+                    fontWeight: FontWeight.w500,
+                  ),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),

@@ -2,6 +2,7 @@ import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/previous_work/provider_profile_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,15 +51,15 @@ class PreviousWork extends StatelessWidget {
                           children: [
                             Text(
                               controller.previousWork[index].titleEn!,
-                              style: TextStyle(
+                              style: getSemiBoldStyle(context).copyWith(
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 17.sp,
                                   color: whiteColor),
                             ),
                             Text(
                               controller.previousWork[index].description!,
-                              style:
-                                  TextStyle(fontSize: 14.sp, color: whiteColor),
+                              style: getMediumStyle(context).copyWith(
+                                color: whiteColor,
+                              ),
                               maxLines: 2,
                               overflow: TextOverflow.ellipsis,
                             )

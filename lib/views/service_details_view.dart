@@ -2,9 +2,12 @@
 
 import 'package:b2b_partenership/controller/service_details_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/services/date_time_convertor.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/utils/font_manager.dart';
 import 'package:b2b_partenership/widgets/service_details.dart/feature_widget.dart';
 import 'package:b2b_partenership/widgets/service_details.dart/seller_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -36,19 +39,15 @@ class ServiceDetailsView extends StatelessWidget {
             children: [
               Expanded(
                 child: Container(
-                  height: 50.h,
+                  height: 45.h,
                   decoration: BoxDecoration(
                       color: primaryColor,
                       borderRadius: BorderRadius.circular(15)),
-                  child: ElevatedButton(
+                  child: CustomLoadingButton(
                     onPressed: () {
                       controller.contactMethods();
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: primaryColor,
-                      minimumSize: Size(double.infinity, 50),
-                    ),
-                    child: Text('Book Appointment'.tr),
+                    text: 'Book Appointment'.tr,
                   ),
                 ),
               ),
@@ -56,301 +55,312 @@ class ServiceDetailsView extends StatelessWidget {
           ),
         ),
       ),
-      body: GetBuilder<ServiceDetailsController>(builder: (controller) {
-        return controller.service == null
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : SingleChildScrollView(
-                child: Column(children: [
-                Stack(
-                  children: [
-                    CachedNetworkImage(
-                      width: double.infinity,
-                      height: 265.h,
-                      fit: BoxFit.cover,
-                      imageUrl: controller.service!.data!.image!,
-                      errorWidget: (context, url, error) => Image.asset(
-                        'assets/images/default.jpg',
-                        width: double.infinity,
-                        height: 265.h,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    Container(
-                      width: double.infinity,
-                      height: 265.h,
-                      decoration: BoxDecoration(
-                        gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: [
-                            Colors.black.withOpacity(0.7),
-                            Colors.transparent,
-                          ],
-                        ),
-                      ),
-                    ),
-                    PositionedDirectional(
-                      top: 50,
-                      start: 16,
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.arrow_back_ios,
-                          color: Colors.white,
-                        ),
-                        onPressed: () {
-                          Get.back();
-                        },
-                      ),
-                    ),
-                    Positioned(
-                      top: 60,
-                      left: 0,
-                      right: 0,
-                      child: Center(
-                        child: Text(
-                          "Service List".tr,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ),
-                    if (Get.find<AppPreferences>().getUserRole() ==
-                            "provider" &&
-                        Get.find<AppPreferences>().getUserRoleId() ==
-                            controller.service?.provider?.providerId)
-                      PositionedDirectional(
-                        top: 60,
-                        end: 16,
-                        child: CircleAvatar(
-                          backgroundColor: whiteColor,
-                          child: IconButton(
-                            icon: Icon(
-                              FontAwesomeIcons.trash,
-                              color: primaryColor,
-                              size: 15.sp,
+      body: GetBuilder<ServiceDetailsController>(
+        builder: (controller) {
+          return controller.service == null
+              ? Center(
+                  child: CircularProgressIndicator(),
+                )
+              : SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      Stack(
+                        children: [
+                          CachedNetworkImage(
+                            width: double.infinity,
+                            height: 265.h,
+                            fit: BoxFit.cover,
+                            imageUrl: controller.service!.data!.image!,
+                            errorWidget: (context, url, error) => Image.asset(
+                              'assets/images/default.jpg',
+                              width: double.infinity,
+                              height: 265.h,
+                              fit: BoxFit.cover,
                             ),
-                            onPressed: () {
-                              controller.deleteServiceDialog();
-                            },
                           ),
-                        ),
-                      ),
-                  ],
-                ),
-                Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Gap(10),
-                        if (controller.service?.data?.video != null)
-                          InkWell(
-                            onTap: () {
-                              launchUrlString(
-                                controller.service?.data?.video ?? "",
-                              );
-                            },
-                            child: Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 17, vertical: 12),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.green,
+                          Container(
+                            width: double.infinity,
+                            height: 265.h,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.black.withOpacity(0.7),
+                                  Colors.transparent,
+                                ],
                               ),
+                            ),
+                          ),
+                          PositionedDirectional(
+                            top: 50,
+                            start: 16,
+                            child: IconButton(
+                              icon: Icon(
+                                Icons.arrow_back_ios,
+                                color: Colors.white,
+                                size: 20.r,
+                              ),
+                              onPressed: () {
+                                Get.back();
+                              },
+                            ),
+                          ),
+                          Positioned(
+                            top: 60,
+                            left: 0,
+                            right: 0,
+                            child: Center(
                               child: Text(
-                                'Watch Video'.tr,
-                                style: TextStyle(
-                                    fontSize: 13.sp,
-                                    color: whiteColor,
-                                    fontWeight: FontWeight.bold),
+                                "Service List".tr,
+                                style: getSemiBoldStyle(context).copyWith(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
                           ),
-                        SizedBox(height: 13),
-                        Text(
-                          translateDatabase(
-                              arabic: controller.service!.data!.nameAr!,
-                              english: controller.service!.data!.nameEn!),
-                          style: TextStyle(
-                              fontSize: 17.sp, fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(height: 20),
-                        Row(
-                          children: [
-                            CircleAvatar(
-                              radius: 17.sp,
-                              backgroundColor: Colors.grey[200],
-                              backgroundImage: CachedNetworkImageProvider(
-                                  controller.service!.provider!.image!),
+                          if (Get.find<AppPreferences>().getUserRole() ==
+                                  "provider" &&
+                              Get.find<AppPreferences>().getUserRoleId() ==
+                                  controller.service?.provider?.providerId)
+                            PositionedDirectional(
+                              top: 60,
+                              end: 16,
+                              child: CircleAvatar(
+                                backgroundColor: whiteColor,
+                                child: IconButton(
+                                  icon: Icon(
+                                    FontAwesomeIcons.trash,
+                                    color: primaryColor,
+                                    size: 15.r,
+                                  ),
+                                  onPressed: () {
+                                    controller.deleteServiceDialog();
+                                  },
+                                ),
+                              ),
                             ),
-                            SizedBox(width: 10),
-                            Text(controller.service!.provider!.name!),
+                        ],
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Gap(10),
+                            if (controller.service?.data?.video != null)
+                              InkWell(
+                                onTap: () {
+                                  launchUrlString(
+                                    controller.service?.data?.video ?? "",
+                                  );
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 17, vertical: 12),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10),
+                                    color: Colors.green,
+                                  ),
+                                  child: Text(
+                                    'Watch Video'.tr,
+                                    style: getRegularStyle(context).copyWith(
+                                        color: whiteColor,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
+                              ),
+                            SizedBox(height: 13),
+                            Text(
+                              translateDatabase(
+                                  arabic: controller.service!.data!.nameAr!,
+                                  english: controller.service!.data!.nameEn!),
+                              style: getMediumStyle(context).copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 20),
+                            Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 20.r,
+                                  backgroundColor: Colors.grey[200],
+                                  backgroundImage: CachedNetworkImageProvider(
+                                      controller.service!.provider!.image!),
+                                ),
+                                SizedBox(width: 10),
+                                Text(
+                                  controller.service!.provider!.name!,
+                                  style: getLightStyle(context).copyWith(
+                                    fontWeight: FontManager.mediumFontWeight,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 25),
+                            FeatureWidget(),
+                            Gap(20),
+                            FractionallySizedBox(
+                              widthFactor: 10,
+                              child: Divider(
+                                color: borderColor,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text(
+                                        DateTimeConvertor.timeAgo(controller
+                                                .service!.data!.createdAt!)
+                                            .toString(),
+                                        style:
+                                            getRegularStyle(context).copyWith(
+                                          color: Colors.green,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    color: greyColor,
+                                    height: 10.h,
+                                    width: 1,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        controller.service!.data!.rating!,
+                                        style: getMediumStyle(context).copyWith(
+                                          color: Colors.orange,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Gap(3),
+                                      Icon(
+                                        Icons.circle,
+                                        size: 3.r,
+                                        color: greyColor,
+                                      ),
+                                      Gap(3),
+                                      Icon(
+                                        Icons.star,
+                                        size: 15.r,
+                                        color: Colors.orange,
+                                      ),
+                                      Gap(7),
+                                      Text(
+                                        'Service Ratings'.tr,
+                                        style: getRegularStyle(context),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                            FractionallySizedBox(
+                              widthFactor: 10,
+                              child: Divider(
+                                color: borderColor,
+                              ),
+                            ),
+                            SizedBox(height: 30),
+                            Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                    child: InkWell(
+                                      onTap: () {
+                                        controller.onTapOverView();
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.only(bottom: 10),
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                            border: Border(
+                                          bottom: BorderSide(
+                                              width: 5,
+                                              color: controller.isOverView
+                                                  ? primaryColor
+                                                  : Colors.white),
+                                        )),
+                                        child: Text(
+                                          "Overview".tr,
+                                          style:
+                                              getMediumStyle(context).copyWith(
+                                            color: controller.isOverView
+                                                ? primaryColor
+                                                : blackColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8.0),
+                                    child: InkWell(
+                                      onTap: () {
+                                        controller.onTapSeller();
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.only(bottom: 10),
+                                        alignment: Alignment.center,
+                                        decoration: BoxDecoration(
+                                            border: Border(
+                                                bottom: BorderSide(
+                                                    width: 3,
+                                                    color: controller.isSeller
+                                                        ? primaryColor
+                                                        : Colors.white))),
+                                        child: Text(
+                                          "About Seller".tr,
+                                          style:
+                                              getMediumStyle(context).copyWith(
+                                            color: controller.isSeller
+                                                ? primaryColor
+                                                : blackColor,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ]),
+                            Divider(
+                              height: 0,
+                              color: const Color.fromARGB(255, 198, 137, 139),
+                            ),
+                            Gap(8.h),
+                            controller.isOverView
+                                ? Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      controller.service!.data!.overview!,
+                                      style: getMediumStyle(context).copyWith(
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                      maxLines: 100,
+                                    ),
+                                  )
+                                : controller.isSeller
+                                    ? SellerWidget()
+                                    : SizedBox.shrink(),
                           ],
                         ),
-                        SizedBox(height: 25),
-                        FeatureWidget(),
-                        Gap(20),
-                        FractionallySizedBox(
-                          widthFactor: 10,
-                          child: Divider(
-                            color: borderColor,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Row(
-                                children: [
-                                  Text(
-                                    DateTimeConvertor.timeAgo(controller
-                                            .service!.data!.createdAt!)
-                                        .toString(),
-                                    style: TextStyle(
-                                      color: Colors.green,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                color: greyColor,
-                                height: 10.h,
-                                width: 1,
-                              ),
-                              Row(
-                                children: [
-                                  Text(
-                                    controller.service!.data!.rating!,
-                                    style: TextStyle(
-                                      color: Colors.orange,
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Gap(3),
-                                  Icon(
-                                    Icons.circle,
-                                    size: 3.sp,
-                                    color: greyColor,
-                                  ),
-                                  Gap(3),
-                                  Icon(
-                                    Icons.star,
-                                    size: 15.sp,
-                                    color: Colors.orange,
-                                  ),
-                                  Gap(7),
-                                  Text(
-                                    'Service Ratings'.tr,
-                                    style: TextStyle(
-                                      fontSize: 13.sp,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                        FractionallySizedBox(
-                          widthFactor: 10,
-                          child: Divider(
-                            color: borderColor,
-                          ),
-                        ),
-                        SizedBox(height: 30),
-                        Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: InkWell(
-                                  onTap: () {
-                                    controller.onTapOverView();
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.only(bottom: 10),
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                      bottom: BorderSide(
-                                          width: 5,
-                                          color: controller.isOverView
-                                              ? primaryColor
-                                              : Colors.white),
-                                    )),
-                                    child: Text(
-                                      "Overview".tr,
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                        color: controller.isOverView
-                                            ? primaryColor
-                                            : blackColor,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 8.0),
-                                child: InkWell(
-                                  onTap: () {
-                                    controller.onTapSeller();
-                                  },
-                                  child: Container(
-                                    padding: EdgeInsets.only(bottom: 10),
-                                    alignment: Alignment.center,
-                                    decoration: BoxDecoration(
-                                        border: Border(
-                                            bottom: BorderSide(
-                                                width: 3,
-                                                color: controller.isSeller
-                                                    ? primaryColor
-                                                    : Colors.white))),
-                                    child: Text(
-                                      "About Seller".tr,
-                                      style: TextStyle(
-                                        fontSize: 14.sp,
-                                        color: controller.isSeller
-                                            ? primaryColor
-                                            : blackColor,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ]),
-                        Divider(
-                          height: 0,
-                          color: const Color.fromARGB(255, 198, 137, 139),
-                        ),
-                        Gap(5),
-                        controller.isOverView
-                            ? Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  controller.service!.data!.overview!,
-                                  style: TextStyle(
-                                      fontSize: 15.sp,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                              )
-                            : controller.isSeller
-                                ? SellerWidget()
-                                : SizedBox.shrink(),
-                      ],
-                    ))
-              ]));
-      }),
+                      )
+                    ],
+                  ),
+                );
+        },
+      ),
     );
   }
 }

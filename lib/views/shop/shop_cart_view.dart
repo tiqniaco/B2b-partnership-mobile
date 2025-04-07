@@ -27,9 +27,10 @@ class ShopCartView extends StatelessWidget {
       builder: (ShopCartController controller) {
         return Scaffold(
           appBar: AppBar(
+            toolbarHeight: context.isTablet ? 45.h : null,
             title: Text(
               "Cart".tr,
-              style: TextStyle(
+              style: getMediumStyle(context).copyWith(
                 color: whiteColor,
               ),
             ),
@@ -37,6 +38,7 @@ class ShopCartView extends StatelessWidget {
             centerTitle: true,
             iconTheme: IconThemeData(
               color: whiteColor,
+              size: context.isTablet ? 16.r : 20.r,
             ),
             actions: [
               IconButton(
@@ -84,11 +86,11 @@ class ShopCartView extends StatelessWidget {
                   trailing: IconButton(
                     icon: Icon(
                       FontAwesomeIcons.xmark,
-                      size: 20.sp,
+                      size: 20.r,
                     ),
                     onPressed: () {
                       controller.removeFromCart(
-                        id: controller.carts[index].id,
+                        id: controller.carts[index].id.toString(),
                       );
                     },
                   ),

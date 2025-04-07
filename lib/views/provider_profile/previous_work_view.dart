@@ -1,6 +1,7 @@
 import 'package:b2b_partenership/controller/previous_work/previous_work_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/provider_profile/work_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -34,14 +35,14 @@ class PreviousWorkView extends StatelessWidget {
                         translateDatabase(
                             arabic: controller.model.titleAr!,
                             english: controller.model.titleEn!),
-                        style: TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 18.sp),
+                        style: getSemiBoldStyle(context).copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                       Gap(10),
                       ReadMoreText(
                         "${controller.model.description!} ",
-                        style: TextStyle(
-                          fontSize: 15.sp,
+                        style: getMediumStyle(context).copyWith(
                           fontWeight: FontWeight.normal,
                         ),
                         trimCollapsedText: "See more".tr,

@@ -3,6 +3,7 @@
 import 'package:b2b_partenership/controller/save/saved_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/home/provider_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,15 +17,21 @@ class SaveView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: context.isTablet ? 45.h : null,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(15),
-                bottomRight: Radius.circular(15))),
-        automaticallyImplyLeading: false,
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(15),
+            bottomRight: Radius.circular(15),
+          ),
+        ),
+        iconTheme: IconThemeData(color: whiteColor),
         backgroundColor: primaryColor,
         title: Text(
           "Saved".tr,
-          style: TextStyle(color: whiteColor, fontWeight: FontWeight.w400),
+          style: getMediumStyle(context).copyWith(
+            color: whiteColor,
+            fontWeight: FontWeight.w400,
+          ),
         ),
       ),
       body: GetBuilder<SavedController>(
@@ -40,14 +47,16 @@ class SaveView extends StatelessWidget {
                     children: [
                       Text(
                         controller.favorites.length.toString(),
-                        style: TextStyle(
-                            fontSize: 15.sp, fontWeight: FontWeight.w500),
+                        style: getMediumStyle(context).copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                       Gap(10),
                       Text(
                         "Saved Provider".tr,
-                        style: TextStyle(
-                            fontSize: 15.sp, fontWeight: FontWeight.w500),
+                        style: getMediumStyle(context).copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ],
                   ),
@@ -59,10 +68,10 @@ class SaveView extends StatelessWidget {
                     statusRequest: controller.statusRequestProviders,
                     child: GridView.builder(
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
+                          crossAxisCount: context.isTablet ? 3 : 2,
                           mainAxisSpacing: 15,
                           crossAxisSpacing: 10,
-                          childAspectRatio: 6 / 9.8),
+                          childAspectRatio: context.isTablet ? 6 / 9 : 6 / 10),
                       scrollDirection: Axis.vertical,
                       padding: EdgeInsets.symmetric(horizontal: 15),
                       itemCount: controller.favorites.length,

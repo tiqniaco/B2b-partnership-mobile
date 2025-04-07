@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/controller/auth/signup_controller.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -22,10 +23,10 @@ class CustomPhoneWidget extends StatelessWidget {
             floatingLabelBehavior: FloatingLabelBehavior.always,
             label: Text(
               "Phone".tr,
-              style: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 17.sp,
-                  color: Colors.black87),
+              style: getMediumStyle(context).copyWith(
+                fontWeight: FontWeight.w500,
+                color: Colors.black87,
+              ),
             ),
             contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 16),
             prefixIcon: SizedBox(
@@ -36,13 +37,18 @@ class CustomPhoneWidget extends StatelessWidget {
                   Icon(
                     Icons.arrow_drop_down_sharp,
                     color: blackColor,
+                    size: 20.r,
                   ),
                   Gap(5),
                   Text(
                     controller.selectedCountry.flag!,
+                    style: getMediumStyle(context),
                   ),
                   Gap(6),
-                  Text("+${controller.selectedCountry.code}"),
+                  Text(
+                    "+${controller.selectedCountry.code}",
+                    style: getRegularStyle(context),
+                  ),
                   Gap(8),
                   Container(
                     width: 2,
@@ -54,12 +60,15 @@ class CustomPhoneWidget extends StatelessWidget {
               ),
             ),
             hintText: "Without country code".tr,
-            hintStyle: TextStyle(
-                fontSize: 12.sp,
-                color: greyColor.withAlpha(160),
-                fontWeight: FontWeight.w500),
-            focusedBorder:
-                OutlineInputBorder(borderSide: BorderSide(color: blackColor)),
+            hintStyle: getLightStyle(context).copyWith(
+              color: greyColor.withAlpha(160),
+              fontWeight: FontWeight.w500,
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: blackColor,
+              ),
+            ),
           ),
         ),
       );
