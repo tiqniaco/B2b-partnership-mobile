@@ -20,20 +20,24 @@ class ComplaintsView extends StatelessWidget {
       builder: (ComplaintsController controller) {
         return Scaffold(
           appBar: AppBar(
+            toolbarHeight: context.isTablet ? 45.h : null,
             titleSpacing: 0,
             title: Row(
               children: [
                 CircleAvatar(
-                  radius: 17.sp,
+                  radius: 17.r,
                   backgroundColor: redColor.withAlpha(30),
                   child: Icon(
                     Icons.headset_mic_outlined,
                     color: redColor,
-                    size: 16.sp,
+                    size: 16.r,
                   ),
                 ),
                 Gap(10.w),
-                Text("Complaints".tr),
+                Text(
+                  "Complaints".tr,
+                  style: getMediumStyle(context),
+                ),
               ],
             ),
           ),
@@ -74,8 +78,8 @@ class ComplaintsView extends StatelessWidget {
                         animate: controller.isRecording,
                         glowColor: primaryColor,
                         child: Container(
-                          width: 40.w,
-                          height: 40.w,
+                          width: 40.r,
+                          height: 40.r,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50.r),
                             color: primaryColor,
@@ -93,7 +97,7 @@ class ComplaintsView extends StatelessWidget {
                                   ? FontAwesomeIcons.stop
                                   : FontAwesomeIcons.microphone,
                               color: whiteColor,
-                              size: 18.w,
+                              size: 18.r,
                             ),
                           ),
                         ),
@@ -102,6 +106,13 @@ class ComplaintsView extends StatelessWidget {
                       Expanded(
                         child: TextFormField(
                           controller: controller.complaintController,
+                          onFieldSubmitted: (value) {
+                            if (value.isNotEmpty) {
+                              controller.sendComplaint();
+                            }
+                          },
+                          minLines: context.isTablet ? 2 : 1,
+                          maxLines: context.isTablet ? 2 : 1,
                           decoration: InputDecoration(
                             hintText: "Enter your complaints...".tr,
                             hintStyle: getLightStyle(context).copyWith(
@@ -112,14 +123,17 @@ class ComplaintsView extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // Gap(10.w),
+                      Gap(context.isTablet ? 8.w : 0),
                       IconButton(
                         onPressed: () {
-                          controller.sendComplaint();
+                          if (controller.complaintController.text.isNotEmpty) {
+                            controller.sendComplaint();
+                          }
                         },
                         icon: Icon(
                           FontAwesomeIcons.paperPlane,
                           color: primaryColor,
+                          size: 20.r,
                         ),
                       ),
                     ],

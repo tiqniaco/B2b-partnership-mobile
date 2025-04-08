@@ -5,6 +5,7 @@ import 'package:b2b_partenership/core/functions/remove_account.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/app_pdf_view.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/language_widget.dart';
 // import 'package:b2b_partenership/widgets/language_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,11 +34,13 @@ class ProviderSettingView extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Container(
-                              height: 60.h,
-                              width: 60.h,
+                              height: context.isTablet ? 100.h : 60.h,
                               decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(color: Colors.grey[300]!)),
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                  color: Colors.grey[300]!,
+                                ),
+                              ),
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8),
                                 child: Image.network(
@@ -49,13 +52,15 @@ class ProviderSettingView extends StatelessWidget {
                             Gap(10),
                             Text(
                               controller.menuModel!.data!.name!,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold, fontSize: 15.sp),
+                              style: getMediumStyle(context).copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             Text(
                               "+${controller.menuModel!.data!.countryCode}${controller.menuModel!.data!.phone}",
-                              style:
-                                  TextStyle(color: greyColor, fontSize: 15.sp),
+                              style: getMediumStyle(context).copyWith(
+                                color: greyColor,
+                              ),
                             ),
                             Gap(8.h),
                             InkWell(
@@ -74,15 +79,15 @@ class ProviderSettingView extends StatelessWidget {
                                     Text(
                                       "Switch to Client Account".tr,
                                       textAlign: TextAlign.center,
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 14.sp),
+                                      style: getRegularStyle(context).copyWith(
+                                        color: blackColor,
+                                        fontWeight: FontWeight.w500,
+                                      ),
                                     ),
                                     Gap(10),
                                     Icon(
                                       Icons.restart_alt_rounded,
-                                      size: 17.sp,
+                                      size: 17.r,
                                     )
                                   ],
                                 ),
@@ -94,10 +99,15 @@ class ProviderSettingView extends StatelessWidget {
                               shrinkWrap: true,
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      mainAxisSpacing: 15,
-                                      crossAxisSpacing: 15,
-                                      childAspectRatio: 9 / 4.1),
+                                crossAxisCount: context.isLargeTablet
+                                    ? 4
+                                    : context.isTablet
+                                        ? 3
+                                        : 2,
+                                mainAxisSpacing: 15,
+                                crossAxisSpacing: 15,
+                                childAspectRatio: 9 / 4.1,
+                              ),
                               children: [
                                 boxWidget(
                                     Icons.work_outline,
@@ -146,9 +156,7 @@ class ProviderSettingView extends StatelessWidget {
                               children: [
                                 Text(
                                   "Personal Information".tr,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 17.sp),
+                                  style: getMediumStyle(context),
                                 ),
                                 Gap(20),
                                 rowWidget("Email".tr,
@@ -231,9 +239,7 @@ class ProviderSettingView extends StatelessWidget {
                                   children: [
                                     Text(
                                       "Commercial Papers".tr,
-                                      style: TextStyle(
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.w300),
+                                      style: getMediumStyle(context),
                                     ),
                                     InkWell(
                                       onTap: () {
@@ -246,10 +252,11 @@ class ProviderSettingView extends StatelessWidget {
                                       },
                                       child: Text(
                                         "View".tr,
-                                        style: TextStyle(
-                                            fontSize: 13.sp,
-                                            color: primaryColor,
-                                            fontWeight: FontWeight.w500),
+                                        style:
+                                            getRegularStyle(context).copyWith(
+                                          color: primaryColor,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -259,7 +266,7 @@ class ProviderSettingView extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  height: 200,
+                                  height: 200.h,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                     child: PDF().cachedFromUrl(
@@ -286,9 +293,7 @@ class ProviderSettingView extends StatelessWidget {
                                   children: [
                                     Text(
                                       "Tax Papers".tr,
-                                      style: TextStyle(
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.w300),
+                                      style: getMediumStyle(context),
                                     ),
                                     InkWell(
                                       onTap: () {
@@ -301,10 +306,11 @@ class ProviderSettingView extends StatelessWidget {
                                       },
                                       child: Text(
                                         "View".tr,
-                                        style: TextStyle(
-                                            fontSize: 13.sp,
-                                            color: primaryColor,
-                                            fontWeight: FontWeight.w500),
+                                        style:
+                                            getRegularStyle(context).copyWith(
+                                          color: primaryColor,
+                                          fontWeight: FontWeight.w500,
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -315,7 +321,7 @@ class ProviderSettingView extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(10),
                                     // border: Border.all(color: primaryColor, width: 2)
                                   ),
-                                  height: 200,
+                                  height: 200.h,
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(10),
                                     child: PDF().cachedFromUrl(
@@ -338,9 +344,7 @@ class ProviderSettingView extends StatelessWidget {
                                 Gap(20),
                                 Text(
                                   "Other Services".tr,
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 17.sp),
+                                  style: getMediumStyle(context),
                                 ),
                                 Gap(20),
                                 rowWithArrow(
@@ -451,12 +455,12 @@ class ProviderSettingView extends StatelessWidget {
         child: Row(
           children: [
             CircleAvatar(
-              radius: 19.sp,
+              radius: 19.r,
               backgroundColor: color.withAlpha(30),
               child: Icon(
                 icon,
                 color: color,
-                size: 20.sp,
+                size: 20.r,
               ),
             ),
             Gap(10),
@@ -466,12 +470,15 @@ class ProviderSettingView extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style:
-                      TextStyle(fontWeight: FontWeight.bold, fontSize: 15.sp),
+                  style: getMediumStyle(Get.context!).copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 Text(
                   subTitle,
-                  style: TextStyle(color: greyColor, fontSize: 13.sp),
+                  style: getRegularStyle(Get.context!).copyWith(
+                    color: greyColor,
+                  ),
                 ),
               ],
             )
@@ -487,18 +494,22 @@ class ProviderSettingView extends StatelessWidget {
       child: Row(
         children: [
           Expanded(
-              flex: 1,
-              child: Text(title,
-                  style:
-                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300))),
+            flex: 1,
+            child: Text(
+              title,
+              style: getRegularStyle(Get.context!).copyWith(
+                fontWeight: FontWeight.w300,
+              ),
+            ),
+          ),
           Expanded(
               flex: 2,
               child: Text(
                 data,
-                style: TextStyle(
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.black54),
+                style: getRegularStyle(Get.context!).copyWith(
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black54,
+                ),
               ))
         ],
       ),
@@ -511,25 +522,27 @@ class ProviderSettingView extends StatelessWidget {
       child: Row(
         children: [
           CircleAvatar(
-            radius: 18.sp,
+            radius: 18.r,
             backgroundColor: borderColor.withAlpha(30),
             child: Icon(
               icon,
               color: Colors.black54,
-              size: 20.sp,
+              size: 20.r,
             ),
           ),
           Gap(15),
           Text(
             title,
-            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w300),
+            style: getRegularStyle(Get.context!).copyWith(
+              fontWeight: FontWeight.w300,
+            ),
           ),
           Spacer(),
           IconButton(
               onPressed: onPressed,
               icon: Icon(
                 Icons.arrow_forward_ios_rounded,
-                size: 15.sp,
+                size: 15.r,
               ))
         ],
       ),

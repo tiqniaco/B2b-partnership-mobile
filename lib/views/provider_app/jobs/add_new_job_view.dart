@@ -4,6 +4,7 @@ import 'package:b2b_partenership/core/enums/jobs_contract_type_enum.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/models/city_model.dart';
 import 'package:b2b_partenership/models/country_model.dart';
 import 'package:b2b_partenership/models/specialize_model.dart';
@@ -29,11 +30,12 @@ class AddNewJobView extends StatelessWidget {
       builder: (AddNewJobController controller) {
         return Scaffold(
           appBar: AppBar(
+            toolbarHeight: context.isTablet ? 45.h : null,
             backgroundColor: primaryColor,
             iconTheme: IconThemeData(color: whiteColor),
             title: Text(
               controller.model != null ? 'Edit Job'.tr : 'Add New Job'.tr,
-              style: TextStyle(
+              style: getMediumStyle(context).copyWith(
                 color: whiteColor,
               ),
             ),
@@ -207,6 +209,10 @@ class AddNewJobView extends StatelessWidget {
         decoration: InputDecoration(
           labelText: label,
           hintText: hint,
+          labelStyle: getRegularStyle(Get.context!),
+          hintStyle: getRegularStyle(Get.context!).copyWith(
+            color: greyColor,
+          ),
           border: OutlineInputBorder(),
         ),
       ),
@@ -220,13 +226,17 @@ class AddNewJobView extends StatelessWidget {
       child: DropdownButtonFormField<JobsContractTypeEnum>(
         decoration: InputDecoration(
           labelText: "Contract Type".tr,
+          labelStyle: getRegularStyle(Get.context!),
           border: OutlineInputBorder(),
         ),
         value: controller.selectedContractType,
         items: JobsContractTypeEnum.values.map((type) {
           return DropdownMenuItem(
             value: type,
-            child: Text(type.text),
+            child: Text(
+              type.text,
+              style: getRegularStyle(Get.context!),
+            ),
           );
         }).toList(),
         onChanged: (value) {
@@ -250,7 +260,9 @@ class AddNewJobView extends StatelessWidget {
             context: Get.context!,
             initialDate: DateTime.now(),
             firstDate: DateTime.now(),
-            lastDate: DateTime(2100),
+            lastDate: DateTime.now().add(
+              const Duration(days: 365),
+            ),
           );
 
           if (pickedDate != null) {
@@ -265,7 +277,14 @@ class AddNewJobView extends StatelessWidget {
           labelText: "Expiry Date".tr,
           hintText: "Select expiry date".tr,
           border: OutlineInputBorder(),
-          suffixIcon: Icon(Icons.calendar_today),
+          suffixIcon: Icon(
+            Icons.calendar_today,
+            size: 20.r,
+          ),
+          labelStyle: getRegularStyle(Get.context!),
+          hintStyle: getRegularStyle(Get.context!).copyWith(
+            color: greyColor,
+          ),
         ),
       ),
     );
@@ -278,6 +297,7 @@ class AddNewJobView extends StatelessWidget {
       child: DropdownButtonFormField<JobGenderEnum>(
         decoration: InputDecoration(
           labelText: "Preferred Gender".tr,
+          labelStyle: getRegularStyle(Get.context!),
           border: OutlineInputBorder(),
         ),
         value: controller.selectedGender,
@@ -286,6 +306,7 @@ class AddNewJobView extends StatelessWidget {
             value: gender,
             child: Text(
               gender.text,
+              style: getRegularStyle(Get.context!),
             ),
           );
         }).toList(),
