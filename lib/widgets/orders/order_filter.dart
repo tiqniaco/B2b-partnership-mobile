@@ -1,6 +1,7 @@
 import 'package:b2b_partenership/controller/orders/orders_controller.dart';
 import 'package:b2b_partenership/core/enums/store_order_status_enum.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -18,11 +19,11 @@ class OrderFilter extends StatelessWidget {
         children: [
           Text(
             "ORDERS FILTER".tr,
-            style: TextStyle(
-                color: primaryColor,
-                letterSpacing: 2,
-                fontWeight: FontWeight.bold,
-                fontSize: 15.sp),
+            style: getMediumStyle(context).copyWith(
+              color: primaryColor,
+              letterSpacing: 2,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           Gap(7),
           Container(
@@ -41,7 +42,9 @@ class OrderFilter extends StatelessWidget {
                   value: status,
                   child: Text(
                     status.text,
-                    style: TextStyle(color: greyColor),
+                    style: getRegularStyle(Get.context!).copyWith(
+                      color: greyColor,
+                    ),
                   ),
                 );
               }).toList(),

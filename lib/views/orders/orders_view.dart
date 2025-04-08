@@ -2,6 +2,7 @@ import 'package:b2b_partenership/controller/orders/orders_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_sliver_server_status_widget.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/orders/order_filter.dart';
 import 'package:b2b_partenership/widgets/orders/order_widget.dart';
 import 'package:b2b_partenership/widgets/please_login_widget.dart';
@@ -24,8 +25,12 @@ class OrdersView extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               backgroundColor: whiteColor,
+              toolbarHeight: context.isTablet ? 45.h : null,
               // automaticallyImplyLeading: false,
-              title: Text("My Orders".tr),
+              title: Text(
+                "My Orders".tr,
+                style: getMediumStyle(context),
+              ),
             ),
             body: Padding(
               padding: EdgeInsets.symmetric(
@@ -44,14 +49,20 @@ class OrdersView extends StatelessWidget {
                   ),
                   CustomSliverServerStatusWidget(
                     statusRequest: controller.statusRequest,
-                    child: SliverList.separated(
+                    child: SliverGrid.builder(
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: context.isTablet ? 2 : 1,
+                        mainAxisSpacing: 10.h,
+                        crossAxisSpacing: 10.w,
+                        childAspectRatio: 1.5,
+                      ),
                       itemCount: controller.orders.length,
                       itemBuilder: (context, index) {
                         return OrderWidget(
                           orderModel: controller.orders[index],
                         );
                       },
-                      separatorBuilder: (context, index) => Gap(10.h),
+                      // separatorBuilder: (context, index) => Gap(10.h),
                     ),
                   ),
                 ],

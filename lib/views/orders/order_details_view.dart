@@ -21,7 +21,13 @@ class OrderDetailsView extends StatelessWidget {
       builder: (OrderDetailsController controller) => Scaffold(
         appBar: AppBar(
           backgroundColor: whiteColor,
-          title: Text("#${controller.orderId}"),
+          toolbarHeight: context.isTablet ? 45.h : null,
+          title: Text(
+            "#${controller.orderId}",
+            style: getMediumStyle(context).copyWith(
+              color: blackColor,
+            ),
+          ),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(
@@ -137,7 +143,7 @@ class OrderDetailsItemWidget extends StatelessWidget {
           child: Text(
             title,
             style: getMediumStyle(context).copyWith(
-              fontSize: 15.sp,
+              // fontSize: 15.sp,
               fontWeight: FontManager.regularFontWeight,
             ),
           ),
@@ -148,7 +154,7 @@ class OrderDetailsItemWidget extends StatelessWidget {
             value,
             style: getMediumStyle(context).copyWith(
               fontWeight: FontManager.semiBoldFontWeight,
-              fontSize: 15.sp,
+              // fontSize: 15.sp,
               color: greenColor,
             ),
           ),

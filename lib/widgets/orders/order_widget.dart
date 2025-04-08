@@ -1,6 +1,7 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/core/services/date_time_convertor.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/models/order_model.dart';
 import 'package:b2b_partenership/widgets/orders/print_type.dart';
 import 'package:flutter/cupertino.dart';
@@ -31,21 +32,24 @@ class OrderWidget extends StatelessWidget {
       child: Container(
         //padding: EdgeInsets.all(10),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: primaryColor)),
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: primaryColor),
+        ),
         child: Column(
           children: [
             Container(
-              padding: EdgeInsets.all(10.w),
+              padding: EdgeInsets.symmetric(
+                horizontal: 10.w,
+                vertical: 9.h,
+              ),
               decoration: BoxDecoration(
                 color: primaryColor,
                 gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
                   colors: [
-                    primaryColor,
-                    // primaryColor,
-                    Colors.transparent,
+                    primaryColor, // Your base color
+                    lightColor, // A lighter, more vibrant red
                   ],
                 ),
                 border: Border(bottom: BorderSide(color: borderColor)),
@@ -58,17 +62,15 @@ class OrderWidget extends StatelessWidget {
                 children: [
                   Text(
                     "#",
-                    style: TextStyle(
-                        color: whiteColor,
-                        fontSize: 17.sp,
-                        fontWeight: FontWeight.bold),
+                    style: getMediumStyle(context).copyWith(
+                        color: whiteColor, fontWeight: FontWeight.bold),
                   ),
                   Text(
                     orderModel.id.toString(),
-                    style: TextStyle(
-                        color: whiteColor,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.bold),
+                    style: getRegularStyle(context).copyWith(
+                      color: whiteColor,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Spacer(),
                   PrintType(
@@ -130,15 +132,18 @@ class OrderWidget extends StatelessWidget {
       children: [
         Icon(
           icon,
-          size: 16.sp,
+          size: 16.r,
         ),
         Gap(8.w),
         Text(
           title,
-          style: TextStyle(fontSize: 14.sp),
+          style: getRegularStyle(Get.context!),
         ),
         Spacer(),
-        Text(value, style: TextStyle(fontSize: 13.sp)),
+        Text(
+          value,
+          style: getRegularStyle(Get.context!),
+        ),
       ],
     );
   }
