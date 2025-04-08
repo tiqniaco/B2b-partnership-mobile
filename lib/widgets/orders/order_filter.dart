@@ -14,10 +14,15 @@ class OrderFilter extends StatelessWidget {
     Get.put(OrdersController());
     return GetBuilder<OrdersController>(builder: (controller) {
       return Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "Order".tr,
-            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15.sp),
+            "ORDERS FILTER".tr,
+            style: TextStyle(
+                color: primaryColor,
+                letterSpacing: 2,
+                fontWeight: FontWeight.bold,
+                fontSize: 15.sp),
           ),
           Gap(7),
           Container(

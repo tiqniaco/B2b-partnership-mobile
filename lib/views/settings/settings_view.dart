@@ -208,8 +208,8 @@ class SettingsView extends StatelessWidget {
                                         Colors.blue,
                                         controller.menuModel!.shoppingCount
                                             .toString(),
-                                        "Shopping".tr, () {
-                                      Get.toNamed(AppRoutes.shop);
+                                        "Orders".tr, () {
+                                      Get.toNamed(AppRoutes.shopOrders);
                                     }),
                                     boxWidget(
                                         CupertinoIcons.news,

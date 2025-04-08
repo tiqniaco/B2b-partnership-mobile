@@ -20,11 +20,12 @@ class OrderDetailsView extends StatelessWidget {
       init: OrderDetailsController(),
       builder: (OrderDetailsController controller) => Scaffold(
         appBar: AppBar(
+          backgroundColor: whiteColor,
           title: Text("#${controller.orderId}"),
         ),
         body: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: 10.w,
+            horizontal: 20.w,
             vertical: 10.h,
           ),
           child: controller.model == null
@@ -86,13 +87,8 @@ class OrderDetailsView extends StatelessWidget {
                           ],
                         ),
                       ),
-                      SliverGrid.builder(
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          mainAxisSpacing: 10.h,
-                          crossAxisSpacing: 10.w,
-                          childAspectRatio: 1 / 1.2,
-                        ),
+                      SliverList.separated(
+                        separatorBuilder: (context, index) => Gap(20.h),
                         itemCount: controller.model?.items.length ?? 0,
                         itemBuilder: (context, index) {
                           return ShopProductItemWidget(
@@ -100,9 +96,10 @@ class OrderDetailsView extends StatelessWidget {
                             //showCategories: false,
                             onTap: () {
                               Get.toNamed(
-                                AppRoutes.orderItem,
+                                AppRoutes.shopProductDetails,
                                 arguments: {
-                                  "product": controller.model!.items[index],
+                                  "productId":
+                                      controller.model!.items[index].id,
                                   'orderStatus':
                                       controller.model?.data.status ?? "",
                                 },
@@ -132,35 +129,31 @@ class OrderDetailsItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.symmetric(
-        horizontal: 10.w,
-        vertical: 10.h,
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: greyColor.withAlpha(100),
-        ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Expanded(
+          flex: 2,
+          child: Text(
             title,
             style: getMediumStyle(context).copyWith(
-              fontWeight: FontManager.semiBoldFontWeight,
+              fontSize: 15.sp,
+              fontWeight: FontManager.regularFontWeight,
             ),
           ),
-          Text(
+        ),
+        Expanded(
+          flex: 1,
+          child: Text(
             value,
             style: getMediumStyle(context).copyWith(
               fontWeight: FontManager.semiBoldFontWeight,
-              color: primaryColor,
+              fontSize: 15.sp,
+              color: greenColor,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

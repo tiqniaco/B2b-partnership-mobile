@@ -20,19 +20,13 @@ class PrintType extends StatelessWidget {
   }
 
   Widget containerType(String title, Color color) {
-    return Container(
-      height: 27.h,
-      padding:
-          EdgeInsets.symmetric(horizontal: Get.context!.isTablet ? 6.w : 10.w),
-      decoration: BoxDecoration(
-          color: pageColor.withAlpha(80),
-          borderRadius: BorderRadius.circular(30)),
-      alignment: Alignment.center,
+    return Material(
+      color: Colors.transparent,
       child: Text(
         title,
         style: getLightStyle(Get.context!).copyWith(
           fontSize: Get.context!.isTablet ? 7.5.sp : null,
-          color: whiteColor,
+          color: blackColor,
           fontWeight: FontWeight.bold,
         ),
       ),

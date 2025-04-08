@@ -39,6 +39,15 @@ class OrderWidget extends StatelessWidget {
               padding: EdgeInsets.all(10.w),
               decoration: BoxDecoration(
                 color: primaryColor,
+                gradient: LinearGradient(
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                  colors: [
+                    primaryColor,
+                    // primaryColor,
+                    Colors.transparent,
+                  ],
+                ),
                 border: Border(bottom: BorderSide(color: borderColor)),
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
@@ -70,10 +79,11 @@ class OrderWidget extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
               child: Column(
                 children: [
-                  Gap(10),
+                  Gap(8),
                   rowWidget(
                     "Date".tr,
                     orderModel.createdAt != null &&
@@ -84,25 +94,23 @@ class OrderWidget extends StatelessWidget {
                         : "Invalid Date",
                     CupertinoIcons.calendar,
                   ),
-                  Gap(10),
+                  Gap(8),
                   Divider(
                     color: borderColor,
                   ),
-                  Gap(10),
+                  Gap(8),
                   rowWidget(
                     "Expiry Date".tr,
-                    // orderModel.expirationDate!
                     DateTimeConvertor.formatDate(
                       orderModel.expirationDate!,
                     ),
-
                     CupertinoIcons.clock,
                   ),
-                  Gap(10),
+                  Gap(8),
                   Divider(
                     color: borderColor,
                   ),
-                  Gap(10),
+                  Gap(8),
                   rowWidget(
                     "Billed".tr,
                     "${orderModel.totalPrice} \$",

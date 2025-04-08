@@ -1,3 +1,4 @@
+import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/shop/shop_product_details_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
@@ -32,16 +33,21 @@ class ShopProductDetailsView extends StatelessWidget {
           width: 1.sw,
           child: Row(
             children: [
-              Container(
-                padding: EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                    border: Border.all(color: greyColor.withAlpha(100)),
-                    color: whiteColor,
-                    borderRadius: BorderRadius.circular(8.r)),
-                child: Icon(
-                  CupertinoIcons.cart_fill,
-                  color: greenColor,
-                  size: context.isTablet ? 20.w : 25.sp,
+              InkWell(
+                onTap: () {
+                  Get.toNamed(AppRoutes.shopCart);
+                },
+                child: Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: BoxDecoration(
+                      border: Border.all(color: greyColor.withAlpha(100)),
+                      color: whiteColor,
+                      borderRadius: BorderRadius.circular(8.r)),
+                  child: Icon(
+                    CupertinoIcons.cart_fill,
+                    color: greenColor,
+                    size: context.isTablet ? 20.w : 25.sp,
+                  ),
                 ),
               ),
               Gap(8.w),

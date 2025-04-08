@@ -11,7 +11,6 @@ import 'package:b2b_partenership/widgets/shop/shop_item_product_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
@@ -83,21 +82,6 @@ class ShopView extends StatelessWidget {
                 ),
               ),
               Gap(10.w),
-              // Container(
-              //   decoration:
-              //       BoxDecoration(color: blueColor, shape: BoxShape.circle),
-              //   child: IconButton(
-              //     onPressed: () {
-              //       Get.toNamed(AppRoutes.shopOrders);
-              //     },
-              //     icon: SvgPicture.asset(
-              //       "assets/svgs/bag2.svg",
-              //       color: whiteColor,
-              //       width: context.isTablet ? 16.w : 17.w,
-              //     ),
-              //   ),
-              // ),
-              // Gap(10.w)
             ],
           ),
           floatingActionButton: Column(
