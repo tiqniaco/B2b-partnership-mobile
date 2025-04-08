@@ -1,6 +1,8 @@
 import 'package:b2b_partenership/controller/request_services/service_request_details_controller.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/utils/font_manager.dart';
 import 'package:b2b_partenership/models/price_offer_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -31,11 +33,11 @@ class PriceOfferWidget extends GetView<ServiceRequestDetailsController> {
         child: Row(
           children: [
             Container(
-              height: 65,
-              width: 65,
+              height: 60.h,
+              width: 60.h,
               decoration: BoxDecoration(shape: BoxShape.circle),
               child: ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
+                  borderRadius: BorderRadius.circular(100),
                   child: CachedNetworkImage(imageUrl: model.providerImage!)),
             ),
             Gap(15),
@@ -45,16 +47,16 @@ class PriceOfferWidget extends GetView<ServiceRequestDetailsController> {
                 children: [
                   Text(
                     model.providerName!,
-                    style: TextStyle(fontSize: 15.sp),
+                    style: getMediumStyle(context),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
                   Text(
                     "${model.requestOfferPrice!} \$",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 15.sp,
-                        color: primaryColor),
+                    style: getMediumStyle(context).copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: primaryColor,
+                    ),
                   ),
                 ],
               ),
@@ -63,7 +65,7 @@ class PriceOfferWidget extends GetView<ServiceRequestDetailsController> {
             Get.find<AppPreferences>().getUserRole() == "client"
                 ? model.requestOfferStatus == 'accepted'
                     ? Container(
-                        width: 90,
+                        width: 90.w,
                         height: 26.h,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
@@ -72,53 +74,62 @@ class PriceOfferWidget extends GetView<ServiceRequestDetailsController> {
                         ),
                         child: Text(
                           "Accepted".tr,
-                          style: TextStyle(
-                              fontSize: 11.sp,
-                              color: whiteColor,
-                              fontWeight: FontWeight.bold),
-                        ))
+                          style: getLightStyle(context).copyWith(
+                            color: whiteColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      )
                     : SizedBox(
-                        width: 90,
-                        height: 26.h,
+                        width: 90.w,
+                        height: 27.h,
                         child: ElevatedButton(
-                            style: ButtonStyle(
-                                padding: WidgetStatePropertyAll(
-                                    EdgeInsets.symmetric(horizontal: 10)),
-                                shape: WidgetStatePropertyAll(
-                                    RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(5)))),
-                            onPressed: () {
-                              controller
-                                  .acceptPriceOffers(model.requestOfferId!);
-                            },
-                            child: Text(
-                              "Accept".tr,
-                              style: TextStyle(fontSize: 11.sp),
-                            )),
+                          style: ButtonStyle(
+                              padding: WidgetStatePropertyAll(
+                                  EdgeInsets.symmetric(horizontal: 10)),
+                              shape: WidgetStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                      borderRadius:
+                                          BorderRadius.circular(5.r)))),
+                          onPressed: () {
+                            controller.acceptPriceOffers(model.requestOfferId!);
+                          },
+                          child: Text(
+                            "Accept".tr,
+                            style: getLightStyle(context).copyWith(
+                              color: whiteColor,
+                              fontWeight: FontManager.semiBoldFontWeight,
+                            ),
+                          ),
+                        ),
                       )
                 : Row(
                     children: [
                       Container(
-                          width: 90,
-                          height: 26.h,
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: greyColor,
+                        width: 90.w,
+                        height: 26.h,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(5),
+                          color: greyColor,
+                        ),
+                        child: Text(
+                          model.requestOfferStatus!.tr,
+                          style: getLightStyle(context).copyWith(
+                            color: whiteColor,
+                            fontWeight: FontWeight.bold,
                           ),
-                          child: Text(
-                            model.requestOfferStatus!.tr,
-                            style: TextStyle(
-                                fontSize: 11.sp,
-                                color: whiteColor,
-                                fontWeight: FontWeight.bold),
-                          )),
+                        ),
+                      ),
                       IconButton(
-                          onPressed: () {
-                            controller.deleteOffer(model.requestOfferId!);
-                          },
-                          icon: Icon(Icons.close))
+                        onPressed: () {
+                          controller.deleteOffer(model.requestOfferId!);
+                        },
+                        icon: Icon(
+                          Icons.close,
+                          size: 20.r,
+                        ),
+                      )
                     ],
                   )
           ],

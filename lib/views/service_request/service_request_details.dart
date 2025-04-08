@@ -43,22 +43,23 @@ class ServiceRequestDetails extends StatelessWidget {
                   ],
                   SizedBox.shrink(),
                   PositionedDirectional(
-                      top: 30.h,
-                      start: 10.h,
-                      child: InkWell(
-                        onTap: () {
-                          Get.back();
-                        },
-                        child: Container(
-                            alignment: Alignment.center,
-                            padding: EdgeInsets.all(10),
-                            child: Icon(
-                              Icons.arrow_back_ios,
-                              size: 25.sp,
-                              color: whiteColor
-                                 
-                            )),
-                      )),
+                    top: 30.h,
+                    start: 10.h,
+                    child: InkWell(
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: Container(
+                        alignment: Alignment.center,
+                        padding: EdgeInsets.all(10),
+                        child: Icon(
+                          Icons.arrow_back_ios,
+                          size: 25.r,
+                          color: whiteColor,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               if (controller.model.image == null) Gap(50),
@@ -77,48 +78,52 @@ class ServiceRequestDetails extends StatelessWidget {
                               },
                               child: Icon(
                                 Icons.arrow_back_ios,
-                                size: 20.sp,
+                                size: 20.r,
                               ),
                             ),
                           Gap(10),
                           Text(
                             controller.model.titleEn!,
-                            style: TextStyle(
-                                fontSize: 17.sp, fontWeight: FontWeight.bold),
+                            style: getSemiBoldStyle(context).copyWith(
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ],
                       ),
                       Gap(10),
                       Text(
                         controller.model.description!,
-                        style: TextStyle(fontSize: 16.sp),
+                        style: getMediumStyle(context),
                       ),
                       Gap(15),
                       Row(
                         children: [
                           Text(
-                              translateDatabase(
-                                  arabic:
-                                      controller.model.specializationNameAr!,
-                                  english:
-                                      controller.model.specializationNameEn!),
-                              style:
-                                  TextStyle(fontSize: 13.sp, color: greyColor)),
+                            translateDatabase(
+                                arabic: controller.model.specializationNameAr!,
+                                english:
+                                    controller.model.specializationNameEn!),
+                            style: getRegularStyle(context).copyWith(
+                              color: greyColor,
+                            ),
+                          ),
                           Gap(10),
                           Icon(
                             Icons.remove,
-                            size: 15.sp,
+                            size: 15.r,
                             color: greyColor,
                           ),
                           Gap(10),
                           Text(
-                              translateDatabase(
-                                  arabic:
-                                      controller.model.subSpecializationNameAr!,
-                                  english: controller
-                                      .model.subSpecializationNameEn!),
-                              style:
-                                  TextStyle(fontSize: 13.sp, color: greyColor)),
+                            translateDatabase(
+                                arabic:
+                                    controller.model.subSpecializationNameAr!,
+                                english:
+                                    controller.model.subSpecializationNameEn!),
+                            style: getRegularStyle(context).copyWith(
+                              color: greyColor,
+                            ),
+                          ),
                         ],
                       ),
                       Gap(10),
@@ -129,7 +134,9 @@ class ServiceRequestDetails extends StatelessWidget {
                               borderRadius: BorderRadius.circular(10)),
                           child: Padding(
                             padding: const EdgeInsets.symmetric(
-                                vertical: 10.0, horizontal: 15),
+                              vertical: 10.0,
+                              horizontal: 15,
+                            ),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
@@ -143,24 +150,25 @@ class ServiceRequestDetails extends StatelessWidget {
                                 ),
                                 Gap(10),
                                 Text(
-                                    translateDatabase(
-                                        arabic: controller.model.countryNameAr!,
-                                        english:
-                                            controller.model.countryNameEn!),
-                                    style: TextStyle(fontSize: 13.sp)),
+                                  translateDatabase(
+                                      arabic: controller.model.countryNameAr!,
+                                      english: controller.model.countryNameEn!),
+                                  style: getMediumStyle(context),
+                                ),
                                 Gap(15),
                                 Icon(
                                   Icons.remove,
-                                  size: 15.sp,
+                                  size: 15.r,
                                 ),
                                 Gap(15),
                                 Text(
-                                    translateDatabase(
-                                        arabic:
-                                            controller.model.governmentNameAr!,
-                                        english:
-                                            controller.model.governmentNameEn!),
-                                    style: TextStyle(fontSize: 13.sp)),
+                                  translateDatabase(
+                                      arabic:
+                                          controller.model.governmentNameAr!,
+                                      english:
+                                          controller.model.governmentNameEn!),
+                                  style: getRegularStyle(context),
+                                ),
                               ],
                             ),
                           ),
@@ -172,8 +180,7 @@ class ServiceRequestDetails extends StatelessWidget {
                               children: [
                                 Text(
                                   "Price Offers".tr,
-                                  style: TextStyle(
-                                    fontSize: 15.sp,
+                                  style: getMediumStyle(context).copyWith(
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),

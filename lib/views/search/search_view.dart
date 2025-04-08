@@ -113,7 +113,7 @@ class SearchView extends StatelessWidget {
                     crossAxisCount: context.isTablet ? 3 : 2,
                     mainAxisSpacing: 15,
                     crossAxisSpacing: 10,
-                    childAspectRatio: context.isTablet ? 0.69 : 6 / 9.8,
+                    childAspectRatio: context.isTablet ? 0.69 : 6 / 10.5,
                   ),
                   scrollDirection: Axis.vertical,
                   padding: EdgeInsets.symmetric(horizontal: 15),

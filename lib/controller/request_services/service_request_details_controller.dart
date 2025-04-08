@@ -166,7 +166,13 @@ class ServiceRequestDetailsController extends GetxController {
     });
   }
 
-  Future<void> getPriceOffers() async {
+  Future<void> getPriceOffers({bool reset = false}) async {
+    if (reset) {
+      currentPage = 0;
+      totalPage = 0;
+      priceOffers.clear();
+      update();
+    }
     if (currentPage < totalPage) {
       isPageLoading = true;
       update();
@@ -235,16 +241,17 @@ class ServiceRequestDetailsController extends GetxController {
         fromJson: (json) {
           return json;
         }).sendPatchRequest();
-    response.fold((l) {
-      statusRequestOffers = StatusRequest.error;
-      Logger().e(l.errMsg);
-    }, (r) {
-      statusRequestOffers = StatusRequest.success;
-      priceOffers.clear();
-      currentPage = 0;
-      totalPage = 0;
-      getPriceOffers();
-    });
+    response.fold(
+      (l) {
+        statusRequestOffers = StatusRequest.error;
+        Logger().e(l.errMsg);
+      },
+      (r) {
+        statusRequestOffers = StatusRequest.success;
+        getPriceOffers(reset: true);
+        update();
+      },
+    );
 
     update();
   }

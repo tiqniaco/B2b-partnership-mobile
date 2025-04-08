@@ -27,10 +27,11 @@ class SeeAllCategories extends StatelessWidget {
           ),
           body: GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: context.isTablet ? 3 : 2,
-                  mainAxisSpacing: 15,
-                  crossAxisSpacing: 10,
-                  childAspectRatio: 9 / 7.8),
+                crossAxisCount: context.isTablet ? 3 : 2,
+                mainAxisSpacing: 15,
+                crossAxisSpacing: 10,
+                childAspectRatio: 1,
+              ),
               scrollDirection: Axis.vertical,
               padding: EdgeInsets.symmetric(horizontal: 15),
               itemCount: controller.categories.length,

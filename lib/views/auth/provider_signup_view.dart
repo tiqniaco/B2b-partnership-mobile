@@ -84,6 +84,7 @@ class ProviderSignupView extends StatelessWidget {
                           ),
                           Expanded(
                             child: LinearProgressIndicator(
+                              minHeight: 8.h,
                               borderRadius: BorderRadius.circular(30),
                               value: (controller.currentStep + 1) /
                                   controller.providerSteps.length,

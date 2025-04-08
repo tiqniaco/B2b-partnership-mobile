@@ -3,6 +3,7 @@ import 'package:b2b_partenership/controller/request_services/get_request_service
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/please_login_widget.dart';
 import 'package:b2b_partenership/widgets/request_services/service_item.dart';
 import 'package:flutter/material.dart';
@@ -19,22 +20,30 @@ class GetUserServiceRequest extends StatelessWidget {
     }
     return Scaffold(
       appBar: AppBar(
+        titleSpacing: 0,
         backgroundColor: whiteColor,
+        toolbarHeight: context.isTablet ? 50.h : null,
         title: Text(
           'Your Posted Services'.tr,
-          style: TextStyle(
-            fontSize: 24,
+          style: getSemiBoldStyle(context).copyWith(
             fontWeight: FontWeight.bold,
             color: primaryColor,
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.toNamed(AppRoutes.addServicesRequest);
-        },
-        shape: CircleBorder(),
-        child: Icon(Icons.add),
+      floatingActionButton: SizedBox(
+        width: 50.w,
+        height: 50.h,
+        child: FloatingActionButton(
+          onPressed: () {
+            Get.toNamed(AppRoutes.addServicesRequest);
+          },
+          shape: CircleBorder(),
+          child: Icon(
+            Icons.add,
+            size: 25.r,
+          ),
+        ),
       ),
       body: GetBuilder<GetRequestServiceController>(
         init: GetRequestServiceController(),
@@ -43,12 +52,13 @@ class GetUserServiceRequest extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child:
-                  Text("${controller.services.length} ${"Service founded".tr}",
-                      style: TextStyle(
-                          color: Colors.black87,
-                          //fontWeight: FontWeight.w500,
-                          fontSize: 12.sp)),
+              child: Text(
+                "${controller.services.length} ${"Service founded".tr}",
+                style: getLightStyle(context).copyWith(
+                  color: Colors.black87,
+                  //fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
             Gap(10),
             CustomServerStatusWidget(

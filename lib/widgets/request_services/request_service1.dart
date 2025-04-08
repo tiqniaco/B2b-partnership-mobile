@@ -1,4 +1,5 @@
 import 'package:b2b_partenership/controller/request_services/add_request_service_controller.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/request_services/build_text_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,9 +34,12 @@ class RequestService1 extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Icon(Icons.image,
-                              size: 50, color: Colors.grey.shade700),
+                              size: 50.r, color: Colors.grey.shade700),
                           Gap(10),
-                          Text("upload image is (optional)".tr),
+                          Text(
+                            "upload image is (optional)".tr,
+                            style: getRegularStyle(context),
+                          ),
                         ],
                       ),
                     ),
@@ -46,17 +50,17 @@ class RequestService1 extends StatelessWidget {
               "enter service name".tr, (val) {
             return controller.validUserData(val);
           }),
-          Gap(30),
+          Gap(20.h),
           buildTextField(controller.descriptionController, 'Description'.tr,
               Icons.description, "enter service description".tr, (val) {
             return controller.validUserData(val);
           }),
-          Gap(30),
+          Gap(20.h),
           buildTextField(controller.addressController, 'Address'.tr,
               Icons.location_on, "enter service address".tr, (val) {
             return controller.validUserData(val);
           }),
-          Gap(20),
+          Gap(20.h),
         ],
       );
     });

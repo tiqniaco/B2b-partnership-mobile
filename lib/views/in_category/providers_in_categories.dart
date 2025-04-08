@@ -128,7 +128,7 @@ class _ProvidersInCategoriesState extends State<ProvidersInCategories>
                   crossAxisCount: context.isTablet ? 3 : 2,
                   mainAxisSpacing: 15,
                   crossAxisSpacing: 10,
-                  childAspectRatio: context.isTablet ? 6 / 9 : 6 / 10,
+                  childAspectRatio: context.isTablet ? 6 / 9 : 6 / 10.5,
                 ),
                 scrollDirection: Axis.vertical,
                 padding: EdgeInsets.symmetric(horizontal: 15),
