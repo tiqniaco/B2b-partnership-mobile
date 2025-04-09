@@ -84,20 +84,19 @@ class ShopView extends StatelessWidget {
               Gap(10.w),
             ],
           ),
-          floatingActionButton: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Gap(30),
-              Material(
-                borderRadius: BorderRadius.circular(70),
-                elevation: 0.3,
-                child: CircleAvatar(
-                  backgroundColor: whiteColor,
-                  radius: 27.r,
-                  backgroundImage: AssetImage("assets/images/whats.png"),
-                ),
+          floatingActionButton: InkWell(
+            onTap: () {
+              controller.launchURL();
+            },
+            child: Material(
+              borderRadius: BorderRadius.circular(70),
+              elevation: 0.3,
+              child: CircleAvatar(
+                backgroundColor: whiteColor,
+                radius: 27.r,
+                backgroundImage: AssetImage("assets/images/whats.png"),
               ),
-            ],
+            ),
           ),
           body: Column(
             crossAxisAlignment: CrossAxisAlignment.start,

@@ -3,7 +3,6 @@ import 'package:b2b_partenership/core/enums/store_order_status_enum.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
@@ -20,7 +19,7 @@ class OrderFilter extends StatelessWidget {
           Text(
             "ORDERS FILTER".tr,
             style: getMediumStyle(context).copyWith(
-              color: primaryColor,
+              color: whiteColor,
               letterSpacing: 2,
               fontWeight: FontWeight.bold,
             ),
@@ -29,12 +28,15 @@ class OrderFilter extends StatelessWidget {
           Container(
             padding: EdgeInsets.symmetric(horizontal: 10),
             decoration: BoxDecoration(
-              border: Border.all(color: borderColor),
+              border: Border.all(color: whiteColor),
               borderRadius: BorderRadius.circular(10),
             ),
             child: DropdownButton<StoreOrderStatusEnum>(
+              style: TextStyle(color: blackColor),
+              dropdownColor: primaryColor,
               underline: SizedBox.shrink(),
               value: controller.selectedStatus,
+              iconEnabledColor: whiteColor,
               items: StoreOrderStatusEnum.values.map((
                 StoreOrderStatusEnum status,
               ) {
@@ -43,7 +45,7 @@ class OrderFilter extends StatelessWidget {
                   child: Text(
                     status.text,
                     style: getRegularStyle(Get.context!).copyWith(
-                      color: greyColor,
+                      color: whiteColor,
                     ),
                   ),
                 );

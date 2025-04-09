@@ -4,12 +4,15 @@ import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:b2b_partenership/models/shop_cart_model.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 class ShopCartController extends GetxController {
   List<ShopCartModel> carts = [];
   StatusRequest statusRequest = StatusRequest.loading;
+  final phoneController = TextEditingController();
+  final emailController = TextEditingController();
   String error = '';
 
   @override
@@ -150,6 +153,10 @@ class ShopCartController extends GetxController {
     if (carts.isEmpty) return;
     final result = await CustomRequest<String>(
       path: ApiConstance.checkout,
+      data: {
+        'phone': phoneController.text,
+        'email': emailController.text,
+      },
       fromJson: (json) {
         return json['message'];
       },
@@ -167,4 +174,6 @@ class ShopCartController extends GetxController {
       },
     );
   }
+
+  
 }

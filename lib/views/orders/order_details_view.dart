@@ -139,22 +139,22 @@ class OrderDetailsItemWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Expanded(
-          flex: 2,
+          flex: 1,
           child: Text(
             title,
             style: getMediumStyle(context).copyWith(
-              // fontSize: 15.sp,
+              fontSize: 12.sp,
               fontWeight: FontManager.regularFontWeight,
             ),
           ),
         ),
         Expanded(
-          flex: 1,
+          flex: 2,
           child: Text(
             value,
             style: getMediumStyle(context).copyWith(
               fontWeight: FontManager.semiBoldFontWeight,
-              // fontSize: 15.sp,
+              fontSize: 12.sp,
               color: greenColor,
             ),
           ),

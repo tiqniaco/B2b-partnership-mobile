@@ -1,4 +1,3 @@
-
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
@@ -7,15 +6,18 @@ import 'package:b2b_partenership/models/shop_product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class ShopController extends GetxController {
   final searchController = TextEditingController();
   List<ShopCategoryModel> shopCategories = [];
   List<ShopProductModel> shopProducts = [];
   ShopCategoryModel? selectedCategory;
+  String whatsApp = '';
 
   StatusRequest categoriesStatus = StatusRequest.loading;
   StatusRequest productsStatus = StatusRequest.loading;
+  StatusRequest whatsAppStatus = StatusRequest.loading;
   ScrollController productsScrollController = ScrollController();
   int currentPage = 1;
   int totalPages = 1;
@@ -31,7 +33,7 @@ class ShopController extends GetxController {
   Future<void> onInit() async {
     await getShopCategories();
     getShopProducts();
-
+    await getWhatsApp();
     super.onInit();
   }
 
@@ -104,5 +106,38 @@ class ShopController extends GetxController {
     selectedCategory = shopCategories[index];
     getShopProducts();
     update();
+  }
+
+  Future<void> getWhatsApp() async {
+    whatsAppStatus = StatusRequest.loading;
+    update();
+    final result = await CustomRequest<Map<String, dynamic>>(
+        path: ApiConstance.whatsContact,
+        fromJson: (json) {
+          return json;
+        }).sendGetRequest();
+    result.fold(
+      (error) {
+        Logger().e(error.errMsg);
+        whatsAppStatus = StatusRequest.error;
+        update();
+      },
+      (data) {
+        whatsAppStatus = StatusRequest.success;
+        print(data);
+        whatsApp = data['whatsapp'];
+        update();
+      },
+    );
+  }
+
+  Future<void> launchURL() async {
+    String url = 'https://wa.me/+$whatsApp';
+    if (await canLaunchUrlString(url)) {
+      await launchUrlString(url);
+    } else {
+      // ignore: avoid_print
+      print('Could not launch $url');
+    }
   }
 }

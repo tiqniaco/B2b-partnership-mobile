@@ -81,6 +81,7 @@ class ApiConstance {
 
   // shop app
 
+  static String whatsContact = 'store/contact-us';
   static String shopCategories = 'store/categories';
   static String shopProducts = 'store/products';
   static String topRatedProducts = 'store/top-selling-products';

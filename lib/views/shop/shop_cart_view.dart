@@ -56,54 +56,170 @@ class ShopCartView extends StatelessWidget {
             statusRequest: controller.statusRequest,
             errorMessage: controller.error,
             emptyMessage: "Cart is empty,\nLet's add some items.",
-            child: ListView.separated(
-              itemBuilder: (context, index) {
-                return ListTile(
-                  onTap: () {
-                    controller.onItemTab(index: index);
-                  },
-                  leading: CustomNetworkImage(
-                    imageUrl: controller.carts[index].product.image,
-                    width: 80.w,
-                    fit: BoxFit.cover,
-                  ),
-                  title: Text(
-                    translateDatabase(
-                      arabic: controller.carts[index].product.titleAr,
-                      english: controller.carts[index].product.titleEn,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: getRegularStyle(context),
-                  ),
-                  subtitle: Text(
-                    '${double.parse(controller.carts[index].product.price) - (double.parse(controller.carts[index].product.price) * double.parse(controller.carts[index].product.discount) / 100)}\$',
-                    style: getRegularStyle(context).copyWith(
-                      color: primaryColor,
-                      fontWeight: FontManager.semiBoldFontWeight,
-                    ),
-                  ),
-                  trailing: IconButton(
-                    icon: Icon(
-                      FontAwesomeIcons.xmark,
-                      size: 20.r,
-                    ),
-                    onPressed: () {
-                      controller.removeFromCart(
-                        id: controller.carts[index].id.toString(),
+            child: Column(
+              children: [
+                Expanded(
+                  child: ListView.separated(
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        onTap: () {
+                          controller.onItemTab(index: index);
+                        },
+                        leading: CustomNetworkImage(
+                          imageUrl: controller.carts[index].product.image,
+                          width: 80.w,
+                          fit: BoxFit.cover,
+                        ),
+                        title: Text(
+                          translateDatabase(
+                            arabic: controller.carts[index].product.titleAr,
+                            english: controller.carts[index].product.titleEn,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: getRegularStyle(context),
+                        ),
+                        subtitle: Text(
+                          '${double.parse(controller.carts[index].product.price) - (double.parse(controller.carts[index].product.price) * double.parse(controller.carts[index].product.discount) / 100)}\$',
+                          style: getRegularStyle(context).copyWith(
+                            color: primaryColor,
+                            fontWeight: FontManager.semiBoldFontWeight,
+                          ),
+                        ),
+                        trailing: IconButton(
+                          icon: Icon(
+                            FontAwesomeIcons.xmark,
+                            size: 20.r,
+                          ),
+                          onPressed: () {
+                            controller.removeFromCart(
+                              id: controller.carts[index].id.toString(),
+                            );
+                          },
+                        ),
                       );
                     },
+                    separatorBuilder: (context, index) => Gap(10.h),
+                    itemCount: controller.carts.length,
                   ),
-                );
-              },
-              separatorBuilder: (context, index) => Gap(10.h),
-              itemCount: controller.carts.length,
+                ),
+                Gap(20.h),
+                Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: const Color.fromARGB(255, 241, 240, 236),
+                      borderRadius: BorderRadius.circular(0.r),
+                    ),
+                    child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                              width: double.infinity,
+                              padding: EdgeInsets.all(15),
+                              decoration: BoxDecoration(color: Colors.blueGrey),
+                              child: Row(
+                                children: [
+                                  Icon(
+                                    Icons.report_gmailerrorred,
+                                    color: whiteColor,
+                                    size: 20.r,
+                                  ),
+                                  Gap(10.w),
+                                  Text(
+                                    "Important Note :".tr,
+                                    style: getRegularStyle(context).copyWith(
+                                      color: whiteColor,
+                                      fontWeight: FontManager.boldFontWeight,
+                                    ),
+                                  ),
+                                ],
+                              )),
+                          Padding(
+                            padding: const EdgeInsets.all(15.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "If you want to receive the bags in specific email or whatsapp, please enter your contact details"
+                                      .tr,
+                                  style: getRegularStyle(context).copyWith(
+                                    color: blackColor,
+                                    fontWeight: FontManager.regularFontWeight,
+                                  ),
+                                  maxLines: 3,
+                                ),
+                                Gap(10.h),
+                                TextFormField(
+                                  controller: controller.emailController,
+                                  style: TextStyle(color: blackColor),
+                                  decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      prefixIcon: Icon(
+                                        Icons.email_outlined,
+                                        color: blackColor,
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: const Color.fromARGB(
+                                              255, 241, 240, 236),
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                        color: const Color.fromARGB(
+                                            255, 241, 240, 236),
+                                        width: 0.5,
+                                      )),
+                                      hintText: 'enter email (optional)',
+                                      hintStyle: getRegularStyle(context)
+                                          .copyWith(color: blackColor)),
+                                ),
+                                Gap(10.h),
+                                TextFormField(
+                                  controller: controller.phoneController,
+                                  style: TextStyle(color: blackColor),
+                                  decoration: InputDecoration(
+                                      filled: true,
+                                      fillColor: Colors.white,
+                                      prefixIcon: Icon(
+                                        Icons.phone_enabled_outlined,
+                                        color: blackColor,
+                                      ),
+                                      focusedBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                          color: const Color.fromARGB(
+                                              255, 241, 240, 236),
+                                          width: 0.5,
+                                        ),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                          borderSide: BorderSide(
+                                        color: const Color.fromARGB(
+                                            255, 241, 240, 236),
+                                        width: 0.5,
+                                      )),
+                                      hintText: 'enter phone (optional)',
+                                      hintStyle: getRegularStyle(context)
+                                          .copyWith(color: blackColor)),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ]),
+                  ),
+                )
+              ],
             ),
           ),
           bottomNavigationBar: Container(
-            padding: EdgeInsets.symmetric(
-              horizontal: 15.w,
-              vertical: 10.h,
+            padding: EdgeInsets.only(
+              left: 20.w,
+              right: 20.w,
+              top: 2.h,
+              bottom: 10.h,
             ),
             height: 0.1.sh,
             child: Column(
@@ -126,6 +242,7 @@ class ShopCartView extends StatelessWidget {
                     ),
                     Spacer(),
                     CustomLoadingButton(
+                      backgroundColor: greenColor,
                       onPressed: () {
                         return controller.checkout();
                       },
