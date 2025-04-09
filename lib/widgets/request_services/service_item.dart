@@ -63,20 +63,21 @@ class ServiceItem extends StatelessWidget {
                       Gap(10),
                       Row(
                         children: [
-                          Text(
-                            translateDatabase(
-                                arabic: model.specializationNameAr!,
-                                english: model.specializationNameEn!),
-                            style: getLightStyle(context).copyWith(
-                              color: greyColor,
-                              fontWeight: FontWeight.w500,
+                          Expanded(
+                            child: Text(
+                              translateDatabase(
+                                  arabic: model.specializationNameAr!,
+                                  english: model.specializationNameEn!),
+                              style: getLightStyle(context).copyWith(
+                                color: greyColor,
+                                fontWeight: FontWeight.w500,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
                             ),
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 1,
                           ),
-                          Spacer(),
                           SizedBox(
-                            width: 120.w,
+                            width: context.isTablet ? 120.w : 100.w,
                             height: 25.h,
                             child: ElevatedButton(
                               style: ButtonStyle(
@@ -91,7 +92,7 @@ class ServiceItem extends StatelessWidget {
                                     arguments: {"model": model});
                               },
                               child: Text(
-                                "Show Service",
+                                "Show Service".tr,
                                 style: getLightStyle(context).copyWith(
                                   color: whiteColor,
                                   fontWeight: FontManager.semiBoldFontWeight,

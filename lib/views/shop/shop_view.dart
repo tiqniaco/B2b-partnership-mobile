@@ -36,7 +36,11 @@ class ShopView extends StatelessWidget {
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
                         onPressed: () {
-                          controller.getShopProducts();
+                          if (controller.searchController.text.isNotEmpty) {
+                            controller.getShopProducts(isSearch: true);
+                          } else {
+                            controller.getShopProducts();
+                          }
                         },
                         icon: Icon(
                           CupertinoIcons.search,
@@ -58,6 +62,8 @@ class ShopView extends StatelessWidget {
                     ),
                     onFieldSubmitted: (value) {
                       if (value.isNotEmpty) {
+                        controller.getShopProducts(isSearch: true);
+                      } else {
                         controller.getShopProducts();
                       }
                     },

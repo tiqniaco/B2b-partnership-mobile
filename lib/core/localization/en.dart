@@ -427,4 +427,37 @@ const Map<String, String> en = {
   "Please log in to access this feature.":
       "Please log in to access this feature.",
   "About us": "About us",
+
+  // New
+  "Checkout": "Checkout",
+  "Cart": "Cart",
+  "Cart is empty,\nLet's add some items.":
+      "Cart is empty,\nLet's add some items.",
+  "Total: ": "Total: ",
+  "Search": "Search",
+  "Confirm": "Confirm",
+  "enter your cover letter": "enter your cover letter",
+  "No services founded\ntry again later":
+      "No services founded\ntry again later",
+  "No Reviews now\nlet's add one": "No Reviews now\nlet's add one",
+  "No Previous work\nhere now": "No Previous work\nhere now",
+  "ORDERS FILTER": "ORDERS FILTER",
+  "Enter your complaints...": "Enter your complaints...",
+  "Yes": "Yes",
+  "No": "No",
+  "Delete Service": "Delete Service",
+  "Are you sure you want to delete this service?":
+      "Are you sure you want to delete this service?",
+  'Remove Service Feature': 'Remove Service Feature',
+  'Are you sure you want to remove this service feature?':
+      'Are you sure you want to remove this service feature?',
+  "Contact with": "Contact with",
+  "All fields are required, please fill them":
+      "All fields are required, please fill them",
+  "upload commercial register pdf file": "upload commercial register pdf file",
+  "upload tax card pdf file": "upload tax card pdf file",
+  "please select image": "please select image",
+  "please fill all fields": "please fill all fields",
+  "Switch Account": "Switch Account",
+  "You don't have any client Account": "You don't have any client Account",
 };

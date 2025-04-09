@@ -66,14 +66,14 @@ class ProviderSettingController extends GetxController {
       // print(l.errMsg);
       if (l.errMsg == 'no client') {
         Get.defaultDialog(
-          title: "Switch Account",
+          title: "Switch Account".tr,
           titleStyle: TextStyle(fontWeight: FontWeight.w500, fontSize: 15.sp),
-          middleText: "You don't have any client Account",
+          middleText: "You don't have any client Account".tr,
           onConfirm: () {
             Get.toNamed(AppRoutes.providerSignup,
                 arguments: {"role": "client"});
           },
-          textConfirm: "Create Account",
+          textConfirm: "Create Account".tr,
           onCancel: () {},
         );
       } else {

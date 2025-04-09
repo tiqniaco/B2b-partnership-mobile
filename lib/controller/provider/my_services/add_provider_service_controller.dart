@@ -177,7 +177,7 @@ class AddProviderServiceController extends GetxController {
   Future<void> addServices() async {
     try {
       if (imageFile == null) {
-        AppSnackBars.warning(message: "please select image");
+        AppSnackBars.warning(message: "please select image".tr);
         return;
       }
       if (formKey.currentState?.validate() ?? false) {
@@ -229,7 +229,7 @@ class AddProviderServiceController extends GetxController {
           update();
         });
       } else {
-        AppSnackBars.warning(message: "please fill all fields");
+        AppSnackBars.warning(message: "please fill all fields".tr);
       }
     } catch (e) {
       debugPrint(e.toString());

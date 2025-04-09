@@ -245,6 +245,7 @@ class ShopProductDetailsView extends StatelessWidget {
                                       style: getMediumStyle(context).copyWith(
                                         color: blackColor,
                                       ),
+                                      maxLines: 100,
                                     ),
                                   ),
                                 ],

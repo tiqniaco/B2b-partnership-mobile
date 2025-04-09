@@ -17,7 +17,7 @@ class PreviousWork extends StatelessWidget {
     Get.put(ProviderProfileController());
     return GetBuilder<ProviderProfileController>(
         builder: (controller) => CustomServerStatusWidget(
-              emptyMessage: "No Previous work\nhere now",
+              emptyMessage: "No Previous work\nhere now".tr,
               statusRequest: controller.statusRequestPerviousWork,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
