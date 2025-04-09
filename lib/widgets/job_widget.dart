@@ -106,14 +106,14 @@ class JobWidget extends StatelessWidget {
                       }
                     },
                     child: Container(
-                      padding: const EdgeInsets.all(5),
+                      padding: EdgeInsets.all(4.w),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: primaryColor,
                       ),
                       child: Icon(
                         FontAwesomeIcons.xmark,
-                        size: 16.sp,
+                        size: 16.r,
                         color: whiteColor,
                       ),
                     ),
@@ -130,14 +130,14 @@ class JobWidget extends StatelessWidget {
                       );
                     },
                     child: Container(
-                      padding: EdgeInsets.all(5.w),
+                      padding: EdgeInsets.all(4.w),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         color: primaryColor,
                       ),
                       child: Icon(
                         FontAwesomeIcons.penToSquare,
-                        size: 16.sp,
+                        size: 16.r,
                         color: whiteColor,
                       ),
                     ),

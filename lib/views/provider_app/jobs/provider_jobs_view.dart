@@ -19,6 +19,7 @@ class ProviderJobsView extends StatelessWidget {
       builder: (ProviderJobsController controller) {
         return Scaffold(
           appBar: AppBar(
+            toolbarHeight: context.isTablet ? 45.h : null,
             backgroundColor: primaryColor,
             iconTheme: IconThemeData(
               color: whiteColor,
@@ -26,7 +27,7 @@ class ProviderJobsView extends StatelessWidget {
             leading: IconButton(
               icon: Icon(
                 Icons.arrow_back_ios_new,
-                size: 20.sp,
+                size: 20.r,
               ),
               onPressed: () {
                 Get.back();
@@ -35,20 +36,25 @@ class ProviderJobsView extends StatelessWidget {
             titleSpacing: 0,
             title: Text(
               "MY JOBS".tr,
-              style: getSemiBoldStyle(context).copyWith(
+              style: getMediumStyle(context).copyWith(
                 letterSpacing: 1.5.w,
                 color: whiteColor,
               ),
             ),
           ),
-          floatingActionButton: FloatingActionButton(
-            backgroundColor: primaryColor,
-            onPressed: () {
-              controller.addNewJob();
-            },
-            child: Icon(
-              Icons.add,
-              color: whiteColor,
+          floatingActionButton: SizedBox(
+            width: 30.w,
+            height: 30.w,
+            child: FloatingActionButton(
+              backgroundColor: primaryColor,
+              onPressed: () {
+                controller.addNewJob();
+              },
+              child: Icon(
+                Icons.add,
+                color: whiteColor,
+                size: 20.r,
+              ),
             ),
           ),
           body: SafeArea(

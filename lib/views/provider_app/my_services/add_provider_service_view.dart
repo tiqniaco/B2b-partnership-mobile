@@ -1,6 +1,7 @@
 import 'package:b2b_partenership/controller/provider/my_services/add_provider_service_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/request_services/build_text_form.dart';
 import 'package:b2b_partenership/widgets/select_city_widget.dart';
 import 'package:b2b_partenership/widgets/select_country_widget.dart';
@@ -21,18 +22,21 @@ class AddProviderServiceView extends StatelessWidget {
       builder: (controller) {
         return Scaffold(
           appBar: AppBar(
+            toolbarHeight: context.isTablet ? 45.h : null,
             leading: IconButton(
               onPressed: () {
                 Get.back();
               },
               icon: Icon(
                 Icons.close,
-                size: 20.sp,
+                size: 20.r,
               ),
             ),
             iconTheme: IconThemeData(color: blackColor),
-            title: Text('Add Service'.tr,
-                style: TextStyle(fontSize: 20.sp, color: blackColor)),
+            title: Text(
+              'Add Service'.tr,
+              style: getSemiBoldStyle(context),
+            ),
             backgroundColor: whiteColor,
             elevation: 0,
           ),
@@ -53,7 +57,10 @@ class AddProviderServiceView extends StatelessWidget {
                           controller.currentStep > 0
                               ? TextButton(
                                   onPressed: controls.onStepCancel,
-                                  child: Text('Previous'.tr),
+                                  child: Text(
+                                    'Previous'.tr,
+                                    style: getRegularStyle(context),
+                                  ),
                                 )
                               : SizedBox.shrink(),
                           Gap(10.w),

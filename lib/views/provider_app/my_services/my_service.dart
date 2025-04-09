@@ -2,6 +2,7 @@ import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/provider/my_services/get_my_service_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/in_category/service_widget_vertical.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,19 +19,22 @@ class MyService extends StatelessWidget {
         backgroundColor: whiteColor,
         title: Text(
           'My Services'.tr,
-          style: TextStyle(
-            fontSize: 17.sp,
-            fontWeight: FontWeight.bold,
-            color: blackColor,
-          ),
+          style: getSemiBoldStyle(context),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Get.toNamed(AppRoutes.addProviderService);
-        },
-        shape: CircleBorder(),
-        child: Icon(Icons.add),
+      floatingActionButton: SizedBox(
+        height: 45.r,
+        width: 45.r,
+        child: FloatingActionButton(
+          onPressed: () {
+            Get.toNamed(AppRoutes.addProviderService);
+          },
+          shape: CircleBorder(),
+          child: Icon(
+            Icons.add,
+            size: 25.r,
+          ),
+        ),
       ),
       body: GetBuilder<GetMyServiceController>(
         builder: (controller) => CustomServerStatusWidget(

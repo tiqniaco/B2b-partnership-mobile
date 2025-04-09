@@ -1,4 +1,5 @@
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/provider/posts/select_city_post.dart';
 import 'package:b2b_partenership/widgets/provider/posts/select_country_post.dart';
 import 'package:b2b_partenership/widgets/provider/posts/select_specialization_post.dart';
@@ -23,13 +24,15 @@ class GetServiceRequest extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Gap(70),
-              Text("FILTERS".tr,
-                  style: TextStyle(
-                      color: blackColor,
-                      letterSpacing: 4,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15.sp)),
+              Gap(MediaQuery.of(context).padding.top + 8.h),
+              Text(
+                "FILTERS".tr,
+                style: getMediumStyle(context).copyWith(
+                  color: blackColor,
+                  letterSpacing: 4,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
               Gap(3),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -39,11 +42,11 @@ class GetServiceRequest extends StatelessWidget {
                     filterWidget(() {
                       showCategorySheet(context);
                     }, "Category".tr, Icons.category_outlined),
-                    Gap(10),
+                    Gap(10.w),
                     filterWidget(() {
                       showLocationSheet(context);
                     }, "Location".tr, Icons.location_on_outlined),
-                    Gap(10),
+                    Gap(10.w),
                     filterWidget(() {
                       controller.resetFunction();
                     }, "Reset".tr, Icons.refresh_outlined),
@@ -55,31 +58,36 @@ class GetServiceRequest extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: Row(
                   children: [
-                    Text("${controller.services.length}",
-                        style: TextStyle(
-                            color: blackColor,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16.sp)),
+                    Text(
+                      "${controller.services.length}",
+                      style: getMediumStyle(context).copyWith(
+                        color: blackColor,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     Gap(10),
-                    Text("Freelance Service".tr,
-                        style: TextStyle(
-                            color: blackColor,
-                            // fontWeight: FontWeight.w500,
-                            fontSize: 15.sp)),
+                    Text(
+                      "Freelance Service".tr,
+                      style: getMediumStyle(context).copyWith(
+                        color: blackColor,
+                        // fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ],
                 ),
               ),
               Gap(5),
               Expanded(
-                  child: ListView.separated(
-                separatorBuilder: (context, index) => Gap(25),
-                scrollDirection: Axis.vertical,
-                padding: EdgeInsets.symmetric(horizontal: 15),
-                itemCount: controller.services.length,
-                itemBuilder: (context, index) => ProviderFreelanceItem(
-                  model: controller.services[index],
+                child: ListView.separated(
+                  separatorBuilder: (context, index) => Gap(25),
+                  scrollDirection: Axis.vertical,
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  itemCount: controller.services.length,
+                  itemBuilder: (context, index) => ProviderFreelanceItem(
+                    model: controller.services[index],
+                  ),
                 ),
-              )),
+              ),
             ],
           ),
         ),
@@ -100,13 +108,12 @@ class GetServiceRequest extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon, size: 16.sp, color: thirdColor),
+                Icon(icon, size: 16.r, color: thirdColor),
                 Gap(8),
                 Text(
                   title,
-                  style: TextStyle(
+                  style: getLightStyle(Get.context!).copyWith(
                     color: Colors.black,
-                    fontSize: 11.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),

@@ -89,90 +89,100 @@ class ServiceWidgetVertical extends StatelessWidget {
                                 maxLines: 1,
                               ),
                               Gap(5.h),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    flex: 1,
-                                    child: Visibility(
-                                      visible: Get.find<AppPreferences>()
-                                              .getUserRole() ==
-                                          "provider",
+                              Padding(
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: context.isTablet ? 12.w : 0,
+                                ),
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      flex: 1,
+                                      child: Visibility(
+                                        visible: Get.find<AppPreferences>()
+                                                .getUserRole() ==
+                                            "provider",
+                                        child: SizedBox(
+                                          height: 32.h,
+                                          child: ElevatedButton(
+                                            style: ButtonStyle(
+                                              backgroundColor:
+                                                  WidgetStatePropertyAll(
+                                                Colors.green,
+                                              ),
+                                              padding: WidgetStatePropertyAll(
+                                                EdgeInsets.symmetric(
+                                                  horizontal: 10,
+                                                ),
+                                              ),
+                                              shape: WidgetStatePropertyAll(
+                                                RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                    5,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            onPressed: () {
+                                              Get.toNamed(
+                                                AppRoutes.editProviderService,
+                                                arguments: {
+                                                  "service": services[index],
+                                                },
+                                              );
+                                            },
+                                            child: Text(
+                                              "Edit".tr,
+                                              style: getRegularStyle(context)
+                                                  .copyWith(
+                                                fontWeight: FontManager
+                                                    .mediumFontWeight,
+                                                color: whiteColor,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Gap(4.w),
+                                    Expanded(
+                                      flex: context.isTablet ? 1 : 2,
                                       child: SizedBox(
                                         height: 32.h,
                                         child: ElevatedButton(
                                           style: ButtonStyle(
-                                            backgroundColor:
-                                                WidgetStatePropertyAll(
-                                              Colors.green,
-                                            ),
                                             padding: WidgetStatePropertyAll(
-                                              EdgeInsets.symmetric(
-                                                horizontal: 10,
-                                              ),
-                                            ),
+                                                EdgeInsets.symmetric(
+                                                    horizontal: 10)),
                                             shape: WidgetStatePropertyAll(
                                               RoundedRectangleBorder(
                                                 borderRadius:
-                                                    BorderRadius.circular(
-                                                  5,
-                                                ),
+                                                    BorderRadius.circular(5),
                                               ),
                                             ),
                                           ),
                                           onPressed: () {
                                             Get.toNamed(
-                                              AppRoutes.editProviderService,
+                                              AppRoutes.serviceDetails,
                                               arguments: {
-                                                "service": services[index],
+                                                "id": services[index].id,
                                               },
                                             );
                                           },
                                           child: Text(
-                                            "Edit".tr,
-                                            style: TextStyle(fontSize: 11.sp),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Gap(4.w),
-                                  Expanded(
-                                    flex: context.isTablet ? 1 : 2,
-                                    child: SizedBox(
-                                      height: 32.h,
-                                      child: ElevatedButton(
-                                        style: ButtonStyle(
-                                          padding: WidgetStatePropertyAll(
-                                              EdgeInsets.symmetric(
-                                                  horizontal: 10)),
-                                          shape: WidgetStatePropertyAll(
-                                            RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5),
+                                            "View".tr,
+                                            style: getRegularStyle(context)
+                                                .copyWith(
+                                              fontWeight:
+                                                  FontManager.mediumFontWeight,
+                                              color: whiteColor,
                                             ),
                                           ),
                                         ),
-                                        onPressed: () {
-                                          Get.toNamed(
-                                            AppRoutes.serviceDetails,
-                                            arguments: {
-                                              "id": services[index].id,
-                                            },
-                                          );
-                                        },
-                                        child: Text(
-                                          "View".tr,
-                                          style:
-                                              getRegularStyle(context).copyWith(
-                                            fontWeight:
-                                                FontManager.mediumFontWeight,
-                                            color: whiteColor,
-                                          ),
-                                        ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               )
                             ],
                           ),

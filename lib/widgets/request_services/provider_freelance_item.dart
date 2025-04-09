@@ -2,6 +2,8 @@ import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/core/constants/app_constants.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/utils/font_manager.dart';
 import 'package:b2b_partenership/models/service_request_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
@@ -58,26 +60,29 @@ class ProviderFreelanceItem extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(model.name!,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15.sp,
-                        )),
-                    Text(model.createdAt!,
-                        style: TextStyle(
-                          color: Colors.green,
-                          //fontWeight: FontWeight.bold,
-                          fontSize: 10.sp,
-                        )),
+                    Text(
+                      model.name!,
+                      style: getMediumStyle(context).copyWith(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      model.createdAt!,
+                      style: getLightStyle(context).copyWith(
+                        color: Colors.green,
+                        fontWeight: FontManager.regularFontWeight,
+                      ),
+                    ),
                   ],
                 )
               ],
             ),
+            Gap(5.h),
             Divider(
                 // color: Colors.black,
                 ),
-            Gap(5),
+            Gap(5.h),
             Row(
               children: [
                 Gap(10),
@@ -89,10 +94,10 @@ class ProviderFreelanceItem extends StatelessWidget {
                       Text(
                         model.description!,
                         textAlign: TextAlign.start,
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 15.sp,
-                            fontWeight: FontWeight.w500),
+                        style: getMediumStyle(context).copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                        ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -103,37 +108,42 @@ class ProviderFreelanceItem extends StatelessWidget {
                             translateDatabase(
                                 arabic: model.specializationNameAr!,
                                 english: model.specializationNameEn!),
-                            style: TextStyle(
-                                fontSize: 12.sp,
-                                color: greyColor,
-                                fontWeight: FontWeight.w500),
+                            style: getLightStyle(context).copyWith(
+                              color: greyColor,
+                              fontWeight: FontWeight.w500,
+                            ),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 1,
                           ),
                           Spacer(),
                           SizedBox(
-                            width: 120,
+                            width: 120.w,
                             height: 25.h,
                             child: ElevatedButton(
-                                style: ButtonStyle(
-                                    padding: WidgetStatePropertyAll(
-                                        EdgeInsets.symmetric(horizontal: 10)),
-                                    shape: WidgetStatePropertyAll(
-                                        RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(10),
-                                          topLeft: Radius.circular(10)),
-                                    ))),
-                                onPressed: () {
-                                  Get.toNamed(AppRoutes.serviceRequestDetails,
-                                      arguments: {"model": model});
-                                },
-                                child: Text(
-                                  "Show Service".tr,
-                                  style: TextStyle(
-                                      fontSize: 11.sp,
-                                      fontWeight: FontWeight.bold),
-                                )),
+                              style: ButtonStyle(
+                                padding: WidgetStatePropertyAll(
+                                    EdgeInsets.symmetric(horizontal: 10)),
+                                shape: WidgetStatePropertyAll(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(5.r),
+                                      topLeft: Radius.circular(5.r),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              onPressed: () {
+                                Get.toNamed(AppRoutes.serviceRequestDetails,
+                                    arguments: {"model": model});
+                              },
+                              child: Text(
+                                "Show Service".tr,
+                                style: getLightStyle(context).copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: whiteColor,
+                                ),
+                              ),
+                            ),
                           )
                         ],
                       )
@@ -146,12 +156,13 @@ class ProviderFreelanceItem extends StatelessWidget {
             if (model.image != null)
               ClipRRect(
                 borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10),
-                    topLeft: Radius.circular(10)),
+                  bottomLeft: Radius.circular(5.r),
+                  bottomRight: Radius.circular(5.r),
+                  topLeft: Radius.circular(5.r),
+                ),
                 child: CachedNetworkImage(
                   imageUrl: "$kBaseImageUrl${model.image}",
-                  height: 100.h,
+                  height: 120.h,
                   width: double.infinity,
                   fit: BoxFit.cover,
                   errorWidget: (context, url, error) => Text("${model.image}"),

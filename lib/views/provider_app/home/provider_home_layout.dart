@@ -1,6 +1,7 @@
 // ignore_for_file: deprecated_member_use
 
 import 'package:b2b_partenership/controller/provider/home/provider_home_layout_controller.dart';
+import 'package:b2b_partenership/views/home/client_home_layout.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -30,68 +31,76 @@ class _ProviderHomeLayoutState extends State<ProviderHomeLayout>
             ...controller.screens,
           ],
         ),
-        bottomNavigationBar: ConvexAppBar(
-          controller: controller.convexController,
-          top: -30,
-          height: 60.h,
-          style: TabStyle.fixedCircle,
-          backgroundColor: whiteColor,
-          color: unSelectedBNavColor,
-          activeColor: primaryColor,
-          curveSize: 140,
-          items: [
-            TabItem(
-              icon: SvgPicture.asset("assets/svgs/home.svg",
-                  height: 20.sp,
-                  color: controller.currentIndex == 0
-                      ? primaryColor
-                      : unSelectedBNavColor),
-              title: "Home".tr,
-            ),
-            TabItem(
-              icon: Icon(
-                  CupertinoIcons
-                      .news, //SvgPicture.asset("assets/svgs/bag2.svg",
-                  // height: 20.sp,
-                  color: controller.currentIndex == 1
-                      ? primaryColor
-                      : unSelectedBNavColor),
-              title: "Posts".tr,
-            ),
-            TabItem(
-              icon: Container(
-                decoration:
-                    BoxDecoration(shape: BoxShape.circle, color: primaryColor),
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
+        bottomNavigationBar: StyleProvider(
+          style: Style(),
+          child: ConvexAppBar(
+            controller: controller.convexController,
+            top: -10.h,
+            height: context.isTablet ? 55.h : 60.h,
+            style: TabStyle.fixedCircle,
+            backgroundColor: whiteColor,
+            color: unSelectedBNavColor,
+            activeColor: primaryColor,
+            curveSize: 140,
+            items: [
+              TabItem(
+                icon: SvgPicture.asset("assets/svgs/home.svg",
+                    height: 20.sp,
+                    color: controller.currentIndex == 0
+                        ? primaryColor
+                        : unSelectedBNavColor),
+                title: "Home".tr,
+              ),
+              TabItem(
+                icon: Icon(
+                    CupertinoIcons
+                        .news, //SvgPicture.asset("assets/svgs/bag2.svg",
+                    // height: 20.sp,
+                    color: controller.currentIndex == 1
+                        ? primaryColor
+                        : unSelectedBNavColor),
+                title: "Posts".tr,
+              ),
+              TabItem(
+                icon: Container(
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: primaryColor,
+                  ),
                   child: Padding(
-                    padding: const EdgeInsets.only(bottom: 6.0, right: 7),
-                    child: SvgPicture.asset("assets/svgs/search.svg",
-                        height: 20.sp, color: Colors.white),
+                    padding: EdgeInsets.all(11.r),
+                    child: Padding(
+                      padding: EdgeInsets.only(bottom: 6.r, right: 7.r),
+                      child: SvgPicture.asset(
+                        "assets/svgs/search.svg",
+                        height: 20.r,
+                        color: Colors.white,
+                      ),
+                    ),
                   ),
                 ),
+                title: "Search".tr,
               ),
-              title: "Search",
-            ),
-            TabItem(
-              icon: SvgPicture.asset("assets/svgs/save.svg",
-                  height: 20.sp,
-                  color: controller.currentIndex == 3
-                      ? primaryColor
-                      : unSelectedBNavColor),
-              title: "My Services".tr,
-            ),
-            TabItem(
-              icon: SvgPicture.asset("assets/svgs/setting.svg",
-                  height: 20.sp,
-                  color: controller.currentIndex == 4
-                      ? primaryColor
-                      : unSelectedBNavColor),
-              title: "Menu".tr,
-            ),
-          ],
-          initialActiveIndex: controller.currentIndex,
-          onTap: (index) => controller.onBNavPressed(index),
+              TabItem(
+                icon: SvgPicture.asset("assets/svgs/save.svg",
+                    height: 20.sp,
+                    color: controller.currentIndex == 3
+                        ? primaryColor
+                        : unSelectedBNavColor),
+                title: "My Services".tr,
+              ),
+              TabItem(
+                icon: SvgPicture.asset("assets/svgs/setting.svg",
+                    height: 20.sp,
+                    color: controller.currentIndex == 4
+                        ? primaryColor
+                        : unSelectedBNavColor),
+                title: "Menu".tr,
+              ),
+            ],
+            initialActiveIndex: controller.currentIndex,
+            onTap: (index) => controller.onBNavPressed(index),
+          ),
         ),
       ),
     );
