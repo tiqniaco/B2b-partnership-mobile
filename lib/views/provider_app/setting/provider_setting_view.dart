@@ -368,6 +368,28 @@ class ProviderSettingView extends StatelessWidget {
                                 ),
                                 Gap(8),
                                 rowWithArrow(
+                                  CupertinoIcons.book,
+                                  "My Previous Work".tr,
+                                  () {
+                                    Get.toNamed(
+                                      AppRoutes.managePreviousWork,
+                                      arguments: {
+                                        'from': "setting screen",
+                                        'id': controller
+                                            .menuModel!.data!.providerId
+                                      },
+                                    );
+                                  },
+                                ),
+                                Gap(8),
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    color: borderColor,
+                                  ),
+                                ),
+                                Gap(8),
+                                rowWithArrow(
                                   CupertinoIcons.phone,
                                   "Mange your Contacts".tr,
                                   () {

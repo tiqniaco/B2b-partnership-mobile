@@ -22,6 +22,7 @@ class ProviderProfileController extends GetxController {
   int selectedIndex = 0;
   ProviderModel? providerModel;
   late String provId;
+  String? from;
   int rating = 0;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController reviewController = TextEditingController();
@@ -38,6 +39,7 @@ class ProviderProfileController extends GetxController {
     super.onInit();
     pageController = PageController(initialPage: selectedIndex);
     provId = Get.arguments['id'];
+    from = Get.arguments['from'];
     await getProvider();
     getServices();
     getPreviousWork();

@@ -11,6 +11,9 @@ import 'package:b2b_partenership/views/job_application/search_job_applications_v
 import 'package:b2b_partenership/views/orders/orders_view.dart';
 import 'package:b2b_partenership/views/provider_app/home/provider_home_layout.dart';
 import 'package:b2b_partenership/views/provider_app/home/provider_home_view.dart';
+import 'package:b2b_partenership/views/provider_profile/edit_previous_work.dart';
+import 'package:b2b_partenership/views/provider_profile/manage_previous_work.dart';
+import 'package:b2b_partenership/views/provider_profile/manage_previous_work_details_view.dart';
 import 'package:b2b_partenership/views/provider_profile/previous_work_view.dart';
 import 'package:b2b_partenership/views/provider_profile/provider_profile_view.dart';
 import 'package:b2b_partenership/views/see_all/see_all_categories.dart';
@@ -95,8 +98,8 @@ class AppRoutes {
   static const String shopProductDetails = '/shopProductDetails';
   static const String shopCart = '/shopCart';
   static const String shopOrders = '/orders';
-   static const String allCategories = '/allCategories';
-    static const String productsInCategory = '/productsInCategory';
+  static const String allCategories = '/allCategories';
+  static const String productsInCategory = '/productsInCategory';
 
   // Edit Client Profile
   static const String editClientProfile = '/editClientProfile';
@@ -118,6 +121,9 @@ class AppRoutes {
   static const String editProviderProfile = "/edit-provider-profile";
   static const String addProviderService = "/add-provider-service";
   static const String editProviderService = "/edit-provider-service";
+  static const String managePreviousWork = "/managePreviousWork";
+  static const String managePreviousWorkDetailsView = '/managePreviousWorkView';
+  static const String editPreviousWork = "/editPreviousWork";
 
   // SaveView
   static const String save = '/save';
@@ -226,6 +232,11 @@ class AppRoutes {
     ),
 
     // provider
+
+    GetPage(
+      name: managePreviousWorkDetailsView,
+      page: () => const ManagePreviousWorkDetailsView(),
+    ),
     GetPage(
       name: providerProfile,
       page: () => const ProviderProfileView(),
@@ -233,6 +244,14 @@ class AppRoutes {
     GetPage(
       name: providerPreviousWork,
       page: () => const PreviousWorkView(),
+    ),
+    GetPage(
+      name: managePreviousWork,
+      page: () => const ManagePreviousWork(),
+    ),
+    GetPage(
+      name: editPreviousWork,
+      page: () => const EditPreviousWorkView(),
     ),
 
     // Shop
@@ -252,7 +271,7 @@ class AppRoutes {
       name: allCategories,
       page: () => const AllCategories(),
     ),
-     GetPage(
+    GetPage(
       name: allCategories,
       page: () => const AllCategories(),
     ),
@@ -260,7 +279,6 @@ class AppRoutes {
       name: productsInCategory,
       page: () => const ProductsInCategory(),
     ),
-
 
     //settings
     // Edit Client Profile
@@ -318,6 +336,7 @@ class AppRoutes {
       name: editProviderProfile,
       page: () => const EditProviderProfileView(),
     ),
+
     GetPage(
       name: addProviderService,
       page: () => const AddProviderServiceView(),

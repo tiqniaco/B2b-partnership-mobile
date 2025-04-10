@@ -62,7 +62,26 @@ class ProviderProfileView extends StatelessWidget {
                                 ),
                               ),
                               AboutWidget(),
-                              PreviousWork(),
+                              CustomServerStatusWidget(
+                                emptyMessage: "No Previous work\nhere now",
+                                statusRequest:
+                                    controller.statusRequestPerviousWork,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20.0),
+                                  child: ListView.separated(
+                                    itemCount: controller.previousWork.length,
+                                    separatorBuilder:
+                                        (BuildContext context, int index) =>
+                                            Gap(14.h),
+                                    itemBuilder:
+                                        (BuildContext context, int index) =>
+                                            PreviousWork(
+                                      model: controller.previousWork[index],
+                                    ),
+                                  ),
+                                ),
+                              ),
                               CustomServerStatusWidget(
                                   emptyMessage: "No Reviews now\nlet's add one",
                                   statusRequest: controller.statusRequestReview,

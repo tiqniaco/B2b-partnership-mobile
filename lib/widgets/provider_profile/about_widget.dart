@@ -88,24 +88,19 @@ class AboutWidget extends StatelessWidget {
                 ],
               ),
               Gap(20),
-              Material(
-                elevation: 10,
-                borderRadius: BorderRadius.circular(10),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    // border: Border.all(color: primaryColor, width: 2)
-                  ),
-                  height: 230.h,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: PDF().cachedFromUrl(
-                      controller.providerModel!.commercialRegister!,
-                      placeholder: (progress) =>
-                          Center(child: Text('loading...'.tr)),
-                      errorWidget: (error) =>
-                          Center(child: Text(error.toString())),
-                    ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                height: 230.h,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: PDF().cachedFromUrl(
+                    controller.providerModel!.commercialRegister!,
+                    placeholder: (progress) =>
+                        Center(child: Text('loading...'.tr)),
+                    errorWidget: (error) =>
+                        Center(child: Text(error.toString())),
                   ),
                 ),
               ),
@@ -138,24 +133,19 @@ class AboutWidget extends StatelessWidget {
                 ],
               ),
               Gap(20),
-              Material(
-                elevation: 10,
-                borderRadius: BorderRadius.circular(10),
-                child: Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    // border: Border.all(color: primaryColor, width: 2)
-                  ),
-                  height: 300,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: PDF().cachedFromUrl(
-                      controller.providerModel!.taxCard!,
-                      placeholder: (progress) =>
-                          Center(child: Text('loading...')),
-                      errorWidget: (error) =>
-                          Center(child: Text(error.toString())),
-                    ),
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                height: 300,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(10),
+                  child: PDF().cachedFromUrl(
+                    controller.providerModel!.taxCard!,
+                    placeholder: (progress) =>
+                        Center(child: Text('loading...')),
+                    errorWidget: (error) =>
+                        Center(child: Text(error.toString())),
                   ),
                 ),
               ),

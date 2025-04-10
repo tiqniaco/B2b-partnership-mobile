@@ -1,5 +1,4 @@
 import 'package:b2b_partenership/app_routes.dart';
-import 'package:b2b_partenership/controller/previous_work/provider_profile_controller.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/models/pervious_work_model.dart';
@@ -8,15 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class PreviousWork extends StatelessWidget {
-  const PreviousWork({super.key, required this.model});
+class ManagePreviousWorkWidget extends StatelessWidget {
+  const ManagePreviousWorkWidget({super.key, required this.model});
   final ProviderPerviousWorkModel model;
+
   @override
   Widget build(BuildContext context) {
-    Get.put(ProviderProfileController());
     return InkWell(
       onTap: () {
-        Get.toNamed(AppRoutes.providerPreviousWork,
+        Get.toNamed(AppRoutes.managePreviousWorkDetailsView,
             arguments: {"model": model});
       },
       child: Container(
@@ -35,8 +34,37 @@ class PreviousWork extends StatelessWidget {
               color: blackColor.withAlpha(95)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.end,
             children: [
+              Row(children: [
+                IconButton(
+                  style: ButtonStyle(
+                    padding: WidgetStatePropertyAll(EdgeInsets.all(5)),
+                    backgroundColor: WidgetStateProperty.all<Color>(
+                        Colors.white.withAlpha(120)),
+                  ),
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.delete,
+                    color: primaryColor,
+                  ),
+                ),
+                IconButton(
+                  style: ButtonStyle(
+                    padding: WidgetStatePropertyAll(EdgeInsets.all(5)),
+                    backgroundColor: WidgetStateProperty.all<Color>(
+                        Colors.white.withAlpha(120)),
+                  ),
+                  onPressed: () {
+                    Get.toNamed(AppRoutes.editPreviousWork,
+                        arguments: {"model": model});
+                  },
+                  icon: Icon(
+                    Icons.edit,
+                    color: primaryColor,
+                  ),
+                ),
+              ]),
+              Spacer(),
               Text(
                 model.titleEn!,
                 style: getMediumStyle(context).copyWith(
@@ -57,6 +85,5 @@ class PreviousWork extends StatelessWidget {
         ),
       ),
     );
-
   }
 }

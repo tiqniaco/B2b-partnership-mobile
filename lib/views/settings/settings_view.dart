@@ -313,15 +313,6 @@ class SettingsView extends StatelessWidget {
                                       ),
                                     ),
                                     Gap(8),
-                                    LanguageWidget(),
-                                    Gap(8),
-                                    FractionallySizedBox(
-                                      widthFactor: 10,
-                                      child: Divider(
-                                        color: borderColor,
-                                      ),
-                                    ),
-                                    Gap(8),
                                     rowWithArrow(
                                       CupertinoIcons.padlock,
                                       "Change Password".tr,
@@ -363,6 +354,15 @@ class SettingsView extends StatelessWidget {
                                         logoutDialog();
                                       },
                                     ),
+                                    FractionallySizedBox(
+                                      widthFactor: 10,
+                                      child: Divider(
+                                        color: borderColor,
+                                      ),
+                                    ),
+                                    Gap(8),
+                                    LanguageWidget(),
+                                    Gap(8),
                                   ],
                                 ),
                               ],

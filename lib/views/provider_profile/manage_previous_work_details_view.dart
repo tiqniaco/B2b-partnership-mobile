@@ -10,8 +10,8 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:widget_zoom/widget_zoom.dart';
 
-class PreviousWorkView extends StatelessWidget {
-  const PreviousWorkView({super.key});
+class ManagePreviousWorkDetailsView extends StatelessWidget {
+  const ManagePreviousWorkDetailsView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -69,12 +69,29 @@ class PreviousWorkView extends StatelessWidget {
                   ),
                 ),
                 Gap(20.h),
-                Text(
-                  'Project Images:'.tr,
-                  style: getBoldStyle(context).copyWith(
-                    fontSize: 14.sp,
-                    color: greenColor,
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      'Project Images:'.tr,
+                      style: getBoldStyle(context).copyWith(
+                        fontSize: 14.sp,
+                        color: greenColor,
+                      ),
+                    ),
+                    const Spacer(),
+                    Material(
+                      elevation: 1,
+                      shape: CircleBorder(),
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(
+                          Icons.add,
+                          color: greenColor,
+                          size: 20.r,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
                 Gap(10.h),
                 CustomServerStatusWidget(
@@ -109,15 +126,31 @@ class WorkImage extends StatelessWidget {
         childAspectRatio: 0.8,
       ),
       itemBuilder: (context, index) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(16.r),
-          child: WidgetZoom(
-            heroAnimationTag: index.toString(),
-            zoomWidget: CustomNetworkImage(
-              imageUrl: controller.images[index].image!,
-              fit: BoxFit.contain,
+        return Stack(
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(16.r),
+              child: WidgetZoom(
+                heroAnimationTag: index.toString(),
+                zoomWidget: CustomNetworkImage(
+                  imageUrl: controller.images[index].image!,
+                  fit: BoxFit.contain,
+                ),
+              ),
             ),
-          ),
+            IconButton(
+                style: ButtonStyle(
+                  padding: WidgetStatePropertyAll(EdgeInsets.all(5)),
+                  backgroundColor: WidgetStateProperty.all<Color>(whiteColor),
+                ),
+                //color: whiteColor,
+                onPressed: () {},
+                icon: Icon(
+                  Icons.delete,
+                  color: primaryColor,
+                  size: 20.sp,
+                ))
+          ],
         );
       },
     );
