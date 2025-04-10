@@ -134,7 +134,7 @@ class ClientJobApplicationsView extends StatelessWidget {
                                       Text.rich(
                                         TextSpan(children: [
                                           TextSpan(
-                                            text: "Status: ",
+                                            text: "${"Status".tr}: ",
                                             style: getRegularStyle(context)
                                                 .copyWith(
                                               fontWeight:
@@ -143,7 +143,7 @@ class ClientJobApplicationsView extends StatelessWidget {
                                           ),
                                           TextSpan(
                                             text: model.applicationStatus.name
-                                                .capitalizeFirst,
+                                                .tr.capitalizeFirst,
                                             style: getRegularStyle(context)
                                                 .copyWith(
                                               fontWeight:
@@ -155,34 +155,36 @@ class ClientJobApplicationsView extends StatelessWidget {
                                       ),
                                       Gap(5.h),
                                       Text(
-                                        "Company: ${model.providerName}",
-                                        style: getRegularStyle(context).copyWith(
+                                        "${"Company".tr}: ${model.providerName}",
+                                        style:
+                                            getRegularStyle(context).copyWith(
                                           fontWeight:
                                               FontManager.mediumFontWeight,
                                         ),
                                       ),
                                       Gap(5.h),
                                       Text(
-                                        "Job Title: ${model.jobTitle}",
-                                        style: getRegularStyle(context).copyWith(
+                                        "${"Job Title".tr}: ${model.jobTitle}",
+                                        style:
+                                            getRegularStyle(context).copyWith(
                                           fontWeight:
                                               FontManager.mediumFontWeight,
                                         ),
                                       ),
                                       Gap(5.h),
                                       Text(
-                                        "Contract Type: ${model.jobContractType.text}",
+                                        "${"Contract Type".tr}: ${model.jobContractType.text}",
                                         style: getLightStyle(context),
                                       ),
                                       Gap(5.h),
                                       Text(
-                                        "Expiry Date: ${model.jobExpirationDate}",
+                                        "${"Expiry Date".tr}: ${model.jobExpirationDate}",
                                         style: getLightStyle(context),
                                       ),
                                       if (model.jobSalary != "null") ...[
                                         Gap(5.h),
                                         Text(
-                                          "Salary: ${model.jobSalary}",
+                                          "${"Salary".tr}: ${model.jobSalary}",
                                           style: getLightStyle(context),
                                         )
                                       ],

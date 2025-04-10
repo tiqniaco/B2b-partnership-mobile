@@ -9,6 +9,7 @@ class ProviderPerviousWorkModel {
   String? image;
   String? createdAt;
   String? updatedAt;
+  bool isDeleteLoading = false;
 
   ProviderPerviousWorkModel(
       {this.id,

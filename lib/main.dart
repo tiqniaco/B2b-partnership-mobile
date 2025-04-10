@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 
 import '/app.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,10 @@ void main() async {
       );
     }
   }
-
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+  });
   await initialServices();
   tz.initializeTimeZones();
   runApp(const B2BPartnershipApp());

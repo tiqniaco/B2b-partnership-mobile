@@ -63,7 +63,7 @@ class ProviderProfileView extends StatelessWidget {
                               ),
                               AboutWidget(),
                               CustomServerStatusWidget(
-                                emptyMessage: "No Previous work\nhere now",
+                                emptyMessage: "No Previous work\nhere now".tr,
                                 statusRequest:
                                     controller.statusRequestPerviousWork,
                                 child: Padding(

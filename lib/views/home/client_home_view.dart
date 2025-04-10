@@ -31,7 +31,7 @@ class ClientHomeView extends StatefulWidget {
 
 class _ClientHomeViewState extends State<ClientHomeView>
     with TickerProviderStateMixin {
-  final settingController = Get.put(SettingController())..getMenuModel();
+  final settingController = Get.put(SettingController());
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeClientController>(
@@ -418,38 +418,6 @@ class _ClientHomeViewState extends State<ClientHomeView>
           ),
         );
       },
-    );
-  }
-
-  containerWidget(Color bgColor, String title) {
-    return Container(
-      height: 130.h,
-      width: 94.h,
-      decoration: BoxDecoration(
-          color: bgColor, borderRadius: BorderRadius.circular(10)),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
-            decoration:
-                BoxDecoration(color: whiteColor, shape: BoxShape.circle),
-            child: Image.asset(
-              "assets/images/job.png",
-              height: 50.h,
-              width: 50.h,
-            ),
-          ),
-          Gap(10),
-          Text(
-            title,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 12.sp,
-              color: blackColor,
-            ),
-          )
-        ],
-      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/controller/job_application/job_application_details_controller.dart';
 import 'package:b2b_partenership/core/enums/job_application_status_enum.dart';
+import 'package:b2b_partenership/core/enums/job_gender_enum.dart';
 import 'package:b2b_partenership/core/enums/jobs_contract_type_enum.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
@@ -87,7 +88,7 @@ class JobApplicationDetailsView extends StatelessWidget {
             ),
             SizedBox(height: 5.h),
             Text(
-              "${controller.model?.jobContractType.text} | Gender: ${controller.model?.jobGender}",
+              "${controller.model?.jobContractType.text} | ${"Gender".tr}: ${controller.model?.jobGender.text}",
               style: getLightStyle(context).copyWith(
                 color: darkGreyColor,
                 fontWeight: FontWeight.w400,
@@ -117,42 +118,44 @@ class JobApplicationDetailsView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Applicant Info",
+              "Applicant Info".tr,
               style: getRegularStyle(context).copyWith(
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 5.h),
             _buildInfoRow(
-              "Years of Experience",
+              "Years of Experience".tr,
               controller.model?.yearsOfExperience ?? "",
               context: context,
             ),
             Divider(),
             _buildInfoRow(
-              "Expected Salary",
+              "Expected Salary".tr,
               "\$${controller.model!.expectedSalary}",
               context: context,
             ),
             Divider(),
-            _buildInfoRow("Available Start Date",
-                controller.model?.availableToStartDate ?? "",
-                context: context),
+            _buildInfoRow(
+              "Available Start Date".tr,
+              controller.model?.availableToStartDate ?? "",
+              context: context,
+            ),
             Divider(),
             _buildInfoRow(
-              "Skills",
+              "Skills".tr,
               controller.model?.jobSkills ?? "",
               context: context,
             ),
             Divider(),
             _buildInfoRow(
-              "Why Ideal?",
+              "Why Ideal?".tr,
               controller.model?.whyIdealCandidate ?? "",
               context: context,
             ),
             Divider(),
             _buildInfoRow(
-              "Cover Letter",
+              "Cover Letter".tr,
               controller.model?.coverLetter ?? "",
               context: context,
             ),
@@ -161,7 +164,7 @@ class JobApplicationDetailsView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Resume",
+                  "Resume".tr,
                   style: getLightStyle(context).copyWith(
                     fontWeight: FontWeight.w500,
                   ),
@@ -172,10 +175,10 @@ class JobApplicationDetailsView extends StatelessWidget {
                         controller.model?.resume ?? "")) {
                       launchUrlString(controller.model?.resume ?? "");
                     } else {
-                      AppSnackBars.warning(message: "Resume not found");
+                      AppSnackBars.warning(message: "Resume not found".tr);
                     }
                   },
-                  label: Text("Preview"),
+                  label: Text("Preview".tr),
                   icon: Icon(
                     FontAwesomeIcons.eye,
                     size: 13.sp,
@@ -229,11 +232,11 @@ class JobApplicationDetailsView extends StatelessWidget {
             ),
             SizedBox(height: 10.h),
             _buildInfoRow(
-              "Phone",
+              "Phone".tr,
               "+${controller.model?.providerCountryCode ?? ""} ${controller.model?.providerPhone ?? ""}",
               context: context,
             ),
-            _buildInfoRow("Rating",
+            _buildInfoRow("Rating".tr,
                 "⭐ ${double.parse(controller.model?.providerRating ?? "0")}",
                 context: context),
           ],
@@ -253,7 +256,7 @@ class JobApplicationDetailsView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Client Info",
+              "Client Info".tr,
               style: getRegularStyle(context).copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -272,11 +275,11 @@ class JobApplicationDetailsView extends StatelessWidget {
                     children: [
                       SizedBox(height: 5.h),
                       _buildClientInfoRow(
-                          "Name", controller.model?.clientName ?? "",
+                          "Name".tr, controller.model?.clientName ?? "",
                           context: context),
                       Divider(),
                       _buildClientInfoRow(
-                        "Email",
+                        "Email".tr,
                         controller.model?.clientEmail ?? "",
                         icon: FontAwesomeIcons.envelope,
                         context: context,
@@ -290,7 +293,7 @@ class JobApplicationDetailsView extends StatelessWidget {
                       ),
                       Divider(),
                       _buildClientInfoRow(
-                        "Phone",
+                        "Phone".tr,
                         "+${controller.model?.clientCountryCode ?? ""} ${controller.model?.clientPhone ?? ""}",
                         icon: FontAwesomeIcons.phone,
                         context: context,
@@ -357,7 +360,7 @@ class JobApplicationDetailsView extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Text(
-          status.name.toUpperCase(),
+          status.name.tr.toUpperCase(),
           style: getLightStyle(Get.context!).copyWith(
             color: status.color,
             fontWeight: FontWeight.bold,

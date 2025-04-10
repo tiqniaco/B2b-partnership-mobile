@@ -11,7 +11,8 @@ import 'package:b2b_partenership/views/job_application/search_job_applications_v
 import 'package:b2b_partenership/views/orders/orders_view.dart';
 import 'package:b2b_partenership/views/provider_app/home/provider_home_layout.dart';
 import 'package:b2b_partenership/views/provider_app/home/provider_home_view.dart';
-import 'package:b2b_partenership/views/provider_profile/edit_previous_work.dart';
+import 'package:b2b_partenership/views/provider_profile/add_previous_work_view.dart';
+import 'package:b2b_partenership/views/provider_profile/edit_previous_work_view.dart';
 import 'package:b2b_partenership/views/provider_profile/manage_previous_work.dart';
 import 'package:b2b_partenership/views/provider_profile/manage_previous_work_details_view.dart';
 import 'package:b2b_partenership/views/provider_profile/previous_work_view.dart';
@@ -124,6 +125,7 @@ class AppRoutes {
   static const String managePreviousWork = "/managePreviousWork";
   static const String managePreviousWorkDetailsView = '/managePreviousWorkView';
   static const String editPreviousWork = "/editPreviousWork";
+  static const String addPreviousWork = "/addPreviousWork";
 
   // SaveView
   static const String save = '/save';
@@ -252,6 +254,10 @@ class AppRoutes {
     GetPage(
       name: editPreviousWork,
       page: () => const EditPreviousWorkView(),
+    ),
+    GetPage(
+      name: addPreviousWork,
+      page: () => const AddPreviousWorkView(),
     ),
 
     // Shop

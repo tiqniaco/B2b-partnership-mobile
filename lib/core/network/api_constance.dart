@@ -63,10 +63,19 @@ class ApiConstance {
   static String getServicesInCategory(String id) =>
       'specializations/$id/services';
   static String getProvidersInCategory = 'specializations/providers';
-  static String getProviderPerviousWork = 'provider-previous-works';
+  static String getProviderPreviousWork = 'provider-previous-works';
+  static String deleteProviderPreviousWork(String id) =>
+      'provider-previous-works/$id';
+  static String updateProviderPreviousWork(String id) =>
+      'provider-previous-works/$id/update';
   static String getTopCountriesProv(String id) =>
       'home/country/$id/top-providers';
   static String getWorkImages = '/previous-work-images';
+  static String addProviderPreviousWork = '/provider-previous-works';
+  static String addProviderPreviousWorkImage = '/previous-work-images';
+  static String deleteProviderPreviousWorkImage(String id) =>
+      '/previous-work-images/$id';
+
   static String addReview = '/provider-service-reviews';
   static String addNewService = '/provider-service';
   static String addProviderService = "provider-service";
@@ -103,7 +112,6 @@ class ApiConstance {
 
   // Notifications
   static String getNotifications = 'notifications';
-
   static String updateProviderProfile(String id) => "providers/$id/update";
 
   static String deleteProviderService(String id) => "provider-service/$id";

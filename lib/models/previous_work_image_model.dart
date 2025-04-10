@@ -6,6 +6,7 @@ class PreviousImagesModel {
   String? image;
   String? createdAt;
   String? updatedAt;
+  bool isDeleteLoading = false;
 
   PreviousImagesModel(
       {this.id,

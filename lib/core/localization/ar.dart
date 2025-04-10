@@ -1,4 +1,9 @@
+import 'app_strings.dart';
+
 const Map<String, String> ar = {
+  AppStrings.error: "خطأ",
+  AppStrings.success: "نجاح",
+  AppStrings.warning: "تحذير",
   // General
   "Manage!!": "ادارة!!",
   "add more": "اضافة المزيد",
@@ -461,5 +466,38 @@ const Map<String, String> ar = {
   "please select image": "الرجاء تحديد صورة",
   "please fill all fields": "الرجاء ملء جميع الحقول",
   "Switch Account": "تبديل الحساب",
-  "You don't have any client Account": "ليس لديك أي حساب عميل"
+  "You don't have any client Account": "ليس لديك أي حساب عميل",
+  'Delete Previous Work': ' حذف العمل السابق',
+  'Are you sure you want to delete this previous work?':
+      'هل أنت متأكد أنك تريد حذف هذا العمل السابق؟',
+  "My Previous Work": "أعمالي السابقة",
+  "Previous Work": "الأعمال السابقة",
+  "Project Images:": "صور المشروع:",
+  "Delete Image": "حذف الصورة",
+  "Are you sure you want to delete this image?":
+      "هل أنت متأكد أنك تريد حذف هذه الصورة؟",
+  "Add Image": "إضافة صورة",
+  "Select images to upload": "اختر الصور لرفعها",
+  "Select from Gallery": "اختر من المعرض",
+
+  "Add Previous Work": "إضافة عمل سابق",
+  "Please enter a title": "يرجى إدخال العنوان",
+  "Please enter a description": "يرجى إدخال الوصف",
+  "Work Title": "عنوان العمل",
+  "Edit Previous Work": "تعديل عمل سابق",
+  "Update": "تحديث",
+  'Please select an image': "يرجى اختيار صورة",
+  "Applicant Info": "معلومات المتقدم",
+  "Available Start Date": "تاريخ التوفر",
+  "Why Ideal?": "لماذا أنت الأنسب؟",
+  "Resume": "السيرة الذاتية",
+  "Resume not found": "السيرة الذاتية غير موجودة",
+  "Preview": "معاينة",
+  "Client Info": "معلومات العميل",
+
+  "Search Applications": "البحث في الطلبات",
+  "Search about job applications": "البحث عن طلبات التوظيف",
+  "applications found": "طلبات تم العثور عليها",
+  "Status": "الحالة",
+  "accepted": "مقبول",
 };
