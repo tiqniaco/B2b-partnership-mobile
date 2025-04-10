@@ -145,6 +145,7 @@ class ShopCartController extends GetxController {
       AppRoutes.shopProductDetails,
       arguments: {
         "product": carts[index].product,
+        "productId": carts[index].product.id,
       },
     );
   }
@@ -174,6 +175,4 @@ class ShopCartController extends GetxController {
       },
     );
   }
-
-  
 }

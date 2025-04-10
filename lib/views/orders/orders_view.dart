@@ -39,6 +39,7 @@ class OrdersView extends StatelessWidget {
                   //vertical: 10.h,
                   ),
               child: CustomScrollView(
+                physics: ClampingScrollPhysics(),
                 slivers: [
                   SliverToBoxAdapter(
                     child: Column(
@@ -69,6 +70,9 @@ class OrdersView extends StatelessWidget {
                       },
                       // separatorBuilder: (context, index) => Gap(10.h),
                     ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Gap(20.h),
                   ),
                 ],
               ),

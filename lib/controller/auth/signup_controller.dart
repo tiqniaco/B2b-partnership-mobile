@@ -238,16 +238,16 @@ class SignupController extends GetxController {
             passwordController.text.isEmpty ||
             phoneController.text.isEmpty) {
           AppSnackBars.warning(
-              message: "All fields are required, please fill them");
+              message: "All fields are required, please fill them".tr);
           return;
         }
 
         if (role == "provider") {
           if (commercePdfFile == null) {
             AppSnackBars.warning(
-                message: "upload commercial register pdf file");
+                message: "upload commercial register pdf file".tr);
           } else if (taxPdfFile == null) {
-            AppSnackBars.warning(message: "upload tax card pdf file");
+            AppSnackBars.warning(message: "upload tax card pdf file".tr);
           }
         }
         return Get.toNamed(
@@ -272,9 +272,9 @@ class SignupController extends GetxController {
       //   AppSnackBars.warning(message: "upload profile image");
       // } else
       if (commercePdfFile == null) {
-        AppSnackBars.warning(message: "upload commercial register pdf file");
+        AppSnackBars.warning(message: "upload commercial register pdf file".tr);
       } else if (taxPdfFile == null) {
-        AppSnackBars.warning(message: "upload tax card pdf file");
+        AppSnackBars.warning(message: "upload tax card pdf file".tr);
       } else {
         final result = await CustomRequest<Map<String, dynamic>>(
             path: ApiConstance.register,

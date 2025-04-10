@@ -43,8 +43,8 @@ class ProviderJobsView extends StatelessWidget {
             ),
           ),
           floatingActionButton: SizedBox(
-            width: 30.w,
-            height: 30.w,
+            width: context.isTablet ? 30.w : 50.w,
+            height: context.isTablet ? 30.w : 50.w,
             child: FloatingActionButton(
               backgroundColor: primaryColor,
               onPressed: () {

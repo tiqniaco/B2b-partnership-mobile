@@ -108,7 +108,7 @@ class GetServiceRequest extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon, size: 16.r, color: thirdColor),
+                Icon(icon, size: 15.r, color: thirdColor),
                 Gap(8),
                 Text(
                   title,

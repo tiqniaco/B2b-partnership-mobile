@@ -219,9 +219,9 @@ const Map<String, String> ar = {
   'Job Application': "طلب توظيف",
   "Years of Experience": "سنين الخبرة",
   "ex: 2": "مثال: 2",
-  "Cover Letter": "نقاط هامة",
+  "Cover Letter": "خطاب تعريفي",
   "Choose File": "اختيار ملف",
-  "Upload Resume": "رفع CV",
+  "Upload Resume": "رفع السيرة الذاتيه",
   'Submit Application': "ارسال الطلب",
   "enter your answer": "اكتب اجابتك",
   "What makes you the ideal candidate for this position?":
@@ -431,4 +431,35 @@ const Map<String, String> ar = {
   "Please log in to access this feature.":
       "الرجاء تسجيل الدخول للحصول علي كل الميزات",
   "About us": "من نحن",
+
+  // New
+  "Checkout": "الدفع",
+  "Cart": "السلة",
+  "Cart is empty,\nLet's add some items.": "سلة فارغه، \n اضف بعض العناصر.ال",
+  "Total: ": "الكل: ",
+  "Search": "بحث",
+  "Confirm": "تأكيد",
+  "enter your cover letter": "ادخل خطابك التعريف",
+  "No services founded\ntry again later":
+      "لا توجد خدمات متاحة\nحاول مرة اخرى لاحقا",
+  "No Reviews now\nlet's add one": "لا توجد تعليقات حاليا\nلنضيف واحدة",
+  "No Previous work\nhere now": "لا توجد اعمال سابقة\nهنا الان",
+  "ORDERS FILTER": "فلتر الطلبات",
+  "Enter your complaint...": "ادخل الشكوى...",
+  "Yes": "نعم",
+  "No": "لا",
+  "Delete Service": "حذف الخدمة",
+  "Are you sure you want to delete this service?":
+      "هل أنت متأكد من أنك تريد حذف هذه الخدمة؟",
+  'Remove Service Feature': 'إزالة ميزة الخدمة',
+  'Are you sure you want to remove this service feature?':
+      'هل أنت متأكد من أنك تريد إزالة ميزة هذه الخدمة؟',
+  "Contact with": "اتصال بـ",
+  "All fields are required, please fill them": "جميع الحقول مطلوبة، يرجى ملؤها",
+  "upload commercial register pdf file": "تحميل ملف السجل التجاري بصيغة PDF",
+  "upload tax card pdf file": "تحميل ملف البطاقة الضريبية بصيغة PDF",
+  "please select image": "الرجاء تحديد صورة",
+  "please fill all fields": "الرجاء ملء جميع الحقول",
+  "Switch Account": "تبديل الحساب",
+  "You don't have any client Account": "ليس لديك أي حساب عميل"
 };

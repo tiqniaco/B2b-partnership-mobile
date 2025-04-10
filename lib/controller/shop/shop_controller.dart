@@ -68,13 +68,16 @@ class ShopController extends GetxController {
     );
   }
 
-  Future<void> getShopProducts() async {
+  Future<void> getShopProducts({bool isSearch = false}) async {
     shopProducts.clear();
     productsStatus = StatusRequest.loading;
+    update();
     final result = await CustomRequest<List<ShopProductModel>>(
         path: ApiConstance.topRatedProducts,
         data: {
-          if (selectedCategory != null) 'category_id': selectedCategory?.id,
+          if (searchController.text.isNotEmpty) 'search': searchController.text,
+          if (selectedCategory != null && !isSearch)
+            'category_id': selectedCategory?.id,
         },
         fromJson: (json) {
           // log(json['data'].toString());

@@ -104,7 +104,7 @@ class ServiceDetailsController extends GetxController {
   contactMethods() {
     Get.defaultDialog(
         titleStyle: getMediumStyle(Get.context!),
-        title: "Contact with",
+        title: "Contact with".tr,
         content: Padding(
           padding: EdgeInsets.symmetric(horizontal: 8.w),
           child: Column(
@@ -199,10 +199,10 @@ class ServiceDetailsController extends GetxController {
 
   void deleteServiceDialog() {
     Get.defaultDialog(
-      title: "Delete Service",
-      middleText: "Are you sure you want to delete this service?",
-      textConfirm: "Yes",
-      textCancel: "No",
+      title: "Delete Service".tr,
+      middleText: "Are you sure you want to delete this service?".tr,
+      textConfirm: "Yes".tr,
+      textCancel: "No".tr,
       onConfirm: _deleteService,
     );
   }

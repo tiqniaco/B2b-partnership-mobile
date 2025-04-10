@@ -55,7 +55,7 @@ class ProviderProfileView extends StatelessWidget {
                             children: [
                               CustomServerStatusWidget(
                                 emptyMessage:
-                                    "No services founded\ntry again later",
+                                    "No services founded\ntry again later".tr,
                                 statusRequest: controller.statusRequestServices,
                                 child: ServiceWidgetVertical(
                                   services: controller.providerServices,
@@ -83,7 +83,8 @@ class ProviderProfileView extends StatelessWidget {
                                 ),
                               ),
                               CustomServerStatusWidget(
-                                  emptyMessage: "No Reviews now\nlet's add one",
+                                  emptyMessage:
+                                      "No Reviews now\nlet's add one".tr,
                                   statusRequest: controller.statusRequestReview,
                                   child: ReviewWidget())
                             ],

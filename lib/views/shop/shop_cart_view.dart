@@ -55,7 +55,7 @@ class ShopCartView extends StatelessWidget {
           body: CustomServerStatusWidget(
             statusRequest: controller.statusRequest,
             errorMessage: controller.error,
-            emptyMessage: "Cart is empty,\nLet's add some items.",
+            emptyMessage: "Cart is empty,\nLet's add some items.".tr,
             child: Column(
               children: [
                 Expanded(
@@ -246,7 +246,7 @@ class ShopCartView extends StatelessWidget {
                       onPressed: () {
                         return controller.checkout();
                       },
-                      text: "Checkout",
+                      text: "Checkout".tr,
                       width: 0.35.sw,
                     ),
                   ],

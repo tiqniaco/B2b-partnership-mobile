@@ -55,6 +55,8 @@ class JobsController extends GetxController {
       initialDate: DateTime.now(),
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
+      confirmText: "Confirm".tr,
+      cancelText: "Cancel".tr,
     );
     if (picked != null && picked != selectedExpiryDate) {
       selectedExpiryDate = picked;
@@ -81,11 +83,11 @@ class JobsController extends GetxController {
 
   void deleteJobsDialog(id) {
     Get.defaultDialog(
-        title: "Delete Job",
+        title: "Delete Job".tr,
         titleStyle: TextStyle(fontSize: 15.sp),
-        middleText: "Are you sure you want to\ndelete this job?",
-        textConfirm: "Yes",
-        textCancel: "No",
+        middleText: "Are you sure you want to\ndelete this job?".tr,
+        textConfirm: "Yes".tr,
+        textCancel: "No".tr,
         onConfirm: () {
           _deleteJobs(id);
         });
@@ -125,7 +127,7 @@ class JobsController extends GetxController {
                 ),
               ),
               width: 1.sw,
-              height: Get.context!.isTablet ? 0.52.sh : 0.6.sh,
+              height: Get.context!.isTablet ? 0.52.sh : 0.61.sh,
               padding: EdgeInsets.symmetric(
                 horizontal: 15.w,
                 vertical: 16.h,

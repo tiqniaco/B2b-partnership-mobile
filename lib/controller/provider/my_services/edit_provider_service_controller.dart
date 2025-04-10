@@ -339,10 +339,10 @@ class EditProviderServiceController extends GetxController {
     required int? id,
   }) {
     Get.defaultDialog(
-      title: 'Remove Service Feature',
-      middleText: 'Are you sure you want to remove this service feature?',
-      textConfirm: 'Yes',
-      textCancel: 'No',
+      title: 'Remove Service Feature'.tr,
+      middleText: 'Are you sure you want to remove this service feature?'.tr,
+      textConfirm: 'Yes'.tr,
+      textCancel: 'No'.tr,
       onConfirm: () {
         _removeServiceFeature(id: id);
       },
