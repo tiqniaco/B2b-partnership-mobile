@@ -252,4 +252,6 @@ class ProviderProfileController extends GetxController {
       });
     }
   }
+
+
 }
