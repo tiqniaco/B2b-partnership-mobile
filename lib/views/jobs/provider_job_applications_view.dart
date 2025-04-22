@@ -94,7 +94,7 @@ class ProviderJobApplicationsView extends StatelessWidget {
                     child: Container(
                       margin: EdgeInsets.only(bottom: 10.h),
                       child: Text(
-                        '${controller.jobApplications.length} applications found',
+                        '${controller.jobApplications.length} ${"applications found".tr}',
                         style: getLightStyle(context).copyWith(
                           fontWeight: FontManager.mediumFontWeight,
                         ),
@@ -154,7 +154,7 @@ class ProviderJobApplicationsView extends StatelessWidget {
                                         borderRadius: 5.r,
                                         height: 0.045.sh,
                                         backgroundColor: greenColor,
-                                        text: "Accept",
+                                        text: "Accept".tr,
                                       ),
                                       Gap(2.h),
                                       CustomLoadingButton(
@@ -170,7 +170,7 @@ class ProviderJobApplicationsView extends StatelessWidget {
                                         borderRadius: 5.r,
                                         height: 0.045.sh,
                                         backgroundColor: redColor,
-                                        text: "Reject",
+                                        text: "Reject".tr,
                                       ),
                                     ],
                                   ),
@@ -188,7 +188,7 @@ class ProviderJobApplicationsView extends StatelessWidget {
                                           Text.rich(
                                             TextSpan(children: [
                                               TextSpan(
-                                                text: "Status: ",
+                                                text: "${"Status".tr}: ",
                                                 style: getRegularStyle(context)
                                                     .copyWith(
                                                   fontWeight: FontManager
@@ -213,7 +213,8 @@ class ProviderJobApplicationsView extends StatelessWidget {
                                             DateTimeConvertor.timeAgo(
                                               model.createdAt,
                                             ),
-                                            style: getLightStyle(context).copyWith(
+                                            style:
+                                                getLightStyle(context).copyWith(
                                               fontWeight:
                                                   FontManager.mediumFontWeight,
                                               color: greyColor,
@@ -224,28 +225,30 @@ class ProviderJobApplicationsView extends StatelessWidget {
                                       ),
                                       Gap(5.h),
                                       Text(
-                                        "Name: ${model.clientName}",
-                                        style: getRegularStyle(context).copyWith(
+                                        "${"Name".tr}: ${model.clientName}",
+                                        style:
+                                            getRegularStyle(context).copyWith(
                                           fontWeight:
                                               FontManager.mediumFontWeight,
                                         ),
                                       ),
                                       Gap(5.h),
                                       Text(
-                                        "Expected Salary: ${model.expectedSalary}\$",
-                                        style: getRegularStyle(context).copyWith(
+                                        "${"Expected Salary".tr}: ${model.expectedSalary}\$",
+                                        style:
+                                            getRegularStyle(context).copyWith(
                                           fontWeight:
                                               FontManager.mediumFontWeight,
                                         ),
                                       ),
                                       Gap(5.h),
                                       Text(
-                                        "Years of experience: ${model.yearsOfExperience}",
+                                        "${"Years of experience".tr}: ${model.yearsOfExperience}",
                                         style: getLightStyle(context),
                                       ),
                                       Gap(5.h),
                                       Text(
-                                        "Available to start: ${model.availableToStartDate}",
+                                        "${"Available to start".tr}: ${model.availableToStartDate}",
                                         style: getLightStyle(context),
                                       ),
                                     ],

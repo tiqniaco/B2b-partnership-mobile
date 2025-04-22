@@ -8,8 +8,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ManagePreviousWorkWidget extends StatelessWidget {
-  const ManagePreviousWorkWidget({super.key, required this.model});
+  const ManagePreviousWorkWidget({
+    super.key,
+    required this.model,
+    required this.onDelete,
+  });
   final ProviderPerviousWorkModel model;
+  final Function onDelete;
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +47,15 @@ class ManagePreviousWorkWidget extends StatelessWidget {
                     backgroundColor: WidgetStateProperty.all<Color>(
                         Colors.white.withAlpha(120)),
                   ),
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.delete,
-                    color: primaryColor,
-                  ),
+                  onPressed: () {
+                    onDelete();
+                  },
+                  icon: model.isDeleteLoading!
+                      ? CircularProgressIndicator()
+                      : Icon(
+                          Icons.delete,
+                          color: primaryColor,
+                        ),
                 ),
                 IconButton(
                   style: ButtonStyle(

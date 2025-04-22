@@ -23,15 +23,15 @@ TextStyle _getTextStyle({
 
 TextStyle getBoldStyle(BuildContext context) {
   return _getTextStyle(
-    fontWeight: FontManager.boldFontWeight,
-    fontSize: context.isTablet ? 15.sp : 22.sp,
+    fontWeight: FontManager.mediumFontWeight,
+    fontSize: context.isTablet ? 14.sp : 21.sp,
     color: blackColor,
   );
 }
 
 TextStyle getSemiBoldStyle(BuildContext context) {
   return _getTextStyle(
-    fontWeight: FontManager.semiBoldFontWeight,
+    fontWeight: FontManager.mediumFontWeight,
     fontSize: context.isTablet ? 12.sp : 18.sp,
     color: blackColor,
   );
@@ -39,7 +39,7 @@ TextStyle getSemiBoldStyle(BuildContext context) {
 
 TextStyle getMediumStyle(BuildContext context) {
   return _getTextStyle(
-    fontWeight: FontManager.mediumFontWeight,
+    fontWeight: FontManager.regularFontWeight,
     fontSize: context.isTablet ? 10.sp : 16.sp,
     color: blackColor,
   );

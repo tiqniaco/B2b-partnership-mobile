@@ -122,7 +122,7 @@ class SearchJobApplicationsView extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Name: ${model.clientName}",
+                                      "${"Name".tr}: ${model.clientName}",
                                       style: getRegularStyle(context).copyWith(
                                         fontWeight:
                                             FontManager.mediumFontWeight,
@@ -130,7 +130,7 @@ class SearchJobApplicationsView extends StatelessWidget {
                                     ),
                                     Gap(5.h),
                                     Text(
-                                      "Expected Salary: ${model.expectedSalary}\$",
+                                      "${"Expected Salary".tr}: ${model.expectedSalary}\$",
                                       style: getRegularStyle(context).copyWith(
                                         fontWeight:
                                             FontManager.mediumFontWeight,
@@ -138,12 +138,12 @@ class SearchJobApplicationsView extends StatelessWidget {
                                     ),
                                     Gap(5.h),
                                     Text(
-                                      "Years of experience: ${model.yearsOfExperience}",
+                                      "${"Years of experience".tr}: ${model.yearsOfExperience}",
                                       style: getLightStyle(context),
                                     ),
                                     Gap(5.h),
                                     Text(
-                                      "Available to start: ${model.availableToStartDate}",
+                                      "${"Available to start".tr}: ${model.availableToStartDate}",
                                       style: getLightStyle(context),
                                     ),
                                   ],

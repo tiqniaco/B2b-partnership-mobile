@@ -1,4 +1,10 @@
+import 'package:b2b_partenership/core/localization/app_strings.dart';
+
 const Map<String, String> en = {
+  AppStrings.error: "error",
+  AppStrings.success: "success",
+  AppStrings.warning: "warning",
+
   // General
   "Manage!!": "Manage!!",
   "add more": "add more",
@@ -460,4 +466,39 @@ const Map<String, String> en = {
   "please fill all fields": "please fill all fields",
   "Switch Account": "Switch Account",
   "You don't have any client Account": "You don't have any client Account",
+  'Delete Previous Work': 'Delete Previous Work',
+  'Are you sure you want to delete this previous work?':
+      'Are you sure you want to delete this previous work?',
+  "My Previous Work": "My Previous Work",
+  'Previous Work': 'Previous Work',
+  'Project Images:': 'Project Images:',
+  'Delete Image': 'Delete Image',
+  'Are you sure you want to delete this image?':
+      'Are you sure you want to delete this image?',
+  "Add Image": "Add Image",
+  "Select images to upload": "Select images to upload",
+  "Select from Gallery": "Select from Gallery",
+  'Add Previous Work': 'Add Previous Work',
+  'Please enter a title': 'Please enter a title',
+  'Please enter a description': 'Please enter a description',
+  'Work Title': 'Work Title',
+  'Edit Previous Work': 'Edit Previous Work',
+  'Update': 'Update',
+  'Please select an image': 'Please select an image',
+  "Applicant Info": "Applicant Info",
+  "Available Start Date": "Available Start Date",
+  "Why Ideal?": "Why Ideal?",
+  "Resume": "Resume",
+  "Resume not found": "Resume not found",
+  "Preview": "Preview",
+  "Client Info": "Client Info",
+
+  'Search Applications': 'Search Applications',
+  'Search about job applications': 'Search about job applications',
+  "applications found": "applications found",
+  "Status": "Status",
+  "accepted": "accepted",
+  'File Downloaded': 'File Downloaded',
+  "File downloaded successfully to": "File downloaded successfully to",
+  "Demo": "Demo",
 };

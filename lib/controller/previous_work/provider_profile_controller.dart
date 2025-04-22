@@ -168,7 +168,7 @@ class ProviderProfileController extends GetxController {
   Future<void> getPreviousWork() async {
     statusRequestPerviousWork = StatusRequest.loading;
     final response = await CustomRequest(
-        path: ApiConstance.getProviderPerviousWork,
+        path: ApiConstance.getProviderPreviousWork,
         data: {"provider_id": providerModel!.providerId},
         fromJson: (json) {
           return json["data"]
@@ -253,5 +253,38 @@ class ProviderProfileController extends GetxController {
     }
   }
 
-
+  Future<void> deletePreviousWork(int index) async {
+    Get.defaultDialog(
+      title: 'Delete Previous Work'.tr,
+      middleText: 'Are you sure you want to delete this previous work?'.tr,
+      textConfirm: 'Yes'.tr,
+      textCancel: 'No'.tr,
+      onConfirm: () async {
+        Get.back();
+        previousWork[index].isDeleteLoading = true;
+        update();
+        final result = await CustomRequest<String>(
+          path: ApiConstance.deleteProviderPreviousWork(
+              previousWork[index].id.toString()),
+          fromJson: (json) {
+            return json["message"];
+          },
+        ).sendDeleteRequest();
+        result.fold(
+          (error) {
+            previousWork[index].isDeleteLoading = false;
+            AppSnackBars.error(message: error.errMsg);
+            update();
+          },
+          (message) {
+            previousWork[index].isDeleteLoading = false;
+            AppSnackBars.success(message: message);
+            previousWork
+                .removeWhere((element) => element.id == previousWork[index].id);
+            update();
+          },
+        );
+      },
+    );
+  }
 }

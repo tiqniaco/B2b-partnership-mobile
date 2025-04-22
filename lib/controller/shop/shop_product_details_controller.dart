@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:b2b_partenership/controller/shop/shop_cart_controller.dart';
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
@@ -6,14 +8,17 @@ import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:b2b_partenership/models/product_description_model.dart';
 import 'package:b2b_partenership/models/shop_product_model.dart';
+import 'package:dio/dio.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:rename/platform_file_editors/abs_platform_file_editor.dart';
 
 class ShopProductDetailsController extends GetxController {
   StatusRequest statusRequest = StatusRequest.loading;
   List<ProductDescriptionModel> descriptions = [];
   ShopProductModel? product;
   String productId = "";
-  
 
   List<String> items = [
     "First step",
@@ -76,5 +81,35 @@ class ShopProductDetailsController extends GetxController {
     descriptions[index].isExpanded = isExpanded == false ? 0 : 1;
 
     update();
+  }
+
+  Future<void> downloadDemo() async {
+    if (product?.file != null) {
+      Directory? downloadsDirectory;
+      if (Platform.isAndroid) {
+        downloadsDirectory = Directory('/storage/emulated/0/Download');
+      } else {
+        downloadsDirectory = await getApplicationDocumentsDirectory();
+      }
+
+      String filePath =
+          '${downloadsDirectory.path}/${product!.file.split('/').last}';
+
+      final response = await Dio().download(
+        product!.file,
+        filePath,
+      );
+      if (response.statusCode == 200) {
+        logger.i(response.statusMessage);
+        Get.defaultDialog(
+          title: 'File Downloaded'.tr,
+          middleText: '${"File downloaded successfully to".tr} $filePath',
+        );
+      } else {
+        AppSnackBars.error(message: 'File download failed');
+      }
+    } else {
+      AppSnackBars.warning(message: 'No file available');
+    }
   }
 }
