@@ -498,4 +498,7 @@ const Map<String, String> en = {
   "applications found": "applications found",
   "Status": "Status",
   "accepted": "accepted",
+  'File Downloaded': 'File Downloaded',
+  "File downloaded successfully to": "File downloaded successfully to",
+  "Demo": "Demo",
 };

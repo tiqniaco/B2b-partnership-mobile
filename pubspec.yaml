@@ -4,7 +4,7 @@ description: "A new Flutter project."
 publish_to: 'none' 
 
 
-version: 1.0.0+6
+version: 1.0.0+7
 
 environment:
   sdk: ^3.6.1
@@ -106,3 +106,20 @@ flutter:
 
        - asset: assets/fonts/ibm_plex_sans_arabic_thin.ttf
          weight: 100
+
+    - family: DinNext
+      fonts:
+        - asset: assets/fonts/din_next/din_next_thin.ttf
+          weight: 100
+
+        - asset: assets/fonts/din_next/din_next_light.ttf
+          weight: 300
+
+        - asset: assets/fonts/din_next/din_next_regular.otf
+          weight: 400
+
+        - asset: assets/fonts/din_next/din_next_medium.ttf
+          weight: 500
+#
+        - asset: assets/fonts/din_next/din_next_bold.ttf
+          weight: 700

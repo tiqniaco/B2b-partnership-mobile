@@ -500,4 +500,7 @@ const Map<String, String> ar = {
   "applications found": "طلبات تم العثور عليها",
   "Status": "الحالة",
   "accepted": "مقبول",
+  'File Downloaded': 'تم تحميل الملف',
+  "File downloaded successfully to": "تم تحميل الملف بنجاح إلى",
+  "Demo": "معاينة",
 };
