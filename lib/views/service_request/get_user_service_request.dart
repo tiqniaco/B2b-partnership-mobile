@@ -24,7 +24,7 @@ class GetUserServiceRequest extends StatelessWidget {
         backgroundColor: whiteColor,
         toolbarHeight: context.isTablet ? 50.h : null,
         title: Text(
-          'Your Posted Services'.tr,
+          'My Posts'.tr,
           style: getSemiBoldStyle(context).copyWith(
             fontWeight: FontWeight.bold,
             color: primaryColor,
@@ -53,7 +53,7 @@ class GetUserServiceRequest extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Text(
-                "${controller.services.length} ${"Service founded".tr}",
+                "${controller.services.length} ${"Post founded".tr}",
                 style: getLightStyle(context).copyWith(
                   color: Colors.black87,
                   //fontWeight: FontWeight.w500,

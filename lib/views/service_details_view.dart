@@ -55,6 +55,7 @@ class ServiceDetailsView extends StatelessWidget {
           ),
         ),
       ),
+     
       body: GetBuilder<ServiceDetailsController>(
         builder: (controller) {
           return controller.service == null

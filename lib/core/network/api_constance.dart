@@ -31,6 +31,7 @@ class ApiConstance {
 
   //client
   static String getClientMenu(String id) => '/clients/$id';
+  // static String getOneClient(String id) => 'clients/$id';
 
   // home
   static const String getBanners = 'banners';
@@ -47,7 +48,7 @@ class ApiConstance {
   static String acceptPriceOffers(String id) =>
       'request-offers/$id/accept-offer';
   static const String addPriceOffer = 'request-offers';
-  static const String getProviderOffersInPost = 'provider-offers';
+  static const String getProviderOffersInPost = 'user-offers';
   static String deletePriceOffer(String id) => 'request-offers/$id';
 
   //service details

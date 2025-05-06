@@ -114,18 +114,18 @@ class ProviderSettingView extends StatelessWidget {
                                     Colors.amber,
                                     controller.menuModel!.jobsCount.toString(),
                                     "Jobs".tr, () {
-                                  Get.toNamed(AppRoutes.providerJobs);
-                                }),
-                                boxWidget(
-                                    Icons.shopping_cart_outlined,
-                                    Colors.blue,
-                                    controller.menuModel!.shoppingCount
-                                        .toString(),
-                                    "Shopping".tr, () {
-                                  Get.toNamed(AppRoutes.shop);
+                                  Get.toNamed(AppRoutes.clientJobApplications);
                                 }),
                                 boxWidget(
                                     CupertinoIcons.news,
+                                    Colors.blue,
+                                    controller.menuModel!.shoppingCount
+                                        .toString(),
+                                    "Posts".tr, () {
+                                  Get.toNamed(AppRoutes.getServicesRequest);
+                                }),
+                                boxWidget(
+                                    Icons.shopping_cart_outlined,
                                     Colors.green,
                                     controller.menuModel!.ordersCount
                                         .toString(),
@@ -193,32 +193,32 @@ class ProviderSettingView extends StatelessWidget {
                                     color: borderColor.withAlpha(40),
                                   ),
                                 ),
-                                rowWidget(
-                                    "Category".tr,
-                                    translateDatabase(
-                                        arabic: controller.menuModel!.data!
-                                            .specializationNameAr!,
-                                        english: controller.menuModel!.data!
-                                            .specializationNameEn!)),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor.withAlpha(40),
-                                  ),
-                                ),
-                                rowWidget(
-                                    "Sub Category".tr,
-                                    translateDatabase(
-                                        arabic: controller.menuModel!.data!
-                                            .subSpecializationNameAr!,
-                                        english: controller.menuModel!.data!
-                                            .subSpecializationNameEn!)),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor.withAlpha(40),
-                                  ),
-                                ),
+                                // rowWidget(
+                                //     "Category".tr,
+                                //     translateDatabase(
+                                //         arabic: controller.menuModel!.data!
+                                //             .specializationNameAr!,
+                                //         english: controller.menuModel!.data!
+                                //             .specializationNameEn!)),
+                                // FractionallySizedBox(
+                                //   widthFactor: 10,
+                                //   child: Divider(
+                                //     color: borderColor.withAlpha(40),
+                                //   ),
+                                // ),
+                                // rowWidget(
+                                //     "Sub Category".tr,
+                                //     translateDatabase(
+                                //         arabic: controller.menuModel!.data!
+                                //             .subSpecializationNameAr!,
+                                //         english: controller.menuModel!.data!
+                                //             .subSpecializationNameEn!)),
+                                // FractionallySizedBox(
+                                //   widthFactor: 10,
+                                //   child: Divider(
+                                //     color: borderColor.withAlpha(40),
+                                //   ),
+                                // ),
                                 rowWidget(
                                     "Company Type".tr,
                                     translateDatabase(
@@ -226,9 +226,11 @@ class ProviderSettingView extends StatelessWidget {
                                             .providerTypeNameAr!,
                                         english: controller.menuModel!.data!
                                             .providerTypeNameEn!)),
+                                // Gap(10.h),
                                 FractionallySizedBox(
                                   widthFactor: 10,
                                   child: Divider(
+                                    // thickness: 10.h,
                                     color: borderColor.withAlpha(40),
                                   ),
                                 ),
@@ -241,6 +243,52 @@ class ProviderSettingView extends StatelessWidget {
                                       "Commercial Papers".tr,
                                       style: getMediumStyle(context),
                                     ),
+                                    // InkWell(
+                                    //   onTap: () {
+                                    //     Get.to(
+                                    //       () => AppPdfView(
+                                    //         url: controller.menuModel!.data!
+                                    //             .commercialRegister!,
+                                    //       ),
+                                    //     );
+                                    //   },
+                                    //   child: Text(
+                                    //     "View".tr,
+                                    //     style:
+                                    //         getRegularStyle(context).copyWith(
+                                    //       color: primaryColor,
+                                    //       fontWeight: FontWeight.w500,
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                  ],
+                                ),
+                                Gap(10.h),
+                                // FractionallySizedBox(
+                                //   widthFactor: 10,
+                                //   child: Divider(
+                                //     thickness: 10.h,
+                                //     color: borderColor.withAlpha(40),
+                                //   ),
+                                // ),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      height: 90.h,
+                                      width: 125.h,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: PDF().cachedFromUrl(
+                                          controller.menuModel!.data!
+                                              .commercialRegister!,
+                                          placeholder: (progress) =>
+                                              Center(child: Text('loading...')),
+                                          errorWidget: (error) => Center(
+                                              child: Text(error.toString())),
+                                        ),
+                                      ),
+                                    ),
+                                    Spacer(),
                                     InkWell(
                                       onTap: () {
                                         Get.to(
@@ -250,34 +298,12 @@ class ProviderSettingView extends StatelessWidget {
                                           ),
                                         );
                                       },
-                                      child: Text(
-                                        "View".tr,
-                                        style:
-                                            getRegularStyle(context).copyWith(
+                                      child: Icon(
+                                          Icons.arrow_circle_right_outlined,
                                           color: primaryColor,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
+                                          size: 30.r),
                                     ),
                                   ],
-                                ),
-                                Gap(20),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  height: 200.h,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: PDF().cachedFromUrl(
-                                      controller
-                                          .menuModel!.data!.commercialRegister!,
-                                      placeholder: (progress) =>
-                                          Center(child: Text('loading...')),
-                                      errorWidget: (error) =>
-                                          Center(child: Text(error.toString())),
-                                    ),
-                                  ),
                                 ),
                                 Gap(15),
                                 FractionallySizedBox(
@@ -295,6 +321,44 @@ class ProviderSettingView extends StatelessWidget {
                                       "Tax Papers".tr,
                                       style: getMediumStyle(context),
                                     ),
+                                    // InkWell(
+                                    //   onTap: () {
+                                    //     Get.to(
+                                    //       () => AppPdfView(
+                                    //         url: controller
+                                    //             .menuModel!.data!.taxCard!,
+                                    //       ),
+                                    //     );
+                                    //   },
+                                    //   child: Text(
+                                    //     "View".tr,
+                                    //     style:
+                                    //         getRegularStyle(context).copyWith(
+                                    //       color: primaryColor,
+                                    //       fontWeight: FontWeight.w500,
+                                    //     ),
+                                    //   ),
+                                    // ),
+                                  ],
+                                ),
+                                Gap(20),
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                      height: 90.h,
+                                      width: 125.h,
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(10),
+                                        child: PDF().cachedFromUrl(
+                                          controller.menuModel!.data!.taxCard!,
+                                          placeholder: (progress) =>
+                                              Center(child: Text('loading...')),
+                                          errorWidget: (error) => Center(
+                                              child: Text(error.toString())),
+                                        ),
+                                      ),
+                                    ),
+                                    Spacer(),
                                     InkWell(
                                       onTap: () {
                                         Get.to(
@@ -304,34 +368,12 @@ class ProviderSettingView extends StatelessWidget {
                                           ),
                                         );
                                       },
-                                      child: Text(
-                                        "View".tr,
-                                        style:
-                                            getRegularStyle(context).copyWith(
+                                      child: Icon(
+                                          Icons.arrow_circle_right_outlined,
                                           color: primaryColor,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
+                                          size: 30.r),
                                     ),
                                   ],
-                                ),
-                                Gap(20),
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    // border: Border.all(color: primaryColor, width: 2)
-                                  ),
-                                  height: 200.h,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(10),
-                                    child: PDF().cachedFromUrl(
-                                      controller.menuModel!.data!.taxCard!,
-                                      placeholder: (progress) =>
-                                          Center(child: Text('loading...')),
-                                      errorWidget: (error) =>
-                                          Center(child: Text(error.toString())),
-                                    ),
-                                  ),
                                 ),
                                 Gap(30),
                                 FractionallySizedBox(
@@ -353,6 +395,26 @@ class ProviderSettingView extends StatelessWidget {
                                   () {
                                     Get.toNamed(
                                       AppRoutes.editProviderProfile,
+                                      arguments: {
+                                        'model': controller.menuModel!.data,
+                                      },
+                                    );
+                                  },
+                                ),
+                                Gap(8),
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    color: borderColor,
+                                  ),
+                                ),
+                                Gap(8),
+                                rowWithArrow(
+                                  Icons.copy_outlined,
+                                  "My Services".tr,
+                                  () {
+                                    Get.toNamed(
+                                      AppRoutes.myServices,
                                       arguments: {
                                         'model': controller.menuModel!.data,
                                       },
@@ -443,6 +505,36 @@ class ProviderSettingView extends StatelessWidget {
                                   "Logout".tr,
                                   () {
                                     logoutDialog();
+                                  },
+                                ),
+                                Gap(8),
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    color: borderColor,
+                                  ),
+                                ),
+                                Gap(8),
+                                rowWithArrow(
+                                  Icons.report_gmailerrorred,
+                                  "About us".tr,
+                                  () {
+                                    Get.toNamed(AppRoutes.aboutUs);
+                                  },
+                                ),
+                                Gap(8),
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    color: borderColor,
+                                  ),
+                                ),
+                                Gap(8),
+                                rowWithArrow(
+                                  CupertinoIcons.news,
+                                  "Terms & Conditions".tr,
+                                  () {
+                                    Get.toNamed(AppRoutes.termsAndConditions);
                                   },
                                 ),
                                 Gap(8),

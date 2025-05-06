@@ -217,7 +217,9 @@ class SettingsView extends StatelessWidget {
                                         controller.menuModel!.servicesCount
                                             .toString(),
                                         "Posts".tr, () {
-                                      Get.toNamed(AppRoutes.getRequestServices);
+                                      Get.toNamed(AppRoutes
+                                              .getServicesRequest //getRequestServices
+                                          );
                                     }),
                                     boxWidget(
                                         Icons.headset_mic_outlined,
@@ -354,6 +356,37 @@ class SettingsView extends StatelessWidget {
                                         logoutDialog();
                                       },
                                     ),
+                                    FractionallySizedBox(
+                                      widthFactor: 10,
+                                      child: Divider(
+                                        color: borderColor,
+                                      ),
+                                    ),
+                                    Gap(8),
+                                    rowWithArrow(
+                                      Icons.report_gmailerrorred,
+                                      "About us".tr,
+                                      () {
+                                        Get.toNamed(AppRoutes.aboutUs);
+                                      },
+                                    ),
+                                    Gap(8),
+                                    FractionallySizedBox(
+                                      widthFactor: 10,
+                                      child: Divider(
+                                        color: borderColor,
+                                      ),
+                                    ),
+                                    Gap(8),
+                                    rowWithArrow(
+                                      CupertinoIcons.news,
+                                      "Terms & Conditions".tr,
+                                      () {
+                                        Get.toNamed(
+                                            AppRoutes.termsAndConditions);
+                                      },
+                                    ),
+                                    Gap(8),
                                     FractionallySizedBox(
                                       widthFactor: 10,
                                       child: Divider(

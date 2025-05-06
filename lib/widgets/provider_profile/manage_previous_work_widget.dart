@@ -50,7 +50,7 @@ class ManagePreviousWorkWidget extends StatelessWidget {
                   onPressed: () {
                     onDelete();
                   },
-                  icon: model.isDeleteLoading!
+                  icon: model.isDeleteLoading
                       ? CircularProgressIndicator()
                       : Icon(
                           Icons.delete,

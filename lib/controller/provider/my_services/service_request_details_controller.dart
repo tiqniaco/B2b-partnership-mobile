@@ -9,7 +9,7 @@ import 'package:logger/logger.dart';
 
 class ServiceRequestDetailsController extends GetxController {
   late ServiceRequestModel model;
-  List<ModelData> priceOffers = [];
+  List<PriceOfferModel> priceOffers = [];
   StatusRequest statusRequest = StatusRequest.loading;
   int currentPage = 0;
   int totalPage = 1;
@@ -45,7 +45,10 @@ class ServiceRequestDetailsController extends GetxController {
           path: ApiConstance.getServicePriceOffer,
           data: {"request_service_id": model.id!, "page": currentPage + 1},
           fromJson: (json) {
-            return PriceOfferModel.fromJson(json);
+            return json["data"]
+                .map<PriceOfferModel>(
+                    (offer) => PriceOfferModel.fromJson(offer))
+                .toList();
           }).sendGetRequest();
       response.fold((l) {
         statusRequest = StatusRequest.error;
@@ -53,14 +56,12 @@ class ServiceRequestDetailsController extends GetxController {
       }, (r) {
         priceOffers.clear();
 
-        priceOffers = r.data!;
-        if (r.data!.isEmpty) {
+        priceOffers = r;
+        if (r.isEmpty) {
           statusRequest = StatusRequest.noData;
         } else {
           statusRequest = StatusRequest.success;
         }
-        totalPage = r.lastPage!;
-        currentPage = r.currentPage!;
       });
 
       isPageLoading = false;

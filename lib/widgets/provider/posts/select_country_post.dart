@@ -18,7 +18,6 @@ class SelectCountryPost extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetBuilder<GetProviderPostsServiceController>(
       builder: (controller) => DropdownButtonFormField<CountryModel>(
-        // value: controller.selectedCountry,
         isExpanded: true,
         decoration: InputDecoration(
           enabled: enabled,
@@ -51,11 +50,11 @@ class SelectCountryPost extends StatelessWidget {
             value: item,
             child: Row(
               children: [
-                Image.network(
+                Text(
                   item.flag!,
-                  width: 23.h,
-                  height: 23.h,
-                  fit: BoxFit.cover,
+                  style: TextStyle(
+                    fontSize: 17.sp,
+                  ),
                 ),
                 const SizedBox(width: 10),
                 Text(

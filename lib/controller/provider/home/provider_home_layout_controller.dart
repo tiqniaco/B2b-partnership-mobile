@@ -1,13 +1,13 @@
 import 'package:b2b_partenership/controller/home/home_client_controller.dart';
 import 'package:b2b_partenership/controller/settings/setting_controller.dart';
+import 'package:b2b_partenership/views/jobs/jobs_view.dart';
 import 'package:b2b_partenership/views/provider_app/home/provider_home_view.dart';
-import 'package:b2b_partenership/views/provider_app/posts/get_service_request.dart';
 import 'package:b2b_partenership/views/search/search_view.dart';
 import 'package:b2b_partenership/views/provider_app/setting/provider_setting_view.dart';
+import 'package:b2b_partenership/views/shop/shop_view.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-import '../../../views/provider_app/my_services/my_service.dart';
 import '/core/localization/app_strings.dart';
 import 'package:get/get.dart';
 
@@ -53,9 +53,11 @@ class ProviderHomeLayoutController extends GetxController {
 
   final screens = [
     ProviderHomeView(),
-    GetServiceRequest(),
+    const ShopView(),
+    //GetServiceRequest(),
     const SearchView(),
-    MyService(),
+    const JobsView(),
+    // MyService(),
     const ProviderSettingView(),
   ];
 

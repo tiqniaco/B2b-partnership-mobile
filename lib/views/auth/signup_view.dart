@@ -10,8 +10,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-class ProviderSignupView extends StatelessWidget {
-  const ProviderSignupView({super.key});
+class SignupView extends StatelessWidget {
+  const SignupView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +58,7 @@ class ProviderSignupView extends StatelessWidget {
                           clipBehavior: Clip.antiAlias,
                           child: Image.asset(
                             "assets/images/logo.png",
-                            height: 70.h,
+                            height: 55.h,
                             fit: BoxFit.fill,
                           ),
                         ),
@@ -98,6 +98,39 @@ class ProviderSignupView extends StatelessWidget {
                     Gap(30),
                     SizedBox(
                       child: controller.providerSteps[controller.currentStep],
+                    ),
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: controller.isCheckbox,
+                          onChanged: (value) {
+                            controller.checkBox(value);
+                          },
+                          activeColor: Colors.white,
+                          checkColor: primaryColor,
+                          fillColor: WidgetStatePropertyAll(
+                              Colors.grey.withOpacity(0.2)),
+                        ),
+                        Text("I Accept".tr,
+                            style: TextStyle(
+                                color: blackColor,
+                                fontSize: 14.r,
+                                fontWeight: FontWeight.normal)),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        InkWell(
+                          onTap: () {
+                            Get.toNamed(AppRoutes.termsAndConditions);
+                          },
+                          child: Text("Terms & Conditions".tr,
+                              style: TextStyle(
+                                  color: blackColor,
+                                  fontSize: 14.r,
+                                  decoration: TextDecoration.underline,
+                                  fontWeight: FontWeight.normal)),
+                        )
+                      ],
                     ),
                     CustomLoadingButton(
                       onPressed: () => controller.goToOtp(),

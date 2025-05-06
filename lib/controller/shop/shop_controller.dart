@@ -127,7 +127,7 @@ class ShopController extends GetxController {
       },
       (data) {
         whatsAppStatus = StatusRequest.success;
-        print(data);
+       
         whatsApp = data['whatsapp'];
         update();
       },

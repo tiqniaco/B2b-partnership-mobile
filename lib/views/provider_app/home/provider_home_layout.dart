@@ -3,7 +3,6 @@
 import 'package:b2b_partenership/controller/provider/home/provider_home_layout_controller.dart';
 import 'package:b2b_partenership/views/home/client_home_layout.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -52,14 +51,12 @@ class _ProviderHomeLayoutState extends State<ProviderHomeLayout>
                 title: "Home".tr,
               ),
               TabItem(
-                icon: Icon(
-                    CupertinoIcons
-                        .news, //SvgPicture.asset("assets/svgs/bag2.svg",
-                    // height: 20.sp,
+                icon: SvgPicture.asset("assets/svgs/shop.svg",
+                    height: 20.sp,
                     color: controller.currentIndex == 1
                         ? primaryColor
                         : unSelectedBNavColor),
-                title: "Posts".tr,
+                title: "Shop".tr,
               ),
               TabItem(
                 icon: Container(
@@ -82,12 +79,12 @@ class _ProviderHomeLayoutState extends State<ProviderHomeLayout>
                 title: "Search".tr,
               ),
               TabItem(
-                icon: SvgPicture.asset("assets/svgs/save.svg",
+                icon: SvgPicture.asset("assets/svgs/job.svg",
                     height: 20.sp,
                     color: controller.currentIndex == 3
                         ? primaryColor
                         : unSelectedBNavColor),
-                title: "My Services".tr,
+                title: "Jobs".tr,
               ),
               TabItem(
                 icon: SvgPicture.asset("assets/svgs/setting.svg",

@@ -1,3 +1,4 @@
+import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/provider/posts/select_city_post.dart';
@@ -25,13 +26,25 @@ class GetServiceRequest extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Gap(MediaQuery.of(context).padding.top + 8.h),
-              Text(
-                "FILTERS".tr,
-                style: getMediumStyle(context).copyWith(
-                  color: blackColor,
-                  letterSpacing: 4,
-                  fontWeight: FontWeight.bold,
-                ),
+              Row(
+                children: [
+                  IconButton(
+                    onPressed: () => Get.back(),
+                    icon: Icon(
+                      Icons.arrow_back_ios,
+                      size: 15.r,
+                      color: blackColor,
+                    ),
+                  ),
+                  Text(
+                    "FILTERS".tr,
+                    style: getMediumStyle(context).copyWith(
+                      color: blackColor,
+                      letterSpacing: 4,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
               Gap(3),
               Padding(
@@ -67,10 +80,21 @@ class GetServiceRequest extends StatelessWidget {
                     ),
                     Gap(10),
                     Text(
-                      "Freelance Service".tr,
+                      "Freelance Posts".tr,
                       style: getMediumStyle(context).copyWith(
                         color: blackColor,
-                        // fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Spacer(),
+                    InkWell(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.getRequestServices);
+                      },
+                      child: Text(
+                        "My Posts".tr,
+                        style: getMediumStyle(context).copyWith(
+                            color: blackColor,
+                            decoration: TextDecoration.underline),
                       ),
                     ),
                   ],

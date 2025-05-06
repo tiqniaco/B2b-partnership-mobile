@@ -60,7 +60,7 @@ class _ClientHomeLayoutState extends State<ClientHomeLayout>
                         : unSelectedBNavColor),
                 title: "Home".tr,
               ),
-              TabItem(
+               TabItem(
                 icon: SvgPicture.asset("assets/svgs/shop.svg",
                     height: 20.sp,
                     color: controller.currentIndex == 1

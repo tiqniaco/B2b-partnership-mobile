@@ -48,11 +48,11 @@ class JobWidget extends StatelessWidget {
         child: Row(
           children: [
             CircleAvatar(
-              backgroundColor: whiteColor,
+              backgroundColor: redColor,
               radius: 35.r,
               child: CustomNetworkImage(
                 imageUrl: model.image,
-                fit: BoxFit.contain,
+                fit: BoxFit.cover,
                 shape: BoxShape.circle,
               ),
             ),

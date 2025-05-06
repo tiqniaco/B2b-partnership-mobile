@@ -9,7 +9,6 @@ import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:b2b_partenership/models/product_description_model.dart';
 import 'package:b2b_partenership/models/shop_product_model.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:rename/platform_file_editors/abs_platform_file_editor.dart';
@@ -59,7 +58,7 @@ class ShopProductDetailsController extends GetxController {
             (e) => ProductDescriptionModel.fromJson(e),
           ),
         );
-        print(descriptions);
+      
         statusRequest = StatusRequest.success;
         update();
       },

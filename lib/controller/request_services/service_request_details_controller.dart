@@ -11,19 +11,21 @@ import 'package:b2b_partenership/models/specialize_model.dart';
 import 'package:b2b_partenership/models/sub_specialize_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 class ServiceRequestDetailsController extends GetxController {
   late ServiceRequestModel model;
-  List<ModelData> priceOffers = [];
-  List<ModelData> providerOffers = [];
+  List<PriceOfferModel> priceOffers = [];
+  List<PriceOfferModel> providerOffers = [];
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController descriptionController = TextEditingController();
   TextEditingController priceController = TextEditingController();
+  TextEditingController durationController = TextEditingController();
   StatusRequest statusRequest = StatusRequest.loading;
   StatusRequest statusRequestOffers = StatusRequest.loading;
-  //   StatusRequest statusRequest = StatusRequest.loading;
+
   StatusRequest statusRequestSearch = StatusRequest.loading;
   StatusRequest statusRequestCity = StatusRequest.loading;
   StatusRequest statusRequestSpecialization = StatusRequest.loading;
@@ -51,8 +53,10 @@ class ServiceRequestDetailsController extends GetxController {
   void onInit() {
     model = Get.arguments['model'];
     scrollController.addListener(scrollFunction);
-    getPriceOffers();
-    if (Get.find<AppPreferences>().getUserRole() == "provider") {
+
+    if (Get.find<AppPreferences>().getUserId() == model.userId) {
+      getPriceOffers();
+    } else {
       getProviderOffers();
     }
     super.onInit();
@@ -89,15 +93,24 @@ class ServiceRequestDetailsController extends GetxController {
                     maxLines: null,
                     decoration: InputDecoration(
                         hintStyle: TextStyle(fontSize: 13.sp),
-                        hintText: 'offer price'.tr),
+                        hintText: 'Price'.tr),
                   ),
-                  const SizedBox(height: 20),
+                  Gap(10.h),
                   TextFormField(
-                    controller: descriptionController,
+                    controller: durationController,
                     maxLines: null,
                     decoration: InputDecoration(
                         hintStyle: TextStyle(fontSize: 13.sp),
-                        hintText: 'offer description'.tr),
+                        hintText: 'Duration'.tr),
+                  ),
+                  Gap(10.h),
+                  TextFormField(
+                    controller: descriptionController,
+                    minLines: 3,
+                    maxLines: 21,
+                    decoration: InputDecoration(
+                        hintStyle: TextStyle(fontSize: 13.sp),
+                        hintText: 'Description'.tr),
                   ),
                 ],
               ),
@@ -127,10 +140,11 @@ class ServiceRequestDetailsController extends GetxController {
             return json;
           },
           data: {
-            "provider_id": Get.find<AppPreferences>().getUserRoleId(),
+            "user_id": Get.find<AppPreferences>().getUserId(),
             "request_service_id": model.id,
             "offer_description": descriptionController.text,
-            "price": priceController.text
+            "price": priceController.text,
+            "duration": durationController.text
           }).sendPostRequest();
       result.fold((l) {
         statusRequest = StatusRequest.error;
@@ -179,9 +193,14 @@ class ServiceRequestDetailsController extends GetxController {
       statusRequest = StatusRequest.loading;
       final response = await CustomRequest(
           path: ApiConstance.getServicePriceOffer,
-          data: {"request_service_id": model.id!, "page": currentPage + 1},
+          data: {
+            "request_service_id": model.id!,
+          },
           fromJson: (json) {
-            return PriceOfferModel.fromJson(json);
+            return json["data"]
+                .map<PriceOfferModel>(
+                    (offer) => PriceOfferModel.fromJson(offer))
+                .toList();
           }).sendGetRequest();
       response.fold((l) {
         statusRequest = StatusRequest.error;
@@ -189,14 +208,12 @@ class ServiceRequestDetailsController extends GetxController {
       }, (r) {
         priceOffers.clear();
 
-        priceOffers = r.data!;
-        if (r.data!.isEmpty) {
+        priceOffers = r;
+        if (r.isEmpty) {
           statusRequest = StatusRequest.noData;
         } else {
           statusRequest = StatusRequest.success;
         }
-        totalPage = r.lastPage!;
-        currentPage = r.currentPage!;
       });
 
       isPageLoading = false;
@@ -210,18 +227,15 @@ class ServiceRequestDetailsController extends GetxController {
         path: ApiConstance.getProviderOffersInPost,
         data: {"request_service_id": model.id!},
         fromJson: (json) {
-          //  print(json);
           return json["data"]
-              .map<ModelData>((offer) => ModelData.fromJson(offer))
+              .map<PriceOfferModel>((offer) => PriceOfferModel.fromJson(offer))
               .toList();
-          // return PriceOfferModel.fromJson(json['data']);
         }).sendPostRequest();
     response.fold((l) {
       statusRequest = StatusRequest.error;
       Logger().e(l.errMsg);
     }, (r) {
       providerOffers.clear();
-
       providerOffers = r;
       if (r.isEmpty) {
         statusRequest = StatusRequest.noData;
@@ -229,7 +243,6 @@ class ServiceRequestDetailsController extends GetxController {
         statusRequest = StatusRequest.success;
       }
     });
-
     update();
   }
 
@@ -252,7 +265,6 @@ class ServiceRequestDetailsController extends GetxController {
         update();
       },
     );
-
     update();
   }
 }

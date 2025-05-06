@@ -243,7 +243,7 @@ class AddNewJobController extends GetxController {
     final response = await CustomRequest<String>(
       path: ApiConstance.addNewJob,
       data: {
-        'employer_id': Get.find<AppPreferences>().getUserRoleId(),
+        'employer_id': Get.find<AppPreferences>().getUserId(),
         "title": titleController.text,
         "description": descriptionController.text,
         "skills": skillsController.text,

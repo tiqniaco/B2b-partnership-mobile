@@ -4,13 +4,16 @@ import 'package:b2b_partenership/views/auth/forget_password_email_view.dart';
 import 'package:b2b_partenership/views/auth/forget_password_reset_view.dart';
 import 'package:b2b_partenership/views/auth/login_view.dart';
 import 'package:b2b_partenership/views/auth/o_t_p_view.dart';
-import 'package:b2b_partenership/views/auth/provider_signup_view.dart';
+import 'package:b2b_partenership/views/auth/signup_view.dart';
+import 'package:b2b_partenership/views/client_profile_view.dart';
 import 'package:b2b_partenership/views/home/client_home_layout.dart';
 import 'package:b2b_partenership/views/home/client_home_view.dart';
 import 'package:b2b_partenership/views/job_application/search_job_applications_view.dart';
 import 'package:b2b_partenership/views/orders/orders_view.dart';
 import 'package:b2b_partenership/views/provider_app/home/provider_home_layout.dart';
 import 'package:b2b_partenership/views/provider_app/home/provider_home_view.dart';
+import 'package:b2b_partenership/views/provider_app/my_services/my_service.dart';
+import 'package:b2b_partenership/views/provider_app/posts/get_service_request.dart';
 import 'package:b2b_partenership/views/provider_profile/add_previous_work_view.dart';
 import 'package:b2b_partenership/views/provider_profile/edit_previous_work_view.dart';
 import 'package:b2b_partenership/views/provider_profile/manage_previous_work.dart';
@@ -144,6 +147,9 @@ class AppRoutes {
   static const String addNewJob = '/addNewJob';
   static const String providerJobApplications = '/providerJobApplications';
   static const String searchJobApplications = '/searchJobApplications';
+  static const String myServices = '/myServices';
+  static const String getServicesRequest = "/getServicesRequest";
+  static const String clientProfile = "/clientProfile";
 
   static final List<GetPage<dynamic>> pages = [
     // base
@@ -175,7 +181,7 @@ class AppRoutes {
     ),
     GetPage(
       name: providerSignup,
-      page: () => const ProviderSignupView(),
+      page: () => const SignupView(),
     ),
     GetPage(
       name: chooseAccount,
@@ -401,6 +407,19 @@ class AppRoutes {
     GetPage(
       name: save,
       page: () => const SaveView(),
+    ),
+
+    GetPage(
+      name: myServices,
+      page: () => MyService(),
+    ),
+    GetPage(
+      name: getServicesRequest,
+      page: () => GetServiceRequest(),
+    ),
+    GetPage(
+      name: clientProfile,
+      page: () => ClientProfileView(),
     ),
   ];
 }

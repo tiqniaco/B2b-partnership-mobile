@@ -23,7 +23,6 @@ class ProviderFreelanceItem extends StatelessWidget {
             arguments: {"model": model});
       },
       child: Container(
-        // height: model.image == null ? 150.h : 250.h,
         padding: EdgeInsets.all(18),
         decoration: BoxDecoration(
           color: whiteColor,
@@ -57,31 +56,38 @@ class ProviderFreelanceItem extends StatelessWidget {
                   ),
                 ),
                 Gap(10),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      model.name!,
-                      style: getMediumStyle(context).copyWith(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        model.name!,
+                        style: getMediumStyle(context).copyWith(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    Text(
-                      model.createdAt!,
-                      style: getLightStyle(context).copyWith(
+                      Text(
+                        model.createdAt!,
+                        style: getLightStyle(context).copyWith(
+                          color: Colors.green,
+                          fontWeight: FontManager.regularFontWeight,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Gap(10),
+                //  Spacer(),
+                Text(model.status!,
+                    style: TextStyle(
+                        fontSize: 15.r,
                         color: Colors.green,
-                        fontWeight: FontManager.regularFontWeight,
-                      ),
-                    ),
-                  ],
-                )
+                        fontWeight: FontWeight.bold)),
               ],
             ),
             Gap(5.h),
-            Divider(
-                // color: Colors.black,
-                ),
+            Divider(),
             Gap(5.h),
             Row(
               children: [
@@ -94,9 +100,9 @@ class ProviderFreelanceItem extends StatelessWidget {
                       Text(
                         model.description!,
                         textAlign: TextAlign.start,
-                        style: getMediumStyle(context).copyWith(
+                        style: getRegularStyle(context).copyWith(
                           color: Colors.black,
-                          fontWeight: FontWeight.w500,
+                          // fontWeight: FontWeight.w500,
                         ),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,

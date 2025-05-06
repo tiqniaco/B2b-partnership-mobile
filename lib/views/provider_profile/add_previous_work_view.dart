@@ -1,9 +1,7 @@
 import 'dart:io';
 
 import 'package:b2b_partenership/controller/previous_work/add_previous_work_controller.dart';
-import 'package:b2b_partenership/controller/previous_work/edit_previous_work_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
-import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/utils/assets_data.dart';
 import 'package:flutter/material.dart';

@@ -25,11 +25,26 @@ class ClientJobApplicationsView extends StatelessWidget {
             backgroundColor: primaryColor,
             titleSpacing: 0.0,
             iconTheme: IconThemeData(color: whiteColor),
-            title: Text(
-              "Job Applications".tr,
-              style: TextStyle(
-                color: whiteColor,
-              ),
+            title: Row(
+              children: [
+                Text(
+                  "My Job Applications".tr,
+                  style: TextStyle(
+                    color: whiteColor,
+                  ),
+                ),
+                Spacer(),
+                InkWell(
+                  onTap: () => Get.toNamed(AppRoutes.providerJobs),
+                  child: Text(
+                    "My Jobs".tr,
+                    style: TextStyle(
+                      color: whiteColor,
+                    ),
+                  ),
+                ),
+                Gap(10.w)
+              ],
             ),
           ),
           body: Padding(

@@ -34,8 +34,9 @@ class _ProviderHomeViewState extends State<ProviderHomeView>
   final settingController = Get.put(ProviderSettingController());
   @override
   Widget build(BuildContext context) {
-    Get.put(ProviderHomeController());
+    // Get.put(ProviderHomeController());
     return GetBuilder<ProviderHomeController>(
+      init: ProviderHomeController(),
       builder: (ProviderHomeController controller) {
         return Scaffold(
           appBar: AppBar(

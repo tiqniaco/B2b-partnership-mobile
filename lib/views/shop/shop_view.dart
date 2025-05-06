@@ -186,6 +186,8 @@ class ShopView extends StatelessWidget {
                                         ),
                                       ),
                                     )
+                                 
+                                 
                                   ],
                                 ),
                               ),

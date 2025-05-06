@@ -197,6 +197,7 @@ class AddNewJobView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: TextFormField(
+        textInputAction: TextInputAction.newline,
         controller: controller,
         keyboardType: keyboardType,
         maxLines: maxLines,

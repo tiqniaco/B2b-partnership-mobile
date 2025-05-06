@@ -31,6 +31,10 @@ class SignupController extends GetxController {
   late TextEditingController bioController;
   late TextEditingController commercialController;
   late TextEditingController taxCartController;
+  late TextEditingController vatController;
+  late TextEditingController commercialNumberController;
+  late TextEditingController taxNumberController;
+
   late CountryModel selectedCountry;
   late CityModel selectedCity;
   late ProviderTypeModel selectedType;
@@ -68,6 +72,7 @@ class SignupController extends GetxController {
   File? taxPdfFile;
   bool isLoading = false;
   late String id;
+  bool isCheckbox = false;
 
   @override
   Future<void> onInit() async {
@@ -79,6 +84,9 @@ class SignupController extends GetxController {
     bioController = TextEditingController();
     commercialController = TextEditingController();
     taxCartController = TextEditingController();
+    vatController = TextEditingController();
+    commercialNumberController = TextEditingController();
+    taxNumberController = TextEditingController();
     await getCountries();
     getCities();
     getProviderTypes();
@@ -200,6 +208,11 @@ class SignupController extends GetxController {
     }
   }
 
+  checkBox(value) {
+    isCheckbox = value;
+    update();
+  }
+
   galleryImage() async {
     XFile? xfile = await ImagePicker().pickImage(source: ImageSource.gallery);
     imageFile = File(xfile!.path);
@@ -223,16 +236,15 @@ class SignupController extends GetxController {
     update();
   }
 
-  ///----------------
-
   goToOtp() {
     if (currentStep == providerSteps.length - 1) {
       if (formKey.currentState!.validate()) {
         statusRequest = StatusRequest.loading;
-        // if (imageFile == null) {
-        //   AppSnackBars.warning(message: "upload profile image");
-        //   return;
-        // }
+        if (isCheckbox == false) {
+          AppSnackBars.warning(
+              message: "please accept terms and conditions".tr);
+          return;
+        }
         if (usernameController.text.isEmpty ||
             emailController.text.isEmpty ||
             passwordController.text.isEmpty ||
@@ -242,12 +254,18 @@ class SignupController extends GetxController {
           return;
         }
 
-        if (role == "provider") {
+        if (role == "provider" && selectedType.nameEn != "Freelancer") {
           if (commercePdfFile == null) {
             AppSnackBars.warning(
                 message: "upload commercial register pdf file".tr);
           } else if (taxPdfFile == null) {
             AppSnackBars.warning(message: "upload tax card pdf file".tr);
+          } else if (taxNumberController.text.isEmpty) {
+            AppSnackBars.warning(message: "Tax number is required".tr);
+          } else if (commercialNumberController.text.isEmpty) {
+            AppSnackBars.warning(message: "Commercial number is required".tr);
+          } else if (vatController.text.isEmpty) {
+            AppSnackBars.warning(message: "VAT number is required".tr);
           }
         }
         return Get.toNamed(
@@ -271,10 +289,19 @@ class SignupController extends GetxController {
       // if (imageFile == null) {
       //   AppSnackBars.warning(message: "upload profile image");
       // } else
-      if (commercePdfFile == null) {
+      if (commercePdfFile == null && selectedType.nameEn != "Freelancer") {
         AppSnackBars.warning(message: "upload commercial register pdf file".tr);
-      } else if (taxPdfFile == null) {
+      } else if (taxPdfFile == null && selectedType.nameEn != "Freelancer") {
         AppSnackBars.warning(message: "upload tax card pdf file".tr);
+      } else if (taxNumberController.text.isEmpty &&
+          selectedType.nameEn != "Freelancer") {
+        AppSnackBars.warning(message: "Tax number is required".tr);
+      } else if (commercialNumberController.text.isEmpty &&
+          selectedType.nameEn != "Freelancer") {
+        AppSnackBars.warning(message: "Commercial number is required".tr);
+      } else if (vatController.text.isEmpty &&
+          selectedType.nameEn != "Freelancer") {
+        AppSnackBars.warning(message: "VAT number is required".tr);
       } else {
         final result = await CustomRequest<Map<String, dynamic>>(
             path: ApiConstance.register,
@@ -283,8 +310,9 @@ class SignupController extends GetxController {
             },
             files: {
               if (imageFile != null) "image": imageFile!.path,
-              "commercial_register": commercePdfFile!.path,
-              "tax_card": taxPdfFile!.path,
+              if (commercePdfFile != null)
+                "commercial_register": commercePdfFile!.path,
+              if (taxPdfFile != null) "tax_card": taxPdfFile!.path,
             },
             data: {
               "name": usernameController.text,
@@ -297,6 +325,11 @@ class SignupController extends GetxController {
               "sub_specialization_id": selectedSubSpecialization.id,
               "provider_types_id": selectedType.id,
               "bio": bioController.text,
+              if (commercialNumberController.text.isNotEmpty)
+                "commercial_register_number": commercialNumberController.text,
+              if (taxNumberController.text.isNotEmpty)
+                "tax_card_number": taxNumberController.text,
+              if (vatController.text.isNotEmpty) "vat": vatController.text,
             }).sendPostRequest();
 
         result.fold((l) {
@@ -502,6 +535,9 @@ class SignupController extends GetxController {
     bioController.dispose();
     commercialController.dispose();
     taxCartController.dispose();
+    commercialNumberController.dispose();
+    taxNumberController.dispose();
+    vatController.dispose();
     super.dispose();
   }
 }

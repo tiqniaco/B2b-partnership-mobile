@@ -28,7 +28,7 @@ class ProviderJobsController extends GetxController {
     final response = await CustomRequest(
         path: ApiConstance.getProviderJobs,
         queryParameters: {
-          "provider_id": Get.find<AppPreferences>().getUserRoleId(),
+          "provider_id": Get.find<AppPreferences>().getUserId(),
         },
         fromJson: (json) {
           debugPrint(json["data"].toString());

@@ -13,7 +13,8 @@ class DioLogger {
     dio.options.headers = {
       'Content-Type': 'application/json',
       'Accept': 'application/json',
-      'Authorization': 'Bearer ${ApiConstance.token}',
+      if (ApiConstance.token.isNotEmpty)
+        'Authorization': 'Bearer ${ApiConstance.token}',
     };
 
     dio.interceptors.add(

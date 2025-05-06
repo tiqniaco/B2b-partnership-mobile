@@ -108,6 +108,7 @@ class OTPController extends GetxController {
 
   Future<void> resendOTP() async {
     log(email, name: 'Email');
+    otp = '';
     Get.put(ForgetPasswordController()).sendOtp(email: email);
   }
 }

@@ -21,7 +21,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<Offset> _slidingAnimation;
-  late String code;
+  String? code;
   StatusRequest statusRequest = StatusRequest.loading;
 
   @override
@@ -55,7 +55,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
         Get.offNamed(AppRoutes.clientHomeLayout);
       } else if (Get.find<AppPreferences>().getUserRole() == "provider") {
         await getVerifyCode();
-        if (code == "0") {
+        if (code == "0" || code == null) {
           Get.toNamed(AppRoutes.authNoteScreen, arguments: {"code": code});
         } else if (code == "1") {
           if (Get.find<AppPreferences>().getStep() == "1") {
@@ -86,6 +86,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
       Get.find<AppPreferences>().clear();
       statusRequest = StatusRequest.error;
     }, (r) {
+      print(r['verified_code']);
       statusRequest = StatusRequest.success;
       code = r['verified_code'];
     });

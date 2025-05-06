@@ -143,7 +143,7 @@ class AddRequestServiceController extends GetxController {
             if (imageFile != null) "image": imageFile!.path,
           },
           data: {
-            "client_id": Get.find<AppPreferences>().getUserRoleId(),
+            "user_id": Get.find<AppPreferences>().getUserId(),
             "governments_id": selectedCity.id,
             "sub_specialization_id": selectedSubSpecialization.id,
             "title_ar": titleEnController.text,

@@ -422,11 +422,8 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:b2b_partenership/controller/shop/shop_product_details_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
-import 'package:b2b_partenership/core/theme/app_color.dart';
-import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 
@@ -552,9 +549,7 @@ class ShopProductDetailsView extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 15.sp, fontWeight: FontWeight.w600)),
                 Gap(10),
-                ...controller.descriptions
-                    .map((e) => _sessionItem(context, e))
-                    .toList(),
+                ...controller.descriptions.map((e) => _sessionItem(context, e)),
                 Gap(40),
               ],
             ),

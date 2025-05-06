@@ -6,7 +6,7 @@ import 'package:flutter/services.dart';
 import '/app.dart';
 import 'package:flutter/material.dart';
 import 'package:timezone/data/latest.dart' as tz;
-import 'core/services/services_locator.dart';
+import 'core/services/services_locator.dart'; 
 import 'firebase_options.dart';
 
 void main() async {

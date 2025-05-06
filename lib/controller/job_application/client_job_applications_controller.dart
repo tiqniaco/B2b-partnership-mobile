@@ -25,7 +25,7 @@ class ClientJobApplicationsController extends GetxController {
     final result = await CustomRequest<List<ClientJobApplicationModel>>(
       path: ApiConstance.clientJobApplications,
       data: {
-        'client_id': Get.find<AppPreferences>().getUserRoleId(),
+        'user_id': Get.find<AppPreferences>().getUserId(),
         if (jobApplicationStatus != JobApplicationStatusEnum.all)
           'status': jobApplicationStatus.name,
       },
@@ -43,7 +43,6 @@ class ClientJobApplicationsController extends GetxController {
       AppSnackBars.error(message: l.errMsg);
     }, (r) {
       jobApplications = r;
-
       if (jobApplications.isEmpty) {
         statusRequest = StatusRequest.noData;
       } else {

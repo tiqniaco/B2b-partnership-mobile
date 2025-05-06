@@ -123,7 +123,7 @@ class GetRequestServiceController extends GetxController {
     statusRequest = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getClientServiceRequest(
-            Get.find<AppPreferences>().getUserRoleId()),
+            Get.find<AppPreferences>().getUserId()),
         // data: {"specialization_id": selectedSpecialization.id},
         fromJson: (json) {
           return json['data']
