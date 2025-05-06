@@ -115,14 +115,14 @@ class ProviderProfileView extends StatelessWidget {
             radius: 30.r,
             backgroundColor: Colors.grey[200],
             backgroundImage:
-                CachedNetworkImageProvider(controller.providerModel!.image!),
+                CachedNetworkImageProvider(controller.providerModel!.image),
           ),
           Gap(8.w),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                controller.providerModel!.name!,
+                controller.providerModel!.name,
                 style: getMediumStyle(Get.context!).copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -130,7 +130,7 @@ class ProviderProfileView extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                    controller.providerModel!.rating!,
+                    controller.providerModel!.rating,
                     style: getMediumStyle(Get.context!).copyWith(
                       color: greyColor,
                       fontWeight: FontWeight.bold,

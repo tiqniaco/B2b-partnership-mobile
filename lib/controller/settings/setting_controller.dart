@@ -73,12 +73,12 @@ class SettingController extends GetxController {
       token = r['token'];
       Get.find<AppPreferences>().clear();
       subscribeTopics(
-        userId: (providerModel.userId!),
+        userId: (providerModel.userId),
         role: "provider",
       );
       Get.find<AppPreferences>().setToken(r['token']);
-      Get.find<AppPreferences>().setUserId(providerModel.userId!);
-      Get.find<AppPreferences>().setUserRoleId(providerModel.providerId!);
+      Get.find<AppPreferences>().setUserId(providerModel.userId);
+      Get.find<AppPreferences>().setUserRoleId(providerModel.providerId);
       Get.find<AppPreferences>().setUserRole("provider");
       ApiConstance.token = r['token'];
       Get.offAllNamed(AppRoutes.providerHomeLayout);

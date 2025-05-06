@@ -188,11 +188,11 @@ class ServiceDetailsView extends StatelessWidget {
                                   radius: 20.r,
                                   backgroundColor: Colors.grey[200],
                                   backgroundImage: CachedNetworkImageProvider(
-                                      controller.service!.provider!.image!),
+                                      controller.service!.provider!.image),
                                 ),
                                 SizedBox(width: 10),
                                 Text(
-                                  controller.service!.provider!.name!,
+                                  controller.service!.provider!.name,
                                   style: getLightStyle(context).copyWith(
                                     fontWeight: FontManager.mediumFontWeight,
                                   ),

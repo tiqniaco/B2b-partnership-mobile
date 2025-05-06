@@ -25,7 +25,7 @@ class SellerWidget extends StatelessWidget {
             InkWell(
               onTap: () {
                 Get.toNamed(AppRoutes.providerProfile, arguments: {
-                  'id': controller.service!.provider!.providerId!
+                  'id': controller.service!.provider!.providerId
                 });
               },
               child: Row(
@@ -34,14 +34,14 @@ class SellerWidget extends StatelessWidget {
                     backgroundColor: Colors.grey[200],
                     radius: 27.r,
                     backgroundImage: CachedNetworkImageProvider(
-                        controller.service!.provider!.image!),
+                        controller.service!.provider!.image),
                   ),
                   SizedBox(width: 10),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        controller.service!.provider!.name!,
+                        controller.service!.provider!.name,
                         style: getMediumStyle(context).copyWith(
                           fontWeight: FontWeight.bold,
                         ),
@@ -57,7 +57,7 @@ class SellerWidget extends StatelessWidget {
                           ),
                           Gap(10),
                           Text(
-                            controller.service!.provider!.rating!,
+                            controller.service!.provider!.rating,
                             style: getMediumStyle(context).copyWith(
                                 color: Colors.orange,
                                 fontWeight: FontWeight.bold),
@@ -100,14 +100,14 @@ class SellerWidget extends StatelessWidget {
                       titleWidget("From".tr),
                       Gap(10),
                       valueWidget(translateDatabase(
-                          arabic: controller.service!.provider!.countryNameAr!,
+                          arabic: controller.service!.provider!.countryNameAr,
                           english:
-                              controller.service!.provider!.countryNameEn!)),
+                              controller.service!.provider!.countryNameEn)),
                       Spacer(),
                       titleWidget("Seller Since".tr),
                       Gap(10),
                       valueWidget(
-                          getYear(controller.service!.provider!.createdAt!)
+                          getYear(controller.service!.provider!.createdAt)
                               .toString()),
                     ],
                   ),
@@ -118,17 +118,17 @@ class SellerWidget extends StatelessWidget {
                       Gap(10),
                       valueWidget(translateDatabase(
                           arabic: controller
-                              .service!.provider!.specializationNameAr!,
+                              .service!.provider!.specializationNameAr,
                           english: controller
-                              .service!.provider!.specializationNameEn!)),
+                              .service!.provider!.specializationNameEn)),
                       Spacer(),
                       titleWidget("Specialization".tr),
                       Gap(10),
                       valueWidget(translateDatabase(
                           arabic: controller
-                              .service!.provider!.subSpecializationNameAr!,
+                              .service!.provider!.subSpecializationNameAr,
                           english: controller
-                              .service!.provider!.subSpecializationNameEn!)),
+                              .service!.provider!.subSpecializationNameEn)),
                     ],
                   )
                 ],

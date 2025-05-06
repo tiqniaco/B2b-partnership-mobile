@@ -245,7 +245,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                       provider: controller.topProviders[index],
                       toggleFavorite: () {
                         controller.toggleFavorites(
-                            controller.topProviders[index].providerId!);
+                            controller.topProviders[index].providerId);
                       },
                     ),
                   ),
@@ -301,7 +301,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                           provider: controller.topEgypt[index],
                           toggleFavorite: () {
                             controller.toggleFavorites(
-                                controller.topEgypt[index].providerId!);
+                                controller.topEgypt[index].providerId);
                           },
                         ),
                       ))),
@@ -356,7 +356,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                           provider: controller.topSaudi[index],
                           toggleFavorite: () {
                             controller.toggleFavorites(
-                                controller.topSaudi[index].providerId!);
+                                controller.topSaudi[index].providerId);
                           },
                         ),
                       ))),
@@ -409,7 +409,7 @@ class _ClientHomeViewState extends State<ClientHomeView>
                             provider: controller.topUAE[index],
                             toggleFavorite: () {
                               controller.toggleFavorites(
-                                  controller.topUAE[index].providerId!);
+                                  controller.topUAE[index].providerId);
                             }),
                       ))),
 

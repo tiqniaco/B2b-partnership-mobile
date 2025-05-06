@@ -109,7 +109,7 @@ class SignupView extends StatelessWidget {
                           activeColor: Colors.white,
                           checkColor: primaryColor,
                           fillColor: WidgetStatePropertyAll(
-                              Colors.grey.withOpacity(0.2)),
+                              Colors.grey.withAlpha(100)),
                         ),
                         Text("I Accept".tr,
                             style: TextStyle(

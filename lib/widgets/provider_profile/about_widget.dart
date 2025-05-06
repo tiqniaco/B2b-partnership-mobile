@@ -28,34 +28,34 @@ class AboutWidget extends StatelessWidget {
                 thickness: 3,
               ),
               Gap(10),
-              titleWidget("Name".tr, controller.providerModel!.name!,
+              titleWidget("Name".tr, controller.providerModel!.name,
                   CupertinoIcons.person),
               Gap(15),
 
-              titleWidget("Phone".tr, controller.providerModel!.phone!,
+              titleWidget("Phone".tr, controller.providerModel!.phone,
                   CupertinoIcons.phone),
               Gap(15),
               titleWidget(
                   "Department".tr,
-                  "${translateDatabase(arabic: controller.providerModel!.specializationNameAr!, english: controller.providerModel!.specializationNameEn!)}",
+                  "${translateDatabase(arabic: controller.providerModel!.specializationNameAr, english: controller.providerModel!.specializationNameEn)}",
                   CupertinoIcons.rectangle_3_offgrid),
               Gap(15),
               titleWidget(
                   "Specialization".tr,
-                  "${translateDatabase(arabic: controller.providerModel!.subSpecializationNameAr!, english: controller.providerModel!.subSpecializationNameEn!)}",
+                  "${translateDatabase(arabic: controller.providerModel!.subSpecializationNameAr, english: controller.providerModel!.subSpecializationNameEn)}",
                   Icons.account_tree_outlined),
               Gap(15),
-              titleWidget("Email".tr, controller.providerModel!.email!,
+              titleWidget("Email".tr, controller.providerModel!.email,
                   CupertinoIcons.mail),
               Gap(15),
               titleWidget(
                   "From".tr,
-                  "${translateDatabase(arabic: controller.providerModel!.countryNameAr!, english: controller.providerModel!.countryNameEn!)}",
+                  "${translateDatabase(arabic: controller.providerModel!.countryNameAr, english: controller.providerModel!.countryNameEn)}",
                   CupertinoIcons.map_pin_ellipse),
               Gap(15),
               titleWidget(
                   "City".tr,
-                  "${translateDatabase(arabic: controller.providerModel!.governmentNameAr!, english: controller.providerModel!.governmentNameEn!)}",
+                  "${translateDatabase(arabic: controller.providerModel!.governmentNameAr, english: controller.providerModel!.governmentNameEn)}",
                   Icons.location_city),
               Gap(20),
               Row(
@@ -73,7 +73,7 @@ class AboutWidget extends StatelessWidget {
                     onTap: () {
                       Get.to(
                         () => AppPdfView(
-                          url: controller.providerModel!.commercialRegister!,
+                          url: controller.providerModel!.commercialRegister,
                         ),
                       );
                     },
@@ -96,7 +96,7 @@ class AboutWidget extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: PDF().cachedFromUrl(
-                    controller.providerModel!.commercialRegister!,
+                    controller.providerModel!.commercialRegister,
                     placeholder: (progress) =>
                         Center(child: Text('loading...'.tr)),
                     errorWidget: (error) =>
@@ -120,7 +120,7 @@ class AboutWidget extends StatelessWidget {
                     onTap: () {
                       Get.to(
                         () => AppPdfView(
-                          url: controller.providerModel!.taxCard!,
+                          url: controller.providerModel!.taxCard,
                         ),
                       );
                     },
@@ -141,7 +141,7 @@ class AboutWidget extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10),
                   child: PDF().cachedFromUrl(
-                    controller.providerModel!.taxCard!,
+                    controller.providerModel!.taxCard,
                     placeholder: (progress) =>
                         Center(child: Text('loading...')),
                     errorWidget: (error) =>

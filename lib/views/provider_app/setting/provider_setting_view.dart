@@ -44,14 +44,14 @@ class ProviderSettingView extends StatelessWidget {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8),
                                 child: Image.network(
-                                  controller.menuModel!.data!.image!,
+                                  controller.menuModel!.data!.image,
                                   fit: BoxFit.cover,
                                 ),
                               ),
                             ),
                             Gap(10),
                             Text(
-                              controller.menuModel!.data!.name!,
+                              controller.menuModel!.data!.name,
                               style: getMediumStyle(context).copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
@@ -160,7 +160,7 @@ class ProviderSettingView extends StatelessWidget {
                                 ),
                                 Gap(20),
                                 rowWidget("Email".tr,
-                                    controller.menuModel!.data!.email!),
+                                    controller.menuModel!.data!.email),
                                 FractionallySizedBox(
                                   widthFactor: 10,
                                   child: Divider(
@@ -171,9 +171,9 @@ class ProviderSettingView extends StatelessWidget {
                                     "City".tr,
                                     translateDatabase(
                                         arabic: controller
-                                            .menuModel!.data!.governmentNameAr!,
+                                            .menuModel!.data!.governmentNameAr,
                                         english: controller.menuModel!.data!
-                                            .governmentNameEn!)),
+                                            .governmentNameEn)),
                                 FractionallySizedBox(
                                   widthFactor: 10,
                                   child: Divider(
@@ -184,128 +184,22 @@ class ProviderSettingView extends StatelessWidget {
                                     "Country".tr,
                                     translateDatabase(
                                         arabic: controller
-                                            .menuModel!.data!.countryNameAr!,
+                                            .menuModel!.data!.countryNameAr,
                                         english: controller
-                                            .menuModel!.data!.countryNameEn!)),
+                                            .menuModel!.data!.countryNameEn)),
                                 FractionallySizedBox(
                                   widthFactor: 10,
                                   child: Divider(
                                     color: borderColor.withAlpha(40),
                                   ),
                                 ),
-                                // rowWidget(
-                                //     "Category".tr,
-                                //     translateDatabase(
-                                //         arabic: controller.menuModel!.data!
-                                //             .specializationNameAr!,
-                                //         english: controller.menuModel!.data!
-                                //             .specializationNameEn!)),
-                                // FractionallySizedBox(
-                                //   widthFactor: 10,
-                                //   child: Divider(
-                                //     color: borderColor.withAlpha(40),
-                                //   ),
-                                // ),
-                                // rowWidget(
-                                //     "Sub Category".tr,
-                                //     translateDatabase(
-                                //         arabic: controller.menuModel!.data!
-                                //             .subSpecializationNameAr!,
-                                //         english: controller.menuModel!.data!
-                                //             .subSpecializationNameEn!)),
-                                // FractionallySizedBox(
-                                //   widthFactor: 10,
-                                //   child: Divider(
-                                //     color: borderColor.withAlpha(40),
-                                //   ),
-                                // ),
                                 rowWidget(
                                     "Company Type".tr,
                                     translateDatabase(
                                         arabic: controller.menuModel!.data!
-                                            .providerTypeNameAr!,
+                                            .providerTypeNameAr,
                                         english: controller.menuModel!.data!
-                                            .providerTypeNameEn!)),
-                                // Gap(10.h),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    // thickness: 10.h,
-                                    color: borderColor.withAlpha(40),
-                                  ),
-                                ),
-                                Gap(10),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Commercial Papers".tr,
-                                      style: getMediumStyle(context),
-                                    ),
-                                    // InkWell(
-                                    //   onTap: () {
-                                    //     Get.to(
-                                    //       () => AppPdfView(
-                                    //         url: controller.menuModel!.data!
-                                    //             .commercialRegister!,
-                                    //       ),
-                                    //     );
-                                    //   },
-                                    //   child: Text(
-                                    //     "View".tr,
-                                    //     style:
-                                    //         getRegularStyle(context).copyWith(
-                                    //       color: primaryColor,
-                                    //       fontWeight: FontWeight.w500,
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                  ],
-                                ),
-                                Gap(10.h),
-                                // FractionallySizedBox(
-                                //   widthFactor: 10,
-                                //   child: Divider(
-                                //     thickness: 10.h,
-                                //     color: borderColor.withAlpha(40),
-                                //   ),
-                                // ),
-                                Row(
-                                  children: [
-                                    SizedBox(
-                                      height: 90.h,
-                                      width: 125.h,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: PDF().cachedFromUrl(
-                                          controller.menuModel!.data!
-                                              .commercialRegister!,
-                                          placeholder: (progress) =>
-                                              Center(child: Text('loading...')),
-                                          errorWidget: (error) => Center(
-                                              child: Text(error.toString())),
-                                        ),
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    InkWell(
-                                      onTap: () {
-                                        Get.to(
-                                          () => AppPdfView(
-                                            url: controller.menuModel!.data!
-                                                .commercialRegister!,
-                                          ),
-                                        );
-                                      },
-                                      child: Icon(
-                                          Icons.arrow_circle_right_outlined,
-                                          color: primaryColor,
-                                          size: 30.r),
-                                    ),
-                                  ],
-                                ),
-                                Gap(15),
+                                            .providerTypeNameEn)),
                                 FractionallySizedBox(
                                   widthFactor: 10,
                                   child: Divider(
@@ -313,76 +207,120 @@ class ProviderSettingView extends StatelessWidget {
                                   ),
                                 ),
                                 Gap(10),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Tax Papers".tr,
-                                      style: getMediumStyle(context),
-                                    ),
-                                    // InkWell(
-                                    //   onTap: () {
-                                    //     Get.to(
-                                    //       () => AppPdfView(
-                                    //         url: controller
-                                    //             .menuModel!.data!.taxCard!,
-                                    //       ),
-                                    //     );
-                                    //   },
-                                    //   child: Text(
-                                    //     "View".tr,
-                                    //     style:
-                                    //         getRegularStyle(context).copyWith(
-                                    //       color: primaryColor,
-                                    //       fontWeight: FontWeight.w500,
-                                    //     ),
-                                    //   ),
-                                    // ),
-                                  ],
-                                ),
-                                Gap(20),
-                                Row(
-                                  children: [
-                                    SizedBox(
-                                      height: 90.h,
-                                      width: 125.h,
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(10),
-                                        child: PDF().cachedFromUrl(
-                                          controller.menuModel!.data!.taxCard!,
-                                          placeholder: (progress) =>
-                                              Center(child: Text('loading...')),
-                                          errorWidget: (error) => Center(
-                                              child: Text(error.toString())),
+                                if (controller
+                                        .menuModel!.data!.commercialRegister !=
+                                    "") ...[
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Commercial Papers".tr,
+                                        style: getMediumStyle(context),
+                                      ),
+                                    ],
+                                  ),
+                                  Gap(10.h),
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                        height: 90.h,
+                                        width: 125.h,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: PDF().cachedFromUrl(
+                                            controller.menuModel!.data!
+                                                .commercialRegister,
+                                            placeholder: (progress) => Center(
+                                                child: Text('loading...')),
+                                            errorWidget: (error) => Center(
+                                                child: Text(error.toString())),
+                                          ),
                                         ),
                                       ),
-                                    ),
-                                    Spacer(),
-                                    InkWell(
-                                      onTap: () {
-                                        Get.to(
-                                          () => AppPdfView(
-                                            url: controller
-                                                .menuModel!.data!.taxCard!,
-                                          ),
-                                        );
-                                      },
-                                      child: Icon(
-                                          Icons.arrow_circle_right_outlined,
-                                          color: primaryColor,
-                                          size: 30.r),
-                                    ),
-                                  ],
-                                ),
-                                Gap(30),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    thickness: 5,
-                                    color: borderColor.withAlpha(40),
+                                      Spacer(),
+                                      InkWell(
+                                        onTap: () {
+                                          Get.to(
+                                            () => AppPdfView(
+                                              url: controller.menuModel!.data!
+                                                  .commercialRegister,
+                                            ),
+                                          );
+                                        },
+                                        child: Icon(
+                                            Icons.arrow_circle_right_outlined,
+                                            color: primaryColor,
+                                            size: 30.r),
+                                      ),
+                                    ],
                                   ),
-                                ),
+                                  Gap(15),
+                                  FractionallySizedBox(
+                                    widthFactor: 10,
+                                    child: Divider(
+                                      color: borderColor.withAlpha(40),
+                                    ),
+                                  ),
+                                  Gap(10)
+                                ],
+                                if (controller.menuModel!.data!.taxCard !=
+                                    "") ...[
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text(
+                                        "Tax Papers".tr,
+                                        style: getMediumStyle(context),
+                                      ),
+                                    ],
+                                  ),
+                                  Gap(20),
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                        height: 90.h,
+                                        width: 125.h,
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                          child: PDF().cachedFromUrl(
+                                            controller.menuModel!.data!.taxCard,
+                                            placeholder: (progress) => Center(
+                                                child: Text('loading...')),
+                                            errorWidget: (error) => Center(
+                                                child: Text(error.toString())),
+                                          ),
+                                        ),
+                                      ),
+                                      Spacer(),
+                                      InkWell(
+                                        onTap: () {
+                                          Get.to(
+                                            () => AppPdfView(
+                                              url: controller
+                                                  .menuModel!.data!.taxCard,
+                                            ),
+                                          );
+                                        },
+                                        child: Icon(
+                                            Icons.arrow_circle_right_outlined,
+                                            color: primaryColor,
+                                            size: 30.r),
+                                      ),
+                                    ],
+                                  ),
+                                  Gap(30),
+                                  FractionallySizedBox(
+                                    widthFactor: 10,
+                                    child: Divider(
+                                      thickness: 5,
+                                      color: borderColor.withAlpha(40),
+                                    ),
+                                  )
+                                ],
                                 Gap(20),
                                 Text(
                                   "Other Services".tr,
