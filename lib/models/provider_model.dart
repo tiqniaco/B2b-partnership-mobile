@@ -12,6 +12,9 @@ class ProviderModel extends Equatable {
   final String providerId;
   final String commercialRegister;
   final String taxCard;
+  final String commercialRegisterNumber;
+  final String taxCardNumber;
+  final String vat;
   final String bio;
   final String rating;
   final String providerVerifiedCode;
@@ -53,6 +56,9 @@ class ProviderModel extends Equatable {
     required this.providerId,
     required this.commercialRegister,
     required this.taxCard,
+    required this.commercialRegisterNumber,
+    required this.taxCardNumber,
+    required this.vat,
     required this.bio,
     required this.rating,
     required this.providerVerifiedCode,
@@ -95,6 +101,9 @@ class ProviderModel extends Equatable {
         providerId: json["provider_id"] ?? "",
         commercialRegister: json["commercial_register"] ?? "",
         taxCard: json["tax_card"] ?? "",
+        commercialRegisterNumber: json["commercial_register_number"] ?? "",
+        taxCardNumber: json["tax_card_number"] ?? "",
+        vat: json["vat"] ?? "",
         bio: json["bio"] ?? "",
         rating: json["rating"] ?? "",
         providerVerifiedCode: json["provider_verified_code"] ?? "",
@@ -137,6 +146,9 @@ class ProviderModel extends Equatable {
         "provider_id": providerId,
         "commercial_register": commercialRegister,
         "tax_card": taxCard,
+        "commercial_register_number": commercialRegisterNumber,
+        "tax_card_number": taxCardNumber,
+        "vat": vat,
         "bio": bio,
         "rating": rating,
         "provider_verified_code": providerVerifiedCode,
@@ -180,6 +192,9 @@ class ProviderModel extends Equatable {
         providerId,
         commercialRegister,
         taxCard,
+        commercialRegisterNumber,
+        taxCardNumber,
+        vat,
         bio,
         rating,
         providerVerifiedCode,
