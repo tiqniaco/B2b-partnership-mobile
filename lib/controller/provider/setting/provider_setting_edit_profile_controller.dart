@@ -30,6 +30,9 @@ class ProviderSettingEditProfileController extends GetxController {
   final bioController = TextEditingController();
   final commercialController = TextEditingController();
   final taxCartController = TextEditingController();
+  final vatController = TextEditingController();
+  final commercialNumberController = TextEditingController();
+  final taxNumberController = TextEditingController();
   File? image;
   String governmentId = '';
   File? commercePdfFile;
@@ -82,9 +85,11 @@ class ProviderSettingEditProfileController extends GetxController {
     emailController.text = model?.email ?? '';
     phoneController.text = model?.phone ?? '';
     bioController.text = model?.bio ?? "";
-    taxCartController.text = model!.taxCard.split('/').last ;
-    commercialController.text =
-        model?.commercialRegister.split('/').last ?? "";
+    taxCartController.text = model!.taxCard.split('/').last;
+    commercialController.text = model?.commercialRegister.split('/').last ?? "";
+    taxNumberController.text = model?.taxCardNumber ?? "";
+    commercialNumberController.text = model?.commercialRegisterNumber ?? "";
+    vatController.text = model?.vat ?? "";
 
     super.onInit();
   }
@@ -288,6 +293,12 @@ class ProviderSettingEditProfileController extends GetxController {
           "government_id": selectedCity.id,
           "sub_specialization_id": selectedSubSpecialization.id,
           "provider_types_id": selectedProviderType.id,
+          if (selectedProviderType.nameEn != "Freelancer")
+            "tax_card_number": taxNumberController.text,
+          if (selectedProviderType.nameEn != "Freelancer")
+            "commercial_register_number": commercialNumberController.text,
+          if (selectedProviderType.nameEn != "Freelancer")
+            "vat": vatController.text
         },
         files: {
           if (image != null) "image": image?.path ?? '',

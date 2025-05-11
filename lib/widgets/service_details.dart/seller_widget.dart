@@ -1,9 +1,9 @@
-import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/service_details_controller.dart';
 import 'package:b2b_partenership/core/functions/get_year_date.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/widgets/about_content_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -23,11 +23,11 @@ class SellerWidget extends StatelessWidget {
           children: [
             Gap(20),
             InkWell(
-              onTap: () {
-                Get.toNamed(AppRoutes.providerProfile, arguments: {
-                  'id': controller.service!.provider!.providerId
-                });
-              },
+              // onTap: () {
+              //   Get.toNamed(AppRoutes.providerProfile, arguments: {
+              //     'id': controller.service!.provider!.providerId
+              //   });
+              // },
               child: Row(
                 children: [
                   CircleAvatar(
@@ -104,31 +104,31 @@ class SellerWidget extends StatelessWidget {
                           english:
                               controller.service!.provider!.countryNameEn)),
                       Spacer(),
-                      titleWidget("Seller Since".tr),
+                      titleWidget("Provider type".tr),
                       Gap(10),
-                      valueWidget(
-                          getYear(controller.service!.provider!.createdAt)
-                              .toString()),
+                      valueWidget(translateDatabase(
+                          arabic:
+                              controller.service!.provider!.providerTypeNameAr,
+                          english: controller
+                              .service!.provider!.providerTypeNameEn)),
                     ],
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      titleWidget("Department".tr),
+                      titleWidget("City".tr),
                       Gap(10),
                       valueWidget(translateDatabase(
-                          arabic: controller
-                              .service!.provider!.specializationNameAr,
-                          english: controller
-                              .service!.provider!.specializationNameEn)),
+                          arabic:
+                              controller.service!.provider!.governmentNameAr,
+                          english:
+                              controller.service!.provider!.governmentNameEn)),
                       Spacer(),
-                      titleWidget("Specialization".tr),
+                      titleWidget("Seller Since".tr),
                       Gap(10),
-                      valueWidget(translateDatabase(
-                          arabic: controller
-                              .service!.provider!.subSpecializationNameAr,
-                          english: controller
-                              .service!.provider!.subSpecializationNameEn)),
+                      valueWidget(
+                          getYear(controller.service!.provider!.createdAt)
+                              .toString()),
                     ],
                   )
                 ],
@@ -138,26 +138,5 @@ class SellerWidget extends StatelessWidget {
         ),
       );
     });
-  }
-
-  Widget titleWidget(String title) {
-    return Text(
-      title,
-      style: getRegularStyle(Get.context!).copyWith(
-        color: Colors.black54,
-      ),
-    );
-  }
-
-  Widget valueWidget(String value) {
-    return Text(
-      value,
-      style: getRegularStyle(Get.context!).copyWith(
-        color: blackColor,
-        fontWeight: FontWeight.w500,
-      ),
-      maxLines: 2,
-      overflow: TextOverflow.ellipsis,
-    );
   }
 }

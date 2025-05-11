@@ -99,8 +99,11 @@ class ProviderModel extends Equatable {
         image: kBaseImageUrl + json["image"],
         status: json["status"] ?? "",
         providerId: json["provider_id"] ?? "",
-        commercialRegister: json["commercial_register"] ?? "",
-        taxCard: json["tax_card"] ?? "",
+        commercialRegister: json["commercial_register"] == null
+            ? ""
+            : kBaseImageUrl + json["commercial_register"],
+        taxCard:
+            json["tax_card"] == null ? "" : kBaseImageUrl + json["tax_card"],
         commercialRegisterNumber: json["commercial_register_number"] ?? "",
         taxCardNumber: json["tax_card_number"] ?? "",
         vat: json["vat"] ?? "",

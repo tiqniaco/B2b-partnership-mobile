@@ -7,8 +7,6 @@ import 'package:b2b_partenership/widgets/auth/auth_text_form.dart';
 import 'package:b2b_partenership/widgets/auth/select_provider_widget.dart';
 import 'package:b2b_partenership/widgets/select_city_widget.dart';
 import 'package:b2b_partenership/widgets/select_country_widget.dart';
-import 'package:b2b_partenership/widgets/select_specialization_widget.dart';
-import 'package:b2b_partenership/widgets/select_sup_specialization_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -238,34 +236,77 @@ class EditProviderProfileView extends StatelessWidget {
                                     controller.onProviderTypeChanged(value);
                                   },
                                 ),
-                                Gap(20.h),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: SelectSpecializationWidget(
-                                        value:
-                                            controller.selectedSpecialization,
-                                        models: controller.specializations,
-                                        onChanged: (val) {
-                                          controller.onSpecializeChanged(val);
+                                if (controller.selectedProviderType.nameEn !=
+                                    "Freelancer") ...[
+                                  Gap(20.h),
+                                  Row(
+                                    children: [
+                                      Expanded(
+                                          child: AuthTextForm(
+                                        lable: "Vat No.".tr,
+                                        preicon: CupertinoIcons.mail,
+                                        hintText: 'Enter vat No.'.tr,
+                                        textFormController:
+                                            controller.vatController,
+                                        validator: (val) {
+                                          return controller.validUserData(val);
                                         },
-                                      ),
-                                    ),
-                                    Gap(8.w),
-                                    Expanded(
-                                      child: SelectSupSpecializationWidget(
-                                        value: controller
-                                            .selectedSubSpecialization,
-                                        models: controller.subSpecializations,
-                                        onChanged: (val) {
-                                          controller
-                                              .onSubSpecializeChanged(val);
+                                      )),
+                                      Gap(10.w),
+                                      Expanded(
+                                          child: AuthTextForm(
+                                        lable: "Tax No.".tr,
+                                        preicon: CupertinoIcons.mail,
+                                        hintText: 'Enter your tax No.'.tr,
+                                        textFormController:
+                                            controller.taxNumberController,
+                                        validator: (val) {
+                                          return controller.validUserData(val);
                                         },
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                      )),
+                                    ],
+                                  ),
+                                  Gap(20.h),
+                                  AuthTextForm(
+                                    lable: "Commercial No.".tr,
+                                    preicon: CupertinoIcons.mail,
+                                    hintText: 'Enter Commercial No.'.tr,
+                                    textFormController:
+                                        controller.commercialNumberController,
+                                    validator: (val) {
+                                      return controller.validUserData(val);
+                                    },
+                                  )
+                                ],
+
                                 Gap(20.h),
+                                // Row(
+                                //   children: [
+                                //     Expanded(
+                                //       child: SelectSpecializationWidget(
+                                //         value:
+                                //             controller.selectedSpecialization,
+                                //         models: controller.specializations,
+                                //         onChanged: (val) {
+                                //           controller.onSpecializeChanged(val);
+                                //         },
+                                //       ),
+                                //     ),
+                                //     Gap(8.w),
+                                //     Expanded(
+                                //       child: SelectSupSpecializationWidget(
+                                //         value: controller
+                                //             .selectedSubSpecialization,
+                                //         models: controller.subSpecializations,
+                                //         onChanged: (val) {
+                                //           controller
+                                //               .onSubSpecializeChanged(val);
+                                //         },
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
+                                // Gap(20.h),
                                 AuthTextForm(
                                   enabled: false,
                                   lable: "Commercial Register".tr,
@@ -334,7 +375,6 @@ class EditProviderProfileView extends StatelessWidget {
                                         if (controller.taxPdfFile != null)
                                           InkWell(
                                             onTap: () {
-                                              //print("hi");
                                               controller.removeFile("t");
                                             },
                                             child: Icon(
@@ -347,7 +387,6 @@ class EditProviderProfileView extends StatelessWidget {
                                           width: 80.h,
                                           child: ElevatedButton(
                                               style: ElevatedButton.styleFrom(
-                                                  //padding: EdgeInsets.symmetric(horizontal: 10),
                                                   shape: RoundedRectangleBorder(
                                                       borderRadius:
                                                           BorderRadius.circular(

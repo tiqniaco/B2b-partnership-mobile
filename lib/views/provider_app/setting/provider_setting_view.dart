@@ -7,7 +7,6 @@ import 'package:b2b_partenership/core/global/widgets/app_pdf_view.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/language_widget.dart';
-// import 'package:b2b_partenership/widgets/language_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
@@ -187,29 +186,92 @@ class ProviderSettingView extends StatelessWidget {
                                             .menuModel!.data!.countryNameAr,
                                         english: controller
                                             .menuModel!.data!.countryNameEn)),
+                                Gap(10.h),
                                 FractionallySizedBox(
                                   widthFactor: 10,
                                   child: Divider(
                                     color: borderColor.withAlpha(40),
                                   ),
                                 ),
-                                rowWidget(
-                                    "Company Type".tr,
-                                    translateDatabase(
-                                        arabic: controller.menuModel!.data!
-                                            .providerTypeNameAr,
-                                        english: controller.menuModel!.data!
-                                            .providerTypeNameEn)),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor.withAlpha(40),
+                                Gap(10.h),
+                                Text(
+                                  "Bio",
+                                  style: getRegularStyle(Get.context!).copyWith(
+                                    fontWeight: FontWeight.w300,
                                   ),
                                 ),
                                 Gap(10),
+                                Text(
+                                  controller.menuModel!.data!.bio,
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: context.isTablet ? 8.sp : 14.sp,
+                                    color: Colors.black54,
+                                  ),
+                                ),
+                                Gap(10.h),
                                 if (controller
                                         .menuModel!.data!.commercialRegister !=
                                     "") ...[
+                                  Gap(15.h),
+                                  FractionallySizedBox(
+                                    widthFactor: 10,
+                                    child: Divider(
+                                      thickness: 5,
+                                      color: borderColor.withAlpha(40),
+                                    ),
+                                  ),
+                                  Gap(15.h),
+                                  Text(
+                                    "Business Information".tr,
+                                    style: getMediumStyle(context),
+                                  ),
+                                  Gap(15.h),
+                                  rowWidget(
+                                      "Company Type".tr,
+                                      translateDatabase(
+                                          arabic: controller.menuModel!.data!
+                                              .providerTypeNameAr,
+                                          english: controller.menuModel!.data!
+                                              .providerTypeNameEn)),
+                                  FractionallySizedBox(
+                                    widthFactor: 10,
+                                    child: Divider(
+                                      color: borderColor.withAlpha(40),
+                                    ),
+                                  ),
+                                  Gap(10),
+                                  rowWidget(
+                                      "Commercial No.".tr,
+                                      controller.menuModel!.data!
+                                          .commercialRegisterNumber),
+                                  FractionallySizedBox(
+                                    widthFactor: 10,
+                                    child: Divider(
+                                      color: borderColor.withAlpha(40),
+                                    ),
+                                  ),
+                                  Gap(10),
+                                  rowWidget(
+                                      "tax No.".tr,
+                                      controller
+                                          .menuModel!.data!.taxCardNumber),
+                                  FractionallySizedBox(
+                                    widthFactor: 10,
+                                    child: Divider(
+                                      color: borderColor.withAlpha(40),
+                                    ),
+                                  ),
+                                  Gap(10),
+                                  rowWidget("VAT No.".tr,
+                                      controller.menuModel!.data!.vat),
+                                  FractionallySizedBox(
+                                    widthFactor: 10,
+                                    child: Divider(
+                                      color: borderColor.withAlpha(40),
+                                    ),
+                                  ),
+                                  Gap(10),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
@@ -313,14 +375,14 @@ class ProviderSettingView extends StatelessWidget {
                                     ],
                                   ),
                                   Gap(30),
-                                  FractionallySizedBox(
-                                    widthFactor: 10,
-                                    child: Divider(
-                                      thickness: 5,
-                                      color: borderColor.withAlpha(40),
-                                    ),
-                                  )
                                 ],
+                                FractionallySizedBox(
+                                  widthFactor: 10,
+                                  child: Divider(
+                                    thickness: 5,
+                                    color: borderColor.withAlpha(40),
+                                  ),
+                                ),
                                 Gap(20),
                                 Text(
                                   "Other Services".tr,
