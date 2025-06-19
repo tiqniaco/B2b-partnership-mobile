@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -24,20 +25,19 @@ class PrintType extends StatelessWidget {
 
   Widget containerType(String title, Color color) {
     return Material(
-      color: color,
-      borderRadius: BorderRadius.circular(5.r),
-      elevation: 4,
+      color: primaryColor,
+      borderRadius: customBorderRadius,
       child: Padding(
         padding: EdgeInsets.symmetric(
-          horizontal: 10.w,
-          vertical: 5.h,
+          horizontal: 16,
+          vertical: 4,
         ),
         child: Text(
           title,
           style: getLightStyle(Get.context!).copyWith(
-            fontSize: Get.context!.isTablet ? 7.5.sp : null,
+            fontSize: 14.r,
             color: whiteColor,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.w400,
           ),
         ),
       ),

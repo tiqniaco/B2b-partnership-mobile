@@ -127,115 +127,117 @@ class JobsController extends GetxController {
                 ),
               ),
               width: 1.sw,
-              height: Get.context!.isTablet ? 0.52.sh : 0.61.sh,
+              height: Get.context!.isTablet ? 0.52.sh : 0.70.sh,
               padding: EdgeInsets.symmetric(
                 horizontal: 15.w,
                 vertical: 16.h,
               ),
-              child: Column(
-                children: [
-                  _buildDropdown<SpecializeModel>(
-                    label: "Specialization".tr,
-                    items: specializationList,
-                    selectedValue: selectedSpecialization,
-                    onChanged: (value) {
-                      selectedSpecialization = value;
-                      getSupSpecialization();
-                      update(['dropdown']);
-                    },
-                    isLoading:
-                        statusRequestSpecialization == StatusRequest.loading,
-                  ),
-                  _buildDropdown<SubSpecializeModel>(
-                    label: "Sub Specialization".tr,
-                    items: subSpecializationList,
-                    selectedValue: selectedSubSpecialization,
-                    onChanged: (value) {
-                      selectedSubSpecialization = value;
-                      update(['dropdown']);
-                    },
-                    isLoading:
-                        statusRequestSupSpecialization == StatusRequest.loading,
-                  ),
-                  _buildDropdown<CountryModel>(
-                    label: "Country".tr,
-                    items: countryList,
-                    selectedValue: selectedCountry,
-                    onChanged: (value) {
-                      selectedCountry = value;
-                      getCities();
-                      update(['dropdown']);
-                    },
-                    isLoading: statusRequestCountry == StatusRequest.loading,
-                  ),
-                  _buildDropdown<CityModel>(
-                    label: "City".tr,
-                    items: governmentList,
-                    selectedValue: selectedCity,
-                    onChanged: (value) {
-                      selectedCity = value;
-                      update(['dropdown']);
-                    },
-                    isLoading: statusRequestCity == StatusRequest.loading,
-                  ),
-                  _buildDropdown<JobsContractTypeEnum>(
-                    label: "Contract Type".tr,
-                    items: contractTypeList,
-                    selectedValue: selectedContractType,
-                    onChanged: (JobsContractTypeEnum? value) {
-                      selectedContractType = value;
-                      update(['dropdown']);
-                    },
-                  ),
-                  GestureDetector(
-                    onTap: () => _selectDate(),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 10.h,
-                        horizontal: 8.w,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            selectedExpiryDate == null
-                                ? "Select Expiry Date".tr
-                                : DateFormat('yyyy-MM-dd')
-                                    .format(selectedExpiryDate!),
-                            style: getRegularStyle(Get.context!),
-                          ),
-                          Icon(
-                            Icons.calendar_today,
-                            color: primaryColor,
-                          ),
-                        ],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    _buildDropdown<SpecializeModel>(
+                      label: "Specialization".tr,
+                      items: specializationList,
+                      selectedValue: selectedSpecialization,
+                      onChanged: (value) {
+                        selectedSpecialization = value;
+                        getSupSpecialization();
+                        update(['dropdown']);
+                      },
+                      isLoading:
+                          statusRequestSpecialization == StatusRequest.loading,
+                    ),
+                    _buildDropdown<SubSpecializeModel>(
+                      label: "Sub Specialization".tr,
+                      items: subSpecializationList,
+                      selectedValue: selectedSubSpecialization,
+                      onChanged: (value) {
+                        selectedSubSpecialization = value;
+                        update(['dropdown']);
+                      },
+                      isLoading: statusRequestSupSpecialization ==
+                          StatusRequest.loading,
+                    ),
+                    _buildDropdown<CountryModel>(
+                      label: "Country".tr,
+                      items: countryList,
+                      selectedValue: selectedCountry,
+                      onChanged: (value) {
+                        selectedCountry = value;
+                        getCities();
+                        update(['dropdown']);
+                      },
+                      isLoading: statusRequestCountry == StatusRequest.loading,
+                    ),
+                    _buildDropdown<CityModel>(
+                      label: "City".tr,
+                      items: governmentList,
+                      selectedValue: selectedCity,
+                      onChanged: (value) {
+                        selectedCity = value;
+                        update(['dropdown']);
+                      },
+                      isLoading: statusRequestCity == StatusRequest.loading,
+                    ),
+                    _buildDropdown<JobsContractTypeEnum>(
+                      label: "Contract Type".tr,
+                      items: contractTypeList,
+                      selectedValue: selectedContractType,
+                      onChanged: (JobsContractTypeEnum? value) {
+                        selectedContractType = value;
+                        update(['dropdown']);
+                      },
+                    ),
+                    GestureDetector(
+                      onTap: () => _selectDate(),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          vertical: 10.h,
+                          horizontal: 8.w,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              selectedExpiryDate == null
+                                  ? "Select Expiry Date".tr
+                                  : DateFormat('yyyy-MM-dd')
+                                      .format(selectedExpiryDate!),
+                              style: getRegularStyle(Get.context!),
+                            ),
+                            Icon(
+                              Icons.calendar_today,
+                              color: primaryColor,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  Gap(20.h),
-                  CustomLoadingButton(
-                    onPressed: () {
-                      return getJobs(refresh: true).then((_) {
-                        Get.back();
-                      });
-                    },
-                    text: "Filter".tr,
-                  ),
-                  Gap(10.h),
-                  CustomLoadingButton(
-                    backgroundColor: greyColor,
-                    onPressed: () {
-                      return resetFilter().then((_) {
-                        Get.back();
-                      });
-                    },
-                    text: "Reset".tr,
-                  ),
-                ],
+                    Gap(20.h),
+                    CustomLoadingButton(
+                      onPressed: () {
+                        return getJobs(refresh: true).then((_) {
+                          Get.back();
+                        });
+                      },
+                      text: "Filter".tr,
+                    ),
+                    Gap(10.h),
+                    CustomLoadingButton(
+                      backgroundColor: greyColor,
+                      onPressed: () {
+                        return resetFilter().then((_) {
+                          Get.back();
+                        });
+                      },
+                      text: "Reset".tr,
+                    ),
+                  ],
+                ),
               ),
             );
           }),

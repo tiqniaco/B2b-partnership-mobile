@@ -1,7 +1,9 @@
 import 'package:b2b_partenership/controller/client_profile_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 
 import '/core/functions/translate_database.dart';
 import '/core/theme/app_color.dart';
@@ -11,14 +13,13 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 class ClientProfileView extends StatelessWidget {
-   ClientProfileView({super.key});
-final controller = Get.put(ClientProfileController());
+  ClientProfileView({super.key});
+  final controller = Get.put(ClientProfileController());
   @override
   Widget build(BuildContext context) {
-   
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        centerTitle: true,
         title: Text(
           'Client Profile'.tr,
           style: getSemiBoldStyle(context).copyWith(color: Colors.black),
@@ -31,9 +32,11 @@ final controller = Get.put(ClientProfileController());
           ),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 20.w,
-            vertical: 16.h,
+          padding: EdgeInsets.only(
+            top: 20,
+            left: 20,
+            right: 20,
+            bottom: 70,
           ),
           child: Row(
             children: [
@@ -41,11 +44,10 @@ final controller = Get.put(ClientProfileController());
                 child: Container(
                   height: 45.h,
                   decoration: BoxDecoration(
-                      color: primaryColor,
-                      borderRadius: BorderRadius.circular(15)),
+                      color: primaryColor, borderRadius: customBorderRadius),
                   child: CustomLoadingButton(
                     onPressed: () {
-                         controller.contactMethods();
+                      controller.contactMethods();
                     },
                     text: 'Book Appointment'.tr,
                   ),
@@ -62,11 +64,11 @@ final controller = Get.put(ClientProfileController());
               : Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Container(
-                        height: 110.h,
-                        width: 110.h,
+                        height: 100,
+                        width: 100,
                         decoration: BoxDecoration(shape: BoxShape.circle),
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(100),
@@ -75,29 +77,32 @@ final controller = Get.put(ClientProfileController());
                               imageUrl: controller.clientModel!.image!,
                             )),
                       ),
-                      Gap(10),
-                      titleWidget(
-                        "Name".tr,
+                      Gap(8),
+                      Text(
                         controller.clientModel!.name!,
+                        style: getBoldStyle(context).copyWith(
+                          color: Colors.black,
+                          fontSize: 16.r,
+                        ),
                       ),
                       Gap(15),
                       titleWidget(
-                        "Phone".tr,
-                        '+${controller.clientModel!.countryCode!}${controller.clientModel!.phone!}',
+                        Icons.phone_in_talk,
+                        '(+${controller.clientModel!.countryCode!}) ${controller.clientModel!.phone!}',
                       ),
                       Gap(15),
                       titleWidget(
-                        "Email".tr,
+                        Icons.email,
                         controller.clientModel!.email!,
                       ),
                       Gap(15),
                       titleWidget(
-                        "From".tr,
+                        CupertinoIcons.location_fill,
                         "${translateDatabase(arabic: controller.clientModel!.countryNameAr!, english: controller.clientModel!.countryNameEn!)}",
                       ),
                       Gap(15),
                       titleWidget(
-                        "City".tr,
+                        Icons.location_on,
                         "${translateDatabase(arabic: controller.clientModel!.governmentNameAr!, english: controller.clientModel!.governmentNameEn!)}",
                       ),
                     ],
@@ -108,44 +113,32 @@ final controller = Get.put(ClientProfileController());
     );
   }
 
-  Widget titleWidget(String title, String value) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Expanded(
-          flex: 1,
-          child: Row(
-            children: [
-              Gap(10),
-              Text(
-                "$title: ",
-                style: TextStyle(
-                    fontSize: 16.r,
-                    color: blackColor,
-                    fontWeight: FontWeight.w500),
-              ),
-            ],
+  Widget titleWidget(IconData icon, String value) {
+    return Container(
+      padding: EdgeInsets.all(8),
+      decoration: BoxDecoration(
+        border: Border.all(color: borderColor),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Icon(
+            icon,
+            color: primaryColor,
+            size: 20.r,
           ),
-        ),
-        //Gap(10.w),
-        Expanded(
-          flex: 4,
-          child: Row(
-            children: [
-              Gap(30.w),
-              Text(
-                value,
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 15.r,
-                    color: Colors.black54),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ],
-          ),
-        )
-      ],
+          Gap(8),
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 14.r,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
+          )
+        ],
+      ),
     );
   }
 }

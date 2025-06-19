@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '/core/utils/assets_data.dart';
 
 class CustomNetworkImage extends StatelessWidget {
@@ -10,6 +9,7 @@ class CustomNetworkImage extends StatelessWidget {
     this.width,
     this.height,
     this.shape,
+    this.borderRadius,
   });
 
   final String imageUrl;
@@ -17,14 +17,16 @@ class CustomNetworkImage extends StatelessWidget {
   final double? height;
   final double? width;
   final BoxShape? shape;
+  final double? borderRadius;
   @override
   Widget build(BuildContext context) {
     return Container(
       height: height,
       width: width,
       decoration: BoxDecoration(
-        borderRadius:
-            shape == BoxShape.circle ? null : BorderRadius.circular(5.r),
+        borderRadius: shape == BoxShape.circle
+            ? null
+            : BorderRadius.circular(borderRadius ?? 0),
         image: DecorationImage(
           image: Image.network(imageUrl).image,
           fit: fit,
@@ -33,6 +35,8 @@ class CustomNetworkImage extends StatelessWidget {
       ),
       clipBehavior: Clip.antiAlias,
       child: Image(
+        width: width,
+        height: height,
         image: Image.network(imageUrl).image,
         fit: fit,
         alignment: Alignment.center,

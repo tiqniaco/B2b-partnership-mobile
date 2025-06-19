@@ -4,6 +4,7 @@ import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:b2b_partenership/core/utils/font_manager.dart';
 import 'package:b2b_partenership/models/services_model.dart';
 import 'package:flutter/material.dart';
@@ -22,10 +23,7 @@ class ServiceWidgetVertical extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
         scrollDirection: Axis.vertical,
-        padding: EdgeInsets.symmetric(
-          vertical: 12.h,
-          horizontal: 12.w,
-        ),
+        padding: EdgeInsets.symmetric(vertical: 12, horizontal: 16),
         itemCount: services.length,
         separatorBuilder: (context, index) => Gap(16.h),
         itemBuilder: (context, index) => InkWell(
@@ -34,15 +32,12 @@ class ServiceWidgetVertical extends StatelessWidget {
                     arguments: {"id": services[index].id});
               },
               child: Container(
-                height: 120.h,
-                padding: EdgeInsets.symmetric(
-                  horizontal: 15.w,
-                  vertical: 10.h,
-                ),
+                height: 116.h,
+                padding: EdgeInsets.all(8),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(12.r),
                   border: Border.all(
-                    color: Colors.grey.withAlpha(80),
+                    color: Colors.grey.withAlpha(160),
                   ),
                 ),
                 child: Column(
@@ -54,12 +49,12 @@ class ServiceWidgetVertical extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                           child: CustomNetworkImage(
                             imageUrl: services[index].image!,
-                            height: 90.h,
+                            height: 100.h,
                             width: context.isTablet ? 90.w : 110.w,
                             fit: BoxFit.cover,
                           ),
                         ),
-                        Gap(10),
+                        Gap(16),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -67,15 +62,11 @@ class ServiceWidgetVertical extends StatelessWidget {
                             children: [
                               Text(
                                 services[index].description!,
-                                textAlign: TextAlign.center,
-                                style: getRegularStyle(context).copyWith(
-                                  color: Colors.black54,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                                style: getRegularStyle(context),
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                               ),
-                              Gap(3.h),
+                              Gap(8),
                               Text(
                                 translateDatabase(
                                     arabic:
@@ -88,7 +79,7 @@ class ServiceWidgetVertical extends StatelessWidget {
                                 overflow: TextOverflow.ellipsis,
                                 maxLines: 1,
                               ),
-                              Gap(5.h),
+                              Gap(8),
                               Padding(
                                 padding: EdgeInsets.symmetric(
                                   horizontal: context.isTablet ? 12.w : 0,
@@ -96,72 +87,51 @@ class ServiceWidgetVertical extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Expanded(
-                                      flex: 1,
+                                      flex: 2,
                                       child: Visibility(
                                         visible: Get.find<AppPreferences>()
                                                 .getUserRole() ==
                                             "provider",
-                                        child: SizedBox(
-                                          height: 32.h,
-                                          child: ElevatedButton(
-                                            style: ButtonStyle(
-                                              backgroundColor:
-                                                  WidgetStatePropertyAll(
-                                                Colors.green,
-                                              ),
-                                              padding: WidgetStatePropertyAll(
-                                                EdgeInsets.symmetric(
-                                                  horizontal: 10,
-                                                ),
-                                              ),
-                                              shape: WidgetStatePropertyAll(
-                                                RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                    5,
-                                                  ),
-                                                ),
+                                        child: InkWell(
+                                          onTap: () {
+                                            Get.toNamed(
+                                              AppRoutes.editProviderService,
+                                              arguments: {
+                                                "service": services[index],
+                                              },
+                                            );
+                                          },
+                                          child: Container(
+                                            height: 28.h,
+                                            alignment: Alignment.center,
+                                            decoration: BoxDecoration(
+                                              borderRadius: customBorderRadius,
+                                              border: Border.all(
+                                                color: primaryColor,
                                               ),
                                             ),
-                                            onPressed: () {
-                                              Get.toNamed(
-                                                AppRoutes.editProviderService,
-                                                arguments: {
-                                                  "service": services[index],
-                                                },
-                                              );
-                                            },
-                                            child: Text(
-                                              "Edit".tr,
-                                              style: getRegularStyle(context)
-                                                  .copyWith(
-                                                fontWeight: FontManager
-                                                    .mediumFontWeight,
-                                                color: whiteColor,
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(4.0),
+                                              child: Text(
+                                                "Edit".tr,
+                                                style: getRegularStyle(context)
+                                                    .copyWith(
+                                                  fontWeight: FontManager
+                                                      .mediumFontWeight,
+                                                  color: primaryColor,
+                                                ),
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                    Gap(4.w),
+                                    Gap(8),
                                     Expanded(
-                                      flex: context.isTablet ? 1 : 2,
-                                      child: SizedBox(
-                                        height: 32.h,
-                                        child: ElevatedButton(
-                                          style: ButtonStyle(
-                                            padding: WidgetStatePropertyAll(
-                                                EdgeInsets.symmetric(
-                                                    horizontal: 10)),
-                                            shape: WidgetStatePropertyAll(
-                                              RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(5),
-                                              ),
-                                            ),
-                                          ),
-                                          onPressed: () {
+                                        flex: context.isTablet ? 1 : 2,
+                                        child: InkWell(
+                                          onTap: () {
                                             Get.toNamed(
                                               AppRoutes.serviceDetails,
                                               arguments: {
@@ -169,18 +139,27 @@ class ServiceWidgetVertical extends StatelessWidget {
                                               },
                                             );
                                           },
-                                          child: Text(
-                                            "View".tr,
-                                            style: getRegularStyle(context)
-                                                .copyWith(
-                                              fontWeight:
-                                                  FontManager.mediumFontWeight,
-                                              color: whiteColor,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                          child: Container(
+                                              height: 28.h,
+                                              alignment: Alignment.center,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      customBorderRadius,
+                                                  color: primaryColor),
+                                              child: Padding(
+                                                  padding:
+                                                      const EdgeInsets.all(4.0),
+                                                  child: Text(
+                                                    "View".tr,
+                                                    style:
+                                                        getRegularStyle(context)
+                                                            .copyWith(
+                                                      fontWeight: FontManager
+                                                          .mediumFontWeight,
+                                                      color: whiteColor,
+                                                    ),
+                                                  ))),
+                                        )),
                                   ],
                                 ),
                               )

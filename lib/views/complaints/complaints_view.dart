@@ -68,9 +68,10 @@ class ComplaintsView extends StatelessWidget {
                 ),
                 Gap(12.h),
                 Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 10.w,
-                    vertical: 10.h,
+                  padding: EdgeInsets.only(
+                    left: 8,
+                    right: 8,
+                    bottom: 48,
                   ),
                   child: Row(
                     children: [

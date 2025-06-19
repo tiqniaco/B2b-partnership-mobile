@@ -2,6 +2,8 @@ import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
+import 'package:b2b_partenership/core/theme/app_color.dart';
+import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:b2b_partenership/models/city_model.dart';
 import 'package:b2b_partenership/models/country_model.dart';
@@ -80,9 +82,7 @@ class ServiceRequestDetailsController extends GetxController {
           return AlertDialog(
             title: Text('Add Price Offer'.tr),
             titleTextStyle: TextStyle(
-                fontSize: 12.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.green),
+                fontSize: 16.r, fontWeight: FontWeight.bold, color: blackColor),
             content: Form(
               key: formKey,
               child: Column(
@@ -92,6 +92,10 @@ class ServiceRequestDetailsController extends GetxController {
                     controller: priceController,
                     maxLines: null,
                     decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide(color: primaryColor),
+                        ),
                         hintStyle: TextStyle(fontSize: 13.sp),
                         hintText: 'Price'.tr),
                   ),
@@ -100,6 +104,10 @@ class ServiceRequestDetailsController extends GetxController {
                     controller: durationController,
                     maxLines: null,
                     decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide(color: primaryColor),
+                        ),
                         hintStyle: TextStyle(fontSize: 13.sp),
                         hintText: 'Duration'.tr),
                   ),
@@ -109,6 +117,10 @@ class ServiceRequestDetailsController extends GetxController {
                     minLines: 3,
                     maxLines: 21,
                     decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide(color: primaryColor),
+                        ),
                         hintStyle: TextStyle(fontSize: 13.sp),
                         hintText: 'Description'.tr),
                   ),
@@ -116,12 +128,26 @@ class ServiceRequestDetailsController extends GetxController {
               ),
             ),
             actions: [
-              TextButton(
-                onPressed: () {
-                  Get.back(); // close dialog
-                  _addOffer();
-                },
-                child: Text('Submit'.tr),
+              Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: customBorderRadius,
+                ),
+                child: TextButton(
+                  onPressed: () {
+                    Get.back(); // close dialog
+                    _addOffer();
+                  },
+                  child: Text(
+                    'Submit'.tr,
+                    style: TextStyle(
+                      fontSize: 16.r,
+                      fontWeight: FontWeight.bold,
+                      color: whiteColor,
+                    ),
+                  ),
+                ),
               ),
             ],
           );

@@ -2,7 +2,7 @@ import 'package:b2b_partenership/controller/home/home_client_controller.dart';
 import 'package:b2b_partenership/controller/settings/setting_controller.dart';
 import 'package:b2b_partenership/views/jobs/jobs_view.dart';
 import 'package:b2b_partenership/views/provider_app/home/provider_home_view.dart';
-import 'package:b2b_partenership/views/search/search_view.dart';
+import 'package:b2b_partenership/views/provider_app/posts/get_service_request.dart';
 import 'package:b2b_partenership/views/provider_app/setting/provider_setting_view.dart';
 import 'package:b2b_partenership/views/shop/shop_view.dart';
 import 'package:equatable/equatable.dart';
@@ -54,10 +54,8 @@ class ProviderHomeLayoutController extends GetxController {
   final screens = [
     ProviderHomeView(),
     const ShopView(),
-    //GetServiceRequest(),
-    const SearchView(),
+    GetServiceRequest(),
     const JobsView(),
-    // MyService(),
     const ProviderSettingView(),
   ];
 
@@ -77,6 +75,8 @@ class ProviderHomeLayoutController extends GetxController {
     update();
     super.onInit();
   }
+
+ 
 }
 
 class HomeBottomNavModel extends Equatable {

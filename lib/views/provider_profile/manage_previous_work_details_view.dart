@@ -22,7 +22,7 @@ class ManagePreviousWorkDetailsView extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.black),
         title: Text(
           'Previous Work'.tr,
-          style: getBoldStyle(context).copyWith(color: primaryColor),
+          style: getBoldStyle(context).copyWith(),
         ),
         centerTitle: true,
       ),

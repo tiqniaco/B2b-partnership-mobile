@@ -5,7 +5,9 @@ import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/about_content_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -21,7 +23,6 @@ class SellerWidget extends StatelessWidget {
         padding: EdgeInsets.all(15),
         child: Column(
           children: [
-            Gap(20),
             InkWell(
               // onTap: () {
               //   Get.toNamed(AppRoutes.providerProfile, arguments: {
@@ -32,7 +33,7 @@ class SellerWidget extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     backgroundColor: Colors.grey[200],
-                    radius: 27.r,
+                    radius: 26.r,
                     backgroundImage: CachedNetworkImageProvider(
                         controller.service!.provider!.image),
                   ),
@@ -46,33 +47,25 @@ class SellerWidget extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Gap(8),
                       Row(
                         children: [
                           Text(
-                            'Seller Rating'.tr,
-                            style: getLightStyle(context).copyWith(
-                              color: Colors.black54,
-                            ),
-                          ),
-                          Gap(10),
-                          Text(
                             controller.service!.provider!.rating,
                             style: getMediumStyle(context).copyWith(
-                                color: Colors.orange,
-                                fontWeight: FontWeight.bold),
+                                color: blackColor, fontWeight: FontWeight.w500),
                           ),
-                          Gap(3),
-                          Icon(
-                            Icons.circle,
-                            size: 3.r,
-                            color: greyColor,
-                          ),
-                          Gap(3),
-                          Icon(
-                            Icons.star,
-                            size: 15.r,
-                            color: Colors.orange,
+                          Gap(4),
+                          RatingBar.builder(
+                            ignoreGestures: true,
+                            itemSize: 20.r,
+                            initialRating: 3,
+                            minRating: 1,
+                            direction: Axis.horizontal,
+                            allowHalfRating: false,
+                            itemCount: 5,
+                            itemBuilder: (context, _) =>
+                                Icon(Icons.star, color: Colors.amber),
+                            onRatingUpdate: (rating) {},
                           ),
                         ],
                       ),
@@ -84,12 +77,10 @@ class SellerWidget extends StatelessWidget {
             Gap(20),
             Container(
               padding: EdgeInsets.all(20),
-              height: 160.h,
+              height: 144.h,
               decoration: BoxDecoration(
-                border: Border.all(
-                  color: borderColor,
-                ),
-                borderRadius: BorderRadius.circular(10),
+                color: lightPrimaryColor.withAlpha(160),
+                borderRadius: BorderRadius.circular(24),
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -97,7 +88,8 @@ class SellerWidget extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      titleWidget("From".tr),
+                      titleWidget("Country".tr,
+                          icon: CupertinoIcons.location_fill),
                       Gap(10),
                       valueWidget(translateDatabase(
                           arabic: controller.service!.provider!.countryNameAr,
@@ -116,13 +108,15 @@ class SellerWidget extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      titleWidget("City".tr),
+                      titleWidget("City".tr, icon: Icons.location_on_sharp),
                       Gap(10),
-                      valueWidget(translateDatabase(
-                          arabic:
-                              controller.service!.provider!.governmentNameAr,
-                          english:
-                              controller.service!.provider!.governmentNameEn)),
+                      valueWidget(
+                        translateDatabase(
+                            arabic:
+                                controller.service!.provider!.governmentNameAr,
+                            english:
+                                controller.service!.provider!.governmentNameEn),
+                      ),
                       Spacer(),
                       titleWidget("Seller Since".tr),
                       Gap(10),

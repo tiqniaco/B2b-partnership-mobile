@@ -5,9 +5,12 @@ import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
+import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:b2b_partenership/models/job_details_model.dart';
+import 'package:b2b_partenership/views/service_request/add_service_request.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class ProviderJobsController extends GetxController {
@@ -52,10 +55,31 @@ class ProviderJobsController extends GetxController {
 
   void deleteJobsDialog(id) {
     Get.defaultDialog(
+      titlePadding: EdgeInsets.only(top: 20, bottom: 8),
       title: "Delete Job".tr,
+      titleStyle: TextStyle(fontSize: 16.r),
       middleText: "Are you sure you want to\ndelete this job?".tr,
+      middleTextStyle: TextStyle(fontSize: 14.r),
       textConfirm: "Yes".tr,
-      textCancel: "No".tr,
+      confirm: Container(
+        margin: EdgeInsets.only(bottom: 20),
+        height: 30.h,
+        width: 100.w,
+        decoration: BoxDecoration(
+          color: primaryColor,
+          borderRadius: customBorderRadius,
+        ),
+        child: Center(
+          child: Text(
+            "Delete".tr,
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+              fontSize: 14.r,
+            ),
+          ),
+        ),
+      ),
       onConfirm: () {
         _deleteJobs(id);
       },

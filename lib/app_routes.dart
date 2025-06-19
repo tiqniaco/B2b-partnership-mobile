@@ -40,7 +40,7 @@ import 'package:get/get.dart';
 import 'views/complaints/complaints_view.dart';
 import 'views/job_application/client_job_applications_view.dart';
 import 'views/job_application/job_application_details_view.dart';
-import 'views/job_application/job_application_view.dart';
+import 'views/job_application/add_job_application_view.dart';
 import 'views/jobs/job_details_view.dart';
 import 'views/jobs/jobs_view.dart';
 import 'views/jobs/provider_job_applications_view.dart';

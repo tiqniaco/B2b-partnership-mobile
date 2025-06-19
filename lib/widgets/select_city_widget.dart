@@ -13,7 +13,7 @@ class SelectCityWidget extends StatelessWidget {
     required this.models,
     required this.onChanged,
   });
-  final CityModel value;
+  final CityModel? value;
   final List<CityModel> models;
   final void Function(CityModel?) onChanged;
   @override
@@ -22,6 +22,9 @@ class SelectCityWidget extends StatelessWidget {
         isExpanded: true,
         value: value, //CountryModel
         decoration: InputDecoration(
+          hintText: 'Select City'.tr,
+          filled: true,
+          fillColor: whiteColor,
           contentPadding:
               EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
           focusedBorder: OutlineInputBorder(
@@ -32,16 +35,16 @@ class SelectCityWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(7),
             borderSide: const BorderSide(color: pageColor, width: 1.5),
           ),
-          label: Text(
-            'Select City'.tr,
-            style: getMediumStyle(context)
-                .copyWith(fontWeight: FontWeight.w500, color: Colors.black87),
-          ),
+          // label: Text(
+          //   'Select City'.tr,
+          //   style: getMediumStyle(context)
+          //       .copyWith(fontWeight: FontWeight.w500, color: Colors.black87),
+          // ),
         ),
         icon: Icon(
           Icons.keyboard_arrow_down_outlined,
           size: 23.r,
-          color: greyColor,
+          color: primaryColor,
         ),
         items: models.map((item) {
           return DropdownMenuItem<CityModel>(
@@ -50,8 +53,8 @@ class SelectCityWidget extends StatelessWidget {
               translateDatabase(
                   arabic: item.nameAr ?? "", english: item.nameEn ?? ""),
               style: getLightStyle(context).copyWith(
-                color: greyColor.withAlpha(160),
-                fontWeight: FontWeight.bold,
+                color: blackColor,
+                fontWeight: FontWeight.w500,
               ),
             ),
           );

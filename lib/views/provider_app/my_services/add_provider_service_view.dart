@@ -7,6 +7,7 @@ import 'package:b2b_partenership/widgets/select_city_widget.dart';
 import 'package:b2b_partenership/widgets/select_country_widget.dart';
 import 'package:b2b_partenership/widgets/select_specialization_widget.dart';
 import 'package:b2b_partenership/widgets/select_sup_specialization_widget.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -23,22 +24,11 @@ class AddProviderServiceView extends StatelessWidget {
         return Scaffold(
           appBar: AppBar(
             toolbarHeight: context.isTablet ? 45.h : null,
-            leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: Icon(
-                Icons.close,
-                size: 20.r,
-              ),
-            ),
             iconTheme: IconThemeData(color: blackColor),
             title: Text(
               'Add Service'.tr,
               style: getSemiBoldStyle(context),
             ),
-            backgroundColor: whiteColor,
-            elevation: 0,
           ),
           body: controller.selectedCity == null
               ? Center(
@@ -47,6 +37,7 @@ class AddProviderServiceView extends StatelessWidget {
               : Form(
                   key: controller.formKey,
                   child: Stepper(
+                    
                     currentStep: controller.currentStep,
                     onStepContinue: controller.onStepContinue,
                     onStepCancel: controller.onStepCancel,
@@ -171,7 +162,7 @@ class ProviderServiceStep2 extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Gap(10.h),
+        Gap(8),
         SelectCountryWidget(
           enabled: false,
           value: controller.selectedCountry,
@@ -180,7 +171,7 @@ class ProviderServiceStep2 extends StatelessWidget {
             controller.onCountryChanged(val);
           },
         ),
-        Gap(40),
+        Gap(16),
         SelectCityWidget(
           value: controller.selectedCity!,
           models: controller.cities,
@@ -188,7 +179,7 @@ class ProviderServiceStep2 extends StatelessWidget {
             controller.onCityChanged(val);
           },
         ),
-        Gap(40),
+        Gap(16),
         SelectSpecializationWidget(
           value: controller.selectedSpecialization,
           models: controller.specializations,
@@ -196,7 +187,7 @@ class ProviderServiceStep2 extends StatelessWidget {
             controller.onSpecializeChanged(val);
           },
         ),
-        Gap(40),
+        Gap(16),
         SelectSupSpecializationWidget(
           value: controller.selectedSubSpecialization,
           models: controller.subSpecializations,
@@ -229,30 +220,40 @@ class ProviderServiceStep1 extends StatelessWidget {
                     borderRadius: BorderRadius.circular(30),
                     child: Image.file(
                       controller.imageFile!,
-                      height: 130.h,
-                      width: 180.h,
+                      height: 160.h,
+                      width: double.infinity,
                       fit: BoxFit.cover,
                     ),
                   )
                 : Container(
-                    height: 130.h,
-                    width: 180.h,
+                    height: 160.h,
+                    width: double.infinity,
                     decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(40),
+                      color: lightPrimaryColor.withAlpha(160),
+                      borderRadius: BorderRadius.circular(30),
                     ),
-                    child: Icon(
-                      Icons.image,
-                      size: 50,
-                      color: Colors.grey.shade700,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          CupertinoIcons.photo,
+                          size: 60.r,
+                          color: primaryColor,
+                        ),
+                        Gap(8),
+                        Text(
+                          "Add Service Image".tr,
+                          style: getRegularStyle(context).copyWith(
+                              color: primaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.r),
+                        ),
+                      ],
                     ),
                   ),
           ),
         ),
-        Gap(40.h),
-        // buildTextField(controller.titleArController, 'Title (Arabic)',
-        //     Icons.title, "enter title in arabic"),
-        // Gap(30),
+        Gap(16),
         buildTextField(
           controller.titleEnController,
           'Title'.tr,
@@ -262,7 +263,7 @@ class ProviderServiceStep1 extends StatelessWidget {
             return controller.validUserData(val);
           },
         ),
-        Gap(20.h),
+        Gap(4),
         buildTextField(
           controller.descriptionController,
           'Description'.tr,
@@ -272,7 +273,7 @@ class ProviderServiceStep1 extends StatelessWidget {
             return controller.validUserData(val);
           },
         ),
-        Gap(20.h),
+        Gap(4),
         buildTextField(
           controller.addressController,
           'Address'.tr,
@@ -282,7 +283,7 @@ class ProviderServiceStep1 extends StatelessWidget {
             return controller.validUserData(val);
           },
         ),
-        Gap(20.h),
+        Gap(4),
         buildTextField(
           controller.overviewController,
           'Overview'.tr,
@@ -292,7 +293,7 @@ class ProviderServiceStep1 extends StatelessWidget {
             return controller.validUserData(val);
           },
         ),
-        Gap(20.h),
+        Gap(4),
         buildTextField(
           controller.videoController,
           'Video Link'.tr,
@@ -303,7 +304,7 @@ class ProviderServiceStep1 extends StatelessWidget {
           },
           hasValidation: false,
         ),
-        Gap(12.h),
+        Gap(16),
       ],
     );
   }

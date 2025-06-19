@@ -14,7 +14,6 @@ import 'package:b2b_partenership/widgets/request_services/request_service1.dart'
 import 'package:b2b_partenership/widgets/request_services/request_service2.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
@@ -383,7 +382,7 @@ Widget featureWidget({
   final controller = Get.put(AddProviderServiceController());
   return Column(
     children: [
-      Gap(20.h),
+      Gap(8),
       buildTextField(
         arController,
         "Feature Title (Arabic)".tr,
@@ -393,7 +392,7 @@ Widget featureWidget({
           return controller.validUserData(val);
         },
       ),
-      Gap(20.h),
+      Gap(4),
       buildTextField(
         enController,
         "Feature Title (English)".tr,

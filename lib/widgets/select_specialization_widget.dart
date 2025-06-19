@@ -4,7 +4,6 @@ import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/models/specialize_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 class SelectSpecializationWidget extends StatelessWidget {
   const SelectSpecializationWidget({
@@ -22,6 +21,8 @@ class SelectSpecializationWidget extends StatelessWidget {
       isExpanded: true,
       value: value,
       decoration: InputDecoration(
+        filled: true,
+        fillColor: whiteColor,
         contentPadding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(7.r),
@@ -31,18 +32,18 @@ class SelectSpecializationWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(7),
           borderSide: const BorderSide(color: pageColor, width: 1.5),
         ),
-        label: Text(
-          'Select Category'.tr,
-          style: getMediumStyle(context).copyWith(
-            fontWeight: FontWeight.w500,
-            color: Colors.black87,
-          ),
-        ),
+        // label: Text(
+        //   'Select Category'.tr,
+        //   style: getMediumStyle(context).copyWith(
+        //     fontWeight: FontWeight.w500,
+        //     color: Colors.black87,
+        //   ),
+        // ),
       ),
       icon: Icon(
         Icons.keyboard_arrow_down_outlined,
         size: 23.r,
-        color: greyColor,
+        color: primaryColor,
       ),
       items: models.map((item) {
         return DropdownMenuItem<SpecializeModel>(
@@ -51,8 +52,8 @@ class SelectSpecializationWidget extends StatelessWidget {
             translateDatabase(
                 arabic: item.nameAr ?? "", english: item.nameEn ?? ""),
             style: getLightStyle(context).copyWith(
-              color: greyColor.withAlpha(160),
-              fontWeight: FontWeight.bold,
+              color: blackColor,
+              fontWeight: FontWeight.w500,
             ),
           ),
         );

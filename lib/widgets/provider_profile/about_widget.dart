@@ -23,10 +23,7 @@ class AboutWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Divider(
-                thickness: 3,
-              ),
-              Gap(10),
+              Gap(16),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -34,26 +31,26 @@ class AboutWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      titleWidget("Country".tr),
-                      Gap(5.h),
+                      titleWidget("Country".tr, icon: Icons.location_on),
+                      Gap(4),
                       valueWidget(translateDatabase(
                           arabic: controller.providerModel!.countryNameAr,
                           english: controller.providerModel!.countryNameEn)),
-                      Gap(20.h),
-                      titleWidget("Email".tr),
-                      Gap(5.h),
+                      Gap(24),
+                      titleWidget("Email".tr, icon: Icons.email),
+                      Gap(4),
                       valueWidget(controller.providerModel!.email),
                       if (controller.providerModel!.commercialRegisterNumber !=
                           "") ...[
                         Gap(20.h),
                         titleWidget("Commercial No.".tr),
-                        Gap(5.h),
+                        Gap(4),
                         valueWidget(controller
                             .providerModel!.commercialRegisterNumber
                             .toString()),
-                        Gap(20.h),
+                        Gap(24),
                         titleWidget("VAT No.".tr),
-                        Gap(5.h),
+                        Gap(4),
                         valueWidget(controller.providerModel!.vat.toString())
                       ],
                     ],
@@ -61,61 +58,61 @@ class AboutWidget extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      titleWidget("City".tr),
-                      Gap(5.h),
+                      titleWidget("City".tr, icon: Icons.location_on),
+                      Gap(4),
                       valueWidget(translateDatabase(
                           arabic: controller.providerModel!.governmentNameAr,
                           english: controller.providerModel!.governmentNameEn)),
-                      Gap(20.h),
-                      titleWidget("Phone".tr),
-                      Gap(5.h),
+                      Gap(24),
+                      titleWidget("Phone".tr, icon: Icons.phone),
+                      Gap(4),
                       valueWidget(
                           "+${controller.providerModel!.countryCode}${controller.providerModel!.phone}"),
                       if (controller.providerModel!.commercialRegisterNumber !=
                           "") ...[
-                        Gap(20.h),
+                        Gap(24),
                         titleWidget("Tax No.".tr),
-                        Gap(5.h),
+                        Gap(4),
                         valueWidget(controller.providerModel!.taxCardNumber),
-                        Gap(20.h),
+                        Gap(24),
                         titleWidget("".tr),
-                        Gap(5.h),
+                        Gap(4),
                         valueWidget("")
                       ],
                     ],
                   ),
                 ],
               ),
-              Gap(20.h),
+              Gap(24),
               Text(
                 "Provider Type".tr,
                 style: getRegularStyle(Get.context!).copyWith(
-                  fontWeight: FontWeight.w300,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              Gap(10),
+              Gap(4),
               Text(
                 translateDatabase(
                     arabic: controller.providerModel!.providerTypeNameAr,
                     english: controller.providerModel!.providerTypeNameEn),
                 style: TextStyle(
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   fontSize: context.isTablet ? 8.sp : 14.sp,
                   color: Colors.black,
                 ),
               ),
-              Gap(20.h),
+              Gap(24),
               Text(
                 "Bio",
                 style: getRegularStyle(Get.context!).copyWith(
-                  fontWeight: FontWeight.w300,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-              Gap(10),
+              Gap(4),
               Text(
                 controller.providerModel!.bio,
                 style: TextStyle(
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w400,
                   fontSize: context.isTablet ? 8.sp : 14.sp,
                   color: Colors.black,
                 ),
@@ -127,7 +124,8 @@ class AboutWidget extends StatelessWidget {
                     Text(
                       "${"Commercial Papers".tr}: ",
                       style: getRegularStyle(Get.context!).copyWith(
-                        color: Colors.black54,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                     Spacer(),
@@ -143,7 +141,7 @@ class AboutWidget extends StatelessWidget {
                         "View".tr,
                         style: getRegularStyle(context).copyWith(
                           color: primaryColor,
-                          fontWeight: FontWeight.w500,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
@@ -154,7 +152,7 @@ class AboutWidget extends StatelessWidget {
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  height: 200.h,
+                  height: 250,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: PDF().cachedFromUrl(
@@ -173,7 +171,8 @@ class AboutWidget extends StatelessWidget {
                     Text(
                       "${"Tax Papers".tr}: ",
                       style: getRegularStyle(Get.context!).copyWith(
-                        color: Colors.black54,
+                        color: blackColor,
+                        fontWeight: FontWeight.w500,
                       ),
                     ),
                     Spacer(),
@@ -188,7 +187,7 @@ class AboutWidget extends StatelessWidget {
                       child: Text(
                         "View".tr,
                         style: getRegularStyle(context).copyWith(
-                            color: primaryColor, fontWeight: FontWeight.w500),
+                            color: primaryColor, fontWeight: FontWeight.w400),
                       ),
                     ),
                   ],

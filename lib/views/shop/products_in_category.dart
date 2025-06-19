@@ -4,7 +4,7 @@ import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
-import 'package:b2b_partenership/widgets/shop/shop_item_product_widget.dart';
+import 'package:b2b_partenership/widgets/shop/shop_item_product_stack_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -89,7 +89,7 @@ class ProductsInCategory extends StatelessWidget {
                       itemCount: controller.products.length,
                       itemBuilder: (context, index) {
                         final product = controller.products[index];
-                        return ShopProductItemWidget(
+                        return ShopItemProductStackWidget(
                           product: product,
                           onTap: () {
                             Get.toNamed(

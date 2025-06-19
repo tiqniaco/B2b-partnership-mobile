@@ -22,10 +22,7 @@ class CustomServerStatusWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return switch (statusRequest) {
       StatusRequest.loading =>
-        //Skeletonizer(
-        //     enabled: true,
-        //     child: child,
-        //   ),
+    
         Container(
           height: height,
           alignment: Alignment.center,

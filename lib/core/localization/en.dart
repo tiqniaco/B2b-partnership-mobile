@@ -96,6 +96,8 @@ const Map<String, String> en = {
   "Work Categories": "Work Categories",
   "Provider Types": "Provider Types",
   "Locations": "Locations",
+  "Search for service, job, training bags...":
+      "Search for service, job, training bags...",
   "Browse categories": "Browse categories",
   "Top Rated Providers": "Top Rated Providers",
   "Egypt Top Rated": "Egypt Top Rated",
@@ -119,6 +121,23 @@ const Map<String, String> en = {
   "You can add the available\njob for recruitment":
       "You can add the available\njob for recruitment",
   "Need employees?": "Need employees?",
+  "90% Discount": "90% Discount",
+  "Training bag on the basics of\npurchasing management":
+      "Training bag on the basics of\npurchasing management",
+  'Shop Now': 'Shop Now',
+  "More than 100 job offer": "More than 100 job offer",
+  "Freelance & Full time & part time": "Freelance & Full time & part time",
+  "Need Custom Service?! ": "Need Custom Service?! ",
+  "Now you can post your\ncustom service request":
+      "Now you can post your\ncustom service request",
+  "All service providers": "All service providers",
+  "IT Services and industry sectors and more":
+      "IT Services and industry sectors and more",
+  'Browse All Categories': 'Browse All Categories',
+  "Find your Suitable Job Now": "Find your Suitable Job Now",
+  "Now Purchasing Management\n Bag pdf, Audio, Video":
+      "Now Purchasing Management\n Bag pdf, Audio, Video",
+  "Special Opportunity": "Special Opportunity",
 
   // manage category
   "Category & Subcategory": "Category & Subcategory",
@@ -218,6 +237,9 @@ const Map<String, String> en = {
   "Are you sure you want to\ndelete this job?":
       "Are you sure you want to\ndelete this job?",
   "Show Applications": "Show Applications",
+  "View Now": "View Now",
+  "Why should we hire you for this position?":
+      "Why should we hire you for this position?",
 
   // Job Application
   'Job Application': 'Job Application',
@@ -290,6 +312,19 @@ const Map<String, String> en = {
   "Terms and condition": "Terms and condition",
   "Categories List": "Categories List",
   "Products List": "Products List",
+  "Recommended Bags": "Recommended Bags",
+  "Bag Details": "Bag Details",
+  "Add to Cart": "Add to Cart",
+  "About Bag": "About Bag",
+  "Sessions": "Sessions",
+  "Terms and Conditions": "Terms and Conditions",
+  "Bag Contents": "Bag Contents",
+  "OFF": "OFF",
+  "Contact Information": "Contact Information",
+  "Enter your contact details to receive order data":
+      "Enter your contact details to receive order data",
+  "Enter email (optional)": "Enter email (optional)",
+  "Enter phone (optional)": "Enter phone (optional)",
 
   // orders
   "Order": "Order",
@@ -313,6 +348,9 @@ const Map<String, String> en = {
   "Order Items": "Order Items",
   "My Orders": "My Orders",
   "Complete": "Complete",
+   "Order Number": "Order Number",
+    "My Jobs": "My Jobs",
+    "My Job Applications": "My Job Applications",
 
   // setting view
   "Orders": "Orders",
@@ -334,6 +372,7 @@ const Map<String, String> en = {
   "Company Type": "Company Type",
   "Mange your Contacts": "Mange your Contacts",
   "Sub Category": "Sub Category",
+  "Terms & Conditions": "Terms & Conditions",
 
   // edit profile
   "uploading image is optional": "uploading image is optional",
@@ -396,6 +435,11 @@ const Map<String, String> en = {
   'offer price': 'offer price',
   'offer description': 'offer description',
   'Submit': 'Submit',
+  "My Posts": "My Posts",
+  "Show": "Show",
+  "Closed": "Closed",
+  "Duration": "Duration",
+  'Client Profile': 'Client Profile',
 
   // contact
   'enter phone number': 'enter phone number',

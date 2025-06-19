@@ -85,42 +85,51 @@ flutter:
     # - assets/fonts/Cairo-Regular.ttf
 
   fonts:
-    - family: Ibm
+    - family: PlaypenSans
       fonts:
-       - asset: assets/fonts/ibm_plex_sans_arabic_bold.ttf
+       - asset: assets/fonts/Playpen_Sans/PlaypenSans-ExtraBold.ttf
+         weight: 800
+
+       - asset: assets/fonts/Playpen_Sans/PlaypenSans-Bold.ttf
          weight: 700
 
-       - asset: assets/fonts/ibm_plex_sans_arabic_semi_bold.ttf
+       - asset: assets/fonts/Playpen_Sans/PlaypenSans-SemiBold.ttf
          weight: 600
 
-       - asset: assets/fonts/ibm_plex_sans_arabic_medium.ttf
+       - asset: assets/fonts/Playpen_Sans/PlaypenSans-Medium.ttf
          weight: 500
 
-       - asset: assets/fonts/ibm_plex_sans_arabic_regular.ttf
+       - asset: assets/fonts/Playpen_Sans/PlaypenSans-Regular.ttf
          weight: 400
 
-       - asset: assets/fonts/ibm_plex_sans_arabic_light.ttf
+       - asset: assets/fonts/Playpen_Sans/PlaypenSans-Light.ttf
          weight: 300
 
-       - asset: assets/fonts/ibm_plex_sans_arabic_extra_light.ttf
+       - asset: assets/fonts/Playpen_Sans/PlaypenSans-ExtraLight.ttf
          weight: 200
 
-       - asset: assets/fonts/ibm_plex_sans_arabic_thin.ttf
+       - asset: assets/fonts/Playpen_Sans/PlaypenSans-Thin.ttf
          weight: 100
 
-    - family: DinNext
+    - family: Roboto
       fonts:
-        - asset: assets/fonts/din_next/din_next_thin.ttf
+        - asset: assets/fonts/Roboto/Roboto-Thin.ttf
           weight: 100
 
-        - asset: assets/fonts/din_next/din_next_light.ttf
+        - asset: assets/fonts/Roboto/Roboto-ExtraLight.ttf
+          weight: 200
+
+        - asset: assets/fonts/Roboto/Roboto-Light.ttf
           weight: 300
 
-        - asset: assets/fonts/din_next/din_next_regular.otf
+        - asset: assets/fonts/Roboto/Roboto-Regular.ttf
           weight: 400
 
-        - asset: assets/fonts/din_next/din_next_medium.ttf
+        - asset: assets/fonts/Roboto/Roboto-Medium.ttf
           weight: 500
 #
-        - asset: assets/fonts/din_next/din_next_bold.ttf
+        - asset: assets/fonts/Roboto/Roboto-Bold.ttf
           weight: 700
+
+        - asset: assets/fonts/Roboto/Roboto-ExtraBold.ttf
+          weight: 800

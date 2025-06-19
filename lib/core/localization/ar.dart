@@ -99,7 +99,9 @@ const Map<String, String> ar = {
   "Work Categories": "فئات العمل",
   "Provider Types": "اقسام مقدمي الخدمات",
   "Locations": "الاماكن",
-  "Browse categories": "تصفح الفئات",
+  "Browse Categories": "تصفح الفئات",
+  "Search for service, job, training bags...":
+      "ابحث عن خدمة، وظيفة، حقائب التدريب...",
   "Top Rated Providers": "الاعلي تقييما",
   "Egypt Top Rated": "الاعلي تقييم في مصر",
   "Saudi Arabia Top Rated": 'الاعلي تقييم في السعودية',
@@ -121,6 +123,7 @@ const Map<String, String> ar = {
   "You can add the available\njob for recruitment":
       "يمكنك اضافة الوظائف \nالمتاحة للتوظيف",
   "Need employees?": "تحتاج موظفين؟",
+  "Special Opportunity": "فرصة خاصة",
 
   // manage category
   "Category & Subcategory": "الفئات الرئيسية & الفرعية",
@@ -131,6 +134,23 @@ const Map<String, String> ar = {
   "Delete Category": "حذف الفئة",
   "Edit Category": "تعديل الفئة",
   'Delete Sub Category': "حذف الفئة الفرعية",
+  "90% Discount": "90% خصم",
+  "Training bag on the basics of\npurchasing management":
+      "حقيبة التدريب على الاساس\nمديرية المشتريات",
+  'Shop Now': 'تسوق الان',
+  "More than 100 job offer": "اكثر من 100 وظيفة",
+  "Freelance & Full time & part time": "حرة & وقت كامل & وقت جزئي",
+  "Need Custom Service?! ": "تريد خدمة معينة؟",
+  "Now you can post your\ncustom service request":
+      "يمكنك الان نشر الخدمة\nالتي تحتاجها",
+  "All service providers": "جميع مقدمي الخدمات",
+  "IT Services and industry sectors and more":
+      "خدمات IT وقطاعات الصناعة والمزيد",
+  'Browse All Categories': 'تصفح كل الفئات',
+  "Find your Suitable Job Now": "ابحث عن وظيفتك الافضل الان",
+  "Now Purchasing Management\n Bag pdf, Audio, Video":
+      "الان حقيبة مديرية المشتريات\n بطاقة pdf, صوتيات, فيديو",
+  "All Jobs": "كل الوظايف",
 
   // manage locations
   "Countries & Cities": "الدول والمحافظات",
@@ -219,6 +239,9 @@ const Map<String, String> ar = {
   "Delete Job": "حذف الوظيفة",
   "Are you sure you want to\ndelete this job?": "هل انت متأكد من\n حذف الوظيفة",
   "Show Applications": "عرض الطلبات",
+  "View Now": "عرض الان",
+  "Why should we hire you for this position?":
+      "لماذا يجب علينا توظيفك لهذا المنصب؟",
 
   // Job Application
   'Job Application': "طلب توظيف",
@@ -291,6 +314,19 @@ const Map<String, String> ar = {
   "Terms and condition": "الشروط والاحكام",
   "Categories List": "قائمة الفئات",
   "Products List": "قائمة المنتجات",
+  "Recommended Bags": "الحقائب الموصى بها",
+  "Bag Details": "تفاصيل الحقيبة",
+  "Add to Cart": "اضافة الى السلة",
+  "About Bag": "حول الحقيبة",
+  "Sessions": "الجلسات",
+  "Terms and Conditions": "الشروط والاحكام",
+  "Bag Contents": "محتوى الحقيبة",
+  "OFF": "خصم",
+  "Contact Information": "معلومات الاتصال",
+  "Enter your contact details to receive order data":
+      "ادخل معلوماتك للحصول على بيانات الطلب",
+  "Enter email (optional)": "ادخل البريد الالكتروني (اختياري)",
+  "Enter phone (optional)": "ادخل رقم الهاتف (اختياري)",
 
   // orders
   "Order": "الطلب",
@@ -314,6 +350,9 @@ const Map<String, String> ar = {
   "Order Items": "اصناف الطلب",
   "My Orders": "طلباتي",
   "Complete": "مكتمل",
+  "Order Number": "رقم الطلب",
+  "My Jobs": "وظائفي",
+  "My Job Applications": "طلبات وظائفي",
 
   // setting view
   "Orders": "الطلبات",
@@ -395,6 +434,11 @@ const Map<String, String> ar = {
   "enter feature title in arabic": "ادخل عنوان الميزة بالعربية",
   "Feature Title (English)": "عنوان الميزة (بالانجليزية)",
   "enter feature title in english": "ادخل عنوان الميزة بالانجليزية",
+  "My Posts": "منشوراتي",
+  "Show": "عرض",
+  "Closed": "مغلق",
+  "Duration": "مدة الزمنية",
+  'Client Profile': 'ملف العميل',
 
   // contact
   'enter phone number': "ادخل رقم الهاتف",
@@ -494,7 +538,7 @@ const Map<String, String> ar = {
   "Resume not found": "السيرة الذاتية غير موجودة",
   "Preview": "معاينة",
   "Client Info": "معلومات العميل",
-
+  "Terms & Conditions": "الشروط والاحكام",
   "Search Applications": "البحث في الطلبات",
   "Search about job applications": "البحث عن طلبات التوظيف",
   "applications found": "طلبات تم العثور عليها",

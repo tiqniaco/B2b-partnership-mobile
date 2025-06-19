@@ -5,6 +5,7 @@ import 'package:b2b_partenership/controller/request_services/service_request_det
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:b2b_partenership/core/utils/font_manager.dart';
 import 'package:b2b_partenership/models/price_offer_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -23,31 +24,27 @@ class PriceOfferWidget extends GetView<ServiceRequestDetailsController> {
       onTap: () {
         Get.defaultDialog(
           contentPadding: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-          backgroundColor: const Color.fromARGB(255, 238, 169, 176),
+          backgroundColor: backgroundColor,
           titlePadding: EdgeInsets.symmetric(vertical: 10),
           title: "Offer Details".tr,
           titleStyle: TextStyle(
-              fontSize: 13.sp, color: whiteColor, fontWeight: FontWeight.bold),
+              fontSize: 13.sp, color: blackColor, fontWeight: FontWeight.bold),
           content: SizedBox(
             height: 500.h,
             child: SingleChildScrollView(
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  buildRow("Price:", model.requestOfferPrice,
+                  buildRow("Price", model.requestOfferPrice,
                       Icons.payments_outlined),
-                  buildRow("Duration:", model.requestOfferDuration,
+                  Gap(16),
+                  buildRow("Duration", model.requestOfferDuration,
                       Icons.watch_later_outlined),
-                  buildRow("Description:", "", Icons.note_alt_outlined),
-                  Text(
-                    model.offerDescription,
-                    style: TextStyle(
-                      fontSize: 13.sp,
-                      color: blackColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Gap(10),
+                  Gap(16),
+                  buildRow("Description", model.offerDescription,
+                      Icons.note_alt_outlined),
+                  Gap(24),
                   InkWell(
                     onTap: () {
                       Get.toNamed(
@@ -59,15 +56,15 @@ class PriceOfferWidget extends GetView<ServiceRequestDetailsController> {
                     child: Container(
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: whiteColor,
-                          borderRadius: BorderRadius.circular(10),
+                          color: primaryColor,
+                          borderRadius: customBorderRadius,
                         ),
                         alignment: Alignment.center,
                         child: Text(
                           "View Applicant Profile".tr,
                           style: TextStyle(
-                            fontSize: 15.r,
-                            color: blackColor,
+                            fontSize: 14.r,
+                            color: whiteColor,
                             fontWeight: FontWeight.bold,
                           ),
                         )),
@@ -79,19 +76,19 @@ class PriceOfferWidget extends GetView<ServiceRequestDetailsController> {
         );
       },
       child: Container(
-        padding: EdgeInsets.all(15),
+        padding: EdgeInsets.all(4),
         decoration: BoxDecoration(
-          color: greyCart,
-          borderRadius: BorderRadius.circular(10),
+          color: lightPrimaryColor.withAlpha(170),
+          borderRadius: BorderRadius.circular(10.r),
         ),
         child: Row(
           children: [
             Container(
-              height: 60.h,
-              width: 60.h,
-              decoration: BoxDecoration(shape: BoxShape.circle),
+              height: 46.h,
+              width: 46.h,
+              decoration: BoxDecoration(),
               child: ClipRRect(
-                  borderRadius: BorderRadius.circular(100),
+                  borderRadius: BorderRadius.circular(10),
                   child: CachedNetworkImage(imageUrl: model.userImage)),
             ),
             Gap(15),
@@ -101,16 +98,23 @@ class PriceOfferWidget extends GetView<ServiceRequestDetailsController> {
                 children: [
                   Text(
                     model.userName,
-                    style: getMediumStyle(context),
+                    style: getBoldStyle(context)
+                        .copyWith(fontSize: 14.r, fontWeight: FontWeight.bold),
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
-                  Text(
-                    model.requestOfferPrice,
-                    style: getMediumStyle(context).copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: primaryColor,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        "Price".tr,
+                        style: getMediumStyle(context).copyWith(fontSize: 14.r),
+                      ),
+                      Gap(4),
+                      Text(
+                        model.requestOfferPrice,
+                        style: getMediumStyle(context).copyWith(fontSize: 14.r),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -125,8 +129,8 @@ class PriceOfferWidget extends GetView<ServiceRequestDetailsController> {
                         height: 26.h,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: greyColor,
+                          borderRadius: customBorderRadius,
+                          color: primaryColor,
                         ),
                         child: Text(
                           "Accepted".tr,
@@ -163,12 +167,12 @@ class PriceOfferWidget extends GetView<ServiceRequestDetailsController> {
                 : Row(
                     children: [
                       Container(
-                        width: 90.w,
+                        width: 74.w,
                         height: 26.h,
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: greyColor,
+                          borderRadius: customBorderRadius,
+                          color: primaryColor,
                         ),
                         child: Text(
                           model.requestOfferStatus.tr,
@@ -178,16 +182,20 @@ class PriceOfferWidget extends GetView<ServiceRequestDetailsController> {
                           ),
                         ),
                       ),
-                      if (controller.model.status != "Closed")
-                        IconButton(
-                          onPressed: () {
-                            controller.deleteOffer(model.requestOfferId);
-                          },
-                          icon: Icon(
-                            Icons.close,
-                            size: 20.r,
-                          ),
-                        )
+                      controller.model.status != "Closed"
+                          ? Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: InkWell(
+                                onTap: () {
+                                  controller.deleteOffer(model.requestOfferId);
+                                },
+                                child: Icon(
+                                  Icons.close,
+                                  size: 20.r,
+                                ),
+                              ),
+                            )
+                          : Gap(8)
                     ],
                   )
           ],
@@ -197,22 +205,34 @@ class PriceOfferWidget extends GetView<ServiceRequestDetailsController> {
   }
 
   Widget buildRow(String title, String value, IconData icon) {
-    return Row(
-      children: [
-        Icon(icon, color: blackColor, size: 15.r),
-        Gap(10),
-        Text(
-          title.tr,
-          style: TextStyle(
-              fontSize: 13.sp, color: whiteColor, fontWeight: FontWeight.bold),
-        ),
-        Spacer(),
-        Text(
-          value,
-          style: TextStyle(
-              fontSize: 13.sp, color: blackColor, fontWeight: FontWeight.bold),
-        ),
-      ],
+    return Container(
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        border: Border.all(color: primaryColor),
+        borderRadius: customBorderRadius,
+      ),
+      child: Row(
+        children: [
+          Icon(icon, color: primaryColor, size: 15.r),
+          Gap(10),
+          Text(
+            "${title.tr}:",
+            style: TextStyle(
+                fontSize: 13.sp,
+                color: blackColor,
+                fontWeight: FontWeight.bold),
+          ),
+          Gap(8),
+          // Spacer(),
+          Text(
+            value,
+            style: TextStyle(
+                fontSize: 13.sp,
+                color: blackColor,
+                fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
     );
   }
 }

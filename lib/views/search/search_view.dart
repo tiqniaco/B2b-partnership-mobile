@@ -24,11 +24,9 @@ class SearchView extends StatelessWidget {
       return Scaffold(
         appBar: AppBar(
           toolbarHeight: context.isTablet ? 45.h : null,
-          backgroundColor: whiteColor,
           title: TextFormField(
             decoration: InputDecoration(
-              filled: true,
-              fillColor: borderColor.withAlpha(30),
+             
               contentPadding: EdgeInsets.symmetric(
                 horizontal: 8.w,
                 vertical: 8.h,

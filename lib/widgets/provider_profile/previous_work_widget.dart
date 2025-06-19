@@ -6,6 +6,7 @@ import 'package:b2b_partenership/models/pervious_work_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 class PreviousWork extends StatelessWidget {
@@ -20,7 +21,7 @@ class PreviousWork extends StatelessWidget {
             arguments: {"model": model});
       },
       child: Container(
-        height: 120.h,
+        height: 105.h,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
             image: DecorationImage(
@@ -32,7 +33,7 @@ class PreviousWork extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15),
-              color: blackColor.withAlpha(95)),
+              color: blackColor.withAlpha(80)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.end,
@@ -51,12 +52,12 @@ class PreviousWork extends StatelessWidget {
                 ),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
-              )
+              ),
+              Gap(16),
             ],
           ),
         ),
       ),
     );
-
   }
 }

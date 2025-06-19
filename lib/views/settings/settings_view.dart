@@ -8,6 +8,7 @@ import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/language_widget.dart';
 import 'package:b2b_partenership/widgets/please_login_widget.dart';
+import 'package:b2b_partenership/widgets/settings/settings_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -76,13 +77,6 @@ class SettingsView extends StatelessWidget {
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                            Text(
-                                              "+${controller.menuModel!.data!.countryCode}${controller.menuModel!.data!.phone}",
-                                              style: getMediumStyle(context)
-                                                  .copyWith(
-                                                color: greyColor,
-                                              ),
-                                            ),
                                           ],
                                         ),
                                       ),
@@ -138,19 +132,20 @@ class SettingsView extends StatelessWidget {
                                         null &&
                                     controller.menuModel!.data!.providerId !=
                                         "")
-                                  InkWell(
-                                    onTap: () {
-                                      controller.switchAccount();
-                                    },
-                                    child: Material(
-                                      borderRadius: BorderRadius.circular(5),
-                                      elevation: 0.5,
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 24.0),
+                                    child: InkWell(
+                                      onTap: () {
+                                        controller.switchAccount();
+                                      },
                                       child: Container(
                                         alignment: Alignment.center,
                                         width: double.infinity,
                                         padding: EdgeInsets.all(12),
                                         decoration: BoxDecoration(
-                                          color: primaryColor.withAlpha(40),
+                                          color:
+                                              lightPrimaryColor.withAlpha(190),
                                           borderRadius:
                                               BorderRadius.circular(5),
                                         ),
@@ -162,7 +157,7 @@ class SettingsView extends StatelessWidget {
                                               "Switch to Provider Account".tr,
                                               style: getRegularStyle(context)
                                                   .copyWith(
-                                                color: blackColor,
+                                                color: primaryColor,
                                                 fontWeight: FontWeight.w500,
                                               ),
                                             ),
@@ -170,13 +165,14 @@ class SettingsView extends StatelessWidget {
                                             Icon(
                                               Icons.restart_alt_rounded,
                                               size: 17.r,
+                                              color: primaryColor,
                                             )
                                           ],
                                         ),
                                       ),
                                     ),
                                   ),
-                                Gap(10),
+                                Gap(24),
                                 GridView(
                                   physics: NeverScrollableScrollPhysics(),
                                   shrinkWrap: true,
@@ -189,7 +185,7 @@ class SettingsView extends StatelessWidget {
                                             : 2,
                                     mainAxisSpacing: 15,
                                     crossAxisSpacing: 15,
-                                    childAspectRatio: 9 / 4.1,
+                                    childAspectRatio: 9 / 3.5,
                                   ),
                                   children: [
                                     boxWidget(
@@ -231,15 +227,7 @@ class SettingsView extends StatelessWidget {
                                     })
                                   ],
                                 ),
-                                Gap(20.h),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    thickness: 5,
-                                    color: borderColor.withAlpha(40),
-                                  ),
-                                ),
-                                Gap(10.h),
+                                Gap(16),
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -249,44 +237,33 @@ class SettingsView extends StatelessWidget {
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
-                                    Gap(20),
-                                    rowWidget("Email".tr,
-                                        controller.menuModel!.data!.email!),
-                                    FractionallySizedBox(
-                                      widthFactor: 10,
-                                      child: Divider(
-                                        color: borderColor,
-                                      ),
-                                    ),
+                                    Gap(16),
                                     rowWidget(
-                                        "City".tr,
+                                      icon: Icons.phone_in_talk,
+                                      controller.menuModel!.data!.phone!,
+                                    ),
+                                    Gap(8),
+                                    rowWidget(
+                                      icon: Icons.email,
+                                      controller.menuModel!.data!.email!,
+                                    ),
+                                    Gap(8),
+                                    rowWidget(
+                                        icon: Icons.location_on,
                                         translateDatabase(
                                             arabic: controller.menuModel!.data!
                                                 .governmentNameAr!,
                                             english: controller.menuModel!.data!
                                                 .governmentNameEn!)),
-                                    FractionallySizedBox(
-                                      widthFactor: 10,
-                                      child: Divider(
-                                        color: borderColor,
-                                      ),
-                                    ),
+                                    Gap(8),
                                     rowWidget(
-                                        "Country".tr,
+                                        icon: FontAwesomeIcons.locationArrow,
                                         translateDatabase(
                                             arabic: controller.menuModel!.data!
                                                 .countryNameAr!,
                                             english: controller.menuModel!.data!
                                                 .countryNameEn!)),
-                                    Gap(30),
-                                    FractionallySizedBox(
-                                      widthFactor: 10,
-                                      child: Divider(
-                                        thickness: 5,
-                                        color: borderColor.withAlpha(40),
-                                      ),
-                                    ),
-                                    Gap(20),
+                                    Gap(24),
                                     Text(
                                       "Other Services".tr,
                                       style:
@@ -294,7 +271,7 @@ class SettingsView extends StatelessWidget {
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
-                                    Gap(20),
+                                    Gap(16),
                                     rowWithArrow(
                                       CupertinoIcons.person,
                                       "Edit Profile".tr,
@@ -308,26 +285,12 @@ class SettingsView extends StatelessWidget {
                                       },
                                     ),
                                     Gap(8),
-                                    FractionallySizedBox(
-                                      widthFactor: 10,
-                                      child: Divider(
-                                        color: borderColor,
-                                      ),
-                                    ),
-                                    Gap(8),
                                     rowWithArrow(
                                       CupertinoIcons.padlock,
                                       "Change Password".tr,
                                       () {
                                         Get.toNamed(AppRoutes.changePassword);
                                       },
-                                    ),
-                                    Gap(8),
-                                    FractionallySizedBox(
-                                      widthFactor: 10,
-                                      child: Divider(
-                                        color: borderColor,
-                                      ),
                                     ),
                                     Gap(8),
                                     rowWithArrow(
@@ -342,25 +305,12 @@ class SettingsView extends StatelessWidget {
                                       },
                                     ),
                                     Gap(8),
-                                    FractionallySizedBox(
-                                      widthFactor: 10,
-                                      child: Divider(
-                                        color: borderColor,
-                                      ),
-                                    ),
-                                    Gap(8),
                                     rowWithArrow(
                                       Icons.logout_rounded,
                                       "Logout".tr,
                                       () {
                                         logoutDialog();
                                       },
-                                    ),
-                                    FractionallySizedBox(
-                                      widthFactor: 10,
-                                      child: Divider(
-                                        color: borderColor,
-                                      ),
                                     ),
                                     Gap(8),
                                     rowWithArrow(
@@ -371,13 +321,6 @@ class SettingsView extends StatelessWidget {
                                       },
                                     ),
                                     Gap(8),
-                                    FractionallySizedBox(
-                                      widthFactor: 10,
-                                      child: Divider(
-                                        color: borderColor,
-                                      ),
-                                    ),
-                                    Gap(8),
                                     rowWithArrow(
                                       CupertinoIcons.news,
                                       "Terms & Conditions".tr,
@@ -385,13 +328,6 @@ class SettingsView extends StatelessWidget {
                                         Get.toNamed(
                                             AppRoutes.termsAndConditions);
                                       },
-                                    ),
-                                    Gap(8),
-                                    FractionallySizedBox(
-                                      widthFactor: 10,
-                                      child: Divider(
-                                        color: borderColor,
-                                      ),
                                     ),
                                     Gap(8),
                                     LanguageWidget(),
@@ -425,119 +361,13 @@ class SettingsView extends StatelessWidget {
                             CircularProgressIndicator(),
                           ],
                         ),
-                      )
+                      ),
                     ],
                   ],
                 ),
               ),
           ],
         ),
-      ),
-    );
-  }
-
-  Widget boxWidget(IconData icon, Color color, String title, String subTitle,
-      void Function() onTap) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: borderColor)),
-        child: Row(
-          children: [
-            CircleAvatar(
-              radius: 19.r,
-              backgroundColor: color.withAlpha(30),
-              child: Icon(
-                icon,
-                color: color,
-                size: 20.r,
-              ),
-            ),
-            Gap(10),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: getMediumStyle(Get.context!).copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  subTitle,
-                  style: getRegularStyle(Get.context!).copyWith(
-                    color: greyColor,
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget rowWidget(String title, String data) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 9.0),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 1,
-            child: Text(
-              title,
-              style: getRegularStyle(Get.context!).copyWith(
-                fontWeight: FontWeight.w300,
-              ),
-            ),
-          ),
-          Expanded(
-              flex: 2,
-              child: Text(
-                data,
-                style: getRegularStyle(Get.context!).copyWith(
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black54,
-                ),
-              ))
-        ],
-      ),
-    );
-  }
-
-  Widget rowWithArrow(IconData icon, String title, void Function() onPressed) {
-    return InkWell(
-      onTap: onPressed,
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 18.r,
-            backgroundColor: borderColor.withAlpha(30),
-            child: Icon(
-              icon,
-              color: Colors.black54,
-              size: 20.r,
-            ),
-          ),
-          Gap(15),
-          Text(
-            title,
-            style: getRegularStyle(Get.context!).copyWith(
-              fontWeight: FontWeight.w300,
-            ),
-          ),
-          Spacer(),
-          IconButton(
-              onPressed: onPressed,
-              icon: Icon(
-                Icons.arrow_forward_ios_rounded,
-                size: 15.r,
-              ))
-        ],
       ),
     );
   }

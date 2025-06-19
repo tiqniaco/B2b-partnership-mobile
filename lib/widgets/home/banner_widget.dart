@@ -21,74 +21,141 @@ class BannerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration:
-          BoxDecoration(border: Border.all(color: primaryColor, width: 0)),
-      height: context.isTablet ? 170.h : 140.h,
+      decoration: BoxDecoration(
+        border: Border.all(color: primaryColor, width: 0),
+        borderRadius: BorderRadius.circular(10.r),
+      ),
+      height: context.isTablet ? 200 : 128.h,
       width: double.infinity,
       child: Stack(
         children: [
           ClipRRect(
+              borderRadius: BorderRadius.circular(10.r),
               child: Image.asset(
-            image, // "assets/images/man.jpeg",
-            fit: BoxFit.cover,
+                image,
+                fit: BoxFit.cover,
+                width: double.infinity,
+              )),
+          Container(
             width: double.infinity,
-          )),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(10.r),
+                topRight: Radius.circular(10.r),
+              ),
+              color: Colors.white,
+              gradient: LinearGradient(
+                begin: Get.locale?.languageCode == "en"
+                    ? Alignment.topLeft
+                    : Alignment.topRight,
+                end: Get.locale?.languageCode == "en"
+                    ? Alignment.bottomRight
+                    : Alignment.bottomLeft,
+                colors: [
+                  lightPrimaryColor,
+                  lightPrimaryColor.withAlpha(160),
+                  whiteColor.withAlpha(50),
+                  Colors.transparent,
+                  Colors.transparent,
+                ],
+              ),
+            ),
+            padding: EdgeInsets.only(
+              top: 20,
+              bottom: 12,
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            height: context.isTablet ? 250 : 127.h,
+            padding: EdgeInsets.only(
+              top: 25,
+              bottom: 12,
+              right: 16.0,
+              left: 16.0,
+            ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  title, //"Need Custom Service?",
+                  title,
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: context.isTablet ? 12.sp : 16.sp,
+                    color: primaryColor,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'PlaypenSans',
+                    fontSize: context.isTablet ? 12.r : 16.r,
                   ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
+                Gap(8),
                 Text(
                   description,
-                  // "you can post your custom services",
                   textAlign: TextAlign.start,
                   style: TextStyle(
-                      color: Colors.white,
-                      fontSize: context.isTablet ? 9.sp : 13.sp,
-                      fontWeight: FontWeight.normal),
+                      height: 1,
+                      color: primaryColor,
+                      fontSize: 12.r,
+                      fontWeight: FontWeight.w400),
                 ),
-                Gap(8.h),
+                Spacer(),
                 SizedBox(
-                  height: 33.h,
-                  width: context.isTablet ? 65.w : 90.w,
+                  height: 30.h,
+                  width: 150.r,
                   child: ElevatedButton(
                     style: ButtonStyle(
                       padding: WidgetStatePropertyAll(
-                        EdgeInsets.symmetric(
-                          horizontal: 10,
-                        ),
+                        EdgeInsets.symmetric(horizontal: 16),
                       ),
                       backgroundColor: WidgetStatePropertyAll(
-                        whiteColor,
+                        primaryColor,
                       ),
                       shape: WidgetStatePropertyAll(
                         RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8.r)),
+                            borderRadius: BorderRadius.circular(30.r)),
                       ),
                     ),
                     onPressed: onPressed,
                     child: Text(
                       buttonTitle,
                       style: getLightStyle(context).copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: blackColor,
+                        fontWeight: FontWeight.w500,
+                        color: whiteColor,
                       ),
                     ),
                   ),
-                )
+                ),
               ],
+            ),
+          ),
+          PositionedDirectional(
+            end: 0,
+            top: 0,
+            child: Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+                vertical: 5,
+              ),
+              decoration: BoxDecoration(
+                color: primaryColor,
+                borderRadius: BorderRadius.only(
+                  topLeft: Get.locale?.languageCode == "en"
+                      ? Radius.circular(0.r)
+                      : Radius.circular(10.r),
+                  topRight: Get.locale?.languageCode == "en"
+                      ? Radius.circular(10.r)
+                      : Radius.circular(0),
+                ),
+              ),
+              child: Text(
+                "Special Opportunity".tr,
+                style: getLightStyle(context).copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: whiteColor,
+                ),
+              ),
             ),
           ),
         ],

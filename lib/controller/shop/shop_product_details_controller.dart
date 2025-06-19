@@ -6,9 +6,11 @@ import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/functions/please_login_dialog.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
+import 'package:b2b_partenership/models/bag_content_model.dart';
 import 'package:b2b_partenership/models/product_description_model.dart';
 import 'package:b2b_partenership/models/shop_product_model.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:rename/platform_file_editors/abs_platform_file_editor.dart';
@@ -16,8 +18,12 @@ import 'package:rename/platform_file_editors/abs_platform_file_editor.dart';
 class ShopProductDetailsController extends GetxController {
   StatusRequest statusRequest = StatusRequest.loading;
   List<ProductDescriptionModel> descriptions = [];
+  List<BagContentModel> contents = [];
   ShopProductModel? product;
   String productId = "";
+  late PageController pageController;
+  int selectedIndex = 0;
+  TextDirection textDirection = TextDirection.rtl;
 
   List<String> items = [
     "First step",
@@ -28,10 +34,28 @@ class ShopProductDetailsController extends GetxController {
 
   @override
   void onInit() {
-    // product = Get.arguments['product'] as ShopProductModel;
+    pageController = PageController(initialPage: selectedIndex);
     productId = Get.arguments?['productId'] as String;
     getProductDetails();
+
+ 
     super.onInit();
+  }
+
+  bool containsArabic(String text) {
+    final arabicRegex = RegExp(r'[\u0600-\u06FF]');
+    return arabicRegex.hasMatch(text);
+  }
+
+  void onPageChanged(int index) {
+    selectedIndex = index;
+    update();
+  }
+
+  void onTabTapped(int index) {
+    selectedIndex = index;
+    pageController.jumpToPage(index);
+    update();
   }
 
   Future<void> getProductDetails() async {
@@ -58,7 +82,13 @@ class ShopProductDetailsController extends GetxController {
             (e) => ProductDescriptionModel.fromJson(e),
           ),
         );
-      
+
+        contents = List<BagContentModel>.from(
+          data['bagContents'].map(
+            (e) => BagContentModel.fromJson(e),
+          ),
+        );
+
         statusRequest = StatusRequest.success;
         update();
       },

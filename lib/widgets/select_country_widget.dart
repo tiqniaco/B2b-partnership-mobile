@@ -16,7 +16,7 @@ class SelectCountryWidget extends StatelessWidget {
   });
 
   final bool enabled;
-  final CountryModel value;
+  final CountryModel? value;
   final List<CountryModel> models;
   final void Function(CountryModel?) onChanged;
 
@@ -27,6 +27,9 @@ class SelectCountryWidget extends StatelessWidget {
         value: value,
         decoration: InputDecoration(
           enabled: enabled,
+          hintText: 'Select Country'.tr,
+          filled: true,
+          fillColor: whiteColor,
           contentPadding:
               EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
           focusedBorder: OutlineInputBorder(
@@ -37,18 +40,18 @@ class SelectCountryWidget extends StatelessWidget {
             borderRadius: BorderRadius.circular(7),
             borderSide: const BorderSide(color: pageColor, width: 1.5),
           ),
-          label: Text(
-            'Select Country'.tr,
-            style: getMediumStyle(context).copyWith(
-              fontWeight: FontWeight.w500,
-              color: Colors.black87,
-            ),
-          ),
+          // label: Text(
+
+          //   style: getMediumStyle(context).copyWith(
+          //     fontWeight: FontWeight.w500,
+          //     color: Colors.black87,
+          //   ),
+          // ),
         ),
         icon: Icon(
           Icons.keyboard_arrow_down_outlined,
           size: 23.r,
-          color: greyColor,
+          color: primaryColor,
         ),
         items: models.map((item) {
           return DropdownMenuItem<CountryModel>(
@@ -65,8 +68,8 @@ class SelectCountryWidget extends StatelessWidget {
                     translateDatabase(
                         arabic: item.nameAr ?? "", english: item.nameEn ?? ""),
                     style: getLightStyle(context).copyWith(
-                      color: greyColor.withAlpha(160),
-                      fontWeight: FontWeight.bold,
+                      color: blackColor,
+                      fontWeight: FontWeight.w500,
                     ),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,

@@ -1,7 +1,6 @@
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 class HomeRowWidget extends StatelessWidget {
@@ -18,7 +17,7 @@ class HomeRowWidget extends StatelessWidget {
           style: TextStyle(
             color: Colors.black87,
             fontWeight: FontWeight.w500,
-            fontSize: context.isTablet ? 13.sp : 17.sp,
+            fontSize: 16.r,
           ),
         ),
         InkWell(
@@ -29,16 +28,11 @@ class HomeRowWidget extends StatelessWidget {
                 "See all".tr,
                 style: TextStyle(
                   color: primaryColor,
-                  fontWeight: FontWeight.w500,
-                  fontSize: context.isTablet ? 11.sp : 16.sp,
+                  decoration: TextDecoration.underline,
+                  decorationColor: primaryColor,
+                  fontSize: 14.r,
                 ),
               ),
-              Gap(10),
-              Icon(
-                Icons.arrow_forward_ios,
-                size: 12.w,
-                color: primaryColor,
-              )
             ],
           ),
         )

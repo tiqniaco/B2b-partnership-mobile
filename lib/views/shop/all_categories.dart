@@ -1,5 +1,5 @@
 import 'package:b2b_partenership/app_routes.dart';
-import 'package:b2b_partenership/controller/shop/all_categoties_controller.dart';
+import 'package:b2b_partenership/controller/shop/all_categories_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
@@ -41,12 +41,14 @@ class AllCategories extends StatelessWidget {
                     arguments: {"model": controller.shopCategories[index]});
               },
               child: SizedBox(
-                //width: 100.w,
                 height: 130.h,
                 child: Stack(
                   children: [
                     ClipRRect(
-                      borderRadius: BorderRadius.circular(5.r),
+                      borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(10.r),
+                        bottomLeft: Radius.circular(10.r),
+                      ),
                       child: CustomNetworkImage(
                         imageUrl: controller.shopCategories[index].image,
                         width: double.infinity,
@@ -58,22 +60,31 @@ class AllCategories extends StatelessWidget {
                       //,
                       height: 130.h,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5.r),
-                          color: blackColor.withAlpha(140)),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(10.r),
+                            bottomLeft: Radius.circular(10.r),
+                          ),
+                          color: blackColor.withAlpha(80),
+                          gradient: LinearGradient(
+                            begin: Alignment.topCenter,
+                            end: Alignment.bottomCenter,
+                            colors: [
+                              Colors.black.withAlpha(220),
+                              Colors.black.withAlpha(150),
+                              Colors.transparent,
+                              Colors.transparent,
+                              Colors.transparent,
+                            ],
+                          )),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(15.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          Icon(
-                            Icons.mediation_outlined,
-                            color: Colors.white,
-                            size: 25.r,
-                          ),
-                          Gap(10.h),
-                          Spacer(),
+                          // Spacer(),
                           Text(
                             translateDatabase(
                               arabic: controller.shopCategories[index].nameAr,
@@ -82,7 +93,7 @@ class AllCategories extends StatelessWidget {
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                             style: getSemiBoldStyle(context).copyWith(
-                                // fontSize: 17.sp,
+                                fontSize: 20.r,
                                 fontWeight: FontWeight.bold,
                                 color: whiteColor),
                           ),

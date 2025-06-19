@@ -14,7 +14,8 @@ class CustomLoadingButton extends StatelessWidget {
       this.height,
       this.width,
       this.alignment,
-      this.borderRadius = 30});
+      this.borderRadius = 30,
+      this.textColor = whiteColor});
 
   final Function onPressed;
   final String text;
@@ -23,6 +24,7 @@ class CustomLoadingButton extends StatelessWidget {
   final double? width;
   final Alignment? alignment;
   final double borderRadius;
+  final Color textColor;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class CustomLoadingButton extends StatelessWidget {
             Text(
               text,
               style: getMediumStyle(context).copyWith(
-                color: Colors.white,
+                color: textColor,
                 fontWeight: FontWeight.bold,
               ),
             ),

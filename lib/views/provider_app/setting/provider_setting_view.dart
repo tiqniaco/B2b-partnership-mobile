@@ -6,11 +6,14 @@ import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/app_pdf_view.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:b2b_partenership/widgets/language_widget.dart';
+import 'package:b2b_partenership/widgets/settings/settings_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cached_pdfview/flutter_cached_pdfview.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
@@ -28,71 +31,114 @@ class ProviderSettingView extends StatelessWidget {
                 : SingleChildScrollView(
                     child: Center(
                       child: Padding(
-                        padding: const EdgeInsets.all(20.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                              height: context.isTablet ? 100.h : 60.h,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  color: Colors.grey[300]!,
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                SizedBox(
+                                  width: 70,
                                 ),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(8),
-                                child: Image.network(
-                                  controller.menuModel!.data!.image,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                            Gap(10),
-                            Text(
-                              controller.menuModel!.data!.name,
-                              style: getMediumStyle(context).copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              "+${controller.menuModel!.data!.countryCode}${controller.menuModel!.data!.phone}",
-                              style: getMediumStyle(context).copyWith(
-                                color: greyColor,
-                              ),
-                            ),
-                            Gap(8.h),
-                            InkWell(
-                              onTap: () {
-                                controller.switchAccount();
-                              },
-                              child: Container(
-                                padding: EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(3),
-                                    color: primaryColor.withAlpha(40)),
-                                width: double.infinity,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                Column(
                                   children: [
-                                    Text(
-                                      "Switch to Client Account".tr,
-                                      textAlign: TextAlign.center,
-                                      style: getRegularStyle(context).copyWith(
-                                        color: blackColor,
-                                        fontWeight: FontWeight.w500,
+                                    Container(
+                                      height: 80.r,
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        // borderRadius: BorderRadius.circular(8),
+                                        border: Border.all(
+                                          color: Colors.grey[300]!,
+                                        ),
+                                      ),
+                                      child: ClipRRect(
+                                        borderRadius:
+                                            BorderRadius.circular(100),
+                                        child: Image.network(
+                                          controller.menuModel!.data!.image,
+                                          fit: BoxFit.cover,
+                                        ),
                                       ),
                                     ),
                                     Gap(10),
-                                    Icon(
-                                      Icons.restart_alt_rounded,
-                                      size: 17.r,
-                                    )
+                                    Text(
+                                      controller.menuModel!.data!.name,
+                                      style: getMediumStyle(context).copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
                                   ],
+                                ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 4, vertical: 8),
+                                      decoration: BoxDecoration(
+                                          borderRadius: customBorderRadius,
+                                          border: Border.all(
+                                            color: Colors.grey[300]!,
+                                          )),
+                                      child: Icon(Icons.bookmark,
+                                          color: primaryColor, size: 26.r),
+                                    ),
+                                    Gap(8),
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 4, vertical: 8),
+                                      decoration: BoxDecoration(
+                                          borderRadius: customBorderRadius,
+                                          border: Border.all(
+                                            color: Colors.grey[300]!,
+                                          )),
+                                      child: Icon(Icons.notifications,
+                                          color: primaryColor, size: 26.r),
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                            Gap(8.h),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20.0),
+                              child: InkWell(
+                                onTap: () {
+                                  controller.switchAccount();
+                                },
+                                child: Container(
+                                  padding: EdgeInsets.all(10),
+                                  decoration: BoxDecoration(
+                                      borderRadius: customBorderRadius,
+                                      color: lightPrimaryColor.withAlpha(180)),
+                                  width: double.infinity,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "Switch to Client Account".tr,
+                                        textAlign: TextAlign.center,
+                                        style:
+                                            getRegularStyle(context).copyWith(
+                                          color: primaryColor,
+                                          fontWeight: FontWeight.w600,
+                                          fontSize: 16.r,
+                                        ),
+                                      ),
+                                      Gap(10),
+                                      Icon(
+                                        Icons.restart_alt_rounded,
+                                        size: 24.r,
+                                        color: primaryColor,
+                                      )
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
-                            Gap(10),
+                            Gap(24),
                             GridView(
                               physics: NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
@@ -105,7 +151,7 @@ class ProviderSettingView extends StatelessWidget {
                                         : 2,
                                 mainAxisSpacing: 15,
                                 crossAxisSpacing: 15,
-                                childAspectRatio: 9 / 4.1,
+                                childAspectRatio: 9 / 3.5,
                               ),
                               children: [
                                 boxWidget(
@@ -116,12 +162,12 @@ class ProviderSettingView extends StatelessWidget {
                                   Get.toNamed(AppRoutes.clientJobApplications);
                                 }),
                                 boxWidget(
-                                    CupertinoIcons.news,
+                                    Icons.my_library_books_outlined,
                                     Colors.blue,
                                     controller.menuModel!.shoppingCount
                                         .toString(),
-                                    "Posts".tr, () {
-                                  Get.toNamed(AppRoutes.getServicesRequest);
+                                    "My Posts".tr, () {
+                                  Get.toNamed(AppRoutes.getRequestServices);
                                 }),
                                 boxWidget(
                                     Icons.shopping_cart_outlined,
@@ -141,144 +187,104 @@ class ProviderSettingView extends StatelessWidget {
                                 })
                               ],
                             ),
-                            Gap(20.h),
-                            FractionallySizedBox(
-                              widthFactor: 10,
-                              child: Divider(
-                                thickness: 5,
-                                color: borderColor.withAlpha(40),
-                              ),
-                            ),
-                            Gap(10.h),
+                            Gap(24),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   "Personal Information".tr,
-                                  style: getMediumStyle(context),
+                                  style: getMediumStyle(context).copyWith(
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                                 Gap(20),
-                                rowWidget("Email".tr,
-                                    controller.menuModel!.data!.email),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor,
-                                  ),
-                                ),
                                 rowWidget(
-                                    "City".tr,
-                                    translateDatabase(
-                                        arabic: controller
-                                            .menuModel!.data!.governmentNameAr,
-                                        english: controller.menuModel!.data!
-                                            .governmentNameEn)),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor,
-                                  ),
-                                ),
+                                    "(+${controller.menuModel!.data!.countryCode}) ${controller.menuModel!.data!.phone}",
+                                    icon: Icons.phone_in_talk),
+                                Gap(8),
+                                rowWidget(controller.menuModel!.data!.email,
+                                    icon: Icons.email),
+                                Gap(8),
                                 rowWidget(
-                                    "Country".tr,
                                     translateDatabase(
                                         arabic: controller
                                             .menuModel!.data!.countryNameAr,
                                         english: controller
-                                            .menuModel!.data!.countryNameEn)),
-                                Gap(10.h),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor.withAlpha(40),
-                                  ),
-                                ),
-                                Gap(10.h),
+                                            .menuModel!.data!.countryNameEn),
+                                    icon: FontAwesomeIcons.locationArrow),
+                                Gap(8),
+                                rowWidget(
+                                    translateDatabase(
+                                        arabic: controller
+                                            .menuModel!.data!.governmentNameAr,
+                                        english: controller
+                                            .menuModel!.data!.governmentNameEn),
+                                    icon: Icons.location_on),
+                                Gap(16),
                                 Text(
                                   "Bio",
                                   style: getRegularStyle(Get.context!).copyWith(
-                                    fontWeight: FontWeight.w300,
+                                    fontWeight: FontWeight.w400,
                                   ),
                                 ),
                                 Gap(10),
-                                Text(
-                                  controller.menuModel!.data!.bio,
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: context.isTablet ? 8.sp : 14.sp,
-                                    color: Colors.black54,
+                                Container(
+                                  padding: const EdgeInsets.all(10.0),
+                                  decoration: BoxDecoration(
+                                    border:
+                                        Border.all(color: Colors.grey[300]!),
+                                    borderRadius: BorderRadius.circular(10.r),
+                                  ),
+                                  child: Text(
+                                    controller.menuModel!.data!.bio,
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: context.isTablet ? 8.sp : 14.sp,
+                                      color: Colors.black54,
+                                    ),
                                   ),
                                 ),
                                 Gap(10.h),
                                 if (controller
                                         .menuModel!.data!.commercialRegister !=
                                     "") ...[
-                                  Gap(15.h),
-                                  FractionallySizedBox(
-                                    widthFactor: 10,
-                                    child: Divider(
-                                      thickness: 5,
-                                      color: borderColor.withAlpha(40),
-                                    ),
-                                  ),
-                                  Gap(15.h),
+                                  Gap(15),
                                   Text(
                                     "Business Information".tr,
-                                    style: getMediumStyle(context),
+                                    style: getMediumStyle(context).copyWith(
+                                      fontWeight: FontWeight.w500,
+                                    ),
                                   ),
                                   Gap(15.h),
                                   rowWidget(
-                                      "Company Type".tr,
-                                      translateDatabase(
-                                          arabic: controller.menuModel!.data!
-                                              .providerTypeNameAr,
-                                          english: controller.menuModel!.data!
-                                              .providerTypeNameEn)),
-                                  FractionallySizedBox(
-                                    widthFactor: 10,
-                                    child: Divider(
-                                      color: borderColor.withAlpha(40),
-                                    ),
+                                    translateDatabase(
+                                        arabic: controller.menuModel!.data!
+                                            .providerTypeNameAr,
+                                        english: controller.menuModel!.data!
+                                            .providerTypeNameEn),
+                                    title: "Company Type".tr,
                                   ),
                                   Gap(10),
                                   rowWidget(
-                                      "Commercial No.".tr,
-                                      controller.menuModel!.data!
-                                          .commercialRegisterNumber),
-                                  FractionallySizedBox(
-                                    widthFactor: 10,
-                                    child: Divider(
-                                      color: borderColor.withAlpha(40),
-                                    ),
+                                    controller.menuModel!.data!
+                                        .commercialRegisterNumber,
+                                    title: "Commercial No.".tr,
                                   ),
                                   Gap(10),
                                   rowWidget(
-                                      "tax No.".tr,
-                                      controller
-                                          .menuModel!.data!.taxCardNumber),
-                                  FractionallySizedBox(
-                                    widthFactor: 10,
-                                    child: Divider(
-                                      color: borderColor.withAlpha(40),
-                                    ),
-                                  ),
+                                      controller.menuModel!.data!.taxCardNumber,
+                                      title: "tax No.".tr),
                                   Gap(10),
-                                  rowWidget("VAT No.".tr,
-                                      controller.menuModel!.data!.vat),
-                                  FractionallySizedBox(
-                                    widthFactor: 10,
-                                    child: Divider(
-                                      color: borderColor.withAlpha(40),
-                                    ),
-                                  ),
-                                  Gap(10),
+                                  rowWidget(controller.menuModel!.data!.vat,
+                                      title: "VAT No.".tr),
+                                  Gap(16),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         "Commercial Papers".tr,
-                                        style: getMediumStyle(context),
+                                        style: getRegularStyle(context),
                                       ),
                                     ],
                                   ),
@@ -312,9 +318,10 @@ class ProviderSettingView extends StatelessWidget {
                                           );
                                         },
                                         child: Icon(
-                                            Icons.arrow_circle_right_outlined,
-                                            color: primaryColor,
-                                            size: 30.r),
+                                          Icons.arrow_forward_ios,
+                                          color: primaryColor,
+                                          size: 15.r,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -335,7 +342,7 @@ class ProviderSettingView extends StatelessWidget {
                                     children: [
                                       Text(
                                         "Tax Papers".tr,
-                                        style: getMediumStyle(context),
+                                        style: getRegularStyle(context),
                                       ),
                                     ],
                                   ),
@@ -368,29 +375,24 @@ class ProviderSettingView extends StatelessWidget {
                                           );
                                         },
                                         child: Icon(
-                                            Icons.arrow_circle_right_outlined,
-                                            color: primaryColor,
-                                            size: 30.r),
+                                          Icons.arrow_forward_ios,
+                                          color: primaryColor,
+                                          size: 15.r,
+                                        ),
                                       ),
                                     ],
                                   ),
                                   Gap(30),
                                 ],
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    thickness: 5,
-                                    color: borderColor.withAlpha(40),
-                                  ),
-                                ),
-                                Gap(20),
+                                Gap(16),
                                 Text(
                                   "Other Services".tr,
-                                  style: getMediumStyle(context),
+                                  style: getMediumStyle(context)
+                                      .copyWith(fontWeight: FontWeight.w500),
                                 ),
                                 Gap(20),
                                 rowWithArrow(
-                                  CupertinoIcons.person,
+                                  CupertinoIcons.person_fill,
                                   "Edit Profile".tr,
                                   () {
                                     Get.toNamed(
@@ -402,15 +404,8 @@ class ProviderSettingView extends StatelessWidget {
                                   },
                                 ),
                                 Gap(8),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor,
-                                  ),
-                                ),
-                                Gap(8),
                                 rowWithArrow(
-                                  Icons.copy_outlined,
+                                  Icons.file_copy,
                                   "My Services".tr,
                                   () {
                                     Get.toNamed(
@@ -422,15 +417,8 @@ class ProviderSettingView extends StatelessWidget {
                                   },
                                 ),
                                 Gap(8),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor,
-                                  ),
-                                ),
-                                Gap(8),
                                 rowWithArrow(
-                                  CupertinoIcons.book,
+                                  CupertinoIcons.book_fill,
                                   "My Previous Work".tr,
                                   () {
                                     Get.toNamed(
@@ -444,45 +432,24 @@ class ProviderSettingView extends StatelessWidget {
                                   },
                                 ),
                                 Gap(8),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor,
-                                  ),
-                                ),
-                                Gap(8),
                                 rowWithArrow(
-                                  CupertinoIcons.phone,
+                                  CupertinoIcons.phone_fill,
                                   "Mange your Contacts".tr,
                                   () {
                                     Get.toNamed(AppRoutes.providerContacts);
                                   },
                                 ),
                                 Gap(8),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor,
-                                  ),
-                                ),
-                                Gap(8),
                                 rowWithArrow(
-                                  CupertinoIcons.padlock,
+                                  CupertinoIcons.padlock_solid,
                                   "Change Password".tr,
                                   () {
                                     Get.toNamed(AppRoutes.changePassword);
                                   },
                                 ),
                                 Gap(8),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor,
-                                  ),
-                                ),
-                                Gap(8),
                                 rowWithArrow(
-                                  CupertinoIcons.delete_simple,
+                                  CupertinoIcons.delete_solid,
                                   "Remove Account".tr,
                                   () {
                                     removeAccountDialog(
@@ -493,13 +460,6 @@ class ProviderSettingView extends StatelessWidget {
                                   },
                                 ),
                                 Gap(8),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor,
-                                  ),
-                                ),
-                                Gap(8),
                                 rowWithArrow(
                                   Icons.logout_rounded,
                                   "Logout".tr,
@@ -508,44 +468,24 @@ class ProviderSettingView extends StatelessWidget {
                                   },
                                 ),
                                 Gap(8),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor,
-                                  ),
-                                ),
-                                Gap(8),
                                 rowWithArrow(
-                                  Icons.report_gmailerrorred,
+                                  Icons.report,
                                   "About us".tr,
                                   () {
                                     Get.toNamed(AppRoutes.aboutUs);
                                   },
                                 ),
                                 Gap(8),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor,
-                                  ),
-                                ),
-                                Gap(8),
                                 rowWithArrow(
-                                  CupertinoIcons.news,
+                                  Icons.safety_check_sharp,
                                   "Terms & Conditions".tr,
                                   () {
                                     Get.toNamed(AppRoutes.termsAndConditions);
                                   },
                                 ),
                                 Gap(8),
-                                FractionallySizedBox(
-                                  widthFactor: 10,
-                                  child: Divider(
-                                    color: borderColor,
-                                  ),
-                                ),
-                                Gap(8),
                                 LanguageWidget(),
+                                Gap(16),
                               ],
                             ),
                           ],
@@ -557,109 +497,124 @@ class ProviderSettingView extends StatelessWidget {
     );
   }
 
-  Widget boxWidget(IconData icon, Color color, String title, String subTitle,
-      void Function() onTap) {
-    return InkWell(
-      onTap: onTap,
-      child: Container(
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: borderColor)),
-        child: Row(
-          children: [
-            CircleAvatar(
-              radius: 19.r,
-              backgroundColor: color.withAlpha(30),
-              child: Icon(
-                icon,
-                color: color,
-                size: 20.r,
-              ),
-            ),
-            Gap(10),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: getMediumStyle(Get.context!).copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Text(
-                  subTitle,
-                  style: getRegularStyle(Get.context!).copyWith(
-                    color: greyColor,
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
-      ),
-    );
-  }
+  // Widget boxWidget(IconData icon, Color color, String title, String subTitle,
+  //     void Function() onTap) {
+  //   return InkWell(
+  //     onTap: onTap,
+  //     child: Container(
+  //       alignment: Alignment.center,
+  //       decoration: BoxDecoration(
+  //           color: primaryColor.withAlpha(30),
+  //           borderRadius: customBorderRadius),
+  //       child: Row(
+  //         mainAxisAlignment: MainAxisAlignment.center,
+  //         children: [
+  //           Icon(
+  //             icon,
+  //             color: primaryColor,
+  //             size: 27.r,
+  //           ),
+  //           Gap(10),
+  //           Column(
+  //             mainAxisAlignment: MainAxisAlignment.center,
+  //             crossAxisAlignment: CrossAxisAlignment.center,
+  //             children: [
+  //               Text(
+  //                 subTitle,
+  //                 style: getMediumStyle(Get.context!)
+  //                     .copyWith(fontWeight: FontWeight.w600, fontSize: 13.r),
+  //               ),
+  //               Text(
+  //                 title,
+  //                 style: getRegularStyle(Get.context!).copyWith(
+  //                   color: blackColor,
+  //                 ),
+  //               ),
+  //             ],
+  //           )
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
 
-  Widget rowWidget(String title, String data) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 9.0),
-      child: Row(
-        children: [
-          Expanded(
-            flex: 1,
-            child: Text(
-              title,
-              style: getRegularStyle(Get.context!).copyWith(
-                fontWeight: FontWeight.w300,
-              ),
-            ),
-          ),
-          Expanded(
-              flex: 2,
-              child: Text(
-                data,
-                style: getRegularStyle(Get.context!).copyWith(
-                  fontWeight: FontWeight.w500,
-                  color: Colors.black54,
-                ),
-              ))
-        ],
-      ),
-    );
-  }
+  // Widget rowWidget(
+  //   String data, {
+  //   IconData? icon,
+  //   String? title,
+  // }) {
+  //   return Container(
+  //     padding: const EdgeInsets.all(10.0),
+  //     decoration: BoxDecoration(
+  //       borderRadius: BorderRadius.circular(10.r),
+  //       border: Border.all(
+  //         color: Colors.black12,
+  //       ),
+  //     ),
+  //     child: Row(
+  //       children: [
+  //         icon == null
+  //             ? Text(
+  //                 "${title!}: ",
+  //                 style: getRegularStyle(Get.context!).copyWith(
+  //                   fontWeight: FontWeight.w400,
+  //                   fontSize: 14.r,
+  //                 ),
+  //               )
+  //             : Icon(icon, color: primaryColor, size: 20.r),
+  //         Gap(12),
+  //         Expanded(
+  //             flex: 2,
+  //             child: Text(
+  //               data,
+  //               style: getRegularStyle(Get.context!).copyWith(
+  //                   // fontWeight: FontWeight.w500,
+  //                   color: blackColor),
+  //             ))
+  //       ],
+  //     ),
+  //   );
+  // }
 
-  Widget rowWithArrow(IconData icon, String title, void Function() onPressed) {
-    return InkWell(
-      onTap: onPressed,
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 18.r,
-            backgroundColor: borderColor.withAlpha(30),
-            child: Icon(
-              icon,
-              color: Colors.black54,
-              size: 20.r,
-            ),
-          ),
-          Gap(15),
-          Text(
-            title,
-            style: getRegularStyle(Get.context!).copyWith(
-              fontWeight: FontWeight.w300,
-            ),
-          ),
-          Spacer(),
-          IconButton(
-              onPressed: onPressed,
-              icon: Icon(
-                Icons.arrow_forward_ios_rounded,
-                size: 15.r,
-              ))
-        ],
-      ),
-    );
-  }
+  // Widget rowWithArrow(IconData icon, String title, void Function() onPressed) {
+  //   return Container(
+  //     padding: const EdgeInsets.all(10.0),
+  //     decoration: BoxDecoration(
+  //       borderRadius: BorderRadius.circular(10.r),
+  //       border: Border.all(
+  //         color: Colors.black12,
+  //       ),
+  //     ),
+  //     child: InkWell(
+  //       onTap: onPressed,
+  //       child: Row(
+  //         children: [
+  //           Icon(
+  //             icon,
+  //             color: primaryColor,
+  //             size: 20.r,
+  //           ),
+  //           Gap(15),
+  //           Text(
+  //             title,
+  //             style: getRegularStyle(Get.context!).copyWith(
+  //               fontWeight: FontWeight.w400,
+  //             ),
+  //           ),
+  //           Spacer(),
+  //           InkWell(
+  //               onTap: onPressed,
+  //               child: Icon(
+  //                 Icons.arrow_forward_ios_rounded,
+  //                 size: 15.r,
+  //                 color: primaryColor,
+  //               ))
+  //         ],
+  //       ),
+  //     ),
+  //   );
+  // }
+
+
+
 }

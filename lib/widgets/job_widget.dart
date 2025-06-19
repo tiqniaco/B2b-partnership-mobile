@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/core/enums/jobs_contract_type_enum.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:b2b_partenership/core/theme/themes.dart';
+import 'package:flutter/cupertino.dart';
 
 import '/app_routes.dart';
 import '/core/global/widgets/custom_network_image.dart';
@@ -41,62 +42,74 @@ class JobWidget extends StatelessWidget {
           vertical: 10.h,
         ),
         decoration: BoxDecoration(
-          color: whiteColor,
-          border: Border.all(color: borderColor),
-          borderRadius: BorderRadius.circular(8.r),
+          color: lightPrimaryColor.withAlpha(130),
+          border: Border.all(color: borderColor.withAlpha(50)),
+          borderRadius: BorderRadius.circular(20.r),
         ),
         child: Row(
           children: [
-            CircleAvatar(
-              backgroundColor: redColor,
-              radius: 35.r,
-              child: CustomNetworkImage(
-                imageUrl: model.image,
-                fit: BoxFit.cover,
-                shape: BoxShape.circle,
-              ),
+            Column(
+              children: [
+                Container(
+                  decoration:
+                      BoxDecoration(color: whiteColor, shape: BoxShape.circle),
+                  child: CustomNetworkImage(
+                    imageUrl: model.image,
+                    height: 90.r,
+                    fit: BoxFit.cover,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                Gap(4),
+                Text(
+                  model.name,
+                  style: getBoldStyle(context).copyWith(
+                      fontWeight: FontManager.boldFontWeight, fontSize: 14.r),
+                ),
+              ],
             ),
             Gap(12.w),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    "${"Company".tr}: ${model.name}",
-                    style: getRegularStyle(context).copyWith(
-                      fontWeight: FontManager.mediumFontWeight,
-                    ),
-                  ),
-                  Gap(3.h),
-                  Text(
-                    "${"Job Title".tr}: ${model.title}",
-                    style: getRegularStyle(context).copyWith(
-                      fontWeight: FontManager.mediumFontWeight,
-                    ),
-                  ),
-                  Gap(3.h),
-                  Text(
-                    "${"Contract Type".tr}: ${model.contractType.text}",
-                    style: getLightStyle(context),
-                  ),
-                  Gap(3.h),
-                  Text(
-                    "${"Expiry Date".tr}: ${model.expiryDate}",
-                    style: getLightStyle(context),
-                  ),
+                  rowWidget("Job Title".tr, model.title, context),
+                  Gap(5),
+                  rowWidget(
+                      "Contract Type".tr, model.contractType.text, context),
+                  Gap(5),
+                  rowWidget("Expiry Date".tr, model.expiryDate, context),
                   if (model.salary != "null") ...[
-                    Gap(5.h),
-                    Text(
-                      "${"Salary".tr}: ${model.salary}",
-                      style: getLightStyle(context),
-                    )
+                    Gap(5),
+                    rowWidget("Salary:".tr, model.salary, context),
                   ],
+                  Gap(10),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                        decoration: BoxDecoration(
+                          color: primaryColor,
+                          borderRadius: customBorderRadius,
+                        ),
+                        child: Text(
+                          "View Now".tr,
+                          style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              fontSize: 12.r,
+                              color: Colors.white),
+                        ),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),
-            Gap(8.w),
             Column(
               mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 if (hasDelete)
                   InkWell(
@@ -109,17 +122,17 @@ class JobWidget extends StatelessWidget {
                       padding: EdgeInsets.all(4.w),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: primaryColor,
+                        color: whiteColor,
                       ),
                       child: Icon(
-                        FontAwesomeIcons.xmark,
+                        CupertinoIcons.delete,
                         size: 16.r,
-                        color: whiteColor,
+                        color: primaryColor,
                       ),
                     ),
                   ),
                 if (hasEdit) ...[
-                  Gap(8.h),
+                  Gap(16),
                   InkWell(
                     onTap: () {
                       Get.toNamed(
@@ -133,15 +146,16 @@ class JobWidget extends StatelessWidget {
                       padding: EdgeInsets.all(4.w),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        color: primaryColor,
-                      ),
-                      child: Icon(
-                        FontAwesomeIcons.penToSquare,
-                        size: 16.r,
                         color: whiteColor,
                       ),
+                      child: Icon(
+                        Icons.edit_outlined,
+                        size: 16.r,
+                        color: primaryColor,
+                      ),
                     ),
-                  )
+                  ),
+                  Gap(32),
                 ]
               ],
             ),
@@ -150,4 +164,27 @@ class JobWidget extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget rowWidget(String title, String value, BuildContext context) {
+  return Row(
+    children: [
+      Text(
+        "$title:",
+        style: TextStyle(fontSize: 12.r),
+      ),
+      Gap(8),
+      Expanded(
+        child: Text(
+          value,
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 12.r,
+          ),
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+        ),
+      ),
+    ],
+  );
 }

@@ -5,6 +5,7 @@ import 'package:b2b_partenership/core/enums/jobs_contract_type_enum.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -24,13 +25,23 @@ class JobApplicationDetailsView extends StatelessWidget {
       builder: (JobApplicationDetailsController controller) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: primaryColor,
-            iconTheme: IconThemeData(color: whiteColor),
-            title: Text(
-              controller.model?.jobTitle ?? "",
-              style: TextStyle(
-                color: whiteColor,
-              ),
+            // backgroundColor: primaryColor,
+            // iconTheme: IconThemeData(color: whiteColor),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  controller.model?.jobTitle ?? "",
+                  style: TextStyle(
+                    color: blackColor,
+                  ),
+                ),
+                if (controller.showStatus)
+                  _buildStatusBadge(
+                    controller.model?.applicationStatus ??
+                        JobApplicationStatusEnum.pending,
+                  ),
+              ],
             ),
           ),
           body: Padding(
@@ -46,19 +57,11 @@ class JobApplicationDetailsView extends StatelessWidget {
                   SizedBox(height: 8.h),
                   _buildApplicantInfo(controller, context),
                   SizedBox(height: 8.h),
-                  if (Get.find<AppPreferences>().getUserRole() == "client") ...[
-                    _buildProviderInfo(controller, context),
-                  ],
-                  if (Get.find<AppPreferences>().getUserRole() ==
-                      "provider") ...[
-                    _buildClientInfo(controller, context),
-                  ],
+                  Get.find<AppPreferences>().getUserId() ==
+                          controller.model?.clientUserId
+                      ? _buildProviderInfo(controller, context)
+                      : _buildClientInfo(controller, context),
                   SizedBox(height: 10.h),
-                  if (controller.showStatus)
-                    _buildStatusBadge(
-                      controller.model?.applicationStatus ??
-                          JobApplicationStatusEnum.pending,
-                    ),
                 ],
               ),
             ),
@@ -236,8 +239,8 @@ class JobApplicationDetailsView extends StatelessWidget {
               "+${controller.model?.providerCountryCode ?? ""} ${controller.model?.providerPhone ?? ""}",
               context: context,
             ),
-            _buildInfoRow("Rating".tr,
-                "⭐ ${double.parse(controller.model?.providerRating ?? "0")}",
+            _buildInfoRow(
+                "Rating".tr, "⭐ ${controller.model?.providerRating ?? "0.0"}",
                 context: context),
           ],
         ),
@@ -256,7 +259,7 @@ class JobApplicationDetailsView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Client Info".tr,
+              "More Info".tr,
               style: getRegularStyle(context).copyWith(
                 fontWeight: FontWeight.bold,
               ),
@@ -356,13 +359,13 @@ class JobApplicationDetailsView extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
         margin: EdgeInsets.only(bottom: 12.h),
         decoration: BoxDecoration(
-          color: status.color.withAlpha(20),
-          borderRadius: BorderRadius.circular(20),
+          color: primaryColor,
+          borderRadius: customBorderRadius,
         ),
         child: Text(
-          status.name.tr.toUpperCase(),
+          status.name.tr,
           style: getLightStyle(Get.context!).copyWith(
-            color: status.color,
+            color: whiteColor,
             fontWeight: FontWeight.bold,
           ),
         ),

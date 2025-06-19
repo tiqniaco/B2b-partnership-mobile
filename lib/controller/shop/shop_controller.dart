@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
@@ -11,12 +13,14 @@ import 'package:url_launcher/url_launcher_string.dart';
 class ShopController extends GetxController {
   final searchController = TextEditingController();
   List<ShopCategoryModel> shopCategories = [];
-  List<ShopProductModel> shopProducts = [];
+  List<ShopProductModel> shopMostProducts = [];
+  List<ShopProductModel> shopRecommendedProducts = [];
   ShopCategoryModel? selectedCategory;
   String whatsApp = '';
 
   StatusRequest categoriesStatus = StatusRequest.loading;
   StatusRequest productsStatus = StatusRequest.loading;
+  StatusRequest recommendedProductsStatus = StatusRequest.loading;
   StatusRequest whatsAppStatus = StatusRequest.loading;
   ScrollController productsScrollController = ScrollController();
   int currentPage = 1;
@@ -32,7 +36,9 @@ class ShopController extends GetxController {
   @override
   Future<void> onInit() async {
     await getShopCategories();
-    getShopProducts();
+    getShopCategories();
+    getMostProducts();
+    recommendedProducts();
     await getWhatsApp();
     super.onInit();
   }
@@ -68,8 +74,8 @@ class ShopController extends GetxController {
     );
   }
 
-  Future<void> getShopProducts({bool isSearch = false}) async {
-    shopProducts.clear();
+  Future<void> getMostProducts({bool isSearch = false}) async {
+    shopMostProducts.clear();
     productsStatus = StatusRequest.loading;
     update();
     final result = await CustomRequest<List<ShopProductModel>>(
@@ -80,8 +86,6 @@ class ShopController extends GetxController {
             'category_id': selectedCategory?.id,
         },
         fromJson: (json) {
-          // log(json['data'].toString());
-
           final List<ShopProductModel> products = List<ShopProductModel>.from(
             json['data'].map((x) => ShopProductModel.fromJson(x)),
           );
@@ -89,13 +93,12 @@ class ShopController extends GetxController {
         }).sendGetRequest();
     result.fold(
       (error) {
-        // Logger().e(error.errMsg);
         productsStatus = StatusRequest.error;
         update();
       },
       (data) {
-        shopProducts.addAll(data);
-        if (shopProducts.isEmpty) {
+        shopMostProducts.addAll(data);
+        if (shopMostProducts.isEmpty) {
           productsStatus = StatusRequest.noData;
         } else {
           productsStatus = StatusRequest.success;
@@ -105,9 +108,48 @@ class ShopController extends GetxController {
     );
   }
 
+  Future<void> recommendedProducts({bool isSearch = false}) async {
+    print("get recommended");
+    shopRecommendedProducts.clear();
+
+    recommendedProductsStatus = StatusRequest.loading;
+    update();
+    final result = await CustomRequest<List<ShopProductModel>>(
+        path: ApiConstance.topRecommendedProducts,
+        data: {
+          if (searchController.text.isNotEmpty) 'search': searchController.text,
+          if (selectedCategory != null && !isSearch)
+            'category_id': selectedCategory?.id,
+        },
+        fromJson: (json) {
+          final List<ShopProductModel> products = List<ShopProductModel>.from(
+            json['data'].map((x) => ShopProductModel.fromJson(x)),
+          );
+          return products;
+        }).sendGetRequest();
+    result.fold(
+      (error) {
+        log(error.errMsg);
+        recommendedProductsStatus = StatusRequest.error;
+        update();
+      },
+      (data) {
+        shopRecommendedProducts.addAll(data);
+        if (shopRecommendedProducts.isEmpty) {
+          recommendedProductsStatus = StatusRequest.noData;
+        } else {
+          recommendedProductsStatus = StatusRequest.success;
+        }
+        update();
+      },
+    );
+  }
+
   void onTapCategory(int index) {
     selectedCategory = shopCategories[index];
-    getShopProducts();
+
+    getMostProducts();
+    recommendedProducts();
     update();
   }
 
@@ -127,7 +169,7 @@ class ShopController extends GetxController {
       },
       (data) {
         whatsAppStatus = StatusRequest.success;
-       
+
         whatsApp = data['whatsapp'];
         update();
       },

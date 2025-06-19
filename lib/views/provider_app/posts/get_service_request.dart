@@ -1,13 +1,16 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:b2b_partenership/widgets/provider/posts/select_city_post.dart';
 import 'package:b2b_partenership/widgets/provider/posts/select_country_post.dart';
 import 'package:b2b_partenership/widgets/provider/posts/select_specialization_post.dart';
 import 'package:b2b_partenership/widgets/provider/posts/select_sup_specialization_post.dart';
 import 'package:b2b_partenership/widgets/request_services/provider_freelance_item.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
@@ -21,91 +24,122 @@ class GetServiceRequest extends StatelessWidget {
     return Scaffold(
       body: GetBuilder<GetProviderPostsServiceController>(
         builder: (controller) => Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Gap(MediaQuery.of(context).padding.top + 8.h),
+              Gap(16),
               Row(
                 children: [
-                  IconButton(
-                    onPressed: () => Get.back(),
-                    icon: Icon(
-                      Icons.arrow_back_ios,
-                      size: 15.r,
-                      color: blackColor,
+                  Expanded(
+                    child: TextFormField(
+                      // controller: controller.searchController,
+                      style: getRegularStyle(context),
+                      decoration: InputDecoration(
+                        prefixIcon: IconButton(
+                          onPressed: () {
+                            // if (controller.searchController.text.isNotEmpty) {
+                            //   controller.getShopProducts(isSearch: true);
+                            // } else {
+                            //   controller.getShopProducts();
+                            // }
+                          },
+                          icon: Icon(
+                            CupertinoIcons.search,
+                            size: context.isTablet ? 13.w : 18.w,
+                            color: primaryColor,
+                          ),
+                        ),
+                        contentPadding:
+                            EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                        hintText: 'Search'.tr,
+                        hintStyle: getMediumStyle(context)
+                            .copyWith(fontSize: 14.r, color: primaryColor),
+                        border: InputBorder.none,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: greyColor),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(10.r),
+                            bottomLeft: Radius.circular(10.r),
+                          ),
+                        ),
+                      ),
+                      onFieldSubmitted: (value) {
+                        // if (value.isNotEmpty) {
+                        //   controller.getShopProducts(isSearch: true);
+                        // } else {
+                        //   controller.getShopProducts();
+                        // }
+                      },
                     ),
                   ),
-                  Text(
-                    "FILTERS".tr,
-                    style: getMediumStyle(context).copyWith(
-                      color: blackColor,
-                      letterSpacing: 4,
-                      fontWeight: FontWeight.bold,
+                  Gap(20),
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.shopCart);
+                    },
+                    child: Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 8, vertical: 14),
+                      decoration: BoxDecoration(
+                        color: primaryColor,
+                        borderRadius: customBorderRadius,
+                      ),
+                      child: Icon(
+                        FontAwesomeIcons.sliders,
+                        color: whiteColor,
+                        size: 18.r,
+                      ),
                     ),
+                  ),
+                  Gap(10),
+                  InkWell(
+                    onTap: () {
+                      Get.toNamed(AppRoutes.getRequestServices);
+                    },
+                    child: Container(
+                        alignment: Alignment.center,
+                        width: context.isTablet ? 120 : null,
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 6, vertical: 14),
+                        decoration: BoxDecoration(
+                          color: primaryColor,
+                          borderRadius: customBorderRadius,
+                        ),
+                        child: Text(
+                          "My Posts".tr,
+                          style: getMediumStyle(context).copyWith(
+                            fontSize: 12.r,
+                            fontWeight: FontWeight.bold,
+                            color: whiteColor,
+                          ),
+                        )),
                   ),
                 ],
               ),
-              Gap(3),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    filterWidget(() {
-                      showCategorySheet(context);
-                    }, "Category".tr, Icons.category_outlined),
-                    Gap(10.w),
-                    filterWidget(() {
-                      showLocationSheet(context);
-                    }, "Location".tr, Icons.location_on_outlined),
-                    Gap(10.w),
-                    filterWidget(() {
-                      controller.resetFunction();
-                    }, "Reset".tr, Icons.refresh_outlined),
-                  ],
-                ),
-              ),
-              Gap(15),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                child: Row(
-                  children: [
-                    Text(
-                      "${controller.services.length}",
-                      style: getMediumStyle(context).copyWith(
-                        color: blackColor,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Gap(10),
-                    Text(
-                      "Freelance Posts".tr,
-                      style: getMediumStyle(context).copyWith(
-                        color: blackColor,
-                      ),
-                    ),
-                    Spacer(),
-                    InkWell(
-                      onTap: () {
-                        Get.toNamed(AppRoutes.getRequestServices);
-                      },
-                      child: Text(
-                        "My Posts".tr,
-                        style: getMediumStyle(context).copyWith(
-                            color: blackColor,
-                            decoration: TextDecoration.underline),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              Gap(5),
+
+              Gap(24),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     filterWidget(() {
+              //       showCategorySheet(context);
+              //     }, "Category".tr, Icons.category_outlined),
+              //     Gap(10.w),
+              //     filterWidget(() {
+              //       showLocationSheet(context);
+              //     }, "Location".tr, Icons.location_on_outlined),
+              //     Gap(10.w),
+              //     filterWidget(() {
+              //       controller.resetFunction();
+              //     }, "Reset".tr, Icons.refresh_outlined),
+              //   ],
+              // ),
+              // //Gap(15),
               Expanded(
                 child: ListView.separated(
-                  separatorBuilder: (context, index) => Gap(25),
+                  separatorBuilder: (context, index) => Gap(20),
                   scrollDirection: Axis.vertical,
-                  padding: EdgeInsets.symmetric(horizontal: 15),
                   itemCount: controller.services.length,
                   itemBuilder: (context, index) => ProviderFreelanceItem(
                     model: controller.services[index],

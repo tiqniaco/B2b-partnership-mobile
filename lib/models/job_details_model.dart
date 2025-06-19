@@ -20,34 +20,29 @@ class JobDetailsModel extends Equatable {
   final String countryCode;
   final String phone;
   final String image;
-  final String providerId;
-  final String commercialRegister;
-  final String taxCard;
-  final String bio;
-  final String rating;
-  final String providerTypeId;
-  final String providerTypeNameAr;
-  final String providerTypeNameEn;
+  // final String providerId;
+  // final String commercialRegister;
+  // final String taxCard;
+  // final String bio;
+  // final String rating;
+  // final String providerTypeId;
+  // final String providerTypeNameAr;
+  // final String providerTypeNameEn;
   final String specializationId;
   final String specializationNameAr;
   final String specializationNameEn;
   final String subSpecializationId;
   final String subSpecializationNameAr;
   final String subSpecializationNameEn;
+
   final String countryId;
   final String countryNameAr;
   final String countryNameEn;
   final String governmentId;
   final String governmentNameAr;
   final String governmentNameEn;
-  final String? contactPhone;
-  final String? contactEmail;
-  final String? contactWhatsapp;
-  final String? contactTelegram;
-  final String? contactInstagram;
-  final String? contactFacebook;
-  final String? contactLinkedin;
-  final String? contactWebsite;
+  // final String? contactPhone;
+  // final String? contactEmail;
   final String providerCreatedAt;
   final String providerUpdatedAt;
   final String jobCreatedAt;
@@ -71,14 +66,14 @@ class JobDetailsModel extends Equatable {
     required this.countryCode,
     required this.phone,
     required this.image,
-    required this.providerId,
-    required this.commercialRegister,
-    required this.taxCard,
-    required this.bio,
-    required this.rating,
-    required this.providerTypeId,
-    required this.providerTypeNameAr,
-    required this.providerTypeNameEn,
+    // required this.providerId,
+    // required this.commercialRegister,
+    // required this.taxCard,
+    // required this.bio,
+    // required this.rating,
+    // required this.providerTypeId,
+    // required this.providerTypeNameAr,
+    // required this.providerTypeNameEn,
     required this.specializationId,
     required this.specializationNameAr,
     required this.specializationNameEn,
@@ -91,14 +86,14 @@ class JobDetailsModel extends Equatable {
     required this.governmentId,
     required this.governmentNameAr,
     required this.governmentNameEn,
-    required this.contactPhone,
-    required this.contactEmail,
-    required this.contactWhatsapp,
-    required this.contactTelegram,
-    required this.contactInstagram,
-    required this.contactFacebook,
-    required this.contactLinkedin,
-    required this.contactWebsite,
+    // required this.contactPhone,
+    // required this.contactEmail,
+    // required this.contactWhatsapp,
+    // required this.contactTelegram,
+    // required this.contactInstagram,
+    // required this.contactFacebook,
+    // required this.contactLinkedin,
+    // required this.contactWebsite,
     required this.providerCreatedAt,
     required this.providerUpdatedAt,
     required this.jobCreatedAt,
@@ -126,15 +121,15 @@ class JobDetailsModel extends Equatable {
         countryCode: json["country_code"].toString(),
         phone: json["phone"].toString(),
         image: kBaseImageUrl + json["image"].toString(),
-        providerId: json["provider_id"].toString(),
-        commercialRegister:
-            kBaseImageUrl + json["commercial_register"].toString(),
-        taxCard: kBaseImageUrl + json["tax_card"].toString(),
-        bio: json["bio"].toString(),
-        rating: json["rating"].toString(),
-        providerTypeId: json["provider_type_id"].toString(),
-        providerTypeNameAr: json["provider_type_name_ar"].toString(),
-        providerTypeNameEn: json["provider_type_name_en"].toString(),
+        // providerId: json["provider_id"].toString(),
+        // commercialRegister:
+        //     kBaseImageUrl + json["commercial_register"].toString(),
+        // taxCard: kBaseImageUrl + json["tax_card"].toString(),
+        // bio: json["bio"].toString(),
+        // rating: json["rating"].toString(),
+        // providerTypeId: json["provider_type_id"].toString(),
+        // providerTypeNameAr: json["provider_type_name_ar"].toString(),
+        // providerTypeNameEn: json["provider_type_name_en"].toString(),
         specializationId: json["specialization_id"].toString(),
         specializationNameAr: json["specialization_name_ar"].toString(),
         specializationNameEn: json["specialization_name_en"].toString(),
@@ -147,14 +142,14 @@ class JobDetailsModel extends Equatable {
         governmentId: json["government_id"].toString(),
         governmentNameAr: json["government_name_ar"].toString(),
         governmentNameEn: json["government_name_en"].toString(),
-        contactPhone: json["contact_phone"].toString(),
-        contactEmail: json["contact_email"].toString(),
-        contactWhatsapp: json["contact_whatsapp"].toString(),
-        contactTelegram: json["contact_telegram"].toString(),
-        contactInstagram: json["contact_instagram"].toString(),
-        contactFacebook: json["contact_facebook"].toString(),
-        contactLinkedin: json["contact_linkedin"].toString(),
-        contactWebsite: json["contact_website"].toString(),
+        // contactPhone: json["contact_phone"].toString(),
+        // contactEmail: json["contact_email"].toString(),
+        // contactWhatsapp: json["contact_whatsapp"].toString(),
+        // contactTelegram: json["contact_telegram"].toString(),
+        // contactInstagram: json["contact_instagram"].toString(),
+        // contactFacebook: json["contact_facebook"].toString(),
+        // contactLinkedin: json["contact_linkedin"].toString(),
+        // contactWebsite: json["contact_website"].toString(),
         providerCreatedAt: json["provider_created_at"].toString(),
         providerUpdatedAt: json["provider_updated_at"].toString(),
         jobCreatedAt: json["job_created_at"].toString(),
@@ -181,14 +176,14 @@ class JobDetailsModel extends Equatable {
         countryCode,
         phone,
         image,
-        providerId,
-        commercialRegister,
-        taxCard,
-        bio,
-        rating,
-        providerTypeId,
-        providerTypeNameAr,
-        providerTypeNameEn,
+        // providerId,
+        // commercialRegister,
+        // taxCard,
+        // bio,
+        // rating,
+        // providerTypeId,
+        // providerTypeNameAr,
+        // providerTypeNameEn,
         specializationId,
         specializationNameAr,
         specializationNameEn,
@@ -201,14 +196,14 @@ class JobDetailsModel extends Equatable {
         governmentId,
         governmentNameAr,
         governmentNameEn,
-        contactPhone,
-        contactEmail,
-        contactWhatsapp,
-        contactTelegram,
-        contactInstagram,
-        contactFacebook,
-        contactLinkedin,
-        contactWebsite,
+        // contactPhone,
+        // contactEmail,
+        // contactWhatsapp,
+        // contactTelegram,
+        // contactInstagram,
+        // contactFacebook,
+        // contactLinkedin,
+        // contactWebsite,
         providerCreatedAt,
         providerUpdatedAt,
         jobCreatedAt,

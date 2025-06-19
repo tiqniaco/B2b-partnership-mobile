@@ -30,14 +30,11 @@ class AddNewJobView extends StatelessWidget {
       builder: (AddNewJobController controller) {
         return Scaffold(
           appBar: AppBar(
-            toolbarHeight: context.isTablet ? 45.h : null,
-            backgroundColor: primaryColor,
-            iconTheme: IconThemeData(color: whiteColor),
+            centerTitle: true,
             title: Text(
               controller.model != null ? 'Edit Job'.tr : 'Add New Job'.tr,
-              style: getMediumStyle(context).copyWith(
-                color: whiteColor,
-              ),
+              style: getMediumStyle(context)
+                  .copyWith(color: blackColor, fontWeight: FontWeight.bold),
             ),
           ),
           body: SingleChildScrollView(
@@ -68,6 +65,8 @@ class AddNewJobView extends StatelessWidget {
                   // Skills
                   _buildTextField(
                     controller.skillsController,
+                    maxLines: 4,
+                    keyboardType: TextInputType.multiline,
                     "Required Skills".tr,
                     "Enter required skills (comma separated)".tr,
                   ),
@@ -160,8 +159,6 @@ class AddNewJobView extends StatelessWidget {
                   Gap(30),
 
                   SizedBox(height: 20),
-
-                  // Submit Button
                 ],
               ),
             ),
@@ -210,6 +207,8 @@ class AddNewJobView extends StatelessWidget {
         decoration: InputDecoration(
           labelText: label,
           hintText: hint,
+          filled: true,
+          fillColor: whiteColor,
           labelStyle: getRegularStyle(Get.context!),
           hintStyle: getRegularStyle(Get.context!).copyWith(
             color: greyColor,
@@ -225,7 +224,13 @@ class AddNewJobView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: DropdownButtonFormField<JobsContractTypeEnum>(
+        icon: Icon(
+          Icons.arrow_drop_down,
+          color: primaryColor,
+        ),
         decoration: InputDecoration(
+          filled: true,
+          fillColor: whiteColor,
           labelText: "Contract Type".tr,
           labelStyle: getRegularStyle(Get.context!),
           border: OutlineInputBorder(),
@@ -280,6 +285,7 @@ class AddNewJobView extends StatelessWidget {
           border: OutlineInputBorder(),
           suffixIcon: Icon(
             Icons.calendar_today,
+            color: primaryColor,
             size: 20.r,
           ),
           labelStyle: getRegularStyle(Get.context!),
@@ -296,6 +302,10 @@ class AddNewJobView extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: DropdownButtonFormField<JobGenderEnum>(
+        icon: Icon(
+          Icons.arrow_drop_down,
+          color: primaryColor,
+        ),
         decoration: InputDecoration(
           labelText: "Preferred Gender".tr,
           labelStyle: getRegularStyle(Get.context!),

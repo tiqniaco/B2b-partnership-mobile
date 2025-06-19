@@ -54,7 +54,7 @@ class JobApplicationController extends GetxController {
         },
         data: {
           "job_id": jobId,
-          "client_id": Get.find<AppPreferences>().getUserRoleId(),
+          "client_id": Get.find<AppPreferences>().getUserId(),
           "years_of_experience": yearsOfExperienceController.text,
           "cover_letter": coverLetterController.text,
           "skills": skillsController.text,

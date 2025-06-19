@@ -3,6 +3,7 @@ import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:b2b_partenership/widgets/in_category/service_widget_vertical.dart';
 import 'package:b2b_partenership/widgets/provider_profile/about_widget.dart';
 import 'package:b2b_partenership/widgets/provider_profile/previous_work_widget.dart';
@@ -45,7 +46,7 @@ class ProviderProfileView extends StatelessWidget {
                       children: [
                         Gap(20),
                         _buildHeader(controller),
-                        Gap(15),
+                        Gap(24),
                         _buildTabs(controller),
                         Gap(8.h),
                         Expanded(
@@ -68,7 +69,7 @@ class ProviderProfileView extends StatelessWidget {
                                     controller.statusRequestPerviousWork,
                                 child: Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 20.0),
+                                      horizontal: 20.0, vertical: 16),
                                   child: ListView.separated(
                                     itemCount: controller.previousWork.length,
                                     separatorBuilder:
@@ -112,7 +113,7 @@ class ProviderProfileView extends StatelessWidget {
             ),
           ),
           CircleAvatar(
-            radius: 30.r,
+            radius: 26.r,
             backgroundColor: Colors.grey[200],
             backgroundImage:
                 CachedNetworkImageProvider(controller.providerModel!.image),
@@ -127,31 +128,17 @@ class ProviderProfileView extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Row(
-                children: [
-                  Text(
-                    controller.providerModel!.rating,
-                    style: getMediumStyle(Get.context!).copyWith(
-                      color: greyColor,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Gap(5),
-                  Icon(Icons.circle, size: 4.r, color: greyColor),
-                  Gap(5),
-                  RatingBar.builder(
-                    ignoreGestures: true,
-                    itemSize: 17.r,
-                    initialRating: 3,
-                    minRating: 1,
-                    direction: Axis.horizontal,
-                    allowHalfRating: false,
-                    itemCount: 5,
-                    itemBuilder: (context, _) =>
-                        Icon(Icons.star, color: Colors.amber),
-                    onRatingUpdate: (rating) {},
-                  ),
-                ],
+              RatingBar.builder(
+                ignoreGestures: true,
+                itemSize: 20.r,
+                initialRating: 3,
+                minRating: 1,
+                direction: Axis.horizontal,
+                allowHalfRating: false,
+                itemCount: 5,
+                itemBuilder: (context, _) =>
+                    Icon(Icons.star, color: Colors.amber),
+                onRatingUpdate: (rating) {},
               ),
             ],
           ),
@@ -180,28 +167,20 @@ class ProviderProfileView extends StatelessWidget {
     return GestureDetector(
       onTap: () => controller.onTabTapped(index),
       child: Container(
-        padding: EdgeInsets.only(left: 10, bottom: 10, right: 10),
+        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
         decoration: BoxDecoration(
-            border: Border(
-                bottom: BorderSide(
-                    width: 2,
-                    color: controller.selectedIndex == index
-                        ? primaryColor
-                        : whiteColor))),
-        child: Text(
-          title.tr,
-          style: Get.context!.isTablet
-              ? getMediumStyle(Get.context!).copyWith(
-                  color: controller.selectedIndex == index
-                      ? primaryColor
-                      : blackColor,
-                )
-              : getRegularStyle(Get.context!).copyWith(
-                  color: controller.selectedIndex == index
-                      ? primaryColor
-                      : blackColor,
-                ),
-        ),
+            borderRadius: customBorderRadius,
+            color: controller.selectedIndex == index
+                ? primaryColor
+                : Colors.transparent,
+            border: Border.all(color: primaryColor)),
+        child: Text(title.tr,
+            style: getMediumStyle(Get.context!).copyWith(
+              fontWeight: FontWeight.bold,
+              fontSize: 13.r,
+              color:
+                  controller.selectedIndex == index ? whiteColor : primaryColor,
+            )),
       ),
     );
   }

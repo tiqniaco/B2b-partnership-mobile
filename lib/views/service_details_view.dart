@@ -7,13 +7,13 @@ import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/services/date_time_convertor.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
-import 'package:b2b_partenership/core/utils/font_manager.dart';
+import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:b2b_partenership/widgets/service_details.dart/feature_widget.dart';
 import 'package:b2b_partenership/widgets/service_details.dart/seller_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher_string.dart';
@@ -41,8 +41,7 @@ class ServiceDetailsView extends StatelessWidget {
                 child: Container(
                   height: 45.h,
                   decoration: BoxDecoration(
-                      color: primaryColor,
-                      borderRadius: BorderRadius.circular(15)),
+                      color: primaryColor, borderRadius: customBorderRadius),
                   child: CustomLoadingButton(
                     onPressed: () {
                       controller.contactMethods();
@@ -55,7 +54,6 @@ class ServiceDetailsView extends StatelessWidget {
           ),
         ),
       ),
-     
       body: GetBuilder<ServiceDetailsController>(
         builder: (controller) {
           return controller.service == null
@@ -128,17 +126,22 @@ class ServiceDetailsView extends StatelessWidget {
                             PositionedDirectional(
                               top: 60,
                               end: 16,
-                              child: CircleAvatar(
-                                backgroundColor: whiteColor,
-                                child: IconButton(
-                                  icon: Icon(
-                                    FontAwesomeIcons.trash,
-                                    color: primaryColor,
-                                    size: 15.r,
+                              child: InkWell(
+                                onTap: () {
+                                  controller.deleteServiceDialog();
+                                },
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 16),
+                                  decoration: BoxDecoration(
+                                    borderRadius: customBorderRadius,
+                                    color: whiteColor,
                                   ),
-                                  onPressed: () {
-                                    controller.deleteServiceDialog();
-                                  },
+                                  child: Icon(
+                                    CupertinoIcons.trash_fill,
+                                    color: primaryColor,
+                                    size: 20.r,
+                                  ),
                                 ),
                               ),
                             ),
@@ -149,29 +152,59 @@ class ServiceDetailsView extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Gap(10),
-                            if (controller.service?.data?.video != null)
-                              InkWell(
-                                onTap: () {
-                                  launchUrlString(
-                                    controller.service?.data?.video ?? "",
-                                  );
-                                },
-                                child: Container(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: 17, vertical: 12),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.green,
-                                  ),
-                                  child: Text(
-                                    'Watch Video'.tr,
-                                    style: getRegularStyle(context).copyWith(
-                                        color: whiteColor,
-                                        fontWeight: FontWeight.bold),
-                                  ),
+                            Row(
+                              children: [
+                                CircleAvatar(
+                                  radius: 24.r,
+                                  backgroundColor: Colors.grey[200],
+                                  backgroundImage: CachedNetworkImageProvider(
+                                      controller.service!.provider!.image),
                                 ),
-                              ),
+                                SizedBox(width: 10),
+                                Text(
+                                  controller.service!.provider!.name,
+                                  style: getLightStyle(context).copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16.r),
+                                ),
+                                Spacer(),
+                                if (controller.service?.data?.video != null)
+                                  InkWell(
+                                    onTap: () {
+                                      launchUrlString(
+                                        controller.service?.data?.video ?? "",
+                                      );
+                                    },
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                          horizontal: 16, vertical: 4),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.grey.shade400),
+                                        borderRadius: BorderRadius.circular(12),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          Icon(
+                                            Icons.videocam_rounded,
+                                            color: primaryColor,
+                                            size: 24.r,
+                                          ),
+                                          Gap(8),
+                                          Text(
+                                            'Watch Video'.tr,
+                                            style: getRegularStyle(context)
+                                                .copyWith(
+                                                    color: blackColor,
+                                                    fontWeight:
+                                                        FontWeight.w500),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                              ],
+                            ),
                             SizedBox(height: 13),
                             Text(
                               translateDatabase(
@@ -181,31 +214,13 @@ class ServiceDetailsView extends StatelessWidget {
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 20),
-                            Row(
-                              children: [
-                                CircleAvatar(
-                                  radius: 20.r,
-                                  backgroundColor: Colors.grey[200],
-                                  backgroundImage: CachedNetworkImageProvider(
-                                      controller.service!.provider!.image),
-                                ),
-                                SizedBox(width: 10),
-                                Text(
-                                  controller.service!.provider!.name,
-                                  style: getLightStyle(context).copyWith(
-                                    fontWeight: FontManager.mediumFontWeight,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(height: 25),
+                            SizedBox(height: 24),
                             FeatureWidget(),
                             Gap(20),
                             FractionallySizedBox(
                               widthFactor: 10,
                               child: Divider(
-                                color: borderColor,
+                                color: primaryColor,
                               ),
                             ),
                             Padding(
@@ -216,20 +231,26 @@ class ServiceDetailsView extends StatelessWidget {
                                 children: [
                                   Row(
                                     children: [
+                                      Icon(
+                                        Icons.watch_later,
+                                        size: 20.r,
+                                        color: primaryColor,
+                                      ),
+                                      Gap(8),
                                       Text(
                                         DateTimeConvertor.timeAgo(controller
                                                 .service!.data!.createdAt!)
                                             .toString(),
                                         style:
                                             getRegularStyle(context).copyWith(
-                                          color: Colors.green,
-                                          fontWeight: FontWeight.bold,
+                                          color: blackColor,
+                                          // fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ],
                                   ),
                                   Container(
-                                    color: greyColor,
+                                    color: primaryColor,
                                     height: 10.h,
                                     width: 1,
                                   ),
@@ -238,21 +259,15 @@ class ServiceDetailsView extends StatelessWidget {
                                       Text(
                                         controller.service!.data!.rating!,
                                         style: getMediumStyle(context).copyWith(
-                                          color: Colors.orange,
+                                          color: starColor,
                                           fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                       Gap(3),
                                       Icon(
-                                        Icons.circle,
-                                        size: 3.r,
-                                        color: greyColor,
-                                      ),
-                                      Gap(3),
-                                      Icon(
                                         Icons.star,
-                                        size: 15.r,
-                                        color: Colors.orange,
+                                        size: 18.r,
+                                        color: starColor,
                                       ),
                                       Gap(7),
                                       Text(
@@ -267,13 +282,12 @@ class ServiceDetailsView extends StatelessWidget {
                             FractionallySizedBox(
                               widthFactor: 10,
                               child: Divider(
-                                color: borderColor,
+                                color: primaryColor,
                               ),
                             ),
                             SizedBox(height: 30),
                             Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
+                                mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
@@ -296,7 +310,8 @@ class ServiceDetailsView extends StatelessWidget {
                                         child: Text(
                                           "Overview".tr,
                                           style:
-                                              getMediumStyle(context).copyWith(
+                                              getRegularStyle(context).copyWith(
+                                            fontWeight: FontWeight.w500,
                                             color: controller.isOverView
                                                 ? primaryColor
                                                 : blackColor,
@@ -305,6 +320,7 @@ class ServiceDetailsView extends StatelessWidget {
                                       ),
                                     ),
                                   ),
+                                  Gap(16),
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
                                         horizontal: 8.0),
@@ -325,7 +341,8 @@ class ServiceDetailsView extends StatelessWidget {
                                         child: Text(
                                           "About Seller".tr,
                                           style:
-                                              getMediumStyle(context).copyWith(
+                                              getRegularStyle(context).copyWith(
+                                            fontWeight: FontWeight.w500,
                                             color: controller.isSeller
                                                 ? primaryColor
                                                 : blackColor,
@@ -335,9 +352,13 @@ class ServiceDetailsView extends StatelessWidget {
                                     ),
                                   ),
                                 ]),
-                            Divider(
-                              height: 0,
-                              color: const Color.fromARGB(255, 198, 137, 139),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 50.0),
+                              child: Divider(
+                                height: 0,
+                                color: const Color.fromARGB(255, 198, 137, 139),
+                              ),
                             ),
                             Gap(8.h),
                             controller.isOverView
@@ -346,7 +367,7 @@ class ServiceDetailsView extends StatelessWidget {
                                     child: Text(
                                       controller.service!.data!.overview!,
                                       style: getMediumStyle(context).copyWith(
-                                        fontWeight: FontWeight.w500,
+                                        fontWeight: FontWeight.w400,
                                       ),
                                       maxLines: 100,
                                     ),

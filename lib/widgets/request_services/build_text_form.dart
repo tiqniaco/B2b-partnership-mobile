@@ -1,8 +1,6 @@
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 Widget buildTextField(
@@ -20,27 +18,27 @@ Widget buildTextField(
       controller: controller,
       decoration: InputDecoration(
         floatingLabelBehavior: FloatingLabelBehavior.always,
-        contentPadding: EdgeInsets.symmetric(vertical: 12, horizontal: 15),
+        contentPadding: EdgeInsets.symmetric(vertical: 16, horizontal: 15),
         hintText: hintText,
-        hintStyle: getRegularStyle(Get.context!).copyWith(color: greyColor),
-        label: Column(
-          children: [
-            Container(
-              width: labelWidth ?? 175.w,
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
-              decoration: BoxDecoration(
-                  color: primaryColor, borderRadius: BorderRadius.circular(8)),
-              child: Text(
-                label,
-                style: getMediumStyle(Get.context!).copyWith(
-                  color: whiteColor,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
-            Gap(35)
-          ],
-        ),
+        hintStyle: getRegularStyle(Get.context!).copyWith(color: blackColor),
+        // label: Column(
+        //   children: [
+        //     Container(
+        //       width: labelWidth ?? 175.w,
+        //       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+        //       decoration: BoxDecoration(
+        //           color: primaryColor, borderRadius: BorderRadius.circular(8)),
+        //       child: Text(
+        //         label,
+        //         style: getMediumStyle(Get.context!).copyWith(
+        //           color: whiteColor,
+        //           fontWeight: FontWeight.w500,
+        //         ),
+        //       ),
+        //     ),
+        //     Gap(35)
+        //   ],
+        // ),
         filled: true,
         fillColor: whiteColor,
         enabledBorder: OutlineInputBorder(

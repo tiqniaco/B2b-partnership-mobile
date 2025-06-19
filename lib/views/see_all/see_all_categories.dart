@@ -16,70 +16,109 @@ class SeeAllCategories extends StatelessWidget {
   Widget build(BuildContext context) {
     Get.put(SeeAllCategoryController());
     return GetBuilder<SeeAllCategoryController>(
-      builder: (controller) => Scaffold(
-          appBar: AppBar(
-            toolbarHeight: context.isTablet ? 45.h : null,
-            backgroundColor: whiteColor,
-            title: Text(
-              "All Categories",
-              style: getMediumStyle(context),
-            ),
-          ),
-          body: GridView.builder(
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: context.isTablet ? 3 : 2,
-                mainAxisSpacing: 15,
-                crossAxisSpacing: 10,
-                childAspectRatio: 1,
+        builder: (controller) => Scaffold(
+            appBar: AppBar(
+              toolbarHeight: context.isTablet ? 45.h : null,
+              // backgroundColor: whiteColor,
+              title: Text(
+                "All Categories",
+                style: getMediumStyle(context),
               ),
-              scrollDirection: Axis.vertical,
-              padding: EdgeInsets.symmetric(horizontal: 15),
-              itemCount: controller.categories.length,
-              itemBuilder: (context, index) => InkWell(
-                    onTap: () {
-                      Get.toNamed(AppRoutes.providersInCategory,
-                          arguments: {"model": controller.categories[index]});
-                    },
-                    child: Container(
-                      width: 100.h,
-                      height: 120.h,
-                      padding: EdgeInsets.all(18),
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Colors.grey.withAlpha(80))),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.all(15),
-                            decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: pageColor.withAlpha(60)),
-                            child: CachedNetworkImage(
-                              imageUrl: controller.categories[index].image!,
-                              height: 32.h,
+            ),
+            body: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: context.isTablet ? 3 : 2,
+                  mainAxisSpacing: 15,
+                  crossAxisSpacing: 10,
+                  childAspectRatio: 1.3,
+                ),
+                scrollDirection: Axis.vertical,
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                itemCount: controller.categories.length,
+                itemBuilder: (context, index) => InkWell(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.providersInCategory,
+                            arguments: {"model": controller.categories[index]});
+                      },
+                      child: SizedBox(
+                        width: 100.r,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              padding: EdgeInsets.all(12.r),
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: lightPrimaryColor),
+                              child: CachedNetworkImage(
+                                imageUrl: controller.categories[index].image!,
+                                height: 50.r,
+                              ),
                             ),
-                          ),
-                          Gap(8.h),
-                          Text(
-                            translateDatabase(
-                                arabic: controller.categories[index].nameAr!,
-                                english: controller.categories[index].nameEn!),
-                            textAlign: TextAlign.center,
-                            style: context.isTablet
-                                ? getRegularStyle(context).copyWith(
-                                    fontWeight: FontWeight.w400,
-                                  )
-                                : getLightStyle(context).copyWith(
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ],
+                            Gap(8),
+                            Text(
+                              translateDatabase(
+                                  arabic: controller.categories[index].nameAr!,
+                                  english:
+                                      controller.categories[index].nameEn!),
+                              textAlign: TextAlign.center,
+                              style: getLightStyle(context).copyWith(
+                                fontSize: 14.r,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ))),
-    );
+                    ))));
+
+    //            InkWell(
+    //                 onTap: () {
+    //                   Get.toNamed(AppRoutes.providersInCategory,
+    //                       arguments: {"model": controller.categories[index]});
+    //                 },
+    //                 child: Container(
+    //                   width: 100.h,
+    //                   height: 120.h,
+    //                   padding: EdgeInsets.all(18),
+    //                   decoration: BoxDecoration(
+    //                       borderRadius: BorderRadius.circular(12),
+    //                       border: Border.all(color: Colors.grey.withAlpha(80))),
+    //                   child: Column(
+    //                     mainAxisAlignment: MainAxisAlignment.center,
+    //                     children: [
+    //                       Container(
+    //                         padding: EdgeInsets.all(15),
+    //                         decoration: BoxDecoration(
+    //                             shape: BoxShape.circle,
+    //                             color: pageColor.withAlpha(60)),
+    //                         child: CachedNetworkImage(
+    //                           imageUrl: controller.categories[index].image!,
+    //                           height: 32.h,
+    //                         ),
+    //                       ),
+    //                       Gap(8.h),
+    //                       Text(
+    //                         translateDatabase(
+    //                             arabic: controller.categories[index].nameAr!,
+    //                             english: controller.categories[index].nameEn!),
+    //                         textAlign: TextAlign.center,
+    //                         style: context.isTablet
+    //                             ? getRegularStyle(context).copyWith(
+    //                                 fontWeight: FontWeight.w400,
+    //                               )
+    //                             : getLightStyle(context).copyWith(
+    //                                 fontWeight: FontWeight.w400,
+    //                               ),
+    //                         maxLines: 2,
+    //                         overflow: TextOverflow.ellipsis,
+    //                       ),
+    //                     ],
+    //                   ),
+    //                 ),
+    //               ))),
+    // );
   }
 }

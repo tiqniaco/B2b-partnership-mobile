@@ -23,7 +23,7 @@ class CustomErrorWidget extends StatelessWidget {
           Lottie.asset(
             AssetsData.serverErrorAnimation,
             repeat: false,
-            height: 100.h,
+            height: 90,
           ),
           Text(
             message != null

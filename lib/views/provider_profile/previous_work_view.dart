@@ -3,6 +3,7 @@ import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -19,64 +20,54 @@ class PreviousWorkView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: whiteColor,
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
         title: Text(
           'Previous Work'.tr,
-          style: getBoldStyle(context).copyWith(color: primaryColor),
+          style: getBoldStyle(context).copyWith(),
         ),
-        centerTitle: true,
       ),
       body: GetBuilder<PreviousDetailsWorkController>(
         builder: (_) {
           return SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: 16.0.r),
+            padding: EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Gap(5.h),
                 Container(
-                  height: 120.h,
+                  height: 170.h,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: customBorderRadius,
                       image: DecorationImage(
                           fit: BoxFit.cover,
                           image: CachedNetworkImageProvider(
                             controller.model.image!,
                           ))),
                 ),
-                Gap(15.h),
+                Gap(24),
                 Text(
                   controller.model.titleEn ?? '',
                   style: getSemiBoldStyle(context).copyWith(
                     color: Colors.black,
+                    fontSize: 20.r,
                   ),
                 ),
-                Gap(10.h),
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      color: const Color.fromARGB(255, 252, 252, 247)),
-                  child: Text(
-                    controller.model.description ?? '',
-                    style: getMediumStyle(context).copyWith(
-                      fontSize: 14.sp,
-                      color: Colors.grey[800],
-                    ),
-                    maxLines: 1000,
+                Gap(16),
+                Text(
+                  controller.model.description ?? '',
+                  style: getMediumStyle(context).copyWith(
+                    fontSize: 14.sp,
+                    color: blackColor,
                   ),
+                  maxLines: 1000,
                 ),
                 Gap(20.h),
                 Text(
                   'Project Images:'.tr,
                   style: getBoldStyle(context).copyWith(
-                    fontSize: 14.sp,
-                    color: greenColor,
+                    fontSize: 16.r,
+                    color: primaryColor,
                   ),
                 ),
-                Gap(10.h),
+                Gap(16),
                 CustomServerStatusWidget(
                   statusRequest: controller.statusRequest,
                   child: const WorkImage(),
@@ -104,18 +95,18 @@ class WorkImage extends StatelessWidget {
       itemCount: controller.images.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
-        mainAxisSpacing: 12.h,
-        crossAxisSpacing: 12.w,
-        childAspectRatio: 0.8,
+        mainAxisSpacing: 16,
+        crossAxisSpacing: 16,
+        childAspectRatio: 1.7,
       ),
       itemBuilder: (context, index) {
         return ClipRRect(
-          borderRadius: BorderRadius.circular(16.r),
+          borderRadius: BorderRadius.circular(10.r),
           child: WidgetZoom(
             heroAnimationTag: index.toString(),
             zoomWidget: CustomNetworkImage(
               imageUrl: controller.images[index].image!,
-              fit: BoxFit.contain,
+              fit: BoxFit.fitWidth,
             ),
           ),
         );

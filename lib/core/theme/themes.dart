@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '/core/theme/app_color.dart';
 import '../utils/font_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,7 +10,7 @@ class AppThemes {
         primarySwatch: primarySwatchColor,
         primaryColor: primaryColor,
         fontFamily: FontManager.defaultFontFamily,
-        scaffoldBackgroundColor: whiteColor, // backgroundColor,
+        scaffoldBackgroundColor: backgroundColor,
         colorScheme: const ColorScheme.light(
           primary: primaryColor,
           onPrimary: whiteColor,
@@ -161,3 +162,21 @@ class AppThemes {
         ),
       );
 }
+
+BorderRadiusGeometry customBorderRadius = BorderRadius.only(
+  topLeft: Get.locale?.languageCode == "en"
+      ? Radius.circular(0.r)
+      : Radius.circular(10.r),
+  bottomRight: Get.locale?.languageCode == "ar"
+      ? Radius.circular(10.r)
+      : Radius.circular(0),
+);
+
+BorderRadiusGeometry customOneRadius = BorderRadius.only(
+  topLeft: Get.locale?.languageCode == "en"
+      ? Radius.circular(0.r)
+      : Radius.circular(10.r),
+  topRight: Get.locale?.languageCode == "en"
+      ? Radius.circular(10.r)
+      : Radius.circular(0),
+);

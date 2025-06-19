@@ -26,8 +26,8 @@ class AddRequestServiceController extends GetxController {
   final TextEditingController addressController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
 
-  late CountryModel selectedCountry;
-  late CityModel selectedCity;
+   CountryModel? selectedCountry;
+   CityModel? selectedCity;
   late SpecializeModel selectedSpecialization;
   late SubSpecializeModel selectedSubSpecialization;
 
@@ -144,7 +144,7 @@ class AddRequestServiceController extends GetxController {
           },
           data: {
             "user_id": Get.find<AppPreferences>().getUserId(),
-            "governments_id": selectedCity.id,
+            "governments_id": selectedCity!.id,
             "sub_specialization_id": selectedSubSpecialization.id,
             "title_ar": titleEnController.text,
             "title_en": titleEnController.text,
@@ -182,7 +182,7 @@ class AddRequestServiceController extends GetxController {
           },
           data: {
             "client_id": Get.find<AppPreferences>().getUserRoleId(),
-            "governments_id": selectedCity.id,
+            "governments_id": selectedCity!.id,
             "sub_specialization_id": selectedSubSpecialization.id,
             "title_ar": titleEnController.text,
             "title_en": titleEnController.text,
@@ -237,7 +237,7 @@ class AddRequestServiceController extends GetxController {
     statusRequestCity = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.cities,
-        data: {"country_id": selectedCountry.id},
+        data: {"country_id": selectedCountry!.id},
         fromJson: (json) {
           return json['data']
               .map<CityModel>((city) => CityModel.fromJson(city))

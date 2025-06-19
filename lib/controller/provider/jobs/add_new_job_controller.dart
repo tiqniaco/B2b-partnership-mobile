@@ -56,11 +56,11 @@ class AddNewJobController extends GetxController {
       descriptionController.text = model?.description ?? '';
       skillsController.text = model?.skills ?? '';
       experienceController.text = model?.experience ?? '';
-      expiryDateController.text = model?.expiryDate ?? '';
+      expiryDateController.text = model?.expiryDate.toString() ?? '';
       salaryController.text =
           model?.salary != "null" ? model!.salary.toString() : '';
-      selectedContractType =
-          model?.contractType ?? JobsContractTypeEnum.fullTime;
+      // selectedContractType =
+      //     model?.contractType ?? JobsContractTypeEnum.fullTime;
       selectedGender = JobGenderEnum.values.firstWhere(
         (element) => element.name == model!.gender,
       );

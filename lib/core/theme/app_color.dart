@@ -9,8 +9,9 @@ import 'package:flutter/material.dart';
 const primaryColor = Color(0xffbe0000); // 821115
 const secondaryColor = Color(0xffA9181D);
 const thirdColor = Color.fromARGB(255, 223, 66, 71);
-const lightColor = Color(0xffff5959);
+const lightPrimaryColor = Color(0xffFEEEEE);
 Color borderColor = Colors.grey.withAlpha(50);
+
 
 const redColor = Color(0xffF43F5F);
 
@@ -44,14 +45,13 @@ const greyCart = Color(0xffF5F6FA);
 
 //const secondaryColor = Color(0xff05414b);
 const bottomBarColor = Color(0xff2E3C33);
-const lightPrimaryColor = Color(0xffc9f7e3);
 const darkPrimaryColor = Color.fromARGB(255, 84, 135, 2);
 // const darkPrimaryColor = Color(0xff00a650);
 const selectedBNavBackgroundColor = Color.fromRGBO(255, 255, 255, 0.16);
 const unSelectedBNavColor = Color(0xff879797);
 
 // Background color
-const backgroundColor = Color(0xFFf1f5f7);
+const backgroundColor = Color(0xFFFDF8F8);
 const secondBackgroundColor = Color(0xFFf7f7f7);
 final lightGreyBackgroundColor = Colors.grey[100];
 
