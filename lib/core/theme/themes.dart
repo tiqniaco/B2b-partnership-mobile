@@ -163,20 +163,20 @@ class AppThemes {
       );
 }
 
-BorderRadiusGeometry customBorderRadius = BorderRadius.only(
-  topLeft: Get.locale?.languageCode == "en"
-      ? Radius.circular(0.r)
-      : Radius.circular(10.r),
-  bottomRight: Get.locale?.languageCode == "ar"
-      ? Radius.circular(10.r)
-      : Radius.circular(0),
+BorderRadiusGeometry customBorderRadius = BorderRadiusDirectional.only(
+  topStart: Radius.circular(10.r),
+  bottomEnd: Radius.circular(10.r),
 );
 
-BorderRadiusGeometry customOneRadius = BorderRadius.only(
-  topLeft: Get.locale?.languageCode == "en"
-      ? Radius.circular(0.r)
-      : Radius.circular(10.r),
-  topRight: Get.locale?.languageCode == "en"
-      ? Radius.circular(10.r)
-      : Radius.circular(0),
+BorderRadiusGeometry customOneRadius = BorderRadiusDirectional.only(
+  topEnd: Radius.circular(10.r),
 );
+
+// BorderRadius.only(
+//   topLeft: Get.locale?.languageCode == "en"
+//       ? Radius.circular(0.r)
+//       : Radius.circular(10.r),
+//   topRight: Get.locale?.languageCode == "en"
+//       ? Radius.circular(10.r)
+//       : Radius.circular(0),
+//);

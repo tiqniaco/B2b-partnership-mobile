@@ -35,9 +35,7 @@ class ShopItemProductRowWidget extends StatelessWidget {
                 width: 128,
                 height: context.isTablet ? 200 : 134,
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(10.r),
-                      bottomLeft: Radius.circular(10.r)), //customBorderRadius,
+                  borderRadius: customBorderRadius,
                   image: DecorationImage(
                       image: CachedNetworkImageProvider(
                         product.image,

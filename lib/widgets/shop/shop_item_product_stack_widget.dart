@@ -32,7 +32,7 @@ class ShopItemProductStackWidget extends StatelessWidget {
               color: borderColor,
               width: 1.w,
             ),
-            borderRadius: customBorderRadius),
+            borderRadius: BorderRadius.circular(12.r)),
         clipBehavior: Clip.hardEdge,
         padding: EdgeInsets.symmetric(horizontal: 8.0.w),
         child: Column(
@@ -55,7 +55,7 @@ class ShopItemProductStackWidget extends StatelessWidget {
                     width: double.infinity,
                     height: context.isTablet ? 130.h : 130.h,
                     decoration: BoxDecoration(
-                      borderRadius: customBorderRadius,
+                      borderRadius: customOneRadius,
                       color: blackColor.withAlpha(170),
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
@@ -113,8 +113,8 @@ class ShopItemProductStackWidget extends StatelessWidget {
                   ),
                   if (product.discount != "0")
                     PositionedDirectional(
-                      top: 0,
-                      end: context.isTablet ? 22 : 28,
+                      // start: 0,
+                      end: context.isTablet ? 22 : 23.w,
                       child: Container(
                         padding: EdgeInsets.symmetric(
                           horizontal: 5.r,
