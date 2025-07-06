@@ -491,7 +491,7 @@ class ShopCartView extends StatelessWidget {
                       "\$${controller.calculateTotalPrice()}",
                       style: TextStyle(
                         color: Colors.black87,
-                        fontSize: 24.r,
+                        fontSize: 20.r,
                         fontWeight: FontWeight.bold,
                       ),
                     ),

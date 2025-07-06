@@ -170,7 +170,7 @@ class LoginView extends StatelessWidget {
                             },
                             textFormController: controller.passwordController,
                             onTapIconsuf: () {
-                              controller.ontapSupfix();
+                              controller.onTapSuffix();
                             },
                             obscureText: controller.obscureText,
                             lable: "Password".tr,

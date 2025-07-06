@@ -86,7 +86,7 @@ class ClientProfileController extends GetxController {
                   _launchURL('tel://${clientModel!.phone}');
                 },
                 icon: FontAwesomeIcons.phone,
-                value: "+20${clientModel?.phone}",
+                value: "(+20) ${clientModel?.phone}",
                 iconColor: Colors.green,
               ),
               ProviderContactMethodWidget(

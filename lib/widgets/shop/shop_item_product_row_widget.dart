@@ -1,4 +1,4 @@
-import 'package:b2b_partenership/core/functions/translate_database.dart';
+import 'package:b2b_partenership/core/functions/get_text_direction.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/theme/themes.dart';
@@ -101,20 +101,25 @@ class ShopItemProductRowWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-                    Gap(2),
-                    Text(
-                      translateDatabase(
-                        arabic: product.descriptionAr,
-                        english: product.descriptionEn,
+                    Gap(5),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Directionality(
+                        textDirection: containsArabic(product.descriptionEn)
+                            ? TextDirection.rtl
+                            : TextDirection.ltr,
+                        child: Text(
+                          product.descriptionEn,
+                          style: TextStyle(
+                              height: 1,
+                              fontSize: 16.r,
+                              fontWeight: FontWeight.w400,
+                              color: blackColor),
+                          textAlign: TextAlign.start,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
                       ),
-                      style: TextStyle(
-                          height: 1,
-                          fontSize: 16.r,
-                          fontWeight: FontWeight.w400,
-                          color: blackColor),
-                      textAlign: TextAlign.start,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
                     ),
                     Gap(8),
                     Row(

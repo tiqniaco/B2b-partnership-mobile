@@ -52,7 +52,9 @@ class PriceOfferModel {
         userEmail: json["user_email"],
         userCountryCode: json["user_country_code"],
         userPhone: json["user_phone"],
-        userImage: kBaseImageUrl + json["user_image"],
+        userImage: json["user_image"] == null
+            ? ""
+            : kBaseImageUrl + json["user_image"],
         userRole: json["user_role"],
         roleId: json["role_id"],
       );

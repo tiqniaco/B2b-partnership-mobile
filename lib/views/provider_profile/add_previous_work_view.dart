@@ -30,12 +30,9 @@ class AddPreviousWorkView extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
                   children: [
-                    Container(
+                    SizedBox(
                       height: 200.h,
                       width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
                       child: Stack(
                         children: [
                           controller.pickedImage.isEmpty

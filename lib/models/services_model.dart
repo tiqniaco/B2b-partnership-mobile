@@ -96,7 +96,7 @@ class ServiceModelData {
     nameEn = json['name_en'];
     address = json['address'];
     description = json['description'];
-    image = kBaseImageUrl + json['image'];
+    image = json['image'] == null ? null : kBaseImageUrl + json['image'];
     // price = json['price'];
     rating = json['rating'];
     overview = json['overview'];

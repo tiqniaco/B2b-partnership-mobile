@@ -1,8 +1,8 @@
 import 'package:b2b_partenership/controller/client_profile_controller.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/theme/themes.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 
 import '/core/functions/translate_database.dart';
@@ -72,7 +72,7 @@ class ClientProfileView extends StatelessWidget {
                         decoration: BoxDecoration(shape: BoxShape.circle),
                         child: ClipRRect(
                             borderRadius: BorderRadius.circular(100),
-                            child: CachedNetworkImage(
+                            child: CustomNetworkImage(
                               fit: BoxFit.cover,
                               imageUrl: controller.clientModel!.image!,
                             )),

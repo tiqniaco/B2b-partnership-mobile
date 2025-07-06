@@ -96,7 +96,7 @@ class ProviderModel extends Equatable {
         email: json["email"] ?? "",
         countryCode: json["country_code"] ?? "",
         phone: json["phone"] ?? "",
-        image: kBaseImageUrl + json["image"],
+        image: json["image"] == null ? "" : kBaseImageUrl + json["image"],
         status: json["status"] ?? "",
         providerId: json["provider_id"] ?? "",
         commercialRegister: json["commercial_register"] == null

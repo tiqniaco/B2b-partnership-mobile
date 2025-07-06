@@ -109,7 +109,7 @@ class ShopController extends GetxController {
   }
 
   Future<void> recommendedProducts({bool isSearch = false}) async {
-    print("get recommended");
+   
     shopRecommendedProducts.clear();
 
     recommendedProductsStatus = StatusRequest.loading;

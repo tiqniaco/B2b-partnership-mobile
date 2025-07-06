@@ -1,4 +1,6 @@
 import 'package:b2b_partenership/app_routes.dart';
+import 'package:b2b_partenership/core/functions/get_text_direction.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:b2b_partenership/core/utils/assets_data.dart';
@@ -36,7 +38,6 @@ class _JobDetailsViewState extends State<JobDetailsView> {
   }
 
   void _scrollListener() {
-    // height اللي بيحصل فيه التغيير ما بين expanded و collapsed
     if (_scrollController.hasClients) {
       bool isNowExpanded = _scrollController.offset < 200;
       if (isNowExpanded != _isExpanded) {
@@ -91,8 +92,6 @@ class _JobDetailsViewState extends State<JobDetailsView> {
                     ),
                     decoration: BoxDecoration(
                       color: primaryColor,
-
-                      //border: Border.all(color: primaryColor),
                       borderRadius: customBorderRadius,
                     ),
                     margin: EdgeInsetsDirectional.only(end: 10.w),
@@ -154,8 +153,8 @@ class _JobDetailsViewState extends State<JobDetailsView> {
                     background: Stack(
                       fit: StackFit.expand,
                       children: [
-                        Image.network(
-                          controller.jobDetailsModel?.image ?? "",
+                        CustomNetworkImage(
+                          imageUrl: controller.jobDetailsModel?.image ?? "",
                           fit: BoxFit.fitWidth,
                         ),
                         Container(
@@ -165,7 +164,6 @@ class _JobDetailsViewState extends State<JobDetailsView> {
                     ),
                   ),
                 ),
-                // باقي السليفر ليست زي ما هي...
                 SliverPadding(
                   padding: const EdgeInsets.all(16.0),
                   sliver: SliverList(
@@ -299,331 +297,47 @@ class _JobDetailsViewState extends State<JobDetailsView> {
     void Function()? onTap,
     bool isShowArrow = false,
     IconData? arrowIcon,
-    Color? arrowColor,
   }) {
     return Card(
       elevation: 0.5,
       margin: EdgeInsets.symmetric(vertical: 6),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: ListTile(
-        leading: Icon(
-          icon,
-          color: primaryColor,
-          size: 20.r,
-        ),
-        title: Text(
-          title,
-          style: getRegularStyle(context).copyWith(
-            fontWeight: FontManager.boldFontWeight,
-          ),
-        ),
-        subtitle: ReadMoreText(
-          value,
-          style: getRegularStyle(context),
-          trimLines: 4,
-          colorClickableText: primaryColor,
-          trimMode: TrimMode.Line,
-          trimCollapsedText: 'See more'.tr,
-          trimExpandedText: 'See less'.tr,
-        ),
-        trailing: isShowArrow
-            ? IconButton(
-                onPressed: onTap,
-                icon: Icon(
-                  arrowIcon ?? Icons.arrow_forward_ios_rounded,
-                  color: arrowColor ?? primaryColor,
-                  size: 16.r,
-                ),
-              )
-            : null,
-      ),
-    );
-  }
-}
-
-class JobetailsView extends StatelessWidget {
-  const JobetailsView({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return GetBuilder<JobDetailsController>(
-      init: JobDetailsController(),
-      builder: (JobDetailsController controller) {
-        return Scaffold(
-          floatingActionButton: Get.find<AppPreferences>().getUserId() !=
-                  controller.jobDetailsModel?.employerId
-              ? FloatingActionButton.extended(
-                  onPressed: () {
-                    Get.toNamed(AppRoutes.jobApplication, arguments: {
-                      "jobId": controller.jobDetailsModel?.id,
-                    });
-                  },
-                  icon: Icon(
-                    FontAwesomeIcons.briefcase,
-                    color: whiteColor,
-                  ),
-                  label: Text(
-                    "Apply Now".tr,
-                    style: getLightStyle(context).copyWith(
-                      color: whiteColor,
-                      fontWeight: FontManager.semiBoldFontWeight,
-                    ),
-                  ),
+        leading: InkWell(
+          onTap: isShowArrow ? onTap : () {},
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Icon(
+                icon,
+                color: primaryColor,
+                size: 20.r,
+              ),
+              if (isShowArrow)
+                Text(
+                  "Contact".tr,
+                  style: TextStyle(color: greyColor),
                 )
-              : null,
-          body: SafeArea(
-            top: false,
-            child: CustomScrollView(
-              slivers: [
-                SliverAppBar(
-                  expandedHeight: context.isTablet ? 300.h : 250.h,
-                  floating: false,
-                  pinned: true,
-                  centerTitle: true,
-                  iconTheme: const IconThemeData(color: whiteColor),
-                  flexibleSpace: FlexibleSpaceBar(
-                    collapseMode: CollapseMode.pin,
-                    centerTitle: true,
-                    title: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Expanded(
-                          child: Text(
-                            controller.jobDetailsModel?.name ?? "",
-                            style: getRegularStyle(context).copyWith(
-                              color: whiteColor,
-                              fontWeight: FontManager.mediumFontWeight,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
-                        ),
-                        if (Get.find<AppPreferences>().getUserId() ==
-                            controller.jobDetailsModel?.employerId)
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 5.w,
-                              vertical: 5.h,
-                            ),
-                            decoration: BoxDecoration(
-                              color: whiteColor,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            margin: EdgeInsetsDirectional.only(end: 10.w),
-                            child: InkWell(
-                              onTap: () {
-                                Get.toNamed(
-                                  AppRoutes.providerJobApplications,
-                                  arguments: {
-                                    "jobId": controller.jobDetailsModel?.id
-                                        .toString(),
-                                  },
-                                );
-                              },
-                              child: Row(
-                                children: [
-                                  Text(
-                                    "Show Applications".tr,
-                                    style: getLightStyle(context).copyWith(
-                                      fontSize: context.isTablet ? 4.sp : 8.sp,
-                                      color: primaryColor,
-                                      fontWeight: FontManager.mediumFontWeight,
-                                    ),
-                                  ),
-                                  SvgPicture.asset(
-                                    AssetsData.jobApplicationSVG,
-                                    height: 15.w,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                      ],
-                    ),
-                    background: Stack(
-                      fit: StackFit.expand,
-                      children: [
-                        Image.network(
-                          controller.jobDetailsModel?.image ?? "",
-                          fit: BoxFit.fitWidth,
-                        ),
-                        Container(
-                          color: Colors.black.withAlpha(70),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SliverPadding(
-                  padding: const EdgeInsets.all(16.0),
-                  sliver: SliverList(
-                    delegate: SliverChildListDelegate(
-                      [
-                        _buildCard(
-                          context: context,
-                          icon: FontAwesomeIcons.briefcase,
-                          title: "Position".tr,
-                          value: controller.jobDetailsModel?.title ?? "",
-                        ),
-                        _buildCard(
-                          context: context,
-                          icon: FontAwesomeIcons.graduationCap,
-                          title: "Specialization".tr,
-                          value:
-                              "${translateDatabase(arabic: controller.jobDetailsModel?.specializationNameAr ?? "", english: controller.jobDetailsModel?.specializationNameEn ?? "")}, ${translateDatabase(arabic: controller.jobDetailsModel?.subSpecializationNameAr ?? "", english: controller.jobDetailsModel?.subSpecializationNameEn ?? "")}",
-                        ),
-                        _buildCard(
-                          context: context,
-                          icon: FontAwesomeIcons.fileLines,
-                          title: "Description".tr,
-                          value: controller.jobDetailsModel?.description ?? "",
-                        ),
-                        _buildCard(
-                          context: context,
-                          icon: FontAwesomeIcons.briefcase,
-                          title: "Contract Type".tr,
-                          value:
-                              controller.jobDetailsModel?.contractType.value ??
-                                  "",
-                        ),
-                        _buildCard(
-                          context: context,
-                          icon: FontAwesomeIcons.venusMars,
-                          title: "Gender".tr,
-                          value: controller.jobDetailsModel?.gender ?? "",
-                        ),
-                        _buildCard(
-                          context: context,
-                          icon: FontAwesomeIcons.code,
-                          title: "Skills Required".tr,
-                          value: controller.jobDetailsModel?.skills ?? "",
-                        ),
-                        _buildCard(
-                          context: context,
-                          icon: FontAwesomeIcons.userClock,
-                          title: "Experience".tr,
-                          value: controller.jobDetailsModel?.experience ?? "",
-                        ),
-                        _buildCard(
-                          context: context,
-                          icon: FontAwesomeIcons.dollarSign,
-                          title: "Salary".tr,
-                          value: controller.jobDetailsModel!.salary == "null"
-                              ? "N/A"
-                              : controller.jobDetailsModel!.salary,
-                        ),
-                        _buildCard(
-                          context: context,
-                          icon: FontAwesomeIcons.calendarDays,
-                          title: "Expiry Date".tr,
-                          value: controller.jobDetailsModel?.expiryDate ?? "",
-                        ),
-                        _buildCard(
-                          context: context,
-                          icon: FontAwesomeIcons.locationDot,
-                          title: "Address".tr,
-                          value:
-                              "${translateDatabase(arabic: controller.jobDetailsModel?.countryNameAr ?? "", english: controller.jobDetailsModel?.countryNameEn ?? "")}, ${translateDatabase(arabic: controller.jobDetailsModel?.governmentNameAr ?? "", english: controller.jobDetailsModel?.governmentNameEn ?? "")}",
-                        ),
-                        _buildCard(
-                          context: context,
-                          icon: FontAwesomeIcons.building,
-                          title: "Company".tr,
-                          value: controller.jobDetailsModel?.name ?? "",
-                        ),
-                        _buildCard(
-                          context: context,
-                          icon: FontAwesomeIcons.phone,
-                          title: "Phone".tr,
-                          value:
-                              "+${controller.jobDetailsModel?.countryCode ?? ""} ${controller.jobDetailsModel?.phone ?? ""}",
-                          isShowArrow: true,
-                          arrowIcon: FontAwesomeIcons.phone,
-                          onTap: () async {
-                            try {
-                              launchUrlString(
-                                "tel:+${controller.jobDetailsModel?.countryCode ?? ""} ${controller.jobDetailsModel?.phone ?? ""}",
-                              );
-                            } catch (e) {
-                              debugPrint(e.toString());
-                            }
-                          },
-                        ),
-                        _buildCard(
-                          context: context,
-                          icon: FontAwesomeIcons.envelope,
-                          title: "Email".tr,
-                          value: controller.jobDetailsModel?.email ?? "",
-                          isShowArrow: true,
-                          arrowIcon: FontAwesomeIcons.envelope,
-                          onTap: () async {
-                            try {
-                              await launchUrlString(
-                                "mailto:${controller.jobDetailsModel?.email ?? ""}",
-                              );
-                            } catch (e) {
-                              debugPrint(e.toString());
-                            }
-                          },
-                        ),
-                        Gap(40.h),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildCard({
-    required BuildContext context,
-    required IconData icon,
-    required String title,
-    required String value,
-    void Function()? onTap,
-    bool isShowArrow = false,
-    IconData? arrowIcon,
-    Color? arrowColor,
-  }) {
-    return Card(
-      elevation: 4,
-      margin: EdgeInsets.symmetric(vertical: 8.h),
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      child: ListTile(
-        leading: Icon(
-          icon,
-          color: primaryColor,
-          size: 20.r,
-        ),
-        title: Text(
-          title,
-          style: getRegularStyle(context).copyWith(
-            fontWeight: FontManager.boldFontWeight,
+            ],
           ),
         ),
-        subtitle: ReadMoreText(
-          value,
-          style: getRegularStyle(context),
-          trimLines: 4,
-          colorClickableText: primaryColor,
-          trimMode: TrimMode.Line,
-          trimCollapsedText: 'See more'.tr,
-          trimExpandedText: 'See less'.tr,
+        title: Text(title,
+            style: getRegularStyle(context).copyWith(
+              fontWeight: FontManager.boldFontWeight,
+            )),
+        subtitle: Directionality(
+          textDirection:
+              containsArabic(value) ? TextDirection.rtl : TextDirection.ltr,
+          child: ReadMoreText(
+            value,
+            style: getRegularStyle(context),
+            trimLines: 4,
+            colorClickableText: primaryColor,
+            trimMode: TrimMode.Line,
+            trimCollapsedText: 'See more'.tr,
+            trimExpandedText: 'See less'.tr,
+          ),
         ),
-        trailing: isShowArrow
-            ? IconButton(
-                onPressed: onTap,
-                icon: Icon(
-                  arrowIcon ?? Icons.arrow_forward_ios_rounded,
-                  color: arrowColor ?? primaryColor,
-                  size: 16.r,
-                ),
-              )
-            : null,
       ),
     );
   }

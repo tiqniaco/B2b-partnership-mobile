@@ -6,26 +6,24 @@ import 'package:b2b_partenership/views/auth/login_view.dart';
 import 'package:b2b_partenership/views/auth/o_t_p_view.dart';
 import 'package:b2b_partenership/views/auth/signup_view.dart';
 import 'package:b2b_partenership/views/client_profile_view.dart';
-import 'package:b2b_partenership/views/home/client_home_layout.dart';
-import 'package:b2b_partenership/views/home/client_home_view.dart';
+import 'package:b2b_partenership/views/home/home_layout_view.dart';
+import 'package:b2b_partenership/views/home/home_view.dart';
 import 'package:b2b_partenership/views/job_application/search_job_applications_view.dart';
 import 'package:b2b_partenership/views/orders/orders_view.dart';
-import 'package:b2b_partenership/views/provider_app/home/provider_home_layout.dart';
-import 'package:b2b_partenership/views/provider_app/home/provider_home_view.dart';
-import 'package:b2b_partenership/views/provider_app/my_services/my_service.dart';
-import 'package:b2b_partenership/views/provider_app/posts/get_service_request.dart';
+import 'package:b2b_partenership/views/provider_profile/my_services/my_service.dart';
+import 'package:b2b_partenership/views/posts/get_all_posts.dart';
 import 'package:b2b_partenership/views/provider_profile/add_previous_work_view.dart';
 import 'package:b2b_partenership/views/provider_profile/edit_previous_work_view.dart';
-import 'package:b2b_partenership/views/provider_profile/manage_previous_work.dart';
-import 'package:b2b_partenership/views/provider_profile/manage_previous_work_details_view.dart';
+import 'package:b2b_partenership/views/settings/provider/manage_previous_work.dart';
+import 'package:b2b_partenership/views/provider_profile/previous_work_details_view.dart';
 import 'package:b2b_partenership/views/provider_profile/previous_work_view.dart';
 import 'package:b2b_partenership/views/provider_profile/provider_profile_view.dart';
 import 'package:b2b_partenership/views/see_all/see_all_categories.dart';
 import 'package:b2b_partenership/views/see_all/see_all_providers.dart';
-import 'package:b2b_partenership/views/service_details_view.dart';
+import 'package:b2b_partenership/views/provider_profile/my_services/service_details_view.dart';
 import 'package:b2b_partenership/views/in_category/providers_in_categories.dart';
-import 'package:b2b_partenership/views/service_request/add_service_request.dart';
-import 'package:b2b_partenership/views/service_request/get_user_service_request.dart';
+import 'package:b2b_partenership/views/posts/add_post_view.dart';
+import 'package:b2b_partenership/views/posts/user_posts.dart';
 import 'package:b2b_partenership/views/settings/about_us_webview.dart';
 import 'package:b2b_partenership/views/settings/change_password_view.dart';
 import 'package:b2b_partenership/views/settings/edit_client_profile_view.dart';
@@ -42,20 +40,20 @@ import 'views/job_application/client_job_applications_view.dart';
 import 'views/job_application/job_application_details_view.dart';
 import 'views/job_application/add_job_application_view.dart';
 import 'views/jobs/job_details_view.dart';
-import 'views/jobs/jobs_view.dart';
-import 'views/jobs/provider_job_applications_view.dart';
+import 'views/jobs/all_jobs_view.dart';
+import 'views/jobs/job_applications_view.dart';
 import 'views/notifications/views/notification_view.dart';
 import 'views/orders/order_details_view.dart';
 import 'views/orders/order_item_view.dart';
-import 'views/provider_app/jobs/add_new_job_view.dart';
-import 'views/provider_app/jobs/provider_jobs_view.dart';
-import 'views/provider_app/my_services/add_provider_service_view.dart';
-import 'views/provider_app/my_services/edit_provider_service_view.dart';
-import 'views/provider_app/setting/edit_provider_profile_view.dart';
-import 'views/provider_app/setting/provider_contacts/provider_contacts_view.dart';
+import 'views/jobs/add_new_job_view.dart';
+import 'views/jobs/user_jobs_view.dart';
+import 'views/provider_profile/my_services/add_provider_service_view.dart';
+import 'views/provider_profile/my_services/edit_provider_service_view.dart';
+import 'views/settings/provider/edit_provider_profile_view.dart';
+import 'views/settings/provider/provider_contacts/provider_contacts_view.dart';
 import 'views/save/save_view.dart';
 import 'views/search/search_view.dart';
-import 'views/service_request/service_request_details.dart';
+import 'views/posts/post_details_view.dart';
 import 'views/shop/shop_product_details_view.dart';
 
 class AppRoutes {
@@ -77,10 +75,10 @@ class AppRoutes {
   static const String authNoteScreen = "/authNoteScreen";
 
   // home
-  static const String clintHome = '/clintHome';
-  static const String providerHomeLayout = '/providerHomeLayout';
-  static const String providerHomeView = '/providerHomeView';
-  static const String clientHomeLayout = '/clientHomeLayout';
+  static const String home = '/home';
+  // static const String providerHomeLayout = '/providerHomeLayout';
+  // static const String providerHomeView = '/providerHomeView';
+  static const String homeLayout = '/homeLayout';
   static const String seeAll = '/seeAll';
   static const String seeAllCategories = '/seeAllCategories';
 
@@ -191,20 +189,20 @@ class AppRoutes {
     //home
 
     GetPage(
-      name: clintHome,
-      page: () => ClientHomeView(),
+      name: home,
+      page: () => HomeView(),
     ),
+    // GetPage(
+    //   name: providerHomeView,
+    //   page: () => const ProviderHomeView(),
+    // ),
+    // GetPage(
+    //   name: providerHomeLayout,
+    //   page: () => const ProviderHomeLayout(),
+    // ),
     GetPage(
-      name: providerHomeView,
-      page: () => const ProviderHomeView(),
-    ),
-    GetPage(
-      name: providerHomeLayout,
-      page: () => const ProviderHomeLayout(),
-    ),
-    GetPage(
-      name: clientHomeLayout,
-      page: () => const ClientHomeLayout(),
+      name: homeLayout,
+      page: () => const HomeLayoutView(),
     ),
     GetPage(
       name: seeAll,
@@ -218,15 +216,15 @@ class AppRoutes {
     // service request
     GetPage(
       name: addServicesRequest,
-      page: () => AddServiceRequest(),
+      page: () => AddPostView(),
     ),
     GetPage(
       name: getRequestServices,
-      page: () => GetUserServiceRequest(),
+      page: () => UserPostsView(),
     ),
     GetPage(
       name: serviceRequestDetails,
-      page: () => ServiceRequestDetails(),
+      page: () => PostDetailsView(),
     ),
 
     // service details
@@ -243,7 +241,7 @@ class AppRoutes {
 
     GetPage(
       name: managePreviousWorkDetailsView,
-      page: () => const ManagePreviousWorkDetailsView(),
+      page: () => const PreviousWorkDetailsView(),
     ),
     GetPage(
       name: providerProfile,
@@ -365,7 +363,7 @@ class AppRoutes {
 
     GetPage(
       name: jobs,
-      page: () => JobsView(),
+      page: () => AllJobsView(),
     ),
     GetPage(
       name: jobDetails,
@@ -388,7 +386,7 @@ class AppRoutes {
 
     GetPage(
       name: providerJobs,
-      page: () => const ProviderJobsView(),
+      page: () => const UserJobsView(),
     ),
 
     GetPage(
@@ -397,7 +395,7 @@ class AppRoutes {
     ),
     GetPage(
       name: providerJobApplications,
-      page: () => const ProviderJobApplicationsView(),
+      page: () => const JobApplicationsView(),
     ),
     GetPage(
       name: searchJobApplications,
@@ -415,7 +413,7 @@ class AppRoutes {
     ),
     GetPage(
       name: getServicesRequest,
-      page: () => GetServiceRequest(),
+      page: () => GetAllPosts(),
     ),
     GetPage(
       name: clientProfile,

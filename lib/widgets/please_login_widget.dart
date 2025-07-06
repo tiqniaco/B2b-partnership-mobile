@@ -18,7 +18,7 @@ class PleaseLoginWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(backgroundColor: whiteColor),
+      // appBar: AppBar(backgroundColor: whiteColor),
       body: Container(
         alignment: AlignmentDirectional.center,
         padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).top * 2),

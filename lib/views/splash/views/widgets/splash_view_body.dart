@@ -52,7 +52,7 @@ class _SplashViewBodyState extends State<SplashViewBody>
   Future<void> _navigateToNext() async {
     Future.delayed(kSplashDuration, () async {
       if (Get.find<AppPreferences>().getUserRole() == "client") {
-        Get.offNamed(AppRoutes.clientHomeLayout);
+        Get.offNamed(AppRoutes.homeLayout);
       } else if (Get.find<AppPreferences>().getUserRole() == "provider") {
         await getVerifyCode();
         if (code == "0" || code == null) {
@@ -61,12 +61,12 @@ class _SplashViewBodyState extends State<SplashViewBody>
           if (Get.find<AppPreferences>().getStep() == "1") {
             Get.toNamed(AppRoutes.authNoteScreen, arguments: {"code": code});
           } else {
-            Get.offNamed(AppRoutes.providerHomeLayout);
+            Get.offNamed(AppRoutes.homeLayout);
           }
         }
       } else {
         // Get.offNamed(AppRoutes.login);
-        Get.offNamed(AppRoutes.clientHomeLayout);
+        Get.offNamed(AppRoutes.homeLayout);
       }
     });
   }
@@ -86,7 +86,6 @@ class _SplashViewBodyState extends State<SplashViewBody>
       Get.find<AppPreferences>().clear();
       statusRequest = StatusRequest.error;
     }, (r) {
-     
       statusRequest = StatusRequest.success;
       code = r['verified_code'];
     });

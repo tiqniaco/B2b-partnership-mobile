@@ -86,6 +86,16 @@ const Map<String, String> en = {
   "No file selected   ": "No file selected   ",
   "Upload": "Upload",
   "Tax Card": "Tax Card",
+  "I Accept": "I Accept",
+  "account not found please create account": "account not found please create account",
+   "Business Information": "Business Information",
+   "VAT No.": "VAT No.",
+   "tax No.": "tax No.",
+   "Commercial No.": "Commercial No.",
+    "enter feature": "enter feature",
+  "Add Service Image":"Add Service Image",
+  "Provider type":"Provider type",
+
 
   // home
   "Home": "Home",

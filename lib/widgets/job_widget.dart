@@ -1,4 +1,6 @@
 import 'package:b2b_partenership/core/enums/jobs_contract_type_enum.dart';
+import 'package:b2b_partenership/core/functions/please_login_dialog.dart';
+import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -28,14 +30,18 @@ class JobWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Get.toNamed(
-          AppRoutes.jobDetails,
-          arguments: {
-            "job": model,
-          },
-        );
-      },
+      onTap: Get.find<AppPreferences>().getToken() == ''
+          ? () {
+              pleaseLoginDialog();
+            }
+          : () {
+              Get.toNamed(
+                AppRoutes.jobDetails,
+                arguments: {
+                  "job": model,
+                },
+              );
+            },
       child: Container(
         padding: EdgeInsets.symmetric(
           horizontal: 16.w,

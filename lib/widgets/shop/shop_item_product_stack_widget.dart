@@ -1,4 +1,4 @@
-import 'package:b2b_partenership/core/functions/translate_database.dart';
+import 'package:b2b_partenership/core/functions/get_text_direction.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
@@ -71,20 +71,23 @@ class ShopItemProductStackWidget extends StatelessWidget {
                     child: Row(
                       children: [
                         Expanded(
-                          child: Text(
-                            translateDatabase(
-                              arabic: product.descriptionAr,
-                              english: product.descriptionEn,
+                          child: Directionality(
+                            textDirection: containsArabic(product.descriptionEn)
+                                ? TextDirection.rtl
+                                : TextDirection.ltr,
+                            child: Text(
+                              product.descriptionEn,
+                              style: getMediumStyle(context).copyWith(
+                                  fontWeight: FontManager.mediumFontWeight,
+                                  height: 1,
+                                  color: whiteColor),
+                              textAlign: TextAlign.start,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            style: getMediumStyle(context).copyWith(
-                                fontWeight: FontManager.mediumFontWeight,
-                                height: 1,
-                                color: whiteColor),
-                            textAlign: TextAlign.start,
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
                           ),
                         ),
+                        Gap(8),
                         Row(
                           children: [
                             Text(
@@ -113,7 +116,7 @@ class ShopItemProductStackWidget extends StatelessWidget {
                   ),
                   if (product.discount != "0")
                     PositionedDirectional(
-                      // start: 0,
+                      //start: 0,
                       end: context.isTablet ? 22 : 23.w,
                       child: Container(
                         padding: EdgeInsets.symmetric(

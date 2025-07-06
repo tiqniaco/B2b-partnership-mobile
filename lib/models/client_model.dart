@@ -42,7 +42,7 @@ class ClientModel {
     email = json['email'];
     countryCode = json['country_code'];
     phone = json['phone'];
-    image = kBaseImageUrl + json['image'];
+    image = json['image'] == null ? "" : kBaseImageUrl + json['image'];
     clientId = json['client_id'];
     countryId = json['country_id'];
     countryNameAr = json['country_name_ar'];

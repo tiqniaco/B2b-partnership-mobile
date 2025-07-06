@@ -4,7 +4,7 @@ import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/theme/themes.dart';
-import 'package:b2b_partenership/widgets/in_category/service_widget_vertical.dart';
+import 'package:b2b_partenership/widgets/provider_profile/service_widget_vertical.dart';
 import 'package:b2b_partenership/widgets/provider_profile/about_widget.dart';
 import 'package:b2b_partenership/widgets/provider_profile/previous_work_widget.dart';
 import 'package:b2b_partenership/widgets/provider_profile/review_widget.dart';

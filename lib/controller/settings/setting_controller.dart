@@ -31,6 +31,7 @@ class SettingController extends GetxController {
     if (ApiConstance.token.isEmpty) {
       return;
     }
+
     print("get details .........");
     var id = Get.find<AppPreferences>().getUserRoleId();
     statusRequest = StatusRequest.loading;
@@ -46,6 +47,8 @@ class SettingController extends GetxController {
       update();
     }, (r) {
       menuModel = r;
+
+      print(menuModel);
       statusRequest = StatusRequest.success;
       update();
     });
@@ -81,7 +84,7 @@ class SettingController extends GetxController {
       Get.find<AppPreferences>().setUserRoleId(providerModel.providerId);
       Get.find<AppPreferences>().setUserRole("provider");
       ApiConstance.token = r['token'];
-      Get.offAllNamed(AppRoutes.providerHomeLayout);
+      Get.offAllNamed(AppRoutes.homeLayout);
       statusRequestSwitch = StatusRequest.success;
       update();
     });

@@ -3,6 +3,7 @@ import 'package:b2b_partenership/controller/settings/setting_controller.dart';
 import 'package:b2b_partenership/core/functions/logout.dart';
 import 'package:b2b_partenership/core/functions/remove_account.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
@@ -62,8 +63,8 @@ class SettingsView extends StatelessWidget {
                                               child: ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(8),
-                                                child: Image.network(
-                                                  controller
+                                                child: CustomNetworkImage(
+                                                  imageUrl: controller
                                                       .menuModel!.data!.image!,
                                                   fit: BoxFit.cover,
                                                 ),

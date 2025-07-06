@@ -1,4 +1,5 @@
 import 'package:b2b_partenership/controller/shop/shop_product_details_controller.dart';
+import 'package:b2b_partenership/core/functions/get_text_direction.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -46,10 +47,10 @@ class TermsAndConditions extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: Directionality(
-                    textDirection: controller
-                            .containsArabic(controller.product!.descriptionAr)
-                        ? TextDirection.rtl
-                        : TextDirection.ltr,
+                    textDirection:
+                        containsArabic(controller.product!.descriptionAr)
+                            ? TextDirection.rtl
+                            : TextDirection.ltr,
                     child: Text(
                       controller.product!.descriptionAr,
                       style: TextStyle(

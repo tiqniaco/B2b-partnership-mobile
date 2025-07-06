@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 
-import 'package:b2b_partenership/controller/provider/my_services/get_my_service_controller.dart';
+import 'package:b2b_partenership/controller/settings/provider/my_services/get_my_service_controller.dart';
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
@@ -109,7 +109,39 @@ class ServiceDetailsController extends GetxController {
           padding: EdgeInsets.symmetric(horizontal: 8.w),
           child: Column(
             children: [
-              if (service?.provider?.contactPhone != null)
+              if (service?.provider?.contactPhone == '' &&
+                  service?.provider?.contactEmail == '' &&
+                  service?.provider?.contactWhatsapp == '' &&
+                  service?.provider?.contactTelegram == '' &&
+                  service?.provider?.contactInstagram == '' &&
+                  service?.provider?.contactLinkedin == '' &&
+                  service?.provider?.contactWebsite == '' &&
+                  service?.provider?.contactFacebook == '')
+                ProviderContactMethodWidget(
+                  icon: FontAwesomeIcons.phone,
+                  value:
+                      "+${service?.provider?.countryCode} ${service?.provider?.phone}",
+                  iconColor: Colors.green,
+                  onTap: () => _launchURL(
+                      'tel://${service?.provider?.countryCode}${service?.provider?.phone}'),
+                ),
+              ProviderContactMethodWidget(
+                onTap: () {
+                  _launchURL('mailto://${service?.provider?.email}');
+                },
+                icon: FontAwesomeIcons.envelope,
+                value: service?.provider?.email ?? "",
+                iconColor: Colors.red,
+              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: Text(
+              //     "The provider does not have any contact information".tr,
+              //     textAlign: TextAlign.center,
+              //   ),
+              // ),
+              if (service?.provider?.contactPhone == null &&
+                  service?.provider?.contactPhone != '')
                 ProviderContactMethodWidget(
                   onTap: () {
                     _launchURL('tel://${service?.provider?.contactPhone}');
@@ -118,7 +150,8 @@ class ServiceDetailsController extends GetxController {
                   value: service?.provider?.contactPhone ?? "",
                   iconColor: Colors.green,
                 ),
-              if (service?.provider?.contactEmail != null)
+              if (service?.provider?.contactEmail != null &&
+                  service?.provider?.contactEmail != '')
                 ProviderContactMethodWidget(
                   onTap: () {
                     _launchURL('mailto://${service?.provider?.contactEmail}');
@@ -127,7 +160,8 @@ class ServiceDetailsController extends GetxController {
                   value: service?.provider?.contactEmail ?? "",
                   iconColor: Colors.red,
                 ),
-              if (service?.provider?.contactWhatsapp != null)
+              if (service?.provider?.contactWhatsapp != null &&
+                  service?.provider?.contactWhatsapp != '')
                 ProviderContactMethodWidget(
                   onTap: () {
                     _launchURL(
@@ -138,7 +172,8 @@ class ServiceDetailsController extends GetxController {
                   value: service?.provider?.contactWhatsapp ?? "",
                   iconColor: whatsappColor,
                 ),
-              if (service?.provider?.contactTelegram != null)
+              if (service?.provider?.contactTelegram != null &&
+                  service?.provider?.contactTelegram != '')
                 ProviderContactMethodWidget(
                   onTap: () {
                     _launchURL('${service?.provider?.contactTelegram}');
@@ -147,7 +182,8 @@ class ServiceDetailsController extends GetxController {
                   value: service?.provider?.contactTelegram ?? "",
                   iconColor: telegramColor,
                 ),
-              if (service?.provider?.contactInstagram != null)
+              if (service?.provider?.contactInstagram != null &&
+                  service?.provider?.contactInstagram != '')
                 ProviderContactMethodWidget(
                   onTap: () {
                     _launchURL('${service?.provider?.contactInstagram}');
@@ -156,7 +192,8 @@ class ServiceDetailsController extends GetxController {
                   value: "Instagram",
                   iconColor: instagramColor,
                 ),
-              if (service?.provider?.contactFacebook != null)
+              if (service?.provider?.contactFacebook != null &&
+                  service?.provider?.contactFacebook != '')
                 ProviderContactMethodWidget(
                   onTap: () {
                     _launchURL('${service?.provider?.contactFacebook}');
@@ -165,7 +202,8 @@ class ServiceDetailsController extends GetxController {
                   value: "Facebook",
                   iconColor: facebookColor,
                 ),
-              if (service?.provider?.contactLinkedin != null)
+              if (service?.provider?.contactLinkedin != null &&
+                  service?.provider?.contactLinkedin != '')
                 ProviderContactMethodWidget(
                   onTap: () {
                     _launchURL('${service?.provider?.contactLinkedin}');
@@ -174,7 +212,8 @@ class ServiceDetailsController extends GetxController {
                   value: "LinkedIn",
                   iconColor: linkedinColor,
                 ),
-              if (service?.provider?.contactWebsite != null)
+              if (service?.provider?.contactWebsite != null &&
+                  service?.provider?.contactWebsite != '')
                 ProviderContactMethodWidget(
                   onTap: () {
                     _launchURL(service?.provider?.contactWebsite ?? "");
@@ -269,10 +308,13 @@ class ProviderContactMethodWidget extends StatelessWidget {
               ),
               Gap(16.w),
               Expanded(
-                child: Text(
-                  value,
-                  style: getMediumStyle(Get.context!),
-                  textAlign: TextAlign.center,
+                child: Directionality(
+                  textDirection: TextDirection.ltr,
+                  child: Text(
+                    value,
+                    style: getMediumStyle(Get.context!),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               )
             ],

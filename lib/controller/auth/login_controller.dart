@@ -35,7 +35,7 @@ class LoginController extends GetxController {
     super.dispose();
   }
 
-  ontapSupfix() {
+  onTapSuffix() {
     obscureText = !obscureText;
     update();
   }
@@ -49,7 +49,6 @@ class LoginController extends GetxController {
   Future<void> login() async {
     if (loginFormKey.currentState!.validate()) {
       statusRequest = StatusRequest.loading;
-
       final result = await CustomRequest<Map<String, dynamic>>(
           path: ApiConstance.login,
           fromJson: (json) {
@@ -65,25 +64,25 @@ class LoginController extends GetxController {
         AppSnackBars.error(message: l.errMsg);
         update();
       }, (r) {
-        AppSnackBars.success(message: r['message']);
-        statusRequest = StatusRequest.success;
-        subscribeTopics(
-          role: r['role'].toString(),
-          userId: r['user_id'].toString(),
-        );
-        Get.find<AppPreferences>().setToken(r['token']);
-        Get.find<AppPreferences>().setUserId(r['user_id'].toString());
-        Get.find<AppPreferences>().setUserRoleId(r['role_id'].toString());
-        Get.find<AppPreferences>().setUserRole(r['role']);
-        ApiConstance.token = r['token'];
-        if (r['role'] == 'provider') {
-          Get.find<AppPreferences>().setStep("2");
-          Get.offAllNamed(AppRoutes.providerHomeLayout);
-        } else {
-          Get.offNamedUntil(
-            AppRoutes.clientHomeLayout,
-            (route) => false,
+        if (r['role'] == 'provider' || r['role'] == 'client') {
+          AppSnackBars.success(message: r['message']);
+          statusRequest = StatusRequest.success;
+          subscribeTopics(
+            role: r['role'].toString(),
+            userId: r['user_id'].toString(),
           );
+          Get.find<AppPreferences>().setToken(r['token']);
+          Get.find<AppPreferences>().setUserId(r['user_id'].toString());
+          Get.find<AppPreferences>().setUserRoleId(r['role_id'].toString());
+          Get.find<AppPreferences>().setUserRole(r['role']);
+          ApiConstance.token = r['token'];
+          Get.find<AppPreferences>().setStep("2");
+          Get.offAllNamed(
+            AppRoutes.homeLayout,
+          );
+        } else {
+          AppSnackBars.error(
+              message: "account not found please create account".tr);
         }
 
         update();

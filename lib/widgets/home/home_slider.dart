@@ -1,4 +1,4 @@
-import 'package:b2b_partenership/controller/home/home_client_controller.dart';
+import 'package:b2b_partenership/controller/home/home_controller.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/widgets/home/banner_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -66,13 +66,10 @@ class _HomeSlidersState extends State<HomeSliders> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(HomeClientController());
-    return GetBuilder<HomeClientController>(
+    Get.put(HomeController());
+    return GetBuilder<HomeController>(
       id: "slider",
       builder: (controller) {
-        if (controller.banners.isEmpty) {
-          return const SizedBox();
-        }
         return Column(
           children: [
             CarouselSlider.builder(

@@ -1,4 +1,5 @@
 import 'package:b2b_partenership/controller/shop/shop_product_details_controller.dart';
+import 'package:b2b_partenership/core/functions/get_text_direction.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -41,6 +42,8 @@ class AboutBagWidget extends StatelessWidget {
                         arabic: controller.contents[index].nameAr!,
                         english: controller.contents[index].nameEn!),
                     textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style:
                         TextStyle(fontSize: 14.r, fontWeight: FontWeight.bold))
               ],
@@ -60,10 +63,9 @@ class AboutBagWidget extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: Directionality(
-                    textDirection:
-                        controller.containsArabic(controller.product!.titleAr)
-                            ? TextDirection.rtl
-                            : TextDirection.ltr,
+                    textDirection: containsArabic(controller.product!.titleAr)
+                        ? TextDirection.rtl
+                        : TextDirection.ltr,
                     child: Text(controller.product!.titleAr,
                         style: TextStyle(
                             fontSize: 14.r, color: primaryColor, height: 1.5)),
@@ -72,10 +74,10 @@ class AboutBagWidget extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: Directionality(
-                    textDirection: controller
-                            .containsArabic(controller.product!.descriptionAr)
-                        ? TextDirection.rtl
-                        : TextDirection.ltr,
+                    textDirection:
+                        containsArabic(controller.product!.descriptionAr)
+                            ? TextDirection.rtl
+                            : TextDirection.ltr,
                     child: Text(controller.product!.descriptionAr,
                         style: TextStyle(
                             fontSize: 14.r,

@@ -66,35 +66,37 @@ class ServiceRequestModel {
 
   ServiceRequestModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    titleAr = json['title_ar'];
-    titleEn = json['title_en'];
-    address = json['address'];
-    description = json['description'];
+    titleAr = json['title_ar'] ?? "";
+    titleEn = json['title_en'] ?? "";
+    address = json['address'] ?? "";
+    description = json['description'] ?? "";
     image = json['image'];
-    status = json['status'];
-    clientId = json['client_id'];
-    userId = json['user_id'];
-    name = json['name'];
-    email = json['email'];
-    userCountryCode = json['user_country_code'];
+    status = json['status'] ?? "";
+    clientId = json['client_id'] ?? "";
+    userId = json['user_id'] ?? "";
+    name = json['name'] ?? "";
+    email = json['email'] ?? "";
+    userCountryCode = json['user_country_code'] ?? "";
     phone = json['phone'];
-    clientImage = kBaseImageUrl + json['client_image'];
-    specializationId = json['specialization_id'];
-    specializationNameAr = json['specialization_name_ar'];
-    specializationNameEn = json['specialization_name_en'];
-    subSpecializationId = json['sub_specialization_id'];
-    subSpecializationNameAr = json['sub_specialization_name_ar'];
-    subSpecializationNameEn = json['sub_specialization_name_en'];
-    countryId = json['country_id'];
-    countryFlag = json['country_flag'];
-    countryCode = json['country_code'];
-    countryNameAr = json['country_name_ar'];
-    countryNameEn = json['country_name_en'];
-    governmentId = json['government_id'];
-    governmentNameAr = json['government_name_ar'];
-    governmentNameEn = json['government_name_en'];
-    createdAt = json['created_at'];
-    updatedAt = json['updated_at'];
+    clientImage = json['client_image'] == null
+        ? ""
+        : kBaseImageUrl + json['client_image'];
+    specializationId = json['specialization_id'] ?? "";
+    specializationNameAr = json['specialization_name_ar'] ?? "";
+    specializationNameEn = json['specialization_name_en'] ?? "";
+    subSpecializationId = json['sub_specialization_id'] ?? "";
+    subSpecializationNameAr = json['sub_specialization_name_ar'] ?? "";
+    subSpecializationNameEn = json['sub_specialization_name_en'] ?? "";
+    countryId = json['country_id'] ?? "";
+    countryFlag = json['country_flag'] ?? "";
+    countryCode = json['country_code'] ?? "";
+    countryNameAr = json['country_name_ar'] ?? "";
+    countryNameEn = json['country_name_en'] ?? "";
+    governmentId = json['government_id'] ?? "";
+    governmentNameAr = json['government_name_ar'] ?? "";
+    governmentNameEn = json['government_name_en'] ?? "";
+    createdAt = json['created_at'] ?? "";
+    updatedAt = json['updated_at'] ?? "";
   }
 
   Map<String, dynamic> toJson() {

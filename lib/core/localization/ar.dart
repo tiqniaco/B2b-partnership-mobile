@@ -74,7 +74,7 @@ const Map<String, String> ar = {
   "Step": "خطوة",
   "of": "من",
   'Finish': 'انهاء',
-  'Next': 'التالي',
+  'Next': 'التالي', //address
   "Enter your full name": "ادخل الاسم الكامل",
   'Enter your email': 'ادخل البريد الالكتروني',
   'Select Country': 'اختر الدولة',
@@ -89,6 +89,16 @@ const Map<String, String> ar = {
   "No file selected   ": "لم يتم اختيار ملف   ",
   "Upload": "رفع",
   "Tax Card": "بطاقة الضريبة",
+  "I Accept": "اوافق علي",
+  "account not found please create account":
+      "لم يتم العثور على الحساب يرجى انشاء حساب",
+
+  "Business Information": "معلومات الشركة",
+  "VAT No.": "رقم الضريبة القضائية",
+  "tax No.": "رقم الضريبة",
+  "Commercial No.": "رقم السجل التجاري",
+  "enter feature": "ادخل الميزة",
+  "Add Service Image": 'اضافة صورة الخدمة',
 
   // home
   "Home": "الرئسية",
@@ -207,7 +217,7 @@ const Map<String, String> ar = {
   "Gender": "الجنس",
   "Skills Required": "المهارات المطلوبة",
   "Experience": "الخبرة",
-  "Address": "العنوان",
+  "Address": "الموقع",
   "Website": "الموقع الاكتروني",
   "Description": "الوصف",
   'Job Applications': "طلبات التوظيف",
@@ -395,7 +405,7 @@ const Map<String, String> ar = {
       "تاكيد كلمة المرور يجب ان تكون >= 6 حرف",
   "Not match!": "لا يتطابق!",
 
-  // posts
+  // posts.           "enter address"
   "FILTERS": "الفلاتر",
   "Category": "التصنيف",
   "Location": "الموقع",
@@ -421,7 +431,7 @@ const Map<String, String> ar = {
   "upload image is (optional)": "تحميل الصورة (اختياري)",
   "enter service name": "ادخل اسم الخدمة",
   "enter service description": "ادخل وصف الخدمة",
-  "enter service address": "عنوان الخدمة",
+  "enter service address": "موقع الخدمة",
   "Service founded": "خدمة موجودة",
   'Your Posted Services': "خدماتك المنشورة",
   "Price Offers": "عروض الاسعار",
@@ -439,11 +449,12 @@ const Map<String, String> ar = {
   "Closed": "مغلق",
   "Duration": "مدة الزمنية",
   'Client Profile': 'ملف العميل',
+  "Provider type": "نوع الشركة",
 
   // contact
   'enter phone number': "ادخل رقم الهاتف",
   'enter email': "ادخل الميل",
-  'enter address': "ادخل العنوان",
+  'enter address': "ادخل الموقع",
   'enter telegram': "ادخل رقم التلجرام",
   'enter instagram': "ادخل لينك الانستجرام",
   'enter linkedin': " ادخل لينك لينكد ان",
