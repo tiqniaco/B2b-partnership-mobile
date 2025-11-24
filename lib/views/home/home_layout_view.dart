@@ -8,6 +8,7 @@ import 'package:b2b_partenership/core/functions/change_app_lang.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/utils/assets_data.dart';
+import 'package:b2b_partenership/custom_upgrader.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,6 +18,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:upgrader/upgrader.dart';
 
 class HomeLayoutView extends StatefulWidget {
   const HomeLayoutView({super.key});
@@ -43,212 +45,226 @@ class _HomeLayoutViewState extends State<HomeLayoutView>
   Widget build(BuildContext context) {
     return GetBuilder<HomeLayoutController>(
       init: HomeLayoutController(),
-      builder: (controller) => Scaffold(
-          backgroundColor: backgroundColor,
-          appBar: controller.currentIndex != 4
-              ? AppBar(
-                  automaticallyImplyLeading: false,
-                  toolbarHeight: context.isTablet ? 70.h : 42.h,
-                  flexibleSpace: Container(
-                    alignment: AlignmentDirectional.center,
-                    padding: EdgeInsets.only(
-                      top: MediaQuery.of(context).padding.top,
-                    ),
-                    height: context.isTablet ? 70.h : null,
-                    child: Row(
-                      children: [
-                        Gap(10.w),
-                        Container(
-                          height: 50,
-                          width: 50,
-                          decoration: BoxDecoration(
+      builder: (controller) => UpgradeAlert(
+        showIgnore: false,
+        showLater: false,
+        barrierDismissible: false,
+        shouldPopScope: () => false,
+        upgrader: Upgrader(
+          messages: CustomUpgraderMessages(),
+          debugLogging: true,
+          // debugDisplayAlways: true,
+        ),
+        child: Scaffold(
+            backgroundColor: backgroundColor,
+            appBar: controller.currentIndex != 4
+                ? AppBar(
+                    automaticallyImplyLeading: false,
+                    toolbarHeight: context.isTablet ? 70.h : 42.h,
+                    flexibleSpace: Container(
+                      alignment: AlignmentDirectional.center,
+                      padding: EdgeInsets.only(
+                        top: MediaQuery.of(context).padding.top,
+                      ),
+                      height: context.isTablet ? 70.h : null,
+                      child: Row(
+                        children: [
+                          Gap(10.w),
+                          Container(
+                            height: 50,
+                            width: 50,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(color: Colors.grey[300]!)),
+                            child: ClipRRect(
                               borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: Colors.grey[300]!)),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: CachedNetworkImage(
-                              imageUrl:
+                              child: CachedNetworkImage(
+                                imageUrl: Get.find<AppPreferences>()
+                                            .getUserRole() ==
+                                        "provider"
+                                    ? providerSettingController
+                                            .menuModel?.data?.image ??
+                                        ""
+                                    : settingController.menuModel?.data.image ??
+                                        "",
+                                errorWidget: (context, url, error) => Icon(
+                                  CupertinoIcons.person,
+                                  size: 18.h,
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                          Gap(10),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  "Welcome!".tr,
+                                  style: getBoldStyle(context).copyWith(
+                                    fontSize: 15.r,
+                                    color: greyColor,
+                                  ),
+                                ),
+                                Text(
                                   Get.find<AppPreferences>().getUserRole() ==
                                           "provider"
                                       ? providerSettingController
-                                              .menuModel?.data?.image ??
-                                          ""
+                                              .menuModel?.data?.name ??
+                                          "Guest".tr
                                       : settingController
-                                              .menuModel?.data?.image ??
-                                          "",
-                              errorWidget: (context, url, error) => Icon(
-                                CupertinoIcons.person,
-                                size: 18.h,
-                              ),
-                              fit: BoxFit.cover,
+                                              .menuModel?.data.name ??
+                                          "Guest".tr,
+                                  style: TextStyle(
+                                    fontSize: 15.r,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                        ),
-                        Gap(10),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                "Welcome!".tr,
-                                style: getBoldStyle(context).copyWith(
-                                  fontSize: 15.r,
-                                  color: greyColor,
-                                ),
-                              ),
-                              Text(
-                                Get.find<AppPreferences>().getUserRole() ==
-                                        "provider"
-                                    ? providerSettingController
-                                            .menuModel?.data?.name ??
-                                        ""
-                                    : settingController.menuModel?.data?.name ??
-                                        "",
-                                style: TextStyle(
-                                  fontSize: 15.r,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Get.bottomSheet(Container(
-                              height: 0.2.sh,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20.r),
-                                  topRight: Radius.circular(20.r),
-                                ),
-                                color: Colors.white,
-                              ),
-                              padding: EdgeInsets.symmetric(
-                                // horizontal: 10.w,
-                                vertical: 10.h,
-                              ),
-                              child: Column(
-                                children: [
-                                  ListTile(
-                                    title: Text(
-                                      "English",
-                                      style: getRegularStyle(context),
-                                    ),
-                                    leading: Image.asset(
-                                      AssetsData.englishImage,
-                                      width: 20.w,
-                                    ),
-                                    onTap: () {
-                                      changeAppLang(
-                                        context: Get.context!,
-                                        lang: LanguageEnum.en,
-                                      );
-                                    },
+                          InkWell(
+                            onTap: () {
+                              Get.bottomSheet(Container(
+                                height: 0.2.sh,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20.r),
+                                    topRight: Radius.circular(20.r),
                                   ),
-                                  ListTile(
-                                    title: Text(
-                                      'العربية',
-                                      style: getRegularStyle(context),
+                                  color: Colors.white,
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                  // horizontal: 10.w,
+                                  vertical: 10.h,
+                                ),
+                                child: Column(
+                                  children: [
+                                    ListTile(
+                                      title: Text(
+                                        "English",
+                                        style: getRegularStyle(context),
+                                      ),
+                                      leading: Image.asset(
+                                        AssetsData.englishImage,
+                                        width: 20.w,
+                                      ),
+                                      onTap: () {
+                                        changeAppLang(
+                                          context: Get.context!,
+                                          lang: LanguageEnum.en,
+                                        );
+                                      },
                                     ),
-                                    leading: Image.asset(
-                                      AssetsData.arabicImage,
-                                      width: 20.w,
+                                    ListTile(
+                                      title: Text(
+                                        'العربية',
+                                        style: getRegularStyle(context),
+                                      ),
+                                      leading: Image.asset(
+                                        AssetsData.arabicImage,
+                                        width: 20.w,
+                                      ),
+                                      onTap: () {
+                                        changeAppLang(
+                                          context: Get.context!,
+                                          lang: LanguageEnum.ar,
+                                        );
+                                      },
                                     ),
-                                    onTap: () {
-                                      changeAppLang(
-                                        context: Get.context!,
-                                        lang: LanguageEnum.ar,
-                                      );
-                                    },
-                                  ),
-                                ],
+                                  ],
+                                ),
+                              ));
+                            },
+                            child: SvgPicture.asset(
+                              AssetsData.languageSVG,
+                              colorFilter: ColorFilter.mode(
+                                blackColor,
+                                BlendMode.srcIn,
                               ),
-                            ));
-                          },
-                          child: SvgPicture.asset(
-                            AssetsData.languageSVG,
-                            colorFilter: ColorFilter.mode(
-                              primaryColor,
-                              BlendMode.srcIn,
+                              height: 25.h,
                             ),
-                            height: 25.h,
                           ),
-                        ),
-                        Gap(12.w)
-                      ],
+                          Gap(12.w)
+                        ],
+                      ),
                     ),
+                  )
+                : AppBar(
+                    automaticallyImplyLeading: false,
+                    title: Text("Menu".tr,
+                        style: TextStyle(
+                            fontSize: 18.r,
+                            color: blackColor,
+                            fontWeight: FontWeight.bold)),
                   ),
-                )
-              : AppBar(
-                  automaticallyImplyLeading: false,
-                  title:
-                      Text("Menu".tr, style: getBoldStyle(context).copyWith()),
-                ),
-          body: TabBarView(
-            controller: controller.convexController,
-            children: [
-              ...controller.screens,
-            ],
-          ),
-          bottomNavigationBar: StyleProvider(
-            style: Style(),
-            child: BottomNavigationBar(
-                elevation: 0,
-                selectedLabelStyle:
-                    TextStyle(color: primaryColor, fontSize: 13.r),
-                unselectedLabelStyle:
-                    TextStyle(color: unSelectedBNavColor, fontSize: 13.r),
-                onTap: (value) => controller.onBNavPressed(value),
-                currentIndex: controller.currentIndex,
-                backgroundColor: backgroundColor,
-                selectedItemColor: primaryColor,
-                items: [
-                  BottomNavigationBarItem(
-                    icon: SvgPicture.asset("assets/svgs/home.svg",
-                        height: 20.r,
-                        color: controller.currentIndex == 0
-                            ? primaryColor
-                            : unSelectedBNavColor),
-                    label: "Home".tr,
-                  ),
-                  BottomNavigationBarItem(
-                    icon: SvgPicture.asset("assets/svgs/shop.svg",
-                        height: 24.r,
-                        color: controller.currentIndex == 1
-                            ? primaryColor
-                            : unSelectedBNavColor),
-                    label: "Shop".tr,
-                  ),
-                  BottomNavigationBarItem(
-                      icon: Icon(
-                        CupertinoIcons.news,
-                        size: 24.r,
-                        color: controller.currentIndex == 2
-                            ? primaryColor
-                            : unSelectedBNavColor,
-                      ),
-                      label: "Posts".tr),
-                  BottomNavigationBarItem(
-                      icon: SvgPicture.asset(
-                        "assets/svgs/job.svg",
-                        height: 24.r,
-                        color: controller.currentIndex == 3
-                            ? primaryColor
-                            : unSelectedBNavColor,
-                      ),
-                      label: "Jobs".tr),
-                  BottomNavigationBarItem(
-                      icon: SvgPicture.asset(
-                        "assets/svgs/setting.svg",
-                        height: 24.r,
-                        color: controller.currentIndex == 4
-                            ? primaryColor
-                            : unSelectedBNavColor,
-                      ),
-                      label: "Menu".tr),
-                ]),
-          )),
+            body: TabBarView(
+              controller: controller.convexController,
+              children: [
+                ...controller.screens,
+              ],
+            ),
+            bottomNavigationBar: StyleProvider(
+              style: Style(),
+              child: BottomNavigationBar(
+                  elevation: 0,
+                  selectedLabelStyle:
+                      TextStyle(color: primaryColor, fontSize: 12.r),
+                  unselectedLabelStyle:
+                      TextStyle(color: unSelectedBNavColor, fontSize: 12.r),
+                  onTap: (value) => controller.onBNavPressed(value),
+                  currentIndex: controller.currentIndex,
+                  backgroundColor: backgroundColor,
+                  selectedItemColor: primaryColor,
+                  items: [
+                    BottomNavigationBarItem(
+                      icon: SvgPicture.asset("assets/svgs/home.svg",
+                          height: 20.r,
+                          color: controller.currentIndex == 0
+                              ? primaryColor
+                              : unSelectedBNavColor),
+                      label: "Home".tr,
+                    ),
+                    BottomNavigationBarItem(
+                      icon: SvgPicture.asset("assets/svgs/shop.svg",
+                          height: 24.r,
+                          color: controller.currentIndex == 1
+                              ? primaryColor
+                              : unSelectedBNavColor),
+                      label: "Shop".tr,
+                    ),
+                    BottomNavigationBarItem(
+                        icon: Icon(
+                          CupertinoIcons.news,
+                          size: 24.r,
+                          color: controller.currentIndex == 2
+                              ? primaryColor
+                              : unSelectedBNavColor,
+                        ),
+                        label: "Posts".tr),
+                    BottomNavigationBarItem(
+                        icon: SvgPicture.asset(
+                          "assets/svgs/job.svg",
+                          height: 24.r,
+                          color: controller.currentIndex == 3
+                              ? primaryColor
+                              : unSelectedBNavColor,
+                        ),
+                        label: "Jobs".tr),
+                    BottomNavigationBarItem(
+                        icon: SvgPicture.asset(
+                          "assets/svgs/setting.svg",
+                          height: 24.r,
+                          color: controller.currentIndex == 4
+                              ? primaryColor
+                              : unSelectedBNavColor,
+                        ),
+                        label: "Menu".tr),
+                  ]),
+            )),
+      ),
     );
   }
 }

@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:lottie/lottie.dart';
 import '/core/theme/app_color.dart';
 import '/core/theme/text_style.dart';
-import '/core/utils/assets_data.dart';
 
 class CustomErrorWidget extends StatelessWidget {
   const CustomErrorWidget({
@@ -19,11 +17,12 @@ class CustomErrorWidget extends StatelessWidget {
       alignment: Alignment.center,
       height: 0.25.sh,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Lottie.asset(
-            AssetsData.serverErrorAnimation,
-            repeat: false,
-            height: 90,
+          Icon(
+            Icons.error,
+            size: 100.r,
+            color: greyColor,
           ),
           Text(
             message != null

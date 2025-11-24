@@ -15,7 +15,6 @@ class SignupView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Get.put(SignupController());
     return GetBuilder<SignupController>(
       init: SignupController(),
       builder: (controller) => Scaffold(

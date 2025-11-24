@@ -6,6 +6,7 @@ import 'package:b2b_partenership/models/pervious_work_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 class ManagePreviousWorkWidget extends StatelessWidget {
@@ -21,91 +22,110 @@ class ManagePreviousWorkWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.toNamed(AppRoutes.managePreviousWorkDetailsView,
+        Get.toNamed(AppRoutes.providerPreviousWork,
             arguments: {"model": model});
       },
       child: Container(
-        height: 120.h,
         decoration: BoxDecoration(
+            color: whiteColor,
             borderRadius: BorderRadius.circular(15),
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: CachedNetworkImageProvider(
-                  model.image!,
-                ))),
-        child: Container(
-          //  width: double.infinity,
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: blackColor.withAlpha(95)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(children: [
-                IconButton(
-                  style: ButtonStyle(
-                    padding: WidgetStatePropertyAll(EdgeInsets.all(5)),
-                    backgroundColor: WidgetStateProperty.all<Color>(
-                        Colors.white.withAlpha(120)),
+            border: Border.all(color: borderColor)),
+        child: Row(
+          children: [
+            Container(
+              height: 105.h,
+              width: 130,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      bottomLeft: Radius.circular(15)),
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: CachedNetworkImageProvider(
+                        model.image!,
+                      ))),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    height: 40,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(30),
+                        color: whiteColor),
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          IconButton(
+                            style: ButtonStyle(
+                              padding:
+                                  WidgetStatePropertyAll(EdgeInsets.all(5)),
+                              backgroundColor: WidgetStateProperty.all<Color>(
+                                  Colors.white.withAlpha(120)),
+                            ),
+                            onPressed: () {
+                              onDelete();
+                            },
+                            icon: model.isDeleteLoading
+                                ? CircularProgressIndicator()
+                                : Icon(
+                                    Icons.delete,
+                                    color: primaryColor,
+                                  ),
+                          ),
+                          IconButton(
+                            style: ButtonStyle(
+                              padding:
+                                  WidgetStatePropertyAll(EdgeInsets.all(5)),
+                              backgroundColor: WidgetStateProperty.all<Color>(
+                                  Colors.white.withAlpha(120)),
+                            ),
+                            onPressed: () {
+                              Get.toNamed(AppRoutes.editPreviousWork,
+                                  arguments: {"model": model});
+                            },
+                            icon: Icon(
+                              Icons.edit,
+                              color: primaryColor,
+                            ),
+                          ),
+                        ]),
                   ),
-                  onPressed: () {
-                    onDelete();
-                  },
-                  icon: model.isDeleteLoading
-                      ? CircularProgressIndicator()
-                      : Icon(
-                          Icons.delete,
-                          color: primaryColor,
-                        ),
-                ),
-                IconButton(
-                  style: ButtonStyle(
-                    padding: WidgetStatePropertyAll(EdgeInsets.all(5)),
-                    backgroundColor: WidgetStateProperty.all<Color>(
-                        Colors.white.withAlpha(120)),
-                  ),
-                  onPressed: () {
-                    Get.toNamed(AppRoutes.editPreviousWork,
-                        arguments: {"model": model});
-                  },
-                  icon: Icon(
-                    Icons.edit,
-                    color: primaryColor,
-                  ),
-                ),
-              ]),
-              Spacer(),
-              SizedBox(
-                width: double.infinity,
-                child: Directionality(
-                  textDirection: containsArabic(model.titleEn!)
-                      ? TextDirection.rtl
-                      : TextDirection.ltr,
-                  child: Text(
-                    model.titleEn!,
-                    style: getMediumStyle(context).copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: whiteColor,
+                ],
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      model.titleEn!,
+                      textDirection: containsArabic(model.titleEn!)
+                          ? TextDirection.rtl
+                          : TextDirection.ltr,
+                      style: getMediumStyle(context).copyWith(
+                        fontWeight: FontWeight.normal,
+                        color: blackColor,
+                      ),
                     ),
-                  ),
+                    Gap(8),
+                    Text(
+                      model.description!,
+                      textDirection: containsArabic(model.titleEn!)
+                          ? TextDirection.rtl
+                          : TextDirection.ltr,
+                      style: getRegularStyle(context).copyWith(
+                          color: Colors.black54, fontWeight: FontWeight.normal),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
                 ),
               ),
-              Directionality(
-                textDirection: containsArabic(model.description!)
-                    ? TextDirection.rtl
-                    : TextDirection.ltr,
-                child: Text(
-                  model.description!,
-                  style: getRegularStyle(context).copyWith(
-                    color: whiteColor,
-                  ),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              )
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

@@ -64,28 +64,38 @@ class ProviderSettingView extends StatelessWidget {
                                 ),
                                 Row(
                                   children: [
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 4, vertical: 8),
-                                      decoration: BoxDecoration(
-                                          borderRadius: customBorderRadius,
-                                          border: Border.all(
-                                            color: Colors.grey[300]!,
-                                          )),
-                                      child: Icon(Icons.bookmark,
-                                          color: primaryColor, size: 26.r),
+                                    InkWell(
+                                      onTap: () {
+                                        Get.toNamed(AppRoutes.save);
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 4, vertical: 8),
+                                        decoration: BoxDecoration(
+                                            borderRadius: customBorderRadius,
+                                            border: Border.all(
+                                              color: Colors.grey[300]!,
+                                            )),
+                                        child: Icon(Icons.bookmark,
+                                            color: primaryColor, size: 26.r),
+                                      ),
                                     ),
                                     Gap(8),
-                                    Container(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 4, vertical: 8),
-                                      decoration: BoxDecoration(
-                                          borderRadius: customBorderRadius,
-                                          border: Border.all(
-                                            color: Colors.grey[300]!,
-                                          )),
-                                      child: Icon(Icons.notifications,
-                                          color: primaryColor, size: 26.r),
+                                    InkWell(
+                                      onTap: () {
+                                        Get.toNamed(AppRoutes.notification);
+                                      },
+                                      child: Container(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 4, vertical: 8),
+                                        decoration: BoxDecoration(
+                                            borderRadius: customBorderRadius,
+                                            border: Border.all(
+                                              color: Colors.grey[300]!,
+                                            )),
+                                        child: Icon(Icons.notifications,
+                                            color: primaryColor, size: 26.r),
+                                      ),
                                     ),
                                   ],
                                 )
@@ -450,6 +460,7 @@ class ProviderSettingView extends StatelessWidget {
                                   "Remove Account".tr,
                                   () {
                                     removeAccountDialog(
+                                      context: context,
                                       removeAccountLoading:
                                           controller.removeAccountLoading,
                                       update: controller.update,
@@ -461,7 +472,7 @@ class ProviderSettingView extends StatelessWidget {
                                   Icons.logout_rounded,
                                   "Logout".tr,
                                   () {
-                                    logoutDialog();
+                                    logoutDialog(context);
                                   },
                                 ),
                                 Gap(8),

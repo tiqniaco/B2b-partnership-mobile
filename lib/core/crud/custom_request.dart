@@ -27,6 +27,7 @@ class CustomRequest<T> {
   final Map<String, dynamic> data;
   final T Function(Map<String, dynamic>) fromJson;
   final Map<String, String> files;
+  final bool showLogs;
 
   CustomRequest({
     required this.path,
@@ -34,6 +35,7 @@ class CustomRequest<T> {
     this.queryParameters = const {},
     this.data = const {},
     this.files = const {},
+    this.showLogs = false,
   });
 
 /*

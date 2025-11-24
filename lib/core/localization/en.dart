@@ -35,6 +35,11 @@ const Map<String, String> en = {
   "Notifications": "Notifications",
   "Search ...": "Search ...",
   "See all": "See all",
+  "Creating Account...": "Creating Account...",
+  "Value added tax (VAT)": "Value added tax (VAT)",
+  "add the number here": "add the number here",
+  "Commercial Register Number": "Commercial Register Number",
+   "Tax Number": "Tax Number",
 
   // auth
   "Welcome Back!": "Welcome Back!",
@@ -87,15 +92,15 @@ const Map<String, String> en = {
   "Upload": "Upload",
   "Tax Card": "Tax Card",
   "I Accept": "I Accept",
-  "account not found please create account": "account not found please create account",
-   "Business Information": "Business Information",
-   "VAT No.": "VAT No.",
-   "tax No.": "tax No.",
-   "Commercial No.": "Commercial No.",
-    "enter feature": "enter feature",
-  "Add Service Image":"Add Service Image",
-  "Provider type":"Provider type",
-
+  "account not found please create account":
+      "account not found please create account",
+  "Business Information": "Business Information",
+  "VAT No.": "VAT No.",
+  "tax No.": "tax No.",
+  "Commercial No.": "Commercial No.",
+  "enter feature": "enter feature",
+  "Add Service Image": "Add Service Image",
+  "Provider type": "Provider type",
 
   // home
   "Home": "Home",
@@ -148,6 +153,10 @@ const Map<String, String> en = {
   "Now Purchasing Management\n Bag pdf, Audio, Video":
       "Now Purchasing Management\n Bag pdf, Audio, Video",
   "Special Opportunity": "Special Opportunity",
+  "Now you can post your custom service request":
+      "Now you can post your custom service request",
+   "Training bag on the basics of purchasing management":
+      "Training bag on the basics of purchasing management",
 
   // manage category
   "Category & Subcategory": "Category & Subcategory",
@@ -358,9 +367,9 @@ const Map<String, String> en = {
   "Order Items": "Order Items",
   "My Orders": "My Orders",
   "Complete": "Complete",
-   "Order Number": "Order Number",
-    "My Jobs": "My Jobs",
-    "My Job Applications": "My Job Applications",
+  "Order Number": "Order Number",
+  "My Jobs": "My Jobs",
+  "My Job Applications": "My Job Applications",
 
   // setting view
   "Orders": "Orders",
@@ -555,4 +564,24 @@ const Map<String, String> en = {
   'File Downloaded': 'File Downloaded',
   "File downloaded successfully to": "File downloaded successfully to",
   "Demo": "Demo",
+  "Guest": "Guest",
+  "Please login to continue": "Please login to continue",
+  "Tax No.": "Tax No.",
+  "Cart Total": "Cart Total",
+  "Total Amount": "Total Amount",
+  "you don't add any service posts\nlet's add some":
+      "you don't add any service posts\nlet's add some",
+  "you don't add any offers": "you don't add any offers",
+  "Contact": "Contact",
+  'you don\'t add any job applications': 'you don\'t add any job applications',
+  'Search for Seekers': 'Search for Seekers',
+  "Offer Details": "Offer Details",
+  "View Applicant Profile": "View Applicant Profile",
+  "Your cart is empty\nDiscover amazing products!":
+      "Your cart is empty\nDiscover amazing products!",
+      'Done': 'Done',
+      "File downloaded successfully": "File downloaded successfully",
+      'File download failed': 'File download failed',
+       'No file available': 'No file available',
+  "Search for service, job, bags": "Search for service, job, bags",
 };

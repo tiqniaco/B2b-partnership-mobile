@@ -3,7 +3,6 @@
 // ignore_for_file: deprecated_member_use
 
 // Primary color
-import '/core/functions/build_material_color.dart';
 import 'package:flutter/material.dart';
 
 const primaryColor = Color(0xffbe0000); // 821115
@@ -69,9 +68,6 @@ const lightGreyColor = Color(0xFFf7f7f7);
 // const borderColor = Color(0xFFdbdbdb);
 const dividerColor = Color(0xFFe7e7e7);
 const starColor = Color(0xFFffcc00);
-
-// Material color
-MaterialColor primarySwatchColor = buildMaterialColor(primaryColor);
 
 // Transparent color
 const Color transparentColor = Colors.transparent;

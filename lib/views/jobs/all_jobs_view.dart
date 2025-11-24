@@ -1,12 +1,17 @@
+import 'package:b2b_partenership/core/enums/status_request.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_error_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_no_connection_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/global_sliver_server_status_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/place_holder.dart';
+import 'package:b2b_partenership/widgets/jobs/jobs_loading_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gap/gap.dart';
 
 import '/controller/jobs/jobs_controller.dart';
-import '/core/global/widgets/custom_sliver_server_status_widget.dart';
 import '/core/theme/app_color.dart';
 import '/core/theme/text_style.dart';
-import '/widgets/job_widget.dart';
+import '../../widgets/jobs/job_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -47,14 +52,15 @@ class AllJobsView extends StatelessWidget {
                                 icon: Icon(
                                   CupertinoIcons.search,
                                   size: context.isTablet ? 13.w : 18.w,
-                                  color: primaryColor,
+                                  color: Colors.black87,
                                 ),
                               ),
                               contentPadding: EdgeInsets.symmetric(
-                                  vertical: 4, horizontal: 16),
+                                  vertical: context.isTablet ? 12 : 4,
+                                  horizontal: context.isTablet ? 18 : 16),
                               hintText: 'Search...'.tr,
-                              hintStyle: getBoldStyle(context).copyWith(
-                                  fontSize: 16.r, color: primaryColor),
+                              hintStyle: getMediumStyle(context).copyWith(
+                                  fontSize: 15.r, color: Colors.black87),
                               border: InputBorder.none,
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(color: greyColor),
@@ -98,11 +104,35 @@ class AllJobsView extends StatelessWidget {
                     ),
                   ),
                   SliverToBoxAdapter(
-                    child: Gap(16),
+                    child: Gap(
+                        controller.statusRequest == StatusRequest.error ||
+                                controller.statusRequest ==
+                                    StatusRequest.noConnection ||
+                                controller.statusRequest == StatusRequest.noData
+                            ? 150
+                            : 16),
                   ),
-                  CustomSliverServerStatusWidget(
+                  GlobalSliverServerStatusWidget(
                     statusRequest: controller.statusRequest,
-                    child: SliverList.separated(
+                    loadingChild: JobsLoadingWidget(),
+                    errorChild: SliverToBoxAdapter(child: CustomErrorWidget()),
+                    noConnectionChild: SliverToBoxAdapter(
+                      child: CustomNoConnectionWidget(
+                        onTap: () {
+                          controller.getJobs();
+                          controller.getCountries();
+                          controller.getCities();
+                        },
+                      ),
+                    ),
+                    noDataChild: SliverToBoxAdapter(
+                      child: PlaceHolderWidget(
+                        icon: Image.asset("assets/images/no_jobs.png"),
+                        title: 'No Jobs Now',
+                        subTitle: 'Try again later or add new job',
+                      ),
+                    ),
+                    successChild: SliverList.separated(
                       itemCount: controller.jobs.length,
                       itemBuilder: (context, index) {
                         return JobWidget(

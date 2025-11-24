@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/shop/products_in_category_controller.dart';
+import 'package:b2b_partenership/core/functions/get_text_direction.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
@@ -20,12 +21,15 @@ class ProductsInCategory extends StatelessWidget {
       init: ProductsInCategoryController(),
       builder: (controller) => Scaffold(
         appBar: AppBar(
-          backgroundColor: whiteColor,
+          //backgroundColor: whiteColor,
           title: Text(
             translateDatabase(
               arabic: controller.model.nameAr,
               english: controller.model.nameEn,
             ),
+            textDirection: containsArabic(controller.model.nameAr)
+                ? TextDirection.rtl
+                : TextDirection.ltr,
           ),
         ),
         body: SafeArea(

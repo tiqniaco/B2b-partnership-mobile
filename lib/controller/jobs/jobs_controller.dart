@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:b2b_partenership/core/enums/jobs_contract_type_enum.dart';
+import 'package:b2b_partenership/core/functions/internet_check.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
@@ -388,7 +389,11 @@ class JobsController extends GetxController {
     ).sendGetRequest();
 
     result.fold((l) {
-      statusRequest = StatusRequest.error;
+      if (isConnectionError(l)) {
+        statusRequest = StatusRequest.noConnection;
+      } else {
+        statusRequest = StatusRequest.error;
+      }
       update();
     }, (r) {
       jobs.addAll(r);

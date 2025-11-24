@@ -17,7 +17,7 @@ class PreviousImagesModel {
 
   PreviousImagesModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    providerPreviousWorkId = json['provider_previous_work_id'];
+    providerPreviousWorkId = json['provider_previous_work_id'].toString();
     image = kBaseImageUrl + json['image'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];

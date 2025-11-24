@@ -8,7 +8,7 @@ import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:b2b_partenership/core/utils/font_manager.dart';
-import 'package:b2b_partenership/widgets/job_widget.dart';
+import 'package:b2b_partenership/widgets/jobs/job_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -110,6 +110,7 @@ class ClientJobApplicationsView extends StatelessWidget {
                     ),
                   ),
                   CustomSliverServerStatusWidget(
+                    emptyMessage: 'you don\'t add any job applications'.tr,
                     statusRequest: controller.statusRequest,
                     child: SliverList.separated(
                       itemCount: controller.jobApplications.length,
@@ -205,155 +206,10 @@ class ClientJobApplicationsView extends StatelessWidget {
                                     ],
                                   ),
                                 ),
-                                // Column(
-                                //   mainAxisAlignment: MainAxisAlignment.start,
-                                //   children: [
-                                //     if (hasDelete)
-                                //       InkWell(
-                                //         onTap: () {
-                                //           if (onTapDelete != null) {
-                                //             onTapDelete!();
-                                //           }
-                                //         },
-                                //         child: Container(
-                                //           padding: EdgeInsets.all(4.w),
-                                //           decoration: BoxDecoration(
-                                //             shape: BoxShape.circle,
-                                //             color: primaryColor,
-                                //           ),
-                                //           child: Icon(
-                                //             FontAwesomeIcons.xmark,
-                                //             size: 16.r,
-                                //             color: whiteColor,
-                                //           ),
-                                //         ),
-                                //       ),
-                                //     if (hasEdit) ...[
-                                //       Gap(8.h),
-                                //       InkWell(
-                                //         onTap: () {
-                                //           Get.toNamed(
-                                //             AppRoutes.addNewJob,
-                                //             arguments: {
-                                //               "model": model,
-                                //             },
-                                //           );
-                                //         },
-                                //         child: Container(
-                                //           padding: EdgeInsets.all(4.w),
-                                //           decoration: BoxDecoration(
-                                //             shape: BoxShape.circle,
-                                //             color: primaryColor,
-                                //           ),
-                                //           child: Icon(
-                                //             FontAwesomeIcons.penToSquare,
-                                //             size: 16.r,
-                                //             color: whiteColor,
-                                //           ),
-                                //         ),
-                                //       )
-                                //     ]
-                                //   ],
-                                // ),
                               ],
                             ),
                           ),
                         );
-
-                        // InkWell(
-                        //   onTap: () {},
-                        //   child: Container(
-                        //     padding: EdgeInsets.symmetric(
-                        //       horizontal: 16.w,
-                        //       vertical: 10.h,
-                        //     ),
-                        //     decoration: BoxDecoration(
-                        //       color: whiteColor,
-                        //       border: Border.all(color: borderColor),
-                        //       borderRadius: BorderRadius.circular(8.r),
-                        //     ),
-                        //     child: Row(
-                        //       children: [
-                        //         CircleAvatar(
-                        //           backgroundColor: whiteColor,
-                        //           radius: 35.r,
-                        //           child: CustomNetworkImage(
-                        //             imageUrl: model.providerImage,
-                        //             fit: BoxFit.contain,
-                        //             shape: BoxShape.circle,
-                        //           ),
-                        //         ),
-                        //         Gap(12.w),
-                        //         Expanded(
-                        //           child: Column(
-                        //             crossAxisAlignment:
-                        //                 CrossAxisAlignment.start,
-                        //             children: [
-                        //               Text.rich(
-                        //                 TextSpan(children: [
-                        //                   TextSpan(
-                        //                     text: "${"Status".tr}: ",
-                        //                     style: getRegularStyle(context)
-                        //                         .copyWith(
-                        //                       fontWeight:
-                        //                           FontManager.mediumFontWeight,
-                        //                     ),
-                        //                   ),
-                        //                   TextSpan(
-                        //                     text:
-                        // model.applicationStatus.name
-                        //                         .tr.capitalizeFirst,
-                        //                     style: getRegularStyle(context)
-                        //                         .copyWith(
-                        //                       fontWeight:
-                        //                           FontManager.mediumFontWeight,
-                        //                       color: primaryColor,
-                        //                     ),
-                        //                   ),
-                        //                 ]),
-                        //               ),
-                        //               Gap(5.h),
-                        //               Text(
-                        //                 "${"Company".tr}: ${model.providerName}",
-                        //                 style:
-                        //                     getRegularStyle(context).copyWith(
-                        //                   fontWeight:
-                        //                       FontManager.mediumFontWeight,
-                        //                 ),
-                        //               ),
-                        //               Gap(5.h),
-                        //               Text(
-                        //                 "${"Job Title".tr}: ${model.jobTitle}",
-                        //                 style:
-                        //                     getRegularStyle(context).copyWith(
-                        //                   fontWeight:
-                        //                       FontManager.mediumFontWeight,
-                        //                 ),
-                        //               ),
-                        //               Gap(5.h),
-                        //               Text(
-                        //                 "${"Contract Type".tr}: ${model.jobContractType.text}",
-                        //                 style: getLightStyle(context),
-                        //               ),
-                        //               Gap(5.h),
-                        //               Text(
-                        //                 "${"Expiry Date".tr}: ${model.jobExpirationDate}",
-                        //                 style: getLightStyle(context),
-                        //               ),
-                        //               if (model.jobSalary != "null") ...[
-                        //                 Gap(5.h),
-                        //                 Text(
-                        //                   "${"Salary".tr}: ${model.jobSalary}",
-                        //                   style: getLightStyle(context),
-                        //                 )
-                        //               ],
-                        //             ],
-                        //           ),
-                        //         ),
-                        //       ],
-                        //     ),
-                        //   ),
-                        // );
                       },
                       separatorBuilder: (context, index) => const Divider(),
                     ),

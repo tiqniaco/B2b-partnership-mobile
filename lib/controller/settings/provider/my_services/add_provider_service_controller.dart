@@ -43,8 +43,6 @@ class AddProviderServiceController extends GetxController {
   List<SubSpecializeModel> subSpecializations = [];
   int currentStep = 0;
 
-  
-
   StatusRequest statusRequest = StatusRequest.loading;
   StatusRequest statusRequestCity = StatusRequest.loading;
   StatusRequest statusRequestCountry = StatusRequest.loading;
@@ -98,7 +96,6 @@ class AddProviderServiceController extends GetxController {
     increaseFeatures();
     super.onInit();
   }
-
 
   onCountryChanged(value) {
     selectedCountry = value;
@@ -248,7 +245,7 @@ class AddProviderServiceController extends GetxController {
     statusRequestCity = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.cities,
-        data: {"country_id": selectedCountry.id},
+        queryParameters: {"country_id": selectedCountry.id.toString()},
         fromJson: (json) {
           return json['data']
               .map<CityModel>((city) => CityModel.fromJson(city))
@@ -299,7 +296,7 @@ class AddProviderServiceController extends GetxController {
     statusRequestSupSpecialization = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getSupSpecialization,
-        data: {"specialization_id": selectedSpecialization.id},
+        queryParameters: {"specialization_id": selectedSpecialization.id},
         fromJson: (json) {
           return json['data']
               .map<SubSpecializeModel>(

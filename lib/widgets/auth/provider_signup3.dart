@@ -93,6 +93,7 @@ class ProviderSignup3 extends StatelessWidget {
                           controller.pickPDF("c");
                         },
                         style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.all(6),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30))),
                         child: Text(
@@ -140,7 +141,7 @@ class ProviderSignup3 extends StatelessWidget {
                       width: context.isTablet ? 45.w : 80.w,
                       child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                              //padding: EdgeInsets.symmetric(horizontal: 10),
+                              padding: EdgeInsets.all(6),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(30))),
                           onPressed: () {

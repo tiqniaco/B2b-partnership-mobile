@@ -1,4 +1,6 @@
+import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/shop/shop_controller.dart';
+import 'package:b2b_partenership/core/functions/get_text_direction.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
@@ -17,7 +19,8 @@ class CategoryItem extends GetView<ShopController> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        controller.onTapCategory(index);
+        // controller.onTapCategory(index);
+        Get.toNamed(AppRoutes.productsInCategory, arguments: {"model": model});
       },
       child: SizedBox(
         width: 142.w,
@@ -41,17 +44,24 @@ class CategoryItem extends GetView<ShopController> {
                   ),
                 ),
                 Gap(8),
-                Text(
-                  translateDatabase(
-                    arabic: model.nameAr,
-                    english: model.nameEn,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: Text(
+                    textDirection: containsArabic(model.nameAr)
+                        ? TextDirection.rtl
+                        : TextDirection.ltr,
+                    textAlign: TextAlign.center,
+                    translateDatabase(
+                      arabic: model.nameAr,
+                      english: model.nameEn,
+                    ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: getRegularStyle(context).copyWith(
+                        fontWeight: FontWeight.w400,
+                        color: blackColor,
+                        fontSize: 15.r),
                   ),
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: getRegularStyle(context).copyWith(
-                      fontWeight: FontWeight.w400,
-                      color: blackColor,
-                      fontSize: 15.r),
                 ),
               ],
             ),

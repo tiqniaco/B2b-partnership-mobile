@@ -1,4 +1,6 @@
+import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class TermsAndConditionsWebview extends StatefulWidget {
@@ -24,7 +26,8 @@ class TermsAndConditionsWebviewState extends State<TermsAndConditionsWebview> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("عرض صفحة ويب")),
+      appBar: AppBar(
+          backgroundColor: whiteColor, title: Text("Terms & Conditions".tr)),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: WebViewWidget(controller: _controller),

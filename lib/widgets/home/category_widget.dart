@@ -17,17 +17,17 @@ class CategoryWidget extends StatelessWidget {
     return ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: specializations.length,
-        separatorBuilder: (context, index) => Gap(20),
-        itemBuilder: (context, index) => 
-        InkWell(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+        separatorBuilder: (context, index) => Gap(6),
+        itemBuilder: (context, index) => InkWell(
               onTap: () {
                 Get.toNamed(AppRoutes.providersInCategory,
                     arguments: {"model": specializations[index]});
               },
               child: SizedBox(
-                width: 100.r,
+                width: 90.w,
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     Container(
                       padding: EdgeInsets.all(12.r),
@@ -35,7 +35,7 @@ class CategoryWidget extends StatelessWidget {
                           shape: BoxShape.circle, color: lightPrimaryColor),
                       child: CachedNetworkImage(
                         imageUrl: specializations[index].image!,
-                        height: 50.r,
+                        height: 40.h,
                       ),
                     ),
                     Gap(8),
@@ -45,7 +45,7 @@ class CategoryWidget extends StatelessWidget {
                           english: specializations[index].nameEn!),
                       textAlign: TextAlign.center,
                       style: getLightStyle(context).copyWith(
-                        fontSize: 14.r,
+                        fontSize: 12.r,
                         fontWeight: FontWeight.w400,
                       ),
                       maxLines: 2,

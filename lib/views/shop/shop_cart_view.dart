@@ -1,4 +1,5 @@
 import 'package:b2b_partenership/controller/shop/shop_cart_controller.dart';
+import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
@@ -51,7 +52,9 @@ class ShopCartView extends StatelessWidget {
               ],
             ),
           ),
-          bottomNavigationBar: _buildModernBottomBar(controller),
+          bottomNavigationBar: controller.statusRequest == StatusRequest.noData
+              ? null
+              : _buildModernBottomBar(controller),
         );
       },
     );
@@ -70,24 +73,26 @@ class ShopCartView extends StatelessWidget {
         ),
       ),
       centerTitle: true,
-      actions: [
-        Container(
-          margin: EdgeInsets.only(right: 16.w),
-          decoration: BoxDecoration(
-            color: primaryColor,
-            borderRadius: customBorderRadius,
-          ),
-          child: IconButton(
-            icon: Icon(
-              FontAwesomeIcons.trashCan,
-              color: Colors.white,
-              size: 16.r,
-            ),
-            onPressed: () => _showClearCartDialog(controller),
-          ),
-        ),
-        Gap(20)
-      ],
+      actions: controller.statusRequest == StatusRequest.noData
+          ? []
+          : [
+              Container(
+                margin: EdgeInsets.only(right: 16.w),
+                decoration: BoxDecoration(
+                  color: primaryColor,
+                  borderRadius: customBorderRadius,
+                ),
+                child: IconButton(
+                  icon: Icon(
+                    FontAwesomeIcons.trashCan,
+                    color: Colors.white,
+                    size: 16.r,
+                  ),
+                  onPressed: () => _showClearCartDialog(controller),
+                ),
+              ),
+              Gap(20)
+            ],
     );
   }
 
@@ -104,7 +109,7 @@ class ShopCartView extends StatelessWidget {
         borderRadius: BorderRadius.circular(20.r),
         boxShadow: [
           BoxShadow(
-            color: Colors.blue.withOpacity(0.3),
+            color: primaryColor.withOpacity(0.3),
             blurRadius: 15,
             offset: const Offset(0, 5),
           ),
@@ -459,10 +464,6 @@ class ShopCartView extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: customBorderRadius,
-          // BorderRadius.only(
-          //   topLeft: Radius.circular(25.r),
-          //   topRight: Radius.circular(25.r),
-          // ),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withOpacity(0.1),

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/see_all/see_all_category_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
@@ -21,7 +23,7 @@ class SeeAllCategories extends StatelessWidget {
               toolbarHeight: context.isTablet ? 45.h : null,
               // backgroundColor: whiteColor,
               title: Text(
-                "All Categories",
+                "All Categories".tr,
                 style: getMediumStyle(context),
               ),
             ),
@@ -30,7 +32,7 @@ class SeeAllCategories extends StatelessWidget {
                   crossAxisCount: context.isTablet ? 3 : 2,
                   mainAxisSpacing: 15,
                   crossAxisSpacing: 10,
-                  childAspectRatio: 1.3,
+                  childAspectRatio: Platform.isIOS ? 0.92.r : 1.1.r,
                 ),
                 scrollDirection: Axis.vertical,
                 padding: EdgeInsets.symmetric(horizontal: 15),

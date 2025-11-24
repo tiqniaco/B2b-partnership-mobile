@@ -61,7 +61,7 @@ class ProvidersInCategoryController extends GetxController {
     statusRequestSupSpecialization = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getSupSpecialization,
-        data: {"specialization_id": specialization.id},
+        queryParameters: {"specialization_id": specialization.id},
         fromJson: (json) {
           return json['data']
               .map<SubSpecializeModel>(

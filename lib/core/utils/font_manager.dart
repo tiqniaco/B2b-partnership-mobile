@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 String? languageCode = Get.locale?.languageCode;
+
 //languageCode=='ar'? "Cairo" :
 class FontManager {
-  
-  static  String defaultFontFamily =  'Roboto'; 
+  static String defaultFontFamily = 'Roboto';
 
   static const FontWeight lightFontWeight = FontWeight.w300;
   static const FontWeight regularFontWeight = FontWeight.w400;

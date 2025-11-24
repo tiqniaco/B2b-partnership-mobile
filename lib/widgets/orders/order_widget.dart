@@ -4,7 +4,6 @@ import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:b2b_partenership/models/order_model.dart';
-import 'package:b2b_partenership/widgets/orders/print_type.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -75,10 +74,10 @@ class OrderWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Spacer(),
-                    PrintType(
-                      type: orderModel.status!,
-                    ),
+                    // Spacer(),
+                    // PrintType(
+                    //   type: orderModel.status!,
+                    // ),
                   ],
                 ),
               ),
@@ -90,16 +89,12 @@ class OrderWidget extends StatelessWidget {
                     Gap(16),
                     rowWidget(
                       "Date".tr,
-                      orderModel.createdAt != null &&
-                              orderModel.createdAt != "null"
-                          ? DateTimeConvertor.formatDate(
-                              orderModel.createdAt!,
-                            )
-                          : "Invalid Date",
+                      DateTimeConvertor.formatDate(
+                        orderModel.createdAt.toString(),
+                      ),
                       CupertinoIcons.calendar,
                     ),
                     Gap(8),
-                   
                     rowWidget(
                       "Billed".tr,
                       "${orderModel.totalPrice} \$",

@@ -55,7 +55,7 @@ class ServiceWidgetVertical extends StatelessWidget {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        Gap(16),
+                        Gap(12),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,7 +68,9 @@ class ServiceWidgetVertical extends StatelessWidget {
                                         : TextDirection.ltr,
                                 child: Text(
                                   services[index].description!,
-                                  style: getRegularStyle(context),
+                                  style: TextStyle(
+                                      fontSize: 14.r,
+                                      fontWeight: FontWeight.w500),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -80,7 +82,8 @@ class ServiceWidgetVertical extends StatelessWidget {
                                         services[index].specializationNameAr!,
                                     english:
                                         services[index].specializationNameEn!),
-                                style: getLightStyle(context).copyWith(
+                                style: TextStyle(
+                                    fontSize: 12.r,
                                     color: greyColor,
                                     fontWeight: FontWeight.w500),
                                 overflow: TextOverflow.ellipsis,
@@ -93,47 +96,55 @@ class ServiceWidgetVertical extends StatelessWidget {
                                 ),
                                 child: Row(
                                   children: [
-                                    Expanded(
-                                      flex: 2,
-                                      child: Visibility(
-                                        visible: Get.find<AppPreferences>()
+                                    if (Get.find<AppPreferences>()
                                                 .getUserRole() ==
-                                            "provider",
-                                        child: InkWell(
-                                          onTap: () {
-                                            Get.toNamed(
-                                              AppRoutes.editProviderService,
-                                              arguments: {
-                                                "service": services[index],
-                                              },
-                                            );
-                                          },
-                                          child: Container(
-                                            height: 28.h,
-                                            alignment: Alignment.center,
-                                            decoration: BoxDecoration(
-                                              borderRadius: customBorderRadius,
-                                              border: Border.all(
-                                                color: primaryColor,
-                                              ),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(4.0),
-                                              child: Text(
-                                                "Edit".tr,
-                                                style: getRegularStyle(context)
-                                                    .copyWith(
-                                                  fontWeight: FontManager
-                                                      .mediumFontWeight,
+                                            "provider" &&
+                                        Get.find<AppPreferences>()
+                                                .getUserRoleId() ==
+                                            services[index].providerId)
+                                      Expanded(
+                                        flex: 2,
+                                        child: Visibility(
+                                          visible: Get.find<AppPreferences>()
+                                                  .getUserRole() ==
+                                              "provider",
+                                          child: InkWell(
+                                            onTap: () {
+                                              Get.toNamed(
+                                                AppRoutes.editProviderService,
+                                                arguments: {
+                                                  "service": services[index],
+                                                },
+                                              );
+                                            },
+                                            child: Container(
+                                              height: 28.h,
+                                              alignment: Alignment.center,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    customBorderRadius,
+                                                border: Border.all(
                                                   color: primaryColor,
+                                                ),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(4.0),
+                                                child: Text(
+                                                  "Edit".tr,
+                                                  style:
+                                                      getRegularStyle(context)
+                                                          .copyWith(
+                                                    fontWeight: FontManager
+                                                        .mediumFontWeight,
+                                                    color: primaryColor,
+                                                  ),
                                                 ),
                                               ),
                                             ),
                                           ),
                                         ),
                                       ),
-                                    ),
                                     Gap(8),
                                     Expanded(
                                         flex: context.isTablet ? 1 : 2,
@@ -146,26 +157,28 @@ class ServiceWidgetVertical extends StatelessWidget {
                                               },
                                             );
                                           },
-                                          child: Container(
-                                              height: 28.h,
-                                              alignment: Alignment.center,
-                                              decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      customBorderRadius,
-                                                  color: primaryColor),
-                                              child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(4.0),
-                                                  child: Text(
-                                                    "View".tr,
-                                                    style:
-                                                        getRegularStyle(context)
-                                                            .copyWith(
-                                                      fontWeight: FontManager
-                                                          .mediumFontWeight,
-                                                      color: whiteColor,
-                                                    ),
-                                                  ))),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                "View".tr,
+                                                style: getRegularStyle(context)
+                                                    .copyWith(
+                                                  fontWeight: FontManager
+                                                      .mediumFontWeight,
+                                                  fontSize: 14.r,
+                                                  color: primaryColor,
+                                                ),
+                                              ),
+                                              Gap(4),
+                                              Icon(
+                                                  Icons
+                                                      .arrow_forward_ios_rounded,
+                                                  color: primaryColor,
+                                                  size: 13.r)
+                                            ],
+                                          ),
                                         )),
                                   ],
                                 ),

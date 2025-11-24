@@ -1,11 +1,13 @@
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 import 'logout.dart';
 
 void removeAccountDialog({
+  required BuildContext context,
   required bool removeAccountLoading,
   required void Function([List<Object>? ids, bool condition]) update,
 }) {
@@ -16,12 +18,13 @@ void removeAccountDialog({
     textConfirm: "Yes".tr,
     onConfirm: () {
       Get.back();
-      _removeAccount(removeAccountLoading, update);
+      _removeAccount(context,removeAccountLoading, update );
     },
   );
 }
 
 Future<void> _removeAccount(
+  BuildContext context,
   bool removeAccountLoading,
   void Function([List<Object>? ids, bool condition]) update,
 ) async {
@@ -40,7 +43,7 @@ Future<void> _removeAccount(
   }, (r) {
     AppSnackBars.success(message: r);
     removeAccountLoading = false;
-    logout();
+    logout(context);
     update();
   });
 }

@@ -1,4 +1,5 @@
 import 'package:b2b_partenership/controller/previous_work/provider_profile_controller.dart';
+import 'package:b2b_partenership/core/functions/get_text_direction.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/app_pdf_view.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
@@ -66,8 +67,32 @@ class AboutWidget extends StatelessWidget {
                       Gap(24),
                       titleWidget("Phone".tr, icon: Icons.phone),
                       Gap(4),
-                      valueWidget(
-                          "+${controller.providerModel!.countryCode}${controller.providerModel!.phone}"),
+                      Directionality(
+                        textDirection: TextDirection.ltr,
+                        child: Row(
+                          children: [
+                            Text(
+                              "+${controller.providerModel!.countryCode}",
+                              style: getRegularStyle(Get.context!).copyWith(
+                                color: blackColor,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            Gap(4),
+                            Text(
+                              controller.providerModel!.phone,
+                              style: getRegularStyle(Get.context!).copyWith(
+                                color: blackColor,
+                                fontWeight: FontWeight.w400,
+                              ),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
+                      ),
                       if (controller.providerModel!.commercialRegisterNumber !=
                           "") ...[
                         Gap(24),
@@ -103,7 +128,7 @@ class AboutWidget extends StatelessWidget {
               ),
               Gap(24),
               Text(
-                "Bio",
+                "Bio".tr,
                 style: getRegularStyle(Get.context!).copyWith(
                   fontWeight: FontWeight.w600,
                 ),
@@ -111,9 +136,12 @@ class AboutWidget extends StatelessWidget {
               Gap(4),
               Text(
                 controller.providerModel!.bio,
+                textDirection: containsArabic(controller.providerModel!.bio)
+                    ? TextDirection.rtl
+                    : TextDirection.ltr,
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  fontSize: context.isTablet ? 8.sp : 14.sp,
+                  fontSize: context.isTablet ? 8.r : 14.r,
                   color: Colors.black,
                 ),
               ),
@@ -209,6 +237,7 @@ class AboutWidget extends StatelessWidget {
                     ),
                   ),
                 ),
+                Gap(40),
               ]
             ],
           ),

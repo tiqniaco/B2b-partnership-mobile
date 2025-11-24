@@ -1,42 +1,50 @@
-import 'package:equatable/equatable.dart';
 
-class OrderModel extends Equatable {
-  final int id;
-  final String userId;
-  final String? status;
-  final String? totalPrice;
-  final String? expirationDate;
-  final String? createdAt;
-  final String? updatedAt;
 
-  const OrderModel({
+class OrderModel {
+  int id;
+  int userId;
+  String status;
+  double totalPrice;
+  DateTime expirationDate;
+  dynamic email;
+  dynamic phone;
+  DateTime createdAt;
+  DateTime updatedAt;
+
+  OrderModel({
     required this.id,
     required this.userId,
     required this.status,
     required this.totalPrice,
     required this.expirationDate,
+    required this.email,
+    required this.phone,
     required this.createdAt,
     required this.updatedAt,
   });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) => OrderModel(
         id: json["id"],
-        userId: json["user_id"].toString(),
-        status: json["status"].toString(),
-        totalPrice: json["total_price"],
-        expirationDate: json["expiration_date"].toString(),
-        createdAt: json["created_at"].toString(),
-        updatedAt: json["updated_at"].toString(),
+        userId: json["user_id"],
+        status: json["status"],
+        totalPrice: json["total_price"]?.toDouble(),
+        expirationDate: DateTime.parse(json["expiration_date"]),
+        email: json["email"],
+        phone: json["phone"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
       );
 
-  @override
-  List<Object?> get props => [
-        id,
-        userId,
-        status,
-        totalPrice,
-        expirationDate,
-        createdAt,
-        updatedAt,
-      ];
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "user_id": userId,
+        "status": status,
+        "total_price": totalPrice,
+        "expiration_date":
+            "${expirationDate.year.toString().padLeft(4, '0')}-${expirationDate.month.toString().padLeft(2, '0')}-${expirationDate.day.toString().padLeft(2, '0')}",
+        "email": email,
+        "phone": phone,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+      };
 }

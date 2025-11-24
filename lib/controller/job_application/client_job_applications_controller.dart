@@ -24,7 +24,7 @@ class ClientJobApplicationsController extends GetxController {
     update();
     final result = await CustomRequest<List<ClientJobApplicationModel>>(
       path: ApiConstance.clientJobApplications,
-      data: {
+      queryParameters: {
         'user_id': Get.find<AppPreferences>().getUserId(),
         if (jobApplicationStatus != JobApplicationStatusEnum.all)
           'status': jobApplicationStatus.name,

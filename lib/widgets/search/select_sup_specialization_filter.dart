@@ -17,6 +17,7 @@ class SelectSupSpecializationFilter extends StatelessWidget {
     return GetBuilder<SearchControllerIM>(
       builder: (controller) => DropdownButtonFormField<SubSpecializeModel>(
         value: controller.selectedSubSpecialization,
+        isExpanded: true,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(
             vertical: context.isTablet ? 8.h : 10.h,
@@ -54,10 +55,11 @@ class SelectSupSpecializationFilter extends StatelessWidget {
             child: Text(
               translateDatabase(arabic: item.nameAr!, english: item.nameEn!),
               style: getMediumStyle(context).copyWith(
-                color: greyColor.withAlpha(160),
-                fontWeight: FontWeight.bold,
-              ),
+                  color: blackColor,
+                  fontWeight: FontWeight.normal,
+                  fontSize: 13.r),
               maxLines: 3,
+              overflow: TextOverflow.ellipsis,
             ),
           );
         }).toList(),

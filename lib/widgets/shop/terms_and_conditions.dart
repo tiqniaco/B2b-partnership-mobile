@@ -14,55 +14,59 @@ class TermsAndConditions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ShopProductDetailsController>(
-      init: ShopProductDetailsController(),
-      builder: (controller) => Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Gap(8),
-          Container(
-            padding: EdgeInsets.all(16),
-            decoration: BoxDecoration(
-                color: lightPrimaryColor.withAlpha(130),
-                borderRadius: BorderRadius.circular(8.r)),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Icon(
-                      Icons.safety_check,
-                      color: primaryColor,
-                      size: 24.r,
-                    ),
-                    Gap(8),
-                    Text(
-                      "Terms and Conditions".tr,
-                      style: TextStyle(
-                          fontSize: 18.r,
-                          fontWeight: FontWeight.bold,
-                          color: blackColor,
-                          height: 1.5),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  width: double.infinity,
-                  child: Directionality(
-                    textDirection:
-                        containsArabic(controller.product!.descriptionAr)
-                            ? TextDirection.rtl
-                            : TextDirection.ltr,
-                    child: Text(
-                      controller.product!.descriptionAr,
-                      style: TextStyle(
-                          fontSize: 14.r, color: Colors.black87, height: 1.5),
+      builder: (controller) {
+        final String terms = controller.product?.termsAndConditionsAr ?? "";
+        if (terms.isEmpty) {
+          return const SizedBox.shrink();
+        }
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Gap(8),
+            Container(
+              padding: EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                  color: lightPrimaryColor.withAlpha(130),
+                  borderRadius: BorderRadius.circular(8.r)),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.safety_check,
+                        color: primaryColor,
+                        size: 24.r,
+                      ),
+                      Gap(8),
+                      Text(
+                        "Terms and Conditions".tr,
+                        style: TextStyle(
+                            fontSize: 18.r,
+                            fontWeight: FontWeight.bold,
+                            color: blackColor,
+                            height: 1.5),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: Directionality(
+                      textDirection: containsArabic(terms)
+                          ? TextDirection.rtl
+                          : TextDirection.ltr,
+                      child: Text(
+                        terms,
+                        style: TextStyle(
+                            fontSize: 14.r, color: Colors.black87, height: 1.5),
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
-      ),
+          ],
+        );
+      },
     );
   }
 }

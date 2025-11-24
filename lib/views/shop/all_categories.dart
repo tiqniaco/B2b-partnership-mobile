@@ -17,7 +17,7 @@ class AllCategories extends StatelessWidget {
     Get.put(AllCategoriesController());
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: whiteColor,
+        // backgroundColor: whiteColor,
         title: Text(
           "Categories List".tr,
           style: getMediumStyle(context).copyWith(
@@ -64,13 +64,20 @@ class AllCategories extends StatelessWidget {
                             topRight: Radius.circular(10.r),
                             bottomLeft: Radius.circular(10.r),
                           ),
-                          color: blackColor.withAlpha(80),
+                          //color: blackColor.withAlpha(80),
                           gradient: LinearGradient(
                             begin: Alignment.topCenter,
                             end: Alignment.bottomCenter,
                             colors: [
-                              Colors.black.withAlpha(220),
+                              Colors.black,
+                              Colors.black.withAlpha(200),
+
                               Colors.black.withAlpha(150),
+                              Colors.black.withAlpha(150),
+                              // Colors.black,
+                              Colors.transparent,
+                              // Colors.black.withAlpha(150),
+                              Colors.transparent,
                               Colors.transparent,
                               Colors.transparent,
                               Colors.transparent,
@@ -78,7 +85,8 @@ class AllCategories extends StatelessWidget {
                           )),
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(15.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 15.0, vertical: 8),
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,

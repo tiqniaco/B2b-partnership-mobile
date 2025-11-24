@@ -369,7 +369,7 @@ class ComplaintsController extends GetxController {
       AppSnackBars.error(message: l.errMsg);
     }, (r) async {
       await getComplaints(isRefresh: false);
-      Get.put(SettingController()).getMenuModel();
+     Get.put(SettingController()).getMenuModel();
       complaintController.clear();
       if (contentType == 'voice') {
         removeRecord();

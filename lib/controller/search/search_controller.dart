@@ -46,11 +46,8 @@ class SearchControllerIM extends GetxController {
   Future<void> onInit() async {
     getProviders();
     searchController = TextEditingController();
-
     await getCountries();
-    // getCities();
     await getSpecialization();
-    getProviders();
     super.onInit();
   }
 
@@ -117,8 +114,9 @@ class SearchControllerIM extends GetxController {
         AppSnackBars.error(message: l.errMsg);
         update();
       }, (r) {
-        isSearch = true;
         Get.back();
+        isSearch = true;
+
         searchList.clear();
         searchList = r;
         print(searchList);
@@ -147,12 +145,14 @@ class SearchControllerIM extends GetxController {
   }
 
   resetLocation() {
+    Get.back();
     selectedCountry = null;
     selectedCity = null;
     update(['location']);
   }
 
   resetCategory() {
+    Get.back();
     selectedSpecialization = null;
     selectedSubSpecialization = null;
     update(['category']);
@@ -190,7 +190,7 @@ class SearchControllerIM extends GetxController {
     statusRequestCity = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.cities,
-        data: {"country_id": selectedCountry!.id},
+        queryParameters: {"country_id": selectedCountry!.id},
         fromJson: (json) {
           return json['data']
               .map<CityModel>((city) => CityModel.fromJson(city))
@@ -241,7 +241,7 @@ class SearchControllerIM extends GetxController {
     statusRequestSupSpecialization = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getSupSpecialization,
-        data: {"specialization_id": selectedSpecialization!.id},
+        queryParameters: {"specialization_id": selectedSpecialization!.id},
         fromJson: (json) {
           return json['data']
               .map<SubSpecializeModel>(

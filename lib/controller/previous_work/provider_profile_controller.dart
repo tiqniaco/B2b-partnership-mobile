@@ -169,7 +169,7 @@ class ProviderProfileController extends GetxController {
     statusRequestPerviousWork = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getProviderPreviousWork,
-        data: {"provider_id": providerModel!.providerId},
+        queryParameters: {"provider_id": providerModel!.providerId},
         fromJson: (json) {
           return json["data"]
               .map<ProviderPerviousWorkModel>(
@@ -191,7 +191,7 @@ class ProviderProfileController extends GetxController {
     statusRequestReview = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getReviewServices,
-        data: {"provider_id": provId},
+        queryParameters: {"provider_id": provId},
         fromJson: (json) {
           return json['data']
               .map<ReviewModel>((type) => ReviewModel.fromJson(type))

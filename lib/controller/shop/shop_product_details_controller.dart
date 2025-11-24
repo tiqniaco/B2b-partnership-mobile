@@ -11,6 +11,7 @@ import 'package:b2b_partenership/models/product_description_model.dart';
 import 'package:b2b_partenership/models/shop_product_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:rename/platform_file_editors/abs_platform_file_editor.dart';
@@ -38,11 +39,9 @@ class ShopProductDetailsController extends GetxController {
     productId = Get.arguments?['productId'] as String;
     getProductDetails();
 
- 
     super.onInit();
   }
 
- 
   void onPageChanged(int index) {
     selectedIndex = index;
     update();
@@ -50,7 +49,6 @@ class ShopProductDetailsController extends GetxController {
 
   void onTabTapped(int index) {
     selectedIndex = index;
-    pageController.jumpToPage(index);
     update();
   }
 
@@ -127,14 +125,16 @@ class ShopProductDetailsController extends GetxController {
       if (response.statusCode == 200) {
         logger.i(response.statusMessage);
         Get.defaultDialog(
-          title: 'File Downloaded'.tr,
-          middleText: '${"File downloaded successfully to".tr} $filePath',
+          title: 'Done'.tr,
+          titleStyle: TextStyle(fontSize: 14.r),
+          middleText: "File downloaded successfully".tr,
+          middleTextStyle: TextStyle(fontSize: 13.r), // $filePath
         );
       } else {
-        AppSnackBars.error(message: 'File download failed');
+        AppSnackBars.error(message: 'File download failed'.tr);
       }
     } else {
-      AppSnackBars.warning(message: 'No file available');
+      AppSnackBars.warning(message: 'No file available'.tr);
     }
   }
 }

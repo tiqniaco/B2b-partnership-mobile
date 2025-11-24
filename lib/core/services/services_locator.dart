@@ -6,8 +6,7 @@ import 'notifications_service.dart';
 class ServicesLocator extends GetxService {
   late SharedPreferences sharedPreferences;
   Future<ServicesLocator> init() async {
-    //await Firebase.initializeApp();
-    //await AndroidAlarmManager.initialize();
+    
     sharedPreferences = await SharedPreferences.getInstance();
     return this;
   }

@@ -17,6 +17,7 @@ class SelectCityFilter extends StatelessWidget {
     return GetBuilder<SearchControllerIM>(
       builder: (controller) => DropdownButtonFormField<CityModel>(
         // value: controller.selectedCity, //CountryModel
+        isExpanded: true,
         padding: EdgeInsets.zero,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(
@@ -58,8 +59,8 @@ class SelectCityFilter extends StatelessWidget {
                   translateDatabase(
                       arabic: item.nameAr!, english: item.nameEn!),
                   style: getLightStyle(context).copyWith(
-                    color: greyColor.withAlpha(160),
-                    fontWeight: FontWeight.bold,
+                    color: blackColor,
+                    fontWeight: FontWeight.normal,
                   ),
                 ),
               ],

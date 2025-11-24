@@ -1,3 +1,5 @@
+import 'package:b2b_partenership/core/services/responsive_helper.dart';
+
 import '/app_bindings.dart';
 import '/core/theme/app_color.dart';
 import '/core/theme/themes.dart';
@@ -7,19 +9,23 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/constants/app_constants.dart';
+
 import 'core/localization/localization.dart';
 
 class B2BPartnershipApp extends StatelessWidget {
   const B2BPartnershipApp({super.key});
 
-  @override
+  // LanguageEnum? language;
+  @override 
   Widget build(BuildContext context) {
+     ResponsiveHelper.init(context);
     return ScreenUtilInit(
-      designSize: const Size(430, 932),
+      designSize: Size(375, 812), //const Size(430, 932),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
         ScreenUtil.init(context);
+
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           locale: Locale('en'),

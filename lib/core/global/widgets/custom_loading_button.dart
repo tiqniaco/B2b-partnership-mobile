@@ -1,7 +1,9 @@
-import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:easy_loading_button/easy_loading_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:b2b_partenership/core/theme/text_style.dart';
+
 import '/core/global/widgets/custom_loading_widget.dart';
 import '/core/theme/app_color.dart';
 
@@ -15,6 +17,7 @@ class CustomLoadingButton extends StatelessWidget {
       this.width,
       this.alignment,
       this.borderRadius = 30,
+      this.fontSize,
       this.textColor = whiteColor});
 
   final Function onPressed;
@@ -25,7 +28,7 @@ class CustomLoadingButton extends StatelessWidget {
   final Alignment? alignment;
   final double borderRadius;
   final Color textColor;
-
+  final double? fontSize;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -46,6 +49,7 @@ class CustomLoadingButton extends StatelessWidget {
               text,
               style: getMediumStyle(context).copyWith(
                 color: textColor,
+                fontSize: fontSize,
                 fontWeight: FontWeight.bold,
               ),
             ),

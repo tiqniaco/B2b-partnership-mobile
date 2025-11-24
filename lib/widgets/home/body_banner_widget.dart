@@ -21,6 +21,7 @@ class BodyBannerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 16.0),
       decoration: BoxDecoration(
         border: Border.all(color: primaryColor, width: 0),
         borderRadius: customBorderRadius,
@@ -76,7 +77,7 @@ class BodyBannerWidget extends StatelessWidget {
                       fontSize: 19.r,
                     ),
                   ),
-                  Gap(8),
+                  Gap(24),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -104,7 +105,7 @@ class BodyBannerWidget extends StatelessWidget {
                                 fontFamily: 'PlaypenSans',
                                 fontWeight: FontWeight.bold,
                                 color: whiteColor,
-                                fontSize: 13.r),
+                                fontSize: 12.r),
                           ),
                         ),
                       ),

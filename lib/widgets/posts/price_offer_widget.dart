@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/posts/post_details_controller.dart';
+import 'package:b2b_partenership/core/functions/get_text_direction.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
@@ -34,14 +35,16 @@ class PriceOfferWidget extends GetView<PostDetailsController> {
             child: SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  buildRow("Price", model.requestOfferPrice,
+                  buildRow("Price".tr, model.requestOfferPrice,
                       Icons.payments_outlined),
                   Gap(16),
-                  buildRow("Duration", model.requestOfferDuration,
+                  buildRow("Duration".tr, model.requestOfferDuration,
                       Icons.watch_later_outlined),
                   Gap(16),
-                  buildRow("Description", model.offerDescription,
+                  buildRow("Description".tr, model.offerDescription,
                       Icons.note_alt_outlined),
                   Gap(24),
                   InkWell(
@@ -129,12 +132,12 @@ class PriceOfferWidget extends GetView<PostDetailsController> {
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           borderRadius: customBorderRadius,
-                          color: primaryColor,
+                          color: backgroundColor,
                         ),
                         child: Text(
                           "Accepted".tr,
                           style: getLightStyle(context).copyWith(
-                            color: whiteColor,
+                            color: blackColor,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -171,12 +174,12 @@ class PriceOfferWidget extends GetView<PostDetailsController> {
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                           borderRadius: customBorderRadius,
-                          color: primaryColor,
+                          //  color: backgroundColor,
                         ),
                         child: Text(
                           model.requestOfferStatus.tr,
                           style: getLightStyle(context).copyWith(
-                            color: whiteColor,
+                            color: blackColor,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -224,8 +227,10 @@ class PriceOfferWidget extends GetView<PostDetailsController> {
           Expanded(
             child: Text(
               value,
+              textDirection:
+                  containsArabic(value) ? TextDirection.rtl : TextDirection.ltr,
               style: TextStyle(
-                  fontSize: 10.r,
+                  fontSize: 12.r,
                   color: blackColor,
                   fontWeight: FontWeight.bold),
             ),
