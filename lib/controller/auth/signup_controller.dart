@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'dart:io';
-
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
@@ -20,7 +19,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:logger/logger.dart';
-
 import '../../core/enums/status_request.dart';
 
 class SignupController extends GetxController {
@@ -90,8 +88,8 @@ class SignupController extends GetxController {
     await getCountries();
     getCities();
     getProviderTypes();
-    await getSpecialization();
-    getSupSpecialization();
+    // await getSpecialization();
+    //getSupSpecialization();
     super.onInit();
   }
 
@@ -424,7 +422,7 @@ class SignupController extends GetxController {
     statusRequestCity = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.cities,
-        data: {"country_id": selectedCountry.id},
+        queryParameters: {"country_id": selectedCountry.id},
         fromJson: (json) {
           return json['data']
               .map<CityModel>((city) => CityModel.fromJson(city))
@@ -502,7 +500,7 @@ class SignupController extends GetxController {
     statusRequestSupSpecialization = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getSupSpecialization,
-        data: {"specialization_id": selectedSpecialization.id},
+        queryParameters: {"specialization_id": selectedSpecialization.id},
         fromJson: (json) {
           return json['data']
               .map<SubSpecializeModel>(

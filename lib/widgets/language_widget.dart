@@ -5,13 +5,13 @@ import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/utils/assets_data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 class LanguageWidget extends StatelessWidget {
   const LanguageWidget({super.key, this.gradient});
   final Gradient? gradient;
 
-  /// final LocalController localcontroller = Get.put(LocalController());
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,56 +24,58 @@ class LanguageWidget extends StatelessWidget {
       ),
       child: InkWell(
         onTap: () {
-          Get.bottomSheet(Container(
-            height: 0.2.sh,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20.r),
-                topRight: Radius.circular(20.r),
+          Get.bottomSheet(
+            Container(
+              height: 0.2.sh,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(20.r),
+                  topRight: Radius.circular(20.r),
+                ),
+                color: Colors.white,
               ),
-              color: Colors.white,
+              padding: EdgeInsets.symmetric(
+                // horizontal: 10.w,
+                vertical: 10.h,
+              ),
+              child: Column(
+                children: [
+                  ListTile(
+                    title: Text(
+                      "English",
+                      style: getRegularStyle(context),
+                    ),
+                    leading: Image.asset(
+                      AssetsData.englishImage,
+                      width: 20.w,
+                    ),
+                    onTap: () {
+                      changeAppLang(
+                        context: Get.context!,
+                        lang: LanguageEnum.en,
+                      );
+                    },
+                  ),
+                  ListTile(
+                    title: Text(
+                      'العربية',
+                      style: getRegularStyle(context),
+                    ),
+                    leading: Image.asset(
+                      AssetsData.arabicImage,
+                      width: 20.w,
+                    ),
+                    onTap: () {
+                      changeAppLang(
+                        context: Get.context!,
+                        lang: LanguageEnum.ar,
+                      );
+                    },
+                  ),
+                ],
+              ),
             ),
-            padding: EdgeInsets.symmetric(
-              // horizontal: 10.w,
-              vertical: 10.h,
-            ),
-            child: Column(
-              children: [
-                ListTile(
-                  title: Text(
-                    "English",
-                    style: getRegularStyle(context),
-                  ),
-                  leading: Image.asset(
-                    AssetsData.englishImage,
-                    width: 20.w,
-                  ),
-                  onTap: () {
-                    changeAppLang(
-                      context: Get.context!,
-                      lang: LanguageEnum.en,
-                    );
-                  },
-                ),
-                ListTile(
-                  title: Text(
-                    'العربية',
-                    style: getRegularStyle(context),
-                  ),
-                  leading: Image.asset(
-                    AssetsData.arabicImage,
-                    width: 20.w,
-                  ),
-                  onTap: () {
-                    changeAppLang(
-                      context: Get.context!,
-                      lang: LanguageEnum.ar,
-                    );
-                  },
-                ),
-              ],
-            ),
-          ));
+          );
         },
         child: Row(
           children: [
@@ -109,6 +111,12 @@ class LanguageWidget extends StatelessWidget {
                 ],
               ),
             ),
+            Gap(12),
+            Icon(
+              Icons.arrow_forward_ios_rounded,
+              size: 15.r,
+              color: primaryColor,
+            )
           ],
         ),
       ),

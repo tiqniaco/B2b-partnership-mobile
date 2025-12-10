@@ -49,6 +49,7 @@ class LoginController extends GetxController {
   Future<void> login() async {
     if (loginFormKey.currentState!.validate()) {
       statusRequest = StatusRequest.loading;
+
       final result = await CustomRequest<Map<String, dynamic>>(
           path: ApiConstance.login,
           fromJson: (json) {
@@ -77,6 +78,7 @@ class LoginController extends GetxController {
           Get.find<AppPreferences>().setUserRole(r['role']);
           ApiConstance.token = r['token'];
           Get.find<AppPreferences>().setStep("2");
+          print(Get.find<AppPreferences>().getUserRoleId());
           Get.offAllNamed(
             AppRoutes.homeLayout,
           );

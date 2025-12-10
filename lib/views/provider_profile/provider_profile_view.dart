@@ -47,7 +47,7 @@ class ProviderProfileView extends StatelessWidget {
                         Gap(20),
                         _buildHeader(controller),
                         Gap(24),
-                        _buildTabs(controller),
+                        SizedBox(height: 35.h, child: _buildTabs(controller)),
                         Gap(8.h),
                         Expanded(
                           child: PageView(
@@ -149,38 +149,46 @@ class ProviderProfileView extends StatelessWidget {
 
   Widget _buildTabs(ProviderProfileController controller) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          _buildTab("Services", 0, controller),
-          _buildTab("About", 1, controller),
-          _buildTab("Previous work", 2, controller),
-          _buildTab("Reviews", 3, controller),
+          _buildTab("Services", 0, 4, controller),
+          Gap(8),
+          _buildTab("About", 1, 3, controller),
+          Gap(8),
+          _buildTab("Previous work", 2, 6, controller),
+          Gap(8),
+          _buildTab("Reviews", 3, 4, controller),
         ],
       ),
     );
   }
 
   Widget _buildTab(
-      String title, int index, ProviderProfileController controller) {
-    return GestureDetector(
-      onTap: () => controller.onTabTapped(index),
-      child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-        decoration: BoxDecoration(
-            borderRadius: customBorderRadius,
-            color: controller.selectedIndex == index
-                ? primaryColor
-                : Colors.transparent,
-            border: Border.all(color: primaryColor)),
-        child: Text(title.tr,
-            style: getMediumStyle(Get.context!).copyWith(
-              fontWeight: FontWeight.bold,
-              fontSize: 13.r,
-              color:
-                  controller.selectedIndex == index ? whiteColor : primaryColor,
-            )),
+      String title, int index, int flex, ProviderProfileController controller) {
+    return Expanded(
+      flex: flex,
+      child: GestureDetector(
+        onTap: () => controller.onTabTapped(index),
+        child: Container(
+          alignment: Alignment.center,
+          padding: EdgeInsets.symmetric(horizontal: 6, vertical: 7),
+          decoration: BoxDecoration(
+              borderRadius: customBorderRadius,
+              color: controller.selectedIndex == index
+                  ? primaryColor
+                  : Colors.transparent,
+              border: Border.all(color: primaryColor)),
+          child: Text(title.tr,
+              style: getMediumStyle(Get.context!).copyWith(
+                fontWeight: FontWeight.bold,
+                fontSize: 12.r,
+                color: controller.selectedIndex == index
+                    ? whiteColor
+                    : primaryColor,
+              )),
+        ),
       ),
     );
   }

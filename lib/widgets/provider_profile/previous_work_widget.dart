@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/previous_work/provider_profile_controller.dart';
+import 'package:b2b_partenership/core/functions/get_text_direction.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/models/pervious_work_model.dart';
@@ -21,41 +22,57 @@ class PreviousWork extends StatelessWidget {
             arguments: {"model": model});
       },
       child: Container(
-        height: 105.h,
         decoration: BoxDecoration(
+            color: whiteColor,
             borderRadius: BorderRadius.circular(15),
-            image: DecorationImage(
-                fit: BoxFit.cover,
-                image: CachedNetworkImageProvider(
-                  model.image!,
-                ))),
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(15),
-              color: blackColor.withAlpha(80)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Text(
-                model.titleEn!,
-                style: getMediumStyle(context).copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: whiteColor,
+            border: Border.all(color: borderColor)),
+        child: Row(
+          children: [
+            Container(
+              height: 105.h,
+              width: 130,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(15),
+                      bottomLeft: Radius.circular(15)),
+                  image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: CachedNetworkImageProvider(
+                        model.image!,
+                      ))),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      model.titleEn!,
+                      textDirection: containsArabic(model.titleEn!)
+                          ? TextDirection.rtl
+                          : TextDirection.ltr,
+                      style: getMediumStyle(context).copyWith(
+                        fontWeight: FontWeight.normal,
+                        color: blackColor,
+                      ),
+                    ),
+                    Gap(8),
+                    Text(
+                      model.description!,
+                      textDirection: containsArabic(model.titleEn!)
+                          ? TextDirection.rtl
+                          : TextDirection.ltr,
+                      style: getRegularStyle(context).copyWith(
+                          color: Colors.black54, fontWeight: FontWeight.normal),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
                 ),
               ),
-              Text(
-                model.description!,
-                style: getRegularStyle(context).copyWith(
-                  color: whiteColor,
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-              Gap(16),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

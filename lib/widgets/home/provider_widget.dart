@@ -1,8 +1,9 @@
 import 'package:b2b_partenership/app_routes.dart';
+import 'package:b2b_partenership/core/functions/get_text_direction.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
-import 'package:b2b_partenership/core/utils/font_manager.dart';
 import 'package:b2b_partenership/models/provider_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pannable_rating_bar/flutter_pannable_rating_bar.dart';
@@ -55,14 +56,14 @@ class ProviderWidget extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    top: -4,
+                    top: -2,
                     left: 8,
                     child: InkWell(
                       child: provider.isFavorite == "1"
                           ? InkWell(
                               onTap: toggleFavorite,
                               child: Icon(
-                                size: 28.r,
+                                size: 20.r,
                                 Icons.bookmark,
                                 color: primaryColor,
                               ),
@@ -70,7 +71,7 @@ class ProviderWidget extends StatelessWidget {
                           : InkWell(
                               onTap: toggleFavorite,
                               child: Icon(
-                                size: 28.r,
+                                size: 20.r,
                                 Icons.bookmark_outline_rounded,
                                 color: primaryColor,
                               ),
@@ -80,81 +81,74 @@ class ProviderWidget extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    provider.name.toUpperCase(),
-                    textAlign: TextAlign.center,
-                    style: getRegularStyle(context).copyWith(
-                      fontWeight: FontWeight.w500,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  PannableRatingBar(
-                    rate: double.parse(provider.rating),
-                    items: List.generate(
-                      5,
-                      (index) => RatingWidget(
-                        selectedColor: Colors.amber,
-                        unSelectedColor: Colors.grey,
-                        child: Icon(
-                          Icons.star,
-                          size: 20.r,
-                        ),
+            Expanded(
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10),
+                child: Column(
+                  // crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(
+                      provider.name.toUpperCase(),
+                      textDirection: containsArabic(provider.name)
+                          ? TextDirection.rtl
+                          : TextDirection.ltr,
+                      textAlign: TextAlign.center,
+                      style: getRegularStyle(context).copyWith(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 13.r,
                       ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    onHover: (value) {},
-                  ),
-                  Gap(14),
-                  Text(
-                    provider.bio,
-                    textAlign: TextAlign.center,
-                    style: getLightStyle(context).copyWith(
-                      color: Colors.black54,
-                      fontSize: 14.r,
-                      fontWeight: FontWeight.normal,
-                    ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Gap(10),
-                  SizedBox(
-                    height: context.isTablet ? 60 : 32,
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        )),
-                        padding: WidgetStatePropertyAll(
-                          EdgeInsets.symmetric(
-                            horizontal: 0,
+                    PannableRatingBar(
+                      rate: double.parse(provider.rating),
+                      items: List.generate(
+                        5,
+                        (index) => RatingWidget(
+                          selectedColor: Colors.amber,
+                          unSelectedColor: Colors.grey,
+                          child: Icon(
+                            Icons.star,
+                            size: 14.r,
                           ),
                         ),
                       ),
-                      onPressed: () {
-                        Get.toNamed(
-                          AppRoutes.providerProfile,
-                          arguments: {
-                            "id": provider.providerId.toString(),
-                          },
-                        );
-                      },
-                      child: Text(
-                        "View".tr,
-                        style: getLightStyle(context).copyWith(
-                          fontWeight: FontManager.boldFontWeight,
-                          color: whiteColor,
-                        ),
+                      onHover: (value) {},
+                    ),
+                    Gap(4),
+                    Text(
+                      provider.bio,
+                      textDirection: containsArabic(provider.bio)
+                          ? TextDirection.rtl
+                          : TextDirection.ltr,
+                      textAlign: TextAlign.center,
+                      style: getLightStyle(context).copyWith(
+                        color: Colors.black54,
+                        fontSize: 13.r,
+                        fontWeight: FontWeight.normal,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Gap(4),
+                    SizedBox(
+                      height: 32.h,
+                      child: CustomLoadingButton(
+                        borderRadius: 10.r,
+                        height: 32.h,
+                        onPressed: () {
+                          Get.toNamed(AppRoutes.providerProfile, arguments: {
+                            "id": provider.providerId.toString()
+                          });
+                        },
+                        fontSize: 14.r,
+                        text: "View".tr,
                       ),
                     ),
-                  )
-                ],
+                  ],
+                ),
               ),
             ),
           ],

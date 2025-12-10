@@ -64,6 +64,8 @@ class CustomPhoneWidget extends StatelessWidget {
               color: greyColor.withAlpha(160),
               fontWeight: FontWeight.w500,
             ),
+            filled: true,
+            fillColor: whiteColor,
             focusedBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: blackColor,

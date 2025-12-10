@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
+import 'package:b2b_partenership/core/functions/internet_check.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
@@ -254,7 +255,6 @@ class AllPostsController extends GetxController {
   }
 
   Future<void> getServices() async {
-   
     statusRequest = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getAllPendingServices,
@@ -270,7 +270,11 @@ class AllPostsController extends GetxController {
               .toList();
         }).sendGetRequest();
     response.fold((l) {
-      statusRequest = StatusRequest.error;
+      if (isConnectionError(l)) {
+        statusRequest = StatusRequest.noConnection;
+      } else {
+        statusRequest = StatusRequest.error;
+      }
       Logger().e(l.errMsg);
     }, (r) {
       services.clear();

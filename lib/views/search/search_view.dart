@@ -23,10 +23,10 @@ class SearchView extends StatelessWidget {
     return GetBuilder<SearchControllerIM>(builder: (controller) {
       return Scaffold(
         appBar: AppBar(
+          leadingWidth: 50,
           toolbarHeight: context.isTablet ? 45.h : null,
           title: TextFormField(
             decoration: InputDecoration(
-             
               contentPadding: EdgeInsets.symmetric(
                 horizontal: 8.w,
                 vertical: 8.h,
@@ -107,34 +107,28 @@ class SearchView extends StatelessWidget {
                     ? controller.statusRequestSearch
                     : controller.statusRequestProviders,
                 child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: context.isTablet ? 3 : 2,
-                    mainAxisSpacing: 15,
-                    crossAxisSpacing: 10,
-                    childAspectRatio: context.isTablet ? 0.69 : 6 / 10.5,
-                  ),
-                  scrollDirection: Axis.vertical,
-                  padding: EdgeInsets.symmetric(horizontal: 15),
-                  itemCount: controller.isSearch
-                      ? controller.searchList.length
-                      : controller.topProviders.length,
-                  itemBuilder: (context, index) => controller.isSearch
-                      ? ProviderWidget(
-                          provider: controller.searchList[index],
-                          toggleFavorite: () {
-                            controller.toggleFavorites(controller
-                                .searchList[index].providerId
-                                .toString());
-                          })
-                      : ProviderWidget(
-                          provider: controller.topProviders[index],
-                          toggleFavorite: () {
-                            controller.toggleFavorites(controller
-                                .topProviders[index].providerId
-                                .toString());
-                          }),
-                ),
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: context.isTablet ? 3 : 2,
+                      mainAxisSpacing: 15,
+                      crossAxisSpacing: 10,
+                      childAspectRatio: context.isTablet ? 0.69 : 6 / 8.2,
+                    ),
+                    scrollDirection: Axis.vertical,
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    itemCount: controller.isSearch
+                        ? controller.searchList.length
+                        : controller.topProviders.length,
+                    itemBuilder: (context, index) => ProviderWidget(
+                        provider: controller.isSearch
+                            ? controller.searchList[index]
+                            : controller.topProviders[index],
+                        toggleFavorite: () {
+                          controller.toggleFavorites(controller
+                              .searchList[index].providerId
+                              .toString());
+                        })),
               )),
+              Gap(50),
             ],
           ),
         ),

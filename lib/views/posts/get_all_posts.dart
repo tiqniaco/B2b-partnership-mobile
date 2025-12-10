@@ -1,12 +1,16 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/core/functions/please_login_dialog.dart';
-import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_error_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_no_connection_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/global_server_status_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/place_holder.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/theme/themes.dart';
 
 import 'package:b2b_partenership/widgets/posts/freelance_item.dart';
+import 'package:b2b_partenership/widgets/posts/post_loading_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,20 +52,30 @@ class GetAllPosts extends StatelessWidget {
                             icon: Icon(
                               CupertinoIcons.search,
                               size: context.isTablet ? 13.w : 18.w,
-                              color: primaryColor,
+                              color: Colors.black87,
                             ),
                           ),
                           contentPadding: EdgeInsets.symmetric(
                               vertical: 12, horizontal: 16),
                           hintText: 'Search'.tr,
                           hintStyle: getMediumStyle(context)
-                              .copyWith(fontSize: 14.r, color: primaryColor),
+                              .copyWith(fontSize: 14.r, color: Colors.black87),
                           border: InputBorder.none,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: greyColor),
                             borderRadius: BorderRadius.only(
-                              topRight: Radius.circular(10.r),
-                              bottomLeft: Radius.circular(10.r),
+                              topRight: Get.locale?.languageCode == "en"
+                                  ? Radius.circular(0.r)
+                                  : Radius.circular(10.r),
+                              bottomLeft: Get.locale?.languageCode == "en"
+                                  ? Radius.circular(0.r)
+                                  : Radius.circular(10.r),
+                              topLeft: Get.locale?.languageCode == "en"
+                                  ? Radius.circular(10.r)
+                                  : Radius.circular(0.r),
+                              bottomRight: Get.locale?.languageCode == "en"
+                                  ? Radius.circular(10.r)
+                                  : Radius.circular(0.r),
                             ),
                           ),
                         ),
@@ -79,7 +93,7 @@ class GetAllPosts extends StatelessWidget {
                         },
                       ),
                     ),
-                    Gap(20),
+                    Gap(10),
                     InkWell(
                       onTap: () {
                         return controller.showFilterDialog();
@@ -127,9 +141,23 @@ class GetAllPosts extends StatelessWidget {
                 ),
                 Gap(24),
                 Expanded(
-                  child: CustomServerStatusWidget(
+                  child: GlobalServerStatusWidget(
                     statusRequest: controller.statusRequest,
-                    child: ListView.separated(
+                    loadingChild: PostLoadingWidget(),
+                    errorChild: CustomErrorWidget(),
+                    noConnectionChild: CustomNoConnectionWidget(
+                      onTap: () {
+                        controller.getServices();
+                        controller.getCountries();
+                        controller.getCities();
+                      },
+                    ),
+                    noDataChild: PlaceHolderWidget(
+                      icon: Image.asset("assets/images/no_posts.png"),
+                      title: 'No Posts Now',
+                      subTitle: 'Try again later or add new post',
+                    ),
+                    successChild: ListView.separated(
                       separatorBuilder: (context, index) => Gap(20),
                       scrollDirection: Axis.vertical,
                       itemCount: controller.services.length,

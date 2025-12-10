@@ -20,7 +20,7 @@ Widget boxWidget(IconData icon, Color color, String title, String subTitle,
           Icon(
             icon,
             color: primaryColor,
-            size: 27.r,
+            size: 26.r,
           ),
           Gap(10),
           Column(

@@ -27,17 +27,19 @@ class _HomeSlidersState extends State<HomeSliders> {
 
   List<Widget> banners = [
     BannerWidget(
-      image: "assets/images/ban2.png",
-      title: "90% Discount".tr,
+      image: "assets/images/2 en.png",
+      imageAr: "assets/images/2 ar.png",
+      title: "Modern\nand advanced\ntraining packages".tr,
       onPressed: () {
         // Get.put(ProviderHomeLayoutController(this)).onBNavPressed(1);
       },
-      description: "Training bag on the basics of\npurchasing management".tr,
+      description: "Training bag on the basics of purchasing management".tr,
       buttonTitle: 'Shop Now'.tr,
     ),
     BannerWidget(
-      image: "assets/images/ban4.png",
-      title: "More than 100 job offer".tr,
+      image: "assets/images/4 en.jpg",
+      imageAr: "assets/images/4 ar.jpg",
+      title: "More than 100\njob offer".tr,
       onPressed: () {
         // Get.put(ProviderHomeLayoutController(this)).onBNavPressed(1);
       },
@@ -45,22 +47,24 @@ class _HomeSlidersState extends State<HomeSliders> {
       buttonTitle: 'Apply Now'.tr,
     ),
     BannerWidget(
-      image: "assets/images/ban1.png",
-      title: "Need Custom Service?! ".tr,
+      image: "assets/images/1 en.png",
+      imageAr: "assets/images/1 ar.png",
+      title: "Need Custom\nService?! ".tr,
       onPressed: () {
         // Get.put(ProviderHomeLayoutController(this)).onBNavPressed(1);
       },
-      description: "Now you can post your\ncustom service request".tr,
+      description: "Now you can post your custom service request".tr,
       buttonTitle: 'Post Now'.tr,
     ),
     BannerWidget(
-      image: "assets/images/ban3.png",
-      title: "All service providers".tr,
+      image: "assets/images/3 ar.png",
+      imageAr: "assets/images/3 en.png",
+      title: "All service\nproviders".tr,
       onPressed: () {
         // Get.put(ProviderHomeLayoutController(this)).onBNavPressed(1);
       },
       description: "IT Services and industry sectors and more".tr,
-      buttonTitle: 'Browse All Categories'.tr,
+      buttonTitle: 'Browse All'.tr,
     ),
   ];
 
@@ -75,11 +79,11 @@ class _HomeSlidersState extends State<HomeSliders> {
             CarouselSlider.builder(
               carouselController: carouselController,
               options: CarouselOptions(
-                viewportFraction: 1,
+                viewportFraction: 0.9,
                 onPageChanged: (index, reson) {
                   changeSlider(index);
                 },
-                height: context.isTablet ? 250 : 127.h,
+                height: context.isTablet ? 250 : 160.h,
                 animateToClosest: true,
                 autoPlay: true,
                 padEnds: true,
@@ -90,12 +94,12 @@ class _HomeSlidersState extends State<HomeSliders> {
               itemCount: banners.length,
               itemBuilder: (context, index, realindex) => banners[index],
             ),
-            Gap(10),
+            Gap(16),
             AnimatedSmoothIndicator(
               effect: ScaleEffect(
                 activeDotColor: primaryColor,
-                dotHeight: 12,
-                dotWidth: 12,
+                dotHeight: 8,
+                dotWidth: 8,
                 spacing: 6,
                 dotColor: primaryColor.withAlpha(60),
                 scale: 1.5,

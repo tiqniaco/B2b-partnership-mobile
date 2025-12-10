@@ -21,7 +21,7 @@ class SelectCountryFilter extends StatelessWidget {
       builder: (controller) => DropdownButtonFormField<CountryModel>(
         // value: controller.selectedCountry,
         isExpanded: true,
-
+        dropdownColor: whiteColor,
         decoration: InputDecoration(
           enabled: enabled,
           contentPadding: EdgeInsets.symmetric(
@@ -30,7 +30,7 @@ class SelectCountryFilter extends StatelessWidget {
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(7.r),
-            borderSide: const BorderSide(color: blackColor, width: 1),
+            borderSide: const BorderSide(color: Colors.black87, width: 1),
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(7),
@@ -61,17 +61,14 @@ class SelectCountryFilter extends StatelessWidget {
               children: [
                 Text(
                   item.flag!,
-                  style: getMediumStyle(context).copyWith(
-                      color: greyColor.withAlpha(160),
-                      fontWeight: FontWeight.bold),
+                  style: getMediumStyle(context)
+                      .copyWith(color: greyColor, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(width: 10),
                 Text(
                   translateDatabase(
                       arabic: item.nameAr!, english: item.nameEn!),
-                  style: getMediumStyle(context).copyWith(
-                      color: greyColor.withAlpha(160),
-                      fontWeight: FontWeight.bold),
+                  style: getMediumStyle(context).copyWith(color: blackColor),
                 ),
               ],
             ),

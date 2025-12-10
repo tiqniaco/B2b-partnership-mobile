@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
+import 'package:b2b_partenership/core/functions/internet_check.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/models/shop_category_model.dart';
 import 'package:b2b_partenership/models/shop_product_model.dart';
@@ -36,7 +37,7 @@ class ShopController extends GetxController {
   @override
   Future<void> onInit() async {
     await getShopCategories();
-    getShopCategories();
+
     getMostProducts();
     recommendedProducts();
     await getWhatsApp();
@@ -59,7 +60,11 @@ class ShopController extends GetxController {
     result.fold(
       (error) {
         Logger().e(error.errMsg);
-        categoriesStatus = StatusRequest.error;
+        if (isConnectionError(error)) {
+          categoriesStatus = StatusRequest.noConnection;
+        } else {
+          categoriesStatus = StatusRequest.error;
+        }
         update();
       },
       (data) {
@@ -80,7 +85,7 @@ class ShopController extends GetxController {
     update();
     final result = await CustomRequest<List<ShopProductModel>>(
         path: ApiConstance.topRatedProducts,
-        data: {
+        queryParameters: {
           if (searchController.text.isNotEmpty) 'search': searchController.text,
           if (selectedCategory != null && !isSearch)
             'category_id': selectedCategory?.id,
@@ -109,14 +114,12 @@ class ShopController extends GetxController {
   }
 
   Future<void> recommendedProducts({bool isSearch = false}) async {
-   
     shopRecommendedProducts.clear();
-
     recommendedProductsStatus = StatusRequest.loading;
     update();
     final result = await CustomRequest<List<ShopProductModel>>(
         path: ApiConstance.topRecommendedProducts,
-        data: {
+        queryParameters: {
           if (searchController.text.isNotEmpty) 'search': searchController.text,
           if (selectedCategory != null && !isSearch)
             'category_id': selectedCategory?.id,
@@ -147,7 +150,6 @@ class ShopController extends GetxController {
 
   void onTapCategory(int index) {
     selectedCategory = shopCategories[index];
-
     getMostProducts();
     recommendedProducts();
     update();
@@ -169,7 +171,6 @@ class ShopController extends GetxController {
       },
       (data) {
         whatsAppStatus = StatusRequest.success;
-
         whatsApp = data['whatsapp'];
         update();
       },

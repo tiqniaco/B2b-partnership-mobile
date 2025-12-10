@@ -41,8 +41,10 @@ class ProductsInCategoryController extends GetxController {
     }
     final result = await CustomRequest<List<ShopProductModel>>(
         path: ApiConstance.shopProducts,
-        data: {
+        queryParameters: {
           'category_id': model.id,
+        },
+        data: {
           'page': currentPage,
           if (searchController.text.isNotEmpty) 'search': searchController.text,
         },

@@ -32,6 +32,8 @@ class SelectProviderWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(7),
           borderSide: const BorderSide(color: pageColor, width: 1.5),
         ),
+        filled: true,
+        fillColor: Colors.white,
         label: Text(
           'Provider Type'.tr,
           style: getMediumStyle(context)

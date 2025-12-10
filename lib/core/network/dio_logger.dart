@@ -30,6 +30,8 @@ class DioLogger {
         },
       ),
     );
+
+    
     return dio;
   }
 }

@@ -276,7 +276,7 @@ class _JobDetailsViewState extends State<JobDetailsView> {
                             }
                           },
                         ),
-                        Gap(40.h),
+                        Gap(80.h),
                       ],
                     ),
                   ),

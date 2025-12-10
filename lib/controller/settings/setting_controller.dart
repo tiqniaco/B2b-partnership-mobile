@@ -23,7 +23,7 @@ class SettingController extends GetxController {
 
   @override
   void onInit() {
-    getMenuModel();
+    //getMenuModel();
     super.onInit();
   }
 
@@ -34,6 +34,7 @@ class SettingController extends GetxController {
 
     print("get details .........");
     var id = Get.find<AppPreferences>().getUserRoleId();
+    print("client id $id");
     statusRequest = StatusRequest.loading;
     final result = await CustomRequest<ClientMenuModel>(
       path: ApiConstance.getClientMenu(id),

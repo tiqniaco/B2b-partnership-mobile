@@ -31,19 +31,17 @@ class SearchWidget extends StatelessWidget {
         child: Row(
           children: [
             Gap(15),
-            InkWell(
-                onTap: () {},
-                child: Icon(
-                  CupertinoIcons.search,
-                  color: primaryColor,
-                  size: 16.r,
-                )),
+            Icon(
+              CupertinoIcons.search,
+              color: Colors.black87,
+              size: 16.r,
+            ),
             Gap(10),
             Text(
               title.tr,
               style: TextStyle(
-                fontSize: context.isTablet ? 10.sp : 13.sp,
-                color: primaryColor,
+                fontSize: 13.r,
+                color: Colors.black87.withAlpha(120),
                 fontWeight: FontWeight.w500,
               ),
             ),

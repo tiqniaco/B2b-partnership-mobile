@@ -3,7 +3,6 @@ import 'package:b2b_partenership/core/global/widgets/custom_sliver_server_status
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
-import 'package:b2b_partenership/widgets/orders/order_filter.dart';
 import 'package:b2b_partenership/widgets/orders/order_widget.dart';
 import 'package:b2b_partenership/widgets/please_login_widget.dart';
 import 'package:flutter/material.dart';
@@ -44,10 +43,10 @@ class OrdersView extends StatelessWidget {
               child: CustomScrollView(
                 physics: ClampingScrollPhysics(),
                 slivers: [
-                  SliverToBoxAdapter(
-                    child: Padding(
-                        padding: EdgeInsets.all(16), child: OrderFilter()),
-                  ),
+                  // SliverToBoxAdapter(
+                  //   child: Padding(
+                  //       padding: EdgeInsets.all(16), child: OrderFilter()),
+                  // ),
                   CustomSliverServerStatusWidget(
                     statusRequest: controller.statusRequest,
                     child: SliverGrid.builder(

@@ -9,6 +9,7 @@ import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/language_widget.dart';
 import 'package:b2b_partenership/widgets/please_login_widget.dart';
+import 'package:b2b_partenership/widgets/settings/setting_loading_widget.dart';
 import 'package:b2b_partenership/widgets/settings/settings_widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -33,340 +34,285 @@ class SettingsView extends StatelessWidget {
           children: [
             SafeArea(
                 child: controller.menuModel == null
-                    ? Center(child: CircularProgressIndicator())
+                    ? SettingLoadingWidget()
                     : SingleChildScrollView(
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.all(20.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                SizedBox(
-                                  width: 1.sw,
-                                  child: Stack(
+                        child: Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Gap(20),
+                                  Column(
                                     children: [
-                                      Align(
-                                        alignment: AlignmentDirectional.center,
-                                        child: Column(
-                                          children: [
-                                            Container(
-                                              height: context.isTablet
-                                                  ? 100.h
-                                                  : 60.h,
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                border: Border.all(
-                                                  color: Colors.grey[300]!,
-                                                ),
-                                              ),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8),
-                                                child: CustomNetworkImage(
-                                                  imageUrl: controller
-                                                      .menuModel!.data!.image!,
-                                                  fit: BoxFit.cover,
-                                                ),
-                                              ),
-                                            ),
-                                            Gap(10),
-                                            Text(
-                                              controller.menuModel!.data!.name!,
-                                              style: getMediumStyle(context)
-                                                  .copyWith(
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
+                                      CustomNetworkImage(
+                                        imageUrl:
+                                            controller.menuModel!.data.image,
+                                        fit: BoxFit.cover,
+                                        borderRadius: 8,
+                                        height: context.isTablet ? 100.h : 60.h,
                                       ),
-                                      PositionedDirectional(
-                                        top: 0,
-                                        end: 0,
-                                        child: Column(
-                                          children: [
-                                            InkWell(
-                                              borderRadius:
-                                                  BorderRadius.circular(20.r),
-                                              onTap: () {
-                                                Get.toNamed(
-                                                  AppRoutes.notification,
-                                                );
-                                              },
-                                              child: CircleAvatar(
-                                                radius: 20.r,
-                                                backgroundColor:
-                                                    blackColor.withAlpha(10),
-                                                child: Icon(
-                                                  FontAwesomeIcons.bell,
-                                                  color: blackColor,
-                                                  size: 20.r,
-                                                ),
-                                              ),
-                                            ),
-                                            Gap(4.h),
-                                            InkWell(
-                                              borderRadius:
-                                                  BorderRadius.circular(20.r),
-                                              onTap: () {
-                                                Get.toNamed(AppRoutes.save);
-                                              },
-                                              child: CircleAvatar(
-                                                radius: 20.r,
-                                                backgroundColor:
-                                                    blackColor.withAlpha(10),
-                                                child: SvgPicture.asset(
-                                                  'assets/svgs/save.svg',
-                                                  height: 20.r,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
+                                      Gap(10),
+                                      Text(
+                                        controller.menuModel!.data.name,
+                                        style: getMediumStyle(context).copyWith(
+                                          fontWeight: FontWeight.bold,
                                         ),
                                       ),
                                     ],
                                   ),
-                                ),
-                                Gap(10),
-                                if (controller.menuModel!.data!.providerId !=
-                                        null &&
-                                    controller.menuModel!.data!.providerId !=
-                                        "")
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 24.0),
-                                    child: InkWell(
-                                      onTap: () {
-                                        controller.switchAccount();
-                                      },
-                                      child: Container(
-                                        alignment: Alignment.center,
-                                        width: double.infinity,
-                                        padding: EdgeInsets.all(12),
-                                        decoration: BoxDecoration(
-                                          color:
-                                              lightPrimaryColor.withAlpha(190),
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                        ),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(
-                                              "Switch to Provider Account".tr,
-                                              style: getRegularStyle(context)
-                                                  .copyWith(
-                                                color: primaryColor,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                            ),
-                                            Gap(10),
-                                            Icon(
-                                              Icons.restart_alt_rounded,
-                                              size: 17.r,
-                                              color: primaryColor,
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                Gap(24),
-                                GridView(
-                                  physics: NeverScrollableScrollPhysics(),
-                                  shrinkWrap: true,
-                                  gridDelegate:
-                                      SliverGridDelegateWithFixedCrossAxisCount(
-                                    crossAxisCount: context.isLargeTablet
-                                        ? 4
-                                        : context.isTablet
-                                            ? 3
-                                            : 2,
-                                    mainAxisSpacing: 15,
-                                    crossAxisSpacing: 15,
-                                    childAspectRatio: 9 / 3.5,
-                                  ),
-                                  children: [
-                                    boxWidget(
-                                      Icons.work_outline,
-                                      Colors.amber,
-                                      controller.menuModel!.jobsCount
-                                          .toString(),
-                                      "Jobs".tr,
-                                      () {
-                                        Get.toNamed(
-                                            AppRoutes.clientJobApplications);
-                                      },
-                                    ),
-                                    boxWidget(
-                                        Icons.shopping_cart_outlined,
-                                        Colors.blue,
-                                        controller.menuModel!.shoppingCount
-                                            .toString(),
-                                        "Orders".tr, () {
-                                      Get.toNamed(AppRoutes.shopOrders);
-                                    }),
-                                    boxWidget(
-                                        CupertinoIcons.news,
-                                        Colors.green,
-                                        controller.menuModel!.servicesCount
-                                            .toString(),
-                                        "Posts".tr, () {
-                                      Get.toNamed(AppRoutes
-                                              .getServicesRequest //getRequestServices
+                                  Column(
+                                    children: [
+                                      InkWell(
+                                        borderRadius:
+                                            BorderRadius.circular(20.r),
+                                        onTap: () {
+                                          Get.toNamed(
+                                            AppRoutes.notification,
                                           );
-                                    }),
-                                    boxWidget(
-                                        Icons.headset_mic_outlined,
-                                        Colors.red,
-                                        controller.menuModel!.complaintsCount
-                                            .toString(),
-                                        "Complaints".tr, () {
-                                      Get.toNamed(AppRoutes.complaints);
-                                    })
-                                  ],
+                                        },
+                                        child: CircleAvatar(
+                                          radius: 20.r,
+                                          backgroundColor:
+                                              blackColor.withAlpha(10),
+                                          child: Icon(
+                                            FontAwesomeIcons.bell,
+                                            color: blackColor,
+                                            size: 20.r,
+                                          ),
+                                        ),
+                                      ),
+                                      Gap(4.h),
+                                      InkWell(
+                                        borderRadius:
+                                            BorderRadius.circular(20.r),
+                                        onTap: () {
+                                          Get.toNamed(AppRoutes.save);
+                                        },
+                                        child: CircleAvatar(
+                                          radius: 20.r,
+                                          backgroundColor:
+                                              blackColor.withAlpha(10),
+                                          child: SvgPicture.asset(
+                                            'assets/svgs/save.svg',
+                                            height: 20.r,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                              Gap(10),
+                              if (controller.menuModel!.data.providerId !=
+                                      null &&
+                                  controller.menuModel!.data.providerId != "")
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 24.0),
+                                  child: InkWell(
+                                    onTap: () {
+                                      controller.switchAccount();
+                                    },
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      width: double.infinity,
+                                      padding: EdgeInsets.all(12),
+                                      decoration: BoxDecoration(
+                                        color: lightPrimaryColor.withAlpha(190),
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "Switch to Provider Account".tr,
+                                            style: getRegularStyle(context)
+                                                .copyWith(
+                                              color: primaryColor,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                          Gap(10),
+                                          Icon(
+                                            Icons.restart_alt_rounded,
+                                            size: 17.r,
+                                            color: primaryColor,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                                Gap(16),
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Personal Information".tr,
-                                      style: getMediumStyle(context).copyWith(
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                    Gap(16),
-                                    rowWidget(
-                                      icon: Icons.phone_in_talk,
-                                      controller.menuModel!.data!.phone!,
-                                    ),
-                                    Gap(8),
-                                    rowWidget(
-                                      icon: Icons.email,
-                                      controller.menuModel!.data!.email!,
-                                    ),
-                                    Gap(8),
-                                    rowWidget(
-                                        icon: Icons.location_on,
-                                        translateDatabase(
-                                            arabic: controller.menuModel!.data!
-                                                .governmentNameAr!,
-                                            english: controller.menuModel!.data!
-                                                .governmentNameEn!)),
-                                    Gap(8),
-                                    rowWidget(
-                                        icon: FontAwesomeIcons.locationArrow,
-                                        translateDatabase(
-                                            arabic: controller.menuModel!.data!
-                                                .countryNameAr!,
-                                            english: controller.menuModel!.data!
-                                                .countryNameEn!)),
-                                    Gap(24),
-                                    Text(
-                                      "Other Services".tr,
-                                      style:
-                                          getMediumStyle(Get.context!).copyWith(
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
-                                    Gap(16),
-                                    rowWithArrow(
-                                      CupertinoIcons.person,
-                                      "Edit Profile".tr,
-                                      () {
-                                        Get.toNamed(
-                                          AppRoutes.editClientProfile,
-                                          arguments: {
-                                            'model': controller.menuModel!.data,
-                                          },
-                                        );
-                                      },
-                                    ),
-                                    Gap(8),
-                                    rowWithArrow(
-                                      CupertinoIcons.padlock,
-                                      "Change Password".tr,
-                                      () {
-                                        Get.toNamed(AppRoutes.changePassword);
-                                      },
-                                    ),
-                                    Gap(8),
-                                    rowWithArrow(
-                                      CupertinoIcons.delete_simple,
-                                      "Remove Account".tr,
-                                      () {
-                                        removeAccountDialog(
-                                          removeAccountLoading:
-                                              controller.removeAccountLoading,
-                                          update: controller.update,
-                                        );
-                                      },
-                                    ),
-                                    Gap(8),
-                                    rowWithArrow(
-                                      Icons.logout_rounded,
-                                      "Logout".tr,
-                                      () {
-                                        logoutDialog();
-                                      },
-                                    ),
-                                    Gap(8),
-                                    rowWithArrow(
-                                      Icons.report_gmailerrorred,
-                                      "About us".tr,
-                                      () {
-                                        Get.toNamed(AppRoutes.aboutUs);
-                                      },
-                                    ),
-                                    Gap(8),
-                                    rowWithArrow(
+                              Gap(24),
+                              GridView(
+                                physics: NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: context.isLargeTablet
+                                      ? 4
+                                      : context.isTablet
+                                          ? 3
+                                          : 2,
+                                  mainAxisSpacing: 15,
+                                  crossAxisSpacing: 15,
+                                  childAspectRatio: 9 / 3.5,
+                                ),
+                                children: [
+                                  boxWidget(
+                                    Icons.work_outline,
+                                    Colors.amber,
+                                    controller.menuModel!.jobsCount.toString(),
+                                    "Jobs".tr,
+                                    () {
+                                      Get.toNamed(
+                                          AppRoutes.clientJobApplications);
+                                    },
+                                  ),
+                                  boxWidget(
+                                      Icons.shopping_cart_outlined,
+                                      Colors.blue,
+                                      controller.menuModel!.shoppingCount
+                                          .toString(),
+                                      "Orders".tr, () {
+                                    Get.toNamed(AppRoutes.shopOrders);
+                                  }),
+                                  boxWidget(
                                       CupertinoIcons.news,
-                                      "Terms & Conditions".tr,
-                                      () {
-                                        Get.toNamed(
-                                            AppRoutes.termsAndConditions);
-                                      },
+                                      Colors.green,
+                                      controller.menuModel!.servicesCount
+                                          .toString(),
+                                      "Posts".tr, () {
+                                    Get.toNamed(AppRoutes
+                                            .getServicesRequest //getRequestServices
+                                        );
+                                  }),
+                                  boxWidget(
+                                      Icons.headset_mic_outlined,
+                                      Colors.red,
+                                      controller.menuModel!.complaintsCount
+                                          .toString(),
+                                      "Complaints".tr, () {
+                                    Get.toNamed(AppRoutes.complaints);
+                                  })
+                                ],
+                              ),
+                              Gap(24),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Personal Information".tr,
+                                    style: getMediumStyle(context).copyWith(
+                                      fontWeight: FontWeight.w500,
                                     ),
-                                    Gap(8),
-                                    LanguageWidget(),
-                                    Gap(8),
-                                  ],
-                                ),
-                              ],
-                            ),
+                                  ),
+                                  Gap(16),
+                                  rowWidget(
+                                    icon: Icons.phone_in_talk,
+                                    controller.menuModel!.data.phone,
+                                  ),
+                                  Gap(8),
+                                  rowWidget(
+                                    icon: Icons.email,
+                                    controller.menuModel!.data.email,
+                                  ),
+                                  Gap(8),
+                                  rowWidget(
+                                      icon: Icons.location_on,
+                                      translateDatabase(
+                                          arabic: controller
+                                              .menuModel!.data.governmentNameAr,
+                                          english: controller.menuModel!.data
+                                              .governmentNameEn)),
+                                  Gap(8),
+                                  rowWidget(
+                                      icon: FontAwesomeIcons.locationArrow,
+                                      translateDatabase(
+                                          arabic: controller
+                                              .menuModel!.data.countryNameAr,
+                                          english: controller
+                                              .menuModel!.data.countryNameEn)),
+                                  Gap(24),
+                                  Text(
+                                    "Other Services".tr,
+                                    style:
+                                        getMediumStyle(Get.context!).copyWith(
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  Gap(16),
+                                  rowWithArrow(
+                                    CupertinoIcons.person,
+                                    "Edit Profile".tr,
+                                    () {
+                                      Get.toNamed(
+                                        AppRoutes.editClientProfile,
+                                        arguments: {
+                                          'model': controller.menuModel!.data,
+                                        },
+                                      );
+                                    },
+                                  ),
+                                  Gap(8),
+                                  rowWithArrow(
+                                    CupertinoIcons.padlock,
+                                    "Change Password".tr,
+                                    () {
+                                      Get.toNamed(AppRoutes.changePassword);
+                                    },
+                                  ),
+                                  Gap(8),
+                                  rowWithArrow(
+                                    CupertinoIcons.delete_simple,
+                                    "Remove Account".tr,
+                                    () {
+                                      removeAccountDialog(
+                                        context: context,
+                                        removeAccountLoading:
+                                            controller.removeAccountLoading,
+                                        update: controller.update,
+                                      );
+                                    },
+                                  ),
+                                  Gap(8),
+                                  rowWithArrow(
+                                    Icons.logout_rounded,
+                                    "Logout".tr,
+                                    () {
+                                      logoutDialog(context);
+                                    },
+                                  ),
+                                  Gap(8),
+                                  rowWithArrow(
+                                    Icons.report_gmailerrorred,
+                                    "About us".tr,
+                                    () {
+                                      Get.toNamed(AppRoutes.aboutUs);
+                                    },
+                                  ),
+                                  Gap(8),
+                                  rowWithArrow(
+                                    CupertinoIcons.news,
+                                    "Terms & Conditions".tr,
+                                    () {
+                                      Get.toNamed(AppRoutes.termsAndConditions);
+                                    },
+                                  ),
+                                  Gap(8),
+                                  LanguageWidget(),
+                                  Gap(8),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       )),
-            if (controller.removeAccountLoading)
-              Container(
-                width: 1.sw,
-                height: 1.sh,
-                color: Colors.black26.withAlpha(80),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ...[
-                      Container(
-                        width: 80.w,
-                        height: 80.w,
-                        decoration: BoxDecoration(
-                          color: whiteColor,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CircularProgressIndicator(),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
-              ),
           ],
         ),
       ),

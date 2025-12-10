@@ -7,7 +7,7 @@ import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:b2b_partenership/core/utils/font_manager.dart';
-import 'package:b2b_partenership/widgets/job_widget.dart';
+import 'package:b2b_partenership/widgets/jobs/job_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -118,7 +118,7 @@ class JobApplicationsView extends StatelessWidget {
                             child: Row(
                               children: [
                                 SizedBox(
-                                  width: 130.r,
+                                  width: 120.r,
                                   child: Column(
                                     children: [
                                       WidgetZoom(
@@ -226,25 +226,7 @@ class JobApplicationsView extends StatelessWidget {
                                                   )),
                                             ),
 
-                                            // SizedBox(
-                                            //   width: 100,
-                                            //   child: CustomLoadingButton(
-                                            //     onPressed: () {
-                                            //       return controller
-                                            //           .changeJobApplicationStatus(
-                                            //         applicationId:
-                                            //             model.jobApplicationId,
-                                            //         status:
-                                            //             JobApplicationStatusEnum
-                                            //                 .rejected,
-                                            //       );
-                                            //     },
-                                            //     borderRadius: 5.r,
-                                            //     height: 0.045.sh,
-                                            //     backgroundColor: redColor,
-                                            //     text: "Reject".tr,
-                                            //   ),
-                                            // ),
+                                          
                                           ]
                                         ],
                                       ),

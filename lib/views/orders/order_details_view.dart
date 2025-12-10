@@ -74,29 +74,11 @@ class OrderDetailsView extends StatelessWidget {
                             child: Column(
                               children: [
                                 rowWidget(
-                                    "${"Order Status".tr} ",
-                                    "${controller.model?.data.status!.capitalizeFirst}"
-                                        .tr,
-                                    Icons.watch_later),
-                                Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 12.0, horizontal: 54.r),
-                                  child: Divider(
-                                    color: primaryColor,
-                                  ),
-                                ),
-                                // Gap(8),
-                                rowWidget(
                                     "Date".tr,
-                                    controller.model?.data.createdAt !=
-                                                "null" &&
-                                            controller.model?.data.createdAt !=
-                                                null
-                                        ? DateTimeConvertor.formatDate(
-                                            controller.model?.data.createdAt ??
-                                                "",
-                                          )
-                                        : "Invalid Date",
+                                    DateTimeConvertor.formatDate(controller
+                                            .model?.data.createdAt
+                                            .toString() ??
+                                        ""),
                                     CupertinoIcons.calendar),
                                 Padding(
                                   padding: EdgeInsets.symmetric(
@@ -137,7 +119,6 @@ class OrderDetailsView extends StatelessWidget {
                         itemBuilder: (context, index) {
                           return ShopItemProductRowWidget(
                             product: controller.model!.items[index],
-                            //showCategories: false,
                             onTap: () {
                               Get.toNamed(
                                 AppRoutes.shopProductDetails,
@@ -184,44 +165,3 @@ class OrderDetailsView extends StatelessWidget {
     );
   }
 }
-
-// class OrderDetailsItemWidget extends StatelessWidget {
-//   const OrderDetailsItemWidget({
-//     super.key,
-//     required this.title,
-//     required this.value,
-//   });
-
-//   final String title;
-//   final String value;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Row(
-//       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//       children: [
-//         Expanded(
-//           flex: 1,
-//           child: Text(
-//             title,
-//             style: getMediumStyle(context).copyWith(
-//               fontSize: 12.sp,
-//               fontWeight: FontManager.regularFontWeight,
-//             ),
-//           ),
-//         ),
-//         Expanded(
-//           flex: 2,
-//           child: Text(
-//             value,
-//             style: getMediumStyle(context).copyWith(
-//               fontWeight: FontManager.semiBoldFontWeight,
-//               fontSize: 12.sp,
-//               color: greenColor,
-//             ),
-//           ),
-//         ),
-//       ],
-//     );
-//   }
-// }

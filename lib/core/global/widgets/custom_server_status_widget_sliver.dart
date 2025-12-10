@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import '/core/enums/status_request.dart';
 import 'custom_empty_widget.dart';
 import 'custom_error_widget.dart';
-
-import 'custom_loading_widget.dart';
 
 class CustomServerStatusSliverWidget extends StatelessWidget {
   const CustomServerStatusSliverWidget({
@@ -27,9 +25,10 @@ class CustomServerStatusSliverWidget extends StatelessWidget {
           child: Container(
             height: height,
             alignment: Alignment.center,
-            child: CustomLoadingWidget(
-              height: heightLoading,
-            ),
+            child: CircularProgressIndicator(),
+            // CustomLoadingWidget(
+            //   height: heightLoading,
+            // ),
           ),
         ),
       StatusRequest.success => child,

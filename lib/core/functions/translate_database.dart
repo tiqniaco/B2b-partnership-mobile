@@ -5,7 +5,7 @@ translateDatabase({
   required String arabic,
   required String english,
 }) {
-  // var storage = GetStorage();
+
 
   var langCode = Get.locale?.languageCode ?? "en";
   if (langCode == "ar") {

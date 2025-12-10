@@ -1,9 +1,9 @@
 import 'package:b2b_partenership/core/functions/get_text_direction.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
-import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:b2b_partenership/core/utils/font_manager.dart';
 import 'package:b2b_partenership/models/shop_product_model.dart';
+import 'package:b2b_partenership/widgets/shop/price_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,7 +33,7 @@ class ShopItemProductRowWidget extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(8),
                 width: 128,
-                height: context.isTablet ? 200 : 134,
+                height: context.isTablet ? 200 : 124.h,
                 decoration: BoxDecoration(
                   borderRadius: customBorderRadius,
                   image: DecorationImage(
@@ -65,9 +65,6 @@ class ShopItemProductRowWidget extends StatelessWidget {
               flex: 3,
               child: Container(
                 height: context.isTablet ? 170 : 110,
-                padding: EdgeInsets.only(
-                    left: Get.locale?.languageCode == "en" ? 10 : 0,
-                    right: Get.locale?.languageCode == "en" ? 0 : 10),
                 decoration: BoxDecoration(
                   border: Border.all(
                     color: blackColor,
@@ -103,48 +100,54 @@ class ShopItemProductRowWidget extends StatelessWidget {
                       ),
                     Gap(5),
                     Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Directionality(
-                        textDirection: containsArabic(product.descriptionEn)
-                            ? TextDirection.rtl
-                            : TextDirection.ltr,
-                        child: Text(
-                          product.descriptionEn,
-                          style: TextStyle(
-                              height: 1,
-                              fontSize: 16.r,
-                              fontWeight: FontWeight.w400,
-                              color: blackColor),
-                          textAlign: TextAlign.start,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                    ),
-                    Gap(8),
-                    Row(
-                      children: [
-                        Text(
-                          product.discount != "0"
-                              ? "${double.parse(product.price) - (double.parse(product.discount) / 100 * double.parse(product.price))}\$"
-                              : "${product.price}\$",
-                          style: getLightStyle(context).copyWith(
-                            fontWeight: FontManager.mediumFontWeight,
-                            fontSize: 14.r,
-                            color: primaryColor,
-                          ),
-                        ),
-                        Gap(8),
-                        if (product.discount != "0")
-                          Text(
-                            "${product.price}\$",
-                            style: getMediumStyle(context).copyWith(
-                              fontSize: 12.r,
-                              color: blackColor.withAlpha(150),
-                              decoration: TextDecoration.lineThrough,
+                      padding: EdgeInsets.symmetric(horizontal: 6),
+                      child: Column(
+                        children: [
+                          Directionality(
+                            textDirection: containsArabic(product.titleEn)
+                                ? TextDirection.rtl
+                                : TextDirection.ltr,
+                            child: Text(
+                              product.titleEn,
+                              style: TextStyle(
+                                  height: 1,
+                                  fontSize: 14.r,
+                                  fontWeight: FontWeight.w400,
+                                  color: blackColor),
+                              textAlign: TextAlign.start,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
                             ),
                           ),
-                      ],
+                          Gap(8),
+                          priceRow(product.price, product.discount,
+                              color: blackColor),
+                          // Row(
+                          //   children: [
+                          //     Text(
+                          //       product.discount != "0"
+                          //           ? "${double.parse(product.price) - (double.parse(product.discount) / 100 * double.parse(product.price))}\$"
+                          //           : "${product.price}\$",
+                          //       style: getLightStyle(context).copyWith(
+                          //         fontWeight: FontManager.mediumFontWeight,
+                          //         fontSize: 14.r,
+                          //         color: primaryColor,
+                          //       ),
+                          //     ),
+                          //     Gap(8),
+                          //     if (product.discount != "0")
+                          //       Text(
+                          //         "${product.price}\$",
+                          //         style: getMediumStyle(context).copyWith(
+                          //           fontSize: 12.r,
+                          //           color: blackColor.withAlpha(150),
+                          //           decoration: TextDecoration.lineThrough,
+                          //         ),
+                          //       ),
+                          //   ],
+                          // ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

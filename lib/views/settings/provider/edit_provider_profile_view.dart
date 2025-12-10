@@ -191,6 +191,8 @@ class EditProviderProfileView extends StatelessWidget {
                                           fontSize: 17.sp,
                                           color: Colors.black87),
                                     ),
+                                    filled: true,
+                                    fillColor: Colors.white,
                                     contentPadding: EdgeInsets.symmetric(
                                         horizontal: 15, vertical: 16),
                                     prefixIcon: SizedBox(

@@ -40,7 +40,7 @@ class PreviousDetailsWorkController extends GetxController {
     update();
     final result = await CustomRequest(
       path: ApiConstance.getWorkImages,
-      data: {"provider_previous_work_id": model.id},
+      queryParameters: {"provider_previous_work_id": model.id},
       fromJson: (json) {
         return json['images']
             .map<PreviousImagesModel>(

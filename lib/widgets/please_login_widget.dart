@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
-import 'package:lucide_icons/lucide_icons.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 
 class PleaseLoginWidget extends StatelessWidget {
   const PleaseLoginWidget({
@@ -23,9 +23,10 @@ class PleaseLoginWidget extends StatelessWidget {
         alignment: AlignmentDirectional.center,
         padding: EdgeInsets.only(bottom: MediaQuery.paddingOf(context).top * 2),
         child: SizedBox(
-          width: context.isTablet ? 0.75.sw : 1.sw,
+          // width: context.isTablet ? 0.75.sw : 1.sw,
           child: Column(
             children: [
+              Gap(12),
               CustomLoginItemWidget(
                 icon: Icons.report_gmailerrorred,
                 title: "About us".tr,
@@ -33,7 +34,7 @@ class PleaseLoginWidget extends StatelessWidget {
                   Get.toNamed(AppRoutes.aboutUs);
                 },
               ),
-              Gap(10.h),
+              Gap(12.h),
               CustomLoginItemWidget(
                 icon: CupertinoIcons.news,
                 title: "Terms & Conditions".tr,
@@ -61,13 +62,16 @@ class PleaseLoginWidget extends StatelessWidget {
                       SizedBox(height: 16.h),
                       Text(
                         "You're not logged in".tr,
-                        style: getSemiBoldStyle(context),
+                        style: getSemiBoldStyle(context).copyWith(
+                          fontSize: 16.r,
+                        ),
                       ),
                       SizedBox(height: 5.h),
                       Text(
                         "Please log in to access this feature.".tr,
                         style: getRegularStyle(context).copyWith(
                           color: hintColor,
+                          fontSize: 13.r,
                         ),
                         textAlign: TextAlign.center,
                       ),
@@ -123,8 +127,7 @@ class CustomLoginItemWidget extends StatelessWidget {
             Text(
               title,
               style: getMediumStyle(context).copyWith(
-                fontWeight: FontManager.boldFontWeight,
-              ),
+                  fontWeight: FontManager.boldFontWeight, fontSize: 14.r),
             ),
             Spacer(),
             Icon(

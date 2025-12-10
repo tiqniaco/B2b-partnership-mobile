@@ -27,11 +27,12 @@ class JobApplicationsController extends GetxController {
     }
     final result = await CustomRequest<List<ClientJobApplicationModel>>(
       path: ApiConstance.providerJobApplications,
-      data: {
+      queryParameters: {
         'job_id': jobId,
         if (jobApplicationStatus != JobApplicationStatusEnum.all)
           'status': jobApplicationStatus.name,
       },
+    //  data: {},
       fromJson: (json) {
         return List<ClientJobApplicationModel>.from(
           json['data'].map(

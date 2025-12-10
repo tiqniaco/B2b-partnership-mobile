@@ -55,8 +55,8 @@ class SelectSpecializationFilter extends StatelessWidget {
             child: Text(
               translateDatabase(arabic: item.nameAr!, english: item.nameEn!),
               style: getRegularStyle(context).copyWith(
-                color: greyColor.withAlpha(160),
-                fontWeight: FontWeight.bold,
+                color: blackColor,
+                fontWeight: FontWeight.normal,
               ),
               maxLines: 3,
             ),

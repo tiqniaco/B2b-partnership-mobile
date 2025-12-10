@@ -92,6 +92,11 @@ const Map<String, String> ar = {
   "I Accept": "اوافق علي",
   "account not found please create account":
       "لم يتم العثور على الحساب يرجى انشاء حساب",
+  "Creating Account...": "انشاء حساب ...",
+  "Value added tax (VAT)": "ضريبة القيمة المضافة (VAT)",
+  "add the number here": "ادخل الرقم هنا",
+  "Commercial Register Number": "رقم السجل التجاري",
+  "Tax Number": "رقم الضريبة",
 
   "Business Information": "معلومات الشركة",
   "VAT No.": "رقم الضريبة القضائية",
@@ -134,7 +139,10 @@ const Map<String, String> ar = {
       "يمكنك اضافة الوظائف \nالمتاحة للتوظيف",
   "Need employees?": "تحتاج موظفين؟",
   "Special Opportunity": "فرصة خاصة",
-
+  "Now you can post your custom service request":
+      "يمكنك الان نشر الخدمة التي تحتاجها",
+  "Training bag on the basics of purchasing management":
+      "حقائب تدريبية عن اسياسيات ادارة المشتريات",
   // manage category
   "Category & Subcategory": "الفئات الرئيسية & الفرعية",
   "Categories": "الفئات الرئيسية",
@@ -405,7 +413,7 @@ const Map<String, String> ar = {
       "تاكيد كلمة المرور يجب ان تكون >= 6 حرف",
   "Not match!": "لا يتطابق!",
 
-  // posts.           "enter address"
+  // posts.
   "FILTERS": "الفلاتر",
   "Category": "التصنيف",
   "Location": "الموقع",
@@ -558,4 +566,25 @@ const Map<String, String> ar = {
   'File Downloaded': 'تم تحميل الملف',
   "File downloaded successfully to": "تم تحميل الملف بنجاح إلى",
   "Demo": "معاينة",
+  "Guest": "زائر",
+  "Please login to continue": "يرجى تسجيل الدخول للمتابعة",
+  "Tax No.": "رقم الضريبة",
+  "Cart Total": "مجموع السلة",
+  "Total Amount": "المبلغ الكلي",
+  "you don't add any service posts\nlet's add some":
+      "لم تقم باضافة اي منشورات خدمة\nادخل بعضها",
+  "you don't add any offers": "لم تقم باضافة اي عروض",
+  "Contact": "تواصل",
+  'you don\'t add any job applications': 'لم تقم باضافة اي طلبات توظيف',
+  "you don't add any previous work": "لم تقم باضافة اي عمل سابق",
+  'Search for Seekers': 'ابحث عن المتقدمين',
+  "Offer Details": 'تفاصيل العرض',
+  "View Applicant Profile": "عرض ملف المتقدم",
+  "Your cart is empty\nDiscover amazing products!":
+      "السلة فارغة\nابحث عن منتجات رائعة",
+  'Done': 'تم',
+  "File downloaded successfully": "تم تحميل الملف بنجاح",
+  'File download failed': 'فشل تحميل الملف',
+  'No file available': 'الملف غير موجود',
+  "Search for service, job, bags": "ابحث عن خدمات، وظائف، وحقائب",
 };

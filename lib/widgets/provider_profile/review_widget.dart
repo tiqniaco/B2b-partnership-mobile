@@ -1,4 +1,5 @@
 import 'package:b2b_partenership/controller/previous_work/provider_profile_controller.dart';
+import 'package:b2b_partenership/core/functions/get_text_direction.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:flutter/material.dart';
@@ -90,6 +91,9 @@ class ReviewItem extends StatelessWidget {
                   ),
                   Text(
                     comment,
+                    textDirection: containsArabic(comment)
+                        ? TextDirection.rtl
+                        : TextDirection.ltr,
                     style: getRegularStyle(context),
                     overflow: TextOverflow.ellipsis,
                     maxLines: 2,

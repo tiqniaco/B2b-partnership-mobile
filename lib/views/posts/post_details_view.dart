@@ -244,6 +244,7 @@ class PostDetailsView extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   CustomServerStatusWidget(
+                                    emptyMessage: "you don't add any offers".tr,
                                     statusRequest: controller.statusRequest,
                                     child: ListView.separated(
                                         physics: NeverScrollableScrollPhysics(),
@@ -287,12 +288,6 @@ class PostDetailsView extends StatelessWidget {
                               )
                             : Column(
                                 children: [
-                                  Text(
-                                    "Price Offers".tr,
-                                    style: getMediumStyle(context).copyWith(
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
                                   Divider(),
                                   CustomServerStatusWidget(
                                     statusRequest: controller.statusRequest,

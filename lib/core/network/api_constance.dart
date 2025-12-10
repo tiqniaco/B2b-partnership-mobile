@@ -1,7 +1,8 @@
 import '/core/constants/app_constants.dart';
 
 class ApiConstance {
-  static const String baseUrl = 'https://tiqnia.com/Apps/b2b_partenership/api/';
+  static const String baseUrl =
+      'https://b2bpartnership.com/api/'; // 'https://tiqnia.com/Apps/b2b_partenership/api/';
 
   static String token = '';
 
@@ -30,7 +31,7 @@ class ApiConstance {
   static const String getVerifyCode = 'auth/get-verify-code';
 
   //client
-  static String getClientMenu(String id) => '/clients/$id';
+  static String getClientMenu(id) => '/clients/$id';
   // static String getOneClient(String id) => 'clients/$id';
 
   // home

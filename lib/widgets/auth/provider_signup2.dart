@@ -19,31 +19,24 @@ class ProviderSignup2 extends StatelessWidget {
       builder: (controller) => Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            children: [
-              if (controller.countries.isNotEmpty)
-                Expanded(
-                  child: SelectCountryWidget(
-                    enabled: false,
-                    value: controller.selectedCountry,
-                    models: controller.countries,
-                    onChanged: (val) {
-                      controller.onCountryChanged(val);
-                    },
-                  ),
-                ),
-              Gap(10),
-              if (controller.cities.isNotEmpty)
-                Expanded(
-                    child: SelectCityWidget(
-                  value: controller.selectedCity,
-                  models: controller.cities,
-                  onChanged: (val) {
-                    controller.onCityChanged(val);
-                  },
-                )),
-            ],
-          ),
+          if (controller.countries.isNotEmpty)
+            SelectCountryWidget(
+              enabled: false,
+              value: controller.selectedCountry,
+              models: controller.countries,
+              onChanged: (val) {
+                controller.onCountryChanged(val);
+              },
+            ),
+          Gap(10),
+          if (controller.cities.isNotEmpty)
+            SelectCityWidget(
+              value: controller.selectedCity,
+              models: controller.cities,
+              onChanged: (val) {
+                controller.onCityChanged(val);
+              },
+            ),
           Gap(20.h),
           if (controller.countries.isNotEmpty) CustomPhoneWidget(),
           if (controller.role == "provider") ...[
@@ -57,7 +50,6 @@ class ProviderSignup2 extends StatelessWidget {
                 },
               ),
             Gap(20.h),
-
           ],
           Gap(20.h),
         ],

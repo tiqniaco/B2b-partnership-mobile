@@ -26,6 +26,7 @@ class SubCategoryWidget extends StatelessWidget {
               controller.onTapSub(subSpecializations[index]);
             },
             child: Container(
+              alignment: Alignment.center,
               padding: EdgeInsets.symmetric(horizontal: 15),
               decoration: BoxDecoration(
                   color: controller.selectedSubSpecialization.id ==
@@ -34,24 +35,19 @@ class SubCategoryWidget extends StatelessWidget {
                       : null,
                   borderRadius: customBorderRadius,
                   border: Border.all(color: primaryColor)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    translateDatabase(
-                      arabic: subSpecializations[index].nameAr!,
-                      english: subSpecializations[index].nameEn!,
-                    ),
-                    textAlign: TextAlign.center,
-                    style: getLightStyle(context).copyWith(
-                        fontSize: 14.r,
-                        color: controller.selectedSubSpecialization.id ==
-                                subSpecializations[index].id
-                            ? whiteColor
-                            : primaryColor,
-                        fontWeight: FontWeight.w500),
-                  ),
-                ],
+              child: Text(
+                translateDatabase(
+                  arabic: subSpecializations[index].nameAr!,
+                  english: subSpecializations[index].nameEn!,
+                ),
+                textAlign: TextAlign.center,
+                style: getLightStyle(context).copyWith(
+                    fontSize: 13.r,
+                    color: controller.selectedSubSpecialization.id ==
+                            subSpecializations[index].id
+                        ? whiteColor
+                        : primaryColor,
+                    fontWeight: FontWeight.w500),
               ),
             ),
           ),

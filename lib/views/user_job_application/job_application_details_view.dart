@@ -2,6 +2,7 @@ import 'package:b2b_partenership/controller/job_application/job_application_deta
 import 'package:b2b_partenership/core/enums/job_application_status_enum.dart';
 import 'package:b2b_partenership/core/enums/job_gender_enum.dart';
 import 'package:b2b_partenership/core/enums/jobs_contract_type_enum.dart';
+import 'package:b2b_partenership/core/functions/get_text_direction.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
@@ -25,6 +26,7 @@ class JobApplicationDetailsView extends StatelessWidget {
       builder: (JobApplicationDetailsController controller) {
         return Scaffold(
           appBar: AppBar(
+            toolbarHeight: context.isTablet ? 45.h : null,
             // backgroundColor: primaryColor,
             // iconTheme: IconThemeData(color: whiteColor),
             title: Row(
@@ -34,6 +36,8 @@ class JobApplicationDetailsView extends StatelessWidget {
                   controller.model?.jobTitle ?? "",
                   style: TextStyle(
                     color: blackColor,
+                    fontSize: 16.r,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 if (controller.showStatus)
@@ -61,7 +65,7 @@ class JobApplicationDetailsView extends StatelessWidget {
                           controller.model?.clientUserId
                       ? _buildProviderInfo(controller, context)
                       : _buildClientInfo(controller, context),
-                  SizedBox(height: 10.h),
+                  SizedBox(height: 100.h),
                 ],
               ),
             ),
@@ -85,22 +89,29 @@ class JobApplicationDetailsView extends StatelessWidget {
           children: [
             Text(
               controller.model?.jobTitle ?? "",
-              style: getSemiBoldStyle(context).copyWith(
+              style: TextStyle(
+                color: blackColor,
+                fontSize: 16.r,
                 fontWeight: FontWeight.bold,
               ),
             ),
             SizedBox(height: 5.h),
             Text(
               "${controller.model?.jobContractType.text} | ${"Gender".tr}: ${controller.model?.jobGender.text}",
-              style: getLightStyle(context).copyWith(
+              style: TextStyle(
                 color: darkGreyColor,
                 fontWeight: FontWeight.w400,
+                fontSize: 14.r,
               ),
             ),
             SizedBox(height: 10.h),
             ReadMoreText(
               controller.model?.jobDescription ?? "",
-              style: getLightStyle(context).copyWith(
+              textDirection: containsArabic(controller.model!.jobDescription)
+                  ? TextDirection.rtl
+                  : TextDirection.ltr,
+              style: TextStyle(
+                fontSize: 12.r,
                 color: blackColor,
               ),
             ),
@@ -181,10 +192,13 @@ class JobApplicationDetailsView extends StatelessWidget {
                       AppSnackBars.warning(message: "Resume not found".tr);
                     }
                   },
-                  label: Text("Preview".tr),
+                  label: Text(
+                    "Preview".tr,
+                    style: TextStyle(fontSize: 12.r, color: primaryColor),
+                  ),
                   icon: Icon(
                     FontAwesomeIcons.eye,
-                    size: 13.sp,
+                    size: 13.r,
                   ),
                 )
               ],
@@ -239,8 +253,8 @@ class JobApplicationDetailsView extends StatelessWidget {
               "+${controller.model?.providerCountryCode ?? ""} ${controller.model?.providerPhone ?? ""}",
               context: context,
             ),
-            _buildInfoRow(
-                "Rating".tr, "⭐ ${controller.model?.providerRating ?? "0.0"}",
+            _buildInfoRow("Rating".tr,
+                "⭐ ${controller.model?.providerRating == 'null' ? "0.0" : controller.model?.providerRating}",
                 context: context),
           ],
         ),
@@ -331,7 +345,8 @@ class JobApplicationDetailsView extends StatelessWidget {
         children: [
           Text(
             title,
-            style: getLightStyle(context).copyWith(
+            style: TextStyle(
+              fontSize: 13.r,
               fontWeight: FontWeight.w500,
             ),
           ),
@@ -340,10 +355,12 @@ class JobApplicationDetailsView extends StatelessWidget {
             child: ReadMoreText(
               value,
               trimLines: 1,
+              // textDirection:
+              //     containsArabic(value) ? TextDirection.rtl : TextDirection.ltr,
               style: getLightStyle(context).copyWith(
                 fontWeight: FontWeight.w400,
                 color: Colors.black87,
-                fontSize: 10.sp,
+                fontSize: 12.r,
               ),
               textAlign: TextAlign.end,
             ),
@@ -399,7 +416,7 @@ class JobApplicationDetailsView extends StatelessWidget {
               style: getLightStyle(context).copyWith(
                 fontWeight: FontWeight.w400,
                 color: Colors.black87,
-                fontSize: 10.sp,
+                fontSize: 10.r,
               ),
               textAlign: TextAlign.end,
             ),
@@ -411,7 +428,7 @@ class JobApplicationDetailsView extends StatelessWidget {
               child: Icon(
                 icon ?? Icons.arrow_forward_ios,
                 color: Colors.black54,
-                size: 15.sp,
+                size: 15.r,
               ),
             )
           ],

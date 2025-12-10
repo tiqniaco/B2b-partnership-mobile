@@ -207,6 +207,8 @@ class EditClientProfileView extends StatelessWidget {
                                         ],
                                       ),
                                     ),
+                                    filled: true,
+                                    fillColor: Colors.white,
                                     hintText: "Without country code".tr,
                                     hintStyle: TextStyle(
                                         fontSize: 12.sp,

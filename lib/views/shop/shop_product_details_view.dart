@@ -1,11 +1,11 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/shop/shop_cart_controller.dart';
+import 'package:b2b_partenership/core/functions/get_text_direction.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:b2b_partenership/widgets/shop/about_bag_widget.dart';
 import 'package:b2b_partenership/widgets/shop/terms_and_conditions.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -32,7 +32,7 @@ class ShopProductDetailsView extends StatelessWidget {
               Text("Bag Details".tr,
                   style: TextStyle(
                       color: Colors.black,
-                      fontSize: 20.r,
+                      fontSize: 14.r,
                       fontWeight: FontWeight.w500)),
               InkWell(
                 onTap: () => Get.toNamed(AppRoutes.shopCart),
@@ -51,7 +51,7 @@ class ShopProductDetailsView extends StatelessWidget {
           ),
         ),
         bottomNavigationBar: BottomAppBar(
-          height: 0.08.sh,
+          height: 60.h,
           child: Row(
             children: [
               Expanded(
@@ -60,15 +60,15 @@ class ShopProductDetailsView extends StatelessWidget {
                   icon: Icon(Icons.download, color: primaryColor, size: 18),
                   label: Text("Demo".tr,
                       style: TextStyle(
-                          fontSize: 14.r,
+                          fontSize: 13.r,
                           color: primaryColor,
                           fontWeight: FontWeight.bold)),
                   style: OutlinedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 12),
+                    //padding: EdgeInsets.symmetric(vertical: 4),
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8)),
                     side: BorderSide(color: primaryColor, width: 1.2),
-                    fixedSize: Size(120.w, 0.056.sh),
+                    fixedSize: Size(120.w, 57.h),
                   ),
                 ),
               ),
@@ -79,27 +79,31 @@ class ShopProductDetailsView extends StatelessWidget {
                         color: primaryColor.withAlpha(70),
                         borderRadius: BorderRadius.circular(8)),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Gap(16),
                         Badge(
+                          padding: EdgeInsets.all(0),
                           label: Text(
                             Get.put(
                               ShopCartController()..getCart(),
                             ).carts.length.toString(),
                             style:
-                                TextStyle(color: Colors.white, fontSize: 12.r),
+                                TextStyle(color: Colors.white, fontSize: 8.r),
                           ),
                           child: Icon(
                             Icons.shopping_cart,
                             color: primaryColor,
-                            size: 24.r,
+                            size: 20.r,
                           ),
                         ),
-                        Expanded(
-                          flex: 3,
+                        Gap(8),
+                        SizedBox(
+                          width: 92,
                           child: CustomLoadingButton(
+                            height: 55.h,
                             textColor: primaryColor,
                             text: "Add to Cart".tr,
+                            fontSize: 13.r,
                             onPressed: controller.addToCart,
                             backgroundColor: transparentColor,
                             borderRadius: 8,
@@ -166,63 +170,47 @@ class ShopProductDetailsView extends StatelessWidget {
                           ],
                         ),
                       ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            child: Text(
-                              translateDatabase(
-                                arabic: controller.product?.titleAr ?? "",
-                                english: controller.product?.titleEn ?? "",
-                              ),
-                              style: TextStyle(
-                                  height: 1.2,
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 17.r),
-                            ),
-                          ),
-                          Gap(8),
-                          _priceRow(controller),
-                        ],
+                      Directionality(
+                        textDirection:
+                            containsArabic(controller.product?.titleEn ?? "")
+                                ? TextDirection.rtl
+                                : TextDirection.ltr,
+                        child: Text(
+                          controller.product?.titleEn ?? "",
+                          style: TextStyle(
+                              height: 1.2,
+                              fontWeight: FontWeight.w500,
+                              fontSize: 16.r),
+                        ),
                       ),
+                      Gap(8),
+                      _priceRow(controller),
                       Gap(20),
                       _buildTabs(controller, context),
                       Gap(20),
-                      Container(
-                        constraints: BoxConstraints(
-                          minHeight: 100.h,
-                          maxHeight: 400.h,
-                        ),
-                        child: PageView(
-                            allowImplicitScrolling: false,
-                            controller: controller.pageController,
-                            onPageChanged: controller.onPageChanged,
-                            children: [
-                              SingleChildScrollView(
-                                physics: const NeverScrollableScrollPhysics(),
-                                child: AboutBagWidget(
-                               
-                                ),
-                              ),
-                              SingleChildScrollView(
-                                child: Container(
-                                  padding: EdgeInsets.all(8),
-                                  decoration: BoxDecoration(
-                                      color: lightPrimaryColor.withAlpha(140),
-                                      borderRadius: BorderRadius.circular(8)),
-                                  child: Column(
-                                    children: [
-                                      ...controller.descriptions
-                                          .map((e) => _sessionItem(context, e)),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              TermsAndConditions(),
-                            ]),
-                      ),
                     ],
                   ),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: IndexedStack(
+                  index: controller.selectedIndex,
+                  children: [
+                    AboutBagWidget(),
+                    Container(
+                      padding: EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                          color: lightPrimaryColor.withAlpha(140),
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Column(
+                        children: [
+                          ...controller.descriptions
+                              .map((e) => _sessionItem(context, e)),
+                        ],
+                      ),
+                    ),
+                    TermsAndConditions(),
+                  ],
                 ),
               )
             ],
@@ -241,7 +229,7 @@ class ShopProductDetailsView extends StatelessWidget {
         Gap(8),
         _buildTab("Sessions", 1, context, controller),
         Gap(8),
-        _buildTab("Terms and Conditions", 2, context, controller),
+        _buildTab("Terms & Conditions", 2, context, controller),
       ],
     );
   }
@@ -252,9 +240,11 @@ class ShopProductDetailsView extends StatelessWidget {
       child: GestureDetector(
         onTap: () => controller.onTabTapped(index),
         child: Container(
+          height: 45.h,
           alignment: Alignment.center,
           padding: EdgeInsets.symmetric(
-              horizontal: 10, vertical: context.isTablet ? 12 : 8),
+            horizontal: 10,
+          ),
           decoration: BoxDecoration(
               borderRadius: customBorderRadius,
               color: controller.selectedIndex == index
@@ -262,9 +252,11 @@ class ShopProductDetailsView extends StatelessWidget {
                   : Colors.transparent,
               border: Border.all(color: primaryColor)),
           child: Text(title.tr,
+              maxLines: 2,
+              textAlign: TextAlign.center,
               style: getMediumStyle(Get.context!).copyWith(
                 fontWeight: FontWeight.bold,
-                fontSize: 13.r,
+                fontSize: 12.r,
                 color: controller.selectedIndex == index
                     ? whiteColor
                     : primaryColor,
@@ -283,14 +275,14 @@ class ShopProductDetailsView extends StatelessWidget {
 
     return Row(
       children: [
-        Text("\$${finalPrice.toStringAsFixed(2)}",
+        Text("\ر.س ${finalPrice.toStringAsFixed(2)}",
             style: TextStyle(
                 fontSize: 16.r,
                 fontWeight: FontWeight.bold,
                 color: primaryColor)),
         Gap(8),
         if (discount > 0)
-          Text("\$${price.toStringAsFixed(0)}",
+          Text("\ر.س ${price.toStringAsFixed(0)}",
               style: TextStyle(
                 fontSize: 14.r,
                 color: blackColor,
@@ -313,14 +305,14 @@ class ShopProductDetailsView extends StatelessWidget {
           horizontalTitleGap: 10,
           dense: true,
           leading: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Icon(Icons.check_circle, color: primaryColor, size: 18.r),
             ],
           ),
           title: Text(
             translateDatabase(arabic: item.contentAr, english: item.contentEn),
-            style: TextStyle(fontSize: 14.r),
+            style: TextStyle(fontSize: 15.r),
           ),
         );
       }).toList(),

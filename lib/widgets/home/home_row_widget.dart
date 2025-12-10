@@ -9,34 +9,37 @@ class HomeRowWidget extends StatelessWidget {
   final void Function() onTap;
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: TextStyle(
-            color: Colors.black87,
-            fontWeight: FontWeight.w500,
-            fontSize: 16.r,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            title,
+            style: TextStyle(
+              color: Colors.black87,
+              fontWeight: FontWeight.w500,
+              fontSize: 16.r,
+            ),
           ),
-        ),
-        InkWell(
-          onTap: onTap,
-          child: Row(
-            children: [
-              Text(
-                "See all".tr,
-                style: TextStyle(
-                  color: primaryColor,
-                  decoration: TextDecoration.underline,
-                  decorationColor: primaryColor,
-                  fontSize: 14.r,
+          InkWell(
+            onTap: onTap,
+            child: Row(
+              children: [
+                Text(
+                  "See all".tr,
+                  style: TextStyle(
+                    color: primaryColor,
+                    decoration: TextDecoration.underline,
+                    decorationColor: primaryColor,
+                    fontSize: 14.r,
+                  ),
                 ),
-              ),
-            ],
-          ),
-        )
-      ],
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

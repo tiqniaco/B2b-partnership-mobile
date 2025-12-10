@@ -3,7 +3,6 @@
 import 'package:b2b_partenership/controller/service_details_controller.dart';
 import 'package:b2b_partenership/core/functions/get_text_direction.dart';
 import 'package:b2b_partenership/core/functions/please_login_dialog.dart';
-import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/services/date_time_convertor.dart';
@@ -216,9 +215,14 @@ class ServiceDetailsView extends StatelessWidget {
                               ),
                               SizedBox(height: 13),
                               Text(
-                                translateDatabase(
-                                    arabic: controller.service!.data!.nameAr!,
-                                    english: controller.service!.data!.nameEn!),
+                            
+                                controller.service!.data!.nameEn!
+                             
+                                ,
+                                textDirection: containsArabic(
+                                        controller.service!.data!.nameEn!)
+                                    ? TextDirection.rtl
+                                    : TextDirection.ltr,
                                 style: getMediumStyle(context).copyWith(
                                   fontWeight: FontWeight.bold,
                                 ),

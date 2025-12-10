@@ -5,8 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class AppThemes {
   static ThemeData get light => ThemeData(
-        /// Define the default brightness and colors.
-        primarySwatch: primarySwatchColor,
+      
         primaryColor: primaryColor,
         fontFamily: FontManager.defaultFontFamily,
         scaffoldBackgroundColor: backgroundColor,
@@ -124,7 +123,7 @@ class AppThemes {
 
         /// Define the default card theme.
         cardColor: whiteColor,
-        cardTheme: CardTheme(
+        cardTheme: CardThemeData(
           color: whiteColor,
           elevation: 3,
           shape: RoundedRectangleBorder(

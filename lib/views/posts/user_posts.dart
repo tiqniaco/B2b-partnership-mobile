@@ -52,7 +52,8 @@ class UserPostsView extends StatelessWidget {
           children: [
             Gap(10),
             CustomServerStatusWidget(
-              emptyMessage: "you don't add any service posts\nlet's add some",
+              emptyMessage:
+                  "you don't add any service posts\nlet's add some".tr,
               statusRequest: controller.statusRequest,
               child: Expanded(
                   child: ListView.separated(

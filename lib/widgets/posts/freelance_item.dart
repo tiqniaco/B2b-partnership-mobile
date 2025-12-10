@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/core/constants/app_constants.dart';
+import 'package:b2b_partenership/core/functions/get_text_direction.dart';
 import 'package:b2b_partenership/core/functions/please_login_dialog.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/services/date_time_convertor.dart';
@@ -35,7 +36,7 @@ class FreelanceItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Padding(
               padding: const EdgeInsets.only(top: 16.0, left: 16, right: 16),
@@ -68,7 +69,7 @@ class FreelanceItem extends StatelessWidget {
                                   model.name!,
                                   style: getMediumStyle(context).copyWith(
                                     color: Colors.black,
-                                    fontSize: 16.r,
+                                    fontSize: 15.r,
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
@@ -84,62 +85,48 @@ class FreelanceItem extends StatelessWidget {
                             ),
                           ],
                         ),
-                        Gap(5),
-                        Text(
-                          model.description!,
-                          textAlign: TextAlign.start,
-                          style: getRegularStyle(context).copyWith(
-                            color: Colors.black,
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
                       ],
                     ),
                   ),
                   Gap(8),
-                  Column(
-                    children: [
-                      Container(
-                        alignment: Alignment.center,
-                        width: context.isTablet ? 150 : 95,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 9),
-                        decoration: BoxDecoration(
-                            borderRadius: customBorderRadius,
-                            color: primaryColor),
-                        child: Text("Show".tr,
-                            style: TextStyle(
-                              fontSize: 12.r,
-                              color: whiteColor,
-                              fontWeight: FontWeight.w600,
-                            )),
-                      ),
-                      Gap(10),
-                      Container(
-                        alignment: Alignment.center,
-                        width: context.isTablet ? 150 : 95,
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 16, vertical: 8)
-                                .copyWith(),
-                        decoration: BoxDecoration(
-                            borderRadius: customBorderRadius,
-                            border: Border.all(color: primaryColor)),
-                        child: Text(model.status!.tr,
-                            style: TextStyle(
-                                fontSize: 12.r,
-                                color: primaryColor,
-                                fontWeight: FontWeight.bold)),
-                      ),
-                    ],
+                  Container(
+                    alignment: Alignment.center,
+                    width: context.isTablet ? 150 : 95,
+                    padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8)
+                        .copyWith(),
+                    decoration: BoxDecoration(
+                        borderRadius: customBorderRadius,
+                        border: Border.all(color: primaryColor)),
+                    child: Text(model.status!.tr,
+                        style: TextStyle(
+                            fontSize: 12.r,
+                            color: primaryColor,
+                            fontWeight: FontWeight.bold)),
                   ),
                 ],
+              ),
+            ),
+            Gap(5),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                model.description!,
+                textAlign: TextAlign.start,
+                textDirection: containsArabic(model.description!)
+                    ? TextDirection.rtl
+                    : TextDirection.ltr,
+                style: TextStyle(
+                  fontSize: 13.r,
+                  color: Colors.black,
+                ),
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             Gap(10),
             if (model.image != null)
               ClipRRect(
-                borderRadius: BorderRadius.circular(17.r),
+                borderRadius: BorderRadius.circular(14.r),
                 child: CachedNetworkImage(
                   imageUrl: "$kBaseImageUrl${model.image}",
                   height: 150.h,
