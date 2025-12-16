@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:b2b_partenership/controller/shop/shop_cart_controller.dart';
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
@@ -61,7 +60,6 @@ class ShopProductDetailsController extends GetxController {
         return json;
       },
     ).sendGetRequest();
-
     result.fold(
       (l) {
         AppSnackBars.error(message: l.errMsg);
@@ -69,20 +67,17 @@ class ShopProductDetailsController extends GetxController {
         update();
       },
       (data) {
-        // print(data);
         product = ShopProductModel.fromJson(data['data']);
         descriptions = List<ProductDescriptionModel>.from(
           data['descriptions'].map(
             (e) => ProductDescriptionModel.fromJson(e),
           ),
         );
-
         contents = List<BagContentModel>.from(
           data['bagContents'].map(
             (e) => BagContentModel.fromJson(e),
           ),
         );
-
         statusRequest = StatusRequest.success;
         update();
       },
@@ -102,7 +97,6 @@ class ShopProductDetailsController extends GetxController {
 
   callBackFun(int index, bool isExpanded) {
     descriptions[index].isExpanded = isExpanded == false ? 0 : 1;
-
     update();
   }
 
@@ -114,10 +108,8 @@ class ShopProductDetailsController extends GetxController {
       } else {
         downloadsDirectory = await getApplicationDocumentsDirectory();
       }
-
       String filePath =
           '${downloadsDirectory.path}/${product!.file.split('/').last}';
-
       final response = await Dio().download(
         product!.file,
         filePath,
@@ -127,7 +119,7 @@ class ShopProductDetailsController extends GetxController {
         Get.defaultDialog(
           title: 'Done'.tr,
           titleStyle: TextStyle(fontSize: 14.r),
-          middleText: "File downloaded successfully".tr,
+          middleText: "File downloaded successfully $filePath".tr,
           middleTextStyle: TextStyle(fontSize: 13.r), // $filePath
         );
       } else {

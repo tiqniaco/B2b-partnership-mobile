@@ -33,7 +33,6 @@ class BannerWidget extends StatelessWidget {
               child: Image.asset(
                 image,
                 fit: BoxFit.fitWidth,
-                //   height: context.isTablet ? 250 : 200.h,
                 width: double.infinity,
               )),
           Container(
@@ -43,22 +42,7 @@ class BannerWidget extends StatelessWidget {
                 bottomLeft: Radius.circular(10.r),
                 topRight: Radius.circular(10.r),
               ),
-              //color: Colors.white,
-              // gradient: LinearGradient(
-              //   begin: Get.locale?.languageCode == "en"
-              //       ? Alignment.topLeft
-              //       : Alignment.topRight,
-              //   end: Get.locale?.languageCode == "en"
-              //       ? Alignment.bottomRight
-              //       : Alignment.bottomLeft,
-              //   colors: [
-              //     lightPrimaryColor,
-              //     lightPrimaryColor.withAlpha(160),
-              //     whiteColor.withAlpha(50),
-              //     Colors.transparent,
-              //     Colors.transparent,
-              //   ],
-              // ),
+             
             ),
             padding: EdgeInsets.only(
               top: 20,
