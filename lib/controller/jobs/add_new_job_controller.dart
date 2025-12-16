@@ -162,7 +162,7 @@ class AddNewJobController extends GetxController {
     statusRequestCity = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.cities,
-        data: {"country_id": selectedCountry?.id},
+        queryParameters: {"country_id": selectedCountry?.id},
         fromJson: (json) {
           return json['data']
               .map<CityModel>((city) => CityModel.fromJson(city))
@@ -213,7 +213,7 @@ class AddNewJobController extends GetxController {
     statusRequestSupSpecialization = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getSupSpecialization,
-        data: {"specialization_id": selectedSpecialization?.id},
+        queryParameters: {"specialization_id": selectedSpecialization?.id},
         fromJson: (json) {
           return json['data']
               .map<SubSpecializeModel>(

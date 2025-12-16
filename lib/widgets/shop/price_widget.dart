@@ -4,7 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 
 Widget priceRow(String? bagPrice, String? bagDiscount,
-    {Color? color = whiteColor}) {
+    {Color? color = whiteColor,
+    double priceFontSize = 14,
+    double offPrice = 12}) {
   final double price = double.tryParse(bagPrice ?? "0") ?? 0;
   final double discount = double.tryParse(bagDiscount ?? "0") ?? 0;
   final double finalPrice =
@@ -12,16 +14,18 @@ Widget priceRow(String? bagPrice, String? bagDiscount,
 
   return Row(
     children: [
-      Text("\ر.س ${finalPrice.toStringAsFixed(1)}",
+      Text(" ﷼ ${finalPrice.toStringAsFixed(1)}",
           style: TextStyle(
-              fontSize: 16.r, fontWeight: FontWeight.w800, color: color)),
+              fontSize: priceFontSize.r,
+              fontWeight: FontWeight.w700,
+              color: color)),
       Gap(8),
       if (discount > 0)
-        Text("\ر.س ${price.toStringAsFixed(1)}",
+        Text(" ﷼${price.toStringAsFixed(1)}",
             style: TextStyle(
-                fontSize: 13.r,
+                fontSize: offPrice.r,
                 color: color,
-                fontWeight: FontWeight.w600,
+                fontWeight: FontWeight.normal,
                 decoration: TextDecoration.lineThrough,
                 decorationStyle: TextDecorationStyle.solid,
                 decorationColor: color)),

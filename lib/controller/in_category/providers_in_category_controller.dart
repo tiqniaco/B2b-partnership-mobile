@@ -34,7 +34,7 @@ class ProvidersInCategoryController extends GetxController {
     statusRequestServices = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getProvidersInCategory,
-        data: {
+        queryParameters: {
           "sub_specialization_id": selectedSubSpecialization.id,
           "specialization_id": specialization.id,
         },

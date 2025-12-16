@@ -587,4 +587,22 @@ const Map<String, String> ar = {
   'File download failed': 'فشل تحميل الملف',
   'No file available': 'الملف غير موجود',
   "Search for service, job, bags": "ابحث عن خدمات، وظائف، وحقائب",
+  "No Providers Now": "لا يوجد مقدمين خدمات الان",
+  "No Providers Available Now, Please\ntry again later":
+      "لا يوجد مقدمين خدمات الان رجاءا حاول\n مره اخرى لاحقا",
+  'No Bags Now': "لا توجد حقائب الان",
+  'Try again later': 'حاول مجدداً لاحقا',
+  "The signup request has been sent successfully":
+      "تم ارسال طلب تسجيل الدخول بنجاح",
+  "Wait the admin's approval\nYou will receive a response notification\nas soon as possible":
+      "انتظر موافقة الادمن\nسوف تتلقى اشعار في اقرب وقت ممكن",
+  'OK': "حسناً",
+  "Your application login request has been accepted":
+      "تم قبول طلب تسجيل الدخول",
+  'No Applications Now': "لا يوجد طلبات توظيف الان",
+  'No Jobs Now': "لا يوجد وظائف الان",
+  'Try again later or add new job': "حاول مجدداً لاحقا او اضف وظيفة جديدة",
+  'No Posts Now': "لا يوجد منشورات الان",
+  'Try again later or add new post': "حاول مجدداً لاحقا او اضف منشور جديد",
+  "Policy": "الخصوصية",
 };

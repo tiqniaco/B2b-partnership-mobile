@@ -32,7 +32,7 @@ class ProviderWidget extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
           border: Border.all(
-            color: Colors.grey.withAlpha(80),
+            color: Colors.grey.withAlpha(40),
           ),
           color: whiteColor,
         ),
@@ -51,7 +51,8 @@ class ProviderWidget extends StatelessWidget {
                         borderRadius: 8,
                         imageUrl: provider.image,
                         height: 66.h,
-                        fit: BoxFit.fitHeight,
+                        width: 66.h,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
@@ -103,7 +104,7 @@ class ProviderWidget extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     PannableRatingBar(
-                      rate: double.parse(provider.rating),
+                      rate: double.parse(provider.rating.toString()),
                       items: List.generate(
                         5,
                         (index) => RatingWidget(
@@ -143,7 +144,7 @@ class ProviderWidget extends StatelessWidget {
                             "id": provider.providerId.toString()
                           });
                         },
-                        fontSize: 14.r,
+                        fontSize: 12.r,
                         text: "View".tr,
                       ),
                     ),

@@ -132,7 +132,11 @@ class SignupView extends StatelessWidget {
                       ],
                     ),
                     CustomLoadingButton(
-                      onPressed: () => controller.goToOtp(),
+                      onPressed: () {
+                        return controller.role == "provider"
+                            ? controller.signupProvider()
+                            : controller.signupClient();
+                      },
                       width: 0.75.sw,
                       text: controller.currentStep ==
                               controller.providerSteps.length - 1

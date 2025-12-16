@@ -1,8 +1,8 @@
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/enums/store_order_status_enum.dart';
+import 'package:b2b_partenership/core/functions/internet_check.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
-import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:b2b_partenership/models/order_model.dart';
 import 'package:get/get.dart';
 
@@ -54,8 +54,11 @@ class OrdersController extends GetxController {
     ).sendGetRequest();
 
     result.fold((l) {
-      statusRequest = StatusRequest.error;
-      AppSnackBars.error(message: l.errMsg);
+      if (isConnectionError(l)) {
+        statusRequest = StatusRequest.noConnection;
+      } else {
+        statusRequest = StatusRequest.error;
+      }
       update();
     }, (r) {
       orders = r;

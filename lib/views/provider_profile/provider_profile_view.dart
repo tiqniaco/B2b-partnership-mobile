@@ -1,9 +1,14 @@
 import 'package:b2b_partenership/controller/previous_work/provider_profile_controller.dart';
-import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_error_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_no_connection_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/global_server_status_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/place_holder.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/theme/themes.dart';
+import 'package:b2b_partenership/widgets/provider_profile/provider_profile_loading_widget.dart';
+import 'package:b2b_partenership/widgets/provider_profile/service_loading_widget.dart';
 import 'package:b2b_partenership/widgets/provider_profile/service_widget_vertical.dart';
 import 'package:b2b_partenership/widgets/provider_profile/about_widget.dart';
 import 'package:b2b_partenership/widgets/provider_profile/previous_work_widget.dart';
@@ -40,7 +45,7 @@ class ProviderProfileView extends StatelessWidget {
             body: SafeArea(
                 child: Center(
               child: controller.providerModel == null
-                  ? CircularProgressIndicator()
+                  ? ProviderProfileLoadingWidget()
                   : Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -54,20 +59,39 @@ class ProviderProfileView extends StatelessWidget {
                             controller: controller.pageController,
                             onPageChanged: controller.onPageChanged,
                             children: [
-                              CustomServerStatusWidget(
-                                emptyMessage:
-                                    "No services founded\ntry again later".tr,
+                              GlobalServerStatusWidget(
                                 statusRequest: controller.statusRequestServices,
-                                child: ServiceWidgetVertical(
+                                errorChild: CustomErrorWidget(),
+                                noConnectionChild: CustomNoConnectionWidget(
+                                  onTap: () => controller.getServices(),
+                                ),
+                                noDataChild: PlaceHolderWidget(
+                                    icon: Image.asset(
+                                        "assets/images/no_services.png"),
+                                    title: "No services founded now",
+                                    subTitle: "try again later"),
+                                loadingChild: ServiceLoadingWidget(),
+                                successChild: ServiceWidgetVertical(
                                   services: controller.providerServices,
                                 ),
                               ),
                               AboutWidget(),
-                              CustomServerStatusWidget(
-                                emptyMessage: "No Previous work\nhere now".tr,
+                              GlobalServerStatusWidget(
+                                //emptyMessage: "No Previous work\nhere now".tr,
                                 statusRequest:
                                     controller.statusRequestPerviousWork,
-                                child: Padding(
+                                errorChild: CustomErrorWidget(),
+
+                                noConnectionChild: CustomNoConnectionWidget(
+                                  onTap: () => controller.getPreviousWork(),
+                                ),
+                                noDataChild: PlaceHolderWidget(
+                                    icon: Image.asset(
+                                        "assets/images/no_work.png"),
+                                    title: "No Previous work now",
+                                    subTitle: "try again later"),
+                                loadingChild: ServiceLoadingWidget(),
+                                successChild: Padding(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 20.0, vertical: 16),
                                   child: ListView.separated(
@@ -83,11 +107,19 @@ class ProviderProfileView extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              CustomServerStatusWidget(
-                                  emptyMessage:
-                                      "No Reviews now\nlet's add one".tr,
+                              GlobalServerStatusWidget(
                                   statusRequest: controller.statusRequestReview,
-                                  child: ReviewWidget())
+                                  errorChild: CustomErrorWidget(),
+                                  noConnectionChild: CustomNoConnectionWidget(
+                                    onTap: () => controller.getPreviousWork(),
+                                  ),
+                                  noDataChild: PlaceHolderWidget(
+                                      icon: Image.asset(
+                                          "assets/images/no_review.png"),
+                                      title: "No reviews now",
+                                      subTitle: "try again later or add one"),
+                                  loadingChild: ServiceLoadingWidget(),
+                                  successChild: ReviewWidget())
                             ],
                           ),
                         ),

@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:b2b_partenership/core/theme/text_style.dart';
 
-import '/core/global/widgets/custom_loading_widget.dart';
 import '/core/theme/app_color.dart';
 
 class CustomLoadingButton extends StatelessWidget {
@@ -55,7 +54,7 @@ class CustomLoadingButton extends StatelessWidget {
             ),
           ],
         ),
-        loadingStateWidget: const CustomLoadingWidget(),
+        loadingStateWidget: const CircularProgressIndicator(),
       ),
     );
   }

@@ -101,7 +101,7 @@ class AddPostController extends GetxController {
           data: {
             "user_id": Get.find<AppPreferences>().getUserId(),
             "governments_id": selectedCity!.id,
-            "sub_specialization_id": 1,
+            "sub_specialization_id": 66,
             "title_ar": titleController.text,
             "title_en": titleController.text,
             "address": addressController.text,
@@ -155,7 +155,7 @@ class AddPostController extends GetxController {
     statusRequestCity = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.cities,
-        data: {"country_id": selectedCountry!.id},
+        queryParameters: {"country_id": selectedCountry!.id},
         fromJson: (json) {
           return json['data']
               .map<CityModel>((city) => CityModel.fromJson(city))

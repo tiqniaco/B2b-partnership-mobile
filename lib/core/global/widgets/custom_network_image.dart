@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '/core/utils/assets_data.dart';
 
@@ -27,17 +28,13 @@ class CustomNetworkImage extends StatelessWidget {
         borderRadius: shape == BoxShape.circle
             ? null
             : BorderRadius.circular(borderRadius ?? 0),
-        image: DecorationImage(
-          image: Image.network(imageUrl).image,
-          fit: fit,
-        ),
         shape: shape ?? BoxShape.rectangle,
       ),
       clipBehavior: Clip.antiAlias,
       child: Image(
         width: width,
         height: height,
-        image: Image.network(imageUrl).image,
+        image: CachedNetworkImageProvider(imageUrl),
         fit: fit,
         alignment: Alignment.center,
         loadingBuilder: (context, child, loadingProgress) {

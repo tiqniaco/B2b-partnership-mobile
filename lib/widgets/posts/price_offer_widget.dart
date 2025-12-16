@@ -155,7 +155,8 @@ class PriceOfferWidget extends GetView<PostDetailsController> {
                                           BorderRadius.circular(5.r)))),
                           onPressed: () {
                             log(Get.find<AppPreferences>().getUserId());
-                            controller.acceptPriceOffers(model.requestOfferId);
+                            controller.acceptPriceOffers(
+                                model.requestOfferId.toString());
                           },
                           child: Text(
                             "Accept".tr,
@@ -189,7 +190,8 @@ class PriceOfferWidget extends GetView<PostDetailsController> {
                               padding: const EdgeInsets.all(8.0),
                               child: InkWell(
                                 onTap: () {
-                                  controller.deleteOffer(model.requestOfferId);
+                                  controller.deleteOffer(
+                                      model.requestOfferId.toString());
                                 },
                                 child: Icon(
                                   Icons.close,

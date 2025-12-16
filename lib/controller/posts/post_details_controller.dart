@@ -142,7 +142,6 @@ class PostDetailsController extends GetxController {
   }
 
   Future<void> _addOffer() async {
-  
     if (formKey.currentState!.validate()) {
       statusRequest = StatusRequest.loading;
 
@@ -205,7 +204,7 @@ class PostDetailsController extends GetxController {
       statusRequest = StatusRequest.loading;
       final response = await CustomRequest(
           path: ApiConstance.getServicePriceOffer,
-          data: {
+          queryParameters: {
             "request_service_id": model.id!,
           },
           fromJson: (json) {

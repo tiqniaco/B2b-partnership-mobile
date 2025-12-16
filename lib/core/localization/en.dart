@@ -39,7 +39,7 @@ const Map<String, String> en = {
   "Value added tax (VAT)": "Value added tax (VAT)",
   "add the number here": "add the number here",
   "Commercial Register Number": "Commercial Register Number",
-   "Tax Number": "Tax Number",
+  "Tax Number": "Tax Number",
 
   // auth
   "Welcome Back!": "Welcome Back!",
@@ -155,7 +155,7 @@ const Map<String, String> en = {
   "Special Opportunity": "Special Opportunity",
   "Now you can post your custom service request":
       "Now you can post your custom service request",
-   "Training bag on the basics of purchasing management":
+  "Training bag on the basics of purchasing management":
       "Training bag on the basics of purchasing management",
 
   // manage category
@@ -579,9 +579,27 @@ const Map<String, String> en = {
   "View Applicant Profile": "View Applicant Profile",
   "Your cart is empty\nDiscover amazing products!":
       "Your cart is empty\nDiscover amazing products!",
-      'Done': 'Done',
-      "File downloaded successfully": "File downloaded successfully",
-      'File download failed': 'File download failed',
-       'No file available': 'No file available',
+  'Done': 'Done',
+  "File downloaded successfully": "File downloaded successfully",
+  'File download failed': 'File download failed',
+  'No file available': 'No file available',
   "Search for service, job, bags": "Search for service, job, bags",
+  "No Providers Now": "No Providers Now",
+  "No Providers Available Now, Please\ntry again later":
+      "No Providers Available Now, Please\ntry again later",
+  'No Bags Now': 'No Bags Now',
+  'Try again later': 'Try again later',
+  "The signup request has been sent successfully":
+      "The signup request has been sent successfully",
+  "Wait the admin's approval\nYou will receive a response notification\nas soon as possible":
+      "Wait the admin's approval\nYou will receive a response notification\nas soon as possible",
+  'OK': 'OK',
+  "Your application login request has been accepted":
+      "Your application login request has been accepted",
+  'No Applications Now': 'No Applications Now',
+  'No Jobs Now': 'No Jobs Now',
+  'Try again later or add new job': 'Try again later or add new job',
+  'No Posts Now': 'No Posts Now',
+  'Try again later or add new post': 'Try again later or add new post',
+  "Policy": "Policy",
 };

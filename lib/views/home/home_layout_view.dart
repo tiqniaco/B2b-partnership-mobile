@@ -70,28 +70,34 @@ class _HomeLayoutViewState extends State<HomeLayoutView>
                       child: Row(
                         children: [
                           Gap(10.w),
-                          Container(
-                            height: 50,
-                            width: 50,
-                            decoration: BoxDecoration(
+                          InkWell(
+                            onTap: () {
+                              controller.onBNavPressed(4);
+                            },
+                            child: Container(
+                              height: 50,
+                              width: 50,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(color: Colors.grey[300]!)),
+                              child: ClipRRect(
                                 borderRadius: BorderRadius.circular(8),
-                                border: Border.all(color: Colors.grey[300]!)),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(8),
-                              child: CachedNetworkImage(
-                                imageUrl: Get.find<AppPreferences>()
-                                            .getUserRole() ==
-                                        "provider"
-                                    ? providerSettingController
-                                            .menuModel?.data?.image ??
-                                        ""
-                                    : settingController.menuModel?.data.image ??
-                                        "",
-                                errorWidget: (context, url, error) => Icon(
-                                  CupertinoIcons.person,
-                                  size: 18.h,
+                                child: CachedNetworkImage(
+                                  imageUrl: Get.find<AppPreferences>()
+                                              .getUserRole() ==
+                                          "provider"
+                                      ? providerSettingController
+                                              .menuModel?.data?.image ??
+                                          ""
+                                      : settingController
+                                              .menuModel?.data.image ??
+                                          "",
+                                  errorWidget: (context, url, error) => Icon(
+                                    CupertinoIcons.person,
+                                    size: 18.h,
+                                  ),
+                                  fit: BoxFit.cover,
                                 ),
-                                fit: BoxFit.cover,
                               ),
                             ),
                           ),

@@ -1,11 +1,15 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/posts/user_posts_controller.dart';
-import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_error_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_no_connection_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/global_server_status_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/place_holder.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/please_login_widget.dart';
 import 'package:b2b_partenership/widgets/posts/freelance_item.dart';
+import 'package:b2b_partenership/widgets/posts/post_loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -51,11 +55,21 @@ class UserPostsView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Gap(10),
-            CustomServerStatusWidget(
-              emptyMessage:
-                  "you don't add any service posts\nlet's add some".tr,
+            GlobalServerStatusWidget(
               statusRequest: controller.statusRequest,
-              child: Expanded(
+              loadingChild: Expanded(child: PostLoadingWidget()),
+              errorChild: CustomErrorWidget(),
+              noConnectionChild: CustomNoConnectionWidget(
+                onTap: () {
+                  controller.getServices();
+                },
+              ),
+              noDataChild: PlaceHolderWidget(
+                icon: Image.asset("assets/images/no_posts.png"),
+                title: 'No Posts Now'.tr,
+                subTitle: 'Try again later or add new post'.tr,
+              ),
+              successChild: Expanded(
                   child: ListView.separated(
                 separatorBuilder: (context, index) => Gap(15),
                 scrollDirection: Axis.vertical,

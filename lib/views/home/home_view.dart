@@ -61,7 +61,7 @@ class _HomeViewState extends State<HomeView> {
                     ),
                     Gap(24),
                     HomeSliders(),
-                    Gap(24),
+                    Gap(16),
                     HomeRowWidget(
                       title: "Browse Categories".tr,
                       onTap: () {
@@ -70,9 +70,9 @@ class _HomeViewState extends State<HomeView> {
                         });
                       },
                     ),
-                    Gap(18.h),
+                    Gap(18),
                     SizedBox(
-                      height: context.isTablet ? 124.h : 126.h,
+                      height: context.isTablet ? 124.h : 116.h,
                       child: controller.statusRequestSpecialization ==
                               StatusRequest.loading
                           ? ListView.separated(
@@ -105,9 +105,10 @@ class _HomeViewState extends State<HomeView> {
                             noDataChild: PlaceHolderWidget(
                                 icon: Image.asset(
                                     "assets/images/no_providers.png"),
-                                title: "No Providers Now",
+                                title: "No Providers Now".tr,
                                 subTitle:
-                                    "No Providers Available Now, Please\ntry again later"),
+                                    "No Providers Available Now, Please\ntry again later"
+                                        .tr),
                             noConnectionChild: CustomNoConnectionWidget(
                               onTap: () {
                                 controller.getSpecialization();
@@ -136,7 +137,8 @@ class _HomeViewState extends State<HomeView> {
                                 provider: controller.topProviders[index],
                                 toggleFavorite: () {
                                   controller.toggleFavorites(controller
-                                      .topProviders[index].providerId);
+                                      .topProviders[index].providerId
+                                      .toString());
                                 },
                               ),
                             ))),

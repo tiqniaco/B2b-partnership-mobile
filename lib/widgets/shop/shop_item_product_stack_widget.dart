@@ -104,18 +104,18 @@ class ShopItemProductStackWidget extends StatelessWidget {
                 ),
               ),
             ),
-            Gap(10),
+            Gap(12),
             Directionality(
               textDirection: containsArabic(product.descriptionEn)
                   ? TextDirection.rtl
                   : TextDirection.ltr,
               child: Text(
-                product.descriptionEn,
+                product.titleEn,
                 style: getMediumStyle(context).copyWith(
                     fontWeight: FontManager.mediumFontWeight,
                     height: 1.2,
                     color: blackColor,
-                    fontSize: 14.r),
+                    fontSize: 15.r),
                 textAlign: TextAlign.start,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
@@ -128,4 +128,3 @@ class ShopItemProductStackWidget extends StatelessWidget {
     );
   }
 }
-
