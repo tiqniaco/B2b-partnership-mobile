@@ -2,9 +2,13 @@ import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/shop/products_in_category_controller.dart';
 import 'package:b2b_partenership/core/functions/get_text_direction.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
-import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_error_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_no_connection_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/global_server_status_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/place_holder.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/widgets/shop/product_stack_loading_list.dart';
 import 'package:b2b_partenership/widgets/shop/shop_item_product_stack_widget.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -84,9 +88,21 @@ class ProductsInCategory extends StatelessWidget {
                   //thickness: 1,
                 ),
                 Expanded(
-                  child: CustomServerStatusWidget(
+                  child: GlobalServerStatusWidget(
                     statusRequest: controller.productsStatus,
-                    child: ListView.separated(
+                    noDataChild: PlaceHolderWidget(
+                      icon: Image.asset("assets/images/no_orders.png"),
+                      title: 'No Bags Now'.tr,
+                      subTitle: 'Try again later'.tr,
+                    ),
+                    errorChild: CustomErrorWidget(),
+                    noConnectionChild: CustomNoConnectionWidget(
+                      onTap: () {
+                        controller.getProducts();
+                      },
+                    ),
+                    loadingChild: ProductStackLoadingList(),
+                    successChild: ListView.separated(
                       controller: controller.productsScrollController,
                       separatorBuilder: (context, index) => Gap(20.h),
                       padding: EdgeInsets.all(10),

@@ -1,4 +1,6 @@
+import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/home/home_controller.dart';
+import 'package:b2b_partenership/controller/home/home_layout_controller.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/widgets/home/banner_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -29,42 +31,30 @@ class _HomeSlidersState extends State<HomeSliders> {
     BannerWidget(
       image: "assets/images/2 en.png",
       imageAr: "assets/images/2 ar.png",
-      title: "Modern\nand advanced\ntraining packages".tr,
       onPressed: () {
-        // Get.put(ProviderHomeLayoutController(this)).onBNavPressed(1);
+        // Get.put(HomeLayoutController()).onBNavPressed(1);
       },
-      description: "Training bag on the basics of purchasing management".tr,
-      buttonTitle: 'Shop Now'.tr,
     ),
     BannerWidget(
       image: "assets/images/4 en.jpg",
       imageAr: "assets/images/4 ar.jpg",
-      title: "More than 100\njob offer".tr,
       onPressed: () {
         // Get.put(ProviderHomeLayoutController(this)).onBNavPressed(1);
       },
-      description: "Freelance & Full time & part time".tr,
-      buttonTitle: 'Apply Now'.tr,
     ),
     BannerWidget(
       image: "assets/images/1 en.png",
       imageAr: "assets/images/1 ar.png",
-      title: "Need Custom\nService?! ".tr,
       onPressed: () {
-        // Get.put(ProviderHomeLayoutController(this)).onBNavPressed(1);
+        Get.put(HomeLayoutController()).onBNavPressed(1);
       },
-      description: "Now you can post your custom service request".tr,
-      buttonTitle: 'Post Now'.tr,
     ),
     BannerWidget(
-      image: "assets/images/3 ar.png",
-      imageAr: "assets/images/3 en.png",
-      title: "All service\nproviders".tr,
+      image: "assets/images/3 en.png",
+      imageAr: "assets/images/3 ar.png",
       onPressed: () {
-        // Get.put(ProviderHomeLayoutController(this)).onBNavPressed(1);
+        Get.toNamed(AppRoutes.addProviderService);
       },
-      description: "IT Services and industry sectors and more".tr,
-      buttonTitle: 'Browse All'.tr,
     ),
   ];
 

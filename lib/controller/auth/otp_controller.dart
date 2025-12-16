@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/auth/forget_password_controller.dart';
-import 'package:b2b_partenership/controller/auth/signup_controller.dart';
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
@@ -57,12 +56,12 @@ class OTPController extends GetxController {
       if (verified) {
         message = "Creating Account...".tr;
         update();
-        final controller = Get.put(SignupController());
-        await Future.wait([
-          controller.role == "provider"
-              ? controller.signupProvider()
-              : controller.signupClient(),
-        ]);
+        // final controller = Get.put(SignupController());
+        if (role == "provider") {
+          goToAuthNote();
+        } else {
+          Get.offNamed(AppRoutes.login);
+        }
         isLoading = false;
         message = "";
         update();
@@ -104,6 +103,10 @@ class OTPController extends GetxController {
         },
       );
     }
+  }
+
+  goToAuthNote() {
+    Get.offAllNamed(AppRoutes.authNoteScreen, arguments: {"code": "0"});
   }
 
   Future<void> resendOTP() async {

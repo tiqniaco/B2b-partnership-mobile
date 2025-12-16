@@ -128,8 +128,8 @@ class AllJobsView extends StatelessWidget {
                     noDataChild: SliverToBoxAdapter(
                       child: PlaceHolderWidget(
                         icon: Image.asset("assets/images/no_jobs.png"),
-                        title: 'No Jobs Now',
-                        subTitle: 'Try again later or add new job',
+                        title: 'No Jobs Now'.tr,
+                        subTitle: 'Try again later or add new job'.tr,
                       ),
                     ),
                     successChild: SliverList.separated(

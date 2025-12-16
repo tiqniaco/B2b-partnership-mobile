@@ -24,43 +24,46 @@ class CategoryItem extends GetView<ShopController> {
       },
       child: SizedBox(
         width: 142.w,
-        height: 84.h,
         child: Stack(
           children: [
             Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(15.r),
-                    topRight: Radius.circular(10.r),
-                  ),
-                  child: CustomNetworkImage(
-                    imageUrl: model.image,
-                    width: 140.w,
-                    height: 84.h,
-                    fit: BoxFit.cover,
+                Expanded(
+                  flex: 3,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(15.r),
+                      topRight: Radius.circular(10.r),
+                    ),
+                    child: CustomNetworkImage(
+                      imageUrl: model.image,
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
                 Gap(8),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: Text(
-                    textDirection: containsArabic(model.nameAr)
-                        ? TextDirection.rtl
-                        : TextDirection.ltr,
-                    textAlign: TextAlign.center,
-                    translateDatabase(
-                      arabic: model.nameAr,
-                      english: model.nameEn,
+                Expanded(
+                  flex: 2,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Text(
+                      textDirection: containsArabic(model.nameAr)
+                          ? TextDirection.rtl
+                          : TextDirection.ltr,
+                      textAlign: TextAlign.center,
+                      translateDatabase(
+                        arabic: model.nameAr,
+                        english: model.nameEn,
+                      ),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: getRegularStyle(context).copyWith(
+                          fontWeight: FontWeight.w400,
+                          color: blackColor,
+                          fontSize: 15.r),
                     ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: getRegularStyle(context).copyWith(
-                        fontWeight: FontWeight.w400,
-                        color: blackColor,
-                        fontSize: 15.r),
                   ),
                 ),
               ],

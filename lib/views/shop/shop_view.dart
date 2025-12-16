@@ -3,15 +3,17 @@ import 'dart:developer';
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/shop/shop_controller.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_error_widget.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_no_connection_widget.dart';
 import 'package:b2b_partenership/core/global/widgets/global_sliver_server_status_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/place_holder.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/home/work_category_loading.dart';
 import 'package:b2b_partenership/widgets/shop/all_felids_widget.dart';
 import 'package:b2b_partenership/widgets/shop/category_item.dart';
 import 'package:b2b_partenership/widgets/shop/product_row_loading_widget.dart';
-import 'package:b2b_partenership/widgets/shop/product_stack_loading_widget.dart';
+import 'package:b2b_partenership/widgets/shop/product_stack_loading_sliver_list.dart';
 import 'package:b2b_partenership/widgets/shop/shop_item_product_row_widget.dart';
 import 'package:b2b_partenership/widgets/shop/shop_item_product_stack_widget.dart';
 import 'package:flutter/cupertino.dart';
@@ -169,6 +171,9 @@ class ShopView extends StatelessWidget {
                         ),
                       ),
                       SliverToBoxAdapter(
+                        child: Gap(10),
+                      ),
+                      SliverToBoxAdapter(
                         child: Text(
                           "Best Selling Bags".tr,
                           style: getMediumStyle(context).copyWith(
@@ -183,9 +188,22 @@ class ShopView extends StatelessWidget {
                       ),
                       GlobalSliverServerStatusWidget(
                         statusRequest: controller.productsStatus,
-                        noDataChild: SliverFillRemaining(),
-                        errorChild: SliverFillRemaining(),
-                        noConnectionChild: SliverFillRemaining(),
+                        noDataChild: SliverToBoxAdapter(
+                          child: PlaceHolderWidget(
+                            icon: Image.asset("assets/images/no_orders.png"),
+                            title: 'No Bags Now'.tr,
+                            subTitle: 'Try again later'.tr,
+                          ),
+                        ),
+                        errorChild:
+                            SliverToBoxAdapter(child: CustomErrorWidget()),
+                        noConnectionChild: SliverToBoxAdapter(
+                          child: CustomNoConnectionWidget(
+                            onTap: () {
+                              controller.getMostProducts();
+                            },
+                          ),
+                        ),
                         loadingChild: ProductRowLoadingWidget(),
                         successChild: SliverList.separated(
                           separatorBuilder: (context, index) => Gap(20.h),
@@ -226,10 +244,23 @@ class ShopView extends StatelessWidget {
                       ),
                       GlobalSliverServerStatusWidget(
                         statusRequest: controller.recommendedProductsStatus,
-                        noDataChild: SizedBox(),
-                        errorChild: SizedBox(),
-                        noConnectionChild: SizedBox(),
-                        loadingChild: ProductStackLoadingWidget(),
+                        noDataChild: SliverToBoxAdapter(
+                          child: PlaceHolderWidget(
+                            icon: Image.asset("assets/images/no_orders.png"),
+                            title: 'No Bags Now'.tr,
+                            subTitle: 'Try again later'.tr,
+                          ),
+                        ),
+                        errorChild:
+                            SliverToBoxAdapter(child: CustomErrorWidget()),
+                        noConnectionChild: SliverToBoxAdapter(
+                          child: CustomNoConnectionWidget(
+                            onTap: () {
+                              controller.recommendedProducts();
+                            },
+                          ),
+                        ),
+                        loadingChild: ProductStackLoadingSliverList(),
                         successChild: SliverList.separated(
                           separatorBuilder: (context, index) => Gap(20.h),
                           itemCount: controller.shopRecommendedProducts.length,

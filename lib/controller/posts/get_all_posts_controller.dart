@@ -258,7 +258,7 @@ class AllPostsController extends GetxController {
     statusRequest = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getAllPendingServices,
-        data: {
+        queryParameters: {
           if (searchController.text.isNotEmpty) 'search': searchController.text,
           if (selectedCountry != null) "country_id": selectedCountry!.id,
           if (selectedCity != null) "government_id": selectedCity!.id,
@@ -322,7 +322,7 @@ class AllPostsController extends GetxController {
     update(['dropdown']);
     final response = await CustomRequest(
         path: ApiConstance.cities,
-        data: {"country_id": selectedCountry?.id},
+        queryParameters: {"country_id": selectedCountry?.id},
         fromJson: (json) {
           return json['data']
               .map<CityModel>((city) => CityModel.fromJson(city))

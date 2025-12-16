@@ -1,8 +1,13 @@
 import 'package:b2b_partenership/controller/orders/orders_controller.dart';
-import 'package:b2b_partenership/core/global/widgets/custom_sliver_server_status_widget.dart';
+import 'package:b2b_partenership/core/enums/status_request.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_error_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_no_connection_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/global_server_status_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/place_holder.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/widgets/orders/order_loading_widget.dart';
 import 'package:b2b_partenership/widgets/orders/order_widget.dart';
 import 'package:b2b_partenership/widgets/please_login_widget.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +28,6 @@ class OrdersView extends StatelessWidget {
         builder: (OrdersController controller) {
           return Scaffold(
             appBar: AppBar(
-              // iconTheme: IconThemeData(color: whiteColor),
-              // backgroundColor: primaryColor,
-              // toolbarHeight: context.isTablet ? 45.h : null,
-              // automaticallyImplyLeading: false,
               title: Text(
                 "My Orders".tr,
                 style: getMediumStyle(context).copyWith(
@@ -35,40 +36,51 @@ class OrdersView extends StatelessWidget {
                     fontSize: 18.r),
               ),
             ),
-            body: Padding(
-              padding: EdgeInsets.symmetric(
-                  // horizontal: 16.w,
-                  //vertical: 10.h,
+            body: CustomScrollView(
+              physics: ClampingScrollPhysics(),
+              slivers: [
+                if (controller.statusRequest == StatusRequest.noConnection ||
+                    controller.statusRequest == StatusRequest.noData ||
+                    controller.statusRequest == StatusRequest.error)
+                  SliverToBoxAdapter(
+                    child: Gap(200),
                   ),
-              child: CustomScrollView(
-                physics: ClampingScrollPhysics(),
-                slivers: [
-                  // SliverToBoxAdapter(
-                  //   child: Padding(
-                  //       padding: EdgeInsets.all(16), child: OrderFilter()),
-                  // ),
-                  CustomSliverServerStatusWidget(
-                    statusRequest: controller.statusRequest,
-                    child: SliverGrid.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: context.isTablet ? 2 : 1,
-                        crossAxisSpacing: 10,
-                        childAspectRatio: 2.8,
-                      ),
-                      itemCount: controller.orders.length,
-                      itemBuilder: (context, index) {
-                        return OrderWidget(
-                          orderModel: controller.orders[index],
-                        );
+                GlobalServerStatusWidget(
+                  statusRequest: controller.statusRequest,
+                  errorChild: SliverToBoxAdapter(child: CustomErrorWidget()),
+                  noConnectionChild: SliverToBoxAdapter(
+                    child: CustomNoConnectionWidget(
+                      onTap: () {
+                        controller.getOrders();
                       },
-                      // separatorBuilder: (context, index) => Gap(10.h),
                     ),
                   ),
-                  SliverToBoxAdapter(
-                    child: Gap(20.h),
+                  noDataChild: SliverToBoxAdapter(
+                    child: PlaceHolderWidget(
+                        icon: Image.asset("assets/images/no_orders.png"),
+                        title: "No Providers Now",
+                        subTitle:
+                            "No Providers Available Now, Please\ntry again later"),
                   ),
-                ],
-              ),
+                  loadingChild: OrderLoadingWidget(),
+                  successChild: SliverGrid.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: context.isTablet ? 2 : 1,
+                      crossAxisSpacing: 10,
+                      childAspectRatio: 2.8,
+                    ),
+                    itemCount: controller.orders.length,
+                    itemBuilder: (context, index) {
+                      return OrderWidget(
+                        orderModel: controller.orders[index],
+                      );
+                    },
+                  ),
+                ),
+                SliverToBoxAdapter(
+                  child: Gap(20.h),
+                ),
+              ],
             ),
           );
         });

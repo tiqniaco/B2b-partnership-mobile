@@ -61,19 +61,17 @@ class ServiceWidgetVertical extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Directionality(
+                              Text(
+                                services[index].description!,
                                 textDirection:
                                     containsArabic(services[index].description!)
                                         ? TextDirection.rtl
                                         : TextDirection.ltr,
-                                child: Text(
-                                  services[index].description!,
-                                  style: TextStyle(
-                                      fontSize: 14.r,
-                                      fontWeight: FontWeight.w500),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
+                                style: TextStyle(
+                                    fontSize: 14.r,
+                                    fontWeight: FontWeight.w500),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
                               ),
                               Gap(8),
                               Text(

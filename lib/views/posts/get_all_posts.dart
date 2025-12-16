@@ -154,8 +154,8 @@ class GetAllPosts extends StatelessWidget {
                     ),
                     noDataChild: PlaceHolderWidget(
                       icon: Image.asset("assets/images/no_posts.png"),
-                      title: 'No Posts Now',
-                      subTitle: 'Try again later or add new post',
+                      title: 'No Posts Now'.tr,
+                      subTitle: 'Try again later or add new post'.tr,
                     ),
                     successChild: ListView.separated(
                       separatorBuilder: (context, index) => Gap(20),

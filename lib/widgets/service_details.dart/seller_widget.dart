@@ -50,7 +50,7 @@ class SellerWidget extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            controller.service!.provider!.rating,
+                            controller.service!.provider!.rating.toString(),
                             style: getMediumStyle(context).copyWith(
                                 color: blackColor, fontWeight: FontWeight.w500),
                           ),
@@ -121,7 +121,7 @@ class SellerWidget extends StatelessWidget {
                       titleWidget("Seller Since".tr),
                       Gap(10),
                       valueWidget(
-                          getYear(controller.service!.provider!.createdAt)
+                          getYear(controller.service!.provider!.createdAt.toString())
                               .toString()),
                     ],
                   )

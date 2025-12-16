@@ -283,6 +283,8 @@ class AddNewJobView extends StatelessWidget {
           labelText: "Expiry Date".tr,
           hintText: "Select expiry date".tr,
           border: OutlineInputBorder(),
+          filled: true,
+          fillColor: whiteColor,
           suffixIcon: Icon(
             Icons.calendar_today,
             color: primaryColor,
@@ -307,6 +309,8 @@ class AddNewJobView extends StatelessWidget {
           color: primaryColor,
         ),
         decoration: InputDecoration(
+          filled: true,
+          fillColor: whiteColor,
           labelText: "Preferred Gender".tr,
           labelStyle: getRegularStyle(Get.context!),
           border: OutlineInputBorder(),

@@ -1,14 +1,20 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/in_category/providers_in_category_controller.dart';
+import 'package:b2b_partenership/core/enums/status_request.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_error_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_no_connection_widget.dart';
 
-import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/global_server_status_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/place_holder.dart';
 import 'package:b2b_partenership/core/services/responsive_helper.dart';
 
 import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/widgets/home/provider_loading.dart';
 import 'package:b2b_partenership/widgets/home/provider_widget.dart';
 
 import 'package:b2b_partenership/widgets/home/search_widget.dart';
+import 'package:b2b_partenership/widgets/home/sub_category_loading_widget.dart';
 import 'package:b2b_partenership/widgets/home/sub_category_widget.dart';
 
 import 'package:flutter/material.dart';
@@ -55,9 +61,12 @@ class _ProvidersInCategoriesState extends State<ProvidersInCategories>
               Gap(16),
               SizedBox(
                 height: 30.h,
-                child: SubCategoryWidget(
-                  subSpecializations: controller.subSpecializations,
-                ),
+                child: controller.statusRequestSupSpecialization ==
+                        StatusRequest.loading
+                    ? SubCategoryLoadingWidget()
+                    : SubCategoryWidget(
+                        subSpecializations: controller.subSpecializations,
+                      ),
               ),
               Gap(16),
               Text(
@@ -69,9 +78,37 @@ class _ProvidersInCategoriesState extends State<ProvidersInCategories>
               ),
               Gap(16),
               Expanded(
-                  child: CustomServerStatusWidget(
+                  child: GlobalServerStatusWidget(
                 statusRequest: controller.statusRequestServices,
-                child: GridView.builder(
+                errorChild: CustomErrorWidget(),
+                noDataChild: PlaceHolderWidget(
+                    icon: Image.asset("assets/images/no_providers.png"),
+                    title: "No Providers Now".tr,
+                    subTitle:
+                        "No Providers Available Now, Please\ntry again later"
+                            .tr),
+                loadingChild: GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: context.isTablet ? 3 : 2,
+                        mainAxisSpacing: 15,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: ResponsiveHelper.getValue(
+                            thinValue: 0.63, // 393
+                            extraSmallValue: 0.69, // 450
+                            smallValue: 0.82, // 600
+                            mediumValue: 0.89, // 900
+                            largeValue: 1.2, // 1200
+                            extraLargeValue: 1.5)),
+                    scrollDirection: Axis.vertical,
+                    itemCount: 10,
+                    itemBuilder: (context, index) => ProviderLoading()),
+                noConnectionChild: CustomNoConnectionWidget(
+                  onTap: () {
+                    controller.getSupSpecialization();
+                    controller.getProviders();
+                  },
+                ),
+                successChild: GridView.builder(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: context.isTablet ? 3 : 2,
                       mainAxisSpacing: 15,

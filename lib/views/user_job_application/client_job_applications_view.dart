@@ -2,13 +2,17 @@ import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/job_application/client_job_applications_controller.dart';
 import 'package:b2b_partenership/core/enums/job_application_status_enum.dart';
 import 'package:b2b_partenership/core/enums/jobs_contract_type_enum.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_error_widget.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
-import 'package:b2b_partenership/core/global/widgets/custom_sliver_server_status_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/custom_no_connection_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/global_sliver_server_status_widget.dart';
+import 'package:b2b_partenership/core/global/widgets/place_holder.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:b2b_partenership/core/utils/font_manager.dart';
 import 'package:b2b_partenership/widgets/jobs/job_widget.dart';
+import 'package:b2b_partenership/widgets/jobs/jobs_loading_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -109,10 +113,41 @@ class ClientJobApplicationsView extends StatelessWidget {
                       ),
                     ),
                   ),
-                  CustomSliverServerStatusWidget(
-                    emptyMessage: 'you don\'t add any job applications'.tr,
+                  GlobalSliverServerStatusWidget(
                     statusRequest: controller.statusRequest,
-                    child: SliverList.separated(
+                    loadingChild: JobsLoadingWidget(),
+                    errorChild: SliverToBoxAdapter(
+                        child: Column(
+                      children: [
+                        Gap(170),
+                        CustomErrorWidget(),
+                      ],
+                    )),
+                    noConnectionChild: SliverToBoxAdapter(
+                      child: Column(
+                        children: [
+                          Gap(170),
+                          CustomNoConnectionWidget(
+                            onTap: () {
+                              controller.getJobApplications();
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                    noDataChild: SliverToBoxAdapter(
+                      child: Column(
+                        children: [
+                          Gap(170),
+                          PlaceHolderWidget(
+                            icon: Image.asset("assets/images/no_jobs.png"),
+                            title: 'No Applications Now'.tr,
+                            subTitle: 'Try again later'.tr,
+                          ),
+                        ],
+                      ),
+                    ),
+                    successChild: SliverList.separated(
                       itemCount: controller.jobApplications.length,
                       itemBuilder: (context, index) {
                         final model = controller.jobApplications[index];

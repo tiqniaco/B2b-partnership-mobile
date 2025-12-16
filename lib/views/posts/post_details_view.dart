@@ -130,51 +130,51 @@ class PostDetailsView extends StatelessWidget {
                                 ),
                               ],
                             ),
-                            Spacer(),
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 8,
-                              ),
-                              decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey.shade400),
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              child: Row(
-                                children: [
-                                  Icon(
-                                    Icons.location_on,
-                                    color: primaryColor,
-                                    size: 16.r,
-                                  ),
-                                  Text(
-                                    translateDatabase(
-                                        arabic: controller.model.countryNameAr!,
-                                        english:
-                                            controller.model.countryNameEn!),
-                                    style: getMediumStyle(context).copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14.r,
-                                    ),
-                                  ),
-                                  Text(
-                                    "-",
-                                    style: getBoldStyle(context),
-                                  ),
-                                  Text(
-                                    translateDatabase(
-                                        arabic:
-                                            controller.model.governmentNameAr!,
-                                        english:
-                                            controller.model.governmentNameEn!),
-                                    style: getRegularStyle(context).copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12.r,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
+                            // Spacer(),
                           ],
+                        ),
+                        Gap(20),
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 8,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey.shade400),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Icon(
+                                Icons.location_on,
+                                color: primaryColor,
+                                size: 16.r,
+                              ),
+                              Text(
+                                translateDatabase(
+                                    arabic: controller.model.countryNameAr!,
+                                    english: controller.model.countryNameEn!),
+                                style: getMediumStyle(context).copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.r,
+                                ),
+                              ),
+                              Text(
+                                "-",
+                                style: getBoldStyle(context),
+                              ),
+                              Text(
+                                translateDatabase(
+                                    arabic: controller.model.governmentNameAr!,
+                                    english:
+                                        controller.model.governmentNameEn!),
+                                style: getRegularStyle(context).copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12.r,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         Gap(10),
                         SizedBox(
@@ -307,7 +307,8 @@ class PostDetailsView extends StatelessWidget {
                                             controller.priceOffers.length),
                                   )
                                 ],
-                              )
+                              ),
+                        Gap(24)
                       ],
                     ))
               ],

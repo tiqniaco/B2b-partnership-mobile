@@ -95,7 +95,7 @@ class UserPostsController extends GetxController {
     statusRequestSupSpecialization = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getSupSpecialization,
-        data: {"specialization_id": selectedSpecialization.id},
+        queryParameters: {"specialization_id": selectedSpecialization.id},
         fromJson: (json) {
           return json['data']
               .map<SubSpecializeModel>(
@@ -124,10 +124,7 @@ class UserPostsController extends GetxController {
     final response = await CustomRequest(
         path: ApiConstance.getClientServiceRequest(
             Get.find<AppPreferences>().getUserId()),
-       
         fromJson: (json) {
-      
-
           return json['data']
               .map<ServiceRequestModel>(
                   (type) => ServiceRequestModel.fromJson(type))

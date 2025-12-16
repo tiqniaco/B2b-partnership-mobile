@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:b2b_partenership/core/crud/custom_request.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
+import 'package:b2b_partenership/core/functions/internet_check.dart';
 import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
@@ -41,8 +42,8 @@ class ProviderProfileController extends GetxController {
     provId = Get.arguments['id'];
 
     await getProvider();
-    getServices();
-    getPreviousWork();
+   getServices();
+   getPreviousWork();
     getReview();
   }
 
@@ -155,7 +156,11 @@ class ProviderProfileController extends GetxController {
               .toList();
         }).sendGetRequest();
     response.fold((l) {
-      statusRequestServices = StatusRequest.error;
+      if (isConnectionError(l)) {
+        statusRequestServices = StatusRequest.noConnection;
+      } else {
+        statusRequestServices = StatusRequest.error;
+      }
     }, (r) {
       providerServices.clear();
       providerServices = r;
@@ -177,7 +182,11 @@ class ProviderProfileController extends GetxController {
               .toList();
         }).sendGetRequest();
     response.fold((l) {
-      statusRequestPerviousWork = StatusRequest.error;
+      if (isConnectionError(l)) {
+        statusRequestPerviousWork = StatusRequest.noConnection;
+      } else {
+        statusRequestPerviousWork = StatusRequest.error;
+      }
     }, (r) {
       previousWork.clear();
       previousWork = r;
@@ -198,8 +207,11 @@ class ProviderProfileController extends GetxController {
               .toList();
         }).sendGetRequest();
     response.fold((l) {
-      statusRequestReview = StatusRequest.error;
-      Logger().e(l.errMsg);
+      if (isConnectionError(l)) {
+        statusRequestReview = StatusRequest.noConnection;
+      } else {
+        statusRequestReview = StatusRequest.error;
+      }
     }, (r) {
       reviews.clear();
       statusRequestReview = StatusRequest.success;

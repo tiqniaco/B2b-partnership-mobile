@@ -98,7 +98,7 @@ class ShopItemProductRowWidget extends StatelessWidget {
                           ),
                         ],
                       ),
-                    Gap(5),
+                    Gap(10),
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 6),
                       child: Column(

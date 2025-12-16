@@ -8,7 +8,7 @@ import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 
 class ProductsInCategoryController extends GetxController {
-  StatusRequest productsStatus = StatusRequest.success;
+  StatusRequest productsStatus = StatusRequest.loading;
   final searchController = TextEditingController();
   List<ShopProductModel> products = [];
   late ShopCategoryModel model;

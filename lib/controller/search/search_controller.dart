@@ -114,7 +114,7 @@ class SearchControllerIM extends GetxController {
         AppSnackBars.error(message: l.errMsg);
         update();
       }, (r) {
-        Get.back();
+        // Get.back();
         isSearch = true;
 
         searchList.clear();

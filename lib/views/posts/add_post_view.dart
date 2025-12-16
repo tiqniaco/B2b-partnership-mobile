@@ -8,7 +8,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
-const primaryColor = Color(0xffbe0000);
 
 class AddPostView extends StatelessWidget {
   AddPostView({super.key});

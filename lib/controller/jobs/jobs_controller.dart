@@ -279,7 +279,7 @@ class JobsController extends GetxController {
     update(['dropdown']);
     final response = await CustomRequest(
         path: ApiConstance.cities,
-        data: {"country_id": selectedCountry?.id},
+        queryParameters: {"country_id": selectedCountry?.id},
         fromJson: (json) {
           return json['data']
               .map<CityModel>((city) => CityModel.fromJson(city))
@@ -328,7 +328,7 @@ class JobsController extends GetxController {
     update(['dropdown']);
     final response = await CustomRequest(
         path: ApiConstance.getSupSpecialization,
-        data: {
+        queryParameters: {
           "specialization_id": selectedSpecialization?.id,
         },
         fromJson: (json) {
@@ -376,7 +376,7 @@ class JobsController extends GetxController {
     log(data.toString(), name: 'data');
     final result = await CustomRequest<List<JobDetailsModel>>(
       path: ApiConstance.jobs,
-      data: data,
+      queryParameters: data,
       fromJson: (json) {
         currentPage = json['current_page'];
         totalPages = json['last_page'];

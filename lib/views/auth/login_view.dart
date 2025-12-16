@@ -225,7 +225,7 @@ class LoginView extends StatelessWidget {
                               Gap(5.w),
                               InkWell(
                                 onTap: () {
-                                  Get.toNamed(AppRoutes.chooseAccount);
+                                  Get.offNamed(AppRoutes.chooseAccount);
                                 },
                                 child: Text(
                                   "Create New".tr,
@@ -237,19 +237,8 @@ class LoginView extends StatelessWidget {
                               ),
                             ],
                           ),
-                          // InkWell(
-                          //   onTap: () {
-                          //     Get.toNamed(AppRoutes.clientHomeLayout);
-                          //   },
-                          //   child: Text(
-                          //     "home".tr,
-                          //     style: TextStyle(
-                          //       fontSize: 13.sp,
-                          //       fontWeight: FontWeight.w500,
-                          //       color: blackColor,
-                          //     ),
-                          //   ),
-                          // ),
+                          
+                       
                         ],
                       ),
                     ),

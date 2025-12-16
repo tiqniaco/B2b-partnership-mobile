@@ -1,9 +1,7 @@
-import 'package:b2b_partenership/core/constants/app_constants.dart';
-
 class PriceOfferModel {
-  String requestOfferId;
-  String userId;
-  String requestServiceId;
+  int requestOfferId;
+  int userId;
+  int requestServiceId;
   String offerDescription;
   String requestOfferStatus;
   String requestOfferPrice;
@@ -52,9 +50,7 @@ class PriceOfferModel {
         userEmail: json["user_email"],
         userCountryCode: json["user_country_code"],
         userPhone: json["user_phone"],
-        userImage: json["user_image"] == null
-            ? ""
-            : kBaseImageUrl + json["user_image"],
+        userImage: json["user_image"],
         userRole: json["user_role"],
         roleId: json["role_id"],
       );

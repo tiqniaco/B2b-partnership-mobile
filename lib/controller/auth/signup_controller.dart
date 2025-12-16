@@ -134,7 +134,7 @@ class SignupController extends GetxController {
     print("=============================");
   }
 
-  void nextStep() {
+  Future<void> nextStep() async {
     if (currentStep < providerSteps.length - 1) {
       currentStep++;
       update();
@@ -282,25 +282,111 @@ class SignupController extends GetxController {
   }
 
   Future<void> signupProvider() async {
-    if (formKey.currentState!.validate()) {
-      statusRequest = StatusRequest.loading;
-      // if (imageFile == null) {
-      //   AppSnackBars.warning(message: "upload profile image");
-      // } else
-      if (commercePdfFile == null && selectedType.nameEn != "Freelancer") {
-        AppSnackBars.warning(message: "upload commercial register pdf file".tr);
-      } else if (taxPdfFile == null && selectedType.nameEn != "Freelancer") {
-        AppSnackBars.warning(message: "upload tax card pdf file".tr);
-      } else if (taxNumberController.text.isEmpty &&
-          selectedType.nameEn != "Freelancer") {
-        AppSnackBars.warning(message: "Tax number is required".tr);
-      } else if (commercialNumberController.text.isEmpty &&
-          selectedType.nameEn != "Freelancer") {
-        AppSnackBars.warning(message: "Commercial number is required".tr);
-      } else if (vatController.text.isEmpty &&
-          selectedType.nameEn != "Freelancer") {
-        AppSnackBars.warning(message: "VAT number is required".tr);
-      } else {
+    if (currentStep == providerSteps.length - 1) {
+      if (formKey.currentState!.validate()) {
+        if (isCheckbox == false) {
+          AppSnackBars.warning(
+              message: "please accept terms and conditions".tr);
+          return;
+        }
+
+        if (usernameController.text.isEmpty ||
+            emailController.text.isEmpty ||
+            passwordController.text.isEmpty ||
+            phoneController.text.isEmpty) {
+          AppSnackBars.warning(
+              message: "All fields are required, please fill them".tr);
+          return;
+        }
+
+        if (commercePdfFile == null && selectedType.nameEn != "Freelancer") {
+          AppSnackBars.warning(
+              message: "upload commercial register pdf file".tr);
+        } else if (taxPdfFile == null && selectedType.nameEn != "Freelancer") {
+          AppSnackBars.warning(message: "upload tax card pdf file".tr);
+        } else if (taxNumberController.text.isEmpty &&
+            selectedType.nameEn != "Freelancer") {
+          AppSnackBars.warning(message: "Tax number is required".tr);
+        } else if (commercialNumberController.text.isEmpty &&
+            selectedType.nameEn != "Freelancer") {
+          AppSnackBars.warning(message: "Commercial number is required".tr);
+        } else if (vatController.text.isEmpty &&
+            selectedType.nameEn != "Freelancer") {
+          AppSnackBars.warning(message: "VAT number is required".tr);
+        } else {
+          statusRequest = StatusRequest.loading;
+          final result = await CustomRequest<Map<String, dynamic>>(
+              path: ApiConstance.register,
+              fromJson: (json) {
+                return json;
+              },
+              files: {
+                if (imageFile != null) "image": imageFile!.path,
+                if (commercePdfFile != null)
+                  "commercial_register": commercePdfFile!.path,
+                if (taxPdfFile != null) "tax_card": taxPdfFile!.path,
+              },
+              data: {
+                "name": usernameController.text,
+                "email": emailController.text,
+                "password": passwordController.text,
+                "country_code": selectedCountry.code,
+                "phone": phoneController.text,
+                "role": "provider",
+                "government_id": selectedCity.id,
+                "provider_types_id": selectedType.id,
+                "bio": bioController.text,
+                if (commercialNumberController.text.isNotEmpty)
+                  "commercial_register_number": commercialNumberController.text,
+                if (taxNumberController.text.isNotEmpty)
+                  "tax_card_number": taxNumberController.text,
+                if (vatController.text.isNotEmpty) "vat": vatController.text,
+              }).sendPostRequest();
+          result.fold((l) {
+            statusRequest = StatusRequest.error;
+            Logger().e(l.errMsg);
+            AppSnackBars.error(message: l.errMsg);
+            update();
+          }, (r) {
+            statusRequest = StatusRequest.success;
+            Get.find<AppPreferences>().setUserRoleId(r['role_id'].toString());
+            Get.find<AppPreferences>().setUserRole(r['role']);
+            Get.find<AppPreferences>().setStep("1");
+            Get.toNamed(
+              AppRoutes.otp,
+              arguments: {
+                'email': emailController.text,
+                'fromAuth': true,
+                'role': role,
+              },
+            );
+            //Get.offAllNamed(AppRoutes.otp, arguments: {"code": "0"});
+            update();
+          });
+        }
+      }
+    } else {
+      return nextStep();
+    }
+  }
+
+  Future<void> signupClient() async {
+    if (currentStep == providerSteps.length - 1) {
+      if (formKey.currentState!.validate()) {
+        if (isCheckbox == false) {
+          AppSnackBars.warning(
+              message: "please accept terms and conditions".tr);
+          return;
+        }
+        if (usernameController.text.isEmpty ||
+            emailController.text.isEmpty ||
+            passwordController.text.isEmpty ||
+            phoneController.text.isEmpty) {
+          AppSnackBars.warning(
+              message: "All fields are required, please fill them".tr);
+          return;
+        }
+        statusRequest = StatusRequest.loading;
         final result = await CustomRequest<Map<String, dynamic>>(
             path: ApiConstance.register,
             fromJson: (json) {
@@ -308,9 +394,6 @@ class SignupController extends GetxController {
             },
             files: {
               if (imageFile != null) "image": imageFile!.path,
-              if (commercePdfFile != null)
-                "commercial_register": commercePdfFile!.path,
-              if (taxPdfFile != null) "tax_card": taxPdfFile!.path,
             },
             data: {
               "name": usernameController.text,
@@ -318,16 +401,8 @@ class SignupController extends GetxController {
               "password": passwordController.text,
               "country_code": selectedCountry.code,
               "phone": phoneController.text,
-              "role": "provider",
+              "role": "client",
               "government_id": selectedCity.id,
-              "sub_specialization_id": selectedSubSpecialization.id,
-              "provider_types_id": selectedType.id,
-              "bio": bioController.text,
-              if (commercialNumberController.text.isNotEmpty)
-                "commercial_register_number": commercialNumberController.text,
-              if (taxNumberController.text.isNotEmpty)
-                "tax_card_number": taxNumberController.text,
-              if (vatController.text.isNotEmpty) "vat": vatController.text,
             }).sendPostRequest();
 
         result.fold((l) {
@@ -336,55 +411,20 @@ class SignupController extends GetxController {
           AppSnackBars.error(message: l.errMsg);
           update();
         }, (r) {
-          AppSnackBars.success(message: r['message']);
           statusRequest = StatusRequest.success;
-          Get.find<AppPreferences>().setUserRoleId(r['role_id'].toString());
-          Get.find<AppPreferences>().setUserRole(r['role']);
-          Get.find<AppPreferences>().setStep("1");
-          Get.offAllNamed(AppRoutes.authNoteScreen, arguments: {"code": "0"});
+          Get.toNamed(
+            AppRoutes.otp,
+            arguments: {
+              'email': emailController.text,
+              'fromAuth': true,
+              'role': role,
+            },
+          );
           update();
         });
       }
-    }
-  }
-
-  Future<void> signupClient() async {
-    if (formKey.currentState!.validate()) {
-      statusRequest = StatusRequest.loading;
-      // if (imageFile == null) {
-      //   AppSnackBars.warning(message: "upload profile image");
-      // } else {
-      final result = await CustomRequest<Map<String, dynamic>>(
-          path: ApiConstance.register,
-          fromJson: (json) {
-            return json;
-          },
-          files: {
-            if (imageFile != null) "image": imageFile!.path,
-          },
-          data: {
-            "name": usernameController.text,
-            "email": emailController.text,
-            "password": passwordController.text,
-            "country_code": selectedCountry.code,
-            "phone": phoneController.text,
-            "role": "client",
-            "government_id": selectedCity.id,
-          }).sendPostRequest();
-
-      result.fold((l) {
-        statusRequest = StatusRequest.error;
-        Logger().e(l.errMsg);
-        AppSnackBars.error(message: l.errMsg);
-        update();
-      }, (r) {
-        AppSnackBars.success(message: r['message']);
-        statusRequest = StatusRequest.success;
-        Get.offAllNamed(
-          AppRoutes.login,
-        );
-        update();
-      });
+    } else {
+      return nextStep();
     }
     // }
   }

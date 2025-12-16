@@ -54,8 +54,8 @@ class SelectProviderWidget extends StatelessWidget {
                 translateDatabase(
                     arabic: item.nameAr ?? "", english: item.nameEn ?? ""),
                 style: getLightStyle(context).copyWith(
-                  color: greyColor.withAlpha(160),
-                  fontWeight: FontWeight.bold,
+                  color: blackColor,
+                  //fontWeight: FontWeight.bold,
                 ),
               ),
             ],

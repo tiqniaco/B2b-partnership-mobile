@@ -16,9 +16,9 @@ class B2BPartnershipApp extends StatelessWidget {
   const B2BPartnershipApp({super.key});
 
   // LanguageEnum? language;
-  @override 
+  @override
   Widget build(BuildContext context) {
-     ResponsiveHelper.init(context);
+    ResponsiveHelper.init(context);
     return ScreenUtilInit(
       designSize: Size(375, 812), //const Size(430, 932),
       minTextAdapt: true,
@@ -28,7 +28,7 @@ class B2BPartnershipApp extends StatelessWidget {
 
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
-          locale: Locale('en'),
+          locale: Locale('ar'),
           //  Get.locale ?? kDefaultLocale,
           defaultTransition: kDefaultAppTransitionAnimation,
           initialBinding: AppBindings(),
