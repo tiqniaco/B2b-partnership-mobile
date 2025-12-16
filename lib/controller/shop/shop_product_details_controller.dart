@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:b2b_partenership/controller/shop/shop_cart_controller.dart';
 import 'package:b2b_partenership/core/crud/custom_request.dart';
@@ -10,6 +11,7 @@ import 'package:b2b_partenership/models/product_description_model.dart';
 import 'package:b2b_partenership/models/shop_product_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:path_provider/path_provider.dart';
@@ -24,7 +26,7 @@ class ShopProductDetailsController extends GetxController {
   late PageController pageController;
   int selectedIndex = 0;
   TextDirection textDirection = TextDirection.rtl;
-
+  QuillController controller = QuillController.basic();
   List<String> items = [
     "First step",
     "Second step",
@@ -33,11 +35,16 @@ class ShopProductDetailsController extends GetxController {
   ];
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
     pageController = PageController(initialPage: selectedIndex);
     productId = Get.arguments?['productId'] as String;
-    getProductDetails();
 
+    await getProductDetails();
+    final document = Document.fromJson(jsonDecode(product!.descriptionEn));
+    controller = QuillController(
+      document: document,
+      selection: const TextSelection.collapsed(offset: 0),
+    )..readOnly = true;
     super.onInit();
   }
 
