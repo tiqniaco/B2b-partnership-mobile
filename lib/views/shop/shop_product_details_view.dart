@@ -97,7 +97,7 @@ class ShopProductDetailsView extends StatelessWidget {
                     child: Container(
                         padding: EdgeInsets.symmetric(horizontal: 12),
                         decoration: BoxDecoration(
-                            color: primaryColor.withAlpha(70),
+                            color: primaryColor.withAlpha(50),
                             borderRadius: BorderRadius.circular(8)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -273,15 +273,14 @@ class ShopProductDetailsView extends StatelessWidget {
               color: controller.selectedIndex == index
                   ? primaryColor
                   : Colors.transparent,
-              border: Border.all(color: primaryColor)),
+              border: Border.all(color: greyColor)),
           child: Text(title.tr,
               textAlign: TextAlign.center,
               style: getMediumStyle(Get.context!).copyWith(
                 fontWeight: FontWeight.bold,
                 fontSize: 12.r,
-                color: controller.selectedIndex == index
-                    ? whiteColor
-                    : primaryColor,
+                color:
+                    controller.selectedIndex == index ? whiteColor : blackColor,
               )),
         ),
       ),

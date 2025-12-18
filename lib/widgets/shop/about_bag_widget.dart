@@ -5,6 +5,7 @@ import 'package:b2b_partenership/core/services/responsive_helper.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_quill/flutter_quill.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:get/get.dart';
@@ -12,9 +13,7 @@ import 'package:get/get.dart';
 class AboutBagWidget extends StatelessWidget {
   const AboutBagWidget({
     super.key,
-    // required this.content,
   });
-  // final List<BagContentModel> content;
   @override
   Widget build(BuildContext context) {
     return GetBuilder<ShopProductDetailsController>(
@@ -90,11 +89,26 @@ class AboutBagWidget extends StatelessWidget {
                     textDirection: containsArabic(descriptionEn)
                         ? TextDirection.rtl
                         : TextDirection.ltr,
-                    child: Text(descriptionEn,
-                        style: TextStyle(
-                            fontSize: 14.r,
-                            color: Colors.black87,
-                            height: 1.5)),
+                    child: QuillEditor.basic(
+                      controller: controller.controller,
+                      config: QuillEditorConfig(
+                        scrollable: false,
+                        autoFocus: false,
+                        expands: false,
+                        customStyles: DefaultStyles(
+                          paragraph: DefaultTextBlockStyle(
+                              TextStyle(
+                                  fontSize: 14.r,
+                                  color: blackColor,
+                                  height: 1.6,
+                                  fontWeight: FontWeight.normal),
+                              HorizontalSpacing(0, 0),
+                              VerticalSpacing(0, 0),
+                              VerticalSpacing(0, 0),
+                              null),
+                        ),
+                      ),
+                    ),
                   ),
                 ],
               ),
