@@ -8,6 +8,9 @@ import 'package:b2b_partenership/views/auth/signup_view.dart';
 import 'package:b2b_partenership/views/client_profile_view.dart';
 import 'package:b2b_partenership/views/home/home_layout_view.dart';
 import 'package:b2b_partenership/views/home/home_view.dart';
+import 'package:b2b_partenership/views/iso/certification_details_view.dart';
+import 'package:b2b_partenership/views/iso/iso_cart_view.dart';
+import 'package:b2b_partenership/views/iso/iso_certifications_view.dart';
 import 'package:b2b_partenership/views/user_job_application/search_job_applications_view.dart';
 import 'package:b2b_partenership/views/orders/orders_view.dart';
 import 'package:b2b_partenership/views/provider_profile/my_services/my_service.dart';
@@ -148,6 +151,10 @@ class AppRoutes {
   static const String myServices = '/myServices';
   static const String getServicesRequest = "/getServicesRequest";
   static const String clientProfile = "/clientProfile";
+
+  //iso 
+  static const String isoCertifications = '/isoCertifications';
+  static const String isoCertificationDetails = '/isoCertificationDetails';
 
   static final List<GetPage<dynamic>> pages = [
     // base
@@ -418,6 +425,16 @@ class AppRoutes {
     GetPage(
       name: clientProfile,
       page: () => ClientProfileView(),
+    ),
+
+    //iso
+    GetPage(
+      name: isoCertifications,
+      page: () => const IsoCertificationsView(),
+    ),
+    GetPage(
+      name: isoCertificationDetails,
+      page: () =>  CertificationDetailsScreen(),
     ),
   ];
 }

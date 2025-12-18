@@ -23,7 +23,7 @@ class CategoryItem extends GetView<ShopController> {
         Get.toNamed(AppRoutes.productsInCategory, arguments: {"model": model});
       },
       child: SizedBox(
-        width: 142.w,
+        width: 134.w,
         child: Stack(
           children: [
             Column(
@@ -40,6 +40,7 @@ class CategoryItem extends GetView<ShopController> {
                     child: CustomNetworkImage(
                       imageUrl: model.image,
                       fit: BoxFit.cover,
+                      width: double.infinity,
                     ),
                   ),
                 ),
@@ -62,7 +63,7 @@ class CategoryItem extends GetView<ShopController> {
                       style: getRegularStyle(context).copyWith(
                           fontWeight: FontWeight.w400,
                           color: blackColor,
-                          fontSize: 15.r),
+                          fontSize: 13.r),
                     ),
                   ),
                 ),

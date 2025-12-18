@@ -39,7 +39,7 @@ class _HomeSlidersState extends State<HomeSliders> {
       image: "assets/images/4 en.jpg",
       imageAr: "assets/images/4 ar.jpg",
       onPressed: () {
-        // Get.put(ProviderHomeLayoutController(this)).onBNavPressed(1);
+        Get.toNamed(AppRoutes.isoCertifications);
       },
     ),
     BannerWidget(

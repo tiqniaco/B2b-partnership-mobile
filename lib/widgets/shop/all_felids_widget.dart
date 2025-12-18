@@ -32,13 +32,13 @@ class AllFelidsWidget extends GetView<ShopController> {
                   child: Image.asset(
                     "assets/images/rr.png",
                     fit: BoxFit.cover,
-                    width: 140.w,
-                    height: 84.h,
+                    width: 134.w,
+                    height: 74.h,
                   ),
                 ),
                 Container(
-                  width: 140.w,
-                  height: 84.h,
+                  width: 134.w,
+                  height: 74.h,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
                         topRight: Radius.circular(10.r),

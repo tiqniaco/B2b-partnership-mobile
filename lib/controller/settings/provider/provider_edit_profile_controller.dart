@@ -129,7 +129,7 @@ class ProviderEditProfileController extends GetxController {
   Future<void> getCities() async {
     final response = await CustomRequest(
         path: ApiConstance.cities,
-        data: {"country_id": selectedCountry.id},
+        queryParameters: {"country_id": selectedCountry.id},
         fromJson: (json) {
           return json['data']
               .map<CityModel>((city) => CityModel.fromJson(city))
@@ -204,10 +204,9 @@ class ProviderEditProfileController extends GetxController {
   }
 
   Future<void> getSupSpecialization() async {
-    // statusRequestSupSpecialization = StatusRequest.loading;
     final response = await CustomRequest(
         path: ApiConstance.getSupSpecialization,
-        data: {"specialization_id": selectedSpecialization.id},
+        queryParameters: {"specialization_id": selectedSpecialization.id},
         fromJson: (json) {
           return json['data']
               .map<SubSpecializeModel>(
@@ -303,7 +302,7 @@ class ProviderEditProfileController extends GetxController {
         files: {
           if (image != null) "image": image?.path ?? '',
           if (taxPdfFile != null) "tax_card": taxPdfFile?.path ?? '',
-          if (commercePdfFile != null) "tax_card": commercePdfFile?.path ?? '',
+          if (commercePdfFile != null) "commercial_register": commercePdfFile?.path ?? '',
         },
       ).sendPostRequest();
       result.fold((l) {

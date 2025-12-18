@@ -140,7 +140,7 @@ class ShopView extends StatelessWidget {
                       ),
                       SliverToBoxAdapter(
                         child: SizedBox(
-                          height: 135.h,
+                          height: 124.h,
                           child: controller.categoriesStatus ==
                                   StatusRequest.loading
                               ? ListView.separated(
@@ -155,7 +155,7 @@ class ShopView extends StatelessWidget {
                                   ),
                                 )
                               : ListView.separated(
-                                  separatorBuilder: (context, index) => Gap(10),
+                                  separatorBuilder: (context, index) => Gap(16),
                                   itemCount:
                                       controller.shopCategories.length + 1,
                                   scrollDirection: Axis.horizontal,

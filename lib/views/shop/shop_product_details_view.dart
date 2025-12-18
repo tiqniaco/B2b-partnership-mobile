@@ -102,6 +102,7 @@ class ShopProductDetailsView extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            Gap(10),
                             Badge(
                               padding: EdgeInsets.all(0),
                               label: Text(
@@ -196,7 +197,7 @@ class ShopProductDetailsView extends StatelessWidget {
                           style: TextStyle(
                               height: 1.2,
                               fontWeight: FontWeight.w500,
-                              fontSize: 16.r),
+                              fontSize: 14.r),
                         ),
                         Gap(8),
                         priceRow(
