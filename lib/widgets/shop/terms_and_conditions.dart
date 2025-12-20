@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/controller/shop/shop_product_details_controller.dart';
 import 'package:b2b_partenership/core/functions/get_text_direction.dart';
+import 'package:b2b_partenership/core/functions/responsive_font.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,7 +42,7 @@ class TermsAndConditions extends StatelessWidget {
                       Text(
                         "Terms and Conditions".tr,
                         style: TextStyle(
-                            fontSize: 18.r,
+                            fontSize: 16.rf(),
                             fontWeight: FontWeight.bold,
                             color: blackColor,
                             height: 1.5),
@@ -57,7 +58,9 @@ class TermsAndConditions extends StatelessWidget {
                       child: Text(
                         terms,
                         style: TextStyle(
-                            fontSize: 14.r, color: Colors.black87, height: 1.5),
+                            fontSize: 13.rf(),
+                            color: Colors.black87,
+                            height: 1.5),
                       ),
                     ),
                   ),

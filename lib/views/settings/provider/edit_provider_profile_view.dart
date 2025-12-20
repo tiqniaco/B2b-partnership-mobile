@@ -278,136 +278,113 @@ class EditProviderProfileView extends StatelessWidget {
                                     validator: (val) {
                                       return controller.validUserData(val);
                                     },
+                                  ),
+                                  Gap(20.h),
+                                  AuthTextForm(
+                                    enabled: false,
+                                    lable: "Commercial Register".tr,
+                                    preicon: CupertinoIcons.person,
+                                    hintText: "No file selected   ".tr,
+                                    textFormController:
+                                        controller.commercialController,
+                                    validator: (val) {
+                                      return controller.validUserData(val);
+                                    },
+                                    sufix: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8.0, vertical: 10),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          if (controller.commercePdfFile !=
+                                              null)
+                                            InkWell(
+                                              onTap: () {
+                                                controller.removeFile("c");
+                                              },
+                                              child: Icon(
+                                                Icons.close,
+                                                size: 23.sp,
+                                              ),
+                                            ),
+                                          Gap(5),
+                                          SizedBox(
+                                            width: 80.h,
+                                            child: ElevatedButton(
+                                                onPressed: () {
+                                                  controller.pickPDF("c");
+                                                },
+                                                style: ElevatedButton.styleFrom(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        30))),
+                                                child: Text(
+                                                  "Upload".tr,
+                                                  style: TextStyle(
+                                                      fontSize: 12.sp),
+                                                )),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  Gap(20),
+                                  AuthTextForm(
+                                    enabled: false,
+                                    lable: "Tax Card".tr,
+                                    preicon: CupertinoIcons.person,
+                                    hintText: "No file selected   ".tr,
+                                    textFormController:
+                                        controller.taxCartController,
+                                    validator: (val) {
+                                      return controller.validUserData(val);
+                                    },
+                                    sufix: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10.0, horizontal: 8),
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          if (controller.taxPdfFile != null)
+                                            InkWell(
+                                              onTap: () {
+                                                controller.removeFile("t");
+                                              },
+                                              child: Icon(
+                                                Icons.close,
+                                                size: 23.sp,
+                                              ),
+                                            ),
+                                          Gap(5),
+                                          SizedBox(
+                                            width: 80.h,
+                                            child: ElevatedButton(
+                                                style: ElevatedButton.styleFrom(
+                                                    shape:
+                                                        RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        30))),
+                                                onPressed: () {
+                                                  controller.pickPDF(
+                                                    "t",
+                                                  );
+                                                },
+                                                child: Text(
+                                                  "Upload".tr,
+                                                  style: TextStyle(
+                                                      fontSize: 12.sp),
+                                                )),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   )
                                 ],
-
-                                Gap(20.h),
-                                // Row(
-                                //   children: [
-                                //     Expanded(
-                                //       child: SelectSpecializationWidget(
-                                //         value:
-                                //             controller.selectedSpecialization,
-                                //         models: controller.specializations,
-                                //         onChanged: (val) {
-                                //           controller.onSpecializeChanged(val);
-                                //         },
-                                //       ),
-                                //     ),
-                                //     Gap(8.w),
-                                //     Expanded(
-                                //       child: SelectSupSpecializationWidget(
-                                //         value: controller
-                                //             .selectedSubSpecialization,
-                                //         models: controller.subSpecializations,
-                                //         onChanged: (val) {
-                                //           controller
-                                //               .onSubSpecializeChanged(val);
-                                //         },
-                                //       ),
-                                //     ),
-                                //   ],
-                                // ),
-                                // Gap(20.h),
-                                AuthTextForm(
-                                  enabled: false,
-                                  lable: "Commercial Register".tr,
-                                  preicon: CupertinoIcons.person,
-                                  hintText: "No file selected   ".tr,
-                                  textFormController:
-                                      controller.commercialController,
-                                  validator: (val) {
-                                    return controller.validUserData(val);
-                                  },
-                                  sufix: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 8.0, vertical: 10),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        if (controller.commercePdfFile != null)
-                                          InkWell(
-                                            onTap: () {
-                                              controller.removeFile("c");
-                                            },
-                                            child: Icon(
-                                              Icons.close,
-                                              size: 23.sp,
-                                            ),
-                                          ),
-                                        Gap(5),
-                                        SizedBox(
-                                          width: 80.h,
-                                          child: ElevatedButton(
-                                              onPressed: () {
-                                                controller.pickPDF("c");
-                                              },
-                                              style: ElevatedButton.styleFrom(
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              30))),
-                                              child: Text(
-                                                "Upload".tr,
-                                                style:
-                                                    TextStyle(fontSize: 12.sp),
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Gap(20),
-                                AuthTextForm(
-                                  enabled: false,
-                                  lable: "Tax Card".tr,
-                                  preicon: CupertinoIcons.person,
-                                  hintText: "No file selected   ".tr,
-                                  textFormController:
-                                      controller.taxCartController,
-                                  validator: (val) {
-                                    return controller.validUserData(val);
-                                  },
-                                  sufix: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10.0, horizontal: 8),
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        if (controller.taxPdfFile != null)
-                                          InkWell(
-                                            onTap: () {
-                                              controller.removeFile("t");
-                                            },
-                                            child: Icon(
-                                              Icons.close,
-                                              size: 23.sp,
-                                            ),
-                                          ),
-                                        Gap(5),
-                                        SizedBox(
-                                          width: 80.h,
-                                          child: ElevatedButton(
-                                              style: ElevatedButton.styleFrom(
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              30))),
-                                              onPressed: () {
-                                                controller.pickPDF(
-                                                  "t",
-                                                );
-                                              },
-                                              child: Text(
-                                                "Upload".tr,
-                                                style:
-                                                    TextStyle(fontSize: 12.sp),
-                                              )),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
                                 Gap(20),
                               ],
                             ),

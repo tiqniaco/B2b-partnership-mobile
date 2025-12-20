@@ -1,6 +1,6 @@
+import 'package:b2b_partenership/core/functions/responsive_font.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
 class HomeRowWidget extends StatelessWidget {
@@ -19,7 +19,7 @@ class HomeRowWidget extends StatelessWidget {
             style: TextStyle(
               color: Colors.black87,
               fontWeight: FontWeight.w500,
-              fontSize: 16.r,
+              fontSize: 16.rf(),
             ),
           ),
           InkWell(
@@ -32,7 +32,7 @@ class HomeRowWidget extends StatelessWidget {
                     color: primaryColor,
                     decoration: TextDecoration.underline,
                     decorationColor: primaryColor,
-                    fontSize: 14.r,
+                    fontSize: 14.rf(),
                   ),
                 ),
               ],

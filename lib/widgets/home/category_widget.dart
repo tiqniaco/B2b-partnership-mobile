@@ -1,4 +1,5 @@
 import 'package:b2b_partenership/app_routes.dart';
+import 'package:b2b_partenership/core/functions/responsive_font.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
@@ -25,7 +26,7 @@ class CategoryWidget extends StatelessWidget {
                     arguments: {"model": specializations[index]});
               },
               child: SizedBox(
-                width: 90.w,
+                width: context.isTablet ? 76.w : 90.w,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -45,7 +46,7 @@ class CategoryWidget extends StatelessWidget {
                           english: specializations[index].nameEn!),
                       textAlign: TextAlign.center,
                       style: getLightStyle(context).copyWith(
-                        fontSize: 12.r,
+                        fontSize: 12.rf(),
                         fontWeight: FontWeight.w400,
                       ),
                       maxLines: 2,

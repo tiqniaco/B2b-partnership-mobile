@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/core/functions/please_login_dialog.dart';
+import 'package:b2b_partenership/core/functions/responsive_font.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_error_widget.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_no_connection_widget.dart';
 import 'package:b2b_partenership/core/global/widgets/global_server_status_widget.dart';
@@ -108,7 +109,7 @@ class GetAllPosts extends StatelessWidget {
                         child: Icon(
                           FontAwesomeIcons.sliders,
                           color: whiteColor,
-                          size: 18.r,
+                          size: 16.r,
                         ),
                       ),
                     ),
@@ -131,7 +132,7 @@ class GetAllPosts extends StatelessWidget {
                           child: Text(
                             "My Posts".tr,
                             style: getMediumStyle(context).copyWith(
-                              fontSize: 12.r,
+                              fontSize: 11.rf(),
                               fontWeight: FontWeight.bold,
                               color: whiteColor,
                             ),

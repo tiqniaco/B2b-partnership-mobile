@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
 import '/app.dart';
@@ -25,11 +24,12 @@ void main() async {
   await initialServices();
   tz.initializeTimeZones();
   runApp(
-    DevicePreview(
-        enabled: true,
-        builder: (context) =>
+    // DevicePreview(
+    //     enabled: true,
+    //     builder: (context) =>
             // const B2BPartnershipApp(),
             // const B2BPartnershipApp():
-            const B2BPartnershipApp()),
+            const B2BPartnershipApp(),
+            //),
   );
 }

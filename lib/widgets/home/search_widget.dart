@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:b2b_partenership/core/functions/responsive_font.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -40,7 +41,7 @@ class SearchWidget extends StatelessWidget {
             Text(
               title.tr,
               style: TextStyle(
-                fontSize: 13.r,
+                fontSize: 13.rf(max: 10),
                 color: Colors.black87.withAlpha(120),
                 fontWeight: FontWeight.w500,
               ),

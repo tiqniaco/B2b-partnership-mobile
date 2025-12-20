@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/controller/shop/shop_product_details_controller.dart';
 import 'package:b2b_partenership/core/functions/get_text_direction.dart';
+import 'package:b2b_partenership/core/functions/responsive_font.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/services/responsive_helper.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
@@ -31,7 +32,8 @@ class AboutBagWidget extends StatelessWidget {
             Gap(8),
             Text("Bag Contents".tr,
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14.r, fontWeight: FontWeight.bold)),
+                style:
+                    TextStyle(fontSize: 12.rf(), fontWeight: FontWeight.bold)),
             Gap(8),
             GridView.builder(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -41,7 +43,7 @@ class AboutBagWidget extends StatelessWidget {
                       extraSmallValue: 1, // 450
                       smallValue: 1.3, // 600
                       mediumValue: 1.5, // 900
-                      largeValue: 1.9, // 1200
+                      largeValue: 1.8, // 1200
                       extraLargeValue: 2.4)),
               itemBuilder: (context, index) => Column(
                 children: [
@@ -58,7 +60,7 @@ class AboutBagWidget extends StatelessWidget {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                          fontSize: 12.r, fontWeight: FontWeight.bold))
+                          fontSize: 11.rf(), fontWeight: FontWeight.bold))
                 ],
               ),
               shrinkWrap: true,
@@ -79,7 +81,7 @@ class AboutBagWidget extends StatelessWidget {
                         : TextDirection.ltr,
                     child: Text(titleEn,
                         style: TextStyle(
-                            fontSize: 15.r,
+                            fontSize: 13.rf(),
                             color: primaryColor,
                             height: 1.5,
                             fontWeight: FontWeight.bold)),
@@ -98,7 +100,7 @@ class AboutBagWidget extends StatelessWidget {
                         customStyles: DefaultStyles(
                           paragraph: DefaultTextBlockStyle(
                               TextStyle(
-                                  fontSize: 14.r,
+                                  fontSize: 13.rf(),
                                   color: blackColor,
                                   height: 1.6,
                                   fontWeight: FontWeight.normal),

@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/shop/shop_controller.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
+import 'package:b2b_partenership/core/functions/responsive_font.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_error_widget.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_no_connection_widget.dart';
 import 'package:b2b_partenership/core/global/widgets/global_sliver_server_status_widget.dart';
@@ -77,20 +78,24 @@ class ShopView extends StatelessWidget {
                                           controller.getMostProducts();
                                         }
                                       },
-                                      icon: Icon(
-                                        CupertinoIcons.search,
-                                        size: context.isTablet ? 13.w : 18.w,
-                                        color: Colors.black87,
+                                      icon: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 8.0),
+                                        child: Icon(
+                                          CupertinoIcons.search,
+                                          size: context.isTablet ? 13.w : 18.w,
+                                          color: Colors.black87,
+                                        ),
                                       ),
                                     ),
                                     contentPadding: EdgeInsets.symmetric(
                                       vertical: context.isTablet ? 10.h : 12,
                                       horizontal:
-                                          context.isTablet ? 10.w : 20.w,
+                                          context.isTablet ? 12.w : 20.w,
                                     ),
                                     hintText: 'Search'.tr,
                                     hintStyle: TextStyle(
-                                      fontSize: 16.r,
+                                      fontSize: 16.rf(),
                                       fontWeight: FontWeight.w400,
                                       color: Colors.black87,
                                     ),
@@ -113,7 +118,7 @@ class ShopView extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              Gap(16),
+                              Gap(12.w),
                               InkWell(
                                 onTap: () {
                                   Get.toNamed(AppRoutes.shopCart);
@@ -139,6 +144,9 @@ class ShopView extends StatelessWidget {
                         ),
                       ),
                       SliverToBoxAdapter(
+                        child: Gap(5.h),
+                      ),
+                      SliverToBoxAdapter(
                         child: SizedBox(
                           height: 124.h,
                           child: controller.categoriesStatus ==
@@ -155,7 +163,8 @@ class ShopView extends StatelessWidget {
                                   ),
                                 )
                               : ListView.separated(
-                                  separatorBuilder: (context, index) => Gap(16),
+                                  separatorBuilder: (context, index) =>
+                                      Gap(12.w),
                                   itemCount:
                                       controller.shopCategories.length + 1,
                                   scrollDirection: Axis.horizontal,
@@ -179,7 +188,7 @@ class ShopView extends StatelessWidget {
                           style: getMediumStyle(context).copyWith(
                             fontWeight: FontWeight.w500,
                             color: blackColor,
-                            fontSize: 18.r,
+                            fontSize: 18.rf(),
                           ),
                         ),
                       ),
@@ -235,7 +244,7 @@ class ShopView extends StatelessWidget {
                           style: getMediumStyle(context).copyWith(
                             fontWeight: FontWeight.w500,
                             color: blackColor,
-                            fontSize: 18.r,
+                            fontSize: 18.rf(),
                           ),
                         ),
                       ),

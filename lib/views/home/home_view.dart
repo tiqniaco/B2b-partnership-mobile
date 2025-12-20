@@ -118,6 +118,8 @@ class _HomeViewState extends State<HomeView> {
                             errorChild: CustomErrorWidget(),
                             loadingChild: ProviderLoadingWidget(),
                             successChild: GridView.builder(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
                               gridDelegate:
                                   SliverGridDelegateWithFixedCrossAxisCount(
                                       crossAxisCount: 2,

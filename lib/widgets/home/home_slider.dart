@@ -73,7 +73,7 @@ class _HomeSlidersState extends State<HomeSliders> {
                 onPageChanged: (index, reson) {
                   changeSlider(index);
                 },
-                height: context.isTablet ? 250 : 160.h,
+                height: context.isTablet ? 230.h : 160.h,
                 animateToClosest: true,
                 autoPlay: true,
                 padEnds: true,
@@ -88,8 +88,8 @@ class _HomeSlidersState extends State<HomeSliders> {
             AnimatedSmoothIndicator(
               effect: ScaleEffect(
                 activeDotColor: primaryColor,
-                dotHeight: 8,
-                dotWidth: 8,
+                dotHeight: 6.h,
+                dotWidth: 6.h,
                 spacing: 6,
                 dotColor: primaryColor.withAlpha(60),
                 scale: 1.5,

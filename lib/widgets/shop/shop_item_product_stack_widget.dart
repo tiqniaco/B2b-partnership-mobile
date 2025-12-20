@@ -1,4 +1,5 @@
 import 'package:b2b_partenership/core/functions/get_text_direction.dart';
+import 'package:b2b_partenership/core/functions/responsive_font.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
@@ -26,7 +27,7 @@ class ShopItemProductStackWidget extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        height: context.isTablet ? 280 : 230,
+        //height: context.isTablet ? 220.h : 180.h,
         width: 1.r,
         decoration: BoxDecoration(
             border: Border.all(
@@ -49,14 +50,14 @@ class ShopItemProductStackWidget extends StatelessWidget {
                       imageUrl: product.image,
                       fit: BoxFit.cover,
                       width: double.infinity,
-                      height: context.isTablet ? 224 : 160,
+                      height: context.isTablet ? 160.h : 130.h,
                     ),
                     Container(
                       alignment: Alignment.topCenter,
                       padding:
                           EdgeInsets.symmetric(horizontal: 40, vertical: 8),
                       width: double.infinity,
-                      height: context.isTablet ? 224 : 160,
+                      height: context.isTablet ? 160.h : 130.h,
                       decoration: BoxDecoration(
                         borderRadius: customOneRadius,
                         //color: blackColor.withAlpha(170),
@@ -93,7 +94,7 @@ class ShopItemProductStackWidget extends StatelessWidget {
                           child: Text(
                             "-${product.discount}%",
                             style: TextStyle(
-                              fontSize: 14.r,
+                              fontSize: 14.rf(),
                               fontWeight: FontManager.boldFontWeight,
                               color: whiteColor,
                             ),
@@ -115,13 +116,13 @@ class ShopItemProductStackWidget extends StatelessWidget {
                     fontWeight: FontManager.mediumFontWeight,
                     height: 1.2,
                     color: blackColor,
-                    fontSize: 15.r),
+                    fontSize: 15.rf(max: 14)),
                 textAlign: TextAlign.start,
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
-            // Gap(8),
+            Gap(16),
           ],
         ),
       ),

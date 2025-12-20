@@ -1,5 +1,6 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/core/functions/get_text_direction.dart';
+import 'package:b2b_partenership/core/functions/responsive_font.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
@@ -98,7 +99,7 @@ class ProviderWidget extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: getRegularStyle(context).copyWith(
                         fontWeight: FontWeight.w500,
-                        fontSize: 13.r,
+                        fontSize: 13.rf(),
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -127,7 +128,7 @@ class ProviderWidget extends StatelessWidget {
                       textAlign: TextAlign.center,
                       style: getLightStyle(context).copyWith(
                         color: Colors.black54,
-                        fontSize: 13.r,
+                        fontSize: 13.rf(),
                         fontWeight: FontWeight.normal,
                       ),
                       maxLines: 2,
@@ -144,7 +145,7 @@ class ProviderWidget extends StatelessWidget {
                             "id": provider.providerId.toString()
                           });
                         },
-                        fontSize: 12.r,
+                        fontSize: 12.rf(),
                         text: "View".tr,
                       ),
                     ),

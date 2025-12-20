@@ -6,7 +6,6 @@ class BannerWidget extends StatelessWidget {
   const BannerWidget(
       {super.key,
       required this.image,
-
       required this.onPressed,
       required this.imageAr});
   final String image;
@@ -22,7 +21,7 @@ class BannerWidget extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6.r),
         ),
-        height: context.isTablet ? 250 : 240.h,
+        height: context.isTablet ? 260.h : 240.h,
         width: double.infinity,
         child: Stack(
           children: [

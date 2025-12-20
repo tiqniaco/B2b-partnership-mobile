@@ -1,6 +1,7 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/shop/shop_cart_controller.dart';
 import 'package:b2b_partenership/core/functions/get_text_direction.dart';
+import 'package:b2b_partenership/core/functions/responsive_font.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_error_widget.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_no_connection_widget.dart';
@@ -19,7 +20,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:b2b_partenership/controller/shop/shop_product_details_controller.dart';
 import 'package:b2b_partenership/core/functions/translate_database.dart';
-import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 
 class ShopProductDetailsView extends StatelessWidget {
   const ShopProductDetailsView({super.key});
@@ -51,7 +51,7 @@ class ShopProductDetailsView extends StatelessWidget {
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 14.r,
-                          fontWeight: FontWeight.w500)),
+                          fontWeight: FontWeight.bold)),
                   InkWell(
                     onTap: () => Get.toNamed(AppRoutes.shopCart),
                     child: Container(
@@ -80,7 +80,7 @@ class ShopProductDetailsView extends StatelessWidget {
                       icon: Icon(Icons.download, color: primaryColor, size: 18),
                       label: Text("Demo".tr,
                           style: TextStyle(
-                              fontSize: 12.r,
+                              fontSize: 11.rf(),
                               color: primaryColor,
                               fontWeight: FontWeight.bold)),
                       style: OutlinedButton.styleFrom(
@@ -94,45 +94,78 @@ class ShopProductDetailsView extends StatelessWidget {
                   ),
                   Gap(8),
                   Expanded(
-                    child: Container(
-                        padding: EdgeInsets.symmetric(horizontal: 12),
-                        decoration: BoxDecoration(
-                            color: primaryColor.withAlpha(50),
+                    child: OutlinedButton.icon(
+                      onPressed: controller.downloadDemo,
+                      icon: Badge(
+                        padding: EdgeInsets.all(0),
+                        label: Text(
+                          Get.put(
+                            ShopCartController()..getCart(),
+                          ).carts.length.toString(),
+                          style: TextStyle(color: Colors.white, fontSize: 8.r),
+                        ),
+                        child: Icon(
+                          Icons.shopping_cart,
+                          color: primaryColor,
+                          size: 20.r,
+                        ),
+                      ),
+                      label: Text("Add to Cart".tr,
+                          style: TextStyle(
+                              fontSize: 11.rf(),
+                              color: primaryColor,
+                              fontWeight: FontWeight.bold)),
+                      style: OutlinedButton.styleFrom(
+                        backgroundColor: primaryColor.withAlpha(50),
+                        shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Gap(10),
-                            Badge(
-                              padding: EdgeInsets.all(0),
-                              label: Text(
-                                Get.put(
-                                  ShopCartController()..getCart(),
-                                ).carts.length.toString(),
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 8.r),
-                              ),
-                              child: Icon(
-                                Icons.shopping_cart,
-                                color: primaryColor,
-                                size: 20.r,
-                              ),
-                            ),
-                            Gap(8),
-                            Expanded(
-                              child: CustomLoadingButton(
-                                height: 55.h,
-                                textColor: primaryColor,
-                                text: "Add to Cart".tr,
-                                fontSize: 11.r,
-                                onPressed: controller.addToCart,
-                                backgroundColor: transparentColor,
-                                borderRadius: 8,
-                              ),
-                            ),
-                          ],
-                        )),
+                        side: BorderSide(
+                            color: primaryColor.withAlpha(30), width: 1.2),
+                        fixedSize: Size(120.w, 57.h),
+                      ),
+                    ),
                   ),
+
+                  // Expanded(
+                  //   child: Container(
+                  //       padding: EdgeInsets.symmetric(horizontal: 12),
+                  //       decoration: BoxDecoration(
+                  //           color: primaryColor.withAlpha(50),
+                  //           borderRadius: BorderRadius.circular(8)),
+                  //       child: Row(
+                  //         mainAxisAlignment: MainAxisAlignment.center,
+                  //         children: [
+                  //           Gap(10),
+                  //           Badge(
+                  //             padding: EdgeInsets.all(0),
+                  //             label: Text(
+                  //               Get.put(
+                  //                 ShopCartController()..getCart(),
+                  //               ).carts.length.toString(),
+                  //               style: TextStyle(
+                  //                   color: Colors.white, fontSize: 8.r),
+                  //             ),
+                  //             child: Icon(
+                  //               Icons.shopping_cart,
+                  //               color: primaryColor,
+                  //               size: 20.r,
+                  //             ),
+                  //           ),
+                  //           Gap(8),
+                  //           Expanded(
+                  //             child: CustomLoadingButton(
+                  //               height: 55.h,
+                  //               textColor: primaryColor,
+                  //               text: "Add to Cart".tr,
+                  //               fontSize: 11.r,
+                  //               onPressed: controller.addToCart,
+                  //               backgroundColor: transparentColor,
+                  //               borderRadius: 8,
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       )),
+                  // ),
                 ],
               ),
             ),
@@ -158,7 +191,7 @@ class ShopProductDetailsView extends StatelessWidget {
                                 ),
                                 child: CustomNetworkImage(
                                   imageUrl: controller.product?.image ?? "",
-                                  height: 180.h,
+                                  height: context.isTablet ? 200.h : 180.h,
                                   borderRadius: 8,
                                   width: double.infinity,
                                   fit: BoxFit.cover,
@@ -180,7 +213,7 @@ class ShopProductDetailsView extends StatelessWidget {
                                     style: TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 16.r),
+                                        fontSize: 16.rf()),
                                   ),
                                 ),
                               )
@@ -197,7 +230,7 @@ class ShopProductDetailsView extends StatelessWidget {
                           style: TextStyle(
                               height: 1.2,
                               fontWeight: FontWeight.w500,
-                              fontSize: 14.r),
+                              fontSize: 13.rf(max: 15)),
                         ),
                         Gap(8),
                         priceRow(
@@ -278,7 +311,7 @@ class ShopProductDetailsView extends StatelessWidget {
               textAlign: TextAlign.center,
               style: getMediumStyle(Get.context!).copyWith(
                 fontWeight: FontWeight.bold,
-                fontSize: 12.r,
+                fontSize: 11.rf(),
                 color:
                     controller.selectedIndex == index ? whiteColor : blackColor,
               )),
@@ -292,7 +325,7 @@ class ShopProductDetailsView extends StatelessWidget {
       tilePadding: EdgeInsets.zero,
       title: Text(
         translateDatabase(arabic: e.titleAr, english: e.titleEn),
-        style: TextStyle(fontSize: 16.r, fontWeight: FontWeight.w500),
+        style: TextStyle(fontSize: 14.rf(), fontWeight: FontWeight.w500),
       ),
       children: e.contents.map<Widget>((item) {
         return ListTile(
@@ -302,12 +335,12 @@ class ShopProductDetailsView extends StatelessWidget {
           leading: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.check_circle, color: primaryColor, size: 18.r),
+              Icon(Icons.check_circle, color: primaryColor, size: 15.r),
             ],
           ),
           title: Text(
             translateDatabase(arabic: item.contentAr, english: item.contentEn),
-            style: TextStyle(fontSize: 15.r),
+            style: TextStyle(fontSize: 12.rf()),
           ),
         );
       }).toList(),

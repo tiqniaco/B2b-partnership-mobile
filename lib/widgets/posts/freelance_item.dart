@@ -2,6 +2,7 @@ import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/core/constants/app_constants.dart';
 import 'package:b2b_partenership/core/functions/get_text_direction.dart';
 import 'package:b2b_partenership/core/functions/please_login_dialog.dart';
+import 'package:b2b_partenership/core/functions/responsive_font.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/services/date_time_convertor.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
@@ -69,7 +70,7 @@ class FreelanceItem extends StatelessWidget {
                                   model.name!,
                                   style: getMediumStyle(context).copyWith(
                                     color: Colors.black,
-                                    fontSize: 15.r,
+                                    fontSize: 14.rf(),
                                     fontWeight: FontWeight.w500,
                                   ),
                                 ),
@@ -78,7 +79,7 @@ class FreelanceItem extends StatelessWidget {
                                   style: getLightStyle(context).copyWith(
                                     color: Colors.black,
                                     fontWeight: FontManager.regularFontWeight,
-                                    fontSize: 10.r,
+                                    fontSize: 9.rf(),
                                   ),
                                 ),
                               ],
@@ -99,7 +100,7 @@ class FreelanceItem extends StatelessWidget {
                         border: Border.all(color: primaryColor)),
                     child: Text(model.status!.tr,
                         style: TextStyle(
-                            fontSize: 12.r,
+                            fontSize: 12.rf(),
                             color: primaryColor,
                             fontWeight: FontWeight.bold)),
                   ),
@@ -116,7 +117,7 @@ class FreelanceItem extends StatelessWidget {
                     ? TextDirection.rtl
                     : TextDirection.ltr,
                 style: TextStyle(
-                  fontSize: 13.r,
+                  fontSize: 13.rf(),
                   color: Colors.black,
                 ),
                 maxLines: 2,

@@ -5,6 +5,7 @@ import 'package:b2b_partenership/controller/settings/provider/provider_setting_c
 import 'package:b2b_partenership/controller/settings/setting_controller.dart';
 import 'package:b2b_partenership/core/enums/language_enum.dart';
 import 'package:b2b_partenership/core/functions/change_app_lang.dart';
+import 'package:b2b_partenership/core/functions/responsive_font.dart';
 import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/core/utils/assets_data.dart';
@@ -60,7 +61,7 @@ class _HomeLayoutViewState extends State<HomeLayoutView>
             appBar: controller.currentIndex != 4
                 ? AppBar(
                     automaticallyImplyLeading: false,
-                    toolbarHeight: context.isTablet ? 70.h : 42.h,
+                    toolbarHeight: context.isTablet ? 50.h : 42.h,
                     flexibleSpace: Container(
                       alignment: AlignmentDirectional.center,
                       padding: EdgeInsets.only(
@@ -75,8 +76,8 @@ class _HomeLayoutViewState extends State<HomeLayoutView>
                               controller.onBNavPressed(4);
                             },
                             child: Container(
-                              height: 50,
-                              width: 50,
+                              height: 40.h,
+                              width: 40.h,
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   border: Border.all(color: Colors.grey[300]!)),
@@ -110,7 +111,7 @@ class _HomeLayoutViewState extends State<HomeLayoutView>
                                 Text(
                                   "Welcome!".tr,
                                   style: getBoldStyle(context).copyWith(
-                                    fontSize: 15.r,
+                                    fontSize: 15.rf(),
                                     color: greyColor,
                                   ),
                                 ),
@@ -124,7 +125,7 @@ class _HomeLayoutViewState extends State<HomeLayoutView>
                                               .menuModel?.data.name ??
                                           "Guest".tr,
                                   style: TextStyle(
-                                    fontSize: 15.r,
+                                    fontSize: 15.rf(),
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
@@ -202,7 +203,7 @@ class _HomeLayoutViewState extends State<HomeLayoutView>
                     automaticallyImplyLeading: false,
                     title: Text("Menu".tr,
                         style: TextStyle(
-                            fontSize: 18.r,
+                            fontSize: 18.rf(),
                             color: blackColor,
                             fontWeight: FontWeight.bold)),
                   ),
@@ -219,7 +220,7 @@ class _HomeLayoutViewState extends State<HomeLayoutView>
                   selectedLabelStyle:
                       TextStyle(color: primaryColor, fontSize: 12.r),
                   unselectedLabelStyle:
-                      TextStyle(color: unSelectedBNavColor, fontSize: 12.r),
+                      TextStyle(color: unSelectedBNavColor, fontSize: 13.rf()),
                   onTap: (value) => controller.onBNavPressed(value),
                   currentIndex: controller.currentIndex,
                   backgroundColor: backgroundColor,

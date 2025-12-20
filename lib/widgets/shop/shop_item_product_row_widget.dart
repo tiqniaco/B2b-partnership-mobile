@@ -1,4 +1,5 @@
 import 'package:b2b_partenership/core/functions/get_text_direction.dart';
+import 'package:b2b_partenership/core/functions/responsive_font.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/themes.dart';
 import 'package:b2b_partenership/core/utils/font_manager.dart';
@@ -90,7 +91,7 @@ class ShopItemProductRowWidget extends StatelessWidget {
                             child: Text(
                               "-${product.discount}%",
                               style: TextStyle(
-                                fontSize: 14.r,
+                                fontSize: 14.rf(),
                                 fontWeight: FontManager.boldFontWeight,
                                 color: whiteColor,
                               ),
@@ -111,7 +112,7 @@ class ShopItemProductRowWidget extends StatelessWidget {
                               product.titleEn,
                               style: TextStyle(
                                   height: 1,
-                                  fontSize: 14.r,
+                                  fontSize: 14.rf(max: 12),
                                   fontWeight: FontWeight.w400,
                                   color: blackColor),
                               textAlign: TextAlign.start,
@@ -122,30 +123,6 @@ class ShopItemProductRowWidget extends StatelessWidget {
                           Gap(8),
                           priceRow(product.price, product.discount,
                               color: blackColor),
-                          // Row(
-                          //   children: [
-                          //     Text(
-                          //       product.discount != "0"
-                          //           ? "${double.parse(product.price) - (double.parse(product.discount) / 100 * double.parse(product.price))}\$"
-                          //           : "${product.price}\$",
-                          //       style: getLightStyle(context).copyWith(
-                          //         fontWeight: FontManager.mediumFontWeight,
-                          //         fontSize: 14.r,
-                          //         color: primaryColor,
-                          //       ),
-                          //     ),
-                          //     Gap(8),
-                          //     if (product.discount != "0")
-                          //       Text(
-                          //         "${product.price}\$",
-                          //         style: getMediumStyle(context).copyWith(
-                          //           fontSize: 12.r,
-                          //           color: blackColor.withAlpha(150),
-                          //           decoration: TextDecoration.lineThrough,
-                          //         ),
-                          //       ),
-                          //   ],
-                          // ),
                         ],
                       ),
                     ),
