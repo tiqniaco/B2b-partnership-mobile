@@ -48,7 +48,7 @@ class _ProvidersInCategoriesState extends State<ProvidersInCategories>
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -81,12 +81,14 @@ class _ProvidersInCategoriesState extends State<ProvidersInCategories>
                   child: GlobalServerStatusWidget(
                 statusRequest: controller.statusRequestServices,
                 errorChild: CustomErrorWidget(),
-                noDataChild: PlaceHolderWidget(
-                    icon: Image.asset("assets/images/no_providers.png"),
-                    title: "No Providers Now".tr,
-                    subTitle:
-                        "No Providers Available Now, Please\ntry again later"
-                            .tr),
+                noDataChild: Center(
+                  child: PlaceHolderWidget(
+                      icon: Image.asset("assets/images/no_providers.png"),
+                      title: "No Providers Now".tr,
+                      subTitle:
+                          "No Providers Available Now, Please\ntry again later"
+                              .tr),
+                ),
                 loadingChild: GridView.builder(
                     gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: context.isTablet ? 3 : 2,
@@ -118,8 +120,19 @@ class _ProvidersInCategoriesState extends State<ProvidersInCategories>
                           extraSmallValue: 0.69, // 450
                           smallValue: 0.82, // 600
                           mediumValue: 0.89, // 900
-                          largeValue: 1.2, // 1200
-                          extraLargeValue: 1.5)),
+                          largeValue: 0.8, // 1200
+                          extraLargeValue: 1.5)
+                      // crossAxisCount: context.isTablet ? 3 : 2,
+                      // mainAxisSpacing: 15,
+                      // crossAxisSpacing: 10,
+                      // childAspectRatio: ResponsiveHelper.getValue(
+                      //     thinValue: 0.63, // 393
+                      //     extraSmallValue: 0.69, // 450
+                      //     smallValue: 0.82, // 600
+                      //     mediumValue: 0.89, // 900
+                      //     largeValue: 1.2, // 1200
+                      //     extraLargeValue: 1.5)
+                      ),
                   scrollDirection: Axis.vertical,
                   itemCount: controller.providers.length,
                   itemBuilder: (context, index) => ProviderWidget(

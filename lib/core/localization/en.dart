@@ -40,6 +40,8 @@ const Map<String, String> en = {
   "add the number here": "add the number here",
   "Commercial Register Number": "Commercial Register Number",
   "Tax Number": "Tax Number",
+  'Retry!': 'Retry!',
+  "Payment History": "Payment History",
 
   // auth
   "Welcome Back!": "Welcome Back!",

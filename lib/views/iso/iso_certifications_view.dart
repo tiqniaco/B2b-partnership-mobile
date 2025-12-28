@@ -2,7 +2,6 @@ import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 class IsoCertificationsView extends StatelessWidget {
@@ -11,6 +10,13 @@ class IsoCertificationsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+          title: Text("ISO Certifications".tr,
+              style: TextStyle(
+                fontSize: 18.r,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF0F172A),
+              ))),
       body: SafeArea(
         child: Container(
           decoration: const BoxDecoration(
@@ -22,29 +28,29 @@ class IsoCertificationsView extends StatelessWidget {
           ),
           child: Column(
             children: [
-              Container(
-                margin: EdgeInsets.symmetric(horizontal: 6.w),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(6.r),
-                ),
-                // height: context.isTablet ? 250 : 190.h,
-                width: double.infinity,
-                child: Stack(
-                  children: [
-                    ClipRRect(
-                        borderRadius: BorderRadius.circular(6.r),
-                        child: Image.asset(
-                          Get.locale?.languageCode == "en"
-                              ? "assets/images/4 en.jpg"
-                              : "assets/images/4 ar.jpg",
-                          fit: BoxFit.fitWidth,
-                          //   height: context.isTablet ? 250 : 200.h,
-                          width: double.infinity,
-                        )),
-                  ],
-                ),
-              ),
-              Gap(8),
+              // Container(
+              //   margin: EdgeInsets.symmetric(horizontal: 6.w),
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(6.r),
+              //   ),
+              //   // height: context.isTablet ? 250 : 190.h,
+              //   width: double.infinity,
+              //   child: Stack(
+              //     children: [
+              //       ClipRRect(
+              //           borderRadius: BorderRadius.circular(6.r),
+              //           child: Image.asset(
+              //             Get.locale?.languageCode == "en"
+              //                 ? "assets/images/4 en.jpg"
+              //                 : "assets/images/4 ar.jpg",
+              //             fit: BoxFit.fitWidth,
+              //             //   height: context.isTablet ? 250 : 200.h,
+              //             width: double.infinity,
+              //           )),
+              //     ],
+              //   ),
+              // ),
+              // Gap(8),
               Expanded(
                 child: SingleChildScrollView(
                   padding: const EdgeInsets.all(16),
@@ -52,17 +58,17 @@ class IsoCertificationsView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // _buildHeader(),
-                      Gap(12),
-                      _buildStatsSection(),
-                      const SizedBox(height: 24),
-                      const Text(
-                        'Our Certifications',
-                        style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF0F172A),
-                        ),
-                      ),
+                      // Gap(12),
+                      //  _buildStatsSection(),
+                      // const SizedBox(height: 24),
+                      // const Text(
+                      //   'Our Certifications',
+                      //   style: TextStyle(
+                      //     fontSize: 20,
+                      //     fontWeight: FontWeight.bold,
+                      //     color: Color(0xFF0F172A),
+                      //   ),
+                      // ),
                       const SizedBox(height: 16),
                       _buildCertificationsGrid(),
                       const SizedBox(height: 24),
@@ -75,93 +81,6 @@ class IsoCertificationsView extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-
-
-  Widget _buildStatsSection() {
-    final stats = [
-      {
-        'label': 'Active Certifications',
-        'value': '4',
-        'icon': Icons.fact_check
-      },
-      {'label': 'Years Certified', 'value': '8+', 'icon': Icons.trending_up},
-      {'label': 'Compliance Rate', 'value': '100%', 'icon': Icons.check_circle},
-    ];
-
-    return GridView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 3,
-        crossAxisSpacing: 12,
-        mainAxisSpacing: 12,
-        childAspectRatio: 1,
-      ),
-      itemCount: stats.length,
-      itemBuilder: (context, index) {
-        final stat = stats[index];
-        return Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: const Color(0xFFE2E8F0)),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x0A000000),
-                blurRadius: 4,
-                offset: Offset(0, 1),
-              ),
-            ],
-          ),
-          padding: const EdgeInsets.all(12),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                stat['label'] as String,
-                style: TextStyle(
-                  fontSize: 14.r,
-                  fontWeight: FontWeight.w500,
-                  color: Color(0xFF64748B),
-                ),
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-              const SizedBox(height: 4),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    stat['value'] as String,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF0F172A),
-                    ),
-                  ),
-                  Container(
-                    width: 36,
-                    height: 36,
-                    decoration: BoxDecoration(
-                      color:
-                          primaryColor.withAlpha(18), //const Color(0xFFDCEEFB),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Icon(
-                      stat['icon'] as IconData,
-                      color: primaryColor,
-                      size: 20,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 
@@ -204,7 +123,7 @@ class IsoCertificationsView extends StatelessWidget {
         crossAxisCount: 2,
         crossAxisSpacing: 16,
         mainAxisSpacing: 16,
-        childAspectRatio: 0.85,
+        childAspectRatio: 0.8,
       ),
       itemCount: certifications.length,
       itemBuilder: (context, index) {

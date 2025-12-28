@@ -7,6 +7,8 @@ import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/utils/app_snack_bars.dart';
 import 'package:b2b_partenership/models/city_model.dart';
 import 'package:b2b_partenership/models/country_model.dart';
+import 'package:b2b_partenership/models/months_model.dart';
+import 'package:b2b_partenership/models/payment_model.dart';
 import 'package:b2b_partenership/models/specialize_model.dart';
 import 'package:b2b_partenership/models/sub_specialize_model.dart';
 import 'package:b2b_partenership/widgets/posts/build_text_form.dart';
@@ -31,33 +33,32 @@ class AddProviderServiceController extends GetxController {
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController overviewController = TextEditingController();
   final TextEditingController videoController = TextEditingController();
-
+  late PaymentMonths selectedMonth;
   late CountryModel selectedCountry;
   CityModel? selectedCity;
   late SpecializeModel selectedSpecialization;
   late SubSpecializeModel selectedSubSpecialization;
-
+  StatusRequest statusRequestMonths = StatusRequest.loading;
+  StatusRequest statusRequestPackages = StatusRequest.loading;
+  List<PaymentMonths> monthsList = [];
+  List<PaymentPackage> packages = [];
   List<CountryModel> countries = [];
   List<CityModel> cities = [];
   List<SpecializeModel> specializations = [];
   List<SubSpecializeModel> subSpecializations = [];
   int currentStep = 0;
-
   StatusRequest statusRequest = StatusRequest.loading;
   StatusRequest statusRequestCity = StatusRequest.loading;
   StatusRequest statusRequestCountry = StatusRequest.loading;
   StatusRequest statusRequestSpecialization = StatusRequest.loading;
   StatusRequest statusRequestSupSpecialization = StatusRequest.loading;
   File? imageFile;
-
   bool get isLoading =>
       statusRequestCity == StatusRequest.loading ||
       statusRequestCountry == StatusRequest.loading ||
       statusRequestSpecialization == StatusRequest.loading ||
       statusRequestSupSpecialization == StatusRequest.loading;
-
   List<ServiceFeatureModel> features = [];
-
   List<Map<String, TextEditingController>> featuresControllers = [];
 
   void increaseFeatures() {
@@ -94,7 +95,68 @@ class AddProviderServiceController extends GetxController {
     await getSpecialization();
     getSupSpecialization();
     increaseFeatures();
+    getMonths();
     super.onInit();
+  }
+
+  void onTapMonth(PaymentMonths month) {
+    selectedMonth = month;
+    print(selectedMonth.durationMonths);
+    getPackages();
+    update(['packages']);
+  }
+
+  Future<void> getMonths() async {
+    statusRequestMonths = StatusRequest.loading;
+    final response = await CustomRequest(
+        path: ApiConstance.getPaymentMonths,
+        // queryParameters: {"specialization_id": selectedMonth.id},
+        fromJson: (json) {
+          return json['data']
+              .map<PaymentMonths>((type) => PaymentMonths.fromJson(type))
+              .toList();
+        }).sendGetRequest();
+    response.fold((l) {
+      statusRequestMonths = StatusRequest.error;
+      Logger().e(l.errMsg);
+    }, (r) {
+      monthsList.clear();
+      monthsList = r;
+      if (r.isEmpty) {
+        statusRequestMonths = StatusRequest.noData;
+      } else {
+        selectedMonth = monthsList[0];
+        getPackages();
+        statusRequestMonths = StatusRequest.success;
+      }
+    });
+    update();
+  }
+
+  Future<void> getPackages() async {
+    statusRequestPackages = StatusRequest.loading;
+    final response = await CustomRequest(
+        path: ApiConstance.getPaymentMethods,
+        queryParameters: {"months_plan_id": selectedMonth.id},
+        fromJson: (json) {
+          return json['data']
+              .map<PaymentPackage>((e) => PaymentPackage.fromJson(e))
+              .toList();
+        }).sendGetRequest();
+    response.fold((l) {
+      statusRequestPackages = StatusRequest.error;
+      Logger().e(l.errMsg);
+    }, (r) {
+      packages.clear();
+      packages = r;
+      // selectedMonth = r[0];
+      if (r.isEmpty) {
+        statusRequestPackages = StatusRequest.noData;
+      } else {
+        statusRequestPackages = StatusRequest.success;
+      }
+    });
+    update(['packages']);
   }
 
   onCountryChanged(value) {

@@ -1,3 +1,4 @@
+import 'package:b2b_partenership/core/functions/responsive_font.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
@@ -32,7 +33,7 @@ class PlaceHolderWidget extends StatelessWidget {
             style: txt.headlineSmall?.copyWith(
               fontWeight: FontWeight.w900,
               color: Colors.black87,
-              fontSize: 20.r,
+              fontSize: 18.rf(),
             ),
           ),
           Gap(2.h),
@@ -42,7 +43,7 @@ class PlaceHolderWidget extends StatelessWidget {
             style: txt.bodyMedium?.copyWith(
               color: Colors.black54,
               height: 1.4,
-              fontSize: 16.r,
+              fontSize: 14.rf(),
               fontWeight: FontWeight.normal,
             ),
           ),

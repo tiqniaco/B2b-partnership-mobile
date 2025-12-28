@@ -34,7 +34,8 @@ const Map<String, String> ar = {
   "Notifications": "الاشعارات",
   "Search ...": "بحث ...",
   "See all": "مشاهدة الكل",
-
+  'Retry!': 'اعادة المحاولة',
+  "Payment History": "تاريخ الدفع",
   // auth
   "Welcome Back!": "مرحبا بعودتك!",
   "Login": "تسجيل الدخول",

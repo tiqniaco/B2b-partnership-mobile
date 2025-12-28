@@ -409,10 +409,10 @@ class CertificationDetailsScreen extends StatelessWidget {
                   //   icon: certification['icon'] as IconData,
                   //   colors: certification['colors'] as List<Color>,
                   // );
-                  //  cartProvider.addItem(cartItem);
+                  //  cartProvider.addItem(cartItem); 
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
-                      content: const Text('Added to cart!'),
+                      content: const Text('Complete Order'),
                       duration: const Duration(seconds: 2),
                       backgroundColor:
                           (certification['colors'] as List<Color>)[0],
@@ -420,7 +420,7 @@ class CertificationDetailsScreen extends StatelessWidget {
                   );
                 },
                 child: Text(
-                  'Add to Cart',
+                  'Complete Order',
                   style: TextStyle(
                     fontSize: 16,
                     color: Colors.white,

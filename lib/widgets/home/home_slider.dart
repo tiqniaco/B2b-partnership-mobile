@@ -1,6 +1,8 @@
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/home/home_controller.dart';
 import 'package:b2b_partenership/controller/home/home_layout_controller.dart';
+import 'package:b2b_partenership/core/functions/please_login_dialog.dart';
+import 'package:b2b_partenership/core/services/app_prefs.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/widgets/home/banner_widget.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -53,7 +55,11 @@ class _HomeSlidersState extends State<HomeSliders> {
       image: "assets/images/3 en.png",
       imageAr: "assets/images/3 ar.png",
       onPressed: () {
-        Get.toNamed(AppRoutes.addProviderService);
+        if (Get.find<AppPreferences>().getToken() != "") {
+          Get.toNamed(AppRoutes.addProviderService);
+        } else {
+          pleaseLoginDialog();
+        }
       },
     ),
   ];

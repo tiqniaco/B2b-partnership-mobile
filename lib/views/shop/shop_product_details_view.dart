@@ -84,7 +84,6 @@ class ShopProductDetailsView extends StatelessWidget {
                               color: primaryColor,
                               fontWeight: FontWeight.bold)),
                       style: OutlinedButton.styleFrom(
-                        //padding: EdgeInsets.symmetric(vertical: 4),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8)),
                         side: BorderSide(color: primaryColor, width: 1.2),
@@ -95,7 +94,7 @@ class ShopProductDetailsView extends StatelessWidget {
                   Gap(8),
                   Expanded(
                     child: OutlinedButton.icon(
-                      onPressed: controller.downloadDemo,
+                      onPressed: controller.addToCart,
                       icon: Badge(
                         padding: EdgeInsets.all(0),
                         label: Text(
@@ -125,47 +124,6 @@ class ShopProductDetailsView extends StatelessWidget {
                       ),
                     ),
                   ),
-
-                  // Expanded(
-                  //   child: Container(
-                  //       padding: EdgeInsets.symmetric(horizontal: 12),
-                  //       decoration: BoxDecoration(
-                  //           color: primaryColor.withAlpha(50),
-                  //           borderRadius: BorderRadius.circular(8)),
-                  //       child: Row(
-                  //         mainAxisAlignment: MainAxisAlignment.center,
-                  //         children: [
-                  //           Gap(10),
-                  //           Badge(
-                  //             padding: EdgeInsets.all(0),
-                  //             label: Text(
-                  //               Get.put(
-                  //                 ShopCartController()..getCart(),
-                  //               ).carts.length.toString(),
-                  //               style: TextStyle(
-                  //                   color: Colors.white, fontSize: 8.r),
-                  //             ),
-                  //             child: Icon(
-                  //               Icons.shopping_cart,
-                  //               color: primaryColor,
-                  //               size: 20.r,
-                  //             ),
-                  //           ),
-                  //           Gap(8),
-                  //           Expanded(
-                  //             child: CustomLoadingButton(
-                  //               height: 55.h,
-                  //               textColor: primaryColor,
-                  //               text: "Add to Cart".tr,
-                  //               fontSize: 11.r,
-                  //               onPressed: controller.addToCart,
-                  //               backgroundColor: transparentColor,
-                  //               borderRadius: 8,
-                  //             ),
-                  //           ),
-                  //         ],
-                  //       )),
-                  // ),
                 ],
               ),
             ),

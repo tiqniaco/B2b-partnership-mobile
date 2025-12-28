@@ -49,13 +49,14 @@ class ProviderSettingView extends StatelessWidget {
                                     CustomNetworkImage(
                                       shape: BoxShape.circle,
                                       imageUrl:
-                                          controller.menuModel!.data!.image,
+                                          controller.menuModel?.data?.image ??
+                                              '',
                                       fit: BoxFit.cover,
                                       height: 100.r,
                                     ),
                                     Gap(10),
                                     Text(
-                                      controller.menuModel!.data!.name,
+                                      controller.menuModel?.data?.name ?? '',
                                       style: getMediumStyle(context).copyWith(
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -436,6 +437,14 @@ class ProviderSettingView extends StatelessWidget {
                                             .menuModel!.data!.providerId
                                       },
                                     );
+                                  },
+                                ),
+                                Gap(8),
+                                rowWithArrow(
+                                  CupertinoIcons.creditcard_fill,
+                                  "Payment History".tr,
+                                  () {
+                                    Get.toNamed(AppRoutes.paymentHistory);
                                   },
                                 ),
                                 Gap(8),

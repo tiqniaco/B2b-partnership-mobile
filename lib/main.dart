@@ -25,11 +25,9 @@ void main() async {
   tz.initializeTimeZones();
   runApp(
     // DevicePreview(
-    //     enabled: true,
-    //     builder: (context) =>
-            // const B2BPartnershipApp(),
-            // const B2BPartnershipApp():
-            const B2BPartnershipApp(),
-            //),
+    //   enabled: true,
+    //   builder: (context) =>
+    const B2BPartnershipApp(),
+    // ),
   );
 }

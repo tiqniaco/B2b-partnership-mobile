@@ -4,10 +4,8 @@ import 'package:b2b_partenership/core/functions/translate_database.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_network_image.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_server_status_widget.dart';
-import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/themes.dart';
-import 'package:b2b_partenership/widgets/please_login_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -19,9 +17,7 @@ class ShopCartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (ApiConstance.token.isEmpty) {
-      return const PleaseLoginWidget();
-    }
+   
 
     return GetBuilder<ShopCartController>(
       init: ShopCartController(),

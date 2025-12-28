@@ -24,7 +24,7 @@ class SeeAll extends StatelessWidget {
           body: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount:
-                    context.isTablet ? 3 : 2, //getCrossAxisCount(context),
+                    context.isTablet ? 3 : 2, 
                 mainAxisSpacing: 15,
                 crossAxisSpacing: 10,
                 childAspectRatio: ResponsiveHelper.getValue(

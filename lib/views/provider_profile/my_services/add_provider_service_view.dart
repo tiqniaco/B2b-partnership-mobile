@@ -2,6 +2,7 @@ import 'package:b2b_partenership/controller/settings/provider/my_services/add_pr
 import 'package:b2b_partenership/core/global/widgets/custom_loading_button.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
+import 'package:b2b_partenership/views/provider_profile/my_services/payment_package_view.dart';
 import 'package:b2b_partenership/views/provider_profile/my_services/widgets/step_1.dart';
 import 'package:b2b_partenership/views/provider_profile/my_services/widgets/step_2.dart';
 
@@ -65,7 +66,22 @@ class AddProviderServiceView extends StatelessWidget {
                               height: 30.h,
                               width: 0.3.sw,
                               onPressed: () {
-                                return controller.addServices();
+                                showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.vertical(
+                                        top: Radius.circular(20)),
+                                  ),
+                                  builder: (context) {
+                                    return SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.9,
+                                      child: PaymentsView(packages: controller.packages,),
+                                    );
+                                  },
+                                );
                               },
                               text: "Add".tr,
                             ),

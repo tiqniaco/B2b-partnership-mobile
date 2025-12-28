@@ -268,6 +268,9 @@ class SettingsView extends StatelessWidget {
                                     },
                                   ),
                                   Gap(8),
+                                  // if(Get.find<AppPreferences>().getUserRole() == 'provider')...[
+                                 
+                                  // ],
                                   rowWithArrow(
                                     CupertinoIcons.delete_simple,
                                     "Remove Account".tr,

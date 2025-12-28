@@ -3,11 +3,13 @@ import 'dart:developer';
 import 'package:b2b_partenership/app_routes.dart';
 import 'package:b2b_partenership/controller/shop/shop_controller.dart';
 import 'package:b2b_partenership/core/enums/status_request.dart';
+import 'package:b2b_partenership/core/functions/please_login_dialog.dart';
 import 'package:b2b_partenership/core/functions/responsive_font.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_error_widget.dart';
 import 'package:b2b_partenership/core/global/widgets/custom_no_connection_widget.dart';
 import 'package:b2b_partenership/core/global/widgets/global_sliver_server_status_widget.dart';
 import 'package:b2b_partenership/core/global/widgets/place_holder.dart';
+import 'package:b2b_partenership/core/network/api_constance.dart';
 import 'package:b2b_partenership/core/theme/app_color.dart';
 import 'package:b2b_partenership/core/theme/text_style.dart';
 import 'package:b2b_partenership/widgets/home/work_category_loading.dart';
@@ -121,7 +123,11 @@ class ShopView extends StatelessWidget {
                               Gap(12.w),
                               InkWell(
                                 onTap: () {
-                                  Get.toNamed(AppRoutes.shopCart);
+                                  if (ApiConstance.token.isEmpty) {
+                                    pleaseLoginDialog();
+                                  } else {
+                                    Get.toNamed(AppRoutes.shopCart);
+                                  }
                                 },
                                 child: Container(
                                   padding: EdgeInsets.symmetric(

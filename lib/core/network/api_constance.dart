@@ -146,4 +146,8 @@ class ApiConstance {
 
   static String changeJobApplicationStatus(String id) =>
       "job-applications/$id/update-status";
+
+  // payment methods
+  static const String getPaymentMethods = "packages";
+  static const String getPaymentMonths = "months-plans";
 }
